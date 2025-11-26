@@ -6,6 +6,7 @@ import "./globals.css";
 import NavBar from "../components/NavBar";
 import VideoBackground from "../components/VideoBackground";
 import ShadowConsole from "../components/ShadowConsole";
+import ShadowAdminBar from "../components/ShadowAdminBar";
 import { ReactNode } from "react";
 
 export const metadata = {
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className="text-white bg-black min-h-screen">
+        <ShadowAdminBar />
         <VideoBackground />
         <NavBar />
         
