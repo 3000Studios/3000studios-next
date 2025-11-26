@@ -1,25 +1,31 @@
-// Copyright (c) 2025 NAME.
-// All rights reserved.
-// Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
-
+// © 2025 3000 Studios / ShadowOS
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        remotePatterns: [
-            {
-                protocol: "https",
-                hostname: "3000studios.com"
-            },
-            {
-                protocol: "https",
-                hostname: "github.com"
-            }
-        ]
-    },
-    typescript: {
-        ignoreBuildErrors: false
-    },
-    reactStrictMode: true
+  reactStrictMode: true,
+
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "3000studios.com" },
+      { protocol: "https", hostname: "raw.githubusercontent.com" },
+      { protocol: "https", hostname: "github.com" }
+    ]
+  },
+
+  typescript: {
+    ignoreBuildErrors: false
+  },
+
+  // Next.js 15 compatible
+  experimental: {
+    optimizeCss: true
+  },
+
+  // This is the new location Next.js demands
+  serverExternalPackages: [
+    "three",
+    "@react-three/fiber",
+    "@react-three/drei"
+  ]
 };
 
 module.exports = nextConfig;

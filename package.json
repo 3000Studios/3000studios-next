@@ -13,9 +13,10 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.4.0",
+    "@react-three/drei": "^9.56.7",
+    "@react-three/fiber": "^8.15.11",
     "axios": "^1.6.7",
+    "critters": "^0.0.23",
     "framer-motion": "^11.0.0",
     "next": "^15.0.3",
     "openai": "^6.9.1",
