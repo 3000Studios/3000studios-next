@@ -1,27 +1,18 @@
-name: Auto Fix Vulnerabilities
-
+name: Auto Fix
 on:
-  schedule:
-    - cron: "0 */6 * * *"
   workflow_dispatch:
-
 jobs:
-  audit:
+  fix:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Install Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-
-      - run: npm audit fix --force
-
-      - name: Commit & push
-        run: |
-          git config user.name "3000 Studios Bot"
-          git config user.email "bot@3000studios.com"
+          node-version: 20
+      - run: npm audit fix --force || true
+      - run: |
+          git config user.name Bot
+          git config user.email bot@3000.com
           git add .
-          git commit -m "Auto security patch" || echo "No changes"
+          git commit -m fix || echo no
           git push

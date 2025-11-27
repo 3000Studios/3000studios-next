@@ -1,9 +1,4 @@
-// Copyright (c) 2025 NAME.
-// All rights reserved.
-// Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
-
 "use client";
-
 export default function ShadowAdminBar() {
   return (
     <div className="fixed top-0 left-0 w-full bg-black/70 text-white p-2 text-center z-[9999] backdrop-blur-md border-b border-white/20">

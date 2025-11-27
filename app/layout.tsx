@@ -7,7 +7,10 @@ import NavBar from "../components/NavBar";
 import VideoBackground from "../components/VideoBackground";
 import ShadowConsole from "../components/ShadowConsole";
 import ShadowAdminBar from "../components/ShadowAdminBar";
+import ShadowVoice from "../components/ShadowVoice";
 import { ReactNode } from "react";
+
+export const experimental_ppr = true;
 
 export const metadata = {
   title: "3000 Studios | AI-Powered Creative Engine",
@@ -37,6 +40,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </main>
 
         <ShadowConsole />
+        <ShadowVoice />
 
         <footer className="relative z-10 bg-black/60 backdrop-blur-xl border-t border-white/10 py-8 mt-20">
           <div className="max-w-6xl mx-auto px-4 text-center">

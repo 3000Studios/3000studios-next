@@ -1,0 +1,22 @@
+# Copyright (c) 2025 NAME.
+# All rights reserved.
+# Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
+
+{
+  "name": "shadow-core-ai",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Shadow Core AI Engine - Local LLM with encrypted memory",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2",
+    "node-record-lpcm16": "^1.0.1"
+  },
+  "keywords": ["shadow", "ai", "ollama", "voice"],
+  "author": "Mr. J.W. Swain",
+  "license": "PROPRIETARY"
+}

@@ -1,0 +1,73 @@
+<!--
+  Copyright (c) 2025 NAME.
+  All rights reserved.
+  Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shadow Command Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="grid-overlay"></div>
+
+<div id="header">
+  <h1>SHADOW COMMAND CENTER</h1>
+  <div id="status">● ONLINE</div>
+</div>
+
+<div id="avatar"></div>
+
+<div id="metrics">
+  <div class="metric-card">
+    <label>VOICE WAVEFORM</label>
+    <canvas id="waveform"></canvas>
+  </div>
+  
+  <div class="metric-card">
+    <label>CPU LOAD</label>
+    <div id="cpu" class="meter">0%</div>
+  </div>
+  
+  <div class="metric-card">
+    <label>MEMORY</label>
+    <div id="memory" class="meter">0%</div>
+  </div>
+
+  <div class="metric-card">
+    <label>UPTIME</label>
+    <div id="uptime" class="meter">0s</div>
+  </div>
+</div>
+
+<div id="actions">
+  <button id="deployBtn" class="action-btn deploy">
+    <span class="icon">🚀</span>
+    <span>DEPLOY</span>
+  </button>
+  <button id="healBtn" class="action-btn heal">
+    <span class="icon">⚡</span>
+    <span>HEAL</span>
+  </button>
+  <button id="viewMemory" class="action-btn memory">
+    <span class="icon">🧠</span>
+    <span>MEMORY</span>
+  </button>
+</div>
+
+<div id="log-container">
+  <div class="log-header">SYSTEM LOG</div>
+  <pre id="log"></pre>
+</div>
+
+<script src="client.js"></script>
+</body>
+</html>
