@@ -5,14 +5,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    serverActions: true,
-    turbo: true
+    serverActions: {}
   },
-  api: {
-    bodyParser: {
-      sizeLimit: "10mb"
-    }
-  },
+  turbopack: {},
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -50,4 +45,4 @@ const nextConfig = {
   }
 };
 
-module.exports = nextConfig;;
+module.exports = nextConfig;
