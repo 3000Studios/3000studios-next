@@ -11,10 +11,10 @@ import ShadowNavbar from "@/components/ShadowNavbar";
 
 export default function ShadowPage() {
   return (
-    <div className="bg-black min-h-screen text-white">
+    <div className="bg-black min-h-screen text-white w-full max-w-full overflow-x-hidden">
       <ShadowNavbar />
 
-      <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="p-4 md:p-6 grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 w-full">
         <ShadowTerminal />
         <ShadowActions />
         <div className="col-span-2">

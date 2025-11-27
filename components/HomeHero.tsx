@@ -92,33 +92,33 @@ export default function HomeHero() {
   }, []);
 
   return (
-    <section className="relative w-full h-[80vh] flex flex-col items-center justify-center overflow-hidden">
+    <section className="relative w-full h-[70vh] md:h-[80vh] flex flex-col items-center justify-center overflow-hidden">
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"
         id="particle-bg"
       />
 
-      <div className="relative z-10 text-center px-4">
-        <h1 className="text-6xl md:text-8xl font-extrabold mb-6 glow-text animate-pulse-slow">
+      <div className="relative z-10 text-center px-4 w-full max-w-4xl">
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-4 md:mb-6 glow-text animate-pulse-slow">
           hello hello
         </h1>
         
-        <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
+        <p className="text-lg md:text-xl lg:text-2xl text-gray-300 mb-6 md:mb-8 max-w-2xl mx-auto px-2">
           Welcome to 3000 Studios - Where AI meets creativity
         </p>
 
-        <div className="flex gap-4 justify-center flex-wrap">
-          <button className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-lg hover:shadow-purple-500/50">
+        <div className="flex gap-3 md:gap-4 justify-center flex-wrap px-4">
+          <button className="px-6 md:px-8 py-2.5 md:py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full font-bold text-base md:text-lg hover:scale-105 transition-transform shadow-lg hover:shadow-purple-500/50">
             Explore Projects
           </button>
-          <button className="px-8 py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full font-bold text-lg hover:scale-105 transition-transform">
+          <button className="px-6 md:px-8 py-2.5 md:py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full font-bold text-base md:text-lg hover:scale-105 transition-transform">
             Learn More
           </button>
         </div>
       </div>
 
-      <p className="absolute bottom-10 text-center text-lg opacity-70 animate-pulse z-10">
+      <p className="absolute bottom-8 md:bottom-10 text-center text-base md:text-lg opacity-70 animate-pulse z-10 px-4">
         System updating. Advanced features loading. Stand by…
       </p>
     </section>

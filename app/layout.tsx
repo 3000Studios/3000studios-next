@@ -28,21 +28,21 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
       </head>
-      <body className="text-white bg-black min-h-screen">
+      <body className="text-white bg-black min-h-screen w-full overflow-x-hidden">
         <ShadowAdminBar />
         <VideoBackground />
         <NavBar />
         
-        <main className="pt-20 min-h-screen">
+        <main className="pt-20 min-h-screen w-full max-w-full">
           {children}
         </main>
 
         <ShadowConsole />
         <ShadowVoice />
 
-        <footer className="relative z-10 bg-black/60 backdrop-blur-xl border-t border-white/10 py-8 mt-20">
+        <footer className="relative z-10 bg-black/60 backdrop-blur-xl border-t border-white/10 py-8 mt-20 w-full">
           <div className="max-w-6xl mx-auto px-4 text-center">
             <p className="text-gray-400">
               © {new Date().getFullYear()} 3000 Studios. Powered by Shadow AI.

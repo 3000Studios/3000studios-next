@@ -40,13 +40,13 @@ export default function ProjectsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen px-4 py-20">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-5xl md:text-7xl font-extrabold text-center mb-6 glow-text">
+    <div className="min-h-screen px-4 py-12 md:py-20 w-full max-w-full overflow-x-hidden">
+      <div className="max-w-6xl mx-auto w-full">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-center mb-4 md:mb-6 glow-text">
           Projects
         </h1>
         
-        <p className="text-xl text-center text-gray-300 mb-16 max-w-3xl mx-auto">
+        <p className="text-lg md:text-xl text-center text-gray-300 mb-12 md:mb-16 max-w-3xl mx-auto px-4">
           Explore our latest work, innovations, and creative solutions
         </p>
 

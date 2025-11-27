@@ -43,17 +43,17 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative">
+    <main className="relative w-full max-w-full overflow-x-hidden">
       <HomeHero />
 
       {/* Crypto Ticker */}
-      <section className="max-w-6xl mx-auto mt-20 px-4">
+      <section className="max-w-6xl mx-auto mt-12 md:mt-20 px-4 w-full">
         <CryptoTicker />
       </section>
 
       {/* Featured Posts from WordPress */}
-      <section className="max-w-6xl mx-auto mt-20 px-4">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-10 glow-text">
+      <section className="max-w-6xl mx-auto mt-12 md:mt-20 px-4 w-full">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-8 md:mb-10 glow-text">
           Featured Projects
         </h2>
         

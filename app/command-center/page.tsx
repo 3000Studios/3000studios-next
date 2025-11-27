@@ -70,14 +70,14 @@ export default function CommandCenterPage() {
   };
 
   return (
-    <div className="min-h-screen px-4 py-20 bg-gradient-to-br from-black via-purple-950 to-black">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen px-4 py-12 md:py-20 bg-gradient-to-br from-black via-purple-950 to-black w-full max-w-full overflow-x-hidden">
+      <div className="max-w-7xl mx-auto w-full">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-6xl md:text-8xl font-extrabold mb-4 bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent">
+        <div className="text-center mb-6 md:mb-8">
+          <h1 className="text-4xl md:text-6xl lg:text-8xl font-extrabold mb-3 md:mb-4 bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent">
             Shadow Command Center
           </h1>
-          <p className="text-xl text-gray-300">
+          <p className="text-lg md:text-xl text-gray-300">
             Voice-activated, AI-powered site control
           </p>
           <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 glass rounded-full">
