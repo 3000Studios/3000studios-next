@@ -10,6 +10,15 @@ import { Collaborator } from "@/types";
 
 const FILE = path.join(process.cwd(), "shadow", "data", "collaborators.json");
 
+let idCounter = 0;
+
+function generateUniqueId(): number {
+  // Combine timestamp with incrementing counter for uniqueness
+  const timestamp = Date.now();
+  idCounter = (idCounter + 1) % 1000;
+  return timestamp * 1000 + idCounter;
+}
+
 function ensureDirectory(): void {
   const dir = path.dirname(FILE);
   if (!fs.existsSync(dir)) {
@@ -22,8 +31,13 @@ function readCollaborators(): Collaborator[] {
   if (!fs.existsSync(FILE)) {
     return [];
   }
-  const data = fs.readFileSync(FILE, "utf8");
-  return JSON.parse(data);
+  try {
+    const data = fs.readFileSync(FILE, "utf8");
+    return JSON.parse(data);
+  } catch {
+    // Return empty array if file is corrupted or invalid JSON
+    return [];
+  }
 }
 
 function writeCollaborators(collaborators: Collaborator[]): void {
@@ -46,7 +60,7 @@ export default {
     
     const newCollaborator: Collaborator = {
       ...collaborator,
-      id: Date.now(),
+      id: generateUniqueId(),
       addedAt: new Date().toISOString(),
     };
     
