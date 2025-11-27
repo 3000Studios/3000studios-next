@@ -29,7 +29,7 @@ export default function VoiceListener({
     const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
 
-    recognition.continuous = true;
+    recognition.continuous = false;
     recognition.interimResults = true;
     recognition.lang = "en-US";
 
@@ -42,6 +42,7 @@ export default function VoiceListener({
       if (event.results[current].isFinal) {
         onCommand(transcriptText);
         setTranscript("");
+        onToggle(); // Stop listening after command
       }
     };
 
@@ -80,7 +81,7 @@ export default function VoiceListener({
         className={`w-32 h-32 rounded-full flex items-center justify-center text-6xl transition-all ${
           isListening
             ? "bg-red-500 hover:bg-red-600 animate-pulse shadow-lg shadow-red-500/50"
-            : "bg-purple-600 hover:bg-purple-700 shadow-lg shadow-purple-500/50"
+            : "bg-yellow-600 hover:bg-yellow-700 shadow-lg shadow-yellow-500/50"
         }`}
       >
         {isListening ? "🔴" : "🎤"}
@@ -103,9 +104,9 @@ export default function VoiceListener({
 
       <div className="text-xs text-gray-500 space-y-1">
         <p>Try saying:</p>
-        <p className="text-purple-400">"Deploy my site"</p>
-        <p className="text-purple-400">"Update the hero section"</p>
-        <p className="text-purple-400">"Generate new content"</p>
+        <p className="text-yellow-400">"Deploy my site"</p>
+        <p className="text-yellow-400">"Update the hero section"</p>
+        <p className="text-yellow-400">"Generate new content"</p>
       </div>
     </div>
   );

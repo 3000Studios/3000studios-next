@@ -6,6 +6,7 @@
 
 import { NextResponse } from "next/server";
 import { executeCommand } from "@/lib/commandExecutor";
+import { interpretCommand } from "@/lib/aiCommandInterpreter";
 
 export async function POST(req: Request) {
   try {
@@ -20,11 +21,17 @@ export async function POST(req: Request) {
 
     const taskId = `shadow-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
 
-    const result = await executeCommand(command);
+    // Use AI to interpret natural language command
+    const interpreted = await interpretCommand(command);
+    
+    // Execute the interpreted action
+    const result = await executeCommand(interpreted.action);
 
     return NextResponse.json({
       taskId,
       command,
+      interpretedAction: interpreted.action,
+      interpretation: interpreted.description,
       user: user || "anonymous",
       origin: origin || "manual",
       timestamp: Date.now(),

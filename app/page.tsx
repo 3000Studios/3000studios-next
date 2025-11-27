@@ -5,9 +5,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import dynamic from "next/dynamic";
 import LiveWallpaper from "../components/LiveWallpaper";
 import HomeHero from "../components/HomeHero";
 import CryptoTicker from "../components/CryptoTicker";
+
+const FloatingAvatar = dynamic(() => import("../components/FloatingAvatar"), { ssr: false });
 
 interface WordPressPost {
   id: number;
@@ -45,6 +48,7 @@ export default function Home() {
     <main className="relative w-full max-w-full overflow-x-hidden">
       <LiveWallpaper />
       <HomeHero />
+      <FloatingAvatar />
 
       {/* Crypto Ticker */}
       <section className="max-w-6xl mx-auto mt-12 md:mt-20 px-4 w-full">
