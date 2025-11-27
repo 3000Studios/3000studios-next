@@ -5,6 +5,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import LiveWallpaper from "../components/LiveWallpaper";
 import HomeHero from "../components/HomeHero";
 import ShadowChatbot from "../components/ShadowChatbot";
 import CryptoTicker from "../components/CryptoTicker";
@@ -43,6 +44,7 @@ export default function Home() {
 
   return (
     <main className="relative w-full max-w-full overflow-x-hidden">
+      <LiveWallpaper />
       <HomeHero />
       <ShadowChatbot />
 
