@@ -132,9 +132,9 @@ export default function ShadowPage() {
   return (
     <div className="bg-black min-h-screen text-white w-full max-w-full overflow-x-hidden pt-20">
       {/* Command Center Header */}
-      <div className="px-4 py-8 bg-gradient-to-r from-purple-950 to-black">
+      <div className="px-4 py-8 bg-gradient-to-r from-gray-950 to-black">
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-3 bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-3 bg-gradient-to-r from-yellow-400 via-orange-500 to-yellow-400 bg-clip-text text-transparent">
             Shadow Command Center
           </h1>
           <p className="text-lg text-gray-300">
@@ -159,7 +159,7 @@ export default function ShadowPage() {
           {/* Voice Command */}
           <div className="lg:col-span-2 glass p-6 rounded-2xl">
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-              <span className="text-purple-400">🎤</span> Voice Command
+              <span className="text-yellow-400">🎤</span> Voice Command
             </h2>
             <VoiceListener
               isListening={isListening}
@@ -180,7 +180,7 @@ export default function ShadowPage() {
         {/* Manual Command */}
         <div className="glass p-6 rounded-2xl mb-6">
           <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-            <span className="text-cyan-400">⌨️</span> Manual Command
+            <span className="text-yellow-400">⌨️</span> Manual Command
           </h2>
           <CommandConsole onExecute={handleManualCommand} />
         </div>
@@ -188,24 +188,24 @@ export default function ShadowPage() {
         {/* Quick Actions */}
         <div className="glass p-6 rounded-2xl mb-6">
           <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-            <span className="text-pink-400">⚡</span> Quick Actions
+            <span className="text-orange-400">⚡</span> Quick Actions
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
             <button
               onClick={() => handleQuickAction("deploy site")}
-              className="px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg font-bold hover:scale-105 transition-transform"
+              className="px-4 py-3 bg-gradient-to-r from-yellow-600 to-orange-600 rounded-lg font-bold hover:scale-105 transition-transform"
             >
               🚀 Deploy
             </button>
             <button
               onClick={() => handleQuickAction("fix my site")}
-              className="px-4 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg font-bold hover:scale-105 transition-transform"
+              className="px-4 py-3 bg-gradient-to-r from-yellow-500 to-yellow-700 rounded-lg font-bold hover:scale-105 transition-transform"
             >
               🔧 Fix Site
             </button>
             <button
               onClick={() => handleQuickAction("update hero section")}
-              className="px-4 py-3 bg-gradient-to-r from-green-600 to-teal-600 rounded-lg font-bold hover:scale-105 transition-transform"
+              className="px-4 py-3 bg-gradient-to-r from-orange-600 to-yellow-600 rounded-lg font-bold hover:scale-105 transition-transform"
             >
               ✨ Update Hero
             </button>
@@ -223,7 +223,7 @@ export default function ShadowPage() {
             </button>
             <button
               onClick={() => handleQuickAction("generate content")}
-              className="px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg font-bold hover:scale-105 transition-transform"
+              className="px-4 py-3 bg-gradient-to-r from-yellow-700 to-orange-700 rounded-lg font-bold hover:scale-105 transition-transform"
             >
               📝 Content
             </button>

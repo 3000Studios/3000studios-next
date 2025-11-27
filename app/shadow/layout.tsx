@@ -7,7 +7,7 @@ import { ReactNode } from "react";
 export default function ShadowLayout({ children }: { children: ReactNode }) {
   return (
     <div className="shadow-system">
-      <div className="shadow-background fixed inset-0 bg-gradient-to-br from-black via-purple-950 to-black -z-10" />
+      <div className="shadow-background fixed inset-0 bg-gradient-to-br from-black via-gray-950 to-black -z-10" />
       {children}
     </div>
   );
