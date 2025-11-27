@@ -70,3 +70,39 @@ body {
 .custom-scrollbar::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.3);
 }
+
+.glow-text {
+  text-shadow: 0 0 20px rgba(251, 191, 36, 0.6), 
+               0 0 40px rgba(251, 191, 36, 0.4),
+               0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+.text-3d {
+  transform: perspective(1000px) rotateX(5deg);
+  text-shadow: 0 0 30px rgba(251, 191, 36, 0.8),
+               0 0 60px rgba(251, 191, 36, 0.5),
+               0 6px 12px rgba(0, 0, 0, 0.9),
+               0 12px 24px rgba(0, 0, 0, 0.7);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 1s ease-out;
+}
+
+.glass {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}

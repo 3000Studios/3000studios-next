@@ -5,10 +5,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import dynamic from "next/dynamic";
 import LiveWallpaper from "../components/LiveWallpaper";
 import HomeHero from "../components/HomeHero";
-import ShadowChatbot from "../components/ShadowChatbot";
 import CryptoTicker from "../components/CryptoTicker";
+
+const CompactAvatar = dynamic(() => import("../components/CompactAvatar"), { ssr: false });
 
 interface WordPressPost {
   id: number;
@@ -46,7 +48,7 @@ export default function Home() {
     <main className="relative w-full max-w-full overflow-x-hidden">
       <LiveWallpaper />
       <HomeHero />
-      <ShadowChatbot />
+      <CompactAvatar />
 
       {/* Crypto Ticker */}
       <section className="max-w-6xl mx-auto mt-12 md:mt-20 px-4 w-full">
@@ -61,7 +63,7 @@ export default function Home() {
         
         {loading ? (
           <div className="text-center text-gray-400">
-            <div className="inline-block w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+            <div className="inline-block w-16 h-16 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin"></div>
             <p className="mt-4">Loading projects...</p>
           </div>
         ) : posts.length > 0 ? (
@@ -78,7 +80,7 @@ export default function Home() {
                     className="w-full h-48 object-cover rounded-lg mb-4"
                   />
                 )}
-                <h3 className="text-2xl font-bold mb-3 group-hover:text-purple-400 transition-colors">
+                <h3 className="text-2xl font-bold mb-3 group-hover:text-yellow-400 transition-colors">
                   {post.title.rendered}
                 </h3>
                 <div
@@ -89,7 +91,7 @@ export default function Home() {
                   href={post.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block px-6 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg font-bold hover:shadow-lg hover:shadow-purple-500/50 transition-all"
+                  className="inline-block px-6 py-2 bg-gradient-to-r from-yellow-600 to-orange-600 rounded-lg font-bold hover:shadow-lg hover:shadow-yellow-500/50 transition-all"
                 >
                   Read More →
                 </a>

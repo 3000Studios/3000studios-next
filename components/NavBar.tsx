@@ -15,13 +15,17 @@ export default function NavBar() {
     { href: "/experience", label: "Experience" },
     { href: "/projects", label: "Projects" },
     { href: "/shadow/avatar", label: "Avatar" },
-    { href: "/dashboard", label: "Dashboard" }
+    { href: "/dashboard", label: "Dashboard" },
+    { href: "/login", label: "Login" },
+    { href: "/command-center", label: "Command Center" }
   ];
 
   return (
-    <nav className="w-full bg-black/90 border-b border-cyan-700 text-white px-6 py-4 flex items-center justify-between fixed top-0 left-0 z-50">
+    <nav className="w-full bg-black/95 border-b border-yellow-600 text-white px-6 py-4 flex items-center justify-between fixed top-0 left-0 z-50 shadow-2xl">
 
-      <Link href="/" className="text-2xl font-extrabold text-cyan-400">
+      <Link href="/" className="text-2xl font-extrabold text-yellow-400 hover:text-yellow-300 transition-all hover:scale-110" style={{
+        textShadow: '0 0 20px rgba(251, 191, 36, 0.8), 0 4px 8px rgba(0, 0, 0, 0.9)'
+      }}>
         3000 STUDIOS
       </Link>
 
@@ -37,7 +41,10 @@ export default function NavBar() {
           <li key={i}>
             <Link
               href={l.href}
-              className="hover:text-cyan-400 transition"
+              className="hover:text-yellow-400 transition-all hover:scale-110 inline-block"
+              style={{
+                textShadow: '0 2px 4px rgba(0, 0, 0, 0.8)'
+              }}
             >
               {l.label}
             </Link>
@@ -46,10 +53,10 @@ export default function NavBar() {
       </ul>
 
       {open && (
-        <ul className="md:hidden absolute top-20 right-6 bg-black p-6 border border-cyan-700 rounded-xl space-y-4 text-lg">
+        <ul className="md:hidden absolute top-20 right-6 bg-black/95 p-6 border border-yellow-600 rounded-xl space-y-4 text-lg shadow-2xl">
           {links.map((l, i) => (
             <li key={i}>
-              <Link href={l.href} onClick={() => setOpen(false)}>
+              <Link href={l.href} onClick={() => setOpen(false)} className="hover:text-yellow-400 transition-all">
                 {l.label}
               </Link>
             </li>

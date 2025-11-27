@@ -36,8 +36,8 @@ export default function LiveWallpaper() {
       ctx.clearRect(0, 0, w, h);
 
       const g = ctx.createRadialGradient(mouse.x, mouse.y, 40, mouse.x, mouse.y, 600);
-      g.addColorStop(0, "rgba(0,255,255,0.15)");
-      g.addColorStop(1, "rgba(0,0,20,0.9)");
+      g.addColorStop(0, "rgba(251, 191, 36, 0.15)");
+      g.addColorStop(1, "rgba(20, 20, 0, 0.9)");
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, w, h);
 
@@ -50,7 +50,7 @@ export default function LiveWallpaper() {
         p.y += p.vy;
         p.alpha -= 0.015;
         ctx.beginPath();
-        ctx.fillStyle = `rgba(0,255,255,${p.alpha})`;
+        ctx.fillStyle = `rgba(251, 191, 36, ${p.alpha})`;
         ctx.arc(p.x, p.y, 6, 0, Math.PI * 2);
         ctx.fill();
       }

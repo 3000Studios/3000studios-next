@@ -8,7 +8,6 @@ import { useState, useEffect } from "react";
 import ShadowTerminal from "@/components/ShadowTerminal";
 import ShadowFileEditor from "@/components/ShadowFileEditor";
 import ShadowActions from "@/components/ShadowActions";
-import ShadowNavbar from "@/components/ShadowNavbar";
 import CommandConsole from "@/components/CommandConsole";
 import CommandHistory from "@/components/CommandHistory";
 import VoiceListener from "@/components/VoiceListener";
@@ -131,9 +130,7 @@ export default function ShadowPage() {
   }
 
   return (
-    <div className="bg-black min-h-screen text-white w-full max-w-full overflow-x-hidden">
-      <ShadowNavbar />
-
+    <div className="bg-black min-h-screen text-white w-full max-w-full overflow-x-hidden pt-20">
       {/* Command Center Header */}
       <div className="px-4 py-8 bg-gradient-to-r from-purple-950 to-black">
         <div className="max-w-7xl mx-auto text-center">
