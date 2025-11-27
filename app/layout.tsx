@@ -5,7 +5,6 @@
 import "./globals.css";
 import NavBar from "../components/NavBar";
 import VideoBackground from "../components/VideoBackground";
-import ShadowAdminBar from "../components/ShadowAdminBar";
 import ShadowVoice from "../components/ShadowVoice";
 import { ReactNode } from "react";
 
@@ -30,7 +29,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
       </head>
       <body className="text-white bg-black min-h-screen w-full overflow-x-hidden">
-        <ShadowAdminBar />
         <VideoBackground />
         <NavBar />
         
