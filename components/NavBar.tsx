@@ -16,6 +16,7 @@ export default function NavBar() {
     { href: "/", label: "Home" },
     { href: "/experience", label: "Experience" },
     { href: "/projects", label: "Projects" },
+    { href: "/live", label: "Live Stream" },
     { href: "/shadow/avatar", label: "Avatar" },
     { href: "/dashboard", label: "Dashboard" },
     { href: "/login", label: "Login" },
