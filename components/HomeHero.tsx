@@ -30,16 +30,16 @@ export default function HomeHero() {
 
         <div className="mt-8 flex justify-center gap-4">
           <Link
-            href="/command-center"
+            href="/projects"
             className="px-6 py-3 bg-cyan-600 hover:bg-cyan-700 rounded-lg font-bold text-white"
           >
-            Command Center
+            View Projects
           </Link>
           <Link
-            href="/projects"
+            href="/experience"
             className="px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-bold text-white"
           >
-            Projects
+            Experience
           </Link>
         </div>
       </div>

@@ -15,8 +15,6 @@ export default function ShadowNavbar() {
       </div>
       <div className="flex gap-4 text-sm flex-wrap">
         <Link href="/" className="text-cyan-300 hover:text-cyan-100 transition-colors">Home</Link>
-        <Link href="/shadow" className="text-purple-300 hover:text-purple-100 transition-colors">Shadow</Link>
-        <Link href="/command-center" className="text-pink-300 hover:text-pink-100 transition-colors">Command Center</Link>
         <Link href="/shadow/avatar" className="text-blue-300 hover:text-blue-100 transition-colors">Avatar</Link>
         <Link href="/projects" className="text-green-300 hover:text-green-100 transition-colors">Projects</Link>
         <Link href="/dashboard" className="text-orange-300 hover:text-orange-100 transition-colors">Dashboard</Link>
