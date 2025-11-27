@@ -20,6 +20,7 @@ export default function NavBar() {
     { href: "/live", label: "Live Stream" },
     { href: "/shadow/avatar", label: "Avatar" },
     { href: "/dashboard", label: "Dashboard" },
+    { href: "/collaborators", label: "Team" },
     { href: "/login", label: "Login" },
     { href: "/command-center", label: "Command Center" },
     { href: "/shadow", label: "Shadow" }

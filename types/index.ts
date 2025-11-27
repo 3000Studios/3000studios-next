@@ -112,3 +112,15 @@ export interface ShadowConsoleProps {
   initialLogs?: LogEntry[];
   enableVoice?: boolean;
 }
+
+// Collaborator Types
+export type CollaboratorRole = "admin" | "editor" | "viewer";
+
+export interface Collaborator {
+  id: number;
+  name: string;
+  email: string;
+  role: CollaboratorRole;
+  avatar?: string;
+  addedAt: string;
+}
