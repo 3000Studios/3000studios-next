@@ -9,6 +9,9 @@ import fs from "fs/promises";
 import path from "path";
 
 export class ShadowEngine {
+  async process(text: string) {
+    return this.execute(text, {});
+  }
   async execute(command: string, payload: any = {}) {
     command = command.toLowerCase().trim();
 

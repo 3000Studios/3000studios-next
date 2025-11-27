@@ -9,7 +9,7 @@ import fs from "fs";
 import path from "path";
 import { exec } from "child_process";
 
-export async function POST(req: Request) {
+export async function POST(req: Request): Promise<Response> {
   const { action, target, content } = await req.json();
 
   try {
@@ -38,7 +38,7 @@ export async function POST(req: Request) {
         "git push origin main",
       ].join(" && ");
 
-      return new Promise((resolve) => {
+      return new Promise<Response>((resolve) => {
         exec(commands, (err, stdout, stderr) => {
           resolve(
             NextResponse.json({

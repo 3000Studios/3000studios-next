@@ -7,7 +7,7 @@
 import { NextResponse } from "next/server";
 import { exec } from "child_process";
 
-export async function POST() {
+export async function POST(): Promise<Response> {
   const repo = process.cwd();
 
   const commands = [
@@ -17,7 +17,7 @@ export async function POST() {
     "git push origin main"
   ].join(" && ");
 
-  return new Promise((resolve) => {
+  return new Promise<Response>((resolve) => {
     exec(commands, (error, stdout, stderr) => {
       resolve(
         NextResponse.json({

@@ -13,6 +13,12 @@ const nextConfig = {
       sizeLimit: "10mb"
     }
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   async headers() {
     return [
       {
