@@ -6,8 +6,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import HomeHero from "../components/HomeHero";
-import MusicPlayer from "../components/MusicPlayer";
-import MiniGame from "../components/MiniGame";
+import ShadowChatbot from "../components/ShadowChatbot";
 import CryptoTicker from "../components/CryptoTicker";
 
 interface WordPressPost {
@@ -45,6 +44,7 @@ export default function Home() {
   return (
     <main className="relative w-full max-w-full overflow-x-hidden">
       <HomeHero />
+      <ShadowChatbot />
 
       {/* Crypto Ticker */}
       <section className="max-w-6xl mx-auto mt-12 md:mt-20 px-4 w-full">
@@ -99,19 +99,6 @@ export default function Home() {
             No posts available. Check back soon!
           </p>
         )}
-      </section>
-
-      {/* Music Player */}
-      <section className="max-w-6xl mx-auto mt-28 px-4">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-10 glow-text">
-          Music Lounge
-        </h2>
-        <MusicPlayer />
-      </section>
-
-      {/* Mini Game */}
-      <section className="max-w-6xl mx-auto mt-28 px-4 mb-20">
-        <MiniGame />
       </section>
 
       {/* Features Grid */}

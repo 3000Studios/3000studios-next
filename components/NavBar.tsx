@@ -3,141 +3,61 @@
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
 "use client";
+
 import Link from "next/link";
 import { useState } from "react";
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
 
+  const links = [
+    { href: "/", label: "Home" },
+    { href: "/experience", label: "Experience" },
+    { href: "/projects", label: "Projects" },
+    { href: "/shadow", label: "Shadow HQ" },
+    { href: "/shadow/avatar", label: "Avatar" },
+    { href: "/command-center", label: "Command Center" },
+    { href: "/dashboard", label: "Dashboard" }
+  ];
+
   return (
-    <nav className="fixed top-0 left-0 w-full z-40 backdrop-blur-xl bg-black/40 border-b border-white/10 shadow-2xl">
-      <div className="max-w-6xl mx-auto flex items-center justify-between p-4">
-        
-        <Link href="/">
-          <span className="text-3xl font-extrabold bg-gradient-to-br from-cyan-300 via-purple-500 to-green-300 bg-clip-text text-transparent hover:scale-110 transition-all duration-300 cursor-pointer inline-block">
-            3000 STUDIOS
-          </span>
-        </Link>
+    <nav className="w-full bg-black/90 border-b border-cyan-700 text-white px-6 py-4 flex items-center justify-between fixed top-0 left-0 z-50">
 
-        {/* Mobile Toggle */}
-        <button
-          className="md:hidden text-white text-3xl hover:text-purple-400 transition-colors"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          ☰
-        </button>
+      <Link href="/" className="text-2xl font-extrabold text-cyan-400">
+        3000 STUDIOS
+      </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex gap-6 font-bold text-base">
-          <Link 
-            className="relative text-white hover:text-cyan-300 transition-all duration-300 group" 
-            href="/"
-          >
-            Home
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-300 to-purple-500 group-hover:w-full transition-all duration-300"></span>
-          </Link>
-          <Link 
-            className="relative text-white hover:text-purple-300 transition-all duration-300 group" 
-            href="/experience"
-          >
-            Experience
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-300 to-pink-500 group-hover:w-full transition-all duration-300"></span>
-          </Link>
-          <Link 
-            className="relative text-white hover:text-green-300 transition-all duration-300 group" 
-            href="/projects"
-          >
-            Projects
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-green-300 to-cyan-500 group-hover:w-full transition-all duration-300"></span>
-          </Link>
-          <Link 
-            className="relative text-white hover:text-yellow-300 transition-all duration-300 group" 
-            href="/shadow"
-          >
-            Shadow
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-300 to-orange-500 group-hover:w-full transition-all duration-300"></span>
-          </Link>
-          <Link 
-            className="relative text-white hover:text-pink-300 transition-all duration-300 group" 
-            href="/command-center"
-          >
-            Command Center
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-300 to-red-500 group-hover:w-full transition-all duration-300"></span>
-          </Link>
-          <Link 
-            className="relative text-white hover:text-blue-300 transition-all duration-300 group" 
-            href="/shadow/avatar"
-          >
-            Avatar
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-300 to-cyan-500 group-hover:w-full transition-all duration-300"></span>
-          </Link>
-          <Link 
-            className="relative text-white hover:text-orange-300 transition-all duration-300 group" 
-            href="/dashboard"
-          >
-            Dashboard
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-300 to-yellow-500 group-hover:w-full transition-all duration-300"></span>
-          </Link>
-        </div>
-
-        {/* Mobile Navigation */}
-        {open && (
-          <div className="absolute top-full left-0 w-full bg-black/95 backdrop-blur-xl border-b border-white/10 md:hidden">
-            <div className="flex flex-col gap-4 p-6 font-bold text-lg">
-              <Link 
-                className="text-white hover:text-cyan-300 transition-all" 
-                href="/"
-                onClick={() => setOpen(false)}
-              >
-                Home
-              </Link>
-              <Link 
-                className="text-white hover:text-purple-300 transition-all" 
-                href="/experience"
-                onClick={() => setOpen(false)}
-              >
-                Experience
-              </Link>
-              <Link 
-                className="text-white hover:text-green-300 transition-all" 
-                href="/projects"
-                onClick={() => setOpen(false)}
-              >
-                Projects
-              </Link>
-              <Link 
-                className="text-white hover:text-yellow-300 transition-all" 
-                href="/shadow"
-                onClick={() => setOpen(false)}
-              >
-                Shadow
-              </Link>
-              <Link 
-                className="text-white hover:text-pink-300 transition-all" 
-                href="/command-center"
-                onClick={() => setOpen(false)}
-              >
-                Command Center
-              </Link>
-              <Link 
-                className="text-white hover:text-blue-300 transition-all" 
-                href="/shadow/avatar"
-                onClick={() => setOpen(false)}
-              >
-                Avatar
-              </Link>
-              <Link 
-                className="text-white hover:text-orange-300 transition-all" 
-                href="/dashboard"
-                onClick={() => setOpen(false)}
-              >
-                Dashboard
-              </Link>
-            </div>
-          </div>
-        )}
+      <div
+        className="md:hidden text-3xl cursor-pointer"
+        onClick={() => setOpen(!open)}
+      >
+        ☰
       </div>
+
+      <ul className="hidden md:flex gap-6 text-lg">
+        {links.map((l, i) => (
+          <li key={i}>
+            <Link
+              href={l.href}
+              className="hover:text-cyan-400 transition"
+            >
+              {l.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+
+      {open && (
+        <ul className="md:hidden absolute top-20 right-6 bg-black p-6 border border-cyan-700 rounded-xl space-y-4 text-lg">
+          {links.map((l, i) => (
+            <li key={i}>
+              <Link href={l.href} onClick={() => setOpen(false)}>
+                {l.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </nav>
   );
 }
