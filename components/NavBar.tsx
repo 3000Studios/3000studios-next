@@ -29,7 +29,7 @@ export default function NavBar() {
         </button>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex gap-8 font-bold text-lg">
+        <div className="hidden md:flex gap-6 font-bold text-base">
           <Link 
             className="relative text-white hover:text-cyan-300 transition-all duration-300 group" 
             href="/"
@@ -57,6 +57,27 @@ export default function NavBar() {
           >
             Shadow
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-300 to-orange-500 group-hover:w-full transition-all duration-300"></span>
+          </Link>
+          <Link 
+            className="relative text-white hover:text-pink-300 transition-all duration-300 group" 
+            href="/command-center"
+          >
+            Command Center
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-300 to-red-500 group-hover:w-full transition-all duration-300"></span>
+          </Link>
+          <Link 
+            className="relative text-white hover:text-blue-300 transition-all duration-300 group" 
+            href="/shadow/avatar"
+          >
+            Avatar
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-300 to-cyan-500 group-hover:w-full transition-all duration-300"></span>
+          </Link>
+          <Link 
+            className="relative text-white hover:text-orange-300 transition-all duration-300 group" 
+            href="/dashboard"
+          >
+            Dashboard
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-300 to-yellow-500 group-hover:w-full transition-all duration-300"></span>
           </Link>
         </div>
 
@@ -91,6 +112,27 @@ export default function NavBar() {
                 onClick={() => setOpen(false)}
               >
                 Shadow
+              </Link>
+              <Link 
+                className="text-white hover:text-pink-300 transition-all" 
+                href="/command-center"
+                onClick={() => setOpen(false)}
+              >
+                Command Center
+              </Link>
+              <Link 
+                className="text-white hover:text-blue-300 transition-all" 
+                href="/shadow/avatar"
+                onClick={() => setOpen(false)}
+              >
+                Avatar
+              </Link>
+              <Link 
+                className="text-white hover:text-orange-300 transition-all" 
+                href="/dashboard"
+                onClick={() => setOpen(false)}
+              >
+                Dashboard
               </Link>
             </div>
           </div>

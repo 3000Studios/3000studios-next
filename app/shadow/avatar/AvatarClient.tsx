@@ -16,8 +16,97 @@ export default function AvatarClient() {
   const [wsMsg, setWsMsg] = useState("");
   const [connected, setConnected] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(false);
-  const voice = useVoiceAvatar();
+  const [voiceState, setVoiceState] = useState({ talking: false, volume: 0, mood: "idle" });
   const llm = useLLMFusionCore();
+
+  // Voice activation hook
+  useEffect(() => {
+    if (!voiceEnabled) {
+      setVoiceState({ talking: false, volume: 0, mood: "idle" });
+      return;
+    }
+
+    // Check if browser supports getUserMedia
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      console.warn("Voice Avatar: getUserMedia not supported");
+      setWsMsg("Microphone not supported");
+      return;
+    }
+
+    let audioContext: AudioContext;
+    let analyser: AnalyserNode;
+    let microphone: MediaStreamAudioSourceNode;
+    let dataArray: Uint8Array;
+    let animationFrame: number;
+    let stream: MediaStream;
+
+    navigator.mediaDevices
+      .getUserMedia({ audio: true })
+      .then((mediaStream) => {
+        stream = mediaStream;
+        audioContext = new AudioContext();
+        analyser = audioContext.createAnalyser();
+        microphone = audioContext.createMediaStreamSource(stream);
+        
+        analyser.fftSize = 256;
+        const bufferLength = analyser.frequencyBinCount;
+        dataArray = new Uint8Array(bufferLength);
+
+        microphone.connect(analyser);
+
+        setWsMsg("Microphone activated");
+
+        // Animation loop to detect speech
+        const detectSpeech = () => {
+          analyser.getByteFrequencyData(dataArray);
+
+          // Calculate average volume
+          const average = dataArray.reduce((a, b) => a + b) / dataArray.length;
+          const normalizedVolume = average / 255; // 0-1 range
+
+          // Determine if talking based on volume threshold
+          const isTalking = normalizedVolume > 0.02; // Adjust sensitivity
+          
+          // Determine mood based on volume intensity
+          let newMood = "idle";
+          if (normalizedVolume > 0.4) {
+            newMood = "angry"; // Loud voice
+          } else if (normalizedVolume > 0.15 && isTalking) {
+            newMood = "excited"; // Moderate voice
+          } else if (isTalking) {
+            newMood = "talking"; // Soft voice
+          }
+
+          setVoiceState({
+            talking: isTalking,
+            volume: normalizedVolume,
+            mood: newMood
+          });
+
+          animationFrame = requestAnimationFrame(detectSpeech);
+        };
+
+        detectSpeech();
+      })
+      .catch((error) => {
+        console.error("Voice Avatar: Microphone access denied", error);
+        setWsMsg("Microphone access denied");
+        setVoiceEnabled(false);
+      });
+
+    // Cleanup
+    return () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+      if (audioContext) {
+        audioContext.close();
+      }
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+      }
+    };
+  }, [voiceEnabled]);
 
   useEffect(() => {
     const ws = new WebSocket("ws://localhost:3334");
@@ -45,13 +134,13 @@ export default function AvatarClient() {
   }, []);
 
   useEffect(() => {
-    const transcript = (voice as any)?.transcript;
+    const transcript = (voiceState as any)?.transcript;
     if (voiceEnabled && transcript) {
       llm.sendToLLM(transcript).then((reply) => {
         setWsMsg(reply);
       });
     }
-  }, [(voice as any)?.transcript, voiceEnabled]);
+  }, [(voiceState as any)?.transcript, voiceEnabled]);
 
   return (
     <div style={{ height: "100vh", background: "#000014", color: "#00ffff", position: "relative" }}>
@@ -72,7 +161,7 @@ export default function AvatarClient() {
         />
 
         <Suspense fallback={null}>
-          <ShadowAvatar message={wsMsg} voiceState={voiceEnabled ? voice : null} />
+          <ShadowAvatar message={wsMsg} voiceState={voiceEnabled ? voiceState : null} />
         </Suspense>
 
         <gridHelper args={[10, 10, "#00ffff", "#003"]} position={[0, -1.5, 0]} />
@@ -128,9 +217,9 @@ export default function AvatarClient() {
         </div>
         {voiceEnabled && (
           <div style={{ marginTop: "8px", fontSize: "0.75rem", color: "#ffff00" }}>
-            <div>Mood: {voice.mood}</div>
-            <div>Volume: {(voice.volume * 100).toFixed(0)}%</div>
-            <div>Talking: {voice.talking ? "YES" : "NO"}</div>
+            <div>Mood: {voiceState.mood}</div>
+            <div>Volume: {(voiceState.volume * 100).toFixed(0)}%</div>
+            <div>Talking: {voiceState.talking ? "YES" : "NO"}</div>
           </div>
         )}
       </div>
