@@ -23,7 +23,7 @@ const wss = new WebSocketServer({ server });
 
 // Broadcast helper
 function broadcast(data) {
-  wss.clients.forEach(c => {
+  wss.clients.forEach((c) => {
     if (c.readyState === WebSocket.OPEN) {
       c.send(JSON.stringify(data));
     }
@@ -42,22 +42,27 @@ setInterval(() => {
     type: "metrics",
     cpu: avgLoad.toFixed(2),
     memory: usedMem.toFixed(2),
-    uptime: os.uptime()
+    uptime: os.uptime(),
   });
 }, 2000);
 
 // Hook into AI events (if Shadow Core sends messages)
-process.on("message", msg => {
+process.on("message", (msg) => {
   broadcast({ type: "ai-event", payload: msg });
 });
 
 // Handle client UI events
-wss.on("connection", ws => {
+wss.on("connection", (ws) => {
   console.log("Client connected to Shadow UI");
-  
-  ws.send(JSON.stringify({ type: "welcome", message: "Shadow Command Center Online" }));
 
-  ws.on("message", msg => {
+  ws.send(
+    JSON.stringify({
+      type: "welcome",
+      message: "Shadow Command Center Online",
+    }),
+  );
+
+  ws.on("message", (msg) => {
     const parsed = JSON.parse(msg);
     const { command } = parsed;
 

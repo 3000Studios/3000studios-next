@@ -46,7 +46,7 @@ export async function POST(req: Request): Promise<Response> {
               action: "push",
               stdout,
               stderr,
-            })
+            }),
           );
         });
       });

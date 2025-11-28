@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     // 1. Update the site configuration
     // 2. Commit changes to GitHub
     // 3. Trigger a Vercel rebuild
-    
+
     // For now, just log it
     console.log(`Title update requested: ${title}`);
 
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
   } catch (error) {
     return NextResponse.json(
       { success: false, error: "Failed to update title" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

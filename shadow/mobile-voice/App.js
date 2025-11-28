@@ -3,7 +3,13 @@
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import Voice from "@react-native-voice/voice";
 
 const HOTWORD = "hey dude";
@@ -18,7 +24,7 @@ export default function App() {
     // Replace YOUR_PC_LOCAL_IP with your actual PC's local IP
     // Find it with: ipconfig | Select-String IPv4
     const socket = new WebSocket("ws://YOUR_PC_LOCAL_IP:3333");
-    
+
     socket.onopen = () => {
       setWsConnected(true);
       addLog("Connected to Shadow Core");
@@ -126,17 +132,27 @@ export default function App() {
     <View style={styles.container}>
       <Text style={styles.title}>SHADOW VOICE OS</Text>
       <Text style={styles.sub}>Hotword: "Hey Dude"</Text>
-      
+
       <View style={styles.statusContainer}>
         <View style={styles.statusRow}>
           <Text style={styles.statusLabel}>WebSocket:</Text>
-          <Text style={[styles.statusValue, wsConnected ? styles.online : styles.offline]}>
+          <Text
+            style={[
+              styles.statusValue,
+              wsConnected ? styles.online : styles.offline,
+            ]}
+          >
             {wsConnected ? "● ONLINE" : "● OFFLINE"}
           </Text>
         </View>
         <View style={styles.statusRow}>
           <Text style={styles.statusLabel}>Listening:</Text>
-          <Text style={[styles.statusValue, listening ? styles.online : styles.offline]}>
+          <Text
+            style={[
+              styles.statusValue,
+              listening ? styles.online : styles.offline,
+            ]}
+          >
             {listening ? "● YES" : "● NO"}
           </Text>
         </View>

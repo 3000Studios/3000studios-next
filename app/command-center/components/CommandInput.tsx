@@ -10,7 +10,10 @@ interface CommandInputProps {
   placeholder?: string;
 }
 
-export default function CommandInput({ onSubmit, placeholder }: CommandInputProps) {
+export default function CommandInput({
+  onSubmit,
+  placeholder,
+}: CommandInputProps) {
   const [input, setInput] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {

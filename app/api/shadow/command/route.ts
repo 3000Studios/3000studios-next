@@ -13,17 +13,14 @@ export async function POST(req: Request) {
     const { command, user, origin } = await req.json();
 
     if (!command) {
-      return NextResponse.json(
-        { error: "Missing command" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Missing command" }, { status: 400 });
     }
 
     const taskId = `shadow-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
 
     // Use AI to interpret natural language command
     const interpreted = await interpretCommand(command);
-    
+
     // Execute the interpreted action
     const result = await executeCommand(interpreted.action);
 
@@ -38,13 +35,14 @@ export async function POST(req: Request) {
       status: result.success ? "completed" : "failed",
       result: result.output || result.error,
       action: result.action,
-      message: result.success ? "Command executed successfully" : "Command failed"
+      message: result.success
+        ? "Command executed successfully"
+        : "Command failed",
     });
-
   } catch (err: any) {
     return NextResponse.json(
       { ok: false, error: err.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

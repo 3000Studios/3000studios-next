@@ -7,7 +7,7 @@ export async function createPage(command: string): Promise<string> {
     // Extract page name from command
     const match = command.match(/create.*page\s+(\w+)/i);
     const pageName = match ? match[1].toLowerCase() : "newpage";
-    
+
     const pageContent = `// Copyright (c) 2025 3000 Studios.
 // All rights reserved.
 
@@ -31,9 +31,9 @@ export default function ${pageName.charAt(0).toUpperCase() + pageName.slice(1)}P
 
     const filePath = join(process.cwd(), `app/${pageName}/page.tsx`);
     writeFileSync(filePath, pageContent, "utf8");
-    
+
     await gitCommitAndPush(`Shadow AI: Created ${pageName} page`);
-    
+
     return `Page created: /app/${pageName}/page.tsx`;
   } catch (err: any) {
     throw new Error(`Page creation failed: ${err.message}`);

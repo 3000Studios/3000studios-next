@@ -23,16 +23,20 @@ export default function NavBar() {
     { href: "/collaborators", label: "Team" },
     { href: "/login", label: "Login" },
     { href: "/command-center", label: "Command Center" },
-    { href: "/shadow", label: "Shadow" }
+    { href: "/shadow", label: "Shadow" },
   ];
 
   return (
     <nav className="w-full bg-corporate-gradient border-b-2 border-corporate-gold text-white px-6 py-4 flex items-center justify-between fixed top-0 left-0 z-50 shadow-2xl backdrop-blur-md font-corporate">
-
-      <Link href="/" className="text-2xl md:text-3xl font-heading font-black text-corporate-gold hover:scale-110 transition-all duration-300" style={{
-        textShadow: '0 0 20px rgba(212, 175, 55, 0.8), 0 0 40px rgba(212, 175, 55, 0.4)',
-        filter: 'drop-shadow(0 0 8px rgba(212, 175, 55, 0.6))'
-      }}>
+      <Link
+        href="/"
+        className="text-2xl md:text-3xl font-heading font-black text-corporate-gold hover:scale-110 transition-all duration-300"
+        style={{
+          textShadow:
+            "0 0 20px rgba(212, 175, 55, 0.8), 0 0 40px rgba(212, 175, 55, 0.4)",
+          filter: "drop-shadow(0 0 8px rgba(212, 175, 55, 0.6))",
+        }}
+      >
         3000 STUDIOS
       </Link>
 
@@ -40,7 +44,7 @@ export default function NavBar() {
         className="md:hidden text-3xl cursor-pointer text-corporate-gold hover:text-corporate-bronze transition-colors"
         onClick={() => setOpen(!open)}
       >
-        {open ? '✕' : '☰'}
+        {open ? "✕" : "☰"}
       </div>
 
       <ul className="hidden md:flex gap-1 text-base lg:text-lg">
@@ -59,14 +63,20 @@ export default function NavBar() {
       </ul>
 
       {open && (
-        <ul className="md:hidden absolute top-20 right-6 bg-corporate-navy border-2 border-corporate-gold rounded-2xl p-6 space-y-3 text-lg shadow-2xl backdrop-blur-xl"
+        <ul
+          className="md:hidden absolute top-20 right-6 bg-corporate-navy border-2 border-corporate-gold rounded-2xl p-6 space-y-3 text-lg shadow-2xl backdrop-blur-xl"
           style={{
-            boxShadow: '0 0 40px rgba(212, 175, 55, 0.3), 0 20px 40px rgba(0, 0, 0, 0.9)'
+            boxShadow:
+              "0 0 40px rgba(212, 175, 55, 0.3), 0 20px 40px rgba(0, 0, 0, 0.9)",
           }}
         >
           {links.map((l, i) => (
             <li key={i}>
-              <Link href={l.href} onClick={() => setOpen(false)} className="block px-4 py-2 rounded-lg hover:bg-corporate-steel hover:text-corporate-gold transition-all font-bold text-corporate-silver">
+              <Link
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="block px-4 py-2 rounded-lg hover:bg-corporate-steel hover:text-corporate-gold transition-all font-bold text-corporate-silver"
+              >
                 {l.label}
               </Link>
             </li>

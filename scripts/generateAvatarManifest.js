@@ -20,5 +20,7 @@ try {
   fs.writeFileSync(manifestPath, JSON.stringify(files, null, 2));
   console.log(`Avatar sound manifest generated (${files.length} files).`);
 } catch (err) {
-  console.log("Avatar sound manifest generation failed, continuing without manifest.");
+  console.log(
+    "Avatar sound manifest generation failed, continuing without manifest.",
+  );
 }

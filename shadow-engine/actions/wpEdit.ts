@@ -11,7 +11,7 @@ export async function editWordPress(command: string): Promise<string> {
     // Extract intent from command
     const isCreatePost = /create|new|post/i.test(command);
     const isUpdatePost = /update|edit|modify/i.test(command);
-    
+
     if (isCreatePost) {
       const result = await callWordPressAPI("posts", "POST", {
         title: "New Post from Shadow AI",
@@ -20,11 +20,11 @@ export async function editWordPress(command: string): Promise<string> {
       });
       return `WordPress post created (ID: ${result.id})`;
     }
-    
+
     if (isUpdatePost) {
       return "WordPress post update feature coming soon";
     }
-    
+
     return "WordPress command received but not implemented yet";
   } catch (err: any) {
     throw new Error(`WordPress operation failed: ${err.message}`);

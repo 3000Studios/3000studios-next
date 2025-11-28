@@ -21,7 +21,8 @@ export async function callLLM(prompt: string): Promise<string> {
       messages: [
         {
           role: "system",
-          content: "You are Shadow AI, an assistant for 3000 Studios. Generate professional, concise web content.",
+          content:
+            "You are Shadow AI, an assistant for 3000 Studios. Generate professional, concise web content.",
         },
         {
           role: "user",

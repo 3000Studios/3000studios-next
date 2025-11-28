@@ -10,17 +10,16 @@ import { getQueueStatus } from "@/shadow-engine/queue/taskQueue";
 export async function GET() {
   try {
     const queueStatus = await getQueueStatus();
-    
+
     return NextResponse.json({
       status: "Online",
       queue: queueStatus,
       timestamp: Date.now(),
     });
-
   } catch (err: any) {
     return NextResponse.json(
       { status: "Error", error: err.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

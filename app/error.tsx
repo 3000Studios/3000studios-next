@@ -21,7 +21,9 @@ export default function Error({
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="glass p-10 rounded-2xl max-w-md text-center">
         <div className="text-6xl mb-4">⚠️</div>
-        <h1 className="text-3xl font-bold mb-4 text-red-400">Something went wrong!</h1>
+        <h1 className="text-3xl font-bold mb-4 text-red-400">
+          Something went wrong!
+        </h1>
         <p className="text-gray-300 mb-6">
           {error.message || "An unexpected error occurred."}
         </p>

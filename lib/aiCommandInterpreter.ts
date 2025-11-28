@@ -16,7 +16,9 @@ export interface InterpretedCommand {
   description: string;
 }
 
-export async function interpretCommand(humanCommand: string): Promise<InterpretedCommand> {
+export async function interpretCommand(
+  humanCommand: string,
+): Promise<InterpretedCommand> {
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-4o-mini",
@@ -69,7 +71,7 @@ Output: {"action": "install-package", "parameters": {"package": "three"}, "descr
 
     const content = response.choices[0]?.message?.content || "{}";
     const parsed = JSON.parse(content);
-    
+
     return {
       action: parsed.action || "unknown",
       parameters: parsed.parameters || {},
@@ -84,12 +86,20 @@ Output: {"action": "install-package", "parameters": {"package": "three"}, "descr
 
 function fallbackInterpretation(command: string): InterpretedCommand {
   const lower = command.toLowerCase();
-  
+
   if (lower.includes("deploy")) {
-    return { action: "deploy", parameters: {}, description: "Deploy to production" };
+    return {
+      action: "deploy",
+      parameters: {},
+      description: "Deploy to production",
+    };
   }
   if (lower.includes("push") || lower.includes("github")) {
-    return { action: "git-push", parameters: {}, description: "Push to GitHub" };
+    return {
+      action: "git-push",
+      parameters: {},
+      description: "Push to GitHub",
+    };
   }
   if (lower.includes("build")) {
     return { action: "build", parameters: {}, description: "Build project" };
@@ -98,8 +108,16 @@ function fallbackInterpretation(command: string): InterpretedCommand {
     return { action: "fix-errors", parameters: {}, description: "Fix errors" };
   }
   if (lower.includes("hero")) {
-    return { action: "update-hero", parameters: {}, description: "Update hero section" };
+    return {
+      action: "update-hero",
+      parameters: {},
+      description: "Update hero section",
+    };
   }
-  
-  return { action: "unknown", parameters: {}, description: "Command not recognized" };
+
+  return {
+    action: "unknown",
+    parameters: {},
+    description: "Command not recognized",
+  };
 }

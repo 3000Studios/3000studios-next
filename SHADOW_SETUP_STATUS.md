@@ -9,12 +9,14 @@
 ## ✅ INSTALLATION STATUS
 
 ### Dependencies Installed
+
 - ✅ `zustand` - State management
 - ⚠️ `three`, `@react-three/fiber`, `@react-three/drei` - **PENDING** (package.json locked)
 - ⚠️ `lucide-react`, `tailwind-merge`, `formidable` - **PENDING** (package.json locked)
 - ⚠️ `openai` - **PENDING** (package.json locked)
 
 ### Configuration Changes
+
 - ✅ `app/layout.tsx` - Added `export const experimental_ppr = true`
 - ✅ `.env.local.example` - Created with credentials template
 
@@ -23,12 +25,14 @@
 ## 📂 NEW FILES CREATED
 
 ### Core Engine
+
 ```
 ✅ /lib/shadow-core/engine.ts        — Shadow Engine with command execution
 ✅ /lib/auth/wp.ts                    — WordPress JWT auth + file update
 ```
 
 ### API Routes (CODE PACK 1)
+
 ```
 ✅ /app/api/shadow/run/route.ts       — Command execution endpoint
 ✅ /app/api/shadow/voice/route.ts     — Voice transcription via OpenAI Whisper
@@ -37,6 +41,7 @@
 ```
 
 ### API Routes (CODE PACK 2) — NEW
+
 ```
 ✅ /app/api/shadow/exec/route.ts      — Direct command execution (updated)
 ✅ /app/api/shadow/update-file/route.ts — File writer with auto-directory creation
@@ -45,6 +50,7 @@
 ```
 
 ### Existing Shadow API Routes (Already Created)
+
 ```
 ✅ /app/api/shadow/route.ts           — Legacy main endpoint
 ✅ /app/api/shadow/command/route.ts   — Command intake
@@ -92,6 +98,7 @@ SHADOW_ENABLED=true
 ### 3. WordPress JWT Plugin Setup
 
 **Install on your WordPress site:**
+
 - Install "JWT Authentication for WP REST API" plugin
 - Configure JWT secret in `wp-config.php`:
 
@@ -105,7 +112,9 @@ define('JWT_AUTH_CORS_ENABLE', true);
 ## 🎯 SHADOW ENGINE CAPABILITIES
 
 ### Command: "update wordpress file"
+
 **Payload:**
+
 ```json
 {
   "command": "update wordpress file",
@@ -117,7 +126,9 @@ define('JWT_AUTH_CORS_ENABLE', true);
 ```
 
 ### Command: "edit file"
+
 **Payload:**
+
 ```json
 {
   "command": "edit file",
@@ -129,7 +140,9 @@ define('JWT_AUTH_CORS_ENABLE', true);
 ```
 
 ### Command: "say"
+
 **Payload:**
+
 ```json
 {
   "command": "say",
@@ -144,9 +157,11 @@ define('JWT_AUTH_CORS_ENABLE', true);
 ## 🔌 API ENDPOINT REFERENCE
 
 ### POST `/api/shadow/run`
+
 **Execute any Shadow command**
 
 **Request:**
+
 ```json
 {
   "command": "edit file",
@@ -158,6 +173,7 @@ define('JWT_AUTH_CORS_ENABLE', true);
 ```
 
 **Response:**
+
 ```json
 {
   "ok": true,
@@ -170,11 +186,13 @@ define('JWT_AUTH_CORS_ENABLE', true);
 ---
 
 ### POST `/api/shadow/voice`
+
 **Voice command transcription + execution**
 
 **Request:** FormData with `audio` Blob (webm/mp3/wav)
 
 **Response:**
+
 ```json
 {
   "transcript": "edit file app slash page dot tsx",
@@ -190,9 +208,11 @@ define('JWT_AUTH_CORS_ENABLE', true);
 ---
 
 ### POST `/api/wp/update`
+
 **Direct WordPress file update**
 
 **Request:**
+
 ```json
 {
   "file": "wp-content/themes/your-theme/style.css",
@@ -201,20 +221,25 @@ define('JWT_AUTH_CORS_ENABLE', true);
 ```
 
 **Response:**
+
 ```json
 {
   "ok": true,
   "file": "wp-content/themes/your-theme/style.css",
-  "result": { /* WordPress API response */ }
+  "result": {
+    /* WordPress API response */
+  }
 }
 ```
 
 ---
 
 ### POST `/api/file/edit`
+
 **Direct local file edit**
 
 **Request:**
+
 ```json
 {
   "file": "app/globals.css",
@@ -223,6 +248,7 @@ define('JWT_AUTH_CORS_ENABLE', true);
 ```
 
 **Response:**
+
 ```json
 {
   "ok": true,
@@ -236,6 +262,7 @@ define('JWT_AUTH_CORS_ENABLE', true);
 ## 🧪 TESTING COMMANDS
 
 ### Test Shadow Engine
+
 ```powershell
 curl -X POST http://localhost:3000/api/shadow/run `
   -H "Content-Type: application/json" `
@@ -243,6 +270,7 @@ curl -X POST http://localhost:3000/api/shadow/run `
 ```
 
 ### Test File Edit
+
 ```powershell
 curl -X POST http://localhost:3000/api/file/edit `
   -H "Content-Type: application/json" `
@@ -250,6 +278,7 @@ curl -X POST http://localhost:3000/api/file/edit `
 ```
 
 ### Test WordPress Update (requires .env.local setup)
+
 ```powershell
 curl -X POST http://localhost:3000/api/wp/update `
   -H "Content-Type: application/json" `
@@ -257,6 +286,7 @@ curl -X POST http://localhost:3000/api/wp/update `
 ```
 
 ### Test Command Execution (CODE PACK 2)
+
 ```powershell
 curl -X POST http://localhost:3000/api/shadow/exec `
   -H "Content-Type: application/json" `
@@ -264,6 +294,7 @@ curl -X POST http://localhost:3000/api/shadow/exec `
 ```
 
 ### Test Update File (CODE PACK 2)
+
 ```powershell
 curl -X POST http://localhost:3000/api/shadow/update-file `
   -H "Content-Type: application/json" `
@@ -271,11 +302,13 @@ curl -X POST http://localhost:3000/api/shadow/update-file `
 ```
 
 ### Test Auto Git Push (CODE PACK 2)
+
 ```powershell
 curl -X POST http://localhost:3000/api/shadow/push
 ```
 
 ### Test Site Action - Update File (CODE PACK 2)
+
 ```powershell
 curl -X POST http://localhost:3000/api/shadow/site-action `
   -H "Content-Type: application/json" `
@@ -283,6 +316,7 @@ curl -X POST http://localhost:3000/api/shadow/site-action `
 ```
 
 ### Test Site Action - Git Push (CODE PACK 2)
+
 ```powershell
 curl -X POST http://localhost:3000/api/shadow/site-action `
   -H "Content-Type: application/json" `
@@ -294,6 +328,7 @@ curl -X POST http://localhost:3000/api/shadow/site-action `
 ## 🚀 NEXT STEPS
 
 ### Immediate:
+
 1. **Close VS Code completely**
 2. **Reopen and run remaining npm installs**
 3. **Create `.env.local` with real credentials**
@@ -301,6 +336,7 @@ curl -X POST http://localhost:3000/api/shadow/site-action `
 5. **Test the `/api/shadow/run` endpoint**
 
 ### Code Pack 2 (Ready When You Are):
+
 - `/app/shadow/page.tsx` — Full Shadow Control Panel UI
 - `/app/command-center/page.tsx` — Master Command Center UI
 - `/components/ShadowVoiceButton.tsx` — Voice input component
@@ -314,6 +350,7 @@ curl -X POST http://localhost:3000/api/shadow/site-action `
 ## ✅ VERIFICATION CHECKLIST
 
 **CODE PACK 1:**
+
 - [x] Shadow Engine created (`/lib/shadow-core/engine.ts`)
 - [x] WordPress auth module created (`/lib/auth/wp.ts`)
 - [x] Shadow Run API route (`/api/shadow/run`)
@@ -324,12 +361,14 @@ curl -X POST http://localhost:3000/api/shadow/site-action `
 - [x] `.env.local.example` created
 
 **CODE PACK 2:**
+
 - [x] Shadow Exec API route updated (`/api/shadow/exec`)
 - [x] Update File API route created (`/api/shadow/update-file`)
 - [x] Auto Push API route created (`/api/shadow/push`)
 - [x] Site Action API route created (`/api/shadow/site-action`)
 
 **Pending:**
+
 - [ ] All npm dependencies installed (3 packages pending)
 - [ ] `.env.local` configured with real credentials
 - [ ] WordPress JWT plugin installed
@@ -341,6 +380,7 @@ curl -X POST http://localhost:3000/api/shadow/site-action `
 **Champ… the backend is FULLY ARMED.** 🔥
 
 All infrastructure deployed:
+
 - ✅ Shadow Engine (command processing)
 - ✅ Voice Command Endpoint (OpenAI Whisper)
 - ✅ WordPress Updater (JWT auth)

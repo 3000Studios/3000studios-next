@@ -6,19 +6,30 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
-import { useGLTF, useAnimations, PositionalAudio, Html } from "@react-three/drei";
+import {
+  useGLTF,
+  useAnimations,
+  PositionalAudio,
+  Html,
+} from "@react-three/drei";
 import * as THREE from "three";
 import { useAvatarSounds } from "@/hooks/useAvatarSounds";
 
-export default function ShadowAvatar({ message, voiceState }: { message: string; voiceState?: any }) {
+export default function ShadowAvatar({
+  message,
+  voiceState,
+}: {
+  message: string;
+  voiceState?: any;
+}) {
   const groupRef = useRef<THREE.Group>(null);
   const [emotion, setEmotion] = useState("idle");
   const [speaking, setSpeaking] = useState(false);
-  
+
   // Load 3D model and animations
   const { scene, animations } = useGLTF("/models/shadow_entity.glb");
   const { actions, names } = useAnimations(animations, groupRef);
-  
+
   // Sound effect refs
   const idleHum = useRef<any>();
   const growl = useRef<any>();
@@ -32,7 +43,11 @@ export default function ShadowAvatar({ message, voiceState }: { message: string;
   const [audioEnabled, setAudioEnabled] = useState(false);
 
   const avatarSound = {
-    idle: soundMap["idle"] || soundMap["ambient"] || soundMap["ambient_loop"] || null,
+    idle:
+      soundMap["idle"] ||
+      soundMap["ambient"] ||
+      soundMap["ambient_loop"] ||
+      null,
     talk: soundMap["talk"] || soundMap["voice"] || null,
     anger: soundMap["growl"] || soundMap["roar"] || null,
     excited: soundMap["charge"] || null,
@@ -47,13 +62,22 @@ export default function ShadowAvatar({ message, voiceState }: { message: string;
     console.log("Avatar received:", message);
 
     // Determine emotion based on message content
-    if (message.toLowerCase().includes("error") || message.toLowerCase().includes("fail")) {
+    if (
+      message.toLowerCase().includes("error") ||
+      message.toLowerCase().includes("fail")
+    ) {
       setEmotion("angry");
       growl.current?.play();
-    } else if (message.toLowerCase().includes("deploy") || message.toLowerCase().includes("success")) {
+    } else if (
+      message.toLowerCase().includes("deploy") ||
+      message.toLowerCase().includes("success")
+    ) {
       setEmotion("excited");
       charge.current?.play();
-    } else if (message.toLowerCase().includes("hey") || message.toLowerCase().includes("hello")) {
+    } else if (
+      message.toLowerCase().includes("hey") ||
+      message.toLowerCase().includes("hello")
+    ) {
       setEmotion("happy");
       alertSound.current?.play();
     } else {
@@ -139,11 +163,16 @@ export default function ShadowAvatar({ message, voiceState }: { message: string;
   // Color based on emotion
   const getColor = () => {
     switch (emotion) {
-      case "angry": return "#ff0000";
-      case "excited": return "#00ff00";
-      case "happy": return "#ffff00";
-      case "talking": return "#00ffff";
-      default: return "#0080ff";
+      case "angry":
+        return "#ff0000";
+      case "excited":
+        return "#00ff00";
+      case "happy":
+        return "#ffff00";
+      case "talking":
+        return "#00ffff";
+      default:
+        return "#0080ff";
     }
   };
 
@@ -183,7 +212,7 @@ export default function ShadowAvatar({ message, voiceState }: { message: string;
       )}
       {/* 3D Model */}
       <primitive object={scene} scale={1.5} />
-      
+
       {/* Sound Effects via auto-map (WAV) */}
       {safePositional(idleHum, avatarSound.idle, { distance: 5, loop: true })}
       {safePositional(growl, avatarSound.anger, { distance: 4 })}

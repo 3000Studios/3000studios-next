@@ -18,7 +18,7 @@ const routing = [
 ];
 
 export async function runShadowCommand(cmd: string) {
-  let route = routing.find(r => r.match.test(cmd));
+  let route = routing.find((r) => r.match.test(cmd));
 
   if (!route) {
     return `Unknown command: ${cmd}`;
@@ -26,11 +26,7 @@ export async function runShadowCommand(cmd: string) {
 
   switch (route.action) {
     case "setFontGold":
-      await editFile(
-        "app/globals.css",
-        /color:\s*#fff;/g,
-        "color: gold;"
-      );
+      await editFile("app/globals.css", /color:\s*#fff;/g, "color: gold;");
 
       await pushCommit("Set font color to gold");
       return "Font changed to gold and deployed";

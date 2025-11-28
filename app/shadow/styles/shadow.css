@@ -5,9 +5,10 @@
  */
 
 .shadow-glow {
-  text-shadow: 0 0 10px rgba(157, 78, 221, 0.8),
-               0 0 20px rgba(0, 240, 255, 0.6),
-               0 0 30px rgba(157, 78, 221, 0.4);
+  text-shadow:
+    0 0 10px rgba(157, 78, 221, 0.8),
+    0 0 20px rgba(0, 240, 255, 0.6),
+    0 0 30px rgba(157, 78, 221, 0.4);
 }
 
 .shadow-pulse {
@@ -15,7 +16,8 @@
 }
 
 @keyframes shadow-pulse {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(157, 78, 221, 0.5);
   }
   50% {

@@ -14,11 +14,36 @@ export default function ShadowNavbar() {
         <span className="text-sm opacity-80">3000 STUDIOS • LIVE CONTROL</span>
       </div>
       <div className="flex gap-4 text-sm flex-wrap">
-        <Link href="/" className="text-cyan-300 hover:text-cyan-100 transition-colors">Home</Link>
-        <Link href="/shadow/avatar" className="text-blue-300 hover:text-blue-100 transition-colors">Avatar</Link>
-        <Link href="/projects" className="text-green-300 hover:text-green-100 transition-colors">Projects</Link>
-        <Link href="/dashboard" className="text-orange-300 hover:text-orange-100 transition-colors">Dashboard</Link>
-        <Link href="/experience" className="text-yellow-300 hover:text-yellow-100 transition-colors">Experience</Link>
+        <Link
+          href="/"
+          className="text-cyan-300 hover:text-cyan-100 transition-colors"
+        >
+          Home
+        </Link>
+        <Link
+          href="/shadow/avatar"
+          className="text-blue-300 hover:text-blue-100 transition-colors"
+        >
+          Avatar
+        </Link>
+        <Link
+          href="/projects"
+          className="text-green-300 hover:text-green-100 transition-colors"
+        >
+          Projects
+        </Link>
+        <Link
+          href="/dashboard"
+          className="text-orange-300 hover:text-orange-100 transition-colors"
+        >
+          Dashboard
+        </Link>
+        <Link
+          href="/experience"
+          className="text-yellow-300 hover:text-yellow-100 transition-colors"
+        >
+          Experience
+        </Link>
       </div>
     </div>
   );

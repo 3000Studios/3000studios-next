@@ -12,7 +12,9 @@ export function useAvatarSounds() {
   useEffect(() => {
     async function load() {
       try {
-        const manifest: string[] = await fetch("/sfx/avatar/manifest.json").then((r) => r.json());
+        const manifest: string[] = await fetch(
+          "/sfx/avatar/manifest.json",
+        ).then((r) => r.json());
         const map: Record<string, string> = {};
         manifest.forEach((file: string) => {
           const key = file.replace(/\.(wav|mp3)$/i, "").toLowerCase();

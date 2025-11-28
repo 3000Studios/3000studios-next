@@ -27,7 +27,7 @@ export default function ProjectsPage() {
   useEffect(() => {
     axios
       .get<WordPressPost[]>(
-        "https://3000studios.com/wp-json/wp/v2/posts?per_page=10&_embed"
+        "https://3000studios.com/wp-json/wp/v2/posts?per_page=10&_embed",
       )
       .then((res) => {
         setPosts(res.data);
@@ -45,7 +45,7 @@ export default function ProjectsPage() {
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-center mb-4 md:mb-6 glow-text">
           Projects
         </h1>
-        
+
         <p className="text-lg md:text-xl text-center text-gray-300 mb-12 md:mb-16 max-w-3xl mx-auto px-4">
           Explore our latest work, innovations, and creative solutions
         </p>

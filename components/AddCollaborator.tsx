@@ -52,10 +52,13 @@ export default function AddCollaborator({ onAdd }: AddCollaboratorProps) {
       <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
         <span className="text-purple-400">👤</span> Add Collaborator
       </h2>
-      
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-300 mb-1"
+          >
             Name
           </label>
           <input
@@ -70,7 +73,10 @@ export default function AddCollaborator({ onAdd }: AddCollaboratorProps) {
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-300 mb-1"
+          >
             Email
           </label>
           <input
@@ -85,7 +91,10 @@ export default function AddCollaborator({ onAdd }: AddCollaboratorProps) {
         </div>
 
         <div>
-          <label htmlFor="role" className="block text-sm font-medium text-gray-300 mb-1">
+          <label
+            htmlFor="role"
+            className="block text-sm font-medium text-gray-300 mb-1"
+          >
             Role
           </label>
           <select
@@ -100,9 +109,7 @@ export default function AddCollaborator({ onAdd }: AddCollaboratorProps) {
           </select>
         </div>
 
-        {error && (
-          <p className="text-red-500 text-sm">{error}</p>
-        )}
+        {error && <p className="text-red-500 text-sm">{error}</p>}
 
         <button
           type="submit"

@@ -20,14 +20,16 @@ interface QueueTask {
 let taskQueue: QueueTask[] = [];
 let isProcessing = false;
 
-export async function addTaskToQueue(task: Omit<QueueTask, "status">): Promise<void> {
+export async function addTaskToQueue(
+  task: Omit<QueueTask, "status">,
+): Promise<void> {
   const newTask: QueueTask = {
     ...task,
     status: "queued",
   };
-  
+
   taskQueue.push(newTask);
-  
+
   // Start processing if not already running
   if (!isProcessing) {
     processQueue();
@@ -36,37 +38,36 @@ export async function addTaskToQueue(task: Omit<QueueTask, "status">): Promise<v
 
 async function processQueue(): Promise<void> {
   if (isProcessing) return;
-  
+
   isProcessing = true;
-  
+
   while (taskQueue.length > 0) {
     const task = taskQueue.find((t) => t.status === "queued");
-    
+
     if (!task) break;
-    
+
     // Mark as running
     task.status = "running";
-    
+
     try {
       // Execute the task
       const result = await executeTask(task.id, task.command);
-      
+
       // Mark as completed
       task.status = "completed";
       task.result = result;
-      
     } catch (err: any) {
       // Mark as failed
       task.status = "failed";
       task.result = `Error: ${err.message}`;
     }
-    
+
     // Remove completed/failed tasks after 60 seconds
     setTimeout(() => {
       taskQueue = taskQueue.filter((t) => t.id !== task.id);
     }, 60000);
   }
-  
+
   isProcessing = false;
 }
 

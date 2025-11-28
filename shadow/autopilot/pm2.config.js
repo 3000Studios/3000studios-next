@@ -13,6 +13,6 @@ module.exports = {
       autorestart: true,
       max_restarts: 99,
       restart_delay: 1500,
-    }
-  ]
+    },
+  ],
 };

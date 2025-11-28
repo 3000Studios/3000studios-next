@@ -21,7 +21,7 @@ export default {
   push: () => api("push"),
   siteAction: (action: string, target?: string, content?: string) =>
     api("site-action", { action, target, content }),
-  
+
   // Autopilot Daemon Integration
   async dispatch(task: any) {
     return await fetch("/api/shadow/tasks", {
@@ -41,5 +41,5 @@ export default {
 
   run(command: string) {
     return this.dispatch({ type: "run", command });
-  }
+  },
 };

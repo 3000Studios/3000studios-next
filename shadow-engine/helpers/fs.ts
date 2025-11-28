@@ -9,11 +9,11 @@ import { join } from "path";
 
 export function readFile(relativePath: string): string {
   const fullPath = join(process.cwd(), relativePath);
-  
+
   if (!existsSync(fullPath)) {
     throw new Error(`File not found: ${relativePath}`);
   }
-  
+
   return readFileSync(fullPath, "utf8");
 }
 

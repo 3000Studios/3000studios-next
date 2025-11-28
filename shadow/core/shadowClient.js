@@ -9,7 +9,7 @@ const shadowClient = {
     const res = await fetch(`http://localhost:3000${endpoint}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
     return res.json();
   },
@@ -24,7 +24,7 @@ const shadowClient = {
 
   async run(command) {
     return this.api("/api/shadow/tasks", { type: "run", command });
-  }
+  },
 };
 
 export default shadowClient;

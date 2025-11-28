@@ -12,13 +12,13 @@ let LOGFILE = "./shadow/logs/daemon.log";
 
 function log(msg) {
   const line = `[${new Date().toISOString()}] ${msg}\n`;
-  
+
   // Ensure log directory exists
   const logDir = "./shadow/logs";
   if (!fs.existsSync(logDir)) {
     fs.mkdirSync(logDir, { recursive: true });
   }
-  
+
   fs.appendFileSync(LOGFILE, line);
   console.log(line);
 }

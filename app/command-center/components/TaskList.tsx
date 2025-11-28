@@ -26,7 +26,9 @@ export default function TaskList({ tasks }: TaskListProps) {
     };
 
     return (
-      <span className={`px-2 py-1 rounded border text-xs font-bold ${styles[status]}`}>
+      <span
+        className={`px-2 py-1 rounded border text-xs font-bold ${styles[status]}`}
+      >
         {status.toUpperCase()}
       </span>
     );

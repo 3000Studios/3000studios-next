@@ -10,10 +10,10 @@ export async function gitCommitAndPush(message: string): Promise<void> {
   try {
     // Add all changes
     execSync("git add .", { stdio: "inherit" });
-    
+
     // Commit with message
     execSync(`git commit -m "${message}"`, { stdio: "inherit" });
-    
+
     // Push to main
     execSync("git push origin main", { stdio: "inherit" });
   } catch (err: any) {

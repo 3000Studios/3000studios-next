@@ -9,7 +9,7 @@ import { useState } from "react";
 export default function ShadowChatbot() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { from: "shadow", text: "Welcome, Commander. How can I assist?" }
+    { from: "shadow", text: "Welcome, Commander. How can I assist?" },
   ]);
   const [input, setInput] = useState("");
 
@@ -17,7 +17,7 @@ export default function ShadowChatbot() {
     if (!input.trim()) return;
 
     const newMsg = { from: "user", text: input };
-    setMessages(prev => [...prev, newMsg]);
+    setMessages((prev) => [...prev, newMsg]);
     const userInput = input;
     setInput("");
 
@@ -25,15 +25,18 @@ export default function ShadowChatbot() {
       const response = await fetch("/api/shadow/llm", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: userInput })
+        body: JSON.stringify({ prompt: userInput }),
       });
 
       const data = await response.json();
       const reply = data.reply || "Error processing request.";
 
-      setMessages(prev => [...prev, { from: "shadow", text: reply }]);
+      setMessages((prev) => [...prev, { from: "shadow", text: reply }]);
     } catch (error) {
-      setMessages(prev => [...prev, { from: "shadow", text: "Connection error. Try again." }]);
+      setMessages((prev) => [
+        ...prev,
+        { from: "shadow", text: "Connection error. Try again." },
+      ]);
     }
   }
 
@@ -71,8 +74,8 @@ export default function ShadowChatbot() {
             <input
               className="flex-1 p-2 bg-black border border-cyan-500 text-white rounded"
               value={input}
-              onChange={e => setInput(e.target.value)}
-              onKeyDown={e => e.key === "Enter" && sendMessage()}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
               placeholder="Say something…"
             />
             <button

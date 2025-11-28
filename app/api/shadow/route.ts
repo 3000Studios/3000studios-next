@@ -10,10 +10,7 @@ export async function POST(request: Request) {
 
     // Security: In production, add authentication and command validation
     if (!cmd || typeof cmd !== "string") {
-      return NextResponse.json(
-        { output: "Invalid command" },
-        { status: 400 }
-      );
+      return NextResponse.json({ output: "Invalid command" }, { status: 400 });
     }
 
     // Log the command
@@ -32,8 +29,10 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     return NextResponse.json(
-      { output: `Error: ${error instanceof Error ? error.message : "Unknown error"}` },
-      { status: 500 }
+      {
+        output: `Error: ${error instanceof Error ? error.message : "Unknown error"}`,
+      },
+      { status: 500 },
     );
   }
 }

@@ -44,5 +44,5 @@ export default {
   all() {
     if (!fs.existsSync(MEMFILE)) return {};
     return JSON.parse(decrypt(JSON.parse(fs.readFileSync(MEMFILE))));
-  }
+  },
 };

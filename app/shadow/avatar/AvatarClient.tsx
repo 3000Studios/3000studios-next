@@ -16,7 +16,11 @@ export default function AvatarClient() {
   const [wsMsg, setWsMsg] = useState("");
   const [connected, setConnected] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(false);
-  const [voiceState, setVoiceState] = useState({ talking: false, volume: 0, mood: "idle" });
+  const [voiceState, setVoiceState] = useState({
+    talking: false,
+    volume: 0,
+    mood: "idle",
+  });
   const llm = useLLMFusionCore();
 
   // Voice activation hook
@@ -47,7 +51,7 @@ export default function AvatarClient() {
         audioContext = new AudioContext();
         analyser = audioContext.createAnalyser();
         microphone = audioContext.createMediaStreamSource(stream);
-        
+
         analyser.fftSize = 256;
         timeArray = new Uint8Array(analyser.fftSize) as any;
 
@@ -70,7 +74,7 @@ export default function AvatarClient() {
 
           // Determine if talking based on volume threshold
           const isTalking = normalizedVolume > 0.02; // Adjust sensitivity
-          
+
           // Determine mood based on volume intensity
           let newMood = "idle";
           if (normalizedVolume > 0.4) {
@@ -84,7 +88,7 @@ export default function AvatarClient() {
           setVoiceState({
             talking: isTalking,
             volume: normalizedVolume,
-            mood: newMood
+            mood: newMood,
           });
 
           animationFrame = requestAnimationFrame(detectSpeech);
@@ -107,7 +111,7 @@ export default function AvatarClient() {
         audioContext.close();
       }
       if (stream) {
-        stream.getTracks().forEach(track => track.stop());
+        stream.getTracks().forEach((track) => track.stop());
       }
     };
   }, [voiceEnabled]);
@@ -137,7 +141,9 @@ export default function AvatarClient() {
     return () => ws.close();
   }, []);
 
-  const transcript: string | undefined = (voiceState as unknown as { transcript?: string })?.transcript;
+  const transcript: string | undefined = (
+    voiceState as unknown as { transcript?: string }
+  )?.transcript;
   useEffect(() => {
     if (voiceEnabled && transcript) {
       llm.sendToLLM(transcript).then((reply) => {
@@ -153,10 +159,14 @@ export default function AvatarClient() {
         <PerspectiveCamera makeDefault position={[0, 1.5, 3]} fov={40} />
         <ambientLight intensity={0.5} />
         <directionalLight position={[2, 4, 5]} intensity={2} />
-        <directionalLight position={[-2, 2, -5]} intensity={1} color="#0080ff" />
+        <directionalLight
+          position={[-2, 2, -5]}
+          intensity={1}
+          color="#0080ff"
+        />
         <pointLight position={[0, 2, 0]} intensity={1} color="#00ffff" />
 
-        <OrbitControls 
+        <OrbitControls
           enablePan={false}
           minDistance={2}
           maxDistance={5}
@@ -165,26 +175,46 @@ export default function AvatarClient() {
         />
 
         <Suspense fallback={null}>
-          <ShadowAvatar message={wsMsg} voiceState={voiceEnabled ? voiceState : null} />
+          <ShadowAvatar
+            message={wsMsg}
+            voiceState={voiceEnabled ? voiceState : null}
+          />
         </Suspense>
 
-        <gridHelper args={[10, 10, "#00ffff", "#003"]} position={[0, -1.5, 0]} />
+        <gridHelper
+          args={[10, 10, "#00ffff", "#003"]}
+          position={[0, -1.5, 0]}
+        />
       </Canvas>
 
       <div className="absolute top-5 left-5 bg-black/80 p-5 rounded-xl border border-corporate-steel shadow-2xl panel">
-        <h1 className="text-2xl font-heading font-bold text-corporate-gold mb-2 glow-text">SHADOW AVATAR</h1>
+        <h1 className="text-2xl font-heading font-bold text-corporate-gold mb-2 glow-text">
+          SHADOW AVATAR
+        </h1>
         <div className="flex items-center gap-2 mb-2">
-          <span className={connected ? "status-dot-online" : "status-dot-offline"}></span>
-          <span className={connected ? "text-green-400 font-bold" : "text-red-400 font-bold"}>
+          <span
+            className={connected ? "status-dot-online" : "status-dot-offline"}
+          ></span>
+          <span
+            className={
+              connected ? "text-green-400 font-bold" : "text-red-400 font-bold"
+            }
+          >
             {connected ? "ONLINE" : "OFFLINE"}
           </span>
         </div>
         <p className="text-sm mb-1">{wsMsg}</p>
-        <p className="text-xs text-corporate-silver">WebSocket: ws://localhost:3334</p>
+        <p className="text-xs text-corporate-silver">
+          WebSocket: ws://localhost:3334
+        </p>
         <div className="mt-3">
           <button
             onClick={() => setVoiceEnabled(!voiceEnabled)}
-            className={voiceEnabled ? "px-4 py-2 rounded-md bg-green-400 text-corporate-navy font-bold text-sm" : "px-4 py-2 rounded-md bg-corporate-steel text-white font-bold text-sm"}
+            className={
+              voiceEnabled
+                ? "px-4 py-2 rounded-md bg-green-400 text-corporate-navy font-bold text-sm"
+                : "px-4 py-2 rounded-md bg-corporate-steel text-white font-bold text-sm"
+            }
           >
             {voiceEnabled ? "Voice Active" : "Enable Voice"}
           </button>

@@ -10,7 +10,7 @@ export async function deploySite(): Promise<string> {
   try {
     // Push to GitHub (triggers Vercel auto-deploy via GitHub Actions)
     await gitCommitAndPush("Shadow AI: Deploy trigger");
-    
+
     return "Deployment triggered via GitHub Actions → Vercel";
   } catch (err: any) {
     throw new Error(`Deploy failed: ${err.message}`);

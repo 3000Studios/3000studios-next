@@ -13,28 +13,28 @@ export default {
     splash: {
       image: "./assets/splash.png",
       resizeMode: "contain",
-      backgroundColor: "#000014"
+      backgroundColor: "#000014",
     },
     android: {
       package: "com.shadow.mobilecontroller",
       permissions: ["INTERNET", "RECORD_AUDIO", "READ_EXTERNAL_STORAGE"],
       adaptiveIcon: {
         foregroundImage: "./assets/icon.png",
-        backgroundColor: "#000014"
-      }
+        backgroundColor: "#000014",
+      },
     },
     ios: {
       supportsTablet: true,
-      bundleIdentifier: "com.shadow.mobilecontroller"
+      bundleIdentifier: "com.shadow.mobilecontroller",
     },
     web: {
-      favicon: "./assets/favicon.png"
+      favicon: "./assets/favicon.png",
     },
     extra: {
       shadowServer: "ws://YOUR_PC_LOCAL_IP:3333",
       eas: {
-        projectId: "YOUR_EAS_PROJECT_ID"
-      }
-    }
-  }
+        projectId: "YOUR_EAS_PROJECT_ID",
+      },
+    },
+  },
 };
