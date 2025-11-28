@@ -23,11 +23,17 @@ function getRoleBadgeColor(role: string): string {
   }
 }
 
-export default function CollaboratorList({ collaborators, onRemove, isRemoving }: CollaboratorListProps) {
+export default function CollaboratorList({
+  collaborators,
+  onRemove,
+  isRemoving,
+}: CollaboratorListProps) {
   if (collaborators.length === 0) {
     return (
       <div className="glass p-6 rounded-2xl text-center">
-        <p className="text-gray-400">No collaborators yet. Add your first collaborator above.</p>
+        <p className="text-gray-400">
+          No collaborators yet. Add your first collaborator above.
+        </p>
       </div>
     );
   }
@@ -37,7 +43,7 @@ export default function CollaboratorList({ collaborators, onRemove, isRemoving }
       <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
         <span className="text-cyan-400">👥</span> Team Members
       </h2>
-      
+
       <div className="space-y-3">
         {collaborators.map((collaborator) => (
           <div
@@ -53,9 +59,11 @@ export default function CollaboratorList({ collaborators, onRemove, isRemoving }
                 <p className="text-sm text-gray-400">{collaborator.email}</p>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-3">
-              <span className={`px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r ${getRoleBadgeColor(collaborator.role)} text-white`}>
+              <span
+                className={`px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r ${getRoleBadgeColor(collaborator.role)} text-white`}
+              >
                 {collaborator.role}
               </span>
               <button
@@ -65,13 +73,38 @@ export default function CollaboratorList({ collaborators, onRemove, isRemoving }
                 title="Remove collaborator"
               >
                 {isRemoving === collaborator.id ? (
-                  <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  <svg
+                    className="w-5 h-5 animate-spin"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
                   </svg>
                 ) : (
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                    />
                   </svg>
                 )}
               </button>

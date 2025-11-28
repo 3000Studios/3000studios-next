@@ -13,7 +13,7 @@ export default {
     splash: {
       image: "./assets/splash.png",
       resizeMode: "contain",
-      backgroundColor: "#000014"
+      backgroundColor: "#000014",
     },
     android: {
       package: "com.shadow.voiceos",
@@ -22,26 +22,28 @@ export default {
         "RECORD_AUDIO",
         "WAKE_LOCK",
         "FOREGROUND_SERVICE",
-        "MODIFY_AUDIO_SETTINGS"
+        "MODIFY_AUDIO_SETTINGS",
       ],
       adaptiveIcon: {
         foregroundImage: "./assets/icon.png",
-        backgroundColor: "#000014"
-      }
+        backgroundColor: "#000014",
+      },
     },
     ios: {
       supportsTablet: true,
       bundleIdentifier: "com.shadow.voiceos",
       infoPlist: {
-        NSSpeechRecognitionUsageDescription: "Shadow Voice OS uses speech recognition for voice commands",
-        NSMicrophoneUsageDescription: "Shadow Voice OS needs microphone access for hotword detection"
-      }
+        NSSpeechRecognitionUsageDescription:
+          "Shadow Voice OS uses speech recognition for voice commands",
+        NSMicrophoneUsageDescription:
+          "Shadow Voice OS needs microphone access for hotword detection",
+      },
     },
     extra: {
       wsServer: "ws://YOUR_PC_LOCAL_IP:3333",
       eas: {
-        projectId: "YOUR_EAS_PROJECT_ID"
-      }
-    }
-  }
+        projectId: "YOUR_EAS_PROJECT_ID",
+      },
+    },
+  },
 };

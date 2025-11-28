@@ -80,7 +80,7 @@ export default function ShadowConsole() {
       const newTitle = cmd.replace(/change title to/i, "").trim();
       if (newTitle) {
         pushLog(`Updating site title to: "${newTitle}"`, "info");
-        
+
         try {
           // Call API to update title (to be implemented)
           const response = await fetch("/api/shadow/update-title", {
@@ -103,7 +103,10 @@ export default function ShadowConsole() {
     }
 
     // Unknown command
-    pushLog(`⚠️ Unknown command: "${cmd}". Type 'help' for available commands.`, "error");
+    pushLog(
+      `⚠️ Unknown command: "${cmd}". Type 'help' for available commands.`,
+      "error",
+    );
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -188,14 +191,20 @@ export default function ShadowConsole() {
       {/* Header */}
       <div className="bg-gradient-to-r from-purple-900 to-black border-t border-l border-purple-500/50 rounded-tl-xl backdrop-blur-xl flex items-center justify-between p-3 cursor-pointer">
         <div className="flex items-center gap-2">
-          <div className={`w-2 h-2 rounded-full ${isListening ? "bg-red-500 animate-pulse" : "bg-green-500"}`}></div>
-          <span className="text-white font-bold text-sm">⚡ Shadow Console</span>
+          <div
+            className={`w-2 h-2 rounded-full ${isListening ? "bg-red-500 animate-pulse" : "bg-green-500"}`}
+          ></div>
+          <span className="text-white font-bold text-sm">
+            ⚡ Shadow Console
+          </span>
         </div>
         <div className="flex gap-2">
           <button
             onClick={toggleVoice}
             className={`px-2 py-1 rounded text-xs font-bold transition-colors ${
-              isListening ? "bg-red-600 hover:bg-red-700" : "bg-purple-600 hover:bg-purple-700"
+              isListening
+                ? "bg-red-600 hover:bg-red-700"
+                : "bg-purple-600 hover:bg-purple-700"
             }`}
             title="Toggle voice input"
           >

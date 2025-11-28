@@ -20,7 +20,12 @@ export default function MiniGame() {
     let animationId: number;
     let playerY = 200;
     let playerVelocity = 0;
-    let obstacles: Array<{ x: number; y: number; width: number; height: number }> = [];
+    let obstacles: Array<{
+      x: number;
+      y: number;
+      width: number;
+      height: number;
+    }> = [];
     let gameScore = 0;
     let gameOver = false;
 
@@ -75,12 +80,16 @@ export default function MiniGame() {
         ctx.fillStyle = "#ffffff";
         ctx.font = "24px Arial";
         ctx.textAlign = "center";
-        ctx.fillText("Click or Press Space to Start", canvas.width / 2, canvas.height / 2);
-        
+        ctx.fillText(
+          "Click or Press Space to Start",
+          canvas.width / 2,
+          canvas.height / 2,
+        );
+
         // Draw player preview
         ctx.fillStyle = "#ff0000";
         ctx.fillRect(100, playerY, playerSize, playerSize);
-        
+
         animationId = requestAnimationFrame(gameLoop);
         return;
       }
@@ -91,8 +100,16 @@ export default function MiniGame() {
         ctx.textAlign = "center";
         ctx.fillText("Game Over!", canvas.width / 2, canvas.height / 2 - 20);
         ctx.font = "20px Arial";
-        ctx.fillText(`Score: ${gameScore}`, canvas.width / 2, canvas.height / 2 + 20);
-        ctx.fillText("Click to Restart", canvas.width / 2, canvas.height / 2 + 50);
+        ctx.fillText(
+          `Score: ${gameScore}`,
+          canvas.width / 2,
+          canvas.height / 2 + 20,
+        );
+        ctx.fillText(
+          "Click to Restart",
+          canvas.width / 2,
+          canvas.height / 2 + 50,
+        );
         animationId = requestAnimationFrame(gameLoop);
         return;
       }
@@ -118,7 +135,10 @@ export default function MiniGame() {
       ctx.fillRect(100, playerY, playerSize, playerSize);
 
       // Add new obstacles
-      if (obstacles.length === 0 || obstacles[obstacles.length - 1].x < canvas.width - 300) {
+      if (
+        obstacles.length === 0 ||
+        obstacles[obstacles.length - 1].x < canvas.width - 300
+      ) {
         const gapY = Math.random() * (canvas.height - 250) + 75;
         obstacles.push({
           x: canvas.width,

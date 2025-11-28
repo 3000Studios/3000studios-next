@@ -37,7 +37,7 @@ export class ShadowEngine {
     return {
       ok: true,
       action: "wordpress_file_update",
-      result
+      result,
     };
   }
 
@@ -49,7 +49,7 @@ export class ShadowEngine {
       ok: true,
       action: "local_file_edit",
       file,
-      length: content.length
+      length: content.length,
     };
   }
 }

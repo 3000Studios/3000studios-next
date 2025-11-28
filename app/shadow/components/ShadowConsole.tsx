@@ -5,7 +5,10 @@
 "use client";
 
 interface ShadowConsoleProps {
-  messages: Array<{ type: "info" | "success" | "error" | "warning"; text: string }>;
+  messages: Array<{
+    type: "info" | "success" | "error" | "warning";
+    text: string;
+  }>;
 }
 
 export default function ShadowConsole({ messages }: ShadowConsoleProps) {

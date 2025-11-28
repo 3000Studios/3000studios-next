@@ -12,19 +12,15 @@ export async function POST(req: Request) {
     const { command } = await req.json();
 
     if (!command) {
-      return NextResponse.json(
-        { error: "Missing command" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Missing command" }, { status: 400 });
     }
 
     const result = await runShadowCommand(command);
     return NextResponse.json({ ok: true, result });
-
   } catch (err: any) {
     return NextResponse.json(
       { ok: false, error: err.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

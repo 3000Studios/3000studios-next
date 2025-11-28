@@ -23,11 +23,11 @@ export default function CollaboratorsPage() {
     try {
       const response = await fetch("/api/collaborators");
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || "Failed to fetch collaborators");
       }
-      
+
       setCollaborators(data.collaborators);
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
@@ -46,12 +46,12 @@ export default function CollaboratorsPage() {
       const response = await fetch(`/api/collaborators?id=${id}`, {
         method: "DELETE",
       });
-      
+
       if (!response.ok) {
         const data = await response.json();
         throw new Error(data.error || "Failed to remove collaborator");
       }
-      
+
       setCollaborators((prev) => prev.filter((c) => c.id !== id));
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
@@ -82,7 +82,7 @@ export default function CollaboratorsPage() {
         {/* Main Content */}
         <div className="space-y-6">
           <AddCollaborator onAdd={handleAdd} />
-          
+
           {isLoading ? (
             <div className="glass p-6 rounded-2xl text-center">
               <div className="inline-block w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>

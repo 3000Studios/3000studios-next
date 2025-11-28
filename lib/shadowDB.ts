@@ -26,17 +26,17 @@ export default {
 
   addTask(task: any) {
     let data: any[] = [];
-    
+
     // Ensure directory exists
     const dir = path.dirname(FILE);
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
-    
+
     if (fs.existsSync(FILE)) {
       data = JSON.parse(fs.readFileSync(FILE, "utf8"));
     }
-    
+
     task.id = Date.now();
     task.done = false;
     data.push(task);
@@ -45,7 +45,7 @@ export default {
 
   markDone(id: number) {
     if (!fs.existsSync(FILE)) return;
-    
+
     let data = JSON.parse(fs.readFileSync(FILE, "utf8"));
     data = data.map((t: any) => (t.id === id ? { ...t, done: true } : t));
     fs.writeFileSync(FILE, JSON.stringify(data, null, 2));

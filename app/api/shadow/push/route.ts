@@ -14,7 +14,7 @@ export async function POST(): Promise<Response> {
     `cd ${repo}`,
     "git add .",
     `git commit -m \"Shadow Auto-Push $(date +%s)\"`,
-    "git push origin main"
+    "git push origin main",
   ].join(" && ");
 
   return new Promise<Response>((resolve) => {
@@ -25,7 +25,7 @@ export async function POST(): Promise<Response> {
           stdout,
           stderr,
           error: error ? error.message : null,
-        })
+        }),
       );
     });
   });

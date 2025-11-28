@@ -55,6 +55,7 @@ node avatar.js
 ```
 
 You should see:
+
 ```
 🤖 Shadow Avatar Core online at ws://0.0.0.0:3334
 Avatar Core listening on port 3334
@@ -73,14 +74,16 @@ Navigate to: `http://localhost:3000/shadow/avatar`
 Send a message via WebSocket:
 
 ```javascript
-const ws = new WebSocket('ws://localhost:3334');
+const ws = new WebSocket("ws://localhost:3334");
 
 ws.onopen = () => {
   // Send message to Avatar
-  ws.send(JSON.stringify({
-    type: "message",
-    text: "Hello Shadow, how are you?"
-  }));
+  ws.send(
+    JSON.stringify({
+      type: "message",
+      text: "Hello Shadow, how are you?",
+    }),
+  );
 };
 ```
 
@@ -88,35 +91,41 @@ ws.onopen = () => {
 
 The Avatar has 4 emotion states with unique animations:
 
-| Emotion | Trigger | Animation | Color |
-|---------|---------|-----------|-------|
-| **Idle** | Default state | Gentle breathing, slow head rotation | Blue (#0080ff) |
-| **Talking** | Speaking/responding | Head bob, scale pulsing | Cyan (#00ffff) |
-| **Excited** | Success events | Rapid bouncing, rotation | Green (#00ff00) |
-| **Angry** | Error events | Fast shaking, aggressive movement | Red (#ff0000) |
+| Emotion     | Trigger             | Animation                            | Color           |
+| ----------- | ------------------- | ------------------------------------ | --------------- |
+| **Idle**    | Default state       | Gentle breathing, slow head rotation | Blue (#0080ff)  |
+| **Talking** | Speaking/responding | Head bob, scale pulsing              | Cyan (#00ffff)  |
+| **Excited** | Success events      | Rapid bouncing, rotation             | Green (#00ff00) |
+| **Angry**   | Error events        | Fast shaking, aggressive movement    | Red (#ff0000)   |
 
 ### Emotion Triggers
 
 **Message Content:**
+
 - Contains "error" or "fail" → **Angry**
 - Contains "deploy" or "success" → **Excited**
 - Contains "hey" or "hello" → **Happy** (yellow)
 - Default → **Talking**
 
 **Events:**
+
 ```javascript
 // Deploy success
-ws.send(JSON.stringify({
-  type: "event",
-  event: "deploy_success"
-}));
+ws.send(
+  JSON.stringify({
+    type: "event",
+    event: "deploy_success",
+  }),
+);
 // Result: Excited emotion + "Deploy complete. All systems nominal."
 
 // Deploy error
-ws.send(JSON.stringify({
-  type: "event",
-  event: "deploy_error"
-}));
+ws.send(
+  JSON.stringify({
+    type: "event",
+    event: "deploy_error",
+  }),
+);
 // Result: Angry emotion + "Deploy failed. Running diagnostics."
 ```
 
@@ -176,6 +185,7 @@ ws.send(JSON.stringify({
 Main page with Three.js Canvas:
 
 **Key Features:**
+
 - PerspectiveCamera positioned at [0, 1.5, 3]
 - OrbitControls for camera manipulation
 - Multiple light sources (ambient, directional, point)
@@ -184,6 +194,7 @@ Main page with Three.js Canvas:
 - Neon cyber theme (#00ffff borders)
 
 **Lighting Setup:**
+
 ```javascript
 <ambientLight intensity={0.5} />
 <directionalLight position={[2, 4, 5]} intensity={2} />
@@ -192,8 +203,9 @@ Main page with Three.js Canvas:
 ```
 
 **Camera Controls:**
+
 ```javascript
-<OrbitControls 
+<OrbitControls
   enablePan={false}
   minDistance={2}
   maxDistance={5}
@@ -207,6 +219,7 @@ Main page with Three.js Canvas:
 3D Avatar entity with animations:
 
 **Structure:**
+
 - **Head** — 0.5 radius sphere with emissive material
 - **Eyes** — Two 0.08 radius spheres (#00ffff glow)
 - **Body** — 0.8×1.2×0.6 box with metallic material
@@ -214,25 +227,26 @@ Main page with Three.js Canvas:
 - **Aura** — 1.5 radius transparent sphere (when speaking)
 
 **Animation Loop:**
+
 ```javascript
 useFrame((state) => {
   const time = state.clock.getElapsedTime();
-  
+
   if (emotion === "idle") {
     groupRef.current.position.y = Math.sin(time * 2) * 0.05;
     headRef.current.rotation.y = Math.sin(time * 0.5) * 0.1;
   }
-  
+
   if (emotion === "excited") {
     groupRef.current.position.y = Math.abs(Math.sin(time * 8)) * 0.3;
     headRef.current.rotation.z = Math.sin(time * 10) * 0.2;
   }
-  
+
   if (emotion === "angry") {
     headRef.current.rotation.x = Math.sin(time * 20) * 0.1;
     headRef.current.rotation.y = Math.cos(time * 20) * 0.1;
   }
-  
+
   if (emotion === "talking" && speaking) {
     headRef.current.scale.y = 1 + Math.sin(time * 10) * 0.05;
   }
@@ -246,29 +260,31 @@ useFrame((state) => {
 WebSocket server with GPT-4o and TTS:
 
 **WebSocket Setup:**
+
 ```javascript
 const WebSocket = require("ws");
 const wss = new WebSocket.Server({ port: 3334 });
 
 wss.on("connection", (ws) => {
   console.log("🌐 Client connected to Avatar Core");
-  
+
   ws.send("Shadow Avatar initialized. Ready to serve.");
 });
 ```
 
 **Message Handler:**
+
 ```javascript
 ws.on("message", async (msg) => {
   const data = JSON.parse(msg);
-  
+
   if (data.type === "message") {
     // Get GPT-4o response
     const response = await getAIResponse(data.text);
-    
+
     // Broadcast to all clients
     broadcast(response);
-    
+
     // Speak via TTS
     speak(response);
   }
@@ -276,6 +292,7 @@ ws.on("message", async (msg) => {
 ```
 
 **GPT-4o Integration:**
+
 ```javascript
 async function getAIResponse(userMessage) {
   const completion = await openai.chat.completions.create({
@@ -283,22 +300,24 @@ async function getAIResponse(userMessage) {
     messages: [
       {
         role: "system",
-        content: "You are Shadow, a cybernetic AI assistant with a cool, confident personality. Keep responses concise (1-2 sentences max). Use tech slang when appropriate. You exist as a 3D holographic avatar."
+        content:
+          "You are Shadow, a cybernetic AI assistant with a cool, confident personality. Keep responses concise (1-2 sentences max). Use tech slang when appropriate. You exist as a 3D holographic avatar.",
       },
       {
         role: "user",
-        content: userMessage
-      }
+        content: userMessage,
+      },
     ],
     max_tokens: 100,
-    temperature: 0.8
+    temperature: 0.8,
   });
-  
+
   return completion.choices[0].message.content;
 }
 ```
 
 **Windows TTS:**
+
 ```javascript
 function speak(text) {
   const psCommand = `
@@ -309,7 +328,7 @@ function speak(text) {
     $synth.Volume = 100
     $synth.Speak("${text.replace(/"/g, '""')}")
   `;
-  
+
   const ps = spawn("powershell.exe", ["-Command", psCommand]);
 }
 ```
@@ -319,6 +338,7 @@ function speak(text) {
 ### Client → Server
 
 **Send Message:**
+
 ```json
 {
   "type": "message",
@@ -327,6 +347,7 @@ function speak(text) {
 ```
 
 **Trigger Emotion:**
+
 ```json
 {
   "type": "emotion",
@@ -335,6 +356,7 @@ function speak(text) {
 ```
 
 **Send Event:**
+
 ```json
 {
   "type": "event",
@@ -345,11 +367,13 @@ function speak(text) {
 ### Server → Client
 
 **Broadcast Response:**
+
 ```
 "Deploy complete. All systems nominal."
 ```
 
 **Emotion Trigger:**
+
 ```
 "Deploy success - Emotion: excited"
 ```
@@ -369,11 +393,14 @@ function speak(text) {
 **Scenario:** Ask Avatar a question
 
 **Command:**
+
 ```javascript
-ws.send(JSON.stringify({
-  type: "message",
-  text: "What's the status of the system?"
-}));
+ws.send(
+  JSON.stringify({
+    type: "message",
+    text: "What's the status of the system?",
+  }),
+);
 ```
 
 **Result:** GPT-4o generates response, Avatar speaks via TTS
@@ -395,11 +422,16 @@ Edit `shadowAvatar.tsx`:
 ```javascript
 const getColor = () => {
   switch (emotion) {
-    case "angry": return "#ff0000";      // Red
-    case "excited": return "#00ff00";    // Green
-    case "happy": return "#ffff00";      // Yellow
-    case "talking": return "#00ffff";    // Cyan
-    default: return "#0080ff";           // Blue
+    case "angry":
+      return "#ff0000"; // Red
+    case "excited":
+      return "#00ff00"; // Green
+    case "happy":
+      return "#ffff00"; // Yellow
+    case "talking":
+      return "#00ffff"; // Cyan
+    default:
+      return "#0080ff"; // Blue
   }
 };
 ```
@@ -425,10 +457,8 @@ import { useGLTF } from "@react-three/drei";
 
 function ShadowAvatar({ message }) {
   const { scene } = useGLTF("/models/shadow_entity.glb");
-  
-  return (
-    <primitive object={scene} scale={1} />
-  );
+
+  return <primitive object={scene} scale={1} />;
 }
 ```
 
@@ -438,13 +468,13 @@ Modify PowerShell command in `avatar.js`:
 
 ```javascript
 // Female voice
-$synth.SelectVoiceByHints([System.Speech.Synthesis.VoiceGender]::Female)
+$synth.SelectVoiceByHints([System.Speech.Synthesis.VoiceGender]::Female);
 
 // Faster speech
-$synth.Rate = 2
+$synth.Rate = 2;
 
 // Lower volume
-$synth.Volume = 50
+$synth.Volume = 50;
 ```
 
 ## 🛠 Troubleshooting
@@ -454,6 +484,7 @@ $synth.Volume = 50
 **Problem:** Black screen or no 3D model
 
 **Solutions:**
+
 1. Check browser console for errors
 2. Verify Three.js dependencies installed:
    ```powershell
@@ -467,6 +498,7 @@ $synth.Volume = 50
 **Problem:** "Connection error" or "Disconnected"
 
 **Solutions:**
+
 1. Verify `avatar.js` is running:
    ```powershell
    cd shadow/core
@@ -480,6 +512,7 @@ $synth.Volume = 50
 **Problem:** Avatar responds but no voice output
 
 **Solutions:**
+
 1. Verify Windows Speech is available:
    ```powershell
    Add-Type -AssemblyName System.Speech
@@ -497,6 +530,7 @@ $synth.Volume = 50
 **Problem:** "Sorry, my neural network glitched"
 
 **Solutions:**
+
 1. Verify OpenAI API key in `.env.local`
 2. Check API key has credits/quota
 3. Verify internet connection
@@ -507,12 +541,14 @@ $synth.Volume = 50
 ### Manual Testing
 
 1. **Start Avatar Server:**
+
    ```powershell
    cd shadow/core
    node avatar.js
    ```
 
 2. **Open Avatar Page:**
+
    ```powershell
    npm run dev
    # Navigate to http://localhost:3000/shadow/avatar
@@ -520,66 +556,80 @@ $synth.Volume = 50
 
 3. **Test Message:**
    Open browser console:
+
    ```javascript
-   const ws = new WebSocket('ws://localhost:3334');
+   const ws = new WebSocket("ws://localhost:3334");
    ws.onopen = () => {
-     ws.send(JSON.stringify({
-       type: "message",
-       text: "Hello Shadow"
-     }));
+     ws.send(
+       JSON.stringify({
+         type: "message",
+         text: "Hello Shadow",
+       }),
+     );
    };
    ```
 
 4. **Test Emotion:**
+
    ```javascript
-   ws.send(JSON.stringify({
-     type: "emotion",
-     emotion: "excited"
-   }));
+   ws.send(
+     JSON.stringify({
+       type: "emotion",
+       emotion: "excited",
+     }),
+   );
    ```
 
 5. **Test Event:**
    ```javascript
-   ws.send(JSON.stringify({
-     type: "event",
-     event: "deploy_success"
-   }));
+   ws.send(
+     JSON.stringify({
+       type: "event",
+       event: "deploy_success",
+     }),
+   );
    ```
 
 ### Automated Testing (Node.js)
 
 ```javascript
-const WebSocket = require('ws');
-const ws = new WebSocket('ws://localhost:3334');
+const WebSocket = require("ws");
+const ws = new WebSocket("ws://localhost:3334");
 
-ws.on('open', () => {
-  console.log('✅ Connected to Avatar Core');
-  
+ws.on("open", () => {
+  console.log("✅ Connected to Avatar Core");
+
   // Test 1: Message
-  ws.send(JSON.stringify({
-    type: "message",
-    text: "System status?"
-  }));
-  
+  ws.send(
+    JSON.stringify({
+      type: "message",
+      text: "System status?",
+    }),
+  );
+
   setTimeout(() => {
     // Test 2: Event
-    ws.send(JSON.stringify({
-      type: "event",
-      event: "deploy_success"
-    }));
+    ws.send(
+      JSON.stringify({
+        type: "event",
+        event: "deploy_success",
+      }),
+    );
   }, 3000);
-  
+
   setTimeout(() => {
     // Test 3: Emotion
-    ws.send(JSON.stringify({
-      type: "emotion",
-      emotion: "angry"
-    }));
+    ws.send(
+      JSON.stringify({
+        type: "emotion",
+        emotion: "angry",
+      }),
+    );
   }, 6000);
 });
 
-ws.on('message', (data) => {
-  console.log('📡 Avatar:', data.toString());
+ws.on("message", (data) => {
+  console.log("📡 Avatar:", data.toString());
 });
 ```
 
@@ -603,33 +653,37 @@ package.json
 
 ## 🔄 Integration with Shadow Ecosystem
 
-| Component | Integration |
-|-----------|-------------|
-| **Shadow Core AI** | Avatar can access encrypted memory |
-| **Shadow Autopilot** | Events trigger Avatar emotions |
-| **Shadow UI** | Avatar displayed in holographic dashboard |
-| **Voice OS** | Voice commands can control Avatar |
-| **Mobile Control** | Mobile app can send Avatar messages |
+| Component            | Integration                               |
+| -------------------- | ----------------------------------------- |
+| **Shadow Core AI**   | Avatar can access encrypted memory        |
+| **Shadow Autopilot** | Events trigger Avatar emotions            |
+| **Shadow UI**        | Avatar displayed in holographic dashboard |
+| **Voice OS**         | Voice commands can control Avatar         |
+| **Mobile Control**   | Mobile app can send Avatar messages       |
 
 ### Example: Autopilot → Avatar
 
 In `shadow/autopilot/daemon.js`, add Avatar event broadcasting:
 
 ```javascript
-const WebSocket = require('ws');
-const avatarWs = new WebSocket('ws://localhost:3334');
+const WebSocket = require("ws");
+const avatarWs = new WebSocket("ws://localhost:3334");
 
 // On successful deploy
-avatarWs.send(JSON.stringify({
-  type: "event",
-  event: "deploy_success"
-}));
+avatarWs.send(
+  JSON.stringify({
+    type: "event",
+    event: "deploy_success",
+  }),
+);
 
 // On error
-avatarWs.send(JSON.stringify({
-  type: "event",
-  event: "deploy_error"
-}));
+avatarWs.send(
+  JSON.stringify({
+    type: "event",
+    event: "deploy_error",
+  }),
+);
 ```
 
 ### Example: Voice OS → Avatar
@@ -637,14 +691,16 @@ avatarWs.send(JSON.stringify({
 In `shadow/core/voice.js`, control Avatar emotions:
 
 ```javascript
-const avatarWs = new WebSocket('ws://localhost:3334');
+const avatarWs = new WebSocket("ws://localhost:3334");
 
 if (cmd.includes("deploy")) {
   // Trigger excited emotion
-  avatarWs.send(JSON.stringify({
-    type: "emotion",
-    emotion: "excited"
-  }));
+  avatarWs.send(
+    JSON.stringify({
+      type: "emotion",
+      emotion: "excited",
+    }),
+  );
 }
 ```
 
@@ -679,11 +735,13 @@ useFrame((state) => {
 import { Points, PointMaterial } from "@react-three/drei";
 
 // In shadowAvatar.tsx
-{emotion === "excited" && (
-  <Points positions={generateParticles()} stride={3}>
-    <PointMaterial color="#00ffff" size={0.05} />
-  </Points>
-)}
+{
+  emotion === "excited" && (
+    <Points positions={generateParticles()} stride={3}>
+      <PointMaterial color="#00ffff" size={0.05} />
+    </Points>
+  );
+}
 ```
 
 ### Add Custom Gestures
@@ -705,7 +763,7 @@ function animateWave() {
     z: -Math.PI / 4,
     duration: 0.5,
     yoyo: true,
-    repeat: 3
+    repeat: 3,
   });
 }
 ```
@@ -713,6 +771,7 @@ function animateWave() {
 ## 🛣 Roadmap
 
 ### Phase 1 (Current)
+
 - ✅ 3D rendering with Three.js
 - ✅ Emotion system (4 emotions)
 - ✅ WebSocket communication
@@ -720,6 +779,7 @@ function animateWave() {
 - ✅ Windows TTS
 
 ### Phase 2 (Planned)
+
 - [ ] Custom GLTF model support
 - [ ] Advanced lip-sync with audio analysis
 - [ ] Hand gesture recognition
@@ -727,6 +787,7 @@ function animateWave() {
 - [ ] Multiple Avatar styles
 
 ### Phase 3 (Future)
+
 - [ ] VR support (Quest integration)
 - [ ] Real-time voice cloning
 - [ ] Emotion learning from user interactions

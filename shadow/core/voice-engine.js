@@ -10,7 +10,7 @@ async function transcribe(audioBuffer) {
   const res = await fetch("http://localhost:3000/api/shadow/stt", {
     method: "POST",
     body: audioBuffer,
-    headers: { "Content-Type": "audio/wav" }
+    headers: { "Content-Type": "audio/wav" },
   });
   return res.json();
 }

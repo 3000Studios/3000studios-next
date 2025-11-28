@@ -12,8 +12,13 @@ export async function GET() {
     return NextResponse.json({ collaborators });
   } catch (error) {
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Failed to fetch collaborators" },
-      { status: 500 }
+      {
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to fetch collaborators",
+      },
+      { status: 500 },
     );
   }
 }
@@ -25,22 +30,21 @@ export async function POST(request: Request) {
 
     // Validate required fields
     if (!name || typeof name !== "string" || name.trim().length === 0) {
-      return NextResponse.json(
-        { error: "Name is required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Name is required" }, { status: 400 });
     }
 
     if (!email || typeof email !== "string" || !email.includes("@")) {
       return NextResponse.json(
         { error: "Valid email is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     // Validate role
     const validRoles: CollaboratorRole[] = ["admin", "editor", "viewer"];
-    const collaboratorRole: CollaboratorRole = validRoles.includes(role) ? role : "viewer";
+    const collaboratorRole: CollaboratorRole = validRoles.includes(role)
+      ? role
+      : "viewer";
 
     const newCollaborator = collaboratorDB.add({
       name: name.trim(),
@@ -49,11 +53,17 @@ export async function POST(request: Request) {
       avatar: avatar || undefined,
     });
 
-    return NextResponse.json({ collaborator: newCollaborator }, { status: 201 });
+    return NextResponse.json(
+      { collaborator: newCollaborator },
+      { status: 201 },
+    );
   } catch (error) {
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Failed to add collaborator" },
-      { status: 500 }
+      {
+        error:
+          error instanceof Error ? error.message : "Failed to add collaborator",
+      },
+      { status: 500 },
     );
   }
 }
@@ -66,7 +76,7 @@ export async function DELETE(request: Request) {
     if (!id) {
       return NextResponse.json(
         { error: "Collaborator ID is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -75,15 +85,20 @@ export async function DELETE(request: Request) {
     if (!removed) {
       return NextResponse.json(
         { error: "Collaborator not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Failed to remove collaborator" },
-      { status: 500 }
+      {
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to remove collaborator",
+      },
+      { status: 500 },
     );
   }
 }

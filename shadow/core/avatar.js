@@ -9,7 +9,7 @@ const { spawn } = require("child_process");
 const wss = new WebSocket.Server({ port: 3334 });
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 console.log("🤖 Shadow Avatar Core online at ws://0.0.0.0:3334");
@@ -35,7 +35,7 @@ function speak(text) {
   `;
 
   const ps = spawn("powershell.exe", ["-Command", psCommand]);
-  
+
   ps.on("error", (error) => {
     console.error("TTS error:", error);
   });
@@ -53,15 +53,16 @@ async function getAIResponse(userMessage) {
       messages: [
         {
           role: "system",
-          content: "You are Shadow, a cybernetic AI assistant with a cool, confident personality. Keep responses concise (1-2 sentences max). Use tech slang when appropriate. You exist as a 3D holographic avatar."
+          content:
+            "You are Shadow, a cybernetic AI assistant with a cool, confident personality. Keep responses concise (1-2 sentences max). Use tech slang when appropriate. You exist as a 3D holographic avatar.",
         },
         {
           role: "user",
-          content: userMessage
-        }
+          content: userMessage,
+        },
       ],
       max_tokens: 100,
-      temperature: 0.8
+      temperature: 0.8,
     });
 
     return completion.choices[0].message.content;
@@ -83,10 +84,10 @@ wss.on("connection", (ws) => {
 
     if (data.type === "message") {
       const userMessage = data.text;
-      
+
       // Get AI response
       const response = await getAIResponse(userMessage);
-      
+
       // Broadcast to all clients (for UI update)
       broadcast(response);
 
@@ -103,7 +104,7 @@ wss.on("connection", (ws) => {
 
     if (data.type === "event") {
       console.log("⚡ Event received:", data.event);
-      
+
       let response = "";
       if (data.event === "deploy_success") {
         response = "Deploy complete. All systems nominal.";
@@ -137,9 +138,10 @@ setInterval(() => {
     "All systems operational.",
     "Shadow monitoring active.",
     "Neural networks synchronized.",
-    "Ready for commands."
+    "Ready for commands.",
   ];
-  const randomMsg = statusMessages[Math.floor(Math.random() * statusMessages.length)];
+  const randomMsg =
+    statusMessages[Math.floor(Math.random() * statusMessages.length)];
   broadcast(randomMsg);
 }, 30000);
 

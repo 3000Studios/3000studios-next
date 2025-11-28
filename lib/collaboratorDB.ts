@@ -57,41 +57,44 @@ export default {
 
   add(collaborator: Omit<Collaborator, "id" | "addedAt">): Collaborator {
     const collaborators = readCollaborators();
-    
+
     const newCollaborator: Collaborator = {
       ...collaborator,
       id: generateUniqueId(),
       addedAt: new Date().toISOString(),
     };
-    
+
     collaborators.push(newCollaborator);
     writeCollaborators(collaborators);
-    
+
     return newCollaborator;
   },
 
-  update(id: number, updates: Partial<Omit<Collaborator, "id" | "addedAt">>): Collaborator | null {
+  update(
+    id: number,
+    updates: Partial<Omit<Collaborator, "id" | "addedAt">>,
+  ): Collaborator | null {
     const collaborators = readCollaborators();
     const index = collaborators.findIndex((c) => c.id === id);
-    
+
     if (index === -1) {
       return null;
     }
-    
+
     collaborators[index] = { ...collaborators[index], ...updates };
     writeCollaborators(collaborators);
-    
+
     return collaborators[index];
   },
 
   remove(id: number): boolean {
     const collaborators = readCollaborators();
     const filtered = collaborators.filter((c) => c.id !== id);
-    
+
     if (filtered.length === collaborators.length) {
       return false;
     }
-    
+
     writeCollaborators(filtered);
     return true;
   },

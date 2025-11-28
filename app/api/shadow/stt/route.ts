@@ -11,7 +11,10 @@ export async function POST(req: NextRequest): Promise<Response> {
   try {
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
-      return NextResponse.json({ error: "Missing OPENAI_API_KEY" }, { status: 500 });
+      return NextResponse.json(
+        { error: "Missing OPENAI_API_KEY" },
+        { status: 500 },
+      );
     }
 
     const openai = new OpenAI({ apiKey });
@@ -34,7 +37,7 @@ export async function POST(req: NextRequest): Promise<Response> {
     console.error("STT Error:", error);
     return NextResponse.json(
       { error: "Transcription failed" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

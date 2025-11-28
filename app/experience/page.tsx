@@ -6,7 +6,8 @@ export default function ExperiencePage() {
   const experiences = [
     {
       title: "Full-Stack Development",
-      description: "Building modern web applications with Next.js, React, and Node.js",
+      description:
+        "Building modern web applications with Next.js, React, and Node.js",
       icon: "💻",
     },
     {
@@ -21,7 +22,8 @@ export default function ExperiencePage() {
     },
     {
       title: "Cloud Infrastructure",
-      description: "Deploying and managing applications on Vercel, AWS, and Azure",
+      description:
+        "Deploying and managing applications on Vercel, AWS, and Azure",
       icon: "☁️",
     },
   ];
@@ -32,9 +34,10 @@ export default function ExperiencePage() {
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-center mb-4 md:mb-6 glow-text">
           Experience
         </h1>
-        
+
         <p className="text-lg md:text-xl text-center text-gray-300 mb-12 md:mb-16 max-w-3xl mx-auto px-4">
-          A showcase of expertise, innovation, and cutting-edge technology solutions
+          A showcase of expertise, innovation, and cutting-edge technology
+          solutions
         </p>
 
         <div className="grid md:grid-cols-2 gap-8 mb-20">
@@ -53,16 +56,23 @@ export default function ExperiencePage() {
         <div className="glass p-10 rounded-2xl">
           <h2 className="text-3xl font-bold mb-6 text-center">Tech Stack</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {["Next.js", "React", "TypeScript", "TailwindCSS", "Node.js", "WordPress", "Vercel", "AWS"].map(
-              (tech) => (
-                <div
-                  key={tech}
-                  className="bg-black/40 p-4 rounded-lg text-center font-bold hover:bg-purple-600/20 transition-colors"
-                >
-                  {tech}
-                </div>
-              )
-            )}
+            {[
+              "Next.js",
+              "React",
+              "TypeScript",
+              "TailwindCSS",
+              "Node.js",
+              "WordPress",
+              "Vercel",
+              "AWS",
+            ].map((tech) => (
+              <div
+                key={tech}
+                className="bg-black/40 p-4 rounded-lg text-center font-bold hover:bg-purple-600/20 transition-colors"
+              >
+                {tech}
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -16,7 +16,7 @@ waveformCanvas.width = waveformCanvas.offsetWidth;
 waveformCanvas.height = waveformCanvas.offsetHeight;
 
 // Log helper
-const log = msg => {
+const log = (msg) => {
   const timestamp = new Date().toLocaleTimeString();
   logEl.textContent += `[${timestamp}] ${msg}\n`;
   logEl.scrollTop = logEl.scrollHeight;
@@ -28,14 +28,14 @@ function drawWaveform() {
   const width = waveformCanvas.width;
   const height = waveformCanvas.height;
   const centerY = height / 2;
-  
+
   waveformCtx.fillStyle = "rgba(0, 0, 0, 0.1)";
   waveformCtx.fillRect(0, 0, width, height);
-  
+
   waveformCtx.strokeStyle = "#00ffff";
   waveformCtx.lineWidth = 2;
   waveformCtx.beginPath();
-  
+
   for (let x = 0; x < width; x++) {
     const y = centerY + Math.sin((x + wavePhase) * 0.05) * 20 * Math.random();
     if (x === 0) {
@@ -44,7 +44,7 @@ function drawWaveform() {
       waveformCtx.lineTo(x, y);
     }
   }
-  
+
   waveformCtx.stroke();
   wavePhase += 2;
   requestAnimationFrame(drawWaveform);
@@ -57,48 +57,48 @@ ws.onopen = () => {
   log("Connected to Shadow Command Center");
 };
 
-ws.onmessage = evt => {
+ws.onmessage = (evt) => {
   const data = JSON.parse(evt.data);
-  
+
   if (data.type === "welcome") {
     log(data.message);
   }
-  
+
   if (data.type === "metrics") {
     cpuEl.textContent = data.cpu + "%";
     memoryEl.textContent = data.memory + "%";
-    
+
     const hours = Math.floor(data.uptime / 3600);
     const minutes = Math.floor((data.uptime % 3600) / 60);
     uptimeEl.textContent = `${hours}h ${minutes}m`;
   }
-  
+
   if (data.type === "log") {
     log(data.message);
   }
-  
+
   if (data.type === "ai-event") {
     log("AI EVENT: " + JSON.stringify(data.payload));
   }
-  
+
   if (data.type === "deploy-complete") {
     log("✅ " + data.message);
   }
-  
+
   if (data.type === "heal-complete") {
     log("⚡ " + data.message);
   }
-  
+
   if (data.type === "memory-data") {
     log("🧠 MEMORY DATA:\n" + data.data);
   }
-  
+
   if (data.type === "run-complete") {
     log("OUTPUT:\n" + data.output);
   }
 };
 
-ws.onerror = err => {
+ws.onerror = (err) => {
   log("WebSocket error: " + err.message);
 };
 
@@ -123,7 +123,7 @@ document.getElementById("viewMemory").onclick = () => {
 };
 
 // Keyboard shortcuts
-document.addEventListener("keydown", evt => {
+document.addEventListener("keydown", (evt) => {
   if (evt.ctrlKey && evt.key === "d") {
     evt.preventDefault();
     document.getElementById("deployBtn").click();

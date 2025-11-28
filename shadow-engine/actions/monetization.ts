@@ -11,7 +11,7 @@ export async function setupMonetization(): Promise<string> {
     // - Add affiliate links
     // - Add payment gateway
     // - Add subscription system
-    
+
     return "Monetization setup queued (feature in development)";
   } catch (err: any) {
     throw new Error(`Monetization setup failed: ${err.message}`);

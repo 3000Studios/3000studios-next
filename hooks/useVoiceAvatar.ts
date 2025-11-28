@@ -12,7 +12,7 @@ export default function useVoiceAvatar() {
   const [state, setState] = useState({
     talking: false,
     volume: 0,
-    mood: "idle"
+    mood: "idle",
   });
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function useVoiceAvatar() {
         audioContext = new AudioContext();
         analyser = audioContext.createAnalyser();
         microphone = audioContext.createMediaStreamSource(stream);
-        
+
         analyser.fftSize = 256;
         const bufferLength = analyser.frequencyBinCount;
         dataArray = new Uint8Array(bufferLength);
@@ -51,7 +51,7 @@ export default function useVoiceAvatar() {
 
           // Determine if talking based on volume threshold
           const isTalking = normalizedVolume > 0.02; // Adjust sensitivity
-          
+
           // Determine mood based on volume intensity
           let newMood = "idle";
           if (normalizedVolume > 0.4) {
@@ -65,7 +65,7 @@ export default function useVoiceAvatar() {
           setState({
             talking: isTalking,
             volume: normalizedVolume,
-            mood: newMood
+            mood: newMood,
           });
 
           animationFrame = requestAnimationFrame(detectSpeech);

@@ -13,11 +13,13 @@
 ### Avatar Sound Effects ZIP
 
 **Direct Download Link (Real + Working):**
+
 ```
 https://files.catbox.moe/1e2ux9.zip
 ```
 
 **Extract To:**
+
 ```
 c:\Users\MrJws\3000studios-next\public\sfx\avatar\
 ```
@@ -26,17 +28,17 @@ c:\Users\MrJws\3000studios-next\public\sfx\avatar\
 
 ## 📦 Included Sound Files
 
-| File | Size | Purpose | Trigger |
-|------|------|---------|---------|
-| `avatar_idle_hum.mp3` | ~500KB | Ambient hum | Loop (autoplay) |
-| `avatar_breath.mp3` | ~200KB | Breathing sound | Idle animation |
-| `avatar_growl.mp3` | ~300KB | Aggressive sound | Angry emotion |
-| `avatar_charge.mp3` | ~400KB | Power-up sound | Excited emotion |
-| `avatar_alert.mp3` | ~250KB | Alert beep | Happy emotion |
-| `avatar_step1.mp3` | ~150KB | Footstep 1 | Movement |
-| `avatar_step2.mp3` | ~150KB | Footstep 2 | Movement |
-| `avatar_woosh.mp3` | ~200KB | Swoosh effect | Fast movement |
-| `avatar_glitch.mp3` | ~300KB | Glitch sound | Error state |
+| File                  | Size   | Purpose          | Trigger         |
+| --------------------- | ------ | ---------------- | --------------- |
+| `avatar_idle_hum.mp3` | ~500KB | Ambient hum      | Loop (autoplay) |
+| `avatar_breath.mp3`   | ~200KB | Breathing sound  | Idle animation  |
+| `avatar_growl.mp3`    | ~300KB | Aggressive sound | Angry emotion   |
+| `avatar_charge.mp3`   | ~400KB | Power-up sound   | Excited emotion |
+| `avatar_alert.mp3`    | ~250KB | Alert beep       | Happy emotion   |
+| `avatar_step1.mp3`    | ~150KB | Footstep 1       | Movement        |
+| `avatar_step2.mp3`    | ~150KB | Footstep 2       | Movement        |
+| `avatar_woosh.mp3`    | ~200KB | Swoosh effect    | Fast movement   |
+| `avatar_glitch.mp3`   | ~300KB | Glitch sound     | Error state     |
 
 **Total Size:** ~2.5MB
 
@@ -131,11 +133,13 @@ mkdir public\sfx\avatar
 ### 2. Download Sound Pack
 
 **Option A: Browser Download**
+
 1. Open: `https://files.catbox.moe/1e2ux9.zip`
 2. Save as: `avatar_sounds.zip`
 3. Extract to: `public\sfx\avatar\`
 
 **Option B: PowerShell Download**
+
 ```powershell
 # Download ZIP
 Invoke-WebRequest -Uri "https://files.catbox.moe/1e2ux9.zip" -OutFile "avatar_sounds.zip"
@@ -178,34 +182,44 @@ Navigate to: `http://localhost:3000/shadow/avatar`
 ### 3. Test Sounds
 
 **Ambient Hum (Auto-plays):**
+
 - Should start immediately when page loads
 - Continuous loop
 
 **Trigger Angry Sound:**
+
 ```javascript
-const ws = new WebSocket('ws://localhost:3334');
+const ws = new WebSocket("ws://localhost:3334");
 ws.onopen = () => {
-  ws.send(JSON.stringify({
-    type: "message",
-    text: "Error occurred!"
-  }));
+  ws.send(
+    JSON.stringify({
+      type: "message",
+      text: "Error occurred!",
+    }),
+  );
 };
 ```
 
 **Trigger Excited Sound:**
+
 ```javascript
-ws.send(JSON.stringify({
-  type: "message",
-  text: "Deploy successful!"
-}));
+ws.send(
+  JSON.stringify({
+    type: "message",
+    text: "Deploy successful!",
+  }),
+);
 ```
 
 **Trigger Alert Sound:**
+
 ```javascript
-ws.send(JSON.stringify({
-  type: "message",
-  text: "Hey Shadow!"
-}));
+ws.send(
+  JSON.stringify({
+    type: "message",
+    text: "Hey Shadow!",
+  }),
+);
 ```
 
 ---
@@ -298,7 +312,7 @@ useFrame(() => {
 const fadeOut = (audio: any, duration: number) => {
   const startVolume = audio.getVolume();
   const interval = setInterval(() => {
-    const newVolume = audio.getVolume() - (startVolume / duration * 100);
+    const newVolume = audio.getVolume() - (startVolume / duration) * 100;
     if (newVolume <= 0) {
       audio.setVolume(0);
       audio.pause();
@@ -313,7 +327,7 @@ const fadeIn = (audio: any, duration: number, targetVolume: number) => {
   audio.setVolume(0);
   audio.play();
   const interval = setInterval(() => {
-    const newVolume = audio.getVolume() + (targetVolume / duration * 100);
+    const newVolume = audio.getVolume() + (targetVolume / duration) * 100;
     if (newVolume >= targetVolume) {
       audio.setVolume(targetVolume);
       clearInterval(interval);
@@ -333,6 +347,7 @@ const fadeIn = (audio: any, duration: number, targetVolume: number) => {
 **Problem:** No audio when triggering emotions
 
 **Solutions:**
+
 1. Check browser console for audio errors
 2. Click anywhere on page to enable audio (browser autoplay policy)
 3. Verify files exist:
@@ -347,6 +362,7 @@ const fadeIn = (audio: any, duration: number, targetVolume: number) => {
 **Problem:** Idle hum plays once and stops
 
 **Solutions:**
+
 1. Verify `loop` prop is set:
    ```typescript
    <PositionalAudio ... loop />
@@ -366,6 +382,7 @@ const fadeIn = (audio: any, duration: number, targetVolume: number) => {
 **Problem:** Audio barely audible
 
 **Solutions:**
+
 1. Increase volume:
    ```typescript
    <PositionalAudio ... volume={1.0} />
@@ -384,6 +401,7 @@ const fadeIn = (audio: any, duration: number, targetVolume: number) => {
 **Problem:** Audio clips before finishing
 
 **Solutions:**
+
 1. Don't stop all sounds on emotion change
 2. Use separate refs for each sound
 3. Check if multiple plays are overlapping
@@ -402,6 +420,7 @@ const fadeIn = (audio: any, duration: number, targetVolume: number) => {
 ### Optimization Tips
 
 1. **Preload Critical Sounds:**
+
    ```typescript
    useEffect(() => {
      growl.current?.load();
@@ -425,36 +444,38 @@ const fadeIn = (audio: any, duration: number, targetVolume: number) => {
 ### Creating Cyberpunk Atmosphere
 
 **Layering:**
+
 1. Base hum (low frequency)
 2. Glitch effects (occasional)
 3. Movement sounds (footsteps, swoosh)
 4. Emotional sounds (growl, charge)
 
 **Processing:**
+
 - Add reverb for spacious feel
 - Use distortion for aggressive sounds
 - Apply filters for robotic voice
 
 ### Emotion-Based Sound Mapping
 
-| Emotion | Primary Sound | Secondary Sound | Tertiary Sound |
-|---------|---------------|-----------------|----------------|
-| **Idle** | Idle hum (loop) | Breath (loop) | - |
-| **Talking** | - | - | - |
-| **Excited** | Charge | Woosh | - |
-| **Angry** | Growl | Glitch | - |
-| **Happy** | Alert | - | - |
+| Emotion     | Primary Sound   | Secondary Sound | Tertiary Sound |
+| ----------- | --------------- | --------------- | -------------- |
+| **Idle**    | Idle hum (loop) | Breath (loop)   | -              |
+| **Talking** | -               | -               | -              |
+| **Excited** | Charge          | Woosh           | -              |
+| **Angry**   | Growl           | Glitch          | -              |
+| **Happy**   | Alert           | -               | -              |
 
 ---
 
 ## 🔄 Integration with Shadow Ecosystem
 
-| Component | Sound Trigger |
-|-----------|---------------|
-| **Voice OS** | Voice commands trigger charge sound |
-| **Shadow Core** | Deploy success → charge sound |
-| **Autopilot** | Health check → alert sound |
-| **Error Events** | Growl + glitch sounds |
+| Component        | Sound Trigger                       |
+| ---------------- | ----------------------------------- |
+| **Voice OS**     | Voice commands trigger charge sound |
+| **Shadow Core**  | Deploy success → charge sound       |
+| **Autopilot**    | Health check → alert sound          |
+| **Error Events** | Growl + glitch sounds               |
 
 ---
 

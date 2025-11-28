@@ -42,6 +42,7 @@ ipconfig | Select-String IPv4
 ```
 
 **Example output:**
+
 ```
 IPv4 Address. . . . . . . . . . . : 10.0.0.46
 ```
@@ -70,6 +71,7 @@ node server.js
 ```
 
 You should see:
+
 ```
 🟪 Shadow Command Center UI running on http://localhost:3333
 WebSocket server ready on port 3333
@@ -89,11 +91,13 @@ npm install
 ### Step 5: Start Expo Dev Server
 
 **Option 1: Quick Start (PowerShell)**
+
 ```powershell
 .\start.ps1
 ```
 
 **Option 2: Manual Start**
+
 ```powershell
 npx expo start
 ```
@@ -132,6 +136,7 @@ cd C:\Users\MrJws\3000studios-next\shadow\mobile
 ```
 
 **The script will:**
+
 - Install dependencies
 - Install EAS CLI
 - Login to Expo (paste your token)
@@ -154,24 +159,28 @@ Upload APK to cloud storage (Google Drive, Dropbox) and download on phone.
 ## 🎨 APP FEATURES
 
 ### Real-Time Metrics
+
 - **CPU Load** — Live system load average
 - **RAM Usage** — Memory consumption percentage
 - **Uptime** — System uptime in hours/minutes
 - Updates every 2 seconds via WebSocket
 
 ### Command Buttons
+
 - **🚀 DEPLOY** — Runs `npm run build` on PC
 - **⚡ HEAL** — Restarts all PM2 processes
 - **🧠 MEMORY** — Fetches Shadow's encrypted memory
 - **📡 SCAN** — Runs `git status` (customizable)
 
 ### System Log
+
 - Real-time command output
 - Timestamped entries
 - Auto-scroll to latest
 - Monospace font for code
 
 ### Connection Status
+
 - **● ONLINE** — Connected to Shadow UI
 - **● OFFLINE** — Disconnected (check WiFi/server)
 
@@ -188,6 +197,7 @@ const socket = new WebSocket("ws://YOUR_PC_LOCAL_IP:3333");
 ```
 
 Replace with:
+
 - **Local IP**: `ws://10.0.0.46:3333`
 - **Cloudflare Tunnel**: `wss://shadow.yourdomain.com`
 - **Localhost** (Android emulator): `ws://10.0.2.2:3333`
@@ -203,6 +213,7 @@ Edit the `sendCmd()` calls in `App.js`:
 ```
 
 Change `"run:git status"` to any command:
+
 - `"run:npm test"`
 - `"run:pm2 list"`
 - `"run:shadow analyze"`
@@ -215,7 +226,7 @@ Edit `styles` in `App.js`:
 const styles = StyleSheet.create({
   // Change primary color
   title: { color: "#00ffff" }, // Change to #ff00ff for magenta
-  
+
   // Change button colors
   btnDeploy: { borderColor: "#ff00ff" },
 });
@@ -230,11 +241,13 @@ To control Shadow from anywhere (not just local WiFi):
 ### Option 1: Cloudflare Tunnel (Recommended)
 
 1. Install Cloudflare Tunnel:
+
    ```powershell
    winget install Cloudflare.cloudflared
    ```
 
 2. Expose Shadow UI:
+
    ```powershell
    cloudflared tunnel --url http://localhost:3333
    ```
@@ -242,6 +255,7 @@ To control Shadow from anywhere (not just local WiFi):
 3. Get public URL (e.g., `https://shadow-xyz.trycloudflare.com`)
 
 4. Update `App.js`:
+
    ```javascript
    const socket = new WebSocket("wss://shadow-xyz.trycloudflare.com");
    ```
@@ -273,16 +287,19 @@ To control Shadow from anywhere (not just local WiFi):
 ### Test Commands
 
 **Deploy Test:**
+
 ```
 Click DEPLOY → Log shows "Initiating deploy..." → Build runs → "Deploy successful"
 ```
 
 **Heal Test:**
+
 ```
 Click HEAL → Log shows "Triggering system heal..." → PM2 restarts → "System healed"
 ```
 
 **Memory Test:**
+
 ```
 Click MEMORY → Log shows "Fetching Shadow memory..." → Memory data appears
 ```
@@ -290,6 +307,7 @@ Click MEMORY → Log shows "Fetching Shadow memory..." → Memory data appears
 ### Test Metrics
 
 Wait 2-4 seconds after connecting. You should see:
+
 - CPU: `1.23%`
 - RAM: `45.67%`
 - UPTIME: `2h 15m`
@@ -301,17 +319,20 @@ Wait 2-4 seconds after connecting. You should see:
 ### "Cannot connect to server"
 
 **Solution 1:** Check PC's local IP matches `App.js`
+
 ```powershell
 ipconfig | Select-String IPv4
 ```
 
 **Solution 2:** Make sure Shadow UI server is running
+
 ```powershell
 cd shadow/ui
 node server.js
 ```
 
 **Solution 3:** Check firewall allows port 3333
+
 ```powershell
 New-NetFirewallRule -DisplayName "Shadow UI" -Direction Inbound -LocalPort 3333 -Protocol TCP -Action Allow
 ```
@@ -332,13 +353,16 @@ New-NetFirewallRule -DisplayName "Shadow UI" -Direction Inbound -LocalPort 3333 
 ### "Build failed" when creating APK
 
 **Solution 1:** Install Android SDK
+
 - Download [Android Studio](https://developer.android.com/studio)
 - Install SDK via SDK Manager
 
 **Solution 2:** Use cloud build instead
+
 ```powershell
 eas build -p android --profile preview
 ```
+
 (Slower but doesn't require local Android setup)
 
 ---
@@ -346,6 +370,7 @@ eas build -p android --profile preview
 ### Expo Go crashes on startup
 
 **Solution:** Clear Expo cache
+
 ```powershell
 npx expo start -c
 ```
@@ -381,6 +406,7 @@ npx expo start -c
 (App UI features neon cyber theme matching Shadow Command Center)
 
 **Main Screen:**
+
 - Holographic title "SHADOW MOBILE"
 - Status indicator (online/offline)
 - 3 metric cards (CPU, RAM, Uptime)
@@ -388,6 +414,7 @@ npx expo start -c
 - Live scrolling log
 
 **Colors:**
+
 - Background: `#000014` (dark navy)
 - Primary: `#00ffff` (cyan)
 - Accent: `#ff00ff` (magenta), `#ffff00` (yellow), `#00ff00` (green)
@@ -400,6 +427,7 @@ npx expo start -c
 ### Add Voice Commands
 
 Integrate with React Native Voice:
+
 ```bash
 npm install @react-native-voice/voice
 ```
@@ -413,6 +441,7 @@ Browse Shadow's memory database, view logs, edit files on PC.
 ### Add 3D Avatar
 
 Use Three.js (React Three Fiber):
+
 ```bash
 npm install @react-three/fiber @react-three/drei
 ```
@@ -430,6 +459,7 @@ Get alerts when deployments complete, errors occur, system needs healing.
 **Champ… you can now control Shadow from your phone.** 🟦
 
 ### What You Built:
+
 - ✅ React Native mobile app
 - ✅ WebSocket connection to Shadow UI
 - ✅ Real-time metrics (CPU, RAM, uptime)
@@ -440,6 +470,7 @@ Get alerts when deployments complete, errors occur, system needs healing.
 - ✅ Connection status indicator
 
 ### Files Created:
+
 - `App.js` — Main React Native component
 - `package.json` — Dependencies
 - `app.config.js` — Expo configuration

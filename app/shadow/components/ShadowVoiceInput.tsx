@@ -9,7 +9,9 @@ interface ShadowVoiceInputProps {
   onTranscript: (text: string) => void;
 }
 
-export default function ShadowVoiceInput({ onTranscript }: ShadowVoiceInputProps) {
+export default function ShadowVoiceInput({
+  onTranscript,
+}: ShadowVoiceInputProps) {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState("");
 

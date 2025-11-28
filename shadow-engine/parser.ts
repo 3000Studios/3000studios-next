@@ -18,25 +18,25 @@ const commandRoutes = [
   { match: /gold|yellow|font.*gold/i, action: "setFontGold" },
   { match: /hero|header|banner/i, action: "updateHero" },
   { match: /color|theme|style/i, action: "changeTheme" },
-  
+
   // Deployment
   { match: /deploy|push|publish/i, action: "deploy" },
-  
+
   // WordPress
   { match: /wordpress|wp|blog|post/i, action: "wordpress" },
-  
+
   // Page creation
   { match: /create.*page|new.*page/i, action: "createPage" },
-  
+
   // SEO
   { match: /seo|optimize|meta|search/i, action: "seo" },
-  
+
   // Content
   { match: /content|generate|write|create.*text/i, action: "generateContent" },
-  
+
   // Monetization
   { match: /monetize|ads|revenue|payment/i, action: "monetization" },
-  
+
   // Status
   { match: /status|health|check/i, action: "status" },
   { match: /fix|repair|debug/i, action: "fix" },
@@ -59,7 +59,7 @@ export async function executeTask(taskId: string, command: string) {
         await editFile(
           "app/page.tsx",
           /3000 Studios/g,
-          "3000 Studios — Innovation Unleashed"
+          "3000 Studios — Innovation Unleashed",
         );
         return "✅ Hero section updated";
 

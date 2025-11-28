@@ -23,7 +23,7 @@ export default function CryptoTicker() {
     const load = () => {
       axios
         .get<CoinData[]>(
-          "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&sparkline=false"
+          "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&sparkline=false",
         )
         .then((res) => {
           setData(res.data);
@@ -77,7 +77,8 @@ export default function CryptoTicker() {
                 {coin.symbol.toUpperCase()}
               </span>
               <span className="text-lg font-semibold text-green-400">
-                ${coin.current_price.toLocaleString(undefined, {
+                $
+                {coin.current_price.toLocaleString(undefined, {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 })}

@@ -29,6 +29,7 @@ node voice.js
 ```
 
 You should see:
+
 ```
 🔥 Shadow Voice Core online at ws://0.0.0.0:3333
 Listening for voice commands on port 3333
@@ -43,6 +44,7 @@ const ws = new WebSocket("ws://192.168.1.100:3333");
 ```
 
 Find your PC's IP:
+
 ```powershell
 ipconfig
 # Look for "IPv4 Address"
@@ -88,25 +90,25 @@ const HOTWORD = "hey dude";
 
 Voice.onSpeechResults = (e) => {
   const text = e.value[0].toLowerCase();
-  
+
   if (text.includes(HOTWORD)) {
     // Hotword triggered
-    ws.send(JSON.stringify({type: "hotword", detected: true}));
+    ws.send(JSON.stringify({ type: "hotword", detected: true }));
   } else {
     // Send command
-    ws.send(JSON.stringify({type: "command", text: text}));
+    ws.send(JSON.stringify({ type: "command", text: text }));
   }
 };
 ```
 
 ## 🗣 Voice Commands
 
-| Command | Action | Example |
-|---------|--------|---------|
-| **Deploy** | `npm run build` | "Deploy the site" |
-| **Heal** | `pm2 restart all` | "Heal the system" |
-| **Scan** / **Status** | `git status` | "Scan the repo" |
-| **Memory** | Access encrypted DB | "Show memory" |
+| Command               | Action              | Example           |
+| --------------------- | ------------------- | ----------------- |
+| **Deploy**            | `npm run build`     | "Deploy the site" |
+| **Heal**              | `pm2 restart all`   | "Heal the system" |
+| **Scan** / **Status** | `git status`        | "Scan the repo"   |
+| **Memory**            | Access encrypted DB | "Show memory"     |
 
 Commands are processed by `shadow/core/voice.js`:
 
@@ -116,21 +118,21 @@ function processCommand(cmd) {
     exec("npm run build");
     return "Deploy sequence initiated. Building now...";
   }
-  
+
   if (cmd.includes("heal")) {
     exec("pm2 restart all");
     return "System heal triggered. Restarting all processes...";
   }
-  
+
   if (cmd.includes("scan") || cmd.includes("status")) {
     exec("git status");
     return "Running system scan. Checking git status...";
   }
-  
+
   if (cmd.includes("memory")) {
     return "Accessing encrypted memory database...";
   }
-  
+
   return `Command received: ${cmd}. Processing...`;
 }
 ```
@@ -178,6 +180,7 @@ function processCommand(cmd) {
 Main voice assistant component:
 
 **Key Features:**
+
 - WebSocket connection management
 - Voice recognition setup
 - Hotword detection logic
@@ -185,6 +188,7 @@ Main voice assistant component:
 - Connection status indicators
 
 **State Management:**
+
 ```javascript
 const [log, setLog] = useState([]);
 const [listening, setListening] = useState(false);
@@ -192,6 +196,7 @@ const [wsConnected, setWsConnected] = useState(false);
 ```
 
 **WebSocket Handlers:**
+
 ```javascript
 ws.onopen = () => {
   setWsConnected(true);
@@ -204,15 +209,16 @@ ws.onmessage = (e) => {
 ```
 
 **Voice Recognition:**
+
 ```javascript
 Voice.onSpeechResults = (e) => {
   const text = e.value[0].toLowerCase();
   addLog(`You: ${text}`);
-  
+
   if (text.includes(HOTWORD)) {
-    ws.send(JSON.stringify({type: "hotword", detected: true}));
+    ws.send(JSON.stringify({ type: "hotword", detected: true }));
   } else {
-    ws.send(JSON.stringify({type: "command", text: text}));
+    ws.send(JSON.stringify({ type: "command", text: text }));
   }
 };
 ```
@@ -239,6 +245,7 @@ Expo configuration with Android permissions:
 ### package.json
 
 Core dependencies:
+
 - `@react-native-voice/voice` ^3.3.0 — Voice recognition engine
 - `expo` ^51.0.0 — React Native framework
 - `react-native` 0.74.0 — Mobile app core
@@ -250,29 +257,34 @@ Core dependencies:
 WebSocket server on port 3333:
 
 **Server Setup:**
+
 ```javascript
 const WebSocket = require("ws");
 const wss = new WebSocket.Server({ port: 3333 });
 
 wss.on("connection", (ws) => {
   console.log("📱 Mobile device connected to Voice Core");
-  
+
   ws.on("message", (msg) => {
     const data = JSON.parse(msg);
-    
+
     if (data.type === "hotword") {
-      ws.send(JSON.stringify({
-        type: "response",
-        message: "Yes Champ? I'm listening..."
-      }));
+      ws.send(
+        JSON.stringify({
+          type: "response",
+          message: "Yes Champ? I'm listening...",
+        }),
+      );
     }
-    
+
     if (data.type === "command") {
       const response = processCommand(data.text);
-      ws.send(JSON.stringify({
-        type: "response",
-        message: response
-      }));
+      ws.send(
+        JSON.stringify({
+          type: "response",
+          message: response,
+        }),
+      );
     }
   });
 });
@@ -280,6 +292,7 @@ wss.on("connection", (ws) => {
 
 **Command Execution:**
 Uses Node.js `child_process` to execute system commands:
+
 ```javascript
 const { exec } = require("child_process");
 
@@ -298,13 +311,13 @@ exec("npm run build", (error, stdout) => {
 
 Required for voice functionality:
 
-| Permission | Purpose |
-|------------|---------|
-| `INTERNET` | WebSocket communication to Shadow Core |
-| `RECORD_AUDIO` | Voice recognition and hotword detection |
-| `WAKE_LOCK` | Keep screen awake during listening |
-| `FOREGROUND_SERVICE` | Background voice detection |
-| `MODIFY_AUDIO_SETTINGS` | Adjust audio levels for clarity |
+| Permission              | Purpose                                 |
+| ----------------------- | --------------------------------------- |
+| `INTERNET`              | WebSocket communication to Shadow Core  |
+| `RECORD_AUDIO`          | Voice recognition and hotword detection |
+| `WAKE_LOCK`             | Keep screen awake during listening      |
+| `FOREGROUND_SERVICE`    | Background voice detection              |
+| `MODIFY_AUDIO_SETTINGS` | Adjust audio levels for clarity         |
 
 ### iOS Permissions
 
@@ -328,13 +341,16 @@ Add to `app.config.js`:
 **Problem:** "Connection error" or "Disconnected"
 
 **Solutions:**
+
 1. Verify Shadow Core `voice.js` is running:
+
    ```powershell
    cd shadow/core
    node voice.js
    ```
 
 2. Check firewall settings — allow port 3333:
+
    ```powershell
    New-NetFirewallRule -DisplayName "Shadow Voice" -Direction Inbound -LocalPort 3333 -Protocol TCP -Action Allow
    ```
@@ -352,6 +368,7 @@ Add to `app.config.js`:
 **Problem:** Hotword not detected
 
 **Solutions:**
+
 1. Grant microphone permissions in Android settings
 2. Ensure speech recognition is enabled on device
 3. Pronounce hotword clearly: "Hey Dude" (not "hay dood")
@@ -360,6 +377,7 @@ Add to `app.config.js`:
 **Problem:** Partial recognition
 
 **Solutions:**
+
 1. Speak slower and clearer
 2. Reduce background noise
 3. Move closer to phone microphone
@@ -370,6 +388,7 @@ Add to `app.config.js`:
 **Problem:** Commands not executing on PC
 
 **Solutions:**
+
 1. Check Shadow Core logs: `node voice.js`
 2. Verify WebSocket connection (green ONLINE indicator)
 3. Test with simple command: "status"
@@ -380,12 +399,14 @@ Add to `app.config.js`:
 ### Manual Testing
 
 1. **Start Shadow Core:**
+
    ```powershell
    cd shadow/core
    node voice.js
    ```
 
 2. **Start Voice OS:**
+
    ```powershell
    cd shadow/mobile-voice
    npm start
@@ -406,21 +427,21 @@ Add to `app.config.js`:
 Test WebSocket server without mobile app:
 
 ```javascript
-const WebSocket = require('ws');
-const ws = new WebSocket('ws://localhost:3333');
+const WebSocket = require("ws");
+const ws = new WebSocket("ws://localhost:3333");
 
-ws.on('open', () => {
-  console.log('Connected');
-  
+ws.on("open", () => {
+  console.log("Connected");
+
   // Test hotword
-  ws.send(JSON.stringify({type: "hotword", detected: true}));
-  
+  ws.send(JSON.stringify({ type: "hotword", detected: true }));
+
   // Test command
-  ws.send(JSON.stringify({type: "command", text: "deploy"}));
+  ws.send(JSON.stringify({ type: "command", text: "deploy" }));
 });
 
-ws.on('message', (data) => {
-  console.log('Received:', data.toString());
+ws.on("message", (data) => {
+  console.log("Received:", data.toString());
 });
 ```
 
@@ -455,6 +476,7 @@ cd shadow/mobile-voice
 ```
 
 This will:
+
 1. Install dependencies
 2. Install EAS CLI globally
 3. Build APK locally
@@ -469,6 +491,7 @@ eas build -p android
 ```
 
 Benefits:
+
 - No local Android SDK required
 - Faster builds on cloud servers
 - Automatic signing
@@ -478,6 +501,7 @@ Benefits:
 ### Client → Server
 
 **Hotword Detection:**
+
 ```json
 {
   "type": "hotword",
@@ -486,6 +510,7 @@ Benefits:
 ```
 
 **Voice Command:**
+
 ```json
 {
   "type": "command",
@@ -496,6 +521,7 @@ Benefits:
 ### Server → Client
 
 **Response:**
+
 ```json
 {
   "type": "response",
@@ -518,6 +544,7 @@ Benefits:
 **Scenario:** Building a site while working on something else
 
 **Command:**
+
 ```
 "Hey Dude, deploy the site"
 ```
@@ -529,6 +556,7 @@ Benefits:
 **Scenario:** Checking git status without switching contexts
 
 **Command:**
+
 ```
 "Hey Dude, scan the repo"
 ```
@@ -540,6 +568,7 @@ Benefits:
 **Scenario:** PM2 processes crashed, need quick restart
 
 **Command:**
+
 ```
 "Hey Dude, heal the system"
 ```
@@ -550,13 +579,13 @@ Benefits:
 
 Voice OS integrates seamlessly with existing Shadow components:
 
-| Component | Integration |
-|-----------|-------------|
-| **Shadow Core AI** | Voice commands routed through local LLM |
-| **Shadow Autopilot** | Voice can trigger task queue items |
-| **Shadow UI** | Same WebSocket server (port 3333) |
-| **Shadow Mobile** | Complementary to tap-based control |
-| **Shadow Avatar** | Voice can control 3D entity emotions |
+| Component            | Integration                             |
+| -------------------- | --------------------------------------- |
+| **Shadow Core AI**   | Voice commands routed through local LLM |
+| **Shadow Autopilot** | Voice can trigger task queue items      |
+| **Shadow UI**        | Same WebSocket server (port 3333)       |
+| **Shadow Mobile**    | Complementary to tap-based control      |
+| **Shadow Avatar**    | Voice can control 3D entity emotions    |
 
 ## 📈 Performance
 
@@ -569,18 +598,21 @@ Voice OS integrates seamlessly with existing Shadow components:
 ## 🛣 Roadmap
 
 ### Phase 1 (Current)
+
 - ✅ Hotword detection ("Hey Dude")
 - ✅ Voice command execution
 - ✅ WebSocket communication
 - ✅ Real-time logging
 
 ### Phase 2 (Planned)
+
 - [ ] Voice feedback (TTS responses)
 - [ ] Custom hotword training
 - [ ] Offline command queueing
 - [ ] Command history/replay
 
 ### Phase 3 (Future)
+
 - [ ] Multi-language support
 - [ ] Voice authentication
 - [ ] Natural language processing
@@ -602,10 +634,12 @@ A: Install Android SDK, run `.\build.ps1` for local build, or use cloud build wi
 ### Logs
 
 **Mobile App Logs:**
+
 - Real-time log view in app UI
 - Metro bundler output in terminal
 
 **Shadow Core Logs:**
+
 ```powershell
 cd shadow/core
 node voice.js

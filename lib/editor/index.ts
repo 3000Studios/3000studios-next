@@ -7,7 +7,7 @@
 // File editor utilities
 export async function editFileContent(
   filePath: string,
-  transform: (content: string) => string
+  transform: (content: string) => string,
 ): Promise<void> {
   // File editing logic will be implemented here
   console.log(`Editing file: ${filePath}`);
@@ -15,7 +15,7 @@ export async function editFileContent(
 
 export async function createNewFile(
   filePath: string,
-  content: string
+  content: string,
 ): Promise<void> {
   // File creation logic
   console.log(`Creating file: ${filePath}`);

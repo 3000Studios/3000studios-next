@@ -11,7 +11,7 @@ export async function boostSEO(): Promise<string> {
     // - Generate sitemap
     // - Optimize images
     // - Add schema markup
-    
+
     return "SEO optimization queued (feature in development)";
   } catch (err: any) {
     throw new Error(`SEO boost failed: ${err.message}`);

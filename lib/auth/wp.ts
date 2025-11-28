@@ -19,7 +19,7 @@ export async function getWPToken() {
 
   const res = await axios.post(WP_URL, {
     username: USERNAME,
-    password: PASSWORD
+    password: PASSWORD,
   });
 
   cachedToken = res.data.token;
@@ -34,9 +34,9 @@ export async function runWordPressUpdate(file: string, content: string) {
     { file, content },
     {
       headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }
+        Authorization: `Bearer ${token}`,
+      },
+    },
   );
 
   return res.data;

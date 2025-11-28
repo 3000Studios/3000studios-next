@@ -64,7 +64,9 @@ export default function CommandHistory({ tasks }: CommandHistoryProps) {
           className="p-3 bg-black/30 border border-gray-800 rounded-lg hover:border-purple-500/30 transition-colors"
         >
           <div className="flex items-start gap-2">
-            <div className={`w-2 h-2 rounded-full mt-2 ${getStatusColor(task.status)}`} />
+            <div
+              className={`w-2 h-2 rounded-full mt-2 ${getStatusColor(task.status)}`}
+            />
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-lg">{getStatusIcon(task.status)}</span>

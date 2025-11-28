@@ -36,6 +36,7 @@ node voice.js
 ```
 
 You should see:
+
 ```
 🔥 Shadow Voice Core online at ws://0.0.0.0:3333
 Listening for voice commands on port 3333
@@ -50,6 +51,7 @@ const ws = new WebSocket("ws://192.168.1.100:3333");
 ```
 
 To find your PC's local IP:
+
 ```powershell
 ipconfig
 # Look for "IPv4 Address" under your active network adapter
@@ -88,6 +90,7 @@ Scan the QR code with Expo Go app on your Android phone.
 ```
 
 This will:
+
 - Install dependencies
 - Build APK locally
 - Output: `shadow-voiceos.apk`
@@ -105,6 +108,7 @@ eas build -p android
 ### app.config.js
 
 Key permissions required:
+
 - `INTERNET` — WebSocket communication
 - `RECORD_AUDIO` — Voice recognition
 - `WAKE_LOCK` — Keep screen awake during listening
@@ -113,6 +117,7 @@ Key permissions required:
 ### package.json
 
 Core dependencies:
+
 - `@react-native-voice/voice` — Voice recognition engine
 - `expo` — React Native framework
 - `react-native` — Mobile app core

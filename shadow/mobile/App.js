@@ -3,57 +3,68 @@
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, StatusBar } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  StatusBar,
+} from "react-native";
 
 export default function App() {
   const [log, setLog] = useState([]);
   const [ws, setWs] = useState(null);
   const [connected, setConnected] = useState(false);
-  const [metrics, setMetrics] = useState({ cpu: "0", memory: "0", uptime: "0s" });
+  const [metrics, setMetrics] = useState({
+    cpu: "0",
+    memory: "0",
+    uptime: "0s",
+  });
 
   useEffect(() => {
     // Replace YOUR_PC_LOCAL_IP with your actual PC's local IP
     // Find it with: ipconfig | Select-String IPv4
     const socket = new WebSocket("ws://YOUR_PC_LOCAL_IP:3333");
-    
+
     socket.onopen = () => {
       setConnected(true);
       addLog("Connected to Shadow Core");
     };
 
-    socket.onmessage = evt => {
+    socket.onmessage = (evt) => {
       const data = JSON.parse(evt.data);
-      
+
       if (data.type === "welcome") {
         addLog(data.message);
       }
-      
+
       if (data.type === "metrics") {
         setMetrics({
           cpu: data.cpu + "%",
           memory: data.memory + "%",
-          uptime: formatUptime(data.uptime)
+          uptime: formatUptime(data.uptime),
         });
       }
-      
+
       if (data.type === "log") {
         addLog(data.message);
       }
-      
+
       if (data.type === "deploy-complete") {
         addLog("✅ " + data.message);
       }
-      
+
       if (data.type === "heal-complete") {
         addLog("⚡ " + data.message);
       }
-      
+
       if (data.type === "memory-data") {
         addLog("🧠 MEMORY:\n" + data.data);
       }
     };
 
-    socket.onerror = err => {
+    socket.onerror = (err) => {
       addLog("Connection error: " + err.message);
     };
 
@@ -73,12 +84,12 @@ export default function App() {
     return `${hours}h ${minutes}m`;
   };
 
-  const addLog = msg => {
+  const addLog = (msg) => {
     const timestamp = new Date().toLocaleTimeString();
-    setLog(l => [...l, `[${timestamp}] ${msg}`]);
+    setLog((l) => [...l, `[${timestamp}] ${msg}`]);
   };
 
-  const sendCmd = c => {
+  const sendCmd = (c) => {
     if (ws && connected) {
       ws.send(JSON.stringify({ command: c }));
       addLog("Sent: " + c);
@@ -90,11 +101,18 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#000014" />
-      
+
       <View style={styles.header}>
         <Text style={styles.title}>SHADOW MOBILE</Text>
-        <View style={[styles.status, connected ? styles.statusOnline : styles.statusOffline]}>
-          <Text style={styles.statusText}>{connected ? "● ONLINE" : "● OFFLINE"}</Text>
+        <View
+          style={[
+            styles.status,
+            connected ? styles.statusOnline : styles.statusOffline,
+          ]}
+        >
+          <Text style={styles.statusText}>
+            {connected ? "● ONLINE" : "● OFFLINE"}
+          </Text>
         </View>
       </View>
 
@@ -114,24 +132,36 @@ export default function App() {
       </View>
 
       <View style={styles.btnRow}>
-        <TouchableOpacity style={[styles.btn, styles.btnDeploy]} onPress={() => sendCmd("deploy")}>
+        <TouchableOpacity
+          style={[styles.btn, styles.btnDeploy]}
+          onPress={() => sendCmd("deploy")}
+        >
           <Text style={styles.btnIcon}>🚀</Text>
           <Text style={styles.btnText}>DEPLOY</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.btn, styles.btnHeal]} onPress={() => sendCmd("heal")}>
+        <TouchableOpacity
+          style={[styles.btn, styles.btnHeal]}
+          onPress={() => sendCmd("heal")}
+        >
           <Text style={styles.btnIcon}>⚡</Text>
           <Text style={styles.btnText}>HEAL</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.btnRow}>
-        <TouchableOpacity style={[styles.btn, styles.btnMemory]} onPress={() => sendCmd("memory")}>
+        <TouchableOpacity
+          style={[styles.btn, styles.btnMemory]}
+          onPress={() => sendCmd("memory")}
+        >
           <Text style={styles.btnIcon}>🧠</Text>
           <Text style={styles.btnText}>MEMORY</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.btn, styles.btnScan]} onPress={() => sendCmd("run:git status")}>
+        <TouchableOpacity
+          style={[styles.btn, styles.btnScan]}
+          onPress={() => sendCmd("run:git status")}
+        >
           <Text style={styles.btnIcon}>📡</Text>
           <Text style={styles.btnText}>SCAN</Text>
         </TouchableOpacity>
@@ -140,7 +170,11 @@ export default function App() {
       <View style={styles.logContainer}>
         <Text style={styles.logHeader}>SYSTEM LOG</Text>
         <ScrollView style={styles.logBox}>
-          {log.map((l, i) => <Text key={i} style={styles.logLine}>{l}</Text>)}
+          {log.map((l, i) => (
+            <Text key={i} style={styles.logLine}>
+              {l}
+            </Text>
+          ))}
         </ScrollView>
       </View>
     </View>

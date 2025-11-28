@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     return NextResponse.json({
       ok: true,
       file,
-      result
+      result,
     });
   } catch (e: any) {
     return NextResponse.json({ ok: false, error: e.message });

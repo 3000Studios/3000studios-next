@@ -49,6 +49,6 @@ export default function useVoice() {
     start,
     stop,
     listening,
-    transcript
+    transcript,
   };
 }

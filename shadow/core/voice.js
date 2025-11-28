@@ -15,10 +15,12 @@ wss.on("connection", (ws) => {
 
     if (data.type === "hotword" && data.detected) {
       console.log("🔥 Hotword triggered: Hey Dude");
-      ws.send(JSON.stringify({
-        type: "response",
-        message: "Yes Champ? I'm listening..."
-      }));
+      ws.send(
+        JSON.stringify({
+          type: "response",
+          message: "Yes Champ? I'm listening...",
+        }),
+      );
       return;
     }
 
@@ -27,10 +29,12 @@ wss.on("connection", (ws) => {
       console.log("📡 Voice Command received:", cmd);
 
       const response = processCommand(cmd);
-      ws.send(JSON.stringify({
-        type: "response",
-        message: response
-      }));
+      ws.send(
+        JSON.stringify({
+          type: "response",
+          message: response,
+        }),
+      );
     }
   });
 

@@ -35,13 +35,26 @@ export default function LiveWallpaper() {
     function loop() {
       ctx.clearRect(0, 0, w, h);
 
-      const g = ctx.createRadialGradient(mouse.x, mouse.y, 40, mouse.x, mouse.y, 600);
+      const g = ctx.createRadialGradient(
+        mouse.x,
+        mouse.y,
+        40,
+        mouse.x,
+        mouse.y,
+        600,
+      );
       g.addColorStop(0, "rgba(251, 191, 36, 0.15)");
       g.addColorStop(1, "rgba(20, 20, 0, 0.9)");
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, w, h);
 
-      particles.push({ x: mouse.x, y: mouse.y, vx: (Math.random() - 0.5) * 2, vy: (Math.random() - 0.5) * 2, alpha: 1 });
+      particles.push({
+        x: mouse.x,
+        y: mouse.y,
+        vx: (Math.random() - 0.5) * 2,
+        vy: (Math.random() - 0.5) * 2,
+        alpha: 1,
+      });
 
       if (particles.length > maxParticles) particles.shift();
 
@@ -61,5 +74,10 @@ export default function LiveWallpaper() {
     return () => window.removeEventListener("resize", resize);
   }, []);
 
-  return <canvas ref={canvasRef} className="fixed inset-0 w-full h-full -z-10 pointer-events-none" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 w-full h-full -z-10 pointer-events-none"
+    />
+  );
 }

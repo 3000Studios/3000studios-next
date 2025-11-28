@@ -4,9 +4,12 @@
 
 "use client";
 import { useState, useEffect } from "react";
+
 import CommandConsole from "@/components/CommandConsole";
 import CommandHistory from "@/components/CommandHistory";
 import VoiceListener from "@/components/VoiceListener";
+import ProductionDashboard from "@/components/ProductionDashboard";
+import AvatarClientWrapper from "../shadow/avatar/AvatarClientWrapper";
 import axios from "axios";
 
 interface Task {
@@ -36,7 +39,10 @@ export default function CommandCenterPage() {
     return () => clearInterval(interval);
   }, []);
 
-  const executeCommand = async (command: string, origin: "voice" | "manual") => {
+  const executeCommand = async (
+    command: string,
+    origin: "voice" | "manual",
+  ) => {
     try {
       const res = await axios.post("/api/shadow/command", {
         command,
@@ -70,35 +76,31 @@ export default function CommandCenterPage() {
   };
 
   return (
-    <div className="min-h-screen px-4 py-12 md:py-20 bg-gradient-to-br from-black via-purple-950 to-black w-full max-w-full overflow-x-hidden">
-      <div className="max-w-7xl mx-auto w-full">
-        {/* Header */}
-        <div className="text-center mb-6 md:mb-8">
-          <h1 className="text-4xl md:text-6xl lg:text-8xl font-extrabold mb-3 md:mb-4 bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent">
+    <div className="min-h-screen px-4 py-12 md:py-20 bg-corporate-charcoal w-full max-w-full overflow-x-hidden">
+      <div className="max-w-7xl mx-auto w-full space-y-10">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl md:text-6xl lg:text-8xl font-extrabold mb-3 md:mb-4 text-corporate-gold font-heading">
             Shadow Command Center
           </h1>
-          <p className="text-lg md:text-xl text-gray-300">
-            Voice-activated, AI-powered site control
+          <p className="text-lg md:text-xl text-corporate-silver">
+            Voice-activated, AI-powered site control & analytics
           </p>
-          <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 glass rounded-full">
-            <div
-              className={`w-3 h-3 rounded-full ${
-                systemStatus === "Online"
-                  ? "bg-green-500 animate-pulse"
-                  : "bg-red-500"
-              }`}
-            />
-            <span className="text-sm font-mono">{systemStatus}</span>
-          </div>
         </div>
 
-        {/* Main Grid */}
+        {/* Shadow Avatar: 3D/Voice-reactive */}
+        <div className="mb-10">
+          <AvatarClientWrapper />
+        </div>
+
+        {/* Production Dashboard: Real Analytics */}
+        <ProductionDashboard />
+
+        {/* Command Input & Task Log */}
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Left Column: Command Input */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Voice Listener */}
             <div className="glass p-6 rounded-2xl">
-              <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+              <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-corporate-gold">
                 <span className="text-purple-400">🎤</span> Voice Command
               </h2>
               <VoiceListener
@@ -107,18 +109,14 @@ export default function CommandCenterPage() {
                 onCommand={handleVoiceCommand}
               />
             </div>
-
-            {/* Manual Command */}
             <div className="glass p-6 rounded-2xl">
-              <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+              <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-corporate-gold">
                 <span className="text-cyan-400">⌨️</span> Manual Command
               </h2>
               <CommandConsole onExecute={handleManualCommand} />
             </div>
-
-            {/* Quick Actions */}
             <div className="glass p-6 rounded-2xl">
-              <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+              <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-corporate-gold">
                 <span className="text-pink-400">⚡</span> Quick Actions
               </h2>
               <div className="grid grid-cols-2 gap-3">
@@ -161,24 +159,15 @@ export default function CommandCenterPage() {
               </div>
             </div>
           </div>
-
           {/* Right Column: Task History */}
           <div className="lg:col-span-1">
             <div className="glass p-6 rounded-2xl sticky top-24">
-              <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+              <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-corporate-gold">
                 <span className="text-green-400">📜</span> Task Log
               </h2>
               <CommandHistory tasks={tasks} />
             </div>
           </div>
-        </div>
-
-        {/* Footer Info */}
-        <div className="mt-8 glass p-4 rounded-xl text-center text-sm text-gray-400">
-          <p>
-            Commands are queued and executed sequentially • Auto-commit to
-            GitHub • Auto-deploy via GitHub Actions
-          </p>
         </div>
       </div>
     </div>
