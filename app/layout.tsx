@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="text-white bg-black min-h-screen w-full overflow-x-hidden">
         <VideoBackgroundWrapper />
         <NavBar />
-        
+
         <main className="pt-20 min-h-screen w-full max-w-full">
           {children}
         </main>
