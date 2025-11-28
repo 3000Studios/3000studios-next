@@ -5,14 +5,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    serverActions: true,
-    turbo: true
+    // Next 15 expects an object for serverActions config
+    serverActions: {}
   },
-  api: {
-    bodyParser: {
-      sizeLimit: "10mb"
-    }
-  },
+  // Removed deprecated/unsupported config:
+  // - experimental.turbo (use turbopack)
+  // - api.bodyParser (not recognized in App Router)
+  turbopack: {},
   typescript: {
     ignoreBuildErrors: true,
   },
