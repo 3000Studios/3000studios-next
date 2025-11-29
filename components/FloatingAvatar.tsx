@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+
 /*
  *   Copyright (c) 2025 NAME.
  *   All rights reserved.
@@ -10,9 +10,10 @@ import * as THREE from 'three';
 import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Sphere, MeshDistortMaterial } from "@react-three/drei";
+import styles from "./FloatingAvatar.module.css";
 
 function AnimatedSphere() {
-  const meshRef = useRef<THREE.Mesh | null>(null);
+  const meshRef = useRef(null);
 
   useFrame((state) => {
     if (meshRef.current) {
@@ -38,11 +39,7 @@ function AnimatedSphere() {
 export default function FloatingAvatar() {
   return (
     <div
-      className="fixed bottom-6 right-6 w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden z-40 shadow-2xl border-4 border-yellow-400"
-      style={{
-        boxShadow:
-          "0 0 60px rgba(251, 191, 36, 0.8), 0 8px 32px rgba(0, 0, 0, 0.9)",
-      }}
+      className={styles["floating-avatar"] + " fixed bottom-6 right-6 w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden z-40 shadow-2xl border-4 border-yellow-400"}
     >
       <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
         <ambientLight intensity={0.5} />

@@ -38,3 +38,6 @@
  */
 
 export function validateCommand(command: string): boolean {
+	// TODO: Implement actual validation logic
+	return true;
+}
