@@ -2,6 +2,36 @@
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
+import React from "react";
+
+export default async function CollaboratorsPage() {
+  // TODO: Replace with real API call for collaborators
+  const team = [
+    { name: "J.W. Swain", role: "Founder & Lead Architect" },
+    { name: "Ava Shadow", role: "AI Systems Engineer" },
+    { name: "M. Gold", role: "Creative Director" },
+    { name: "D. Platinum", role: "UI/UX Designer" },
+  ];
+  return (
+    <div className="p-8 md:p-16 w-full max-w-4xl mx-auto min-h-screen flex flex-col items-center">
+      <h1 className="text-3d text-4xl md:text-5xl font-black platinum shadow-lg animate-fade-in-up mb-8 text-center">
+        Collaborators
+      </h1>
+      <div className="grid md:grid-cols-2 gap-8 w-full">
+        {team.map((member, idx) => (
+          <div key={idx} className="glass luxury-border p-8 rounded-2xl shadow-xl flex flex-col items-center">
+            <h2 className="text-xl font-bold text-corporate-gold mb-2">{member.name}</h2>
+            <div className="text-corporate-silver text-lg mb-2">{member.role}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+// Copyright (c) 2025 NAME.
+// All rights reserved.
+// Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
+
 "use client";
 
 import { useState, useEffect } from "react";

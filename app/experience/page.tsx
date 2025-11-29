@@ -2,6 +2,44 @@
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
+import React from "react";
+
+export default async function ExperiencePage() {
+  // TODO: Replace with real API call for experience data
+  const experiences = [
+    {
+      title: "AI-Powered Creative Suite",
+      description: "Automate, create, and collaborate with the world’s most advanced AI tools for media, design, and entertainment.",
+    },
+    {
+      title: "Real-Time Collaboration",
+      description: "Work with your team live, with instant updates, voice, and avatar presence across the platform.",
+    },
+    {
+      title: "Immersive Metaverse Integration",
+      description: "Step into a fully 3D, high-definition metaverse workspace with voice, video, and avatar control.",
+    },
+  ];
+  return (
+    <div className="p-8 md:p-16 w-full max-w-5xl mx-auto min-h-screen flex flex-col items-center">
+      <h1 className="text-3d text-4xl md:text-5xl font-black platinum shadow-lg animate-fade-in-up mb-8 text-center">
+        Experience 3000 Studios
+      </h1>
+      <div className="grid md:grid-cols-2 gap-8 w-full">
+        {experiences.map((exp, idx) => (
+          <div key={idx} className="glass luxury-border p-8 rounded-2xl shadow-xl">
+            <h2 className="text-xl font-bold text-corporate-gold mb-2">{exp.title}</h2>
+            <p className="text-corporate-silver text-lg">{exp.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+// Copyright (c) 2025 NAME.
+// All rights reserved.
+// Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
+
 export default function ExperiencePage() {
   const experiences = [
     {
