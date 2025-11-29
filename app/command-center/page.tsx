@@ -1,39 +1,8 @@
-// Copyright (c) 2025 NAME.
-// All rights reserved.
-// Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
-
-import React from "react";
-import ShadowChatWindow from "@/components/ShadowChatWindow";
-
-export default function CommandCenterPage() {
-  return (
-    <div className="p-8 md:p-16 w-full max-w-5xl mx-auto min-h-screen flex flex-col items-center">
-      <h1 className="text-3d text-4xl md:text-5xl font-black platinum shadow-lg animate-fade-in-up mb-8 text-center">
-        Command Center
-      </h1>
-      <div className="w-full flex flex-col md:flex-row gap-8">
-        <div className="flex-1 glass luxury-border p-8 rounded-2xl shadow-xl">
-          <h2 className="text-xl font-bold text-corporate-gold mb-2">AI Chat</h2>
-          <ShadowChatWindow />
-        </div>
-        <div className="flex-1 glass luxury-border p-8 rounded-2xl shadow-xl">
-          <h2 className="text-xl font-bold text-corporate-gold mb-2">System Actions</h2>
-          <ul className="text-corporate-silver text-lg list-disc pl-6">
-            <li>Deploy new build</li>
-            <li>Monitor logs</li>
-            <li>Manage users</li>
-            <li>Run diagnostics</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
-}
-// Copyright (c) 2025 NAME.
-// All rights reserved.
-// Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
-
 "use client";
+// Copyright (c) 2025 NAME.
+// All rights reserved.
+// Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
+
 import { useState, useEffect } from "react";
 
 import CommandConsole from "@/components/CommandConsole";

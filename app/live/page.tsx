@@ -1,43 +1,8 @@
+"use client";
 // Copyright (c) 2025 NAME.
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
-import React from "react";
-
-export default async function LivePage() {
-  // TODO: Replace with real API call for live events/streams
-  const streams = [
-    {
-      title: "Live Coding: Building the Platinum UI",
-      viewers: 312,
-      status: "Live",
-    },
-    {
-      title: "AI Voice Avatar Demo",
-      viewers: 128,
-      status: "Replay",
-    },
-  ];
-  return (
-    <div className="p-8 md:p-16 w-full max-w-5xl mx-auto min-h-screen flex flex-col items-center">
-      <h1 className="text-3d text-4xl md:text-5xl font-black platinum shadow-lg animate-fade-in-up mb-8 text-center">
-        Live Events & Streams
-      </h1>
-      <div className="grid md:grid-cols-2 gap-8 w-full">
-        {streams.map((stream, idx) => (
-          <div key={idx} className="glass luxury-border p-8 rounded-2xl shadow-xl">
-            <h2 className="text-xl font-bold text-corporate-gold mb-2">{stream.title}</h2>
-            <div className="text-corporate-silver text-lg mb-2">Viewers: <span className="text-corporate-gold">{stream.viewers}</span></div>
-            <span className={`inline-block px-4 py-1 rounded-full ${stream.status === 'Live' ? 'bg-green-500' : 'bg-corporate-gold'} text-black font-bold text-sm shadow-md`}>
-              {stream.status}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-"use client";
 import { useState } from "react";
 
 export default function LiveStreamPage() {
