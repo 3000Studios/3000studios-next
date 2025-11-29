@@ -25,7 +25,7 @@ export default function HomeHero() {
       <div
         className={`relative z-10 text-center px-6 transition-all duration-1000 ${fadeIn ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
       >
-        <h1 className="text-5xl md:text-7xl lg:text-9xl font-extrabold text-corporate-gold drop-shadow-2xl animate-pulse tracking-wider hero-3d">
+        <h1 className="text-5xl md:text-7xl lg:text-9xl font-extrabold text-3d platinum shadow-lg animate-pulse tracking-wider">
           3000 STUDIOS
         </h1>
         <p className="text-xl md:text-3xl mt-6 text-corporate-silver opacity-90 font-bold shadow-text">
