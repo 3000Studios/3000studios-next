@@ -2,6 +2,50 @@
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
+import React from "react";
+
+export default async function StorePage() {
+  // TODO: Replace with real API call for store products
+  const products = [
+    {
+      name: "Platinum Membership",
+      price: 299.99,
+      description: "Unlock all premium features, AI tools, and exclusive content.",
+    },
+    {
+      name: "Gold NFT Collectible",
+      price: 99.0,
+      description: "Limited edition digital collectible with luxury branding.",
+    },
+    {
+      name: "Diamond Creator Toolkit",
+      price: 499.0,
+      description: "Full suite of creative AI tools for elite creators.",
+    },
+  ];
+  return (
+    <div className="p-8 md:p-16 w-full max-w-5xl mx-auto min-h-screen flex flex-col items-center">
+      <h1 className="text-3d text-4xl md:text-5xl font-black platinum shadow-lg animate-fade-in-up mb-8 text-center">
+        Storefront
+      </h1>
+      <div className="grid md:grid-cols-2 gap-8 w-full">
+        {products.map((prod, idx) => (
+          <div key={idx} className="glass luxury-border p-8 rounded-2xl shadow-xl">
+            <h2 className="text-xl font-bold text-corporate-gold mb-2">{prod.name}</h2>
+            <p className="text-corporate-silver text-lg mb-2">{prod.description}</p>
+            <span className="inline-block px-4 py-1 rounded-full bg-corporate-gold text-black font-bold text-lg shadow-md">
+              ${prod.price.toLocaleString(undefined, {minimumFractionDigits:2})}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+// Copyright (c) 2025 NAME.
+// All rights reserved.
+// Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
+
 "use client";
 
 import { useState } from "react";

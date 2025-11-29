@@ -2,6 +2,50 @@
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
+import React from "react";
+
+export default async function ProjectsPage() {
+  // TODO: Replace with real API call for projects
+  const projects = [
+    {
+      name: "Shadow Command Center",
+      description: "AI-driven dashboard for creative automation, analytics, and live control.",
+      status: "Active",
+    },
+    {
+      name: "Avatar Metaverse",
+      description: "3D avatar system with real-time voice and emotion sync.",
+      status: "Beta",
+    },
+    {
+      name: "Platinum Storefront",
+      description: "Luxury digital goods and NFT marketplace with gold/platinum branding.",
+      status: "Launching Soon",
+    },
+  ];
+  return (
+    <div className="p-8 md:p-16 w-full max-w-5xl mx-auto min-h-screen flex flex-col items-center">
+      <h1 className="text-3d text-4xl md:text-5xl font-black platinum shadow-lg animate-fade-in-up mb-8 text-center">
+        Projects
+      </h1>
+      <div className="grid md:grid-cols-2 gap-8 w-full">
+        {projects.map((proj, idx) => (
+          <div key={idx} className="glass luxury-border p-8 rounded-2xl shadow-xl">
+            <h2 className="text-xl font-bold text-corporate-gold mb-2">{proj.name}</h2>
+            <p className="text-corporate-silver text-lg mb-2">{proj.description}</p>
+            <span className="inline-block px-4 py-1 rounded-full bg-corporate-gold text-black font-bold text-sm shadow-md">
+              {proj.status}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+// Copyright (c) 2025 NAME.
+// All rights reserved.
+// Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
+
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
