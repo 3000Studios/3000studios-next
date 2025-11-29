@@ -1,3 +1,17 @@
+/* Avatar toggle button styles */
+.avatar-toggle {
+  background: linear-gradient(135deg, #fbbf24 0%, #fcd34d 100%);
+  border: 4px solid #ffd700;
+  box-shadow: 0 0 40px rgba(251, 191, 36, 0.8), 0 8px 16px rgba(0, 0, 0, 0.9);
+}
+
+/* Avatar panel styles */
+.avatar-panel {
+  background: rgba(0,0,0,0.95);
+  border: 2px solid #ffd700;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 60px rgba(251, 191, 36, 0.6), 0 16px 32px rgba(0, 0, 0, 0.9);
+}
 /* CompactAvatar.module.css */
 .compact-avatar {
   width: 40px;

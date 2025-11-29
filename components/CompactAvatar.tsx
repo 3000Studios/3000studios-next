@@ -83,11 +83,11 @@ export default function CompactAvatar() {
       {/* Avatar Toggle Button */}
       <div
         onClick={() => setOpen(!open)}
-        className={styles["compact-avatar"] + " fixed bottom-6 right-6 w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-yellow-400 to-yellow-600 cursor-pointer shadow-2xl border-4 border-yellow-300 flex items-center justify-center hover:scale-110 transition-all z-50"}
-        style={{
-          boxShadow:
-            "0 0 40px rgba(251, 191, 36, 0.8), 0 8px 16px rgba(0, 0, 0, 0.9)",
-        }}
+        className={[
+          styles["compact-avatar"],
+          styles["avatar-toggle"],
+          "fixed bottom-6 right-6 w-16 h-16 md:w-20 md:h-20 cursor-pointer flex items-center justify-center hover:scale-110 transition-all z-50"
+        ].join(" ")}
       >
         <span className="text-3xl md:text-4xl">🤖</span>
       </div>
@@ -95,11 +95,11 @@ export default function CompactAvatar() {
       {/* Compact Avatar Panel */}
       {open && (
         <div
-          className={styles["compact-avatar-inner"] + " fixed bottom-28 right-6 w-80 md:w-96 h-96 bg-black/95 border-2 border-yellow-500 rounded-2xl shadow-2xl flex flex-col z-50"}
-          style={{
-            boxShadow:
-              "0 0 60px rgba(251, 191, 36, 0.6), 0 16px 32px rgba(0, 0, 0, 0.9)",
-          }}
+          className={[
+            styles["compact-avatar-inner"],
+            styles["avatar-panel"],
+            "fixed bottom-28 right-6 w-80 md:w-96 h-96 flex flex-col z-50"
+          ].join(" ")}
         >
           <div className="p-4 border-b border-yellow-500 text-yellow-400 font-bold text-center text-lg">
             SHADOW AVATAR
