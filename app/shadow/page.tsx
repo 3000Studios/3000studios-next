@@ -1,32 +1,7 @@
-// Copyright (c) 2025 NAME.
-// All rights reserved.
-// Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
-
-import React from "react";
-
-export default function ShadowPage() {
-  return (
-    <div className="p-8 md:p-16 w-full max-w-4xl mx-auto min-h-screen flex flex-col items-center">
-      <h1 className="text-3d text-4xl md:text-5xl font-black platinum shadow-lg animate-fade-in-up mb-8 text-center">
-        Shadow AI
-      </h1>
-      <div className="glass luxury-border p-8 rounded-2xl shadow-xl w-full">
-        <h2 className="text-xl font-bold text-corporate-gold mb-2">AI System Overview</h2>
-        <ul className="text-corporate-silver text-lg list-disc pl-6">
-          <li>Voice Command Engine</li>
-          <li>Avatar Control</li>
-          <li>Real-Time Analytics</li>
-          <li>API Integrations</li>
-        </ul>
-      </div>
-    </div>
-  );
-}
-// Copyright (c) 2025 NAME.
-// All rights reserved.
-// Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
-
 "use client";
+// Copyright (c) 2025 NAME.
+// All rights reserved.
+// Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
 import { useState, useEffect } from "react";
 import ShadowTerminal from "@/components/ShadowTerminal";

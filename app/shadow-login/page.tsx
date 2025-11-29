@@ -1,28 +1,7 @@
-﻿// Copyright (c) 2025 NAME.
-// All rights reserved.
-// Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
-
-import React from "react";
-
-export default function ShadowLoginPage() {
-  return (
-    <div className="p-8 md:p-16 w-full max-w-md mx-auto min-h-screen flex flex-col items-center justify-center">
-      <h1 className="text-3d text-4xl md:text-5xl font-black platinum shadow-lg animate-fade-in-up mb-8 text-center">
-        Shadow Login
-      </h1>
-      <form className="glass luxury-border p-8 rounded-2xl shadow-xl w-full flex flex-col gap-6">
-        <input type="text" placeholder="Shadow Username" className="input luxury-border" required />
-        <input type="password" placeholder="Password" className="input luxury-border" required />
-        <button type="submit" className="luxury-btn sendBtn">Sign In</button>
-      </form>
-    </div>
-  );
-}
+﻿"use client";
 // Copyright (c) 2025 NAME.
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
-
-"use client";
 
 import { useState } from "react";
 
