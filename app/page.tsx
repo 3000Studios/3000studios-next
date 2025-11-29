@@ -57,7 +57,7 @@ export default function Home() {
 
       {/* Featured Posts from WordPress */}
       <section className="max-w-6xl mx-auto mt-12 md:mt-20 px-4 w-full">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-8 md:mb-10 glow-text">
+        <h2 className="text-3d text-4xl md:text-5xl font-black platinum text-center mb-8 md:mb-10 shadow-lg animate-fade-in-up">
           Featured Projects
         </h2>
 
@@ -110,7 +110,7 @@ export default function Home() {
 
       {/* Features Grid */}
       <section className="max-w-6xl mx-auto mt-28 px-4 mb-20">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-10 glow-text">
+        <h2 className="text-3d text-4xl md:text-5xl font-black platinum text-center mb-10 shadow-lg animate-fade-in-up">
           System Features
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
