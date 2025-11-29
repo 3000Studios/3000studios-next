@@ -10,6 +10,7 @@
   flex-direction: column;
   box-shadow: 0 0 32px #d4af37cc, 0 4px 24px #b3b3b399;
   position: relative;
+  -webkit-backdrop-filter: blur(10px) saturate(1.2);
   backdrop-filter: blur(10px) saturate(1.2);
 }
 
@@ -37,7 +38,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 0 8px #d4af37cc);
 }
 
@@ -47,7 +48,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 0 8px #ffd700cc);
 }
 
