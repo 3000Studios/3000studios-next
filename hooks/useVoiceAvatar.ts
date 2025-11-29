@@ -28,54 +28,44 @@ export default function useVoiceAvatar() {
     let dataArray: Uint8Array;
     let animationFrame: number;
 
-    navigator.mediaDevices
-      .getUserMedia({ audio: true })
-      .then((stream) => {
-        audioContext = new AudioContext();
-        analyser = audioContext.createAnalyser();
-        microphone = audioContext.createMediaStreamSource(stream);
 
-        analyser.fftSize = 256;
-        const bufferLength = analyser.frequencyBinCount;
-        dataArray = new Uint8Array(bufferLength);
+      navigator.mediaDevices
+        .getUserMedia({ audio: true })
+        .then((stream) => {
+          audioContext = new AudioContext();
+          analyser = audioContext.createAnalyser();
+          microphone = audioContext.createMediaStreamSource(stream);
 
-        microphone.connect(analyser);
+          analyser.fftSize = 256;
+          microphone.connect(analyser);
 
-        // Animation loop to detect speech
-        const detectSpeech = () => {
-          analyser.getByteFrequencyData(dataArray);
+          // --- PATCHED SECTION ---
+          const buffer = new ArrayBuffer(analyser.frequencyBinCount);
+          const dataArray = new Uint8Array(buffer);
 
-          // Calculate average volume
-          const average = dataArray.reduce((a, b) => a + b) / dataArray.length;
-          const normalizedVolume = average / 255; // 0-1 range
+          const detectSpeech = () => {
+            analyser.getByteFrequencyData(dataArray as Uint8Array);
 
-          // Determine if talking based on volume threshold
-          const isTalking = normalizedVolume > 0.02; // Adjust sensitivity
+            const average =
+              dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
 
-          // Determine mood based on volume intensity
-          let newMood = "idle";
-          if (normalizedVolume > 0.4) {
-            newMood = "angry"; // Loud voice
-          } else if (normalizedVolume > 0.15 && isTalking) {
-            newMood = "excited"; // Moderate voice
-          } else if (isTalking) {
-            newMood = "talking"; // Soft voice
-          }
+            // You can setState here if needed, e.g.:
+            // setState({ talking: average > 20, volume: average, mood: average > 40 ? 'angry' : average > 25 ? 'talking' : 'idle' });
 
-          setState({
-            talking: isTalking,
-            volume: normalizedVolume,
-            mood: newMood,
-          });
+            if (average > 20) {
+              setState((prev) => ({ ...prev, talking: true, volume: average, mood: 'talking' }));
+            } else {
+              setState((prev) => ({ ...prev, talking: false, volume: average, mood: 'idle' }));
+            }
 
-          animationFrame = requestAnimationFrame(detectSpeech);
-        };
+            animationFrame = requestAnimationFrame(detectSpeech);
+          };
 
-        detectSpeech();
-      })
-      .catch((error) => {
-        console.error("Voice Avatar: Microphone access denied", error);
-      });
+          detectSpeech();
+        })
+        .catch((error) => {
+          console.error("Voice Avatar: Microphone access denied", error);
+        });
 
     // Cleanup
     return () => {

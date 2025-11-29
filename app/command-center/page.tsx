@@ -10,6 +10,7 @@ import CommandHistory from "@/components/CommandHistory";
 import VoiceListener from "@/components/VoiceListener";
 import ProductionDashboard from "@/components/ProductionDashboard";
 import AvatarClientWrapper from "../shadow/avatar/AvatarClientWrapper";
+import ShadowChatWindow from "@/components/ShadowChatWindow";
 import axios from "axios";
 
 interface Task {
@@ -94,6 +95,11 @@ export default function CommandCenterPage() {
 
         {/* Production Dashboard: Real Analytics */}
         <ProductionDashboard />
+
+        {/* Shadow Copilot Chat Window */}
+        <div style={{ marginTop: "20px" }}>
+          <ShadowChatWindow />
+        </div>
 
         {/* Command Input & Task Log */}
         <div className="grid lg:grid-cols-3 gap-6">

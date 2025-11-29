@@ -8,6 +8,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import styles from "./NavBar.module.css";
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
@@ -24,6 +25,7 @@ export default function NavBar() {
     { href: "/login", label: "Login" },
     { href: "/command-center", label: "Command Center" },
     { href: "/shadow", label: "Shadow" },
+    { href: "/shadow-login", label: "Shadow Login" },
   ];
 
   return (
@@ -47,7 +49,7 @@ export default function NavBar() {
         {open ? "✕" : "☰"}
       </div>
 
-      <ul className="hidden md:flex gap-1 text-base lg:text-lg">
+      <ul className={styles["navbar-list"] + " hidden md:flex text-base lg:text-lg gap-2"}>
         {links.map((l, i) => (
           <li key={i} className="relative group">
             <Link
@@ -64,11 +66,7 @@ export default function NavBar() {
 
       {open && (
         <ul
-          className="md:hidden absolute top-20 right-6 bg-corporate-navy border-2 border-corporate-gold rounded-2xl p-6 space-y-3 text-lg shadow-2xl backdrop-blur-xl"
-          style={{
-            boxShadow:
-              "0 0 40px rgba(212, 175, 55, 0.3), 0 20px 40px rgba(0, 0, 0, 0.9)",
-          }}
+          className="md:hidden absolute top-20 right-6 bg-corporate-navy border-2 border-corporate-gold rounded-2xl p-6 space-y-3 text-lg shadow-2xl backdrop-blur-xl navbar-mobile-list w-64"
         >
           {links.map((l, i) => (
             <li key={i}>

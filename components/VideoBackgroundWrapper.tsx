@@ -6,7 +6,7 @@
 
 import dynamic from "next/dynamic";
 
-const VideoBackground = dynamic(() => import("./VideoBackground"), {
+const VideoBackground = dynamic(() => import("./VideoBackgroundWrapper"), {
   ssr: false,
 });
 
