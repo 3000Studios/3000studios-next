@@ -40,6 +40,7 @@ export default function CollaboratorsPage() {
     </div>
   );
 }
+
 "use client";
 // Copyright (c) 2025 NAME.
 // All rights reserved.
