@@ -11,8 +11,8 @@
     <div className="min-h-screen bg-black text-white pt-20 px-4 flex flex-col items-center luxury-border glass">
       <div className="max-w-3xl w-full mx-auto py-12">
         <h1 className="text-5xl md:text-6xl font-black text-center text-3d mb-8 animate-fade-in-up">
-          "use client";
 
+          "use client";
           import { useState } from "react";
 
           export default function LiveStreamPage() {
