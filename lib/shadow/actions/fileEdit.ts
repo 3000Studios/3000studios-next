@@ -10,8 +10,8 @@ import path from "path";
 export async function editFile(filePath: string, find: any, replace: string) {
   const full = path.join(process.cwd(), filePath);
 
-  let data = fs.readFileSync(full, "utf8");
-  let updated = data.replace(find, replace);
+  const data = fs.readFileSync(full, "utf8");
+  const updated = data.replace(find, replace);
 
   fs.writeFileSync(full, updated, "utf8");
 

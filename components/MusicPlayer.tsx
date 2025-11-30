@@ -72,7 +72,8 @@ export default function MusicPlayer() {
         audio.play().catch(() => setIsPlaying(false));
       }
     }
-  }, [currentIndex]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentIndex, isPlaying]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -94,7 +95,8 @@ export default function MusicPlayer() {
       audio.removeEventListener("loadedmetadata", updateDuration);
       audio.removeEventListener("ended", handleEnded);
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [nextSong]);
 
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
@@ -128,6 +130,8 @@ export default function MusicPlayer() {
           value={currentTime}
           onChange={handleSeek}
           className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-purple-500"
+          title="Seek audio"
+          placeholder="Seek audio"
         />
         <div className="flex justify-between text-sm text-gray-400 mt-2">
           <span>{formatTime(currentTime)}</span>

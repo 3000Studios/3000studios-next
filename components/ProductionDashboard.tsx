@@ -93,8 +93,12 @@ export default function ProductionDashboard() {
       });
 
       setLoading(false);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (typeof err === "object" && err && "message" in err) {
+        setError((err as { message: string }).message);
+      } else {
+        setError("Unknown error");
+      }
       setLoading(false);
     }
   };

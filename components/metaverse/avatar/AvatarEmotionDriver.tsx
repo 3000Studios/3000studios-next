@@ -2,8 +2,18 @@
 
 import { useEffect, useState } from "react";
 
-export default function AvatarEmotionDriver({ api }) {
-  const [emotion, setEmotion] = useState("neutral");
+interface AvatarEmotionDriverProps {
+  api: {
+    smile: () => void;
+    frown: () => void;
+    shock: () => void;
+    slump: () => void;
+    resetFace: () => void;
+  };
+}
+
+export default function AvatarEmotionDriver({ api }: AvatarEmotionDriverProps) {
+  const [emotion, setEmotion] = useState<string>("neutral");
 
   useEffect(() => {
     const handler = (e: MessageEvent) => {
@@ -21,6 +31,7 @@ export default function AvatarEmotionDriver({ api }) {
 
     window.addEventListener("message", handler);
     return () => window.removeEventListener("message", handler);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return null;

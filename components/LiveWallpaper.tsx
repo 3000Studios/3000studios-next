@@ -6,6 +6,15 @@
 
 import { useEffect, useRef } from "react";
 
+
+type Particle = {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  alpha: number;
+};
+
 export default function LiveWallpaper() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -17,7 +26,7 @@ export default function LiveWallpaper() {
     let w = (canvas.width = window.innerWidth);
     let h = (canvas.height = window.innerHeight);
 
-    const particles: any[] = [];
+    const particles: Particle[] = [];
     const maxParticles = 60;
 
     const resize = () => {
@@ -58,7 +67,7 @@ export default function LiveWallpaper() {
 
       if (particles.length > maxParticles) particles.shift();
 
-      for (let p of particles) {
+      for (const p of particles) {
         p.x += p.vx;
         p.y += p.vy;
         p.alpha -= 0.015;

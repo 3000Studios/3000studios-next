@@ -18,7 +18,7 @@ const routing = [
 ];
 
 export async function runShadowCommand(cmd: string) {
-  let route = routing.find((r) => r.match.test(cmd));
+  const route = routing.find((r) => r.match.test(cmd));
 
   if (!route) {
     return `Unknown command: ${cmd}`;
