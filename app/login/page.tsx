@@ -18,8 +18,8 @@ export default function Login() {
     if (email === "mr.jwswain@gmail.com" && pass === "Bossman3000!!!") {
       document.cookie = "shadowAuth=1; path=/;";
       r.push("/command-center");
-    "use client";
 
+    "use client";
     import React, { useState } from "react";
     import { useRouter } from "next/navigation";
 
