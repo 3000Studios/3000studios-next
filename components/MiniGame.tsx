@@ -20,12 +20,14 @@ export default function MiniGame() {
     let animationId: number;
     let playerY = 200;
     let playerVelocity = 0;
-    let obstacles: Array<{
+    type Obstacle = {
       x: number;
       y: number;
       width: number;
       height: number;
-    }> = [];
+      scored?: boolean;
+    };
+    let obstacles: Obstacle[] = [];
     let gameScore = 0;
     let gameOver = false;
 
@@ -33,7 +35,7 @@ export default function MiniGame() {
     const jumpStrength = -10;
     const playerSize = 40;
     const obstacleWidth = 60;
-    const obstacleGap = 200;
+      const obstacleGap = 200; // Unused
 
     const reset = () => {
       playerY = 200;
@@ -173,10 +175,10 @@ export default function MiniGame() {
         }
 
         // Score point
-        if (obs.x + obs.width < 100 && !obs.hasOwnProperty("scored")) {
+        if (obs.x + obs.width < 100 && !obs.scored) {
           gameScore++;
           setScore(gameScore);
-          (obs as any).scored = true;
+          obs.scored = true;
         }
 
         return obs.x + obs.width > 0;

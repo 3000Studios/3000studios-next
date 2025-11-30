@@ -3,112 +3,45 @@
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
-import { useState } from "react";
 
-export default function LiveStreamPage() {
-  const [isAuth, setIsAuth] = useState(false);
-  const [pwd, setPwd] = useState("");
-  const [err, setErr] = useState("");
-  const [isPublic, setIsPublic] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (pwd === "Bossman3000!!!") {
-      setIsAuth(true);
-      setErr("");
-    } else {
-      setErr("Access Denied");
-      setPwd("");
-    }
-  };
 
-  if (!isAuth) {
-    return (
-      <div className="min-h-screen bg-black flex items-center justify-center px-4 pt-20">
-        <div className="glass p-8 rounded-2xl border-2 border-yellow-500 max-w-md w-full">
-          <h1 className="text-4xl font-bold text-yellow-400 text-center mb-6">
-            LIVE STREAMING
-          </h1>
-          <form onSubmit={handleLogin} className="space-y-6">
-            <input
-              type="password"
-              value={pwd}
-              onChange={(e) => setPwd(e.target.value)}
-              className="w-full px-4 py-3 bg-black/50 border border-yellow-600 rounded text-white"
-              placeholder="Admin Password"
-              autoFocus
-            />
-            {err && (
-              <div className="p-3 bg-red-900/50 border border-red-500 rounded text-red-200 text-center">
-                {err}
-              </div>
-            )}
-            <button
-              type="submit"
-              className="w-full px-6 py-3 bg-gradient-to-r from-yellow-600 to-orange-600 rounded font-bold"
-            >
-              LOGIN
-            </button>
-          </form>
-        </div>
-      </div>
-    );
-  }
 
   return (
-    <div className="min-h-screen bg-black text-white pt-20 px-4">
-      <div className="max-w-7xl mx-auto py-8">
-        <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
-          Live Streaming Dashboard
+    <div className="min-h-screen bg-black text-white pt-20 px-4 flex flex-col items-center luxury-border glass">
+      <div className="max-w-3xl w-full mx-auto py-12">
+        <h1 className="text-5xl md:text-6xl font-black text-center text-3d mb-8 animate-fade-in-up">
+          Live Stream
         </h1>
-        <div className="grid lg:grid-cols-2 gap-6">
-          <div className="glass p-6 rounded-xl border border-yellow-500/30">
-            <h2 className="text-2xl font-bold mb-4 text-yellow-400">
-              Settings
-            </h2>
-            <div className="flex items-center justify-between p-4 bg-black/50 rounded mb-4">
-              <span>Public Stream</span>
-              <button
-                onClick={() => setIsPublic(!isPublic)}
-                className={
-                  isPublic
-                    ? "px-4 py-2 bg-green-500 rounded"
-                    : "px-4 py-2 bg-gray-600 rounded"
-                }
-              >
-                {isPublic ? "ON" : "OFF"}
-              </button>
-            </div>
-            <div className="p-4 bg-black/50 rounded">
-              <h3 className="font-bold mb-2">Stream Key</h3>
-              <code className="px-3 py-2 bg-black border border-yellow-600 rounded text-yellow-400 text-sm block">
-                shadow-stream-{Date.now()}
-              </code>
-            </div>
+        <div className="w-full aspect-video bg-black/80 border-4 border-gold rounded-2xl shadow-2xl flex items-center justify-center mb-8 relative overflow-hidden">
+          {/* Embed your live stream player here (e.g., video.js, iframe, or custom player) */}
+          <span className="text-2xl text-gold font-bold">Live Stream Window</span>
+        </div>
+        <div className="glass p-6 rounded-xl border border-yellow-500/30 mb-8">
+          <h2 className="text-2xl font-bold mb-4 text-yellow-400">How to Watch</h2>
+          <ul className="list-disc list-inside space-y-2 text-lg text-platinum">
+            <li>No login required. This is a public viewer-only stream.</li>
+            <li>For best experience, use Chrome, Edge, or Safari on desktop or mobile.</li>
+            <li>For creators: Stream using Larix Broadcaster (mobile) or OBS Studio (desktop) to <span className="text-gold font-bold">rtmp://3000studios.com/live</span>.</li>
+          </ul>
+        </div>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="glass p-4 rounded-xl border border-yellow-500/30">
+            <h3 className="font-bold mb-2 text-yellow-400">From Phone</h3>
+            <ol className="list-decimal list-inside space-y-1 text-gray-300">
+              <li>Download Larix Broadcaster</li>
+              <li>Add connection: <span className="text-gold font-bold">rtmp://3000studios.com/live</span></li>
+              <li>Start recording</li>
+            </ol>
           </div>
-          <div className="glass p-6 rounded-xl border border-yellow-500/30">
-            <h2 className="text-2xl font-bold mb-4 text-yellow-400">
-              How to Stream
-            </h2>
-            <div className="space-y-4 text-sm">
-              <div className="p-4 bg-black/50 rounded">
-                <h3 className="font-bold mb-2">From Phone</h3>
-                <ol className="list-decimal list-inside space-y-1 text-gray-300">
-                  <li>Download Larix Broadcaster</li>
-                  <li>Add connection: rtmp://3000studios.com/live</li>
-                  <li>Start recording</li>
-                </ol>
-              </div>
-              <div className="p-4 bg-black/50 rounded">
-                <h3 className="font-bold mb-2">From Laptop</h3>
-                <ol className="list-decimal list-inside space-y-1 text-gray-300">
-                  <li>Download OBS Studio</li>
-                  <li>Settings → Stream → Custom</li>
-                  <li>Server: rtmp://3000studios.com/live</li>
-                  <li>Start streaming</li>
-                </ol>
-              </div>
-            </div>
+          <div className="glass p-4 rounded-xl border border-yellow-500/30">
+            <h3 className="font-bold mb-2 text-yellow-400">From Laptop</h3>
+            <ol className="list-decimal list-inside space-y-1 text-gray-300">
+              <li>Download OBS Studio</li>
+              <li>Settings → Stream → Custom</li>
+              <li>Server: <span className="text-gold font-bold">rtmp://3000studios.com/live</span></li>
+              <li>Start streaming</li>
+            </ol>
           </div>
         </div>
       </div>

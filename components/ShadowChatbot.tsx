@@ -32,7 +32,7 @@ export default function ShadowChatbot() {
       const reply = data.reply || "Error processing request.";
 
       setMessages((prev) => [...prev, { from: "shadow", text: reply }]);
-    } catch (error) {
+    } catch {
       setMessages((prev) => [
         ...prev,
         { from: "shadow", text: "Connection error. Try again." },

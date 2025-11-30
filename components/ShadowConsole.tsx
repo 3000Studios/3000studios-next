@@ -128,6 +128,7 @@ export default function ShadowConsole() {
       return;
     }
 
+    // @ts-expect-error webkitSpeechRecognition is not typed
     const recognition = new (window as any).webkitSpeechRecognition();
     recognition.continuous = false;
     recognition.interimResults = false;
@@ -142,13 +143,13 @@ export default function ShadowConsole() {
       setIsListening(false);
     };
 
-    recognition.onresult = (event: any) => {
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
       const transcript = event.results[0][0].transcript;
       setInput(transcript);
       pushLog(`🎤 Heard: "${transcript}"`, "info");
     };
 
-    recognition.onerror = (event: any) => {
+    recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
       pushLog(`⚠️ Voice error: ${event.error}`, "error");
       setIsListening(false);
     };

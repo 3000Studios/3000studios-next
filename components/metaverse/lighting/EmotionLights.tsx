@@ -1,9 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 
-export default function EmotionLights({ lightRef }) {
-  const [color, setColor] = useState("#ffffff");
+import { MutableRefObject, useEffect, useState } from "react";
+
+interface EmotionLightsProps {
+  lightRef: MutableRefObject<{ color: { set: (color: string) => void } } | null>;
+}
+
+export default function EmotionLights({ lightRef }: EmotionLightsProps) {
+  const [color, setColor] = useState<string>("#ffffff");
 
   useEffect(() => {
     const handler = (e: MessageEvent) => {
@@ -24,7 +29,7 @@ export default function EmotionLights({ lightRef }) {
 
   useEffect(() => {
     if (lightRef.current) lightRef.current.color.set(color);
-  }, [color]);
+  }, [color, lightRef]);
 
   return null;
 }
