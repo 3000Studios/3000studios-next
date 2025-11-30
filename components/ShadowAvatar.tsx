@@ -4,7 +4,7 @@
 
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 /**
  * ShadowAvatar - A CSS-based animated avatar with parallax and voice interaction
@@ -15,6 +15,23 @@ export default function ShadowAvatar() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [floatOffset, setFloatOffset] = useState(0);
+
+  // Floating animation using requestAnimationFrame
+  useEffect(() => {
+    let animationId: number;
+    let startTime: number | null = null;
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = (timestamp - startTime) / 1000;
+      setFloatOffset(Math.sin(elapsed * 0.6) * 5);
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animationId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationId);
+  }, []);
 
   // Parallax effect on mouse move
   useEffect(() => {
@@ -32,7 +49,7 @@ export default function ShadowAvatar() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     // Trigger speaking animation
     setIsSpeaking(true);
     
@@ -44,7 +61,7 @@ export default function ShadowAvatar() {
     
     // Stop speaking animation after a delay
     setTimeout(() => setIsSpeaking(false), 3000);
-  };
+  }, []);
 
   return (
     <div
@@ -58,7 +75,7 @@ export default function ShadowAvatar() {
       <div
         className="relative transition-transform duration-200 ease-out"
         style={{
-          transform: `rotateY(${mousePos.x}deg) rotateX(${-mousePos.y}deg) translateY(${Math.sin(Date.now() / 1000) * 5}px)`,
+          transform: `rotateY(${mousePos.x}deg) rotateX(${-mousePos.y}deg) translateY(${floatOffset}px)`,
         }}
       >
         {/* Glow Effect */}

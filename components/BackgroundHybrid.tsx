@@ -23,8 +23,15 @@ export default function BackgroundHybrid() {
 
     if (!canvas || !ctx) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // Get initial dimensions (only runs client-side in useEffect)
+    const getCanvasSize = () => ({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+
+    const initialSize = getCanvasSize();
+    canvas.width = initialSize.width;
+    canvas.height = initialSize.height;
 
     const particles: Particle[] = [];
     for (let i = 0; i < 150; i++) {
@@ -72,8 +79,9 @@ export default function BackgroundHybrid() {
 
     // Handle resize
     const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const size = getCanvasSize();
+      canvas.width = size.width;
+      canvas.height = size.height;
     };
     window.addEventListener("resize", handleResize);
 
