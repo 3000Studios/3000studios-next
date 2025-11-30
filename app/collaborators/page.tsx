@@ -1,42 +1,35 @@
 "use client";
-// Copyright (c) 2025 NAME.
-// All rights reserved.
-// Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
 import { useState, useEffect } from "react";
 import AddCollaborator from "@/components/AddCollaborator";
-
-"use client";
-// Copyright (c) 2025 NAME.
-// All rights reserved.
-// Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
-import { useState, useEffect } from "react";
-import AddCollaborator from "@/components/AddCollaborator";
-import CollaboratorList from "@/components/CollaboratorList";
-import { Collaborator } from "@/types";
 
 export default function CollaboratorsPage() {
-  const [collaborators, setCollaborators] = useState<Collaborator[]>([]);
-  
+  const [collaborators, setCollaborators] = useState<string[]>([]);
+
   useEffect(() => {
-    fetch("/api/collaborators")
-      .then((res) => res.json())
-      .then((data) => setCollaborators(data))
-      .catch(() => {});
+    const loadData = async () => {
+      const res = await fetch("/api/collaborators/list");
+      const data = await res.json();
+      setCollaborators(data.list || []);
+    };
+    loadData();
   }, []);
 
-
-
-
-
-
-
-
   return (
-    <div className="min-h-screen p-8 text-white">
-      <h1 className="text-4xl font-bold mb-6">Manage Collaborators</h1>
-      <AddCollaborator onAdd={setCollaborators} />
-      <CollaboratorList collaborators={collaborators} />
+    <div className="min-h-screen p-10 text-white bg-black">
+      <h1 className="text-4xl font-bold mb-6">Collaborators</h1>
+      <AddCollaborator />
+
+      <ul className="mt-6 space-y-2">
+        {collaborators.map((x) => (
+          <li
+            key={x}
+            className="bg-gray-800 p-3 rounded-md border border-gray-700"
+          >
+            {x}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
