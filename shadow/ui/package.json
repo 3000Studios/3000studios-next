@@ -1,0 +1,23 @@
+# Copyright (c) 2025 NAME.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}  "license": "PROPRIETARY"  "author": "Mr. J.W. Swain",  "keywords": ["shadow", "ui", "dashboard", "websocket"],  },    "ws": "^8.14.2"    "express": "^4.18.2",  "dependencies": {  },    "dev": "node --watch server.js"    "start": "node server.js",  "scripts": {  "main": "server.js",  "description": "Shadow Command Center — Holographic UI Dashboard",  "type": "module",  "version": "1.0.0",  "name": "shadow-ui",# All rights reserved.
+# Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
+
+{
