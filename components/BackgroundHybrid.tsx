@@ -1,6 +1,8 @@
-// Copyright (c) 2025 NAME.
-// All rights reserved.
-// Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
+/*
+ * Copyright (c) 2025 NAME.
+ * All rights reserved.
+ * Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
+ */
 
 "use client";
 
@@ -33,6 +35,11 @@ export default function BackgroundHybrid() {
     canvas.width = initialSize.width;
     canvas.height = initialSize.height;
 
+    // Create gradient once, recreate only on resize
+    let gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    gradient.addColorStop(0, "#050505");
+    gradient.addColorStop(1, "#0e0e0e");
+
     const particles: Particle[] = [];
     for (let i = 0; i < 150; i++) {
       particles.push({
@@ -51,11 +58,8 @@ export default function BackgroundHybrid() {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Marble color base
-      const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      grad.addColorStop(0, "#050505");
-      grad.addColorStop(1, "#0e0e0e");
-      ctx.fillStyle = grad;
+      // Marble color base - use cached gradient
+      ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Embers + particles
@@ -79,9 +83,24 @@ export default function BackgroundHybrid() {
 
     // Handle resize
     const handleResize = () => {
+      const oldWidth = canvas.width;
+      const oldHeight = canvas.height;
       const size = getCanvasSize();
       canvas.width = size.width;
       canvas.height = size.height;
+
+      // Recreate gradient for new canvas size
+      gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      gradient.addColorStop(0, "#050505");
+      gradient.addColorStop(1, "#0e0e0e");
+
+      // Scale particle positions proportionally
+      const scaleX = size.width / oldWidth;
+      const scaleY = size.height / oldHeight;
+      particles.forEach((p) => {
+        p.x *= scaleX;
+        p.y *= scaleY;
+      });
     };
     window.addEventListener("resize", handleResize);
 

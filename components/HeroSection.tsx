@@ -1,8 +1,12 @@
-// Copyright (c) 2025 NAME.
-// All rights reserved.
-// Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
+/*
+ * Copyright (c) 2025 NAME.
+ * All rights reserved.
+ * Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
+ */
 
 "use client";
+
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
@@ -16,13 +20,19 @@ export default function HeroSection() {
       </p>
 
       <div className="flex justify-center gap-6 mt-6">
-        <button className="px-8 py-3 bg-gradient-to-r from-yellow-500 to-yellow-300 text-black rounded-xl shadow-xl hover:scale-105 transition">
+        <Link
+          href="/command-center"
+          className="px-8 py-3 bg-gradient-to-r from-yellow-500 to-yellow-300 text-black rounded-xl shadow-xl hover:scale-105 transition"
+        >
           Enter Command Center
-        </button>
+        </Link>
 
-        <button className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-300 text-black rounded-xl shadow-xl hover:scale-105 transition">
+        <Link
+          href="/store"
+          className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-300 text-black rounded-xl shadow-xl hover:scale-105 transition"
+        >
           Launch Apps
-        </button>
+        </Link>
       </div>
     </div>
   );

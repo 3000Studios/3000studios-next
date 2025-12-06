@@ -1,10 +1,15 @@
-// Copyright (c) 2025 NAME.
-// All rights reserved.
-// Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
+/*
+ * Copyright (c) 2025 NAME.
+ * All rights reserved.
+ * Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
+ */
 
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+
+// Constants
+const SPEAKING_DURATION_MS = 3000;
 
 /**
  * ShadowAvatar - A CSS-based animated avatar with parallax and voice interaction
@@ -12,10 +17,32 @@ import { useEffect, useRef, useState, useCallback } from "react";
  */
 export default function ShadowAvatar() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const speakingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [floatOffset, setFloatOffset] = useState(0);
+  const [verticalFloatOffset, setVerticalFloatOffset] = useState(0);
+
+  // Initialize audio element once
+  useEffect(() => {
+    audioRef.current = new Audio("/shadow-voice.mp3");
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+
+  // Cleanup speaking timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (speakingTimeoutRef.current) {
+        clearTimeout(speakingTimeoutRef.current);
+      }
+    };
+  }, []);
 
   // Floating animation using requestAnimationFrame
   useEffect(() => {
@@ -25,7 +52,7 @@ export default function ShadowAvatar() {
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const elapsed = (timestamp - startTime) / 1000;
-      setFloatOffset(Math.sin(elapsed * 0.6) * 5);
+      setVerticalFloatOffset(Math.sin(elapsed * 0.6) * 5);
       animationId = requestAnimationFrame(animate);
     };
 
@@ -53,15 +80,29 @@ export default function ShadowAvatar() {
     // Trigger speaking animation
     setIsSpeaking(true);
     
-    // Try to play voice audio
-    const audio = new Audio("/shadow-voice.mp3");
-    audio.play().catch(() => {
-      // Audio play failed - continue with animation only
-    });
+    // Try to play voice audio using reusable audio element
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play().catch(() => {
+        // Audio play failed - continue with animation only
+      });
+    }
+    
+    // Clear any existing timeout
+    if (speakingTimeoutRef.current) {
+      clearTimeout(speakingTimeoutRef.current);
+    }
     
     // Stop speaking animation after a delay
-    setTimeout(() => setIsSpeaking(false), 3000);
+    speakingTimeoutRef.current = setTimeout(() => setIsSpeaking(false), SPEAKING_DURATION_MS);
   }, []);
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleClick();
+    }
+  }, [handleClick]);
 
   return (
     <div
@@ -70,12 +111,16 @@ export default function ShadowAvatar() {
       onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      role="button"
+      aria-label="Activate Shadow voice"
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
     >
       {/* Avatar Container with Parallax */}
       <div
         className="relative transition-transform duration-200 ease-out"
         style={{
-          transform: `rotateY(${mousePos.x}deg) rotateX(${-mousePos.y}deg) translateY(${floatOffset}px)`,
+          transform: `rotateY(${mousePos.x}deg) rotateX(${-mousePos.y}deg) translateY(${verticalFloatOffset}px)`,
         }}
       >
         {/* Glow Effect */}
@@ -143,7 +188,7 @@ export default function ShadowAvatar() {
       </div>
       
       {/* Interaction Hint */}
-      <div className={`absolute bottom-4 text-cyan-400 text-sm transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-0"}`}>
+      <div className={`absolute bottom-4 text-cyan-400 text-sm transition-opacity duration-300 ${isHovered ? "opacity-100" : "opacity-60"}`}>
         Click to activate voice
       </div>
     </div>
