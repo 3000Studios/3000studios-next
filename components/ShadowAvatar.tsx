@@ -135,6 +135,13 @@ export default function ShadowAvatar() {
       onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+          e.preventDefault();
+          handleClick();
+        }
+      }}
       role="button"
       aria-label="Activate Shadow voice"
       role="button"
