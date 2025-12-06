@@ -11,6 +11,10 @@ import { useEffect, useRef, useState, useCallback } from "react";
 // Constants
 const SPEAKING_DURATION_MS = 3000;
 
+// Audio configuration
+const AUDIO_PATH = "/audio/shadow-voice.mp3";
+let audioFileExists: boolean | null = null; // Cache audio file existence check
+
 /**
  * ShadowAvatar - A CSS-based animated avatar with parallax and voice interaction
  * This component provides a full-body avatar visualization without Three.js dependencies
@@ -24,9 +28,29 @@ export default function ShadowAvatar() {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [verticalFloatOffset, setVerticalFloatOffset] = useState(0);
 
-  // Initialize audio element once
+  // Initialize audio element once (with cached file existence check)
   useEffect(() => {
-    audioRef.current = new Audio("/shadow-voice.mp3");
+    const initAudio = async () => {
+      // Use cached result if available
+      if (audioFileExists === false) return;
+      
+      if (audioFileExists === null) {
+        try {
+          const response = await fetch(AUDIO_PATH, { method: "HEAD" });
+          audioFileExists = response.ok;
+        } catch {
+          audioFileExists = false;
+          return;
+        }
+      }
+      
+      if (audioFileExists) {
+        audioRef.current = new Audio(AUDIO_PATH);
+      }
+    };
+
+    initAudio();
+
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
