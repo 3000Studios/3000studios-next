@@ -135,10 +135,17 @@ export default function ShadowAvatar() {
       onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+          e.preventDefault();
+          handleClick();
+        }
+      }}
       role="button"
       aria-label="Activate Shadow voice"
       tabIndex={0}
+      onKeyDown={handleKeyDown}
     >
       {/* Avatar Container with Parallax */}
       <div

@@ -35,5 +35,3 @@ const shadowActions = {
     }
   },
 };
-
-export default shadowActions;

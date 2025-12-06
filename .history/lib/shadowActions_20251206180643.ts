@@ -15,7 +15,7 @@ interface ShadowAction {
   target?: string;
 }
 
-const shadowActions = {
+export default {
   async run(action: ShadowAction) {
     switch (action.type) {
       case "update_file":
@@ -35,5 +35,3 @@ const shadowActions = {
     }
   },
 };
-
-export default shadowActions;

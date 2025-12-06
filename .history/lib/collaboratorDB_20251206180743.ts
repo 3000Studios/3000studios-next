@@ -99,5 +99,3 @@ const collaboratorDB = {
     return true;
   },
 };
-
-export default collaboratorDB;
