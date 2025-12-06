@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Avatar from "@/components/Avatar";
+// import Avatar from "@/components/Avatar"; // Removed: component does not exist
 import Particles from "@/components/Particles";
 
 export default function HomePage() {
