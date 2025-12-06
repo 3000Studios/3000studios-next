@@ -14,7 +14,7 @@ const api = async (endpoint: string, body?: Record<string, unknown>) => {
   return res.json();
 };
 
-const shadowClient = {
+export default {
   exec: (command: string) => api("exec", { command }),
   updateFile: (filePath: string, content: string) =>
     api("update-file", { filePath, content }),
@@ -43,5 +43,3 @@ const shadowClient = {
     return this.dispatch({ type: "run", command });
   },
 };
-
-export default shadowClient;

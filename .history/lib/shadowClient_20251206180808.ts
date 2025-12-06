@@ -43,5 +43,3 @@ const shadowClient = {
     return this.dispatch({ type: "run", command });
   },
 };
-
-export default shadowClient;

@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import AvatarSpeech from "../dialogue/AvatarSpeech";
 import DialogueBrain from "../dialogue/DialogueBrain";
+import AvatarSpeech from "../dialogue/AvatarSpeech";
 
 export default function AIDirector({ avatar }) {
   const [line, setLine] = useState("");
