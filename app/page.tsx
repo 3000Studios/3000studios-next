@@ -15,7 +15,7 @@ export default function Home() {
       <BackgroundHybrid />
 
       <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-        <Suspense fallback={<div className="text-white">Loading…</div>}>
+        <Suspense fallback={<div className="text-white">Loading...</div>}>
           <div className="pointer-events-auto w-full h-full max-w-md">
             <ShadowAvatar />
           </div>
