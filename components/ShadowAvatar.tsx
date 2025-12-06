@@ -137,6 +137,8 @@ export default function ShadowAvatar() {
       onMouseLeave={() => setIsHovered(false)}
       role="button"
       aria-label="Activate Shadow voice"
+      role="button"
+      aria-label="Activate Shadow voice"
       tabIndex={0}
       onKeyDown={handleKeyDown}
     >
