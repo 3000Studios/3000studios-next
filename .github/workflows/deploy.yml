@@ -1,0 +1,58 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build
+        run: npm run build --if-present
+
+      - name: Deploy to staging
+        # Replace this with your real deploy command (Vercel, Netlify, Docker push, kubectl, etc.)
+        run: |
+          echo "Deploying to staging..."
+          # Example placeholder:
+          # npm run deploy:staging
+        env:
+          # use repository secrets or GitHub Environments secrets for credentials
+          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+
+      - name: Run smoke tests against staging
+        run: |
+          echo "Running smoke tests..."
+          # e.g. curl health endpoint, or run playwright smoke test
+          # curl -f https://staging.example.com/health
+  promote-to-production:
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || always()
+    environment:
+      name: production
+      url: https://your-production-url.example.com
+    steps:
+      - name: Wait for manual approval and promote
+        # This job will require approval if you configure environment protection rules in GitHub
+        run: |
+          echo "Promote to production: manual approval expected via Environments"
+          # Replace with production deploy command
+          echo "Deploying to production..."
+        env:
+          PROD_DEPLOY_TOKEN: ${{ secrets.PROD_DEPLOY_TOKEN }}
