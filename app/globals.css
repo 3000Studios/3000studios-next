@@ -236,16 +236,35 @@ body {
 
 /* Luxury button style */
 .luxury-btn {
-  @apply px-6 py-2 rounded-xl font-semibold bg-gradient-to-br text-black shadow-lg luxury-hover;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  background: linear-gradient(to bottom right, var(--tw-gradient-stops));
+  color: #000000;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   background-image: linear-gradient(135deg, #d4af37 0%, #e5e4e2 100%);
   border: 2px solid #ffd700;
-  transition: all 0.2s;
+  transition:
+    box-shadow 0.3s,
+    border 0.3s,
+    transform 0.2s,
+    all 0.2s;
+  box-shadow:
+    0 2px 16px #ffd70033,
+    0 1.5px 6px #b3b3b355;
 }
 .luxury-btn:hover,
 .luxury-btn:focus {
-  background-image: linear-gradient(120deg, #ffd700 0%, #e5e4e2 100%);
-  color: #18181b;
   box-shadow:
     0 0 32px #ffd700cc,
-    0 4px 24px #b3b3b399;
+    0 4px 24px #b3b3b399,
+    0 0 0 2px #fff8;
+  border-color: #fffbe6;
+  transform: translateY(-2px) scale(1.03);
+  z-index: 2;
 }
+
+

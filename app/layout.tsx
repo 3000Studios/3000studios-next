@@ -6,6 +6,11 @@ import "./globals.css";
 import { MarbleBG } from "@/components/ui/MarbleBG";
 import { AmbientAudio } from "@/components/ui/AmbientAudio";
 import { FramerMotionProvider } from "@/components/ui/MotionProvider";
+import EventBus from "@/components/os/EventBus";
+import PrimeLoop from "@/components/os/PrimeLoop";
+import SelfCheckLoop from "@/components/os/SelfCheckLoop";
+import FusionEventHandler from "@/components/world/FusionEventHandler";
+import MoodMap from "@/components/world/MoodMap";
 
 export const metadata = {
   title: "3000 Studios",
@@ -20,6 +25,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="overflow-hidden bg-black text-white selection:bg-gold/40">
+        {/* Shadow PRIME OS - Core Systems */}
+        <EventBus />
+        <PrimeLoop />
+        <SelfCheckLoop />
+        <FusionEventHandler />
+        <MoodMap />
+        
+        {/* Visual Layer */}
         <MarbleBG />
         <AmbientAudio />
         <FramerMotionProvider>
