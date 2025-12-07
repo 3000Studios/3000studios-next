@@ -3,6 +3,10 @@ name: Sync main into branches (create PRs)
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   create-prs:
     runs-on: ubuntu-latest
