@@ -25,7 +25,8 @@ export default function LiveAnalytics() {
   });
 
   useEffect(() => {
-    // Simulate live analytics data (in production, connect to real analytics)
+    // Simulate live analytics data
+    // TODO: In production, connect to real analytics service (Google Analytics, Vercel Analytics, etc.)
     const updateAnalytics = () => {
       setAnalytics({
         liveVisitors: Math.floor(Math.random() * 50) + 10,
@@ -83,6 +84,7 @@ export default function LiveAnalytics() {
         <h2 className="text-2xl font-bold text-white flex items-center gap-2">
           <Activity className="text-gold" size={28} />
           Live Analytics
+          <span className="text-xs text-gray-500 font-normal ml-2">(Demo Data)</span>
         </h2>
         <div className="flex items-center gap-2 text-green-400">
           <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>

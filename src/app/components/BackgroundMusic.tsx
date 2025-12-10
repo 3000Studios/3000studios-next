@@ -15,6 +15,9 @@ interface MusicTrack {
   artist?: string;
 }
 
+// Default music tracks
+// TODO: Add actual music files to /public/music/ directory
+// Or configure these paths via environment variables
 const DEFAULT_TRACKS: MusicTrack[] = [
   { name: 'Ambient Waves', src: '/music/ambient-1.mp3', artist: '3000 Studios' },
   { name: 'Jazz Corporate', src: '/music/jazz-1.mp3', artist: '3000 Studios' },
@@ -69,7 +72,8 @@ export default function BackgroundMusic() {
         audioRef.current.src = currentTrack.src;
       }
       audioRef.current.play().catch(err => {
-        console.log('Autoplay prevented:', err);
+        console.log('Music playback error (audio files may not exist):', err);
+        setIsPlaying(false);
       });
       setIsPlaying(true);
     }

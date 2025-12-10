@@ -27,8 +27,16 @@ export default function ShadowAvatar() {
 
   // Initialize speech recognition
   useEffect(() => {
-    if (typeof window !== 'undefined' && 'webkitSpeechRecognition' in window) {
-      const SpeechRecognition = (window as any).webkitSpeechRecognition;
+    if (typeof window !== 'undefined') {
+      // Check for standard API first, then webkit
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      
+      if (!SpeechRecognition) {
+        console.warn('Speech recognition not supported in this browser');
+        setAvatarText("Hey! Speech recognition isn't supported in your browser, but I can still chat via text!");
+        return;
+      }
+
       recognitionRef.current = new SpeechRecognition();
       recognitionRef.current.continuous = false;
       recognitionRef.current.interimResults = false;
