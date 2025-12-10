@@ -4,7 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { createOrder, trackAffiliateSale } from '@/lib/services/paypal';
+import { createOrder } from '@/lib/services/paypal';
 import { saveOrder } from '@/lib/services/mongodb';
 
 export async function POST(request: NextRequest) {
@@ -20,13 +20,13 @@ export async function POST(request: NextRequest) {
     }
 
     // Calculate total
-    const total = items.reduce((sum: number, item: any) => {
+    const total = items.reduce((sum: number, item: { price: number; quantity: number }) => {
       return sum + (item.price * item.quantity);
     }, 0);
 
     // Create PayPal order
     const paypalOrder = await createOrder({
-      items: items.map((item: any) => ({
+      items: items.map((item: { name: string; description?: string; quantity: number; price: number; affiliateLink?: string }) => ({
         name: item.name,
         description: item.description || item.name,
         quantity: item.quantity,
@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
     await saveOrder({
       orderId: paypalOrder.id,
       userId,
-      items: items.map((item: any) => ({
+      items: items.map((item: { id: string; name: string; price: number; quantity: number }) => ({
         productId: item.id,
         name: item.name,
         price: item.price,
@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       orderId: paypalOrder.id,
-      approvalUrl: paypalOrder.links.find((link: any) => link.rel === 'approve')?.href,
+      approvalUrl: paypalOrder.links.find((link: { rel: string; href?: string }) => link.rel === 'approve')?.href,
     });
   } catch (error) {
     console.error('PayPal create order error:', error);

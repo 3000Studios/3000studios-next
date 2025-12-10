@@ -35,6 +35,16 @@ export default function BackgroundMusic() {
 
   const currentTrack = DEFAULT_TRACKS[currentTrackIndex];
 
+  const handleNextTrack = () => {
+    const nextIndex = (currentTrackIndex + 1) % DEFAULT_TRACKS.length;
+    setCurrentTrackIndex(nextIndex);
+    
+    if (audioRef.current && isPlaying) {
+      audioRef.current.src = DEFAULT_TRACKS[nextIndex].src;
+      audioRef.current.play().catch(err => console.log('Play error:', err));
+    }
+  };
+
   useEffect(() => {
     // Create audio element
     if (typeof window !== 'undefined') {
@@ -52,6 +62,7 @@ export default function BackgroundMusic() {
         }
       };
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -76,16 +87,6 @@ export default function BackgroundMusic() {
         setIsPlaying(false);
       });
       setIsPlaying(true);
-    }
-  };
-
-  const handleNextTrack = () => {
-    const nextIndex = (currentTrackIndex + 1) % DEFAULT_TRACKS.length;
-    setCurrentTrackIndex(nextIndex);
-    
-    if (audioRef.current && isPlaying) {
-      audioRef.current.src = DEFAULT_TRACKS[nextIndex].src;
-      audioRef.current.play().catch(err => console.log('Play error:', err));
     }
   };
 

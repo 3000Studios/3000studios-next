@@ -17,8 +17,6 @@ import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [email, setEmail] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
   const categories = ['All', ...getAllCategories()];
 
@@ -85,13 +83,8 @@ export default function BlogPage() {
         />
 
         {/* Blog Posts Grid */}
-        {isLoading ? (
-          <div className="space-y-8">
-            <LoadingSkeleton variant="blog" count={3} />
-          </div>
-        ) : (
-          <div className="space-y-8">
-            {filteredPosts.map((post, index) => (
+        <div className="space-y-8">
+          {filteredPosts.map((post, index) => (
               <motion.article
                 key={post.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -168,10 +161,10 @@ export default function BlogPage() {
               </motion.article>
             ))}
           </div>
-        )}
+        )
 
         {/* No Results */}
-        {filteredPosts.length === 0 && !isLoading && (
+        {filteredPosts.length === 0 && (
           <div className="text-center py-12">
             <div className="text-6xl mb-4 opacity-50">📝</div>
             <p className="text-gray-400 text-lg">No articles found matching your search</p>
