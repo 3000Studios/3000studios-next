@@ -81,7 +81,7 @@ export default function About() {
             <div className="max-w-3xl mx-auto bg-gradient-to-br from-gray-900/50 to-black/50 p-8 rounded-lg border-2 border-[#D4AF37] glossy-overlay">
               <h2 className="text-3xl font-bold text-white mb-4">Ready to Work Together?</h2>
               <p className="text-lg text-gray-300 mb-6">
-                Let's create something amazing together.
+                Let&apos;s create something amazing together.
               </p>
               <a
                 href="/contact"

@@ -55,7 +55,7 @@ export default function Portfolio() {
             <div className="max-w-3xl mx-auto bg-gradient-to-br from-gray-900/50 to-black/50 p-8 rounded-lg border-2 border-[#D4AF37] glossy-overlay">
               <h2 className="text-3xl font-bold text-white mb-4">Like What You See?</h2>
               <p className="text-lg text-gray-300 mb-6">
-                Let's collaborate on your next project and bring your vision to life.
+                Let&apos;s collaborate on your next project and bring your vision to life.
               </p>
               <a
                 href="/contact"
