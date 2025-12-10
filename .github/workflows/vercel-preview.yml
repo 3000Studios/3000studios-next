@@ -3,6 +3,7 @@ name: Shadow Preview Deploys
 on:
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   preview:
