@@ -1,17 +1,20 @@
 {
-  "name": "shadow-next",
-  "version": "0.1.0",
+  "name": "3000studios-next",
+  "version": "1.0.0",
   "private": true,
+  "description": "3000 Studios - Professional Creative Studio Platform",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint"
   },
   "dependencies": {
     "next": "16.0.7",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "lucide-react": "^0.460.0",
+    "clsx": "^2.1.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
