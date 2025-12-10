@@ -88,6 +88,7 @@ body::after {
     rgba(0, 0, 0, 0.1) 100%
   );
   pointer-events: none;
+  z-index: 1;
 }
 
 /* Gold border utilities */
