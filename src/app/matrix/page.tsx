@@ -36,7 +36,10 @@ import {
 } from 'lucide-react';
 import { verifySessionToken } from '@/lib/auth';
 import Link from 'next/link';
-import LiveAnalytics from '../components/LiveAnalytics';
+import VoiceCodeEditor from './components/VoiceCodeEditor';
+import StreamControl from './components/StreamControl';
+import RealAnalytics from './components/RealAnalytics';
+import ContentGenerator from './components/ContentGenerator';
 
 interface StatCardProps {
   title: string;
@@ -193,117 +196,17 @@ export default function MatrixPage() {
           />
         </div>
 
-        {/* Voice-to-Code Editor Preview */}
-        <div className="card bg-gradient-to-r from-gold/10 to-sapphire/10 border-gold">
-          <h2 className="text-2xl font-bold gradient-text mb-4 flex items-center gap-2">
-            <Mic className="text-gold" size={24} />
-            Voice-to-Code Editor
-          </h2>
-          <p className="text-gray-300 mb-4">
-            Speak commands to edit your website in real-time. This is where you say things like &quot;change the background&quot; 
-            or &quot;add a new page&quot; and the AI makes it happen.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <button className="p-4 bg-gray-900 hover:bg-gray-800 rounded-lg transition-all border border-gold/30 hover:border-gold text-left">
-              <Code className="text-gold mb-2" size={24} />
-              <h3 className="text-white font-semibold mb-1">Code Generator</h3>
-              <p className="text-gray-400 text-sm">AI-powered code creation from voice commands</p>
-            </button>
-            <button className="p-4 bg-gray-900 hover:bg-gray-800 rounded-lg transition-all border border-sapphire/30 hover:border-sapphire text-left">
-              <Activity className="text-sapphire mb-2" size={24} />
-              <h3 className="text-white font-semibold mb-1">Live Preview</h3>
-              <p className="text-gray-400 text-sm">See changes before they&apos;re deployed</p>
-            </button>
-          </div>
-          <div className="mt-4 text-center text-sm text-gray-500">
-            🚀 Full voice-to-code implementation coming in advanced update
-          </div>
-        </div>
+        {/* Voice-to-Code Editor - FULL IMPLEMENTATION */}
+        <VoiceCodeEditor />
 
-        {/* Quick Actions */}
-        <div className="card">
-          <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-            <Zap className="text-gold" size={24} />
-            Quick Actions
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            <button className="flex flex-col items-center gap-2 p-4 bg-gray-900 hover:bg-gray-800 rounded-lg transition-all hover:shadow-lg hover:border hover:border-gold">
-              <Edit3 className="text-gold" size={24} />
-              <span className="text-sm text-white">Voice Editor</span>
-            </button>
-            <button className="flex flex-col items-center gap-2 p-4 bg-gray-900 hover:bg-gray-800 rounded-lg transition-all hover:shadow-lg hover:border hover:border-gold">
-              <Package className="text-gold" size={24} />
-              <span className="text-sm text-white">Store Manager</span>
-            </button>
-            <button className="flex flex-col items-center gap-2 p-4 bg-gray-900 hover:bg-gray-800 rounded-lg transition-all hover:shadow-lg hover:border hover:border-gold">
-              <Video className="text-gold" size={24} />
-              <span className="text-sm text-white">Stream Control</span>
-            </button>
-            <button className="flex flex-col items-center gap-2 p-4 bg-gray-900 hover:bg-gray-800 rounded-lg transition-all hover:shadow-lg hover:border hover:border-gold">
-              <Activity className="text-gold" size={24} />
-              <span className="text-sm text-white">Analytics</span>
-            </button>
-            <button className="flex flex-col items-center gap-2 p-4 bg-gray-900 hover:bg-gray-800 rounded-lg transition-all hover:shadow-lg hover:border hover:border-gold">
-              <BarChart3 className="text-gold" size={24} />
-              <span className="text-sm text-white">Reports</span>
-            </button>
-            <button className="flex flex-col items-center gap-2 p-4 bg-gray-900 hover:bg-gray-800 rounded-lg transition-all hover:shadow-lg hover:border hover:border-gold">
-              <Settings className="text-gold" size={24} />
-              <span className="text-sm text-white">Settings</span>
-            </button>
-          </div>
-        </div>
+        {/* Stream Control - WebRTC Live Streaming */}
+        <StreamControl />
 
-        {/* Dashboard Widgets */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Recent Activity */}
-          <div className="card">
-            <h2 className="text-xl font-bold text-white mb-4">Recent Activity</h2>
-            <div className="space-y-3">
-              {[
-                { action: 'New order received', time: '2 minutes ago', type: 'order' },
-                { action: 'User registered', time: '15 minutes ago', type: 'user' },
-                { action: 'Blog post published', time: '1 hour ago', type: 'content' },
-                { action: 'Live stream started', time: '2 hours ago', type: 'stream' },
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-center justify-between p-3 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors">
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-gold rounded-full"></div>
-                    <span className="text-white text-sm">{item.action}</span>
-                  </div>
-                  <span className="text-gray-500 text-xs">{item.time}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* Content Generator - AI Blog & Product Descriptions */}
+        <ContentGenerator />
 
-          {/* System Status */}
-          <div className="card">
-            <h2 className="text-xl font-bold text-white mb-4">System Status</h2>
-            <div className="space-y-4">
-              {[
-                { name: 'Web Server', status: 'Online', uptime: '99.9%' },
-                { name: 'Database', status: 'Online', uptime: '100%' },
-                { name: 'Payment Gateway', status: 'Ready', uptime: '99.8%' },
-                { name: 'Live Stream Service', status: 'Online', uptime: '98.5%' },
-              ].map((service, idx) => (
-                <div key={idx} className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="text-white text-sm">{service.name}</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-green-400 text-xs mr-2">{service.status}</span>
-                    <span className="text-gray-500 text-xs">{service.uptime}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Live Analytics from Blueprint */}
-        <LiveAnalytics />
+        {/* Real Analytics from MongoDB */}
+        <RealAnalytics />
       </div>
     </div>
   );
