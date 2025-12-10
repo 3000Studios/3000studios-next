@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy to Vercel
 
 on:
   push:
@@ -7,58 +7,60 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy-staging:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    environment: staging
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'pnpm'
-
-      - name: Install deps
-        run: pnpm install --frozen-lockfile
-
-      - name: Build
-        run: pnpm run build --if-present
-
-      - name: Deploy to staging
-        # Replace this with your real deploy command (Vercel, Netlify, Docker push, kubectl, etc.)
-        run: |
-          echo "Deploying to staging..."
-          # Example placeholder:
-          # npm run deploy:staging
-        env:
-          # use repository secrets or GitHub Environments secrets for credentials
-          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
-
-      - name: Run smoke tests against staging
-        run: |
-          echo "Running smoke tests..."
-          # e.g. curl health endpoint, or run playwright smoke test
-          # curl -f https://staging.example.com/health
-  promote-to-production:
-    needs: deploy-staging
-    runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' || always()
     environment:
       name: production
-      url: https://your-production-url.example.com
+      url: https://3000studios.com
+
     steps:
-      - name: Wait for manual approval and promote
-        # This job will require approval if you configure environment protection rules in GitHub
-        run: |
-          echo "Promote to production: manual approval expected via Environments"
-          # Replace with production deploy command
-          echo "Deploying to production..."
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Project
+        run: pnpm build
         env:
-          PROD_DEPLOY_TOKEN: ${{ secrets.PROD_DEPLOY_TOKEN }}
+          NEXT_PUBLIC_MAPS_API: ${{ secrets.GOOGLE_MAPS_API }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          GOOGLE_GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      - name: Deploy to Vercel Production
+        run: vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          NEXT_PUBLIC_MAPS_API: ${{ secrets.GOOGLE_MAPS_API }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          GOOGLE_GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PAYPAL_CLIENT_ID: ${{ secrets.PAYPAL_CLIENT_ID }}
+          PAYPAL_SECRET: ${{ secrets.PAYPAL_SECRET }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_KEY }}
+
+      - name: Deployment Status
+        if: always()
+        run: |
+          if [ $? -eq 0 ]; then
+            echo "✅ Deployment to Vercel succeeded"
+          else
+            echo "❌ Deployment to Vercel failed"
+            exit 1
+          fi
