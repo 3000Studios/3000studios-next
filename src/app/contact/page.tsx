@@ -1,7 +1,7 @@
 'use client';
 
 import Navbar from '../components/Navbar';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -11,6 +11,16 @@ export default function Contact() {
     message: '',
   });
   const [submitMessage, setSubmitMessage] = useState('');
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    // Cleanup timeout on unmount
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,7 +29,10 @@ export default function Contact() {
     setFormData({ name: '', email: '', subject: '', message: '' });
     
     // Clear message after 5 seconds
-    setTimeout(() => setSubmitMessage(''), 5000);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => setSubmitMessage(''), 5000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
