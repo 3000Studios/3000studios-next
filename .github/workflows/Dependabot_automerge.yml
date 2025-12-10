@@ -1,0 +1,45 @@
+name: ShadowBot AutoMerge
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: write
+  pull-requests: write
+  statuses: write
+  checks: write
+
+jobs:
+  automerge:
+    name: Auto-Approve and Auto-Merge Dependabot PRs
+    runs-on: ubuntu-latest
+
+    if: >
+      github.actor == 'dependabot[bot]' ||
+      github.actor == 'dependabot'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Approve PR
+        uses: hmarr/auto-approve-action@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Auto Merge
+        uses: pascalgn/automerge-action@v0.16.3
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          MERGE_METHOD: "squash"
+          MERGE_LABELS: "automerge,dependencies,ci,security"
+          MERGE_RETRIES: "5"
+          MERGE_RETRY_SLEEP: "15000"
+          UPDATE_LABELS: "dependencies"
+          PULL_REQUEST: "true"
+
+      - name: Confirm Merge Status
+        run: echo "ShadowBot: PR was approved and merged automatically."
