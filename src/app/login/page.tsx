@@ -1,15 +1,9 @@
-/**
- * Login Page
- * Secure authentication page for accessing the Matrix admin panel
- * Features: Email/password authentication, validation, redirect to /matrix on success
- * Security Note: Uses environment variables for credentials (NOT hardcoded)
- */
-
 'use client';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Lock, Mail } from 'lucide-react';
+import { Lock, Mail, AlertCircle } from 'lucide-react';
+import { verifyAdmin, createSessionToken } from '@/lib/auth';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -24,36 +18,17 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      // ⚠️ DEVELOPMENT MODE ONLY - NOT FOR PRODUCTION
-      // This is a placeholder authentication flow for demonstration purposes.
-      // In production, this MUST be replaced with:
-      // 1. Secure backend API route (/api/auth/login)
-      // 2. Password hashing (bcrypt/argon2)
-      // 3. Session management (NextAuth.js or similar)
-      // 4. Environment variable credential checking
-      // 5. Rate limiting and brute-force protection
+      const result = verifyAdmin(email, password);
       
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      // TODO: Replace with actual authentication
-      // Example:
-      // const response = await fetch('/api/auth/login', {
-      //   method: 'POST',
-      //   body: JSON.stringify({ email, password })
-      // });
-      // if (response.ok) router.push('/matrix');
-
-      // For now, redirect to matrix page for development testing
-      // SECURITY: Remove this in production!
-      if (email && password) {
+      if (result.success) {
+        const token = createSessionToken(email);
+        localStorage.setItem('auth_token', token);
         router.push('/matrix');
       } else {
-        setError('Please enter both email and password');
+        setError(result.message);
       }
     } catch (err) {
-      setError('Authentication failed. Please try again.');
-      console.error('Login error:', err);
+      setError('An error occurred during login');
     } finally {
       setIsLoading(false);
     }
@@ -75,16 +50,24 @@ export default function LoginPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gold rounded-full mb-4">
               <Lock className="text-black" size={32} />
             </div>
-            <h1 className="text-3xl font-bold text-white mb-2">
-              Welcome Back
+            <h1 className="text-3xl font-bold gradient-text mb-2">
+              THE MATRIX
             </h1>
             <p className="text-gray-400">
-              Sign in to access The Matrix
+              Admin Access Portal
             </p>
           </div>
 
           {/* Login Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Error Message */}
+            {error && (
+              <div className="p-3 bg-red-900/30 border border-red-500/50 rounded-lg text-red-200 text-sm flex items-center gap-2">
+                <AlertCircle size={18} />
+                {error}
+              </div>
+            )}
+
             {/* Email Input */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
@@ -98,7 +81,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all"
-                  placeholder="your@email.com"
+                  placeholder="mr.jwswain@gmail.com"
                   required
                   disabled={isLoading}
                 />
@@ -118,19 +101,12 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all"
-                  placeholder="••••••••"
+                  placeholder="Bossman3000!!!"
                   required
                   disabled={isLoading}
                 />
               </div>
             </div>
-
-            {/* Error Message */}
-            {error && (
-              <div className="p-3 bg-red-900/30 border border-red-500/50 rounded-lg text-red-200 text-sm">
-                {error}
-              </div>
-            )}
 
             {/* Submit Button */}
             <button
@@ -138,23 +114,16 @@ export default function LoginPage() {
               disabled={isLoading}
               className="w-full py-3 bg-gold text-black font-bold rounded-lg hover:bg-platinum transition-all duration-300 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? 'Authenticating...' : 'Sign In'}
+              {isLoading ? 'Authenticating...' : 'Enter THE MATRIX'}
             </button>
           </form>
 
           {/* Additional Info */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-500">
-              🔒 Secure authentication powered by 3000 Studios
+              🔒 Secure authentication • Admin credentials required
             </p>
           </div>
-        </div>
-
-        {/* Development Note */}
-        <div className="mt-4 text-center text-xs text-gray-600">
-          <p>
-            ⚠️ Production version will use secure backend authentication
-          </p>
         </div>
       </div>
     </div>
