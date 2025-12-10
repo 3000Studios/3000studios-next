@@ -96,7 +96,7 @@ export default function PortfolioPage() {
                     <Star key={star} className="text-gold fill-gold" size={20} />
                   ))}
                 </div>
-                <p className="text-gray-300 mb-4 italic">"{testimonial.content}"</p>
+                <p className="text-gray-300 mb-4 italic">&quot;{testimonial.content}&quot;</p>
                 <div>
                   <p className="text-white font-semibold">{testimonial.name}</p>
                   <p className="text-gray-400 text-sm">{testimonial.role}</p>
@@ -132,7 +132,7 @@ export default function PortfolioPage() {
         <div className="mt-16 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Ready to Start Your Project?</h2>
           <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
-            Let's discuss how we can help bring your vision to life
+            Let&apos;s discuss how we can help bring your vision to life
           </p>
           <button className="px-8 py-4 bg-gold text-black font-bold rounded-lg hover:bg-platinum transition-all hover:shadow-lg text-lg">
             Get in Touch

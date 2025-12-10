@@ -162,7 +162,7 @@ export default function ProjectsPage() {
             Have a Project in Mind?
           </h3>
           <p className="text-gray-400 mb-6 max-w-md mx-auto">
-            Let's collaborate and bring your vision to life with cutting-edge technology
+            Let&apos;s collaborate and bring your vision to life with cutting-edge technology
           </p>
           <button className="px-8 py-3 bg-gold text-black font-bold rounded-lg hover:bg-platinum transition-all hover:shadow-lg">
             Start a Project
