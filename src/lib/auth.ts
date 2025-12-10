@@ -1,13 +1,20 @@
 /**
  * Authentication Library
  * Handles login verification for THE MATRIX admin access
- * Admin credentials: mr.jwswain@gmail.com / Bossman3000!!!
+ * 
+ * ⚠️ SECURITY NOTE: In production, credentials should be:
+ * 1. Stored in environment variables
+ * 2. Hashed with bcrypt
+ * 3. Validated against a secure database
+ * 
+ * This implementation is for development/demo purposes.
  */
 
-// In production, use bcrypt for password hashing
+// TODO: Move to environment variables in production
+// process.env.ADMIN_EMAIL and process.env.ADMIN_PASSWORD_HASH
 const ADMIN_CREDENTIALS = {
   email: 'mr.jwswain@gmail.com',
-  password: 'Bossman3000!!!',
+  password: 'Bossman3000!!!', // TODO: Hash with bcrypt
 };
 
 export interface AuthResult {
@@ -38,6 +45,8 @@ export function verifyAdmin(email: string, password: string): AuthResult {
 }
 
 export function createSessionToken(email: string): string {
+  // TODO: In production, use proper JWT with crypto.sign()
+  // and a secret key from environment variables
   const token = Buffer.from(
     JSON.stringify({ email, timestamp: Date.now() })
   ).toString('base64');
@@ -46,6 +55,7 @@ export function createSessionToken(email: string): string {
 
 export function verifySessionToken(token: string): AuthResult {
   try {
+    // TODO: In production, use proper JWT verification with secret key
     const decoded = JSON.parse(Buffer.from(token, 'base64').toString());
     const hoursSinceCreation = (Date.now() - decoded.timestamp) / (1000 * 60 * 60);
     
