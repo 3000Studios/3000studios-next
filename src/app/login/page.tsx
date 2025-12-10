@@ -24,14 +24,28 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      // TODO: Replace with actual API call to /api/auth/login
-      // This is a placeholder - production version will use secure backend authentication
+      // ⚠️ DEVELOPMENT MODE ONLY - NOT FOR PRODUCTION
+      // This is a placeholder authentication flow for demonstration purposes.
+      // In production, this MUST be replaced with:
+      // 1. Secure backend API route (/api/auth/login)
+      // 2. Password hashing (bcrypt/argon2)
+      // 3. Session management (NextAuth.js or similar)
+      // 4. Environment variable credential checking
+      // 5. Rate limiting and brute-force protection
       
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // For now, redirect to matrix page
-      // In production, this will verify credentials against environment variables
+      // TODO: Replace with actual authentication
+      // Example:
+      // const response = await fetch('/api/auth/login', {
+      //   method: 'POST',
+      //   body: JSON.stringify({ email, password })
+      // });
+      // if (response.ok) router.push('/matrix');
+
+      // For now, redirect to matrix page for development testing
+      // SECURITY: Remove this in production!
       if (email && password) {
         router.push('/matrix');
       } else {
