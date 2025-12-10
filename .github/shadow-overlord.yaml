@@ -1,12 +1,8 @@
-/shadow run "
-mkdir -p .github;
-cat > .github/shadow-overlord.yaml << 'EOF'
----
 name: Shadow Overlord
 description: >
   The autonomous AI agent of 3000 Studios.
   Shadow Overlord controls the repository, fixes code, resolves conflicts,
-  manages PRs, builds & deploys to Vercel, maintains secrets, rewrites files,
+  manages PRs, deploys to Vercel, maintains secrets, rewrites files,
   updates architecture, and obeys Boss Man J without question.
 
 config:
@@ -14,99 +10,82 @@ config:
     engine: copilot
     model: gpt-4o-mini
 
-  permissions:
-    contents: write
-    pull_requests: write
-    issues: write
-    actions: write
-    workflows: write
+permissions:
+  contents: write
+  pull_requests: write
+  issues: write
+  actions: write
+  workflows: write
 
-  commands:
+commands:
 
-    - name: deploy
-      description: Deploy to Vercel production
-      run: |
-        npm install -g vercel
-        vercel pull --yes --environment=production --token=\"${{ secrets.VERCEL_TOKEN }}\"
-        vercel build --prod --token=\"${{ secrets.VERCEL_TOKEN }}\"
-        vercel deploy --prebuilt --prod --token=\"${{ secrets.VERCEL_TOKEN }}\"
+  - name: deploy
+    description: Deploy to Vercel production
+    run: |
+      npm install -g vercel
+      vercel pull --yes --environment=production --token="${{ secrets.VERCEL_TOKEN }}"
+      vercel build --prod --token="${{ secrets.VERCEL_TOKEN }}"
+      vercel deploy --prebuilt --prod --token="${{ secrets.VERCEL_TOKEN }}"
 
-    - name: preview
-      description: Preview deployment
-      run: |
-        npm install -g vercel
-        vercel pull --yes --environment=preview --token=\"${{ secrets.VERCEL_TOKEN }}\"
-        vercel build --token=\"${{ secrets.VERCEL_TOKEN }}\"
-        vercel deploy --prebuilt --token=\"${{ secrets.VERCEL_TOKEN }}\"
+  - name: preview
+    description: Preview deployment
+    run: |
+      npm install -g vercel
+      vercel pull --yes --environment=preview --token="${{ secrets.VERCEL_TOKEN }}"
+      vercel build --token="${{ secrets.VERCEL_TOKEN }}"
+      vercel deploy --prebuilt --token="${{ secrets.VERCEL_TOKEN }}"
 
-    - name: sync
-      description: Sync repo with main
-      run: |
-        git fetch --all
-        git pull origin main --rebase || true
-        git push origin main || true
+  - name: sync
+    description: Sync repo with main
+    run: |
+      git fetch --all
+      git pull origin main --rebase || true
+      git push origin main || true
 
-    - name: fix
-      description: Auto-fix errors and rebuild
-      run: |
-        pnpm install
-        pnpm lint --fix || true
-        pnpm build || true
-        git add .
-        git commit -m \"Shadow Overlord: Automated Fixes\" || true
-        git push origin main || true
+  - name: fix
+    description: Auto-fix errors and rebuild
+    run: |
+      pnpm install
+      pnpm lint --fix || true
+      pnpm build || true
+      git add .
+      git commit -m "Shadow Overlord: Automated Fixes" || true
+      git push origin main || true
 
-    - name: audit
-      description: Security audit
-      run: |
-        pnpm audit || true
-        pnpm audit fix || true
+  - name: audit
+    description: Security audit
+    run: |
+      pnpm audit || true
+      pnpm audit fix || true
 
-    - name: rebuild
-      description: Clean rebuild
-      run: |
-        rm -rf .next node_modules pnpm-lock.yaml
-        pnpm install
-        pnpm build
+  - name: rebuild
+    description: Clean rebuild
+    run: |
+      rm -rf .next node_modules pnpm-lock.yaml
+      pnpm install
+      pnpm build
 
-    - name: merge
-      description: Merge PR if safe
-      run: |
-        gh pr merge \${{ github.event.pull_request.number }} --merge
+  - name: conflicts
+    description: Auto-resolve merge conflicts
+    run: |
+      git fetch origin main
+      git merge origin/main || true
+      git add .
+      git commit -m "Shadow Overlord: Auto-resolved conflicts" || true
+      git push origin HEAD || true
 
-    - name: force-merge
-      description: Override checks & merge immediately
-      run: |
-        gh pr merge \${{ github.event.pull_request.number }} --merge --admin
+  - name: command
+    description: Execute raw shell command
+    parameters:
+      text:
+        type: string
+        required: true
+    run: |
+      bash -c "${{ inputs.text }}"
 
-    - name: conflicts
-      description: Auto-resolve conflicts
-      run: |
-        git fetch origin main
-        git merge origin/main || true
-        git add .
-        git commit -m \"Shadow Overlord: Auto-resolved conflicts\" || true
-        git push origin HEAD || true
-
-    - name: review
-      description: AI code review
-      run: |
-        echo 'Shadow Overlord reviewing PR...'
-
-    - name: command
-      description: Execute raw shell command
-      parameters:
-        text:
-          type: string
-          required: true
-      run: |
-        bash -c \"\${{ inputs.text }}\"
-
-    - name: status
-      description: Show repo status
-      run: |
-        echo \"Branch: $(git branch --show-current)\"
-        git --no-pager log -10 --oneline
-        ls -la
-EOF
-"
+  - name: status
+    description: Show repo status
+    run: |
+      echo "Branch: $(git branch --show-current)"
+      git --no-pager log -10 --oneline
+      ls -la
