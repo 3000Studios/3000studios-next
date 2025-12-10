@@ -1,0 +1,122 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🚀 Shadow: Start Dev Server",
+      "type": "shell",
+      "command": "pwsh.exe",
+      "args": [
+        "-File",
+        "C:/3000Studios/shadow/shadow-dev.ps1"
+      ],
+      "isBackground": false,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^ready - started server.*",
+          "line": 1,
+          "column": 1,
+          "message": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*Local:.*",
+          "endsPattern": "^.*ready.*"
+        }
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "🔑 Shadow: Store API Key",
+      "type": "shell",
+      "command": "pwsh.exe",
+      "args": [
+        "-File",
+        "C:/3000Studios/shadow/shadow-secrets.ps1",
+        "-Store"
+      ],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      },
+      "group": {
+        "kind": "test"
+      }
+    },
+    {
+      "label": "📋 Shadow: List Stored Keys",
+      "type": "shell",
+      "command": "pwsh.exe",
+      "args": [
+        "-File",
+        "C:/3000Studios/shadow/shadow-secrets.ps1",
+        "-List"
+      ],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new"
+      },
+      "group": {
+        "kind": "test"
+      }
+    },
+    {
+      "label": "🗑️  Shadow: Clear API Key",
+      "type": "shell",
+      "command": "pwsh.exe",
+      "args": [
+        "-File",
+        "C:/3000Studios/shadow/shadow-secrets.ps1",
+        "-Clear"
+      ],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      },
+      "group": {
+        "kind": "test"
+      }
+    },
+    {
+      "label": "✅ Git: Sync & Push",
+      "type": "shell",
+      "command": "git",
+      "args": [
+        "add",
+        ".",
+        "&&",
+        "git",
+        "commit",
+        "-m",
+        "update",
+        "&&",
+        "git",
+        "push",
+        "origin",
+        "main"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "focus": false,
+        "panel": "new"
+      },
+      "group": {
+        "kind": "test"
+      }
+    }
+  ]
+}
