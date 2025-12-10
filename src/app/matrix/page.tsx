@@ -36,6 +36,7 @@ import {
 } from 'lucide-react';
 import { verifySessionToken } from '@/lib/auth';
 import Link from 'next/link';
+import LiveAnalytics from '../components/LiveAnalytics';
 
 interface StatCardProps {
   title: string;
@@ -300,6 +301,9 @@ export default function MatrixPage() {
             </div>
           </div>
         </div>
+
+        {/* Live Analytics from Blueprint */}
+        <LiveAnalytics />
       </div>
     </div>
   );
