@@ -12,6 +12,8 @@ import AnimatedStats from './components/AnimatedStats';
 import TestimonialsCarousel from './components/TestimonialsCarousel';
 import PremiumCTA from './components/PremiumCTA';
 import ServicesShowcase from './components/ServicesShowcase';
+import GoogleAdsPlaceholder from './components/GoogleAdsPlaceholder';
+import Newsletter from './components/Newsletter';
 
 export default function Home() {
   return (
@@ -106,6 +108,15 @@ export default function Home() {
       {/* Testimonials */}
       <TestimonialsCarousel />
 
+      {/* Google Ads Placeholder - Revenue Generation */}
+      <div className="py-12 px-4">
+        <GoogleAdsPlaceholder 
+          slot="home-mid-content" 
+          format="rectangle"
+          className="max-w-6xl mx-auto"
+        />
+      </div>
+
       {/* Featured Section */}
       <section className="py-20 px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
@@ -147,6 +158,17 @@ export default function Home() {
 
       {/* Premium CTA */}
       <PremiumCTA />
+
+      {/* Newsletter Section - Revenue/Lead Generation */}
+      <section className="py-12 px-4">
+        <div className="max-w-6xl mx-auto">
+          <Newsletter 
+            variant="hero"
+            title="Join Our Exclusive Community"
+            description="Get insider access to cutting-edge design trends, development tips, and exclusive offers"
+          />
+        </div>
+      </section>
 
     </div>
   );
