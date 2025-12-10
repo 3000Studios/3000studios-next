@@ -1,58 +1,105 @@
 /**
  * Store Page
  * E-commerce store front with product listings
- * Features: Product grid, filtering, search, shopping cart integration
- * Future: Will connect to Stripe/PayPal for payments
- * 
- * CUSTOMIZATION SECTIONS:
- * - Product categories: Update categories array
- * - Product data: Replace mock data with real API
- * - Payment integration: Add Stripe/PayPal checkout
+ * Features: Product grid, filtering, search, PayPal checkout
+ * Connected to MongoDB for real products and PayPal for payments
  */
 
 'use client';
 
-import { useState } from 'react';
-import { Search, ShoppingCart, Filter, Star } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Search, ShoppingCart, Filter, Star, Loader2 } from 'lucide-react';
+import { useProducts, usePayPalCheckout } from '@/hooks/useAPI';
 
 interface Product {
-  id: number;
+  productId: string;
   name: string;
+  description: string;
   price: number;
   category: string;
   rating: number;
-  image: string;
+  reviewCount: number;
+  image?: string;
   inStock: boolean;
+  affiliateLink?: string;
 }
-
-// Mock product data - Replace with API call in production
-const mockProducts: Product[] = [
-  { id: 1, name: 'Premium Digital Asset Pack', price: 99.99, category: 'Digital', rating: 4.8, image: '', inStock: true },
-  { id: 2, name: 'Creative Template Bundle', price: 49.99, category: 'Templates', rating: 4.9, image: '', inStock: true },
-  { id: 3, name: 'Professional Theme', price: 79.99, category: 'Themes', rating: 4.7, image: '', inStock: true },
-  { id: 4, name: 'UI Component Library', price: 129.99, category: 'Digital', rating: 4.9, image: '', inStock: true },
-  { id: 5, name: 'Design System Pro', price: 199.99, category: 'Design', rating: 5.0, image: '', inStock: true },
-  { id: 6, name: 'Animation Pack', price: 59.99, category: 'Digital', rating: 4.6, image: '', inStock: true },
-  { id: 7, name: 'Icon Set Collection', price: 39.99, category: 'Design', rating: 4.8, image: '', inStock: true },
-  { id: 8, name: 'Marketing Templates', price: 89.99, category: 'Templates', rating: 4.7, image: '', inStock: true },
-];
 
 const categories = ['All', 'Digital', 'Templates', 'Themes', 'Design'];
 
 export default function StorePage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [cartCount, setCartCount] = useState(0);
+  const [cart, setCart] = useState<Array<Product & { quantity: number }>>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true);
 
-  const filteredProducts = mockProducts.filter(product => {
+  const { fetchProducts } = useProducts();
+  const { createOrder, loading: checkoutLoading, error: checkoutError } = usePayPalCheckout();
+
+  useEffect(() => {
+    loadProducts();
+  }, []);
+
+  const loadProducts = async () => {
+    try {
+      const data = await fetchProducts();
+      setProducts(data.products || []);
+    } catch (err) {
+      console.error('Failed to load products:', err);
+    } finally {
+      setIsLoadingProducts(false);
+    }
+  };
+
+  const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
-  const handleAddToCart = () => {
-    setCartCount(prev => prev + 1);
+  const handleAddToCart = (product: Product) => {
+    setCart(prev => {
+      const existing = prev.find(item => item.productId === product.productId);
+      if (existing) {
+        return prev.map(item =>
+          item.productId === product.productId
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+      return [...prev, { ...product, quantity: 1 }];
+    });
   };
+
+  const handleCheckout = async () => {
+    if (cart.length === 0) {
+      alert('Your cart is empty');
+      return;
+    }
+
+    try {
+      const orderData = await createOrder(
+        cart.map(item => ({
+          id: item.productId,
+          name: item.name,
+          description: item.description,
+          price: item.price,
+          quantity: item.quantity,
+          affiliateLink: item.affiliateLink,
+        }))
+      );
+
+      // Redirect to PayPal approval URL
+      if (orderData.approvalUrl) {
+        window.location.href = orderData.approvalUrl;
+      }
+    } catch (err) {
+      alert('Checkout failed. Please try again.');
+    }
+  };
+
+  const cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black py-8 px-4">
@@ -68,7 +115,7 @@ export default function StorePage() {
                 Discover our curated collection of digital products
               </p>
             </div>
-            <button className="relative p-3 glass rounded-lg border border-gold hover:bg-gold/10 transition-all">
+            <button className="relative p-3 glass rounded-lg border border-gold hover:bg-gold/10 transition-all" onClick={handleCheckout}>
               <ShoppingCart className="text-gold" size={24} />
               {cartCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-gold text-black text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
@@ -112,47 +159,97 @@ export default function StorePage() {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
-          {filteredProducts.map((product) => (
-            <div key={product.id} className="card group">
-              {/* Product Image Placeholder */}
-              <div className="w-full h-48 bg-gradient-to-br from-gold/20 to-sapphire/20 rounded-lg mb-4 flex items-center justify-center">
-                <div className="text-6xl opacity-30">📦</div>
-              </div>
+        {isLoadingProducts ? (
+          <div className="flex items-center justify-center py-12">
+            <Loader2 className="animate-spin text-gold" size={48} />
+            <span className="ml-3 text-white text-lg">Loading products...</span>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+            {filteredProducts.map((product) => (
+              <div key={product.productId} className="card group">
+                {/* Product Image Placeholder */}
+                <div className="w-full h-48 bg-gradient-to-br from-gold/20 to-sapphire/20 rounded-lg mb-4 flex items-center justify-center">
+                  <div className="text-6xl opacity-30">📦</div>
+                </div>
 
-              {/* Product Info */}
-              <div className="mb-4">
-                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-gold transition-colors">
-                  {product.name}
-                </h3>
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="flex items-center">
-                    <Star className="text-gold fill-gold" size={16} />
-                    <span className="text-white text-sm ml-1">{product.rating}</span>
+                {/* Product Info */}
+                <div className="mb-4">
+                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-gold transition-colors">
+                    {product.name}
+                  </h3>
+                  <p className="text-sm text-gray-400 mb-2 line-clamp-2">{product.description}</p>
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="flex items-center">
+                      <Star className="text-gold fill-gold" size={16} />
+                      <span className="text-white text-sm ml-1">{product.rating}</span>
+                    </div>
+                    <span className="text-gray-500 text-sm">•</span>
+                    <span className="text-gray-400 text-sm">({product.reviewCount} reviews)</span>
                   </div>
-                  <span className="text-gray-500 text-sm">•</span>
-                  <span className="text-gray-400 text-sm">{product.category}</span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-2xl font-bold text-gold">
+                      ${product.price.toFixed(2)}
+                    </span>
+                    {product.inStock && (
+                      <span className="text-green-400 text-sm">In Stock</span>
+                    )}
+                  </div>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-gold">
-                    ${product.price}
-                  </span>
-                  {product.inStock && (
-                    <span className="text-green-400 text-sm">In Stock</span>
-                  )}
-                </div>
-              </div>
 
-              {/* Add to Cart Button */}
-              <button
-                onClick={handleAddToCart}
-                className="w-full py-2 bg-gold text-black font-semibold rounded-lg hover:bg-platinum transition-all duration-300 hover:shadow-lg"
-              >
-                Add to Cart
-              </button>
+                {/* Add to Cart Button */}
+                <button
+                  onClick={() => handleAddToCart(product)}
+                  disabled={!product.inStock}
+                  className="w-full py-2 bg-gold text-black font-semibold rounded-lg hover:bg-platinum transition-all duration-300 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Cart Summary (if items in cart) */}
+        {cart.length > 0 && (
+          <div className="card bg-gradient-to-r from-gold/10 to-sapphire/10 border-gold mb-8">
+            <h3 className="text-xl font-bold text-white mb-4">Cart Summary</h3>
+            <div className="space-y-2 mb-4">
+              {cart.map((item) => (
+                <div key={item.productId} className="flex items-center justify-between text-sm">
+                  <span className="text-gray-300">{item.name} x{item.quantity}</span>
+                  <span className="text-gold font-semibold">${(item.price * item.quantity).toFixed(2)}</span>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+            <div className="border-t border-gray-700 pt-4 mb-4">
+              <div className="flex items-center justify-between text-lg font-bold">
+                <span className="text-white">Total:</span>
+                <span className="text-gold">${cartTotal.toFixed(2)}</span>
+              </div>
+            </div>
+            <button
+              onClick={handleCheckout}
+              disabled={checkoutLoading}
+              className="w-full py-3 bg-gold text-black font-bold rounded-lg hover:bg-platinum transition-all duration-300 hover:shadow-lg flex items-center justify-center gap-2 disabled:opacity-50"
+            >
+              {checkoutLoading ? (
+                <>
+                  <Loader2 className="animate-spin" size={20} />
+                  Processing...
+                </>
+              ) : (
+                <>
+                  <ShoppingCart size={20} />
+                  Checkout with PayPal
+                </>
+              )}
+            </button>
+            {checkoutError && (
+              <p className="mt-3 text-red-400 text-sm text-center">{checkoutError}</p>
+            )}
+          </div>
+        )}
 
         {/* No Results */}
         {filteredProducts.length === 0 && (
@@ -166,7 +263,7 @@ export default function StorePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <div>
               <h3 className="text-lg font-bold text-white mb-2">🔒 Secure Checkout</h3>
-              <p className="text-gray-400 text-sm">Stripe & PayPal integration coming soon</p>
+              <p className="text-gray-400 text-sm">PayPal integration - fully functional</p>
             </div>
             <div>
               <h3 className="text-lg font-bold text-white mb-2">⚡ Instant Delivery</h3>
@@ -181,7 +278,9 @@ export default function StorePage() {
 
         {/* Note */}
         <div className="mt-8 text-center text-sm text-gray-600">
-          <p>🚀 Full payment integration and 10,000+ product catalog coming in next update</p>
+          <p>✅ Connected to MongoDB for real products</p>
+          <p>✅ PayPal checkout fully integrated</p>
+          <p>✅ Affiliate link tracking enabled</p>
         </div>
       </div>
     </div>
