@@ -200,8 +200,8 @@ export default function MatrixPage() {
             Voice-to-Code Editor
           </h2>
           <p className="text-gray-300 mb-4">
-            Speak commands to edit your website in real-time. This is where you say things like "change the background" 
-            or "add a new page" and the AI makes it happen.
+            Speak commands to edit your website in real-time. This is where you say things like &quot;change the background&quot; 
+            or &quot;add a new page&quot; and the AI makes it happen.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <button className="p-4 bg-gray-900 hover:bg-gray-800 rounded-lg transition-all border border-gold/30 hover:border-gold text-left">
@@ -212,7 +212,7 @@ export default function MatrixPage() {
             <button className="p-4 bg-gray-900 hover:bg-gray-800 rounded-lg transition-all border border-sapphire/30 hover:border-sapphire text-left">
               <Activity className="text-sapphire mb-2" size={24} />
               <h3 className="text-white font-semibold mb-1">Live Preview</h3>
-              <p className="text-gray-400 text-sm">See changes before they're deployed</p>
+              <p className="text-gray-400 text-sm">See changes before they&apos;re deployed</p>
             </button>
           </div>
           <div className="mt-4 text-center text-sm text-gray-500">
