@@ -28,9 +28,18 @@ export async function POST(request: NextRequest) {
 
     // Track affiliate sales if applicable
     if (order) {
-      const affiliateProducts = order.items
-        .filter((item: any) => item.affiliateLink)
-        .map((item: any) => ({
+      type OrderItem = { 
+        productId: string; 
+        name: string; 
+        price: number; 
+        quantity: number;
+        affiliateLink?: string;
+        commission?: number;
+      };
+      
+      const affiliateProducts = (order.items as OrderItem[])
+        .filter((item): item is OrderItem & { affiliateLink: string } => !!item.affiliateLink)
+        .map((item) => ({
           productId: item.productId,
           affiliateLink: item.affiliateLink,
           commission: item.commission || 0,
