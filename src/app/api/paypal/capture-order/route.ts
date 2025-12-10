@@ -6,6 +6,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { captureOrder, trackAffiliateSale } from '@/lib/services/paypal';
 import { getOrders } from '@/lib/services/mongodb';
+import { OrderItem } from '@/types/paypal';
 
 export async function POST(request: NextRequest) {
   try {
@@ -28,15 +29,6 @@ export async function POST(request: NextRequest) {
 
     // Track affiliate sales if applicable
     if (order) {
-      type OrderItem = { 
-        productId: string; 
-        name: string; 
-        price: number; 
-        quantity: number;
-        affiliateLink?: string;
-        commission?: number;
-      };
-      
       const affiliateProducts = (order.items as OrderItem[])
         .filter((item): item is OrderItem & { affiliateLink: string } => !!item.affiliateLink)
         .map((item) => ({
