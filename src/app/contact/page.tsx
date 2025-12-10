@@ -8,6 +8,7 @@
 
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Send, Check, AlertCircle, Loader2 } from 'lucide-react';
+import GoogleMap from '../components/GoogleMap';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -407,15 +408,15 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* Map Placeholder */}
+        {/* Google Maps Integration */}
         <div className="mt-12 card p-0 overflow-hidden hover-lift">
-          <div className="w-full h-64 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center relative">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(255,215,0,0.1)_0%,_transparent_50%)]"></div>
-            <div className="text-center relative z-10">
-              <MapPin className="text-gold mx-auto mb-2 animate-bounce" size={48} />
-              <p className="text-gray-400 font-semibold">Interactive Map Coming Soon</p>
-              <p className="text-gray-600 text-sm mt-1">Google Maps integration ready</p>
-            </div>
+          <div className="w-full h-96">
+            <GoogleMap 
+              apiKey={process.env.NEXT_PUBLIC_MAPS_API || 'YOUR_GOOGLE_MAPS_API_KEY_HERE'}
+              center={{ lat: 33.7490, lng: -84.3880 }} // Atlanta, Georgia
+              zoom={13}
+              mapType="satellite"
+            />
           </div>
         </div>
       </div>
