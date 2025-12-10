@@ -7,10 +7,13 @@
 
 import Link from 'next/link';
 import { ArrowRight, Sparkles, Zap, Globe } from 'lucide-react';
+import ShadowAvatar from './components/ShadowAvatar';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
+      {/* Shadow AI Avatar - Conversational Assistant */}
+      <ShadowAvatar />
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
         {/* Animated Background Effect */}
@@ -123,12 +126,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Note: Shadow AI Avatar will be added here in future update */}
-      <div className="text-center py-12 px-4 opacity-60">
-        <p className="text-sm text-gray-500">
-          🚀 Shadow AI Interactive Avatar - Coming Soon
-        </p>
-      </div>
     </div>
   );
 }
