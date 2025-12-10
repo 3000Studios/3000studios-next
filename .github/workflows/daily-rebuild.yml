@@ -1,0 +1,19 @@
+name: Shadow Daily Rebuild
+
+on:
+  schedule:
+    - cron: "0 7 * * *"  # Every day at 7AM EST
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Trigger Rebuild
+        run: |
+          npx vercel deploy --prod --force \
+            --token=${{ secrets.VERCEL_TOKEN }} \
+            --org-id=${{ secrets.VERCEL_ORG_ID }} \
+            --project-id=${{ secrets.VERCEL_PROJECT_ID }}
