@@ -38,7 +38,7 @@ export default function Contact() {
               <span className="text-[#D4AF37]">Contact</span> Us
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Let's bring your vision to life
+              Let&apos;s bring your vision to life
             </p>
           </section>
 
