@@ -175,18 +175,49 @@ Example:
 
 ## 🌐 Deployment
 
-### Vercel (Recommended)
+### 🚀 Quick Deploy to Vercel (2 Minutes)
 
-1. Push code to GitHub
-2. Import project in Vercel dashboard
-3. Add environment variables in Vercel settings
-4. Deploy automatically
+**One-Click Deploy:**
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/3000Studios/3000studios-next)
+
+**Or via Dashboard:**
+
+1. Visit https://vercel.com/new
+2. Sign in with GitHub
+3. Import `3000Studios/3000studios-next`
+4. Click "Deploy"
+
+Your site will be live at `https://3000studios-next.vercel.app` in ~2-3 minutes!
+
+### 📚 Deployment Documentation
+
+- **Quick Start**: [QUICK_DEPLOY.md](./QUICK_DEPLOY.md) - 2-minute guide
+- **Complete Guide**: [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) - Comprehensive instructions
+- **Status Report**: [DEPLOYMENT_STATUS_REPORT.md](./DEPLOYMENT_STATUS_REPORT.md) - Current deployment status
+- **General Deployment**: [DEPLOYMENT.md](./DEPLOYMENT.md) - All deployment options
+
+### Vercel CLI
 
 ```bash
-# Or use Vercel CLI
-npm i -g vercel
-vercel
+# Install Vercel CLI
+npm install -g vercel
+
+# Login to Vercel
+vercel login
+
+# Deploy to production
+vercel --prod
 ```
+
+### GitHub Actions (Automated)
+
+Automatic deployment is configured for the `main` branch. See [.github/workflows/deploy.yml](./.github/workflows/deploy.yml).
+
+**Required Secrets:**
+- `VERCEL_TOKEN` - Get from https://vercel.com/account/tokens
+- `VERCEL_ORG_ID` - Found in `.vercel/project.json` after first deploy
+- `VERCEL_PROJECT_ID` - Found in `.vercel/project.json` after first deploy
 
 ### Manual Deployment
 
