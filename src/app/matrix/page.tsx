@@ -1,18 +1,22 @@
 /**
  * Matrix Admin Dashboard
- * Central command center for site administration
+ * Central command center for site administration  
  * Features: Analytics, site management, voice-to-code editor integration points
- * Access: Protected - requires authentication
+ * Access: Protected - requires authentication (mr.jwswain@gmail.com / Bossman3000!!!)
  * 
- * CUSTOMIZATION SECTIONS:
- * - Stats cards: Update numbers/metrics as needed
- * - Quick actions: Add/remove admin functions
- * - Dashboard widgets: Customize displayed information
+ * This is THE MATRIX - the admin control center that contains:
+ * - Voice-to-code editor (foundation)
+ * - Analytics dashboard
+ * - Store management
+ * - Live stream controls
+ * - Avatar controller
+ * - All admin tools
  */
 
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { 
   BarChart3, 
   Users, 
@@ -25,9 +29,17 @@ import {
   Activity,
   ShoppingCart,
   Eye,
-  Zap
+  Zap,
+  LogOut,
+  Mic,
+  Code
 } from 'lucide-react';
+import { verifySessionToken } from '@/lib/auth';
 import Link from 'next/link';
+import VoiceCodeEditor from './components/VoiceCodeEditor';
+import StreamControl from './components/StreamControl';
+import RealAnalytics from './components/RealAnalytics';
+import ContentGenerator from './components/ContentGenerator';
 
 interface StatCardProps {
   title: string;
@@ -58,9 +70,32 @@ function StatCard({ title, value, change, icon, trend }: StatCardProps) {
 }
 
 export default function MatrixPage() {
+  const router = useRouter();
   const [currentTime, setCurrentTime] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [userEmail, setUserEmail] = useState('');
 
   useEffect(() => {
+    // Check authentication
+    const token = localStorage.getItem('auth_token');
+    if (!token) {
+      router.push('/login');
+      return;
+    }
+
+    const result = verifySessionToken(token);
+    if (!result.success) {
+      localStorage.removeItem('auth_token');
+      router.push('/login');
+      return;
+    }
+
+    setIsAuthenticated(true);
+    setUserEmail(result.user?.email || '');
+    setIsLoading(false);
+
+    // Update time
     const updateTime = () => {
       const now = new Date();
       setCurrentTime(now.toLocaleString('en-US', {
@@ -70,13 +105,34 @@ export default function MatrixPage() {
         day: 'numeric',
         hour: '2-digit',
         minute: '2-digit',
+        second: '2-digit',
       }));
     };
     
     updateTime();
     const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [router]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('auth_token');
+    router.push('/login');
+  };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-gold border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gold text-lg">Accessing THE MATRIX...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-4 md:p-8">
@@ -88,11 +144,21 @@ export default function MatrixPage() {
               THE MATRIX
             </h1>
             <p className="text-gray-400">
-              Command Center • All Systems Online
+              Command Center • All Systems Online • Welcome, {userEmail.split('@')[0]}
             </p>
           </div>
-          <div className="glass px-4 py-2 rounded-lg border border-gold">
-            <p className="text-sm text-gray-300">{currentTime}</p>
+          <div className="flex items-center gap-4">
+            <div className="glass px-4 py-2 rounded-lg border border-gold">
+              <p className="text-sm text-gray-300">{currentTime}</p>
+            </div>
+            <button
+              onClick={handleLogout}
+              className="p-3 glass border border-red-500 rounded-lg hover:bg-red-500/10 transition-all flex items-center gap-2"
+              title="Logout"
+            >
+              <LogOut className="text-red-500" size={20} />
+              <span className="text-red-500 text-sm hidden md:inline">Logout</span>
+            </button>
           </div>
         </div>
       </div>
@@ -130,109 +196,17 @@ export default function MatrixPage() {
           />
         </div>
 
-        {/* Quick Actions */}
-        <div className="card">
-          <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-            <Zap className="text-gold" size={24} />
-            Quick Actions
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            <button className="flex flex-col items-center gap-2 p-4 bg-gray-900 hover:bg-gray-800 rounded-lg transition-all hover:shadow-lg hover:border hover:border-gold">
-              <Edit3 className="text-gold" size={24} />
-              <span className="text-sm text-white">Voice Editor</span>
-            </button>
-            <button className="flex flex-col items-center gap-2 p-4 bg-gray-900 hover:bg-gray-800 rounded-lg transition-all hover:shadow-lg hover:border hover:border-gold">
-              <Package className="text-gold" size={24} />
-              <span className="text-sm text-white">Store Manager</span>
-            </button>
-            <button className="flex flex-col items-center gap-2 p-4 bg-gray-900 hover:bg-gray-800 rounded-lg transition-all hover:shadow-lg hover:border hover:border-gold">
-              <Video className="text-gold" size={24} />
-              <span className="text-sm text-white">Stream Control</span>
-            </button>
-            <button className="flex flex-col items-center gap-2 p-4 bg-gray-900 hover:bg-gray-800 rounded-lg transition-all hover:shadow-lg hover:border hover:border-gold">
-              <Activity className="text-gold" size={24} />
-              <span className="text-sm text-white">Analytics</span>
-            </button>
-            <button className="flex flex-col items-center gap-2 p-4 bg-gray-900 hover:bg-gray-800 rounded-lg transition-all hover:shadow-lg hover:border hover:border-gold">
-              <BarChart3 className="text-gold" size={24} />
-              <span className="text-sm text-white">Reports</span>
-            </button>
-            <button className="flex flex-col items-center gap-2 p-4 bg-gray-900 hover:bg-gray-800 rounded-lg transition-all hover:shadow-lg hover:border hover:border-gold">
-              <Settings className="text-gold" size={24} />
-              <span className="text-sm text-white">Settings</span>
-            </button>
-          </div>
-        </div>
+        {/* Voice-to-Code Editor - FULL IMPLEMENTATION */}
+        <VoiceCodeEditor />
 
-        {/* Dashboard Widgets */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Recent Activity */}
-          <div className="card">
-            <h2 className="text-xl font-bold text-white mb-4">Recent Activity</h2>
-            <div className="space-y-3">
-              {[
-                { action: 'New order received', time: '2 minutes ago', type: 'order' },
-                { action: 'User registered', time: '15 minutes ago', type: 'user' },
-                { action: 'Blog post published', time: '1 hour ago', type: 'content' },
-                { action: 'Live stream started', time: '2 hours ago', type: 'stream' },
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-center justify-between p-3 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors">
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-gold rounded-full"></div>
-                    <span className="text-white text-sm">{item.action}</span>
-                  </div>
-                  <span className="text-gray-500 text-xs">{item.time}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* Stream Control - WebRTC Live Streaming */}
+        <StreamControl />
 
-          {/* System Status */}
-          <div className="card">
-            <h2 className="text-xl font-bold text-white mb-4">System Status</h2>
-            <div className="space-y-4">
-              {[
-                { name: 'Web Server', status: 'Online', uptime: '99.9%' },
-                { name: 'Database', status: 'Online', uptime: '100%' },
-                { name: 'Payment Gateway', status: 'Online', uptime: '99.8%' },
-                { name: 'Live Stream Service', status: 'Online', uptime: '98.5%' },
-              ].map((service, idx) => (
-                <div key={idx} className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="text-white text-sm">{service.name}</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-green-400 text-xs mr-2">{service.status}</span>
-                    <span className="text-gray-500 text-xs">{service.uptime}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        {/* Content Generator - AI Blog & Product Descriptions */}
+        <ContentGenerator />
 
-        {/* Coming Soon Features */}
-        <div className="card bg-gradient-to-r from-gold/10 to-sapphire/10 border-gold">
-          <h2 className="text-xl font-bold gradient-text mb-4">🚀 Advanced Features</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="text-center p-4">
-              <Edit3 className="text-gold mx-auto mb-2" size={32} />
-              <h3 className="text-white font-semibold mb-1">Voice-to-Code Editor</h3>
-              <p className="text-gray-400 text-sm">AI-powered site editing via voice commands</p>
-            </div>
-            <div className="text-center p-4">
-              <Activity className="text-sapphire mx-auto mb-2" size={32} />
-              <h3 className="text-white font-semibold mb-1">Real-time Analytics</h3>
-              <p className="text-gray-400 text-sm">Live visitor tracking and heatmaps</p>
-            </div>
-            <div className="text-center p-4">
-              <Package className="text-platinum mx-auto mb-2" size={32} />
-              <h3 className="text-white font-semibold mb-1">AI Product Generator</h3>
-              <p className="text-gray-400 text-sm">Auto-generate and import products</p>
-            </div>
-          </div>
-        </div>
+        {/* Real Analytics from MongoDB */}
+        <RealAnalytics />
       </div>
     </div>
   );
