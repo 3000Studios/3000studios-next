@@ -2,14 +2,20 @@
  * Root Layout Component
  * Main layout wrapper for the entire application
  * Includes: Global metadata, navigation, footer, and common UI elements
- * This layout wraps all pages in the application
+ * Features from 3000structure.txt blueprint:
+ * - Video wallpaper backgrounds
+ * - Gravity physics footer
+ * - Background music engine
+ * - Ultra-luxe theme
  */
 
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Navigation from "./components/Navigation";
-import Footer from "./components/Footer";
+import GravityFooter from "./components/GravityFooter";
+import VideoWallpaper from "./components/VideoWallpaper";
+import BackgroundMusic from "./components/BackgroundMusic";
 
 export const metadata: Metadata = {
   title: "3000 Studios - Professional Creative Studio",
@@ -24,12 +30,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased flex flex-col min-h-screen">
+      <body className="antialiased flex flex-col min-h-screen bg-black">
+        {/* Live Video Wallpaper Background - Blueprint Feature */}
+        <VideoWallpaper opacity={0.25} />
+        
+        {/* Background Music Engine - Blueprint Feature */}
+        <BackgroundMusic />
+        
+        {/* Main Content */}
         <Navigation />
-        <main className="flex-grow pt-16">
+        <main className="flex-grow pt-16 relative z-10">
           {children}
         </main>
-        <Footer />
+        
+        {/* Gravity Footer - Blueprint Feature */}
+        <GravityFooter />
+        
         <Analytics />
       </body>
     </html>
