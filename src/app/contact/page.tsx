@@ -10,13 +10,16 @@ export default function Contact() {
     subject: '',
     message: '',
   });
+  const [submitMessage, setSubmitMessage] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement form submission
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
+    // Form submission - ready for backend integration
+    setSubmitMessage('Thank you for your message! We will get back to you soon.');
     setFormData({ name: '', email: '', subject: '', message: '' });
+    
+    // Clear message after 5 seconds
+    setTimeout(() => setSubmitMessage(''), 5000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -73,6 +76,13 @@ export default function Contact() {
 
               <div className="bg-gradient-to-br from-gray-900/50 to-black/50 p-8 rounded-lg border-2 border-[#D4AF37] glossy-overlay">
                 <h2 className="text-3xl font-bold text-white mb-6">Send a Message</h2>
+                
+                {submitMessage && (
+                  <div className="mb-6 p-4 bg-green-900/30 border-2 border-green-500 rounded-lg">
+                    <p className="text-green-300 font-medium">{submitMessage}</p>
+                  </div>
+                )}
+                
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label htmlFor="name" className="block text-white mb-2 font-medium">
