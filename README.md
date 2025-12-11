@@ -1,6 +1,19 @@
 # 3000 Studios - Professional Creative Studio Platform
 
-A cutting-edge Next.js 16 website featuring a luxury design theme, comprehensive page structure, and preparation for advanced features like AI avatars, voice-to-code editing, and live streaming.
+A cutting-edge Next.js 16 website featuring a luxury design theme, comprehensive page structure, and advanced features including AI integrations, voice-to-web capabilities, payment processing, and live streaming.
+
+## 🚀 Deployment
+
+**Canonical Vercel Project:** `3000studios-next` (Production)
+
+- **Production URL:** https://3000studios-next.vercel.app (or custom domain)
+- **Deployment:** Automated via GitHub integration
+- **Branch Strategy:** 
+  - `main` → Production deployment
+  - `develop` → Preview deployments
+  - Feature branches → Preview deployments
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete deployment instructions and environment setup.
 
 ## 🚀 Features
 
