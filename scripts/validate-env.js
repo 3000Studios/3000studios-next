@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+/* eslint-disable @typescript-eslint/no-require-imports */
+
 /**
  * Environment Variables Validation Script
  * Validates required environment variables for different deployment modes

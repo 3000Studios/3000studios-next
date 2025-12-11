@@ -6,7 +6,7 @@
 
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Volume2, VolumeX, SkipForward, Play, Pause } from 'lucide-react';
 
 interface MusicTrack {
@@ -35,6 +35,16 @@ export default function BackgroundMusic() {
 
   const currentTrack = DEFAULT_TRACKS[currentTrackIndex];
 
+  const handleNextTrack = useCallback(() => {
+    const nextIndex = (currentTrackIndex + 1) % DEFAULT_TRACKS.length;
+    setCurrentTrackIndex(nextIndex);
+    
+    if (audioRef.current && isPlaying) {
+      audioRef.current.src = DEFAULT_TRACKS[nextIndex].src;
+      audioRef.current.play().catch(err => console.log('Play error:', err));
+    }
+  }, [currentTrackIndex, isPlaying]);
+
   useEffect(() => {
     // Create audio element
     if (typeof window !== 'undefined') {
@@ -52,7 +62,7 @@ export default function BackgroundMusic() {
         }
       };
     }
-  }, []);
+  }, [handleNextTrack]);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -76,16 +86,6 @@ export default function BackgroundMusic() {
         setIsPlaying(false);
       });
       setIsPlaying(true);
-    }
-  };
-
-  const handleNextTrack = () => {
-    const nextIndex = (currentTrackIndex + 1) % DEFAULT_TRACKS.length;
-    setCurrentTrackIndex(nextIndex);
-    
-    if (audioRef.current && isPlaying) {
-      audioRef.current.src = DEFAULT_TRACKS[nextIndex].src;
-      audioRef.current.play().catch(err => console.log('Play error:', err));
     }
   };
 
