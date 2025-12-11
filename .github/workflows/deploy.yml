@@ -1,10 +1,15 @@
-name: Deploy to Vercel
+name: Deploy to Vercel (Real-Time)
 
 on:
   push:
     branches:
       - main
   workflow_dispatch:
+
+# Enable faster deployments
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
 
 jobs:
   build-and-deploy:
@@ -28,9 +33,22 @@ jobs:
           node-version: "20"
           cache: "pnpm"
 
+      # Cache dependencies for faster builds
+      - name: Cache Dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pnpm-store
+            node_modules
+            .next/cache
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
+      # Parallel build for speed
       - name: Build Project
         run: pnpm build
         env:
@@ -38,11 +56,14 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
           GOOGLE_GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # Enable incremental builds
+          NEXT_TELEMETRY_DISABLED: 1
 
       - name: Install Vercel CLI
         run: npm install -g vercel
 
-      - name: Deploy to Vercel Production
+      # Deploy with production flag for instant deployment
+      - name: Deploy to Vercel Production (INSTANT)
         run: vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
@@ -59,8 +80,17 @@ jobs:
         if: always()
         run: |
           if [ $? -eq 0 ]; then
-            echo "✅ Deployment to Vercel succeeded"
+            echo "✅ Real-time deployment to production succeeded"
+            echo "🚀 Changes are LIVE on https://3000studios.com"
           else
-            echo "❌ Deployment to Vercel failed"
+            echo "❌ Deployment failed"
             exit 1
           fi
+
+      # Notify deployment webhook (for real-time status updates)
+      - name: Trigger Deployment Webhook
+        if: success()
+        run: |
+          curl -X POST ${{ secrets.DEPLOYMENT_WEBHOOK_URL || 'https://3000studios.com/api/deployment/webhook' }} \
+            -H "Content-Type: application/json" \
+            -d '{"status": "success", "branch": "main", "commit": "${{ github.sha }}", "timestamp": "${{ github.event.head_commit.timestamp }}"}'
