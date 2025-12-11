@@ -20,10 +20,10 @@ import { openai } from './apiClients';
 // ==========================================
 
 export interface VoiceConfig {
-  language?: string;
-  continuous?: boolean;
-  interimResults?: boolean;
-  maxAlternatives?: number;
+  language: string;
+  continuous: boolean;
+  interimResults: boolean;
+  maxAlternatives: number;
 }
 
 export interface TranscriptionResult {
@@ -49,16 +49,68 @@ export interface TTSOptions {
 }
 
 // ==========================================
+// TYPE DEFINITIONS FOR WEB SPEECH API
+// ==========================================
+
+// Web Speech API type definitions (since they're not in standard TypeScript DOM types)
+interface SpeechRecognitionEvent extends Event {
+  results: SpeechRecognitionResultList;
+  resultIndex: number;
+}
+
+interface SpeechRecognitionResultList {
+  length: number;
+  item(index: number): SpeechRecognitionResult;
+  [index: number]: SpeechRecognitionResult;
+}
+
+interface SpeechRecognitionResult {
+  length: number;
+  item(index: number): SpeechRecognitionAlternative;
+  [index: number]: SpeechRecognitionAlternative;
+  isFinal: boolean;
+}
+
+interface SpeechRecognitionAlternative {
+  transcript: string;
+  confidence: number;
+}
+
+interface SpeechRecognitionErrorEvent extends Event {
+  error: string;
+  message: string;
+}
+
+interface ISpeechRecognition extends EventTarget {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  maxAlternatives: number;
+  start(): void;
+  stop(): void;
+  abort(): void;
+  onresult: ((event: SpeechRecognitionEvent) => void) | null;
+  onerror: ((event: SpeechRecognitionErrorEvent) => void) | null;
+  onend: (() => void) | null;
+  onstart: (() => void) | null;
+}
+
+interface WindowWithSpeech extends Window {
+  SpeechRecognition?: new () => ISpeechRecognition;
+  webkitSpeechRecognition?: new () => ISpeechRecognition;
+}
+
+// ==========================================
 // WEB SPEECH API (BROWSER)
 // ==========================================
 
 export class VoiceRecognition {
-  private recognition: any = null;
+  private recognition: ISpeechRecognition | null = null;
   private isListening = false;
   private config: VoiceConfig;
   private callbacks: VoiceRecognitionCallbacks;
 
-  constructor(config: VoiceConfig = {}, callbacks: VoiceRecognitionCallbacks = {}) {
+  constructor(config: Partial<VoiceConfig> = {}, callbacks: VoiceRecognitionCallbacks = {}) {
     this.config = {
       language: config.language || process.env.VOICE_LANGUAGE || 'en-US',
       continuous: config.continuous ?? (process.env.VOICE_CONTINUOUS === 'true'),
@@ -76,7 +128,8 @@ export class VoiceRecognition {
       return;
     }
 
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    const win = window as unknown as WindowWithSpeech;
+    const SpeechRecognition = win.SpeechRecognition || win.webkitSpeechRecognition;
     
     if (!SpeechRecognition) {
       console.warn('Speech recognition not supported in this browser');
