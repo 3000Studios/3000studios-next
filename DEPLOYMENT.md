@@ -1,6 +1,16 @@
 # 3000 Studios - Deployment Guide
 
-This guide will walk you through deploying the 3000 Studios website to Vercel.
+Complete guide for deploying 3000 Studios to production on Vercel.
+
+## 🎯 Canonical Vercel Project
+
+**Project Name:** `3000studios-next` (Production)
+
+- **Production URL:** https://3000studios-next.vercel.app
+- **Git Integration:** GitHub - 3000Studios/3000studios-next
+- **Framework:** Next.js 16
+- **Node Version:** 20.x
+- **Package Manager:** npm
 
 ## Prerequisites
 
@@ -23,24 +33,55 @@ This guide will walk you through deploying the 3000 Studios website to Vercel.
    - Click "Import"
 
 3. **Configure Project**
-   - **Framework Preset**: Next.js (auto-detected)
-   - **Root Directory**: ./
-   - **Build Command**: `npm run build` (default)
-   - **Output Directory**: `.next` (default)
-   - **Install Command**: `npm install` (default)
+   
+   **Exact Vercel Settings:**
+   
+   | Setting | Value |
+   |---------|-------|
+   | Framework Preset | Next.js (auto-detected) |
+   | Root Directory | `./` |
+   | Build Command | `npm run build` |
+   | Output Directory | `.next` |
+   | Install Command | `npm ci` |
+   | Development Command | `npm run dev` |
+   | Node.js Version | 20.x |
 
 4. **Add Environment Variables**
-   Click "Environment Variables" and add:
    
+   **Required for All Environments:**
    ```
-   ADMIN_EMAIL=mr.jwswain@gmail.com
-   ADMIN_PASSWORD=Bossman3000!!!
+   NEXT_PUBLIC_BASE_URL=https://your-domain.vercel.app
+   ADMIN_EMAIL=your-admin-email@example.com
+   ADMIN_PASSWORD=your-secure-password-min-12-chars
+   JWT_SECRET=your-random-secret-min-32-chars
    ```
    
-   **⚠️ IMPORTANT**: These are temporary. In production, you should:
-   - Use a proper authentication service (Auth0, NextAuth, etc.)
-   - Hash passwords
-   - Never store plain-text credentials
+   **Required for Production:**
+   See [ENVIRONMENT.md](./ENVIRONMENT.md) for complete list of environment variables.
+   
+   Minimum production requirements:
+   ```
+   # Database
+   MONGODB_URI=mongodb+srv://...
+   MONGODB_DB_NAME=3000studios
+   
+   # AI Services (at least one)
+   OPENAI_API_KEY=sk-...
+   
+   # Payment Processing (at least one)
+   STRIPE_SECRET_KEY=sk_live_...
+   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_...
+   # OR
+   PAYPAL_CLIENT_ID=...
+   PAYPAL_SECRET=...
+   PAYPAL_MODE=live
+   ```
+   
+   **⚠️ SECURITY WARNING**: 
+   - NEVER commit real secrets to git
+   - Use Vercel's Environment Variables section
+   - Rotate secrets regularly
+   - Use different values for production vs preview
 
 5. **Deploy**
    - Click "Deploy"
@@ -106,57 +147,90 @@ Visit your Vercel URL and check:
 
 ## Environment Variables Reference
 
-### Currently Used
-```env
-ADMIN_EMAIL=your-admin-email@example.com
-ADMIN_PASSWORD=your-secure-password
-```
+See [ENVIRONMENT.md](./ENVIRONMENT.md) for comprehensive documentation of all environment variables.
 
-### Future Integration Variables
+### Quick Reference by Feature
 
-When you're ready to add advanced features, you'll need:
+**Core (Always Required):**
+- `NEXT_PUBLIC_BASE_URL` - Your application URL
+- `ADMIN_EMAIL` - Admin login email
+- `ADMIN_PASSWORD` - Admin password (min 12 chars)
+- `JWT_SECRET` - Secret for JWT signing (min 32 chars)
 
-```env
-# Database (PostgreSQL/MongoDB)
-DATABASE_URL=postgresql://user:password@host:5432/dbname
+**Database (Required for Production):**
+- `MONGODB_URI` - MongoDB connection string
+- `MONGODB_DB_NAME` - Database name (default: 3000studios)
 
-# Authentication (NextAuth.js)
-NEXTAUTH_URL=https://your-domain.com
-NEXTAUTH_SECRET=your-random-secret-key
+**Payment Processing:**
+- Stripe: `STRIPE_SECRET_KEY`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_WEBHOOK_SECRET`
+- PayPal: `PAYPAL_CLIENT_ID`, `PAYPAL_SECRET`, `PAYPAL_MODE`
 
-# Stripe Payment
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_...
-STRIPE_SECRET_KEY=sk_live_...
-STRIPE_WEBHOOK_SECRET=whsec_...
+**AI Services:**
+- OpenAI: `OPENAI_API_KEY`, `OPENAI_ORG_ID`
+- Claude: `CLAUDE_API_KEY`
+- Gemini: `GEMINI_API_KEY`
 
-# PayPal
-PAYPAL_CLIENT_ID=your-paypal-client-id
-PAYPAL_SECRET=your-paypal-secret
+**Optional Features:**
+- Google Auth: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`
+- Apple Auth: `APPLE_CLIENT_ID`, `APPLE_CLIENT_SECRET`
+- Twilio: `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_PHONE`
+- WordPress: `WP_URL`, `WP_USER`, `WP_PASS`
+- WebRTC: `WEBRTC_KEY`, `WEBRTC_TURN_URL`, `NEXT_PUBLIC_SIGNAL_SERVER`
+- Affiliate: `AFFILIATE_SECRET`, `AFFILIATE_COOKIE_DURATION`, `AFFILIATE_COMMISSION_RATE`
+- Analytics: `NEXT_PUBLIC_GA_MEASUREMENT_ID`
 
-# Email (SendGrid/AWS SES)
-EMAIL_SERVER=smtp://...
-EMAIL_FROM=noreply@3000studios.com
-SENDGRID_API_KEY=SG...
+### Environment Variable Mapping in Vercel
 
-# Live Streaming (Mux)
-MUX_TOKEN_ID=your-mux-token-id
-MUX_TOKEN_SECRET=your-mux-token-secret
+1. Go to Vercel Dashboard → Your Project → Settings → Environment Variables
+2. Add variables for each environment:
+   - **Production** - Live site variables
+   - **Preview** - Testing variables (can use sandbox/test keys)
+   - **Development** - Local dev variables (optional)
 
-# AI Services (OpenAI)
-OPENAI_API_KEY=sk-...
-
-# File Storage (AWS S3/Cloudinary)
-CLOUDINARY_CLOUD_NAME=your-cloud-name
-CLOUDINARY_API_KEY=your-api-key
-CLOUDINARY_API_SECRET=your-api-secret
-```
+3. Use `.env.example` as a template
+4. Validate configuration: `node scripts/validate-env.js production`
 
 ## Continuous Deployment
 
 Vercel automatically deploys when you push to GitHub:
 
-- **Production**: Pushes to `main` branch
-- **Preview**: Pushes to any other branch (like your current PR branch)
+- **Production**: Pushes to `main` branch → https://3000studios-next.vercel.app
+- **Preview**: Pushes to any other branch → Unique preview URL
+- **PR Deployments**: Every PR gets a preview deployment
+
+### Branch Protection Rules (Recommended)
+
+Configure in GitHub → Settings → Branches:
+
+1. **Protect `main` branch:**
+   - Require pull request reviews (at least 1)
+   - Require status checks to pass:
+     - ✅ Vercel deployment
+     - ✅ CI build
+     - ✅ Type check
+     - ✅ Lint
+   - Require branches to be up to date
+   - Do not allow force pushes
+   - Do not allow deletions
+
+2. **Auto-merge requirements:**
+   - All checks must pass
+   - At least 1 approval
+   - No unresolved conversations
+
+### GitHub Secrets (Required for CI/CD)
+
+Add these in GitHub Repository → Settings → Secrets and variables → Actions:
+
+| Secret Name | Description | Where to Get |
+|-------------|-------------|--------------|
+| `VERCEL_TOKEN` | Vercel API token | Vercel → Settings → Tokens |
+| `VERCEL_ORG_ID` | Organization ID | Run `vercel whoami` |
+| `VERCEL_PROJECT_ID` | Project ID | Vercel → Project Settings → General |
+
+**Optional but Recommended:**
+- `OPENAI_API_KEY` - For CI tests that need AI
+- `MONGODB_URI` - For integration tests with DB
 
 ## Build Optimization
 
@@ -221,16 +295,48 @@ Before going live:
 
 ## Rollback Procedure
 
-If you need to rollback:
+### Option 1: Vercel Dashboard (Recommended)
 
 1. Go to Vercel Dashboard → Your Project → Deployments
 2. Find the previous working deployment
 3. Click "..." → "Promote to Production"
+4. Confirm promotion
 
-Or using CLI:
+### Option 2: Git Rollback
+
+```bash
+# Create a revert commit
+git revert HEAD
+git push origin main
+
+# Or rollback to specific commit
+git reset --hard COMMIT_SHA
+git push --force origin main  # Use with caution!
+```
+
+### Option 3: Vercel CLI
+
 ```bash
 vercel rollback
 ```
+
+### Emergency Rollback
+
+If site is completely broken:
+
+1. **Immediate:** Use Vercel dashboard to promote last known good deployment
+2. **Investigate:** Check deployment logs for errors
+3. **Fix:** Create hotfix branch, fix issue, deploy
+4. **Post-mortem:** Document what happened and prevent recurrence
+
+### Rollback Checklist
+
+- [ ] Identify the last working deployment
+- [ ] Note the issue causing rollback
+- [ ] Execute rollback using preferred method
+- [ ] Verify site is functional
+- [ ] Create issue to track the problem
+- [ ] Document in changelog
 
 ## Support
 
