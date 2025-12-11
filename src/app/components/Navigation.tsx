@@ -33,12 +33,13 @@ export default function Navigation() {
   const navLinks = [
     { href: '/', label: 'Home', hoverColor: 'hover:text-gold' },
     { href: '/store', label: 'Store', hoverColor: 'hover:text-gold' },
-    { href: '/live', label: 'Live', hoverColor: 'hover:text-sapphire' },
     { href: '/projects', label: 'Projects', hoverColor: 'hover:text-teal' },
-    { href: '/blog', label: 'Blog', hoverColor: 'hover:text-purple-400' },
-    { href: '/matrix', label: 'Matrix', hoverColor: 'hover:text-gold' },
     { href: '/portfolio', label: 'Portfolio', hoverColor: 'hover:text-platinum' },
+    { href: '/live', label: 'Live', hoverColor: 'hover:text-sapphire' },
+    { href: '/blog', label: 'Blog', hoverColor: 'hover:text-purple-400' },
     { href: '/contact', label: 'Contact', hoverColor: 'hover:text-gold' },
+    { href: '/matrix', label: 'Matrix', hoverColor: 'hover:text-cyan-400' },
+    { href: '/login', label: 'Login', hoverColor: 'hover:text-gold' },
   ];
   
   // Mood-reactive shadow colors based on ShadowOS state
@@ -116,17 +117,6 @@ export default function Navigation() {
                 </Link>
               </motion.div>
             ))}
-            <motion.div
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link
-                href="/login"
-                className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-gold to-yellow-500 text-black font-semibold hover:from-platinum hover:to-white transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,215,0,0.5)]"
-              >
-                Login
-              </Link>
-            </motion.div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -175,13 +165,6 @@ export default function Navigation() {
                 </div>
               </Link>
             ))}
-            <Link
-              href="/login"
-              className="block px-4 py-3 mt-3 text-center bg-gradient-to-r from-gold to-yellow-500 text-black font-bold rounded-lg hover:from-platinum hover:to-white transition-all duration-300 shadow-lg"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Login
-            </Link>
           </div>
         </motion.div>
       )}

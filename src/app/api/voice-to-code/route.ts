@@ -1,12 +1,12 @@
 /**
  * Voice-to-Code API Route
- * Converts voice commands to code changes
+ * Converts voice commands to code changes with INSTANT deployment
+ * Boss Man J edition - changes go LIVE immediately!
  */
 
 import { NextRequest, NextResponse } from 'next/server';
 import { generateCode, transcribeAudio } from '@/lib/services/openai';
-import { createCommit } from '@/lib/services/github';
-import { triggerDeployment } from '@/lib/services/vercel';
+import { instantSync, quickCommit } from '@/lib/services/realtime-sync';
 
 export async function POST(request: NextRequest) {
   try {
@@ -46,46 +46,46 @@ export async function POST(request: NextRequest) {
         });
 
       case 'apply':
-        // Commit code to GitHub
+        // Quick commit without deploying (for batching changes)
         const filePath = body.filePath || 'src/app/generated.tsx';
-        const commitSha = await createCommit([
-          {
-            path: filePath,
-            content: codeResult.code,
-            message: `Voice command: ${textPrompt.substring(0, 50)}...`,
-          },
-        ]);
+        const commitResult = await quickCommit(
+          filePath,
+          codeResult.code,
+          `Voice command: ${textPrompt.substring(0, 50)}...`
+        );
 
         return NextResponse.json({
-          success: true,
-          commitSha,
+          success: commitResult.success,
+          commitSha: commitResult.commitSha,
           code: codeResult.code,
           explanation: codeResult.explanation,
-          message: 'Code committed to GitHub',
+          message: commitResult.message,
         });
 
       case 'deploy':
-        // Commit and deploy
+        // INSTANT SYNC - Commit and deploy to LIVE in one flow
         const deployFilePath = body.filePath || 'src/app/generated.tsx';
-        const deployCommitSha = await createCommit([
-          {
-            path: deployFilePath,
-            content: codeResult.code,
-            message: `Voice deployment: ${textPrompt.substring(0, 50)}...`,
-          },
-        ]);
-
-        // Trigger Vercel deployment
-        const deployment = await triggerDeployment();
+        const events: any[] = [];
+        
+        const syncResult = await instantSync(
+          deployFilePath,
+          codeResult.code,
+          `🎤 Voice deployment: ${textPrompt.substring(0, 50)}...`,
+          (event) => {
+            events.push(event);
+          }
+        );
 
         return NextResponse.json({
-          success: true,
-          commitSha: deployCommitSha,
-          deploymentId: deployment.id,
-          deploymentUrl: deployment.url,
+          success: syncResult.success,
+          commitSha: syncResult.commitSha,
+          deploymentId: syncResult.deploymentId,
+          deploymentUrl: syncResult.deploymentUrl,
           code: codeResult.code,
           explanation: codeResult.explanation,
-          message: 'Code deployed successfully',
+          message: syncResult.message,
+          events: events, // Include deployment events for tracking
+          timestamp: syncResult.timestamp,
         });
 
       default:
