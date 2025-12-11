@@ -3,6 +3,7 @@
  * Main site navigation bar with responsive design
  * Includes links to all public pages and admin login
  * Features: Mobile menu, active link highlighting, smooth transitions, premium marble background
+ * Updated with framer-motion animations and ShadowOS mood-reactive colors (MODULE 17 PART 3)
  */
 
 'use client';
@@ -12,11 +13,14 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { motion } from 'framer-motion';
+import { useShadowOS } from '@/lib/shadow/os/state';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const { uiMood } = useShadowOS();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,23 +31,39 @@ export default function Navigation() {
   }, []);
 
   const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/store', label: 'Store' },
-    { href: '/projects', label: 'Projects' },
-    { href: '/portfolio', label: 'Portfolio' },
-    { href: '/live', label: 'Live' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/contact', label: 'Contact' },
+    { href: '/', label: 'Home', hoverColor: 'hover:text-gold' },
+    { href: '/store', label: 'Store', hoverColor: 'hover:text-gold' },
+    { href: '/live', label: 'Live', hoverColor: 'hover:text-sapphire' },
+    { href: '/projects', label: 'Projects', hoverColor: 'hover:text-teal' },
+    { href: '/blog', label: 'Blog', hoverColor: 'hover:text-purple-400' },
+    { href: '/matrix', label: 'Matrix', hoverColor: 'hover:text-gold' },
+    { href: '/portfolio', label: 'Portfolio', hoverColor: 'hover:text-platinum' },
+    { href: '/contact', label: 'Contact', hoverColor: 'hover:text-gold' },
   ];
+  
+  // Mood-reactive shadow colors based on ShadowOS state
+  const moodColors = {
+    neutral: 'shadow-gray-800',
+    gold: 'shadow-yellow-500',
+    blue: 'shadow-blue-500',
+    'purple-alert': 'shadow-purple-500',
+    teal: 'shadow-teal-400',
+    'cyber-cyan': 'shadow-cyan-400',
+  };
 
   const isActiveLink = (href: string) => pathname === href;
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled 
-        ? 'glass-premium border-b border-gold/30 shadow-2xl' 
-        : 'glass border-b border-gray-800/50'
-    }`}>
+    <motion.nav 
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 1.2, ease: 'easeOut' }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled 
+          ? 'glass-premium border-b border-gold/30 shadow-2xl' 
+          : 'glass border-b border-gray-800/50'
+      } ${moodColors[uiMood]}`}
+    >
       {/* Premium Marble Background Effect */}
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 opacity-90 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent"></div>
@@ -70,27 +90,43 @@ export default function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {navLinks.map((link) => (
-              <Link
+              <motion.div
                 key={link.href}
-                href={link.href}
-                className={`relative text-sm lg:text-base font-medium transition-all duration-200 ${
-                  isActiveLink(link.href)
-                    ? 'text-gold'
-                    : 'text-gray-300 hover:text-gold'
-                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {link.label}
-                {isActiveLink(link.href) && (
-                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gold rounded-full"></span>
-                )}
-              </Link>
+                <Link
+                  href={link.href}
+                  className={`relative text-sm lg:text-base font-medium transition-all duration-200 ${
+                    isActiveLink(link.href)
+                      ? 'text-gold'
+                      : `text-gray-300 ${link.hoverColor}`
+                  }`}
+                >
+                  {link.label}
+                  {isActiveLink(link.href) && (
+                    <motion.span 
+                      layoutId="activeLink"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gold rounded-full"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  )}
+                </Link>
+              </motion.div>
             ))}
-            <Link
-              href="/login"
-              className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-gold to-yellow-500 text-black font-semibold hover:from-platinum hover:to-white transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,215,0,0.5)] hover:-translate-y-0.5"
+            <motion.div
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Login
-            </Link>
+              <Link
+                href="/login"
+                className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-gold to-yellow-500 text-black font-semibold hover:from-platinum hover:to-white transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,215,0,0.5)]"
+              >
+                Login
+              </Link>
+            </motion.div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -112,7 +148,13 @@ export default function Navigation() {
 
       {/* Enhanced Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden glass-premium border-t border-gold/20 backdrop-blur-xl animate-slide-down">
+        <motion.div 
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.3 }}
+          className="md:hidden glass-premium border-t border-gold/20 backdrop-blur-xl"
+        >
           <div className="px-4 pt-3 pb-4 space-y-2 max-h-[80vh] overflow-y-auto">
             {navLinks.map((link) => (
               <Link
@@ -141,8 +183,8 @@ export default function Navigation() {
               Login
             </Link>
           </div>
-        </div>
+        </motion.div>
       )}
-    </nav>
+    </motion.nav>
   );
 }
