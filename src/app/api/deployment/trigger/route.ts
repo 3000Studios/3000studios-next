@@ -4,7 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { triggerDeployment, getDeploymentStatus } from '@/lib/services/vercel';
+import { triggerDeployment } from '@/lib/services/vercel';
 
 export async function POST(request: NextRequest) {
   try {
