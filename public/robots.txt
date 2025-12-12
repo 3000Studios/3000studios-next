@@ -1,0 +1,16 @@
+# 3000 Studios - Robots.txt
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://3000studios.com/sitemap.xml
+
+# Disallow admin and API routes
+Disallow: /api/
+Disallow: /matrix/
+Disallow: /login/
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1

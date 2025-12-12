@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 
     // Extract title from content (assume first line is title)
     const lines = content.split('\n');
-    const title = lines[0].replace(/^#\s*/, '');
+    const title = lines[0]?.replace(/^#\s*/, '') || 'Untitled';
     const bodyContent = lines.slice(1).join('\n');
 
     // Publish to WordPress if requested

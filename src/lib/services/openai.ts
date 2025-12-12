@@ -50,7 +50,7 @@ Format your response as JSON with: { code, explanation, preview }`;
       temperature: 0.7,
     });
 
-    const result = JSON.parse(response.choices[0].message.content || '{}');
+    const result = JSON.parse(response.choices[0]?.message.content || '{}');
     
     return {
       code: result.code || '',
@@ -85,7 +85,7 @@ export async function generateBlogPost(topic: string, keywords: string[]): Promi
       max_tokens: 2000,
     });
 
-    return response.choices[0].message.content || '';
+    return response.choices[0]?.message.content || '';
   } catch (error) {
     console.error('Blog post generation error:', error);
     throw new Error('Failed to generate blog post');
@@ -117,7 +117,7 @@ export async function generateProductDescription(
       max_tokens: 500,
     });
 
-    return response.choices[0].message.content || '';
+    return response.choices[0]?.message.content || '';
   } catch (error) {
     console.error('Product description generation error:', error);
     throw new Error('Failed to generate product description');
