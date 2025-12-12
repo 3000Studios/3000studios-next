@@ -42,3 +42,9 @@ next-env.d.ts
 node_modules/
 .next/
 package-lock.json
+.env
+.env.*
+!.env.schema
+.vercel/
+*.log
+pnpm-debug.log*
