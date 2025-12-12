@@ -29,7 +29,16 @@ const nextConfig: NextConfig = {
 
   // Image optimization
   images: {
-    domains: ['3000studios.com', 'localhost'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '3000studios.com',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+      },
+    ],
     formats: ['image/avif', 'image/webp'],
   },
 
