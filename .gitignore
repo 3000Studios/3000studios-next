@@ -42,3 +42,7 @@ next-env.d.ts
 node_modules/
 .next/
 package-lock.json
+
+# backups
+/backups/
+*.tar.gz

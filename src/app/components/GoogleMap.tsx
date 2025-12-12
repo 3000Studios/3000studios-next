@@ -7,6 +7,13 @@
 
 import { useEffect, useRef } from 'react';
 
+// Declare global google types
+declare global {
+  interface Window {
+    google: any;
+  }
+}
+
 interface GoogleMapProps {
   apiKey: string;
   center?: { lat: number; lng: number };
@@ -21,7 +28,7 @@ export default function GoogleMap({
   mapType = 'satellite'
 }: GoogleMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<google.maps.Map | null>(null);
+  const mapInstanceRef = useRef<any>(null);
 
   useEffect(() => {
     if (!apiKey || apiKey === 'YOUR_GOOGLE_MAPS_API_KEY_HERE') {
@@ -45,9 +52,9 @@ export default function GoogleMap({
     };
 
     const initializeMap = () => {
-      if (!mapRef.current) return;
+      if (!mapRef.current || !window.google) return;
 
-      const mapOptions: google.maps.MapOptions = {
+      const mapOptions: any = {
         center,
         zoom,
         mapTypeId: mapType,
@@ -60,8 +67,8 @@ export default function GoogleMap({
         ],
         mapTypeControl: true,
         mapTypeControlOptions: {
-          style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-          position: google.maps.ControlPosition.TOP_RIGHT,
+          style: window.google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+          position: window.google.maps.ControlPosition.TOP_RIGHT,
           mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain']
         },
         streetViewControl: true,
@@ -69,17 +76,17 @@ export default function GoogleMap({
         zoomControl: true,
       };
 
-      const map = new google.maps.Map(mapRef.current, mapOptions);
+      const map = new window.google.maps.Map(mapRef.current, mapOptions);
       mapInstanceRef.current = map;
 
       // Add marker for location
-      new google.maps.Marker({
+      new window.google.maps.Marker({
         position: center,
         map,
         title: '3000 Studios - Atlanta, Georgia',
-        animation: google.maps.Animation.DROP,
+        animation: window.google.maps.Animation.DROP,
         icon: {
-          path: google.maps.SymbolPath.CIRCLE,
+          path: window.google.maps.SymbolPath.CIRCLE,
           scale: 10,
           fillColor: '#FFD700',
           fillOpacity: 1,
@@ -89,7 +96,7 @@ export default function GoogleMap({
       });
 
       // Add info window
-      const infoWindow = new google.maps.InfoWindow({
+      const infoWindow = new window.google.maps.InfoWindow({
         content: `
           <div style="padding: 10px; color: #000;">
             <h3 style="margin: 0 0 8px 0; font-weight: bold; color: #000;">3000 Studios</h3>
@@ -99,7 +106,7 @@ export default function GoogleMap({
         `,
       });
 
-      const marker = new google.maps.Marker({
+      const marker = new window.google.maps.Marker({
         position: center,
         map,
       });
@@ -113,8 +120,8 @@ export default function GoogleMap({
 
     return () => {
       // Cleanup
-      if (mapInstanceRef.current) {
-        google.maps.event.clearInstanceListeners(mapInstanceRef.current);
+      if (mapInstanceRef.current && window.google) {
+        window.google.maps.event.clearInstanceListeners(mapInstanceRef.current);
       }
     };
   }, [apiKey, center, zoom, mapType]);

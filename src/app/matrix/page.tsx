@@ -32,7 +32,9 @@ import {
   Zap,
   LogOut,
   Mic,
-  Code
+  Code,
+  Rocket,
+  GitBranch
 } from 'lucide-react';
 import { verifySessionToken } from '@/lib/auth';
 import Link from 'next/link';
@@ -40,6 +42,9 @@ import VoiceCodeEditor from './components/VoiceCodeEditor';
 import StreamControl from './components/StreamControl';
 import RealAnalytics from './components/RealAnalytics';
 import ContentGenerator from './components/ContentGenerator';
+import { CompactRealtimeSync } from '@/app/components/RealtimeSync';
+import { useRealtimeSync } from '@/hooks/useRealtimeSync';
+import { forceRedeploy } from '@/lib/services/realtime-sync';
 
 interface StatCardProps {
   title: string;
@@ -75,6 +80,8 @@ export default function MatrixPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [userEmail, setUserEmail] = useState('');
+  const [isDeploying, setIsDeploying] = useState(false);
+  const { refreshStatus } = useRealtimeSync();
 
   useEffect(() => {
     // Check authentication
@@ -117,6 +124,18 @@ export default function MatrixPage() {
   const handleLogout = () => {
     localStorage.removeItem('auth_token');
     router.push('/login');
+  };
+
+  const handleForceDeploy = async () => {
+    setIsDeploying(true);
+    try {
+      await forceRedeploy();
+      await refreshStatus();
+    } catch (error) {
+      console.error('Force deploy failed:', error);
+    } finally {
+      setIsDeploying(false);
+    }
   };
 
   if (isLoading) {
@@ -164,6 +183,83 @@ export default function MatrixPage() {
       </div>
 
       <div className="max-w-7xl mx-auto space-y-8">
+        {/* Real-Time Deployment Status - NEW */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2">
+            <div className="card">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <Rocket className="text-gold" size={24} />
+                  <h2 className="text-xl font-bold text-white">🚀 Real-Time Deployment</h2>
+                </div>
+                <button
+                  onClick={handleForceDeploy}
+                  disabled={isDeploying}
+                  className="px-4 py-2 bg-gradient-to-r from-gold to-yellow-500 text-black font-semibold rounded-lg hover:from-platinum hover:to-white transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                >
+                  <Zap size={16} />
+                  {isDeploying ? 'Deploying...' : 'Deploy Now'}
+                </button>
+              </div>
+              <CompactRealtimeSync />
+              <div className="mt-4 p-3 glass border border-cyan-500/30 rounded-lg">
+                <div className="flex items-center gap-2 mb-2">
+                  <GitBranch className="text-cyan-400" size={16} />
+                  <p className="text-sm font-semibold text-cyan-400">Production Branch</p>
+                </div>
+                <p className="text-2xl font-bold text-white">main</p>
+                <p className="text-xs text-gray-400 mt-1">
+                  ✅ Single source of truth - All changes deploy directly to production
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="card">
+            <h3 className="text-lg font-bold text-white mb-4">⚡ Quick Actions</h3>
+            <div className="space-y-3">
+              <button 
+                onClick={() => window.location.href = '/matrix#voice-editor'}
+                className="w-full p-3 glass border border-gold/30 rounded-lg hover:bg-gold/10 transition-all text-left"
+              >
+                <div className="flex items-center gap-3">
+                  <Mic className="text-gold" size={20} />
+                  <div>
+                    <p className="text-white font-semibold">Voice Command</p>
+                    <p className="text-xs text-gray-400">Deploy with voice</p>
+                  </div>
+                </div>
+              </button>
+              <button 
+                onClick={handleForceDeploy}
+                disabled={isDeploying}
+                className="w-full p-3 glass border border-green-500/30 rounded-lg hover:bg-green-500/10 transition-all text-left disabled:opacity-50"
+              >
+                <div className="flex items-center gap-3">
+                  <Rocket className="text-green-400" size={20} />
+                  <div>
+                    <p className="text-white font-semibold">Force Redeploy</p>
+                    <p className="text-xs text-gray-400">Redeploy current state</p>
+                  </div>
+                </div>
+              </button>
+              <a 
+                href="https://github.com/3000Studios/3000studios-next"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full p-3 glass border border-purple-500/30 rounded-lg hover:bg-purple-500/10 transition-all text-left block"
+              >
+                <div className="flex items-center gap-3">
+                  <Code className="text-purple-400" size={20} />
+                  <div>
+                    <p className="text-white font-semibold">View Repository</p>
+                    <p className="text-xs text-gray-400">GitHub main branch</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard
