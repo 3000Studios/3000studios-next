@@ -1,9 +1,12 @@
 import { NextResponse } from "next/server";
 
 export async function POST() {
-  return NextResponse.json({
-    status: "ok",
-    monetization: "blog-generated",
-    ts: Date.now()
-  });
+  const post = {
+    title: "AI Automation That Actually Makes Money",
+    slug: "ai-automation-monetization",
+    body: "This article was generated automatically to drive SEO traffic and affiliate conversions.",
+    publishedAt: new Date().toISOString()
+  };
+
+  return NextResponse.json({ ok: true, post });
 }
