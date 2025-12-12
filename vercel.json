@@ -1,0 +1,10 @@
+{
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "installCommand": "npm install",
+  "buildCommand": "npm run build"
+}
