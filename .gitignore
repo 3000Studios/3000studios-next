@@ -48,3 +48,4 @@ package-lock.json
 .vercel/
 *.log
 pnpm-debug.log*
+.env*.local
