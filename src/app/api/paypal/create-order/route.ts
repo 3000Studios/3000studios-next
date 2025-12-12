@@ -4,7 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { createOrder, trackAffiliateSale } from '@/lib/services/paypal';
+import { createOrder } from '@/lib/services/paypal';
 import { saveOrder } from '@/lib/services/mongodb';
 
 export async function POST(request: NextRequest) {
