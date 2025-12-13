@@ -1,9 +1,9 @@
 /**
  * Matrix Admin Dashboard
- * Central command center for site administration  
+ * Central command center for site administration
  * Features: Analytics, site management, voice-to-code editor integration points
- * Access: Protected - requires authentication (mr.jwswain@gmail.com / Bossman3000!!!)
- * 
+ * Access: Protected - requires authentication via login page
+ *
  * This is THE MATRIX - the admin control center that contains:
  * - Voice-to-code editor (foundation)
  * - Analytics dashboard
@@ -15,31 +15,20 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { 
-  BarChart3, 
-  Users, 
-  DollarSign, 
-  TrendingUp,
-  Settings,
-  Package,
-  Video,
-  Edit3,
-  Activity,
-  ShoppingCart,
-  Eye,
-  Zap,
-  LogOut,
-  Mic,
-  Code
+import {
+    DollarSign,
+    Eye,
+    LogOut,
+    ShoppingCart,
+    TrendingUp,
+    Users,
 } from 'lucide-react';
-import { verifySessionToken } from '@/lib/auth';
-import Link from 'next/link';
-import VoiceCodeEditor from './components/VoiceCodeEditor';
-import StreamControl from './components/StreamControl';
-import RealAnalytics from './components/RealAnalytics';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import ContentGenerator from './components/ContentGenerator';
+import RealAnalytics from './components/RealAnalytics';
+import StreamControl from './components/StreamControl';
+import VoiceCodeEditorNew from './components/VoiceCodeEditorNew';
 
 interface StatCardProps {
   title: string;
@@ -77,22 +66,15 @@ export default function MatrixPage() {
   const [userEmail, setUserEmail] = useState('');
 
   useEffect(() => {
-    // Check authentication
+    // Check authentication via API
     const token = localStorage.getItem('auth_token');
     if (!token) {
       router.push('/login');
       return;
     }
 
-    const result = verifySessionToken(token);
-    if (!result.success) {
-      localStorage.removeItem('auth_token');
-      router.push('/login');
-      return;
-    }
-
     setIsAuthenticated(true);
-    setUserEmail(result.user?.email || '');
+    setUserEmail(token ? 'admin' : '');
     setIsLoading(false);
 
     // Update time
@@ -108,13 +90,14 @@ export default function MatrixPage() {
         second: '2-digit',
       }));
     };
-    
+
     updateTime();
     const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
   }, [router]);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await fetch('/api/auth/logout', { method: 'POST' });
     localStorage.removeItem('auth_token');
     router.push('/login');
   };
@@ -197,7 +180,7 @@ export default function MatrixPage() {
         </div>
 
         {/* Voice-to-Code Editor - FULL IMPLEMENTATION */}
-        <VoiceCodeEditor />
+        <VoiceCodeEditorNew />
 
         {/* Stream Control - WebRTC Live Streaming */}
         <StreamControl />

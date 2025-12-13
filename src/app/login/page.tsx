@@ -1,9 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { AlertCircle, Lock, Mail } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { Lock, Mail, AlertCircle } from 'lucide-react';
-import { verifyAdmin, createSessionToken } from '@/lib/auth';
+import { useState } from 'react';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -18,16 +17,21 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      const result = verifyAdmin(email, password);
-      
-      if (result.success) {
-        const token = createSessionToken(email);
-        localStorage.setItem('auth_token', token);
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('auth_token', data.token);
         router.push('/matrix');
       } else {
-        setError(result.message);
+        const data = await response.json();
+        setError(data.error || 'Login failed');
       }
-    } catch (err) {
+    } catch {
       setError('An error occurred during login');
     } finally {
       setIsLoading(false);
@@ -81,7 +85,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all"
-                  placeholder="mr.jwswain@gmail.com"
+                  placeholder="admin@example.com"
                   required
                   disabled={isLoading}
                 />
@@ -101,7 +105,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all"
-                  placeholder="Bossman3000!!!"
+                  placeholder="••••••••••••••••"
                   required
                   disabled={isLoading}
                 />

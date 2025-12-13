@@ -13,29 +13,64 @@
   --sapphire: #0F52BA;
   --dark-bg: #0a0a0a;
   --light-bg: #ffffff;
-  
+
   /* Semantic Colors */
   --background: #0a0a0a;
   --foreground: #ededed;
   --accent: var(--gold);
   --secondary: var(--platinum);
   --highlight: var(--sapphire);
-  
+
   /* UI Element Colors */
   --card-bg: rgba(255, 255, 255, 0.05);
   --card-border: rgba(255, 215, 0, 0.2);
   --hover-bg: rgba(255, 215, 0, 0.1);
-  
+
   /* Shadows */
   --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
   --shadow-md: 0 4px 8px rgba(0,0,0,0.2);
   --shadow-lg: 0 8px 16px rgba(0,0,0,0.3);
   --shadow-gold: 0 4px 12px rgba(255, 215, 0, 0.3);
+
+  /* Electric Theme */
+  --electric-blue: #00f3ff;
+  --electric-purple: #bc13fe;
+  --neon-glow: 0 0 10px var(--electric-blue), 0 0 20px var(--electric-blue), 0 0 40px var(--electric-blue);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+}
+
+@keyframes electric-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 20px var(--electric-blue), 0 0 35px var(--electric-blue), 0 0 40px var(--electric-blue), 0 0 50px var(--electric-blue), 0 0 75px var(--electric-blue);
+  }
+  20%, 24%, 55% {
+    opacity: 0.5;
+    text-shadow: none;
+  }
+}
+
+@keyframes shock-wave {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.8; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+.electric-text {
+  color: #fff;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px var(--electric-blue), 0 0 30px var(--electric-blue), 0 0 40px var(--electric-blue);
+}
+
+.glass-morphism {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
 @media (prefers-color-scheme: light) {
@@ -268,7 +303,7 @@ a:hover {
 
 /* Mesh Gradient Background */
 .mesh-gradient {
-  background: 
+  background:
     radial-gradient(at 40% 20%, rgba(255, 215, 0, 0.15) 0px, transparent 50%),
     radial-gradient(at 80% 0%, rgba(15, 82, 186, 0.15) 0px, transparent 50%),
     radial-gradient(at 0% 50%, rgba(229, 228, 226, 0.1) 0px, transparent 50%),
@@ -441,7 +476,7 @@ a:focus-visible {
   border-radius: 1rem;
   padding: 2rem;
   backdrop-filter: blur(15px);
-  box-shadow: 
+  box-shadow:
     0 10px 40px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -450,7 +485,7 @@ a:focus-visible {
 .card-premium:hover {
   transform: translateY(-8px) scale(1.02);
   border-color: var(--gold);
-  box-shadow: 
+  box-shadow:
     0 20px 60px rgba(255, 215, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }

@@ -1,22 +1,86 @@
 {
+  // ============================================
+  // 3000 Studios - Optimal VS Code Settings
+  // Lean, fast, eslint+prettier first
+  // ============================================
   "git.autofetch": true,
+  "git.confirmSync": false,
+
+  // Formatting & linting
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "explicit"
   },
-  "files.eol": "\n",
-  "typescript.tsdk": "node_modules/typescript/lib",
   "eslint.validate": [
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact"
   ],
+  "eslint.workingDirectories": ["./src"],
+
+  // TypeScript
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
+  // Copilot
   "github.copilot.enable": {
-    "*": true
+    "*": true,
+    "plaintext": false
   },
+
+  // Tailwind helpers
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"] ,
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  "tailwindCSS.includeLanguages": {
+    "typescript": "javascript",
+    "typescriptreact": "javascript"
+  },
+
+  // Files & performance
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.next": true,
+    "**/node_modules": true,
+    "**/.pnpm-store": true,
+    "**/dist": true,
+    "**/build": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.next/**": true,
+    "**/node_modules/**": true,
+    "**/.pnpm-store/**": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/dist": true,
+    "**/.pnpm-store": true,
+    "**/pnpm-lock.yaml": true
+  },
+  "files.maxMemoryForLargeFilesMB": 4096,
+
+  // Editor ergonomics
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+
+  // Terminal
   "terminal.integrated.defaultProfile.windows": "PowerShell",
-  "editor.formatOnSave": true,
-  "git.confirmSync": false,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    }
+  }
 }

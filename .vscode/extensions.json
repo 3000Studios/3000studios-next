@@ -1,10 +1,11 @@
 {
   "recommendations": [
-    "GitHub.copilot",
-    "GitHub.copilot-chat",
+    "github.copilot",
+    "github.copilot-chat",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "eamodio.gitlens",
+    "bradlc.vscode-tailwindcss",
     "ms-vscode.vscode-typescript-next"
-  ]
+  ],
+  "unwantedRecommendations": []
 }
