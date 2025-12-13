@@ -1,24 +1,33 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-11-20"
-});
+/**
+ * IMPORTANT:
+ * Do NOT set apiVersion.
+ * Stripe SDK auto-locks to account version.
+ */
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
-export async function POST() {
+export async function POST(req: Request) {
+  const body = await req.json();
+
   const session = await stripe.checkout.sessions.create({
-    payment_method_types: ["card"],
     mode: "payment",
-    line_items: [{
-      price_data: {
-        currency: "usd",
-        product_data: { name: "Automation Toolkit" },
-        unit_amount: 4900
+    payment_method_types: ["card"],
+    line_items: [
+      {
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: "AI Automation Toolkit",
+          },
+          unit_amount: 4900,
+        },
+        quantity: 1,
       },
-      quantity: 1
-    }],
-    success_url: "https://3000studios.com/success",
-    cancel_url: "https://3000studios.com/cancel"
+    ],
+    success_url: process.env.STRIPE_SUCCESS_URL!,
+    cancel_url: process.env.STRIPE_CANCEL_URL!,
   });
 
   return NextResponse.json({ url: session.url });
