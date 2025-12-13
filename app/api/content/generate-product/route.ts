@@ -1,12 +1,9 @@
 import { NextResponse } from "next/server";
 
 export async function POST() {
-  const product = {
-    name: "Automation Toolkit",
+  return NextResponse.json({
+    title: "AI Automation Toolkit",
     price: 49,
-    affiliate: true,
-    payout: "recurring"
-  };
-
-  return NextResponse.json({ ok: true, product });
+    content: "Generated product ready for sale.",
+  });
 }

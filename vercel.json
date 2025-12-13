@@ -1,5 +1,6 @@
 {
-  "installCommand": "npm install",
-  "buildCommand": "npm run build",
-  "framework": "nextjs"
+  "crons": [
+    { "path": "/api/automation/generate-blog", "schedule": "0 8 * * *" },
+    { "path": "/api/automation/generate-product", "schedule": "0 9 * * *" }
+  ]
 }
