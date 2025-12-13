@@ -1,6 +1,7 @@
 {
   "crons": [
-    { "path": "/api/automation/generate-blog", "schedule": "0 8 * * *" },
-    { "path": "/api/automation/generate-product", "schedule": "0 9 * * *" }
+    { "path": "/api/automation/blog", "schedule": "0 8 * * *" },
+    { "path": "/api/automation/product", "schedule": "0 9 * * *" },
+    { "path": "/api/automation/pricing", "schedule": "0 10 * * *" }
   ]
 }
