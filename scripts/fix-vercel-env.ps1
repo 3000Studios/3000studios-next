@@ -1,9 +1,15 @@
 # 🔒 Vercel Environment Variable Fix Script (PowerShell)
 # Fixes NEXT_PUBLIC_SITE_URL circular reference issue
-# Usage: .\scripts\fix-vercel-env.ps1
+# 
+# USAGE:
+#   Method 1: PowerShell -ExecutionPolicy Bypass -File ".\scripts\fix-vercel-env.ps1"
+#   Method 2: Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+#             Then: .\scripts\fix-vercel-env.ps1
+#   Method 3: & ".\scripts\fix-vercel-env.ps1"
 
-$ErrorActionPreference = "Stop"
+$ErrorActionPreference = "Continue"  # Changed from Stop to Continue for better error handling
 
+Write-Host ""
 Write-Host "╔════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
 Write-Host "║   VERCEL ENVIRONMENT VARIABLE FIX                      ║" -ForegroundColor Cyan
 Write-Host "║   Fixing NEXT_PUBLIC_SITE_URL circular reference       ║" -ForegroundColor Cyan
@@ -13,9 +19,14 @@ Write-Host ""
 # Navigate to project directory
 $projectPath = "C:\DEV\3000studios-next"
 if (Test-Path $projectPath) {
-    Set-Location $projectPath
-    Write-Host "✅ Changed to project directory: $projectPath" -ForegroundColor Green
+    try {
+        Set-Location $projectPath
+        Write-Host "✅ Changed to project directory: $projectPath" -ForegroundColor Green
+    } catch {
+        Write-Host "⚠️  Could not change to $projectPath, using current directory" -ForegroundColor Yellow
+    }
 } else {
+    Write-Host "⚠️  Directory $projectPath not found" -ForegroundColor Yellow
     Write-Host "⚠️  Using current directory: $(Get-Location)" -ForegroundColor Yellow
 }
 Write-Host ""
@@ -53,26 +64,54 @@ try {
 }
 Write-Host ""
 
-# Step 3: Remove broken reference
-Write-Host "🗑️  Step 3: Removing NEXT_PUBLIC_SITE_URL (if exists)..." -ForegroundColor Yellow
-try {
-    vercel env rm NEXT_PUBLIC_SITE_URL production --yes 2>&1 | Out-Null
-    Write-Host "✅ Removed old reference" -ForegroundColor Green
-} catch {
-    Write-Host "⚠️  Variable may not exist (that's okay)" -ForegroundColor Yellow
+# Step 3: Remove broken reference from ALL environments
+Write-Host "🗑️  Step 3: Removing NEXT_PUBLIC_SITE_URL from ALL environments..." -ForegroundColor Yellow
+Write-Host "   (This ensures no references remain)" -ForegroundColor Cyan
+
+# Remove from all possible environments
+$environments = @("production", "preview", "development")
+foreach ($env in $environments) {
+    try {
+        Write-Host "   Removing from $env..." -ForegroundColor Gray
+        $output = vercel env rm NEXT_PUBLIC_SITE_URL $env --yes 2>&1
+        if ($LASTEXITCODE -eq 0) {
+            Write-Host "   ✅ Removed from $env" -ForegroundColor Green
+        }
+    } catch {
+        Write-Host "   ⚠️  Not found in $env (okay)" -ForegroundColor Yellow
+    }
 }
+
+Write-Host "✅ Cleanup complete" -ForegroundColor Green
 Write-Host ""
 
 # Step 4: Add correct value
 Write-Host "➕ Step 4: Adding NEXT_PUBLIC_SITE_URL with literal value..." -ForegroundColor Yellow
-Write-Host "ℹ️  When prompted:" -ForegroundColor Cyan
-Write-Host "   - Enter: https://3000studios.com" -ForegroundColor Cyan
-Write-Host "   - Mark as sensitive? NO (Press N)" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Yellow
+Write-Host "⚠️  IMPORTANT: When prompted, provide these EXACT answers:" -ForegroundColor Yellow
+Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Yellow
+Write-Host ""
+Write-Host "   1. What's the value of NEXT_PUBLIC_SITE_URL?" -ForegroundColor Cyan
+Write-Host "      Answer: https://3000studios.com" -ForegroundColor Green
+Write-Host ""
+Write-Host "   2. Mark as sensitive?" -ForegroundColor Cyan
+Write-Host "      Answer: n  (or just press Enter)" -ForegroundColor Green
+Write-Host ""
+Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Yellow
 Write-Host ""
 
-vercel env add NEXT_PUBLIC_SITE_URL production --force
-
-Write-Host "✅ Added NEXT_PUBLIC_SITE_URL" -ForegroundColor Green
+try {
+    vercel env add NEXT_PUBLIC_SITE_URL production
+    Write-Host ""
+    Write-Host "✅ Added NEXT_PUBLIC_SITE_URL" -ForegroundColor Green
+} catch {
+    Write-Host ""
+    Write-Host "❌ Failed to add variable" -ForegroundColor Red
+    Write-Host "💡 Try manually:" -ForegroundColor Yellow
+    Write-Host "   vercel env add NEXT_PUBLIC_SITE_URL production" -ForegroundColor Cyan
+    exit 1
+}
 Write-Host ""
 
 # Step 5: Verify
