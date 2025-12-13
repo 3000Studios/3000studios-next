@@ -1,18 +1,18 @@
+import MarketTicker from "@/components/MarketTicker";
+import VideoGrid from "@/components/VideoGrid";
+import BlackHoleFooter from "@/components/BlackHoleFooter";
+
 export default function HomePage() {
   return (
-    <main style={{
-      minHeight: "100vh",
-      background: "black",
-      color: "white",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      fontFamily: "system-ui"
-    }}>
-      <div style={{ textAlign: "center" }}>
-        <h1 style={{ fontSize: "3rem" }}>3000 Studios</h1>
-        <p style={{ opacity: 0.8 }}>Shadow Prime is live.</p>
-      </div>
+    <main style={{ background: "#000", color: "#fff", minHeight: "100vh" }}>
+      <section style={{ padding: "6rem", textAlign: "center" }}>
+        <h1 style={{ fontSize: "4rem" }}>3000 Studios</h1>
+        <p>Shadow Prime is live.</p>
+      </section>
+
+      <VideoGrid />
+      <MarketTicker />
+      <BlackHoleFooter />
     </main>
   );
 }
