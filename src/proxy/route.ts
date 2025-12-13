@@ -1,11 +1,11 @@
-import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 /**
- * Middleware: Guard /matrix route
+ * Proxy: Guard /matrix route
  * Redirects unauthenticated requests to /login
+ * Migrated from middleware to proxy for Next.js 16+
  */
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Protect /matrix route

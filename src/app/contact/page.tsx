@@ -6,8 +6,8 @@
 
 'use client';
 
+import { AlertCircle, Check, Loader2, Mail, MapPin, Phone, Send } from 'lucide-react';
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Check, AlertCircle, Loader2 } from 'lucide-react';
 import GoogleMap from '../components/GoogleMap';
 
 export default function ContactPage() {
@@ -28,7 +28,7 @@ export default function ContactPage() {
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-    
+
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
@@ -37,14 +37,14 @@ export default function ContactPage() {
     }
     if (!formData.message.trim()) newErrors.message = 'Message is required';
     if (formData.message.length < 20) newErrors.message = 'Message must be at least 20 characters';
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       setSubmitStatus('error');
       setSubmitMessage('Please fix the errors above');
@@ -68,18 +68,18 @@ export default function ContactPage() {
 
       setSubmitStatus('success');
       setSubmitMessage('Thank you! We\'ll get back to you within 24 hours.');
-      setFormData({ 
-        name: '', 
-        email: '', 
-        phone: '', 
-        company: '', 
-        subject: '', 
-        budget: '', 
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        subject: '',
+        budget: '',
         message: '',
         newsletter: true,
       });
       setErrors({});
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
       setSubmitMessage('Something went wrong. Please try again later.');
     } finally {
@@ -90,12 +90,12 @@ export default function ContactPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
-    
+
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
-    
+
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
@@ -199,7 +199,7 @@ export default function ContactPage() {
           <div className="lg:col-span-2">
             <div className="card">
               <h2 className="text-2xl font-bold text-white mb-6">Send us a Message</h2>
-              
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Name */}
@@ -411,7 +411,7 @@ export default function ContactPage() {
         {/* Google Maps Integration */}
         <div className="mt-12 card p-0 overflow-hidden hover-lift">
           <div className="w-full h-96">
-            <GoogleMap 
+            <GoogleMap
               apiKey={process.env.NEXT_PUBLIC_MAPS_API || 'YOUR_GOOGLE_MAPS_API_KEY_HERE'}
               center={{ lat: 33.7490, lng: -84.3880 }} // Atlanta, Georgia
               zoom={13}

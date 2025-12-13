@@ -1,7 +1,7 @@
 'use client';
 
 import { AlertCircle, CheckCircle, Eye, Mic, StopCircle } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface CodePatch {
   file: string;
@@ -20,9 +20,6 @@ interface VoiceResponse {
 }
 
 export default function VoiceCodeEditor() {
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const chunksRef = useRef<Blob[]>([]);
-
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
@@ -30,9 +27,27 @@ export default function VoiceCodeEditor() {
   const [showPreview, setShowPreview] = useState(false);
   const [error, setError] = useState('');
   const [status, setStatus] = useState('');
+  const recognitionRef = useRef<any>(null);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (recognitionRef.current) {
+        try {
+          recognitionRef.current.stop();
+        } catch {}
+        recognitionRef.current = null;
+      }
+    };
+  }, []);
 
   // Browser Web Speech API for voice recognition
   const startListening = async () => {
+    // Prevent double-listen: if already listening, do nothing
+    if (isListening || recognitionRef.current) {
+      return;
+    }
+
     try {
       setError('');
       setStatus('🎤 Listening...');
@@ -44,6 +59,7 @@ export default function VoiceCodeEditor() {
       }
 
       const recognition = new SpeechRecognition();
+      recognitionRef.current = recognition;
       recognition.continuous = true;
       recognition.interimResults = true;
       recognition.language = 'en-US';
@@ -69,23 +85,40 @@ export default function VoiceCodeEditor() {
       };
 
       recognition.onerror = (event: any) => {
+        console.error('[VOICE] Recognition error:', event.error);
         setError(`Error: ${event.error}`);
         setIsListening(false);
+        recognitionRef.current = null;
+        
+        // Auto-disable on repeated errors (failsafe)
+        if (event.error === 'no-speech' || event.error === 'aborted') {
+          setStatus('⚠️ Voice disabled - click "Start Speaking" to retry');
+        }
       };
 
       recognition.onend = () => {
         setIsListening(false);
         setStatus('');
+        recognitionRef.current = null;
       };
 
       recognition.start();
     } catch (err) {
       setError(`Listening failed: ${err}`);
       setIsListening(false);
+      recognitionRef.current = null;
     }
   };
 
   const stopListening = () => {
+    if (recognitionRef.current) {
+      try {
+        recognitionRef.current.stop();
+      } catch (err) {
+        console.error('Stop recognition error:', err);
+      }
+      recognitionRef.current = null;
+    }
     setIsListening(false);
     setStatus('');
   };
@@ -134,8 +167,22 @@ export default function VoiceCodeEditor() {
     setStatus('📤 Committing changes...');
 
     try {
-      // Here you would call an API to actually commit the changes
-      // For now, just show a success message
+      // Call API to commit the changes
+      const res = await fetch('/api/voice-to-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          transcript: transcript.trim(),
+          action: 'commit',
+        }),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        setError(errorData.error || 'Failed to commit changes');
+        return;
+      }
+
       setStatus('✅ Changes committed! Ready to deploy.');
       setTimeout(() => {
         setTranscript('');

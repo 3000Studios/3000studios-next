@@ -12,7 +12,9 @@ const openai = new OpenAI({
 });
 
 interface VoiceInput {
-  transcript: string;
+  transcript?: string;
+  audio?: string;
+  prompt?: string;
   currentContext?: string;
   action?: 'preview' | 'commit' | 'deploy';
 }
@@ -37,11 +39,43 @@ interface VoiceToCodeResponse {
 export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as VoiceInput;
-    const { transcript, currentContext, action } = body;
+    const { transcript, audio, prompt, currentContext, action } = body;
 
-    if (!transcript) {
+    const userInput = transcript || prompt;
+
+    if (!userInput && !audio) {
       return NextResponse.json(
-        { error: 'Transcript required' },
+        { error: 'Transcript, prompt, or audio required' },
+        { status: 400 }
+      );
+    }
+
+    let finalTranscript = userInput || '';
+
+    // If audio provided, transcribe it first
+    if (audio && process.env.OPENAI_API_KEY) {
+      try {
+        const audioBuffer = Buffer.from(audio, 'base64');
+        const audioFile = new File([audioBuffer], 'audio.webm', { type: 'audio/webm' });
+
+        const transcription = await openai.audio.transcriptions.create({
+          file: audioFile,
+          model: 'whisper-1',
+        });
+
+        finalTranscript = transcription.text;
+      } catch (err) {
+        console.error('Transcription error:', err);
+        return NextResponse.json(
+          { error: 'Failed to transcribe audio' },
+          { status: 500 }
+        );
+      }
+    }
+
+    if (!finalTranscript) {
+      return NextResponse.json(
+        { error: 'No valid input to process' },
         { status: 400 }
       );
     }
@@ -103,7 +137,7 @@ RESPOND WITH ONLY THIS JSON STRUCTURE:
         },
         {
           role: 'user',
-          content: `User request: "${transcript}"
+          content: `User request: "${finalTranscript}"
 
 Current site context: ${currentContext || 'Home page with video wallpaper and components'}
 

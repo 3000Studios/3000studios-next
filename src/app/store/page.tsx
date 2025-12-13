@@ -7,13 +7,13 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Search, ShoppingCart, Filter, Star, Loader2, SlidersHorizontal, ArrowUpDown } from 'lucide-react';
-import { useProducts, usePayPalCheckout } from '@/hooks/useAPI';
-import { productCatalog, getAllCategories } from '../lib/productData';
-import LoadingSkeleton from '../components/LoadingSkeleton';
+import { usePayPalCheckout, useProducts } from '@/hooks/useAPI';
+import { Filter, Loader2, Search, ShoppingCart, SlidersHorizontal, Star } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
 import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
+import LoadingSkeleton from '../components/LoadingSkeleton';
 import Newsletter from '../components/Newsletter';
+import { getAllCategories, productCatalog } from '../lib/productData';
 
 interface Product {
   productId: string;
@@ -46,11 +46,7 @@ export default function StorePage() {
   const { fetchProducts } = useProducts();
   const { createOrder, loading: checkoutLoading, error: checkoutError } = usePayPalCheckout();
 
-  useEffect(() => {
-    loadProducts();
-  }, []);
-
-  const loadProducts = async () => {
+  const loadProducts = useCallback(async () => {
     try {
       // Try to fetch from API first
       const data = await fetchProducts();
@@ -67,7 +63,11 @@ export default function StorePage() {
     } finally {
       setIsLoadingProducts(false);
     }
-  };
+  }, [fetchProducts]);
+
+  useEffect(() => {
+    loadProducts();
+  }, [loadProducts]);
 
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -130,7 +130,7 @@ export default function StorePage() {
       if (orderData.approvalUrl) {
         window.location.href = orderData.approvalUrl;
       }
-    } catch (err) {
+    } catch {
       alert('Checkout failed. Please try again.');
     }
   };
@@ -152,8 +152,8 @@ export default function StorePage() {
                 Discover our curated collection of {products.length}+ digital products
               </p>
             </div>
-            <button 
-              className="relative p-3 glass-premium rounded-lg border border-gold hover:bg-gold/10 transition-all hover-lift" 
+            <button
+              className="relative p-3 glass-premium rounded-lg border border-gold hover:bg-gold/10 transition-all hover-lift"
               onClick={handleCheckout}
               aria-label="View shopping cart"
             >
@@ -234,8 +234,8 @@ export default function StorePage() {
         </div>
 
         {/* Google Ads Placeholder - Revenue Generation */}
-        <GoogleAdsPlaceholder 
-          slot="store-top-banner" 
+        <GoogleAdsPlaceholder
+          slot="store-top-banner"
           format="horizontal"
           className="mb-8"
         />
@@ -291,7 +291,7 @@ export default function StorePage() {
                     {product.tags && product.tags.length > 0 && (
                       <div className="flex flex-wrap gap-1 mt-2">
                         {product.tags.slice(0, 2).map((tag, idx) => (
-                          <span 
+                          <span
                             key={idx}
                             className="px-2 py-0.5 bg-sapphire/20 text-sapphire rounded text-xs"
                           >
@@ -367,7 +367,7 @@ export default function StorePage() {
           <div className="text-center py-12">
             <div className="text-6xl mb-4 opacity-50">🔍</div>
             <p className="text-gray-400 text-lg mb-4">No products found matching your criteria</p>
-            <button 
+            <button
               onClick={() => {
                 setSearchTerm('');
                 setSelectedCategory('All');
@@ -382,8 +382,8 @@ export default function StorePage() {
 
         {/* Mid-Content Ad */}
         {sortedProducts.length > 8 && (
-          <GoogleAdsPlaceholder 
-            slot="store-mid-content" 
+          <GoogleAdsPlaceholder
+            slot="store-mid-content"
             format="rectangle"
             className="my-12"
           />
@@ -391,7 +391,7 @@ export default function StorePage() {
 
         {/* Newsletter Signup */}
         <div className="my-12">
-          <Newsletter 
+          <Newsletter
             title="Get Exclusive Product Updates"
             description="Be the first to know about new products, special discounts, and limited-time offers"
             showBenefits={false}

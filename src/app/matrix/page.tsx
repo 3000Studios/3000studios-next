@@ -66,7 +66,7 @@ export default function MatrixPage() {
   const [userEmail, setUserEmail] = useState('');
 
   useEffect(() => {
-    // Check authentication via API
+    // Auth check - middleware pre-verified
     const token = localStorage.getItem('auth_token');
     if (!token) {
       router.push('/login');
@@ -74,7 +74,7 @@ export default function MatrixPage() {
     }
 
     setIsAuthenticated(true);
-    setUserEmail(token ? 'admin' : '');
+    setUserEmail('admin');
     setIsLoading(false);
 
     // Update time
@@ -97,9 +97,14 @@ export default function MatrixPage() {
   }, [router]);
 
   const handleLogout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST' });
-    localStorage.removeItem('auth_token');
-    router.push('/login');
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch (error) {
+      console.error('Logout failed:', error);
+    } finally {
+      localStorage.removeItem('auth_token');
+      router.push('/login');
+    }
   };
 
   if (isLoading) {
