@@ -6,25 +6,23 @@
 
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface VideoWallpaperProps {
   videoSrc?: string;
-  fallbackGradient?: boolean;
   opacity?: number;
 }
 
-export default function VideoWallpaper({ 
-  videoSrc, 
-  fallbackGradient = true,
-  opacity = 0.3 
+export default function VideoWallpaper({
+  videoSrc,
+  opacity = 0.3
 }: VideoWallpaperProps) {
   const [videoLoaded, setVideoLoaded] = useState(false);
 
   return (
     <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
       {/* Animated Gradient Background */}
-      <div 
+      <div
         className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"
         style={{ opacity: videoLoaded ? 0 : 1 }}
       >

@@ -4,26 +4,36 @@
  * Award-winning UI with premium animations and interactive elements
  */
 
+'use client';
+
+import { ArrowRight, Globe, Sparkles, Zap } from 'lucide-react';
 import Link from 'next/link';
-import { ArrowRight, Sparkles, Zap, Globe } from 'lucide-react';
-import ShadowAvatar from './components/ShadowAvatar';
-import ParticleBackground from './components/ParticleBackground';
-import AnimatedStats from './components/AnimatedStats';
-import TestimonialsCarousel from './components/TestimonialsCarousel';
-import PremiumCTA from './components/PremiumCTA';
-import ServicesShowcase from './components/ServicesShowcase';
-import GoogleAdsPlaceholder from './components/GoogleAdsPlaceholder';
-import Newsletter from './components/Newsletter';
+import { lazy, Suspense } from 'react';
+import LoadingSkeleton from './components/LoadingSkeleton';
+
+// Lazy-load heavy components
+const ShadowAvatar = lazy(() => import('./components/ShadowAvatar'));
+const ParticleBackground = lazy(() => import('./components/ParticleBackground'));
+const AnimatedStats = lazy(() => import('./components/AnimatedStats'));
+const TestimonialsCarousel = lazy(() => import('./components/TestimonialsCarousel'));
+const PremiumCTA = lazy(() => import('./components/PremiumCTA'));
+const ServicesShowcase = lazy(() => import('./components/ServicesShowcase'));
+const GoogleAdsPlaceholder = lazy(() => import('./components/GoogleAdsPlaceholder'));
+const Newsletter = lazy(() => import('./components/Newsletter'));
 
 export default function Home() {
   return (
     <div className="min-h-screen mesh-gradient relative">
       {/* Animated Particle Background */}
-      <ParticleBackground />
-      
+      <Suspense fallback={<div className="fixed inset-0 bg-black" />}>
+        <ParticleBackground />
+      </Suspense>
+
       {/* Shadow AI Avatar - Conversational Assistant */}
-      <ShadowAvatar />
-      
+      <Suspense fallback={null}>
+        <ShadowAvatar />
+      </Suspense>
+
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
         {/* Animated Background Effect */}
@@ -100,24 +110,31 @@ export default function Home() {
       </section>
 
       {/* Animated Statistics */}
-      <AnimatedStats />
+      <Suspense fallback={<LoadingSkeleton />}>
+        <AnimatedStats />
+      </Suspense>
 
       {/* Services Showcase - Revenue Generation */}
-      <ServicesShowcase />
+      <Suspense fallback={<LoadingSkeleton />}>
+        <ServicesShowcase />
+      </Suspense>
 
       {/* Testimonials */}
-      <TestimonialsCarousel />
+      <Suspense fallback={<LoadingSkeleton />}>
+        <TestimonialsCarousel />
+      </Suspense>
 
       {/* Google Ads Placeholder - Revenue Generation */}
       <div className="py-12 px-4">
-        <GoogleAdsPlaceholder 
-          slot="home-mid-content" 
-          format="rectangle"
-          className="max-w-6xl mx-auto"
-        />
+        <Suspense fallback={<div className="h-64 w-full skeleton rounded-lg" />}>
+          <GoogleAdsPlaceholder
+            slot="home-mid-content"
+            format="rectangle"
+            className="max-w-6xl mx-auto"
+          />
+        </Suspense>
       </div>
 
-      {/* Featured Section */}
       <section className="py-20 px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
@@ -157,20 +174,23 @@ export default function Home() {
       </section>
 
       {/* Premium CTA */}
-      <PremiumCTA />
+      <Suspense fallback={<LoadingSkeleton />}>
+        <PremiumCTA />
+      </Suspense>
 
       {/* Newsletter Section - Revenue/Lead Generation */}
       <section className="py-12 px-4">
         <div className="max-w-6xl mx-auto">
-          <Newsletter 
-            variant="hero"
-            title="Join Our Exclusive Community"
-            description="Get insider access to cutting-edge design trends, development tips, and exclusive offers"
-          />
+          <Suspense fallback={<div className="h-32 w-full skeleton rounded-lg" />}>
+            <Newsletter
+              variant="hero"
+              title="Join Our Exclusive Community"
+              description="Get insider access to cutting-edge design trends, development tips, and exclusive offers"
+            />
+          </Suspense>
         </div>
       </section>
 
     </div>
-  );
-}
-
+    );
+  }

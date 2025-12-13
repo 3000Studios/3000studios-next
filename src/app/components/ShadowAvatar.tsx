@@ -7,15 +7,15 @@
  * - Gyroscope responsive (on mobile)
  * - Does NOT edit the website (that's only in THE MATRIX)
  * - Fun, conversational personality
- * 
+ *
  * NOTE: Full 3D implementation requires Three.js/R3F
  * This is a foundational structure that can be enhanced with 3D models
  */
 
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
 import { Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export default function ShadowAvatar() {
   const [isListening, setIsListening] = useState(false);
@@ -25,12 +25,37 @@ export default function ShadowAvatar() {
   const [audioEnabled, setAudioEnabled] = useState(true);
   const recognitionRef = useRef<any>(null);
 
+  const handleUserInput = useCallback(async (_input: string) => {
+    // Simulate AI response (in production, this would call an AI API)
+    const responses = [
+      "That's interesting! Want to check out our store?",
+      "I like the way you think! Have you seen our projects?",
+      "Great question! I'm here to help you navigate 3000 Studios.",
+      "Fascinating! You should definitely explore our portfolio.",
+      "I hear you! Let me know if you want to see what we're working on.",
+      "Cool! Check out our live streams for more content.",
+    ];
+
+    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+    setAvatarText(randomResponse);
+
+    // Text-to-speech if enabled
+    if (audioEnabled && 'speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(randomResponse);
+      utterance.rate = 1.1;
+      utterance.pitch = 1.0;
+      utterance.onstart = () => setIsSpeaking(true);
+      utterance.onend = () => setIsSpeaking(false);
+      window.speechSynthesis.speak(utterance);
+    }
+  }, [audioEnabled]);
+
   // Initialize speech recognition
   useEffect(() => {
     if (typeof window !== 'undefined') {
       // Check for standard API first, then webkit
       const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-      
+
       if (!SpeechRecognition) {
         console.warn('Speech recognition not supported in this browser');
         setAvatarText("Hey! Speech recognition isn't supported in your browser, but I can still chat via text!");
@@ -57,7 +82,7 @@ export default function ShadowAvatar() {
         setIsListening(false);
       };
     }
-  }, []);
+  }, [handleUserInput]);
 
   const toggleListening = () => {
     if (!recognitionRef.current) {
@@ -74,30 +99,6 @@ export default function ShadowAvatar() {
     }
   };
 
-  const handleUserInput = async (input: string) => {
-    // Simulate AI response (in production, this would call an AI API)
-    const responses = [
-      "That's interesting! Want to check out our store?",
-      "I like the way you think! Have you seen our projects?",
-      "Great question! I'm here to help you navigate 3000 Studios.",
-      "Fascinating! You should definitely explore our portfolio.",
-      "I hear you! Let me know if you want to see what we're working on.",
-      "Cool! Check out our live streams for more content.",
-    ];
-    
-    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-    setAvatarText(randomResponse);
-    
-    // Text-to-speech if enabled
-    if (audioEnabled && 'speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance(randomResponse);
-      utterance.rate = 1.1;
-      utterance.pitch = 1.0;
-      utterance.onstart = () => setIsSpeaking(true);
-      utterance.onend = () => setIsSpeaking(false);
-      window.speechSynthesis.speak(utterance);
-    }
-  };
 
   return (
     <div className="fixed bottom-8 right-8 z-50 max-w-sm">

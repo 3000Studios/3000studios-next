@@ -7,12 +7,12 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Users, MessageCircle, Radio } from 'lucide-react';
+import { MessageCircle, Radio, Users } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export default function LivePage() {
   const [viewerCount, setViewerCount] = useState(42);
-  const [isLive, setIsLive] = useState(false);
+  const [isLive] = useState(false);
 
   useEffect(() => {
     // Simulate viewer count updates
@@ -88,7 +88,7 @@ export default function LivePage() {
                 <MessageCircle className="text-gold" size={24} />
                 <h3 className="text-xl font-bold text-white">Live Chat</h3>
               </div>
-              
+
               <div className="flex-1 space-y-3 mb-4 overflow-y-auto max-h-96">
                 {[
                   { user: 'Viewer123', message: 'Great stream!', time: '2m ago' },

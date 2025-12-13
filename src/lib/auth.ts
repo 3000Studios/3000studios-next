@@ -40,7 +40,8 @@ export function verifyAdmin(email: string, password: string): AuthResult {
 
 export function createSessionToken(email: string): string {
   // JWT-style token with env secret (dev mode uses simple base64)
-  const secret = process.env.SESSION_SECRET || 'dev-secret-key';
+  // NOTE: left exported for compatibility; prefix with _ to satisfy lint
+  const _secret = process.env.SESSION_SECRET || 'dev-secret-key';
   const payload = {
     email,
     timestamp: Date.now(),

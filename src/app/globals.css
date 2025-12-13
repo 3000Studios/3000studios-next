@@ -7,10 +7,12 @@
 @import "tailwindcss";
 
 :root {
-  /* Primary Brand Colors - Luxury Theme */
-  --gold: #FFD700;
-  --platinum: #E5E4E2;
-  --sapphire: #0F52BA;
+  /* Brand Colors */
+  --gold: #ffd700;
+  --platinum: #e5e4e2;
+  --sapphire: #0f52ba;
+  --color-platinum: #E5E4E2; /* legacy alias */
+  --color-sapphire: #0F52BA; /* legacy alias */
   --dark-bg: #0a0a0a;
   --light-bg: #ffffff;
 
@@ -36,11 +38,6 @@
   --electric-blue: #00f3ff;
   --electric-purple: #bc13fe;
   --neon-glow: 0 0 10px var(--electric-blue), 0 0 20px var(--electric-blue), 0 0 40px var(--electric-blue);
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
 }
 
 @keyframes electric-flicker {
@@ -176,17 +173,18 @@ a:hover {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Particle Effects */
+/* Particle Effects - GPU accelerated */
 @keyframes float {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(0px) translateZ(0);
   }
   50% {
-    transform: translateY(-20px);
+    transform: translateY(-20px) translateZ(0);
   }
 }
 
 .float-animation {
+  will-change: transform;
   animation: float 6s ease-in-out infinite;
 }
 
@@ -272,19 +270,24 @@ a:hover {
   animation: slideInLeft 0.8s ease-out forwards;
 }
 
-/* Premium Hover Effects */
+/* Premium Hover Effects - GPU accelerated */
 .hover-lift {
+  will-change: transform, box-shadow;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .hover-lift:hover {
-  transform: translateY(-8px) scale(1.02);
+  transform: translateY(-8px) scale(1.02) translateZ(0);
   box-shadow: 0 12px 24px rgba(255, 215, 0, 0.3);
 }
 
-/* Tilt Effect */
+/* Tilt Effect - GPU accelerated */
+.tilt {
+  will-change: transform;
+}
+
 .tilt:hover {
-  transform: perspective(1000px) rotateX(2deg) rotateY(2deg);
+  transform: perspective(1000px) rotateX(2deg) rotateY(2deg) translateZ(0);
   transition: transform 0.5s ease;
 }
 
@@ -442,15 +445,23 @@ a:hover {
   animation: bounce 1s infinite;
 }
 
-/* Enhanced Hover States */
-.hover-scale:hover {
-  transform: scale(1.05);
+/* Enhanced Hover States - GPU accelerated */
+.hover-scale {
+  will-change: transform;
   transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05) translateZ(0);
+}
+
+.hover-glow {
+  will-change: box-shadow;
+  transition: box-shadow 0.3s ease;
 }
 
 .hover-glow:hover {
   box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
-  transition: box-shadow 0.3s ease;
 }
 
 /* Focus States for Accessibility */
@@ -465,7 +476,7 @@ a:focus-visible {
   outline-offset: 2px;
 }
 
-/* Enhanced Card Variants */
+/* Enhanced Card Variants - GPU accelerated */
 .card-premium {
   background: linear-gradient(
     135deg,
@@ -479,11 +490,12 @@ a:focus-visible {
   box-shadow:
     0 10px 40px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  will-change: transform, border-color, box-shadow;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-premium:hover {
-  transform: translateY(-8px) scale(1.02);
+  transform: translateY(-8px) scale(1.02) translateZ(0);
   border-color: var(--gold);
   box-shadow:
     0 20px 60px rgba(255, 215, 0, 0.4),

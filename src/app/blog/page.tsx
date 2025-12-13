@@ -6,19 +6,19 @@
 
 'use client';
 
-import { useState } from 'react';
-import { Calendar, Clock, User, Search, Tag } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { blogPosts, getAllCategories, getAllTags } from '../lib/blogData';
-import Newsletter from '../components/Newsletter';
-import LoadingSkeleton from '../components/LoadingSkeleton';
+import { Calendar, Clock, Search, Tag, User } from 'lucide-react';
+import { useState } from 'react';
 import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
+import LoadingSkeleton from '../components/LoadingSkeleton';
+import Newsletter from '../components/Newsletter';
+import { blogPosts, getAllCategories, getAllTags } from '../lib/blogData';
 
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [email, setEmail] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [_email, _setEmail] = useState('');
+  const [_isLoading, _setIsLoading] = useState(false);
 
   const categories = ['All', ...getAllCategories()];
 
@@ -26,9 +26,9 @@ export default function BlogPage() {
     const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          post.content.toLowerCase().includes(searchTerm.toLowerCase());
-    
+
     const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
-    
+
     return matchesSearch && matchesCategory;
   });
 
@@ -78,14 +78,14 @@ export default function BlogPage() {
         </div>
 
         {/* Google Ads Placeholder - Revenue Generation */}
-        <GoogleAdsPlaceholder 
-          slot="blog-top-banner" 
+        <GoogleAdsPlaceholder
+          slot="blog-top-banner"
           format="horizontal"
           className="mb-8"
         />
 
         {/* Blog Posts Grid */}
-        {isLoading ? (
+        {_isLoading ? (
           <div className="space-y-8">
             <LoadingSkeleton variant="blog" count={3} />
           </div>
@@ -136,11 +136,11 @@ export default function BlogPage() {
                         </span>
                       ))}
                     </div>
-                    
+
                     <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 group-hover:text-gold transition-colors">
                       {post.title}
                     </h2>
-                    
+
                     <p className="text-gray-400 mb-4 line-clamp-3">
                       {post.excerpt}
                     </p>
@@ -171,11 +171,11 @@ export default function BlogPage() {
         )}
 
         {/* No Results */}
-        {filteredPosts.length === 0 && !isLoading && (
+        {filteredPosts.length === 0 && !_isLoading && (
           <div className="text-center py-12">
             <div className="text-6xl mb-4 opacity-50">📝</div>
             <p className="text-gray-400 text-lg">No articles found matching your search</p>
-            <button 
+            <button
               onClick={() => { setSearchTerm(''); setSelectedCategory('All'); }}
               className="mt-4 px-6 py-2 bg-gold text-black font-semibold rounded-lg hover:bg-platinum transition-all"
             >
@@ -186,8 +186,8 @@ export default function BlogPage() {
 
         {/* Mid-Content Ad */}
         {filteredPosts.length > 5 && (
-          <GoogleAdsPlaceholder 
-            slot="blog-mid-content" 
+          <GoogleAdsPlaceholder
+            slot="blog-mid-content"
             format="rectangle"
             className="my-12"
           />
@@ -201,7 +201,7 @@ export default function BlogPage() {
           viewport={{ once: true }}
           className="mt-16"
         >
-          <Newsletter 
+          <Newsletter
             title="Join 1,000+ Subscribers"
             description="Get exclusive insights, industry trends, and special offers delivered to your inbox"
             showBenefits={true}

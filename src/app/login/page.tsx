@@ -24,8 +24,7 @@ export default function LoginPage() {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('auth_token', data.token);
+        // Cookie is set server-side via Set-Cookie header
         router.push('/matrix');
       } else {
         const data = await response.json();
