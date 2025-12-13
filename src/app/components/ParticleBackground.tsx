@@ -70,7 +70,7 @@ export default function ParticleBackground() {
     // Create particles
     const particles: Particle[] = [];
     const particleCount = 100;
-    
+
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
     }
@@ -78,7 +78,7 @@ export default function ParticleBackground() {
     // Mouse interaction
     let mouseX = 0;
     let mouseY = 0;
-    let mouseRadius = 100;
+    const mouseRadius = 100;
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
