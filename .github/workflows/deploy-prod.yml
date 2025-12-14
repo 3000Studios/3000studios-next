@@ -43,7 +43,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build locally to validate
+        run: pnpm build
+
       - name: Deploy to Vercel
         run: |
           npm install -g vercel
-          vercel --prod --token="${{ secrets.VERCEL_TOKEN }}"
+          vercel --prod --token="${{ secrets.VERCEL_TOKEN }}" --yes
