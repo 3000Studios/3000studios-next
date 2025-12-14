@@ -48,14 +48,14 @@ jobs:
         run: |
           npm install -g vercel
           vercel --prod --token=${{ secrets.VERCEL_TOKEN }} --yes \
-            -e NEXT_PUBLIC_SITE_URL=https://3000studios.com \
-            -e OPENAI_API_KEY=$OPENAI_API_KEY \
-            -e CLAUDE_API_KEY=$CLAUDE_API_KEY \
-            -e CLAUDE_ALT_KEY=$CLAUDE_ALT_KEY \
-            -e GEMINI_API_KEY=$GEMINI_API_KEY \
-            -e GEMINI_ALT_KEY=$GEMINI_ALT_KEY \
-            -e AI_GATEWAY_API_KEY=$AI_GATEWAY_API_KEY \
-            -e PAYPAL_CLIENT_ID=$PAYPAL_CLIENT_ID \
-            -e PAYPAL_CLIENT_SECRET=$PAYPAL_CLIENT_SECRET \
-            -e STRIPE_SECRET_KEY=$STRIPE_SECRET_KEY \
-            -e GOOGLE_MAPS_API_KEY=$GOOGLE_MAPS_API_KEY
+            --build-env NEXT_PUBLIC_SITE_URL=https://3000studios.com \
+            --build-env OPENAI_API_KEY=$OPENAI_API_KEY \
+            --build-env CLAUDE_API_KEY=$CLAUDE_API_KEY \
+            --build-env CLAUDE_ALT_KEY=$CLAUDE_ALT_KEY \
+            --build-env GEMINI_API_KEY=$GEMINI_API_KEY \
+            --build-env GEMINI_ALT_KEY=$GEMINI_ALT_KEY \
+            --build-env AI_GATEWAY_API_KEY=$AI_GATEWAY_API_KEY \
+            --build-env PAYPAL_CLIENT_ID=$PAYPAL_CLIENT_ID \
+            --build-env PAYPAL_CLIENT_SECRET=$PAYPAL_CLIENT_SECRET \
+            --build-env STRIPE_SECRET_KEY=$STRIPE_SECRET_KEY \
+            --build-env GOOGLE_MAPS_API_KEY=$GOOGLE_MAPS_API_KEY
