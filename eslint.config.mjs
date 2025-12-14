@@ -36,3 +36,4 @@ const eslintConfig = defineConfig([
 ]);
 
 export default eslintConfig;
+✅ VERCEL ENV FIXED — RUNNING vercel --prod --force
