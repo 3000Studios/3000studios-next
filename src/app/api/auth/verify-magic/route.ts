@@ -49,6 +49,7 @@ export async function POST(request: NextRequest) {
       {
         success: true,
         message: 'Authentication successful',
+        token: sessionToken,
         user: {
           email: data.email,
           role: 'admin',
