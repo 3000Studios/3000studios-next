@@ -11,9 +11,9 @@ Write-Host "========================================`n" -ForegroundColor Cyan
 $allGood = $true
 
 # ============================================
-# 1. Git Configuration
+# 3. Git Configuration
 # ============================================
-Write-Host "1️⃣  Checking Git Configuration..." -ForegroundColor Yellow
+Write-Host "`n3️⃣  Checking Git Configuration..." -ForegroundColor Yellow
 
 try {
     $gitVersion = git --version
@@ -39,10 +39,13 @@ try {
 
 try {
     $remote = git remote get-url origin 2>$null
-    if ($remote -match "github.com/3000Studios/3000studios-next") {
+    if ($remote -match "github.com") {
         Write-Host "   ✅ Remote configured: $remote" -ForegroundColor Green
+    } elseif ($remote) {
+        Write-Host "   ✅ Remote configured: $remote" -ForegroundColor Green
+        Write-Host "      (Non-GitHub remote detected)" -ForegroundColor Gray
     } else {
-        Write-Host "   ⚠️  Remote URL unexpected: $remote" -ForegroundColor Yellow
+        Write-Host "   ⚠️  No remote configured" -ForegroundColor Yellow
     }
 } catch {
     Write-Host "   ❌ Git remote not configured" -ForegroundColor Red
