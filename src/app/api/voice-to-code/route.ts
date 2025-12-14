@@ -71,7 +71,8 @@ export async function POST(request: NextRequest) {
         const audioBuffer = Buffer.from(audio, 'base64');
         const audioFile = new File([audioBuffer], 'audio.webm', { type: 'audio/webm' });
 
-        const transcription = await (await getOpenAI()).audio.transcriptions.create({
+        const openai = await getOpenAI();
+        const transcription = await openai.audio.transcriptions.create({
           file: audioFile,
           model: 'whisper-1',
         });
@@ -141,7 +142,8 @@ RESPOND WITH ONLY THIS JSON STRUCTURE:
   ]
 }`;
 
-    const message = await (await getOpenAI()).chat.completions.create({
+    const openai = await getOpenAI();
+    const message = await openai.chat.completions.create({
       model: 'gpt-4o',
       messages: [
         {
