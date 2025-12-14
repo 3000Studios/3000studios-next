@@ -115,13 +115,17 @@ This project includes comprehensive documentation for keeping your local VS Code
 
 ### 🛠️ Scripts
 
-#### Synchronization Scripts
+#### Utility Scripts
 
 - **`scripts/secure-sync.ps1`** - Secure Git sync with authentication check
 - **`scripts/auto-sync.ps1`** - Automated sync script
+- **`scripts/validate-sync.ps1`** - Health check and validation script
+- **`scripts/release-merge.ps1`** - Three-phase PR merge automation (PowerShell)
+- **`scripts/release-merge.sh`** - Three-phase PR merge automation (Bash)
+- **`scripts/RELEASE_SCRIPTS_README.md`** - Release scripts usage guide
 - **`push-to-github.sh`** - Safe push script with confirmation
 
-#### Utility Scripts
+#### Monitoring & Health
 
 - **`scripts/shadow-watch.ps1`** - Watch mode for development
 - **`scripts/shadow-health.mjs`** - Health check script
@@ -130,6 +134,18 @@ This project includes comprehensive documentation for keeping your local VS Code
 ---
 
 ## 🎯 Use Cases - Find What You Need
+
+### "I want to merge multiple PRs safely"
+1. Read [scripts/RELEASE_SCRIPTS_README.md](scripts/RELEASE_SCRIPTS_README.md) for release script usage
+2. Run dry-run first: `.\scripts\release-merge.ps1 -DryRun`
+3. Execute: `.\scripts\release-merge.ps1` (creates backups, tests PRs, merges safely)
+4. Monitor deployment in Vercel dashboard
+
+### "I need to rollback a deployment"
+1. Check backup tag/branch created by release script
+2. Run: `git checkout v-pre-merge-YYYY-MM-DD`
+3. Push: `git push origin v-pre-merge-YYYY-MM-DD:main --force`
+4. Vercel automatically redeploys rollback
 
 ### "I'm setting up the project for the first time"
 1. Read [README.md](README.md) for project overview

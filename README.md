@@ -68,6 +68,13 @@ Keep your local workspace, GitHub, and Vercel perfectly synchronized:
 
 **Quick Sync**: Use `.\scripts\secure-sync.ps1` for one-command synchronization.
 
+### 🚀 Release Management
+
+Safe PR merging with automated verification and rollback:
+
+- **[scripts/RELEASE_SCRIPTS_README.md](scripts/RELEASE_SCRIPTS_README.md)** - Release scripts usage guide
+- **Quick Start**: Run `.\scripts\release-merge.ps1 -DryRun` (Windows) or `./scripts/release-merge.sh --dry-run` (Linux/macOS)
+
 ## 🔐 Environment Variables
 
 Create a `.env.local` file in the root directory (see `.env.example` for template):
