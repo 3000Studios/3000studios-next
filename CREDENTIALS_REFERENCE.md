@@ -1,14 +1,18 @@
 # 🔐 3000 Studios - Login Credentials & Authentication Reference
 
+> **📢 NOTE:** This document consolidates credential information that is already publicly available in `.env.example`. These are DEVELOPMENT/TEMPLATE credentials only. For production, you MUST use secure, unique credentials stored in environment variables that are NEVER committed to version control.
+
 ## 📋 Quick Access
 
 ### Admin Login (THE MATRIX Dashboard)
 
 **Login Page:** `/login` → Redirects to `/matrix` on success
 
-**Credentials:**
+**Development Credentials (from `.env.example`):**
 - **Email:** `mr.jwswain@gmail.com`
 - **Password:** `Bossman3000!!!`
+
+**⚠️ PRODUCTION WARNING:** Change these credentials immediately for production use! These are example values only.
 
 **Environment Variables Used:**
 - `MATRIX_ADMIN_EMAIL` (falls back to hardcoded in `.env.example`)
@@ -51,10 +55,14 @@
 
 ### Admin Credentials (`.env.example`)
 
+**⚠️ These are TEMPLATE/DEVELOPMENT values from the committed `.env.example` file:**
+
 ```env
 ADMIN_EMAIL=mr.jwswain@gmail.com
 ADMIN_PASSWORD=Bossman3000!!!
 ```
+
+**For production:** Replace with secure credentials in your `.env.local` (which is gitignored).
 
 ### Complete List of Required Variables
 
@@ -215,9 +223,11 @@ const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '24h' });
    http://localhost:3000/login
    ```
 
-3. **Enter credentials:**
+3. **Enter credentials (from `.env.example` - development only):**
    - Email: `mr.jwswain@gmail.com`
    - Password: `Bossman3000!!!`
+   
+   **⚠️ Note:** These are the template credentials. If you've customized your `.env.local`, use those instead.
 
 4. **Successful login redirects to:**
    ```
