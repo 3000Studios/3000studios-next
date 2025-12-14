@@ -41,25 +41,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Write .env.production
-        run: |
-          cat > .env.production << 'EOF'
-          NEXT_PUBLIC_SITE_URL=https://3000studios.com
-          OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
-          CLAUDE_API_KEY=${{ secrets.CLAUDE_API_KEY }}
-          CLAUDE_ALT_KEY=${{ secrets.CLAUDE_ALT_KEY }}
-          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
-          GEMINI_ALT_KEY=${{ secrets.GEMINI_ALT_KEY }}
-          AI_GATEWAY_API_KEY=${{ secrets.AI_GATEWAY_API_KEY }}
-          PAYPAL_CLIENT_ID=${{ secrets.PAYPAL_CLIENT_ID }}
-          PAYPAL_CLIENT_SECRET=${{ secrets.PAYPAL_CLIENT_SECRET }}
-          STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }}
-          GOOGLE_MAPS_API_KEY=${{ secrets.GOOGLE_MAPS_API_KEY }}
-          EOF
-
-      - name: Prebuilt deploy via Vercel CLI
+      - name: Deploy to Vercel
         run: |
           npm install -g vercel
-          vercel pull --yes --environment=production --token="${{ secrets.VERCEL_TOKEN }}"
-          vercel build --prod --token="${{ secrets.VERCEL_TOKEN }}"
-          vercel deploy --prebuilt --prod --token="${{ secrets.VERCEL_TOKEN }}"
+          vercel --prod --token="${{ secrets.VERCEL_TOKEN }}"
