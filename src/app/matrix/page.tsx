@@ -7,29 +7,25 @@
 'use client';
 
 import { brand } from '@/design/brand';
-import { getAnalytics } from '@/lib/analytics';
 import { getAuditLogger } from '@/lib/auditLog';
 import { getTier } from '@/lib/tiers';
-import { parseVoiceCommand, executeCommand, type VoiceCommand, type CommandResult } from '@/lib/voiceCommands';
+import { executeCommand, parseVoiceCommand, type CommandResult, type VoiceCommand } from '@/lib/voiceCommands';
 import { motion } from 'framer-motion';
 import {
-  Mic,
-  MicOff,
-  Activity,
-  DollarSign,
-  Users,
-  Zap,
-  TrendingUp,
-  LogOut,
-  ShoppingCart,
-  Terminal,
-  Eye,
-  AlertCircle,
-  CheckCircle,
-  XCircle,
+    Activity,
+    AlertCircle,
+    CheckCircle,
+    DollarSign,
+    LogOut,
+    Mic,
+    MicOff,
+    Terminal,
+    TrendingUp,
+    Users,
+    XCircle
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface LogEntry {
   id: string;
@@ -44,14 +40,14 @@ export default function MatrixCommandCenter() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userEmail, setUserEmail] = useState('');
   const [userTier, setUserTier] = useState('free');
-  
+
   // Voice State
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState('');
   const [waveform, setWaveform] = useState<number[]>([]);
   const [currentCommand, setCurrentCommand] = useState<VoiceCommand | null>(null);
   const [commandResult, setCommandResult] = useState<CommandResult | null>(null);
-  
+
   // Dashboard State
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [stats, setStats] = useState({
@@ -85,7 +81,7 @@ export default function MatrixCommandCenter() {
     try {
       const revenueRes = await fetch('/api/health/revenue');
       const revenueData = await revenueRes.json();
-      
+
       setStats({
         revenue: {
           today: revenueData.revenue || 0,
@@ -113,7 +109,7 @@ export default function MatrixCommandCenter() {
     try {
       const auditLogger = getAuditLogger();
       const auditLogs = await auditLogger.getLogs({ limit: 50 });
-      
+
       const logEntries: LogEntry[] = auditLogs.map(log => ({
         id: log.id,
         timestamp: log.timestamp,
@@ -167,7 +163,7 @@ export default function MatrixCommandCenter() {
     setIsListening(false);
     setTranscript('');
     setWaveform([]);
-    
+
     if (audioContextRef.current) {
       audioContextRef.current.close();
       audioContextRef.current = null;
@@ -181,7 +177,7 @@ export default function MatrixCommandCenter() {
       "Change price of Premium Pack to $79.99",
       "Update homepage hero to Elite AI Platform",
     ];
-    
+
     const randomCommand = demoCommands[Math.floor(Math.random() * demoCommands.length)];
     setTranscript(randomCommand);
     handleVoiceCommand(randomCommand);
@@ -189,7 +185,7 @@ export default function MatrixCommandCenter() {
 
   const handleVoiceCommand = async (voiceTranscript: string) => {
     const command = parseVoiceCommand(voiceTranscript);
-    
+
     if (!command) {
       addLog('error', `Unrecognized command: "${voiceTranscript}"`, 'error');
       setIsListening(false);
@@ -202,10 +198,10 @@ export default function MatrixCommandCenter() {
     try {
       const result = await executeCommand(command, userTier);
       setCommandResult(result);
-      
+
       if (result.success) {
         addLog('command', `✓ ${command.action} completed`, 'success');
-        
+
         // Log to audit
         const auditLogger = getAuditLogger();
         await auditLogger.log({
@@ -249,7 +245,7 @@ export default function MatrixCommandCenter() {
 
   if (!isAuthenticated) {
     return (
-      <div 
+      <div
         className="min-h-screen flex items-center justify-center"
         style={{ background: brand.colors.bg.primary }}
       >
@@ -266,7 +262,7 @@ export default function MatrixCommandCenter() {
   const tier = getTier(userTier);
 
   return (
-    <div 
+    <div
       className="min-h-screen p-4 md:p-8"
       style={{ background: brand.colors.bg.primary }}
     >
@@ -274,11 +270,11 @@ export default function MatrixCommandCenter() {
       <div className="max-w-7xl mx-auto mb-8">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h1 
+            <h1
               className="text-4xl font-bold mb-2"
-              style={{ 
+              style={{
                 color: brand.colors.text.primary,
-                textShadow: brand.colors.shadow.glow 
+                textShadow: brand.colors.shadow.glow
               }}
             >
               COMMAND CENTER
@@ -311,7 +307,7 @@ export default function MatrixCommandCenter() {
           }}
         >
           <div className="flex items-center justify-between mb-6">
-            <h2 
+            <h2
               className="text-2xl font-bold"
               style={{ color: brand.colors.text.primary }}
             >
@@ -365,7 +361,7 @@ export default function MatrixCommandCenter() {
                 border: `1px solid ${brand.colors.border.subtle}`,
               }}
             >
-              <p 
+              <p
                 className="text-lg"
                 style={{ color: brand.colors.text.primary }}
               >
@@ -411,7 +407,7 @@ export default function MatrixCommandCenter() {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {[
-            { 
+            {
               icon: <DollarSign size={24} />,
               title: 'Revenue Today',
               value: `$${stats.revenue.today.toFixed(2)}`,
@@ -450,7 +446,7 @@ export default function MatrixCommandCenter() {
               whileHover={{ y: -4, boxShadow: brand.colors.shadow.lg }}
             >
               <div className="flex items-center justify-between mb-4">
-                <div 
+                <div
                   className="w-12 h-12 rounded-full flex items-center justify-center"
                   style={{
                     background: brand.colors.action.primary,
@@ -461,13 +457,13 @@ export default function MatrixCommandCenter() {
                 </div>
               </div>
               <p style={{ color: brand.colors.text.secondary }}>{stat.title}</p>
-              <h3 
+              <h3
                 className="text-3xl font-bold mb-2"
                 style={{ color: brand.colors.text.primary }}
               >
                 {stat.value}
               </h3>
-              <p 
+              <p
                 className="text-sm flex items-center gap-1"
                 style={{ color: brand.colors.state.success }}
               >
@@ -486,7 +482,7 @@ export default function MatrixCommandCenter() {
             border: `1px solid ${brand.colors.border.subtle}`,
           }}
         >
-          <h2 
+          <h2
             className="text-2xl font-bold mb-4 flex items-center gap-2"
             style={{ color: brand.colors.text.primary }}
           >
@@ -505,10 +501,10 @@ export default function MatrixCommandCenter() {
                   border: `1px solid ${brand.colors.border.subtle}`,
                 }}
               >
-                <div style={{ 
-                  color: log.status === 'success' ? brand.colors.state.success : 
-                         log.status === 'error' ? brand.colors.state.error : 
-                         brand.colors.state.info 
+                <div style={{
+                  color: log.status === 'success' ? brand.colors.state.success :
+                         log.status === 'error' ? brand.colors.state.error :
+                         brand.colors.state.info
                 }}>
                   {log.status === 'success' && <CheckCircle size={20} />}
                   {log.status === 'error' && <AlertCircle size={20} />}
@@ -516,7 +512,7 @@ export default function MatrixCommandCenter() {
                 </div>
                 <div className="flex-1">
                   <p style={{ color: brand.colors.text.primary }}>{log.message}</p>
-                  <p 
+                  <p
                     className="text-xs mt-1"
                     style={{ color: brand.colors.text.tertiary }}
                   >
