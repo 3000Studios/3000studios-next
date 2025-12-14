@@ -5,16 +5,23 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import OpenAI from 'openai';
 
-// Lazy-load OpenAI to avoid errors during build time when credentials might not be available
-function getOpenAI() {
+// Lazy-load OpenAI dynamically to avoid errors during build time
+let openaiInstance: any = null;
+
+async function getOpenAI() {
   if (!process.env.OPENAI_API_KEY) {
     throw new Error('OPENAI_API_KEY is not set');
   }
-  return new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-  });
+  
+  if (!openaiInstance) {
+    const { default: OpenAI } = await import('openai');
+    openaiInstance = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+  }
+  
+  return openaiInstance;
 }
 
 interface VoiceInput {
