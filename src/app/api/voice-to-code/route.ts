@@ -7,9 +7,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// Lazy-load OpenAI to avoid errors during build time when credentials might not be available
+function getOpenAI() {
+  if (!process.env.OPENAI_API_KEY) {
+    throw new Error('OPENAI_API_KEY is not set');
+  }
+  return new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+}
 
 interface VoiceInput {
   transcript?: string;
@@ -58,7 +64,7 @@ export async function POST(request: NextRequest) {
         const audioBuffer = Buffer.from(audio, 'base64');
         const audioFile = new File([audioBuffer], 'audio.webm', { type: 'audio/webm' });
 
-        const transcription = await openai.audio.transcriptions.create({
+        const transcription = await getOpenAI().audio.transcriptions.create({
           file: audioFile,
           model: 'whisper-1',
         });
@@ -128,7 +134,7 @@ RESPOND WITH ONLY THIS JSON STRUCTURE:
   ]
 }`;
 
-    const message = await openai.chat.completions.create({
+    const message = await getOpenAI().chat.completions.create({
       model: 'gpt-4o',
       messages: [
         {
