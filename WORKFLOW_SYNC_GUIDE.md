@@ -202,9 +202,17 @@ git commit -m "feat: add new feature to homepage"
 # Push to current branch
 git push origin main
 
-# Or use the secure sync script
+# Or use the secure sync script (automated)
 .\scripts\secure-sync.ps1
 ```
+
+**About the secure-sync.ps1 script**:
+- Verifies GitHub CLI authentication before proceeding
+- Fetches latest changes from remote
+- Stages all modified files
+- Creates timestamped commit
+- Pushes to remote repository
+- Provides clear feedback on each step
 
 **What Happens Automatically**:
 1. ✅ Code pushed to GitHub repository

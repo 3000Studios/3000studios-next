@@ -725,8 +725,12 @@ Follow the synchronization workflow above for each new variable.
 ### Test Command
 
 ```powershell
-# Verify no secrets in Git
-git log --all --source --full-history -- .env .env.local
+# Verify no secrets in Git (Warning: May be slow on large repositories)
+git log --all --source --full-history --grep="password\|secret\|key" -- .env .env.local
+# Should return no results
+
+# For faster check of recent commits only:
+git log --oneline -n 100 --all --source -- .env .env.local
 # Should return no results
 
 # Verify .gitignore working
