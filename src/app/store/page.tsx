@@ -95,6 +95,13 @@ export default function StorePage() {
   });
 
   const handleAddToCart = (product: Product) => {
+    // If it's an affiliate product, open the affiliate link
+    if (product.affiliateLink) {
+      window.open(product.affiliateLink, '_blank', 'noopener,noreferrer');
+      return;
+    }
+    
+    // Otherwise add to cart
     setCart(prev => {
       const existing = prev.find(item => item.productId === product.productId);
       if (existing) {
@@ -308,8 +315,19 @@ export default function StorePage() {
                     disabled={!product.inStock}
                     className="w-full py-2 bg-gradient-to-r from-gold to-yellow-500 text-black font-semibold rounded-lg hover:from-platinum hover:to-white transition-all duration-300 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover-lift"
                   >
-                    {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+                    {!product.inStock 
+                      ? 'Out of Stock' 
+                      : product.affiliateLink 
+                        ? 'View Product →' 
+                        : 'Add to Cart'}
                   </button>
+                  
+                  {/* Affiliate Badge */}
+                  {product.affiliateLink && (
+                    <p className="text-xs text-center text-gray-500 mt-2">
+                      🔗 Affiliate Product • Earns Commission
+                    </p>
+                  )}
                 </div>
               ))}
             </div>
@@ -423,8 +441,9 @@ export default function StorePage() {
         <div className="mt-8 text-center text-sm text-gray-600 space-y-1">
           <p>✅ Connected to MongoDB for real products</p>
           <p>✅ PayPal checkout fully integrated</p>
-          <p>✅ Affiliate link tracking enabled</p>
+          <p>✅ Affiliate link tracking enabled (Amazon, ClickBank, JVZoo)</p>
           <p>✅ {products.length}+ premium products available</p>
+          <p className="text-gold">💰 Featuring real affiliate products with commission earnings</p>
         </div>
       </div>
     </div>
