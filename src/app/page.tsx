@@ -1,196 +1,367 @@
 /**
- * Home Page (Main Landing Page)
- * Features: Hero section, 3D Avatar, featured projects, testimonials, stats, CTAs
- * Award-winning UI with premium animations and interactive elements
+ * Enhanced Homepage with Brand System
+ * High-conversion hero, proof section, funnels, exit-intent
  */
 
 'use client';
 
-import { ArrowRight, Globe, Sparkles, Zap } from 'lucide-react';
+import { brand } from '@/design/brand';
+import { motion } from 'framer-motion';
+import {
+    ArrowRight,
+    DollarSign,
+    MessageSquare,
+    ShoppingCart,
+    Sparkles,
+    Trophy,
+    Users,
+    Zap
+} from 'lucide-react';
 import Link from 'next/link';
-import { lazy, Suspense } from 'react';
-import LoadingSkeleton from './components/LoadingSkeleton';
+import { lazy, Suspense, useEffect, useState } from 'react';
 
-// Lazy-load heavy components
 const ShadowAvatar = lazy(() => import('./components/ShadowAvatar'));
-const ParticleBackground = lazy(() => import('./components/ParticleBackground'));
 const AnimatedStats = lazy(() => import('./components/AnimatedStats'));
-const TestimonialsCarousel = lazy(() => import('./components/TestimonialsCarousel'));
-const PremiumCTA = lazy(() => import('./components/PremiumCTA'));
-const ServicesShowcase = lazy(() => import('./components/ServicesShowcase'));
-const GoogleAdsPlaceholder = lazy(() => import('./components/GoogleAdsPlaceholder'));
 const Newsletter = lazy(() => import('./components/Newsletter'));
 
-export default function Home() {
-  return (
-    <div className="min-h-screen mesh-gradient relative">
-      {/* Animated Particle Background */}
-      <Suspense fallback={<div className="fixed inset-0 bg-black" />}>
-        <ParticleBackground />
-      </Suspense>
+export default function HomePage() {
+  const [showExitIntent, setShowExitIntent] = useState(false);
 
-      {/* Shadow AI Avatar - Conversational Assistant */}
+  // Exit intent detection
+  useEffect(() => {
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0) {
+        setShowExitIntent(true);
+      }
+    };
+
+    document.addEventListener('mouseleave', handleMouseLeave);
+    return () => document.removeEventListener('mouseleave', handleMouseLeave);
+  }, []);
+
+  return (
+    <div
+      className="min-h-screen relative"
+      style={{ background: brand.colors.bg.primary }}
+    >
+      {/* Shadow AI Avatar */}
       <Suspense fallback={null}>
         <ShadowAvatar />
       </Suspense>
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
-        {/* Animated Background Effect */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold rounded-full filter blur-3xl float-animation"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-sapphire rounded-full filter blur-3xl float-animation" style={{ animationDelay: '3s' }}></div>
+        {/* Background Glow Effects */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full filter blur-3xl"
+            style={{ background: brand.colors.gradient.glow }}
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
+          <motion.div
+            className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full filter blur-3xl"
+            style={{
+              background: 'radial-gradient(circle, rgba(0, 255, 136, 0.2) 0%, transparent 70%)'
+            }}
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.2, 0.4, 0.2],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay: 2,
+            }}
+          />
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto text-center">
           {/* Main Headline */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 fade-in-up">
-            <span className="gradient-text text-shadow-gold">Welcome to</span>
-            <br />
-            <span className="text-white">3000 STUDIOS</span>
-          </h1>
-
-          {/* Subheadline */}
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto scale-in">
-            Award-Winning Creative Studio Delivering Cutting-Edge Digital Experiences,
-            Innovative Solutions, and Transformative Projects That Drive Real Results
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 slide-in-left">
-            <Link
-              href="/store"
-              className="btn-primary px-8 py-4 font-bold rounded-lg flex items-center gap-2 hover-lift"
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+          >
+            <h1
+              className="font-bold mb-6"
+              style={{
+                ...brand.typography.styles.h1,
+                color: brand.colors.text.primary,
+                textShadow: brand.colors.shadow.glow,
+              }}
             >
-              Explore Store
-              <ArrowRight size={20} />
-            </Link>
-            <Link
-              href="/projects"
-              className="glass border border-gold text-gold px-8 py-4 font-bold rounded-lg hover:bg-gold hover:text-black transition-all duration-300 hover-lift flex items-center gap-2"
-            >
-              View Projects
-              <Sparkles size={20} />
-            </Link>
-          </div>
-
-          {/* Feature Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20">
-            <div className="card text-center hover-lift tilt">
-              <div className="w-12 h-12 bg-gold rounded-full flex items-center justify-center mx-auto mb-4 glow">
-                <Zap className="text-black" size={24} />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-2">Lightning Fast</h3>
-              <p className="text-gray-400">
-                Optimized performance for seamless user experience across all devices
-              </p>
-            </div>
-
-            <div className="card text-center hover-lift tilt">
-              <div className="w-12 h-12 bg-sapphire rounded-full flex items-center justify-center mx-auto mb-4 glow-sapphire">
-                <Globe className="text-white" size={24} />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-2">Global Reach</h3>
-              <p className="text-gray-400">
-                Serving 250+ clients and customers worldwide with excellence
-              </p>
-            </div>
-
-            <div className="card text-center hover-lift tilt">
-              <div className="w-12 h-12 bg-platinum rounded-full flex items-center justify-center mx-auto mb-4 shimmer">
-                <Sparkles className="text-black" size={24} />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-2">Premium Quality</h3>
-              <p className="text-gray-400">
-                99% client satisfaction with excellence in every detail
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Animated Statistics */}
-      <Suspense fallback={<LoadingSkeleton />}>
-        <AnimatedStats />
-      </Suspense>
-
-      {/* Services Showcase - Revenue Generation */}
-      <Suspense fallback={<LoadingSkeleton />}>
-        <ServicesShowcase />
-      </Suspense>
-
-      {/* Testimonials */}
-      <Suspense fallback={<LoadingSkeleton />}>
-        <TestimonialsCarousel />
-      </Suspense>
-
-      {/* Google Ads Placeholder - Revenue Generation */}
-      <div className="py-12 px-4">
-        <Suspense fallback={<div className="h-64 w-full skeleton rounded-lg" />}>
-          <GoogleAdsPlaceholder
-            slot="home-mid-content"
-            format="rectangle"
-            className="max-w-6xl mx-auto"
-          />
-        </Suspense>
-      </div>
-
-      <section className="py-20 px-4 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
-            <span className="gradient-text text-shadow-gold">Experience the Future</span>
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="card hover-lift">
-              <div className="text-5xl mb-4">📡</div>
-              <h3 className="text-2xl font-bold text-white mb-4">Live Streaming</h3>
-              <p className="text-gray-400 mb-4">
-                Watch exclusive live content and interact with our community in real-time.
-              </p>
-              <Link
-                href="/live"
-                className="text-gold hover:text-platinum transition-colors inline-flex items-center gap-2 font-semibold"
+              Command Your
+              <br />
+              <span
+                style={{
+                  background: brand.colors.gradient.primary,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
               >
-                Watch Live <ArrowRight size={16} />
-              </Link>
-            </div>
+                Digital Empire
+              </span>
+            </h1>
+          </motion.div>
 
-            <div className="card hover-lift">
-              <div className="text-5xl mb-4">🛍️</div>
-              <h3 className="text-2xl font-bold text-white mb-4">Premium Store</h3>
-              <p className="text-gray-400 mb-4">
-                Discover our curated collection of premium products and exclusive items.
-              </p>
+          {/* Value Proposition */}
+          <motion.p
+            className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto"
+            style={{ color: brand.colors.text.secondary }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Elite AI-powered platform • Voice-controlled deployments • Real-time revenue optimization
+            <br />
+            <span style={{ color: brand.colors.action.secondary }}>
+              The only studio that obeys your voice commands
+            </span>
+          </motion.p>
+
+          {/* Primary CTAs */}
+          <motion.div
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <motion.div
+              whileHover={brand.motion.microInteractions.buttonHover}
+              whileTap={brand.motion.microInteractions.buttonTap}
+            >
               <Link
                 href="/store"
-                className="text-gold hover:text-platinum transition-colors inline-flex items-center gap-2 font-semibold"
+                className="px-8 py-4 font-bold rounded-lg flex items-center gap-2 text-lg"
+                style={{
+                  background: brand.colors.gradient.primary,
+                  color: brand.colors.text.inverse,
+                  boxShadow: brand.colors.shadow.glow,
+                }}
               >
-                Shop Now <ArrowRight size={16} />
+                <ShoppingCart size={24} />
+                Explore Store
+                <ArrowRight size={24} />
               </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+            </motion.div>
 
-      {/* Premium CTA */}
-      <Suspense fallback={<LoadingSkeleton />}>
-        <PremiumCTA />
-      </Suspense>
+            <motion.div
+              whileHover={brand.motion.microInteractions.buttonHover}
+              whileTap={brand.motion.microInteractions.buttonTap}
+            >
+              <Link
+                href="/matrix"
+                className="px-8 py-4 font-bold rounded-lg flex items-center gap-2 text-lg"
+                style={{
+                  background: brand.colors.bg.glass,
+                  color: brand.colors.action.secondary,
+                  border: `2px solid ${brand.colors.action.secondary}`,
+                  backdropFilter: 'blur(10px)',
+                }}
+              >
+                <Zap size={24} />
+                Command Center
+              </Link>
+            </motion.div>
+          </motion.div>
 
-      {/* Newsletter Section - Revenue/Lead Generation */}
-      <section className="py-12 px-4">
-        <div className="max-w-6xl mx-auto">
-          <Suspense fallback={<div className="h-32 w-full skeleton rounded-lg" />}>
-            <Newsletter
-              variant="hero"
-              title="Join Our Exclusive Community"
-              description="Get insider access to cutting-edge design trends, development tips, and exclusive offers"
-            />
+          {/* Social Proof / Live Stats */}
+          <Suspense fallback={<div className="h-32" />}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 0.6 }}
+            >
+              <AnimatedStats />
+            </motion.div>
           </Suspense>
         </div>
       </section>
 
+      {/* Value Propositions Section */}
+      <section
+        className="py-24 px-4"
+        style={{ background: brand.colors.bg.secondary }}
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={brand.motion.variants.staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
+            {[
+              {
+                icon: <Trophy size={32} />,
+                title: 'Award-Winning Design',
+                description: 'Elite UI/UX that converts visitors into customers',
+                color: brand.colors.action.primary,
+              },
+              {
+                icon: <MessageSquare size={32} />,
+                title: 'Voice-Controlled',
+                description: 'Update your site by speaking—no code required',
+                color: brand.colors.action.secondary,
+              },
+              {
+                icon: <DollarSign size={32} />,
+                title: 'Revenue-Optimized',
+                description: 'Every pixel designed to maximize conversions',
+                color: brand.colors.revenue.positive,
+              },
+            ].map((item, idx) => (
+              <motion.div
+                key={idx}
+                variants={brand.motion.variants.slideUp}
+                className="p-8 rounded-lg text-center"
+                style={{
+                  background: brand.colors.bg.glass,
+                  backdropFilter: 'blur(10px)',
+                  border: `1px solid ${brand.colors.border.subtle}`,
+                }}
+                whileHover={{
+                  y: -8,
+                  boxShadow: brand.colors.shadow.lg,
+                  transition: { duration: 0.3 },
+                }}
+              >
+                <div
+                  className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+                  style={{
+                    background: item.color,
+                    boxShadow: `0 0 20px ${item.color}80`,
+                  }}
+                >
+                  {item.icon}
+                </div>
+                <h3
+                  className="text-2xl font-bold mb-3"
+                  style={{ color: brand.colors.text.primary }}
+                >
+                  {item.title}
+                </h3>
+                <p style={{ color: brand.colors.text.secondary }}>
+                  {item.description}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Funnels Section - Quick Access */}
+      <section className="py-24 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2
+            className="text-4xl md:text-5xl font-bold mb-12"
+            style={{ color: brand.colors.text.primary }}
+          >
+            Choose Your Path
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { href: '/store', label: 'Shop Products', icon: <ShoppingCart size={24} /> },
+              { href: '/projects', label: 'View Projects', icon: <Sparkles size={24} /> },
+              { href: '/live', label: 'Watch Live', icon: <Users size={24} /> },
+              { href: '/matrix', label: 'Voice Control', icon: <Zap size={24} /> },
+            ].map((funnel, idx) => (
+              <motion.div
+                key={idx}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Link
+                  href={funnel.href}
+                  className="block p-6 rounded-lg"
+                  style={{
+                    background: brand.colors.bg.elevated,
+                    border: `1px solid ${brand.colors.border.default}`,
+                  }}
+                >
+                  <div className="flex flex-col items-center gap-3">
+                    <div style={{ color: brand.colors.action.primary }}>
+                      {funnel.icon}
+                    </div>
+                    <span
+                      className="font-semibold"
+                      style={{ color: brand.colors.text.primary }}
+                    >
+                      {funnel.label}
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter / Email Capture */}
+      <section
+        className="py-24 px-4"
+        style={{ background: brand.colors.bg.secondary }}
+      >
+        <Suspense fallback={<div className="h-64" />}>
+          <Newsletter />
+        </Suspense>
+      </section>
+
+      {/* Exit Intent Modal */}
+      {showExitIntent && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ background: brand.colors.bg.overlay }}
+          onClick={() => setShowExitIntent(false)}
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="max-w-md p-8 rounded-lg"
+            style={{
+              background: brand.colors.bg.elevated,
+              border: `2px solid ${brand.colors.action.primary}`,
+              boxShadow: brand.colors.shadow.xl,
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3
+              className="text-2xl font-bold mb-4"
+              style={{ color: brand.colors.text.primary }}
+            >
+              Wait! Before you go...
+            </h3>
+            <p
+              className="mb-6"
+              style={{ color: brand.colors.text.secondary }}
+            >
+              Get 20% off your first purchase + exclusive voice control access
+            </p>
+            <Link
+              href="/store"
+              className="block w-full text-center px-6 py-3 rounded-lg font-bold"
+              style={{
+                background: brand.colors.gradient.primary,
+                color: brand.colors.text.inverse,
+              }}
+              onClick={() => setShowExitIntent(false)}
+            >
+              Claim Your Discount
+            </Link>
+          </motion.div>
+        </motion.div>
+      )}
     </div>
-    );
-  }
+  );
+}
