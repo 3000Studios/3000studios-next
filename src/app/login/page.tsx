@@ -57,8 +57,8 @@ export default function LoginPage() {
 
       if (response.ok) {
         setMagicLinkSent(true);
-        // In development, show the link
-        if (data.magicLink) {
+        // Only show link in development mode
+        if (data.magicLink && process.env.NODE_ENV === 'development') {
           setMagicLinkUrl(data.magicLink);
         }
       } else {

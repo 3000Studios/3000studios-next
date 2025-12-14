@@ -60,19 +60,29 @@ export default function ShadowAvatar() {
     if (audioEnabled && 'speechSynthesis' in window) {
       const utterance = new SpeechSynthesisUtterance(randomResponse);
       
-      // Configure for female voice
-      const voices = window.speechSynthesis.getVoices();
-      const femaleVoice = voices.find(
-        voice => voice.name.includes('Female') || 
-                voice.name.includes('female') ||
-                voice.name.includes('Samantha') ||
-                voice.name.includes('Victoria') ||
-                voice.name.includes('Karen') ||
-                voice.name.includes('Zira')
-      );
+      // Configure for female voice with async voice loading support
+      const setVoice = () => {
+        const voices = window.speechSynthesis.getVoices();
+        const femaleVoice = voices.find(
+          voice => voice.name.includes('Female') || 
+                  voice.name.includes('female') ||
+                  voice.name.includes('Samantha') ||
+                  voice.name.includes('Victoria') ||
+                  voice.name.includes('Karen') ||
+                  voice.name.includes('Zira')
+        );
+        
+        if (femaleVoice) {
+          utterance.voice = femaleVoice;
+        }
+      };
       
-      if (femaleVoice) {
-        utterance.voice = femaleVoice;
+      // Try to set voice immediately
+      setVoice();
+      
+      // If voices not loaded yet, wait for them
+      if (window.speechSynthesis.getVoices().length === 0) {
+        window.speechSynthesis.addEventListener('voiceschanged', setVoice, { once: true });
       }
       
       utterance.rate = 1.05; // Slightly faster, more energetic
