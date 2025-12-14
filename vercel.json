@@ -1,15 +1,19 @@
 {
   "env": {
-    "NEXT_PUBLIC_SITE_URL": "@next_public_site_url"
+    "NEXT_PUBLIC_SITE_URL": "https://3000studios.com"
   },
   "crons": [
     {
-      "path": "/api/revenue",
-      "schedule": "0 */6 * * *"
+      "path": "/api/cron/content",
+      "schedule": "0 9 * * *"
     },
     {
-      "path": "/api/automation/product",
-      "schedule": "0 */8 * * *"
+      "path": "/api/cron/store",
+      "schedule": "0 12 * * *"
+    },
+    {
+      "path": "/api/cron/reports",
+      "schedule": "0 18 * * *"
     }
   ],
   "redirects": [
