@@ -5,7 +5,7 @@
   "crons": [
     {
       "path": "/api/cron/content",
-      "schedule": "0 9 * * *"
+      "schedule": "0 * * * *"
     },
     {
       "path": "/api/cron/store",

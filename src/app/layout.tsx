@@ -13,6 +13,7 @@
 
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
+import Script from "next/script";
 import BackgroundMusic from "./components/BackgroundMusic";
 import GravityFooter from "./components/GravityFooter";
 import Navigation from "./components/Navigation";
@@ -20,6 +21,13 @@ import SmoothScroll from "./components/SmoothScroll";
 import SoundEffects from "./components/SoundEffects";
 import VideoWallpaper from "./components/VideoWallpaper";
 import "./globals.css";
+
+const RAW_ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
+const ADSENSE_ACCOUNT = RAW_ADSENSE_ID
+  ? RAW_ADSENSE_ID.startsWith("ca-pub-")
+    ? RAW_ADSENSE_ID
+    : `ca-pub-${RAW_ADSENSE_ID}`
+  : undefined;
 
 export const metadata: Metadata = {
   title: "3000 Studios - Award-Winning Creative Studio",
@@ -49,6 +57,9 @@ export const metadata: Metadata = {
     title: "3000 Studios - Award-Winning Creative Studio",
     description: "Premium digital experiences, innovative solutions, and transformative projects.",
   },
+  other: ADSENSE_ACCOUNT
+    ? { "google-adsense-account": ADSENSE_ACCOUNT }
+    : undefined,
 };
 
 export default function RootLayout({
@@ -59,6 +70,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased flex flex-col min-h-screen bg-black">
+        {/* Google AdSense Auto Ads (enabled when NEXT_PUBLIC_ADSENSE_PUBLISHER_ID is set) */}
+        {ADSENSE_ACCOUNT ? (
+          <Script
+            id="adsense"
+            strategy="afterInteractive"
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_ACCOUNT}`}
+            crossOrigin="anonymous"
+          />
+        ) : null}
         {/* Live Video Wallpaper Background - Blueprint Feature */}
         <VideoWallpaper opacity={0.25} />
 
@@ -73,7 +94,7 @@ export default function RootLayout({
 
         {/* Main Content */}
         <Navigation />
-        <main className="flex-grow pt-16 relative z-10">
+        <main className="flex-grow pt-20 relative z-10">
           {children}
         </main>
 

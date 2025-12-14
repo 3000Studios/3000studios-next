@@ -188,6 +188,7 @@ export default function Navigation() {
   const navLinks = [
     { href: '/', label: 'HOME' },
     { href: '/store', label: 'STORE' },
+    { href: '/vendors-platform', label: 'VENDORS' },
     { href: '/projects', label: 'PROJECTS' },
     { href: '/portfolio', label: 'PORTFOLIO' },
     { href: '/live', label: 'LIVE' },
@@ -200,7 +201,7 @@ export default function Navigation() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'glass-morphism py-2' : 'bg-transparent py-4'
+        scrolled ? 'bg-black/70 backdrop-blur-md py-2 border-b border-[var(--platinum)]/40' : 'bg-black/50 backdrop-blur-sm py-4 border-b border-[var(--platinum)]/30'
       }`}
     >
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(0,243,255,0.12),_transparent_45%)]" />
@@ -241,7 +242,7 @@ export default function Navigation() {
           <div className="hidden md:block ml-4">
             <Link
               href="/login"
-              className="relative px-6 py-2 overflow-hidden font-bold text-white rounded-full group bg-gray-900 border border-[var(--electric-blue)]/30 hover:border-[var(--electric-blue)]"
+              className="relative px-6 py-2 overflow-hidden font-bold text-white rounded-full group bg-gray-900 border border-[var(--platinum)]/40 hover:border-[var(--electric-blue)]"
             >
               <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-[var(--electric-blue)] top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease" />
               <span className="relative transition duration-300 group-hover:text-black ease">LOGIN</span>
