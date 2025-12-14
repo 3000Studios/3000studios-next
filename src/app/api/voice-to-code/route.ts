@@ -5,11 +5,30 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import OpenAI from 'openai';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// Lazy-load OpenAI dynamically to avoid errors during build time
+let openaiInstance: any = null;
+
+async function getOpenAI() {
+  // Return null if key missing - allow graceful fallback
+  if (!process.env.OPENAI_API_KEY) {
+    return null;
+  }
+
+  if (!openaiInstance) {
+    try {
+      const { default: OpenAI } = await import('openai');
+      openaiInstance = new OpenAI({
+        apiKey: process.env.OPENAI_API_KEY,
+      });
+    } catch (err) {
+      console.error('Failed to initialize OpenAI:', err);
+      return null;
+    }
+  }
+
+  return openaiInstance;
+}
 
 interface VoiceInput {
   transcript?: string;
@@ -58,6 +77,10 @@ export async function POST(request: NextRequest) {
         const audioBuffer = Buffer.from(audio, 'base64');
         const audioFile = new File([audioBuffer], 'audio.webm', { type: 'audio/webm' });
 
+        const openai = await getOpenAI();
+        if (!openai) {
+          throw new Error('OpenAI client unavailable');
+        }
         const transcription = await openai.audio.transcriptions.create({
           file: audioFile,
           model: 'whisper-1',
@@ -127,6 +150,14 @@ RESPOND WITH ONLY THIS JSON STRUCTURE:
     }
   ]
 }`;
+
+    const openai = await getOpenAI();
+    if (!openai) {
+      return NextResponse.json(
+        { error: 'OpenAI service unavailable' },
+        { status: 503 }
+      );
+    }
 
     const message = await openai.chat.completions.create({
       model: 'gpt-4o',
