@@ -23,6 +23,8 @@ jobs:
       MXBAI_API_KEY: ${{ secrets.MXBAI_API_KEY }}
       MXBAI_STORE_ID: ${{ secrets.MXBAI_STORE_ID }}
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
 
     steps:
       - uses: actions/checkout@v4
