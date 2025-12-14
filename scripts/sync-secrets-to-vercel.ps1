@@ -5,7 +5,7 @@ Write-Host "=== Syncing Secrets to Vercel ===" -ForegroundColor Cyan
 
 $secrets = @(
     "OPENAI_API_KEY",
-    "CLAUDE_API_KEY", 
+    "CLAUDE_API_KEY",
     "CLAUDE_ALT_KEY",
     "GEMINI_API_KEY",
     "GEMINI_ALT_KEY",
@@ -39,14 +39,14 @@ Write-Host ""
 # For each secret we want to sync
 foreach ($secretName in $secrets) {
     $exists = $ghSecrets | Where-Object { $_.name -eq $secretName }
-    
+
     if ($exists) {
         Write-Host "📦 $secretName exists in GitHub" -ForegroundColor Cyan
-        
+
         # Note: GitHub CLI doesn't expose secret values for security
         # User must manually add these to Vercel dashboard OR
         # provide them here if they have them locally
-        
+
         Write-Host "   → Add this to Vercel: vercel env add $secretName production" -ForegroundColor Gray
     } else {
         Write-Host "⚠️  $secretName NOT found in GitHub secrets" -ForegroundColor Yellow

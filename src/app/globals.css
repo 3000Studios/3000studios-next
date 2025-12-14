@@ -7,10 +7,10 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand Colors */
-  --gold: #ffd700;
-  --platinum: #e5e4e2;
-  --sapphire: #0f52ba;
+  /* Brand Colors (updated to corporate palette) */
+  --gold: #FFC107; /* deep bold yellow */
+  --platinum: #9CA3AF; /* sleek grey */
+  --sapphire: #FFC107; /* replace blue usages with deep yellow */
   --color-platinum: #E5E4E2; /* legacy alias */
   --color-sapphire: #0F52BA; /* legacy alias */
   --dark-bg: #0a0a0a;
@@ -34,9 +34,9 @@
   --shadow-lg: 0 8px 16px rgba(0,0,0,0.3);
   --shadow-gold: 0 4px 12px rgba(255, 215, 0, 0.3);
 
-  /* Electric Theme */
-  --electric-blue: #00f3ff;
-  --electric-purple: #bc13fe;
+  /* Electric Theme (aligned to new palette) */
+  --electric-blue: #FFC107; /* deep bold yellow for electric accents */
+  --electric-purple: #6B7280; /* sleek corporate grey */
   --neon-glow: 0 0 10px var(--electric-blue), 0 0 20px var(--electric-blue), 0 0 40px var(--electric-blue);
 }
 
@@ -88,7 +88,8 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  /* Corporate font stack */
+  font-family: 'Segoe UI', 'Inter', 'Helvetica Neue', Arial, system-ui, sans-serif;
   overflow-x: hidden;
   min-height: 100vh;
 }

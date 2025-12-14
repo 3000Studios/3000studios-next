@@ -28,6 +28,22 @@ export interface CommandHandler {
   handler: (match: RegExpMatchArray) => VoiceCommand;
 }
 
+// Vendor-specific voice intents (Matrix control)
+export const VENDOR_COMMANDS = [
+  {
+    pattern: /add vendor (.*)/i,
+    action: "ADD_VENDOR",
+  },
+  {
+    pattern: /sync vendor products/i,
+    action: "SYNC_VENDORS",
+  },
+  {
+    pattern: /show top selling products/i,
+    action: "SHOW_TOP_PRODUCTS",
+  },
+];
+
 const commandPatterns: CommandHandler[] = [
   // Content Commands
   {
@@ -95,6 +111,54 @@ const commandPatterns: CommandHandler[] = [
       target: match[1],
     }),
   },
+  {
+    pattern: /sync\s+vendor\s+products/i,
+    category: 'store',
+    action: 'sync_vendors',
+    handler: () => ({
+      category: 'store',
+      action: 'sync_vendors',
+    }),
+  },
+  {
+    pattern: /add\s+vendor\s+(.*)/i,
+    category: 'store',
+    action: 'add_vendor',
+    handler: (match) => ({
+      category: 'store',
+      action: 'add_vendor',
+      target: match[1],
+    }),
+  },
+  {
+    pattern: /show\s+(?:top\s+)?selling\s+products/i,
+    category: 'store',
+    action: 'show_top_products',
+    handler: () => ({
+      category: 'store',
+      action: 'show_top_products',
+    }),
+  },
+  {
+    pattern: /auto[- ]price\s+(.+)/i,
+    category: 'store',
+    action: 'auto_price_product',
+    handler: (match) => ({
+      category: 'store',
+      action: 'auto_price_product',
+      target: match[1],
+    }),
+  },
+  {
+    pattern: /generate\s+product\s+page\s+(?:for\s+)?(.+)/i,
+    category: 'store',
+    action: 'generate_product_page',
+    handler: (match) => ({
+      category: 'store',
+      action: 'generate_product_page',
+      target: match[1],
+    }),
+  },
 
   // System Commands
   {
@@ -123,6 +187,15 @@ const commandPatterns: CommandHandler[] = [
       category: 'system',
       action: 'show_revenue',
       params: { period: match[1] || 'today' },
+    }),
+  },
+  {
+    pattern: /enable\s+voice\s+only\s+mode|matrix\s+os\s+mode/i,
+    category: 'system',
+    action: 'enable_voice_only',
+    handler: () => ({
+      category: 'system',
+      action: 'enable_voice_only',
     }),
   },
 

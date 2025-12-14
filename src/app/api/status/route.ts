@@ -3,15 +3,15 @@
  * Returns build info, environment flags, and system status
  */
 
-import { NextResponse } from 'next/server';
 import { readFileSync } from 'fs';
+import { NextResponse } from 'next/server';
 import { join } from 'path';
 
 export async function GET() {
   // Read package.json for version info
   let version = 'unknown';
   let buildId = 'unknown';
-  
+
   try {
     const packagePath = join(process.cwd(), 'package.json');
     const packageJson = JSON.parse(readFileSync(packagePath, 'utf8'));
