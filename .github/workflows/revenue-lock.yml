@@ -20,11 +20,19 @@ jobs:
             "src/app/components/GoogleAdsPlaceholder.tsx"
           )
 
+          violations=()
           for file in "${protected[@]}"; do
             if git diff --name-only origin/main...HEAD | grep -q "$file"; then
-              echo "❌ Revenue-protected file modified: $file"
-              exit 1
+              violations+=("$file")
             fi
           done
+
+          if [ ${#violations[@]} -gt 0 ]; then
+            echo "❌ Revenue-protected files modified:"
+            for v in "${violations[@]}"; do
+              echo "   - $v"
+            done
+            exit 1
+          fi
 
           echo "✅ Revenue lock passed"
