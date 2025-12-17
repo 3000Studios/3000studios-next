@@ -1,109 +1,93 @@
-/**
- * Stripe Webhook Handler
- * Processes Stripe events (payment_intent.succeeded, etc.)
- */
+import { prisma } from "@/lib/prisma";
+import { stripe } from "@/lib/services/stripe";
+import { headers } from "next/headers";
+import { NextResponse } from "next/server";
+import Stripe from "stripe";
 
-import { RATE_LIMITS, withRateLimit } from '@/lib/rate-limit';
-import { withSecurity } from '@/lib/security';
-import { NextRequest, NextResponse } from 'next/server';
-import Stripe from 'stripe';
+export async function POST(req: Request) {
+  const body = await req.text();
+  const signature = (await headers()).get("Stripe-Signature") as string;
 
-export const runtime = 'nodejs';
+  let event: Stripe.Event;
 
-function getStripe(): Stripe | null {
-  const key = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET || process.env.STRIPE_3000_SECRET;
-  if (!key) return null;
-  return new Stripe(key);
-}
-
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || '';
-
-const handler = async (request: NextRequest) => {
   try {
-    const stripe = getStripe();
-    if (!stripe) {
-      return NextResponse.json(
-        { error: 'Stripe not configured. Set STRIPE_SECRET_KEY.' },
-        { status: 500 }
-      );
+    if (!process.env.STRIPE_WEBHOOK_SECRET) {
+      throw new Error("STRIPE_WEBHOOK_SECRET is missing");
     }
+    event = stripe.webhooks.constructEvent(
+      body,
+      signature,
+      process.env.STRIPE_WEBHOOK_SECRET
+    );
+  } catch (error) {
+    console.error(`Webhook Error: ${(error as Error).message}`);
+    return NextResponse.json(
+      { error: "Webhook signature verification failed" },
+      { status: 400 }
+    );
+  }
 
-    const body = await request.text();
-    const signature = request.headers.get('stripe-signature') || '';
+  try {
+    if (event.type === "checkout.session.completed") {
+      const session = event.data.object as Stripe.Checkout.Session;
 
-    let event: Stripe.Event;
+      // 1. Create Order
+      const amount = session.amount_total ? session.amount_total / 100 : 0;
+      const userId = session.metadata?.userId || null;
 
-    // Verify webhook signature
-    try {
-      event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
-    } catch (err) {
-      console.error('⚠️ Webhook signature verification failed:', err);
-      return NextResponse.json(
-        { error: 'Webhook signature verification failed' },
-        { status: 400 }
-      );
-    }
+      await prisma.order.create({
+        data: {
+          total: amount,
+          status: "paid",
+          provider: "stripe",
+          providerOrderId: session.id,
+          userId: userId,
+          // We would ideally link items here too if we had line items expanded
+        },
+      });
 
-    // Handle events
-    switch (event.type) {
-      case 'checkout.session.completed': {
-        const session = event.data.object as Stripe.Checkout.Session;
-        console.log('✅ Payment successful:', {
-          sessionId: session.id,
-          customerEmail: session.customer_email,
-          amountTotal: session.amount_total,
-          currency: session.currency,
+      // 2. Update Revenue Stats
+      // Find 'Revenue' stat or create/update it
+      const revenueStat = await prisma.stats.findFirst({
+        where: { title: "Total Revenue" },
+      });
+
+      if (revenueStat) {
+        // Parse current value, remove symbols
+        const currentRevenue =
+          parseFloat(revenueStat.value.replace(/[^0-9.-]+/g, "")) || 0;
+        const newRevenue = currentRevenue + amount;
+        await prisma.stats.update({
+          where: { id: revenueStat.id },
+          data: {
+            value: `$${newRevenue.toLocaleString()}`,
+            change: "+2.5%", // Mock trend update
+            trend: "up",
+          },
         });
-
-        // TODO: Send confirmation email
-        // TODO: Update database with order
-        // TODO: Log to Matrix analytics
-        break;
+      } else {
+        // Initialize if not exists
+        await prisma.stats.create({
+          data: {
+            title: "Total Revenue",
+            value: `$${amount.toLocaleString()}`,
+            change: "+100%",
+            trend: "up",
+            iconName: "DollarSign",
+            color: "text-green-500",
+          },
+        });
       }
 
-      case 'payment_intent.succeeded': {
-        const paymentIntent = event.data.object as Stripe.PaymentIntent;
-        console.log('✅ Payment intent succeeded:', {
-          id: paymentIntent.id,
-          amount: paymentIntent.amount,
-          currency: paymentIntent.currency,
-        });
-        break;
-      }
-
-      case 'payment_intent.payment_failed': {
-        const paymentIntent = event.data.object as Stripe.PaymentIntent;
-        console.error('❌ Payment failed:', {
-          id: paymentIntent.id,
-          error: paymentIntent.last_payment_error?.message,
-        });
-        break;
-      }
-
-      case 'charge.refunded': {
-        const charge = event.data.object as Stripe.Charge;
-        console.log('🔄 Charge refunded:', {
-          id: charge.id,
-          amount: charge.amount_refunded,
-        });
-        break;
-      }
-
-      default:
-        console.log(`Unhandled event type: ${event.type}`);
+      console.log(`Payment processed for session: ${session.id}`);
     }
 
     return NextResponse.json({ received: true });
   } catch (error) {
-    console.error('Webhook processing error:', error);
+    console.error("Error processing webhook:", error);
     return NextResponse.json(
-      { error: 'Webhook processing failed' },
+      { error: "Webhook handler failed" },
       { status: 500 }
     );
   }
-};
-
-export const POST = withRateLimit(
-  withSecurity(handler, { cors: false, csrf: false }),
-  RATE_LIMITS.payment
-);
+}

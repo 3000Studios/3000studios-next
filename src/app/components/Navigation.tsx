@@ -1,17 +1,18 @@
-'use client';
+"use client";
 
-import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import type { MouseEvent } from 'react';
-import { useEffect, useMemo, useState } from 'react';
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import type { MouseEvent } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 // --- Sound Generation Utility ---
 const playElectricSound = () => {
   try {
-    const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+    const AudioContext =
+      window.AudioContext || (window as any).webkitAudioContext;
     if (!AudioContext) return;
 
     const ctx = new AudioContext();
@@ -29,7 +30,7 @@ const playElectricSound = () => {
     gainNode.gain.value = 0.05;
 
     const filter = ctx.createBiquadFilter();
-    filter.type = 'highpass';
+    filter.type = "highpass";
     filter.frequency.value = 1200;
 
     whiteNoise.connect(filter);
@@ -57,7 +58,12 @@ type ElectricLinkProps = {
   onClick?: () => void;
 };
 
-const ElectricLink = ({ href, label, isActive, onClick }: ElectricLinkProps) => {
+const ElectricLink = ({
+  href,
+  label,
+  isActive,
+  onClick,
+}: ElectricLinkProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isZapping, setIsZapping] = useState(false);
   const [isExploding, setIsExploding] = useState(false);
@@ -65,9 +71,9 @@ const ElectricLink = ({ href, label, isActive, onClick }: ElectricLinkProps) => 
 
   const arcPaths = useMemo(
     () => [
-      'M0,20 Q25,12 50,20 T100,20',
-      'M0,20 Q25,28 50,20 T100,20',
-      'M0,20 Q25,16 50,20 T100,20',
+      "M0,20 Q25,12 50,20 T100,20",
+      "M0,20 Q25,28 50,20 T100,20",
+      "M0,20 Q25,16 50,20 T100,20",
     ],
     []
   );
@@ -108,13 +114,13 @@ const ElectricLink = ({ href, label, isActive, onClick }: ElectricLinkProps) => 
         onMouseEnter={handleHover}
         onMouseLeave={() => setIsHovered(false)}
         className={`relative block px-4 py-2 text-lg font-bold tracking-wider transition-all duration-300 ${
-          isActive ? 'text-[var(--electric-blue)]' : 'text-gray-200'
-        } ${isExploding ? 'opacity-0 scale-150' : 'opacity-100'}`}
+          isActive ? "text-[var(--electric-blue)]" : "text-gray-200"
+        } ${isExploding ? "opacity-0 scale-150" : "opacity-100"}`}
         style={{
           textShadow:
             isHovered || isZapping || isActive
-              ? '0 0 6px #fff, 0 0 12px #00f3ff, 0 0 28px #00f3ff'
-              : 'none',
+              ? "0 0 6px #fff, 0 0 12px #00f3ff, 0 0 28px #00f3ff"
+              : "none",
         }}
       >
         {label}
@@ -138,7 +144,11 @@ const ElectricLink = ({ href, label, isActive, onClick }: ElectricLinkProps) => 
                   fill="none"
                   initial={{ pathLength: 0, opacity: 0 }}
                   animate={{ pathLength: [0, 1, 0], opacity: [0, 1, 0] }}
-                  transition={{ duration: 0.35, repeat: Infinity, delay: idx * 0.05 }}
+                  transition={{
+                    duration: 0.35,
+                    repeat: Infinity,
+                    delay: idx * 0.05,
+                  }}
                 />
               ))}
             </motion.svg>
@@ -159,7 +169,7 @@ const ElectricLink = ({ href, label, isActive, onClick }: ElectricLinkProps) => 
                 y: (Math.random() - 0.5) * 120,
                 opacity: [1, 0],
               }}
-              transition={{ duration: 0.55, ease: 'easeOut' }}
+              transition={{ duration: 0.55, ease: "easeOut" }}
             />
           ))}
           <motion.div
@@ -181,19 +191,19 @@ export default function Navigation() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 18);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
-    { href: '/', label: 'HOME' },
-    { href: '/store', label: 'STORE' },
-    { href: '/vendors-platform', label: 'VENDORS' },
-    { href: '/projects', label: 'PROJECTS' },
-    { href: '/portfolio', label: 'PORTFOLIO' },
-    { href: '/live', label: 'LIVE' },
-    { href: '/blog', label: 'BLOG' },
-    { href: '/contact', label: 'CONTACT' },
+    { href: "/", label: "HOME" },
+    { href: "/store", label: "STORE" },
+    { href: "/vendors-platform", label: "VENDORS" },
+    { href: "/projects", label: "PROJECTS" },
+    { href: "/portfolio", label: "PORTFOLIO" },
+    { href: "/live", label: "LIVE" },
+    { href: "/blog", label: "BLOG" },
+    { href: "/contact", label: "CONTACT" },
   ];
 
   const isActiveLink = (href: string) => pathname === href;
@@ -201,17 +211,22 @@ export default function Navigation() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'bg-black/70 backdrop-blur-md py-2 border-b border-[var(--platinum)]/40' : 'bg-black/50 backdrop-blur-sm py-4 border-b border-[var(--platinum)]/30'
+        scrolled
+          ? "bg-black/70 backdrop-blur-md py-2 border-b border-[var(--platinum)]/40"
+          : "bg-black/50 backdrop-blur-sm py-4 border-b border-[var(--platinum)]/30"
       }`}
     >
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(0,243,255,0.12),_transparent_45%)]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center space-x-3 group relative z-10">
+          <Link
+            href="/"
+            className="flex items-center space-x-3 group relative z-10"
+          >
             <div className="relative w-12 h-12 transition-transform group-hover:scale-110 duration-300">
               <Image
-                src="/logo.svg"
+                src="/brand-logo.png"
                 alt="3000 Studios"
                 width={48}
                 height={48}
@@ -220,7 +235,7 @@ export default function Navigation() {
             </div>
             <div
               className="text-2xl font-black tracking-tighter text-white group-hover:text-[var(--electric-blue)] transition-colors duration-300"
-              style={{ textShadow: '0 0 12px rgba(0,243,255,0.25)' }}
+              style={{ textShadow: "0 0 12px rgba(0,243,255,0.25)" }}
             >
               3000 STUDIOS
             </div>
@@ -245,7 +260,9 @@ export default function Navigation() {
               className="relative px-6 py-2 overflow-hidden font-bold text-white rounded-full group bg-gray-900 border border-[var(--platinum)]/40 hover:border-[var(--electric-blue)]"
             >
               <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-[var(--electric-blue)] top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease" />
-              <span className="relative transition duration-300 group-hover:text-black ease">LOGIN</span>
+              <span className="relative transition duration-300 group-hover:text-black ease">
+                LOGIN
+              </span>
             </Link>
           </div>
 
@@ -291,4 +308,3 @@ export default function Navigation() {
     </nav>
   );
 }
-

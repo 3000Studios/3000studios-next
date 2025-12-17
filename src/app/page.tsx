@@ -3,26 +3,26 @@
  * High-conversion hero, proof section, funnels, exit-intent
  */
 
-'use client';
+"use client";
 
-import { brand } from '@/design/brand';
-import { motion } from 'framer-motion';
+import { brand } from "@/design/brand";
+import { motion } from "framer-motion";
 import {
-    ArrowRight,
-    DollarSign,
-    MessageSquare,
-    ShoppingCart,
-    Sparkles,
-    Trophy,
-    Users,
-    Zap
-} from 'lucide-react';
-import Link from 'next/link';
-import { lazy, Suspense, useEffect, useState } from 'react';
+  ArrowRight,
+  DollarSign,
+  MessageSquare,
+  ShoppingCart,
+  Sparkles,
+  Trophy,
+  Users,
+  Zap,
+} from "lucide-react";
+import Link from "next/link";
+import { Suspense, lazy, useEffect, useState } from "react";
 
-const ShadowAvatar = lazy(() => import('./components/ShadowAvatar'));
-const AnimatedStats = lazy(() => import('./components/AnimatedStats'));
-const Newsletter = lazy(() => import('./components/Newsletter'));
+const ShadowAvatar = lazy(() => import("./components/InteractiveAvatar"));
+const AnimatedStats = lazy(() => import("./components/AnimatedStats"));
+const Newsletter = lazy(() => import("./components/Newsletter"));
 
 export default function HomePage() {
   const [showExitIntent, setShowExitIntent] = useState(false);
@@ -35,8 +35,8 @@ export default function HomePage() {
       }
     };
 
-    document.addEventListener('mouseleave', handleMouseLeave);
-    return () => document.removeEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener("mouseleave", handleMouseLeave);
+    return () => document.removeEventListener("mouseleave", handleMouseLeave);
   }, []);
 
   return (
@@ -63,13 +63,14 @@ export default function HomePage() {
             transition={{
               duration: 8,
               repeat: Infinity,
-              ease: 'easeInOut',
+              ease: "easeInOut",
             }}
           />
           <motion.div
             className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full filter blur-3xl"
             style={{
-              background: 'radial-gradient(circle, rgba(0, 255, 136, 0.2) 0%, transparent 70%)'
+              background:
+                "radial-gradient(circle, rgba(0, 255, 136, 0.2) 0%, transparent 70%)",
             }}
             animate={{
               scale: [1, 1.3, 1],
@@ -78,7 +79,7 @@ export default function HomePage() {
             transition={{
               duration: 10,
               repeat: Infinity,
-              ease: 'easeInOut',
+              ease: "easeInOut",
               delay: 2,
             }}
           />
@@ -89,7 +90,7 @@ export default function HomePage() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <h1
               className="font-bold mb-6"
@@ -104,8 +105,8 @@ export default function HomePage() {
               <span
                 style={{
                   background: brand.colors.gradient.primary,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
                 }}
               >
                 Digital Empire
@@ -121,7 +122,8 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Elite AI-powered platform • Voice-controlled deployments • Real-time revenue optimization
+            Elite AI-powered platform • Voice-controlled deployments • Real-time
+            revenue optimization
             <br />
             <span style={{ color: brand.colors.action.secondary }}>
               The only studio that obeys your voice commands
@@ -165,7 +167,7 @@ export default function HomePage() {
                   background: brand.colors.bg.glass,
                   color: brand.colors.action.secondary,
                   border: `2px solid ${brand.colors.action.secondary}`,
-                  backdropFilter: 'blur(10px)',
+                  backdropFilter: "blur(10px)",
                 }}
               >
                 <Zap size={24} />
@@ -203,20 +205,21 @@ export default function HomePage() {
             {[
               {
                 icon: <Trophy size={32} />,
-                title: 'Award-Winning Design',
-                description: 'Elite UI/UX that converts visitors into customers',
+                title: "Award-Winning Design",
+                description:
+                  "Elite UI/UX that converts visitors into customers",
                 color: brand.colors.action.primary,
               },
               {
                 icon: <MessageSquare size={32} />,
-                title: 'Voice-Controlled',
-                description: 'Update your site by speaking—no code required',
+                title: "Voice-Controlled",
+                description: "Update your site by speaking—no code required",
                 color: brand.colors.action.secondary,
               },
               {
                 icon: <DollarSign size={32} />,
-                title: 'Revenue-Optimized',
-                description: 'Every pixel designed to maximize conversions',
+                title: "Revenue-Optimized",
+                description: "Every pixel designed to maximize conversions",
                 color: brand.colors.revenue.positive,
               },
             ].map((item, idx) => (
@@ -226,7 +229,7 @@ export default function HomePage() {
                 className="p-8 rounded-lg text-center"
                 style={{
                   background: brand.colors.bg.glass,
-                  backdropFilter: 'blur(10px)',
+                  backdropFilter: "blur(10px)",
                   border: `1px solid ${brand.colors.border.subtle}`,
                 }}
                 whileHover={{
@@ -270,10 +273,22 @@ export default function HomePage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { href: '/store', label: 'Shop Products', icon: <ShoppingCart size={24} /> },
-              { href: '/projects', label: 'View Projects', icon: <Sparkles size={24} /> },
-              { href: '/live', label: 'Watch Live', icon: <Users size={24} /> },
-              { href: '/matrix', label: 'Voice Control', icon: <Zap size={24} /> },
+              {
+                href: "/store",
+                label: "Shop Products",
+                icon: <ShoppingCart size={24} />,
+              },
+              {
+                href: "/projects",
+                label: "View Projects",
+                icon: <Sparkles size={24} />,
+              },
+              { href: "/live", label: "Watch Live", icon: <Users size={24} /> },
+              {
+                href: "/matrix",
+                label: "Voice Control",
+                icon: <Zap size={24} />,
+              },
             ].map((funnel, idx) => (
               <motion.div
                 key={idx}
@@ -342,10 +357,7 @@ export default function HomePage() {
             >
               Wait! Before you go...
             </h3>
-            <p
-              className="mb-6"
-              style={{ color: brand.colors.text.secondary }}
-            >
+            <p className="mb-6" style={{ color: brand.colors.text.secondary }}>
               Get 20% off your first purchase + exclusive voice control access
             </p>
             <Link

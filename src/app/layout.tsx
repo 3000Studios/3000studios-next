@@ -31,8 +31,10 @@ const ADSENSE_ACCOUNT = RAW_ADSENSE_ID
 
 export const metadata: Metadata = {
   title: "3000 Studios - Award-Winning Creative Studio",
-  description: "Premium digital experiences, innovative solutions, and transformative projects. 250+ successful clients worldwide with 99% satisfaction rate.",
-  keywords: "creative studio, digital agency, web development, premium design, innovation, 3D experiences, AI solutions",
+  description:
+    "Premium digital experiences, innovative solutions, and transformative projects. 250+ successful clients worldwide with 99% satisfaction rate.",
+  keywords:
+    "creative studio, digital agency, web development, premium design, innovation, 3D experiences, AI solutions",
   authors: [{ name: "3000 Studios" }],
   robots: "index, follow",
   openGraph: {
@@ -41,10 +43,11 @@ export const metadata: Metadata = {
     url: "https://3000studios.vercel.app",
     siteName: "3000 Studios",
     title: "3000 Studios - Award-Winning Creative Studio",
-    description: "Premium digital experiences, innovative solutions, and transformative projects.",
+    description:
+      "Premium digital experiences, innovative solutions, and transformative projects.",
     images: [
       {
-        url: "/media/3000-logo.svg",
+        url: "/brand-logo.png",
         width: 1200,
         height: 630,
         alt: "3000 Studios",
@@ -55,7 +58,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@3000studios",
     title: "3000 Studios - Award-Winning Creative Studio",
-    description: "Premium digital experiences, innovative solutions, and transformative projects.",
+    description:
+      "Premium digital experiences, innovative solutions, and transformative projects.",
   },
   other: ADSENSE_ACCOUNT
     ? { "google-adsense-account": ADSENSE_ACCOUNT }
@@ -94,9 +98,7 @@ export default function RootLayout({
 
         {/* Main Content */}
         <Navigation />
-        <main className="flex-grow pt-20 relative z-10">
-          {children}
-        </main>
+        <main className="flex-grow pt-20 relative z-10">{children}</main>
 
         {/* Gravity Footer - Blueprint Feature */}
         <GravityFooter />
@@ -106,4 +108,3 @@ export default function RootLayout({
     </html>
   );
 }
-
