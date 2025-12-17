@@ -172,6 +172,7 @@ Example:
 2. **Admin authentication**: Production version requires secure backend
 3. **Payment processing**: Use environment variables for API keys
 4. **HTTPS only**: Enforce secure connections in production
+5. **Branch Protection**: Main branch is protected - see [Branch Protection Guide](.github/BRANCH_PROTECTION_README.md)
 
 ## 🌐 Deployment
 
@@ -211,7 +212,13 @@ npm start
 
 ## 💡 Contributing
 
-This is a proprietary project for 3000 Studios. For questions or collaboration:
+This is a proprietary project for 3000 Studios. 
+
+### Development Workflow
+
+All changes to the `main` branch must go through Pull Requests with code review. See the [Branch Protection Guide](.github/BRANCH_PROTECTION_README.md) for details.
+
+For questions or collaboration:
 - Email: contact@3000studios.com
 
 ## 📄 License
