@@ -62,5 +62,5 @@ export async function getMatrixStats(): Promise<StatItem[]> {
     icon: null, // UI handles icon rendering logic
     trend: s.trend as "up" | "down",
     iconName: s.iconName as "DollarSign" | "Users" | "Calendar" | "BarChart2",
-  }));
+  })) as StatItem[];
 }
