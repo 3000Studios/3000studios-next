@@ -101,8 +101,8 @@ function checkAdsTxt() {
 
   const adsTxtContent = readFileSync(adsTxtPath, 'utf-8');
   
-  // Check for Google AdSense entry
-  const hasGoogleAdsense = adsTxtContent.includes('google.com');
+  // Check for Google AdSense entry (must start with 'google.com' to be valid)
+  const hasGoogleAdsense = /^google\.com,\s*pub-\d+/.test(adsTxtContent.trim());
   const hasPublisherId = /pub-\d+/.test(adsTxtContent);
   
   if (hasGoogleAdsense && hasPublisherId) {
