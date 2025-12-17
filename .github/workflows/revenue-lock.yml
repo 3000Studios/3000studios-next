@@ -13,13 +13,19 @@ jobs:
       - name: Protect revenue files
         run: |
           # Get list of changed files
-          changed_files=$(git diff --name-only origin/main...HEAD)
+          changed_files=$(git diff --name-only origin/main...HEAD 2>/dev/null || echo "")
+          
+          # Exit early if no files changed
+          if [ -z "$changed_files" ]; then
+            echo "✅ No files changed - Revenue lock passed"
+            exit 0
+          fi
           
           # Define protected patterns
           protected=(
             "public/ads.txt"
             "src/app/api/stripe/"
-            "src/lib/stripe"
+            "src/lib/stripe/"
             "src/components/AdSense.tsx"
             "src/app/components/GoogleAdsPlaceholder.tsx"
           )
@@ -28,9 +34,10 @@ jobs:
           
           # Check each changed file against protected patterns
           while IFS= read -r file; do
+            [ -z "$file" ] && continue
             for pattern in "${protected[@]}"; do
               # Check if file matches pattern exactly or starts with pattern (for directories)
-              if [[ "$file" == "$pattern" ]] || [[ "$file" == "$pattern"* ]]; then
+              if [[ "$file" == "$pattern" ]] || [[ "$pattern" == */ && "$file" == "${pattern%/}/"* ]]; then
                 violations+=("$file")
                 break
               fi
