@@ -3,20 +3,22 @@
  * CORS, CSRF, input validation, and security headers
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
 /**
  * CORS Configuration
  */
 export const CORS_CONFIG = {
   allowedOrigins: [
-    'https://3000studios.com',
-    'https://www.3000studios.com',
-    process.env.NEXT_PUBLIC_SITE_URL || '',
-    ...(process.env.NODE_ENV === 'development' ? ['http://localhost:3000', 'http://localhost:3001'] : []),
+    "https://3000studios.com",
+    "https://www.3000studios.com",
+    process.env.NEXT_PUBLIC_SITE_URL || "",
+    ...(process.env.NODE_ENV === "development"
+      ? ["http://localhost:3000", "http://localhost:3001"]
+      : []),
   ].filter(Boolean),
-  allowedMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
+  allowedMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-CSRF-Token"],
   credentials: true,
   maxAge: 86400, // 24 hours
 };
@@ -24,17 +26,29 @@ export const CORS_CONFIG = {
 /**
  * Apply CORS headers to response
  */
-export function applyCORS(request: NextRequest, response: NextResponse): NextResponse {
-  const origin = request.headers.get('origin') || '';
+export function applyCORS(
+  request: NextRequest,
+  response: NextResponse
+): NextResponse {
+  const origin = request.headers.get("origin") || "";
 
   if (CORS_CONFIG.allowedOrigins.includes(origin)) {
-    response.headers.set('Access-Control-Allow-Origin', origin);
+    response.headers.set("Access-Control-Allow-Origin", origin);
   }
 
-  response.headers.set('Access-Control-Allow-Methods', CORS_CONFIG.allowedMethods.join(', '));
-  response.headers.set('Access-Control-Allow-Headers', CORS_CONFIG.allowedHeaders.join(', '));
-  response.headers.set('Access-Control-Allow-Credentials', CORS_CONFIG.credentials.toString());
-  response.headers.set('Access-Control-Max-Age', CORS_CONFIG.maxAge.toString());
+  response.headers.set(
+    "Access-Control-Allow-Methods",
+    CORS_CONFIG.allowedMethods.join(", ")
+  );
+  response.headers.set(
+    "Access-Control-Allow-Headers",
+    CORS_CONFIG.allowedHeaders.join(", ")
+  );
+  response.headers.set(
+    "Access-Control-Allow-Credentials",
+    CORS_CONFIG.credentials.toString()
+  );
+  response.headers.set("Access-Control-Max-Age", CORS_CONFIG.maxAge.toString());
 
   return response;
 }
@@ -43,7 +57,7 @@ export function applyCORS(request: NextRequest, response: NextResponse): NextRes
  * Handle OPTIONS preflight requests
  */
 export function handleCORSPreflight(request: NextRequest): NextResponse | null {
-  if (request.method === 'OPTIONS') {
+  if (request.method === "OPTIONS") {
     const response = new NextResponse(null, { status: 204 });
     return applyCORS(request, response);
   }
@@ -56,20 +70,20 @@ export function handleCORSPreflight(request: NextRequest): NextResponse | null {
  */
 export function applySecurityHeaders(response: NextResponse): NextResponse {
   // Prevent clickjacking
-  response.headers.set('X-Frame-Options', 'DENY');
+  response.headers.set("X-Frame-Options", "DENY");
 
   // Prevent MIME type sniffing
-  response.headers.set('X-Content-Type-Options', 'nosniff');
+  response.headers.set("X-Content-Type-Options", "nosniff");
 
   // XSS Protection (legacy but still useful)
-  response.headers.set('X-XSS-Protection', '1; mode=block');
+  response.headers.set("X-XSS-Protection", "1; mode=block");
 
   // Referrer Policy
-  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
 
   // Content Security Policy
   response.headers.set(
-    'Content-Security-Policy',
+    "Content-Security-Policy",
     [
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://www.paypal.com https://js.stripe.com",
@@ -84,27 +98,30 @@ export function applySecurityHeaders(response: NextResponse): NextResponse {
       "form-action 'self' https://www.paypal.com",
       "frame-ancestors 'none'",
       "upgrade-insecure-requests",
-    ].join('; ')
+    ].join("; ")
   );
 
   // Permissions Policy (formerly Feature Policy)
   response.headers.set(
-    'Permissions-Policy',
+    "Permissions-Policy",
     [
-      'accelerometer=()',
-      'camera=()',
-      'geolocation=()',
-      'gyroscope=()',
-      'magnetometer=()',
-      'microphone=()',
-      'payment=(self)',
-      'usb=()',
-    ].join(', ')
+      "accelerometer=()",
+      "camera=()",
+      "geolocation=()",
+      "gyroscope=()",
+      "magnetometer=()",
+      "microphone=()",
+      "payment=(self)",
+      "usb=()",
+    ].join(", ")
   );
 
   // Strict-Transport-Security (HSTS) - Vercel handles this, but adding for completeness
-  if (process.env.NODE_ENV === 'production') {
-    response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+  if (process.env.NODE_ENV === "production") {
+    response.headers.set(
+      "Strict-Transport-Security",
+      "max-age=31536000; includeSubDomains; preload"
+    );
   }
 
   return response;
@@ -114,9 +131,12 @@ export function applySecurityHeaders(response: NextResponse): NextResponse {
  * Validate request body against schema
  * Simple validation - for production use Zod or similar
  */
-export function validateRequestBody(body: any, requiredFields: string[]): string | null {
-  if (!body || typeof body !== 'object') {
-    return 'Invalid request body';
+export function validateRequestBody(
+  body: any,
+  requiredFields: string[]
+): string | null {
+  if (!body || typeof body !== "object") {
+    return "Invalid request body";
   }
 
   for (const field of requiredFields) {
@@ -131,19 +151,23 @@ export function validateRequestBody(body: any, requiredFields: string[]): string
 /**
  * CSRF Token Generation and Validation
  */
-const CSRF_SECRET = process.env.CSRF_SECRET || 'change-me-in-production';
+const CSRF_SECRET = process.env.CSRF_SECRET || "change-me-in-production";
+
+import { randomBytes } from "crypto";
 
 export function generateCSRFToken(sessionId: string): string {
-  // Simple implementation - use crypto.randomBytes for production
   const timestamp = Date.now();
-  const token = Buffer.from(`${sessionId}:${timestamp}:${CSRF_SECRET}`).toString('base64');
+  const salt = randomBytes(16).toString("hex");
+  const token = Buffer.from(
+    `${sessionId}:${timestamp}:${salt}:${CSRF_SECRET}`
+  ).toString("base64");
   return token;
 }
 
 export function validateCSRFToken(token: string, sessionId: string): boolean {
   try {
-    const decoded = Buffer.from(token, 'base64').toString('utf-8');
-    const [receivedSessionId, timestamp, secret] = decoded.split(':');
+    const decoded = Buffer.from(token, "base64").toString("utf-8");
+    const [receivedSessionId, timestamp, secret] = decoded.split(":");
 
     // Validate session
     if (receivedSessionId !== sessionId) {
@@ -172,9 +196,9 @@ export function validateCSRFToken(token: string, sessionId: string): boolean {
  */
 export function sanitizeInput(input: string): string {
   return input
-    .replace(/[<>]/g, '') // Remove < and >
-    .replace(/javascript:/gi, '') // Remove javascript: protocol
-    .replace(/on\w+=/gi, '') // Remove inline event handlers
+    .replace(/[<>]/g, "") // Remove < and >
+    .replace(/javascript:/gi, "") // Remove javascript: protocol
+    .replace(/on\w+=/gi, "") // Remove inline event handlers
     .trim();
 }
 
@@ -190,8 +214,8 @@ export function isValidEmail(email: string): boolean {
  * Check if request is from trusted origin
  */
 export function isTrustedOrigin(request: NextRequest): boolean {
-  const origin = request.headers.get('origin') || '';
-  return CORS_CONFIG.allowedOrigins.includes(origin) || origin === '';
+  const origin = request.headers.get("origin") || "";
+  return CORS_CONFIG.allowedOrigins.includes(origin) || origin === "";
 }
 
 /**
@@ -215,19 +239,19 @@ export function withSecurity(
     }
 
     // Validate CSRF token for non-GET requests
-    if (options.csrf && request.method !== 'GET') {
-      const csrfToken = request.headers.get('X-CSRF-Token');
-      const sessionId = request.cookies.get('session')?.value || '';
+    if (options.csrf && request.method !== "GET") {
+      const csrfToken = request.headers.get("X-CSRF-Token");
+      const sessionId = request.cookies.get("session")?.value || "";
 
       if (!csrfToken || !validateCSRFToken(csrfToken, sessionId)) {
         return applySecurityHeaders(
-          NextResponse.json({ error: 'Invalid CSRF token' }, { status: 403 })
+          NextResponse.json({ error: "Invalid CSRF token" }, { status: 403 })
         );
       }
     }
 
     // Validate request body
-    if (options.validateBody && request.method !== 'GET') {
+    if (options.validateBody && request.method !== "GET") {
       try {
         const body = await request.json();
         const error = validateRequestBody(body, options.validateBody);
@@ -238,7 +262,7 @@ export function withSecurity(
         }
       } catch {
         return applySecurityHeaders(
-          NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
+          NextResponse.json({ error: "Invalid JSON body" }, { status: 400 })
         );
       }
     }
