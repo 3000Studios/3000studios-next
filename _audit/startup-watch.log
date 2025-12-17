@@ -1941,3 +1941,171 @@ PSDrive        : HKLM
 PSProvider     : Microsoft.PowerShell.Core\Registry
 
 
+\[2025-12-17 16:01:42Z] POWERSHELL SESSION STARTED\
+
+RtkAudUService                                           : 
+MicrosoftEdgeAutoLaunch_08433C26F625E0CE8D182571210AF68A : "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --no-startup-window --win-session-start
+PSPath                                                   : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+PSParentPath                                             : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion
+PSChildName                                              : Run
+PSDrive                                                  : HKCU
+PSProvider                                               : Microsoft.PowerShell.Core\Registry
+
+
+
+SecurityHealth : C:\WINDOWS\system32\SecurityHealthSystray.exe
+RtkAudUService : "C:\WINDOWS\System32\DriverStore\FileRepository\realtekservice.inf_amd64_9366beb5d0043df3\RtkAudUService64.exe" -background
+PSPath         : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
+PSParentPath   : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion
+PSChildName    : Run
+PSDrive        : HKLM
+PSProvider     : Microsoft.PowerShell.Core\Registry
+
+
+\[2025-12-17 16:02:26Z] POWERSHELL SESSION STARTED\
+
+RtkAudUService                                           : 
+MicrosoftEdgeAutoLaunch_08433C26F625E0CE8D182571210AF68A : "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --no-startup-window --win-session-start
+PSPath                                                   : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+PSParentPath                                             : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion
+PSChildName                                              : Run
+PSDrive                                                  : HKCU
+PSProvider                                               : Microsoft.PowerShell.Core\Registry
+
+
+
+SecurityHealth : C:\WINDOWS\system32\SecurityHealthSystray.exe
+RtkAudUService : "C:\WINDOWS\System32\DriverStore\FileRepository\realtekservice.inf_amd64_9366beb5d0043df3\RtkAudUService64.exe" -background
+PSPath         : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
+PSParentPath   : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion
+PSChildName    : Run
+PSDrive        : HKLM
+PSProvider     : Microsoft.PowerShell.Core\Registry
+
+
+\[2025-12-17 16:27:37Z] POWERSHELL SESSION STARTED\
+
+RtkAudUService                                           : 
+MicrosoftEdgeAutoLaunch_08433C26F625E0CE8D182571210AF68A : "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --no-startup-window --win-session-start
+PSPath                                                   : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+PSParentPath                                             : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion
+PSChildName                                              : Run
+PSDrive                                                  : HKCU
+PSProvider                                               : Microsoft.PowerShell.Core\Registry
+
+
+
+SecurityHealth : C:\WINDOWS\system32\SecurityHealthSystray.exe
+RtkAudUService : "C:\WINDOWS\System32\DriverStore\FileRepository\realtekservice.inf_amd64_9366beb5d0043df3\RtkAudUService64.exe" -background
+PSPath         : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
+PSParentPath   : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion
+PSChildName    : Run
+PSDrive        : HKLM
+PSProvider     : Microsoft.PowerShell.Core\Registry
+
+
+\[2025-12-17 16:27:49Z] POWERSHELL SESSION STARTED\
+
+RtkAudUService                                           : 
+MicrosoftEdgeAutoLaunch_08433C26F625E0CE8D182571210AF68A : "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --no-startup-window --win-session-start
+PSPath                                                   : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+PSParentPath                                             : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion
+PSChildName                                              : Run
+PSDrive                                                  : HKCU
+PSProvider                                               : Microsoft.PowerShell.Core\Registry
+
+
+
+SecurityHealth : C:\WINDOWS\system32\SecurityHealthSystray.exe
+RtkAudUService : "C:\WINDOWS\System32\DriverStore\FileRepository\realtekservice.inf_amd64_9366beb5d0043df3\RtkAudUService64.exe" -background
+PSPath         : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
+PSParentPath   : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion
+PSChildName    : Run
+PSDrive        : HKLM
+PSProvider     : Microsoft.PowerShell.Core\Registry
+
+
+\[2025-12-17 16:28:19Z] POWERSHELL SESSION STARTED\
+
+RtkAudUService                                           : 
+MicrosoftEdgeAutoLaunch_08433C26F625E0CE8D182571210AF68A : "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --no-startup-window --win-session-start
+PSPath                                                   : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+PSParentPath                                             : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion
+PSChildName                                              : Run
+PSDrive                                                  : HKCU
+PSProvider                                               : Microsoft.PowerShell.Core\Registry
+
+
+
+SecurityHealth : C:\WINDOWS\system32\SecurityHealthSystray.exe
+RtkAudUService : "C:\WINDOWS\System32\DriverStore\FileRepository\realtekservice.inf_amd64_9366beb5d0043df3\RtkAudUService64.exe" -background
+PSPath         : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
+PSParentPath   : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion
+PSChildName    : Run
+PSDrive        : HKLM
+PSProvider     : Microsoft.PowerShell.Core\Registry
+
+
+\[2025-12-17 16:28:29Z] POWERSHELL SESSION STARTED\
+
+RtkAudUService                                           : 
+MicrosoftEdgeAutoLaunch_08433C26F625E0CE8D182571210AF68A : "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --no-startup-window --win-session-start
+PSPath                                                   : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+PSParentPath                                             : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion
+PSChildName                                              : Run
+PSDrive                                                  : HKCU
+PSProvider                                               : Microsoft.PowerShell.Core\Registry
+
+
+
+SecurityHealth : C:\WINDOWS\system32\SecurityHealthSystray.exe
+RtkAudUService : "C:\WINDOWS\System32\DriverStore\FileRepository\realtekservice.inf_amd64_9366beb5d0043df3\RtkAudUService64.exe" -background
+PSPath         : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
+PSParentPath   : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion
+PSChildName    : Run
+PSDrive        : HKLM
+PSProvider     : Microsoft.PowerShell.Core\Registry
+
+
+\[2025-12-17 16:29:13Z] POWERSHELL SESSION STARTED\
+
+RtkAudUService                                           : 
+MicrosoftEdgeAutoLaunch_08433C26F625E0CE8D182571210AF68A : "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --no-startup-window --win-session-start
+PSPath                                                   : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+PSParentPath                                             : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion
+PSChildName                                              : Run
+PSDrive                                                  : HKCU
+PSProvider                                               : Microsoft.PowerShell.Core\Registry
+
+
+
+SecurityHealth : C:\WINDOWS\system32\SecurityHealthSystray.exe
+RtkAudUService : "C:\WINDOWS\System32\DriverStore\FileRepository\realtekservice.inf_amd64_9366beb5d0043df3\RtkAudUService64.exe" -background
+PSPath         : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
+PSParentPath   : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion
+PSChildName    : Run
+PSDrive        : HKLM
+PSProvider     : Microsoft.PowerShell.Core\Registry
+
+
+\[2025-12-17 16:29:31Z] POWERSHELL SESSION STARTED\
+
+RtkAudUService                                           : 
+MicrosoftEdgeAutoLaunch_08433C26F625E0CE8D182571210AF68A : "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --no-startup-window --win-session-start
+PSPath                                                   : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+PSParentPath                                             : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion
+PSChildName                                              : Run
+PSDrive                                                  : HKCU
+PSProvider                                               : Microsoft.PowerShell.Core\Registry
+
+
+
+SecurityHealth : C:\WINDOWS\system32\SecurityHealthSystray.exe
+RtkAudUService : "C:\WINDOWS\System32\DriverStore\FileRepository\realtekservice.inf_amd64_9366beb5d0043df3\RtkAudUService64.exe" -background
+PSPath         : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
+PSParentPath   : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion
+PSChildName    : Run
+PSDrive        : HKLM
+PSProvider     : Microsoft.PowerShell.Core\Registry
+
+
