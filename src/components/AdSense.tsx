@@ -1,35 +1,43 @@
-import Script from "next/script";
+"use client";
 
-type AdSenseUnitProps = {
-  slot: string;
-  client?: string;
-  style?: React.CSSProperties;
-  className?: string;
-  format?: string;
-  responsive?: string;
-};
+import { useEffect } from "react";
 
-export const AdSenseUnit = ({
+/**
+ * Manual AdSense ad unit. Use only if you have a specific data-ad-slot.
+ * If you don't have a slot, rely on Auto Ads via the script injected in layout.tsx
+ */
+export function AdSenseUnit({
   slot,
-  client = "ca-pub-5800977493749262", // Default client ID based on usage
   style,
-  className,
-  format = "auto",
-  responsive = "true",
-}: AdSenseUnitProps) => {
+}: {
+  slot: string;
+  style?: React.CSSProperties;
+}) {
+  useEffect(() => {
+    try {
+      // @ts-expect-error AdSense global may not be available
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  // Only render if AdSense ID is configured
+  if (typeof window === "undefined") return null;
+
+  const raw = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
+  if (!raw) return null;
+
+  const client = raw.startsWith("ca-pub-") ? raw : `ca-pub-${raw}`;
+
   return (
-    <div className={`ads-container ${className || ""}`}>
-      <ins
-        className="adsbygoogle"
-        style={style}
-        data-ad-client={client}
-        data-ad-slot={slot}
-        data-ad-format={format}
-        data-full-width-responsive={responsive}
-      />
-      <Script id={`adsense-${slot}`} strategy="afterInteractive">
-        {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-      </Script>
-    </div>
+    <ins
+      className="adsbygoogle"
+      style={style || { display: "block" }}
+      data-ad-client={client}
+      data-ad-slot={slot}
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    />
   );
-};
+}
