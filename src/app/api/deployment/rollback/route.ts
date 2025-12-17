@@ -15,7 +15,8 @@ export async function POST(request: NextRequest) {
     console.log(`[ROLLBACK] Initiated: ${reason || 'Manual rollback'}`);
 
     // Get latest stable deployment if no specific ID provided
-    const targetDeployment = deploymentId || (await getLatestDeployment()).id;
+    const latestDeployment = await getLatestDeployment();
+    const targetDeployment = deploymentId || latestDeployment?.id || 'main';
 
     // Trigger redeployment of the stable version
     // In production, this would redeploy from a known-good commit
