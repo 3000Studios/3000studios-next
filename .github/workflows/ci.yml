@@ -21,6 +21,6 @@ jobs:
       - run: npx prisma generate
       - run: npm run build
         env:
-          DATABASE_URL: postgresql://placeholder:placeholder@localhost:5432/placeholder
+          DATABASE_URL: postgresql://ci-build-only:not-a-real-connection@localhost:5432/ci-build-placeholder
           NEXTAUTH_SECRET: ci-build-secret
           NEXTAUTH_URL: http://localhost:3000
