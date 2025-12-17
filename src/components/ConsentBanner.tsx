@@ -46,10 +46,13 @@ export default function ConsentBanner() {
     localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(consent));
     setShowBanner(false);
     
-    // Reload to initialize AdSense and analytics
-    if (typeof window !== 'undefined') {
-      window.location.reload();
-    }
+    // Note: AdSense requires page reload to initialize properly
+    // Using setTimeout to allow banner animation to complete
+    setTimeout(() => {
+      if (typeof window !== 'undefined') {
+        window.location.reload();
+      }
+    }, 300);
   };
 
   const handleRejectNonEssential = () => {
@@ -71,9 +74,13 @@ export default function ConsentBanner() {
     localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(consent));
     setShowBanner(false);
     
-    // Reload if advertising is enabled
-    if (advertising && typeof window !== 'undefined') {
-      window.location.reload();
+    // Only reload if advertising is enabled (required for AdSense)
+    if (advertising) {
+      setTimeout(() => {
+        if (typeof window !== 'undefined') {
+          window.location.reload();
+        }
+      }, 300);
     }
   };
 
