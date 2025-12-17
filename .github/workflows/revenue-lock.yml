@@ -25,7 +25,7 @@ jobs:
           protected=(
             "public/ads.txt"
             "src/app/api/stripe/"
-            "src/lib/stripe/"
+            "src/lib/stripe.ts"
             "src/components/AdSense.tsx"
             "src/app/components/GoogleAdsPlaceholder.tsx"
           )
