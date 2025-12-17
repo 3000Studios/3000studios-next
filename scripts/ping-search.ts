@@ -1,4 +1,4 @@
-const fetch = require("node-fetch"); // Ensure node-fetch is available if not using global fetch in Node < 18
+// fetch is available globally in Node.js 18+
 
 const SITEMAP_URL = "https://3000studios.com/sitemap.xml";
 const PING_URL = `https://www.google.com/ping?sitemap=${SITEMAP_URL}`;
