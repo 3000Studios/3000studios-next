@@ -4,32 +4,32 @@
  * Award-winning UI with premium animations and interactive elements
  */
 
-import Link from 'next/link';
-import { ArrowRight, Sparkles, Zap, Globe } from 'lucide-react';
-import ShadowAvatar from './components/ShadowAvatar';
-import ParticleBackground from './components/ParticleBackground';
-import AnimatedStats from './components/AnimatedStats';
-import TestimonialsCarousel from './components/TestimonialsCarousel';
-import PremiumCTA from './components/PremiumCTA';
-import ServicesShowcase from './components/ServicesShowcase';
-import GoogleAdsPlaceholder from './components/GoogleAdsPlaceholder';
-import Newsletter from './components/Newsletter';
+import Link from "next/link";
+import { ArrowRight, Sparkles, Zap, Globe } from "lucide-react";
+import ShadowAvatar from "./components/ShadowAvatar";
+import ParticleBackground from "./components/ParticleBackground";
+import AnimatedStats from "./components/AnimatedStats";
+import TestimonialsCarousel from "./components/TestimonialsCarousel";
+import PremiumCTA from "./components/PremiumCTA";
+import ServicesShowcase from "./components/ServicesShowcase";
+import { AdSenseUnit } from "@/components/AdSense";
+import Newsletter from "./components/Newsletter";
 
 export default function Home() {
   return (
     <div className="min-h-screen mesh-gradient relative">
       {/* Animated Particle Background */}
       <ParticleBackground />
-      
+
       {/* Shadow AI Avatar - Conversational Assistant */}
       <ShadowAvatar />
-      
+
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
         {/* Animated Background Effect */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold rounded-full filter blur-3xl float-animation"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-sapphire rounded-full filter blur-3xl float-animation" style={{ animationDelay: '3s' }}></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-sapphire rounded-full filter blur-3xl float-animation delay-3000"></div>
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto text-center">
@@ -42,8 +42,9 @@ export default function Home() {
 
           {/* Subheadline */}
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto scale-in">
-            Award-Winning Creative Studio Delivering Cutting-Edge Digital Experiences,
-            Innovative Solutions, and Transformative Projects That Drive Real Results
+            Award-Winning Creative Studio Delivering Cutting-Edge Digital
+            Experiences, Innovative Solutions, and Transformative Projects That
+            Drive Real Results
           </p>
 
           {/* CTA Buttons */}
@@ -70,9 +71,12 @@ export default function Home() {
               <div className="w-12 h-12 bg-gold rounded-full flex items-center justify-center mx-auto mb-4 glow">
                 <Zap className="text-black" size={24} />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Lightning Fast</h3>
+              <h3 className="text-xl font-bold text-white mb-2">
+                Lightning Fast
+              </h3>
               <p className="text-gray-400">
-                Optimized performance for seamless user experience across all devices
+                Optimized performance for seamless user experience across all
+                devices
               </p>
             </div>
 
@@ -80,7 +84,9 @@ export default function Home() {
               <div className="w-12 h-12 bg-sapphire rounded-full flex items-center justify-center mx-auto mb-4 glow-sapphire">
                 <Globe className="text-white" size={24} />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Global Reach</h3>
+              <h3 className="text-xl font-bold text-white mb-2">
+                Global Reach
+              </h3>
               <p className="text-gray-400">
                 Serving 250+ clients and customers worldwide with excellence
               </p>
@@ -90,7 +96,9 @@ export default function Home() {
               <div className="w-12 h-12 bg-platinum rounded-full flex items-center justify-center mx-auto mb-4 shimmer">
                 <Sparkles className="text-black" size={24} />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Premium Quality</h3>
+              <h3 className="text-xl font-bold text-white mb-2">
+                Premium Quality
+              </h3>
               <p className="text-gray-400">
                 99% client satisfaction with excellence in every detail
               </p>
@@ -108,28 +116,34 @@ export default function Home() {
       {/* Testimonials */}
       <TestimonialsCarousel />
 
-      {/* Google Ads Placeholder - Revenue Generation */}
+      {/* Google Ads - Revenue Generation */}
       <div className="py-12 px-4">
-        <GoogleAdsPlaceholder 
-          slot="home-mid-content" 
-          format="rectangle"
-          className="max-w-6xl mx-auto"
-        />
+        <div className="max-w-6xl mx-auto flex justify-center">
+          <AdSenseUnit
+            slot="5800977493749262"
+            className="block min-h-[100px] w-full"
+          />
+        </div>
       </div>
 
       {/* Featured Section */}
       <section className="py-20 px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
-            <span className="gradient-text text-shadow-gold">Experience the Future</span>
+            <span className="gradient-text text-shadow-gold">
+              Experience the Future
+            </span>
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="card hover-lift">
               <div className="text-5xl mb-4">📡</div>
-              <h3 className="text-2xl font-bold text-white mb-4">Live Streaming</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Live Streaming
+              </h3>
               <p className="text-gray-400 mb-4">
-                Watch exclusive live content and interact with our community in real-time.
+                Watch exclusive live content and interact with our community in
+                real-time.
               </p>
               <Link
                 href="/live"
@@ -141,9 +155,12 @@ export default function Home() {
 
             <div className="card hover-lift">
               <div className="text-5xl mb-4">🛍️</div>
-              <h3 className="text-2xl font-bold text-white mb-4">Premium Store</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Premium Store
+              </h3>
               <p className="text-gray-400 mb-4">
-                Discover our curated collection of premium products and exclusive items.
+                Discover our curated collection of premium products and
+                exclusive items.
               </p>
               <Link
                 href="/store"
@@ -162,15 +179,13 @@ export default function Home() {
       {/* Newsletter Section - Revenue/Lead Generation */}
       <section className="py-12 px-4">
         <div className="max-w-6xl mx-auto">
-          <Newsletter 
+          <Newsletter
             variant="hero"
             title="Join Our Exclusive Community"
             description="Get insider access to cutting-edge design trends, development tips, and exclusive offers"
           />
         </div>
       </section>
-
     </div>
   );
 }
-

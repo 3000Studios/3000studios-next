@@ -1,0 +1,28 @@
+name: Maintenance — Repo Hygiene
+
+on:
+  schedule:
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+
+jobs:
+  hygiene:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Dependency audit (non-blocking)
+        run: |
+          npm audit --audit-level=high || true
+
+      - name: Detect unused deps
+        run: |
+          npx depcheck || true
