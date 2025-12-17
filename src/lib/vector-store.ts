@@ -34,7 +34,7 @@ export async function recallMemory(
       LIMIT 5
     `;
 
-    return results.map((r) => r.content).join("\n");
+    return results.map((r: { content: string }) => r.content).join("\n");
   } catch (error) {
     console.error("Failed to recall memory:", error);
     return "";
