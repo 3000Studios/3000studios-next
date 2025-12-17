@@ -137,11 +137,43 @@ if (!fs.existsSync(baseDir)) {
   fs.mkdirSync(baseDir, { recursive: true });
 }
 
+// 1. Process Hardcoded Pages
 pages.forEach((p) => {
+  generatePage(p);
+});
+
+// 2. Process "Dropzone" Content (src/revenue-content/*.json)
+const dropzoneDir = "src/revenue-content";
+if (fs.existsSync(dropzoneDir)) {
+  const files = fs
+    .readdirSync(dropzoneDir)
+    .filter((file) => file.endsWith(".json"));
+
+  files.forEach((file) => {
+    try {
+      const rawData = fs.readFileSync(path.join(dropzoneDir, file), "utf-8");
+      const p = JSON.parse(rawData);
+
+      // Basic validation
+      if (p.slug && p.title && p.content) {
+        generatePage(p);
+        console.log(`[Dropzone] Ingested: ${file} -> /revenue/${p.slug}`);
+      } else {
+        console.warn(
+          `[Dropzone] Skipped ${file}: Missing requisite fields (slug, title, content).`
+        );
+      }
+    } catch (err) {
+      console.error(`[Dropzone] Error processing ${file}:`, err);
+    }
+  });
+}
+
+function generatePage(p: any) {
   const dir = path.join(baseDir, p.slug);
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
   fs.writeFileSync(path.join(dir, "page.tsx"), template(p));
   console.log(`Generated revenue page: ${p.slug}`);
-});
+}
