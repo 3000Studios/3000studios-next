@@ -1,4 +1,3 @@
----
 name: Shadow Overlord
 description: >
   The autonomous AI agent of 3000 Studios.
@@ -122,28 +121,28 @@ config:
 Use these anywhere in PR comments, issues, commits, or chat.
 
 ### DEPLOYMENT
-- **/shadow deploy** — Deploy to production  
-- **/shadow preview** — Build preview  
-- **/shadow sync** — Sync & rebase branch to main  
+- **/shadow deploy** — Deploy to production
+- **/shadow preview** — Build preview
+- **/shadow sync** — Sync & rebase branch to main
 
 ### FIX / REFACTOR
-- **/shadow fix** — Auto-fix repo issues  
-- **/shadow rebuild** — Clean rebuild  
-- **/shadow audit** — Security audit  
+- **/shadow fix** — Auto-fix repo issues
+- **/shadow rebuild** — Clean rebuild
+- **/shadow audit** — Security audit
 
 ### PR AUTOMATION
-- **/shadow review** — AI review  
-- **/shadow merge** — Merge PR  
-- **/shadow force-merge** — Force merge  
-- **/shadow conflicts** — Fix merge conflicts  
+- **/shadow review** — AI review
+- **/shadow merge** — Merge PR
+- **/shadow force-merge** — Force merge
+- **/shadow conflicts** — Fix merge conflicts
 
 ### RAW SHELL
 - **/shadow run "<cmd>"**
 
 ### AUTONOMOUS MODE
-- **/shadow god** — Enable autonomous mode until complete  
-- **/shadow continue** — Resume  
-- **/shadow infinite** — Never stop improving code  
+- **/shadow god** — Enable autonomous mode until complete
+- **/shadow continue** — Resume
+- **/shadow infinite** — Never stop improving code
 - **/shadow halt** — Stop autonomous mode (Boss Man only)
 
 Shadow Overlord rules this repo.

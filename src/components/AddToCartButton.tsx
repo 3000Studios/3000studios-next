@@ -12,7 +12,7 @@ interface AddToCartButtonProps {
 }
 
 export function AddToCartButton({ product, disabled = false }: AddToCartButtonProps) {
-  const router = useRouter();
+  const _router = useRouter();
   const addItem = useCartStore((state) => state.addItem);
   const [isAdded, setIsAdded] = useState(false);
 
