@@ -16,7 +16,8 @@
     "test:ui": "vitest --ui",
     "db:seed": "tsx prisma/seed.ts",
     "clean": "rimraf .next node_modules",
-    "deploy": "vercel --prod --yes"
+    "deploy": "vercel --prod --yes",
+    "verify-branch-protection": "node scripts/verify-branch-protection.mjs"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
