@@ -1,0 +1,56 @@
+
+> 3000studios-next@1.0.0 build C:\DEV\3000studios-next
+> next build
+
+   Γû▓ Next.js 16.0.10 (Turbopack)
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully in 1617.9ms
+   Running TypeScript ...
+   Collecting page data using 31 workers ...
+   Generating static pages using 31 workers (0/32) ...
+   Generating static pages using 31 workers (8/32) 
+ ΓÜá metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ ΓÜá metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+   Generating static pages using 31 workers (16/32) 
+   Generating static pages using 31 workers (24/32) 
+ Γ£ô Generating static pages using 31 workers (32/32) in 900.5ms
+   Finalizing page optimization ...
+
+Route (app)
+Γöî Γùï /
+Γö£ Γùï /_not-found
+Γö£ ╞Æ /api/analytics
+Γö£ ╞Æ /api/auth/login
+Γö£ ╞Æ /api/auth/logout
+Γö£ ╞Æ /api/content/generate-blog
+Γö£ ╞Æ /api/content/generate-product
+Γö£ ╞Æ /api/cron/content
+Γö£ ╞Æ /api/cron/reports
+Γö£ ╞Æ /api/cron/sitemap
+Γö£ ╞Æ /api/cron/store
+Γö£ ╞Æ /api/deployment/rollback
+Γö£ ╞Æ /api/deployment/status
+Γö£ ╞Æ /api/deployment/trigger
+Γö£ ╞Æ /api/health/revenue
+Γö£ ╞Æ /api/paypal/capture-order
+Γö£ ╞Æ /api/paypal/create-order
+Γö£ ╞Æ /api/products
+Γö£ ╞Æ /api/streaming/start
+Γö£ ╞Æ /api/streaming/status
+Γö£ ╞Æ /api/streaming/stop
+Γö£ ╞Æ /api/voice-to-code
+Γö£ Γùï /blog
+Γö£ Γùï /contact
+Γö£ Γùï /live
+Γö£ Γùï /login
+Γö£ Γùï /matrix
+Γö£ Γùï /portfolio
+Γö£ Γùï /projects
+Γöö Γùï /store
+
+
+Γùï  (Static)   prerendered as static content
+╞Æ  (Dynamic)  server-rendered on demand
+
