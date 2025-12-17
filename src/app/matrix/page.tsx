@@ -45,7 +45,7 @@ export default function MatrixCommandCenter() {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState('');
   const [waveform, setWaveform] = useState<number[]>([]);
-  const [currentCommand, setCurrentCommand] = useState<VoiceCommand | null>(null);
+  const [_currentCommand, setCurrentCommand] = useState<VoiceCommand | null>(null);
   const [commandResult, setCommandResult] = useState<CommandResult | null>(null);
 
   // Dashboard State

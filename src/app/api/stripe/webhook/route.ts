@@ -11,7 +11,7 @@ import Stripe from 'stripe';
 export const runtime = 'nodejs';
 
 function getStripe(): Stripe | null {
-  const key = process.env.STRIPE_SECRET_KEY;
+  const key = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET || process.env.STRIPE_3000_SECRET;
   if (!key) return null;
   return new Stripe(key);
 }

@@ -9,9 +9,9 @@ import { useEffect } from 'react';
 export function AdSenseUnit({ slot, style }: { slot: string; style?: React.CSSProperties }) {
   useEffect(() => {
     try {
-      // @ts-ignore
+      // @ts-expect-error AdSense global may not be available
       (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
+    } catch {
       // ignore
     }
   }, []);

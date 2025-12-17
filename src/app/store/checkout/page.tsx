@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function CheckoutPage() {
-  const router = useRouter();
+  const _router = useRouter();
   const { items, getTotalPrice, getTotalItems } = useCartStore();
   const [paymentMethod, setPaymentMethod] = useState<'paypal' | 'stripe'>('paypal');
   const [loading, setLoading] = useState(false);
