@@ -127,7 +127,7 @@ function EmergencyRequestButton() {
       } else {
         setMessage("❌ Failed to send");
       }
-    } catch (e) {
+    } catch {
       setMessage("❌ Error");
     }
     setLoading(false);

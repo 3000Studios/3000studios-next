@@ -1,9 +1,9 @@
 import { openai } from "./openai";
 
 export const agents = {
-  router: openai("gpt-5-mini"),
-  coder: openai("gpt-5.1-codex"),
-  researcher: openai("gpt-5"),
-  writer: openai("gpt-5-mini"),
-  system: openai("gpt-5"),
+  router: openai("gpt-4o"),
+  coder: openai("gpt-4-turbo"),
+  researcher: openai("gpt-4o"),
+  writer: openai("gpt-4o-mini"),
+  system: openai("gpt-4o"),
 };
