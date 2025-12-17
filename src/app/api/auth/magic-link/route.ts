@@ -10,6 +10,11 @@ import crypto from 'crypto';
 const CLEANUP_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
 const MAGIC_LINK_EXPIRY_MS = 15 * 60 * 1000; // 15 minutes
 
+// Rate limiting: track requests per IP/email
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
+const MAX_REQUESTS_PER_WINDOW = 3; // Max 3 magic link requests per 15 minutes
+
 // In-memory store for magic link tokens (in production, use Redis or database)
 // Use global store so it's shared across API routes
 if (typeof globalThis !== 'undefined') {
@@ -56,6 +61,28 @@ export async function POST(request: NextRequest) {
         { error: 'Email not authorized for Matrix access' },
         { status: 403 }
       );
+    }
+
+    // Rate limiting: check requests for this email
+    const rateLimitKey = email;
+    const now = Date.now();
+    const rateLimit = rateLimitMap.get(rateLimitKey);
+    
+    if (rateLimit) {
+      if (now < rateLimit.resetTime) {
+        if (rateLimit.count >= MAX_REQUESTS_PER_WINDOW) {
+          return NextResponse.json(
+            { error: 'Too many requests. Please try again later.' },
+            { status: 429 }
+          );
+        }
+        rateLimit.count++;
+      } else {
+        // Reset window
+        rateLimitMap.set(rateLimitKey, { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS });
+      }
+    } else {
+      rateLimitMap.set(rateLimitKey, { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS });
     }
 
     // Generate unique token
@@ -141,24 +168,4 @@ async function sendMagicLinkEmail(email: string, magicLink: string): Promise<boo
     console.error('Email send error:', error);
     return false;
   }
-}
-
-// Export function to verify magic link tokens
-export function verifyMagicToken(token: string): { valid: boolean; email?: string } {
-  const tokens = (globalThis as any).__magicTokens || new Map();
-  const data = tokens.get(token);
-  
-  if (!data) {
-    return { valid: false };
-  }
-
-  if (data.expires < Date.now()) {
-    tokens.delete(token);
-    return { valid: false };
-  }
-
-  // Delete token after use (one-time use)
-  tokens.delete(token);
-  
-  return { valid: true, email: data.email };
 }

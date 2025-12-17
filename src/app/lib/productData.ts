@@ -3,10 +3,11 @@
  * Expanded product catalog with diverse offerings
  */
 
-// Affiliate link constants
-const AMAZON_AFFILIATE_TAG = '3000studios-20';
-const CLICKBANK_AFFILIATE_URL = 'https://3000studios.pay.clickbank.net';
-const JVZOO_AFFILIATE_URL = 'https://www.jvzoo.com/3000studios';
+// Affiliate link constants (load from environment variables)
+// In production, set these via environment variables for security
+const AMAZON_AFFILIATE_TAG = process.env.NEXT_PUBLIC_AMAZON_AFFILIATE_TAG || '3000studios-20';
+const CLICKBANK_AFFILIATE_URL = process.env.NEXT_PUBLIC_CLICKBANK_AFFILIATE_URL || 'https://3000studios.pay.clickbank.net';
+const JVZOO_AFFILIATE_URL = process.env.NEXT_PUBLIC_JVZOO_AFFILIATE_URL || 'https://www.jvzoo.com/3000studios';
 
 export interface Product {
   productId: string;
@@ -21,6 +22,8 @@ export interface Product {
   affiliateLink?: string;
   featured?: boolean;
   tags?: string[];
+  commission?: number; // Commission percentage or fixed amount
+  commissionType?: 'percentage' | 'fixed'; // Type of commission
 }
 
 export const productCatalog: Product[] = [

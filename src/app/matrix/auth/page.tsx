@@ -34,14 +34,9 @@ function MatrixAuthContent() {
         });
 
         if (response.ok) {
-          const data = await response.json();
+          await response.json(); // Read response but don't need data
           setStatus('success');
           setMessage('Authentication successful! Redirecting to The Matrix...');
-          
-          // Store token in localStorage as backup
-          if (data.token) {
-            localStorage.setItem('auth_token', data.token);
-          }
 
           // Redirect to matrix after 2 seconds
           setTimeout(() => {

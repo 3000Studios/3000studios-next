@@ -77,14 +77,40 @@ export default function ShadowAvatar() {
       // Configure for female voice with async voice loading support
       const setVoice = () => {
         const voices = window.speechSynthesis.getVoices();
-        const femaleVoice = voices.find(
-          voice => voice.name.includes('Female') || 
-                  voice.name.includes('female') ||
-                  voice.name.includes('Samantha') ||
-                  voice.name.includes('Victoria') ||
-                  voice.name.includes('Karen') ||
-                  voice.name.includes('Zira')
-        );
+        
+        // Strategy 1: Check for gender property (if available)
+        let femaleVoice = voices.find(voice => (voice as any).gender === 'female');
+        
+        // Strategy 2: Look for 'female' in name or voiceURI (case-insensitive)
+        if (!femaleVoice) {
+          femaleVoice = voices.find(
+            voice =>
+              /female/i.test(voice.name) ||
+              /female/i.test(voice.voiceURI)
+          );
+        }
+        
+        // Strategy 3: Common female voice names across platforms (expanded list)
+        if (!femaleVoice) {
+          const commonFemaleNames = [
+            'Samantha', 'Victoria', 'Karen', 'Zira', 'Susan', 'Tessa', 'Joanna', 
+            'Emma', 'Linda', 'Amy', 'Jenny', 'Aria', 'Mia', 'Olivia', 'Lila', 
+            'Catherine', 'Hazel', 'Shelley', 'Allison', 'Fiona', 'Moira', 'Veena',
+            'Rishi', 'Nicky', 'Paulina', 'Princess', 'Kathy', 'Alice', 'Nicole'
+          ];
+          femaleVoice = voices.find(voice =>
+            commonFemaleNames.some(name => voice.name.toLowerCase().includes(name.toLowerCase()))
+          );
+        }
+        
+        // Strategy 4: Filter by language and prefer higher-pitched voices
+        if (!femaleVoice) {
+          const englishVoices = voices.filter(v => v.lang.startsWith('en'));
+          // Prefer voices with certain indicators in their names
+          femaleVoice = englishVoices.find(v => 
+            !/male/i.test(v.name) && (v.name.includes('+') || /\d/.test(v.name))
+          );
+        }
         
         if (femaleVoice) {
           utterance.voice = femaleVoice;

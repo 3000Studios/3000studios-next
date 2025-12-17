@@ -208,7 +208,9 @@ All requirements from Boss Man J have been successfully implemented for the 3000
 
 ### Updated in .env.example:
 ```bash
-ADMIN_PASSWORD=Gabby3000!!!
+# IMPORTANT: These are examples only. Use your own secure credentials!
+ADMIN_EMAIL=your-admin-email@example.com
+ADMIN_PASSWORD=your-secure-password-here
 ```
 
 ### For Production (Magic Link):
@@ -311,8 +313,12 @@ SENDGRID_API_KEY=your-key
 
 1. **Set Environment Variables** in Vercel/production:
    ```bash
-   ADMIN_PASSWORD=Gabby3000!!!
-   NEXT_PUBLIC_BASE_URL=https://3000studios.vercel.app
+   # IMPORTANT: Use your own secure credentials, not these examples!
+   ADMIN_EMAIL=your-admin-email@example.com
+   ADMIN_PASSWORD=your-secure-password-here
+   MATRIX_ADMIN_EMAIL=your-admin-email@example.com
+   MATRIX_ADMIN_PASSWORD=your-secure-password-here
+   NEXT_PUBLIC_BASE_URL=https://your-domain.com
    # Add email service API key
    ```
 
