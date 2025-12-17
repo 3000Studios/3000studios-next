@@ -30,15 +30,29 @@ export default function ShadowAvatar() {
   const [audioEnabled, setAudioEnabled] = useState(true);
   const [isBlinking, setIsBlinking] = useState(false);
   const recognitionRef = useRef<any>(null);
+  const blinkTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Blinking animation for more lifelike avatar
   useEffect(() => {
     const blinkInterval = setInterval(() => {
       setIsBlinking(true);
-      setTimeout(() => setIsBlinking(false), BLINK_DURATION);
+      // Clear any previous timeout before setting a new one
+      if (blinkTimeoutRef.current) {
+        clearTimeout(blinkTimeoutRef.current);
+      }
+      blinkTimeoutRef.current = setTimeout(() => {
+        setIsBlinking(false);
+        blinkTimeoutRef.current = null;
+      }, BLINK_DURATION);
     }, BASE_BLINK_INTERVAL + Math.random() * BLINK_RANDOM_RANGE);
 
-    return () => clearInterval(blinkInterval);
+    return () => {
+      clearInterval(blinkInterval);
+      if (blinkTimeoutRef.current) {
+        clearTimeout(blinkTimeoutRef.current);
+        blinkTimeoutRef.current = null;
+      }
+    };
   }, []);
 
   const handleUserInput = useCallback(async (_input: string) => {
