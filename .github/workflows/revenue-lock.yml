@@ -1,0 +1,27 @@
+name: Revenue Lock
+
+on: [pull_request]
+
+jobs:
+  revenue-lock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Protect revenue files
+        run: |
+          protected=(
+            "ads.txt"
+            "src/app/api/stripe"
+            "src/lib/stripe"
+            "src/lib/adsense"
+          )
+
+          for file in "${protected[@]}"; do
+            if git diff --name-only origin/main...HEAD | grep -q "$file"; then
+              echo "❌ Revenue-protected file modified: $file"
+              exit 1
+            fi
+          done
+
+          echo "✅ Revenue lock passed"
