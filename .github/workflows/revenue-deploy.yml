@@ -20,6 +20,9 @@ jobs:
       - name: Generate Revenue Pages
         run: npx tsx scripts/generate-revenue-pages.ts
 
+      - name: 🔒 Verify Revenue Lock
+        run: npx tsx scripts/verify-revenue-lock.ts
+
       - run: npm run build
 
       - name: Deploy to Vercel
