@@ -1,6 +1,7 @@
+---
 name: Revenue Lock Guard
 
-on:
+'on':
   pull_request:
     branches: [main]
 
@@ -20,15 +21,17 @@ jobs:
 
       - name: Protect Stripe Environment Usage
         run: |
-          if git diff origin/main...HEAD | grep -E "STRIPE_SECRET|STRIPE_3000_SECRET|NEXT_PUBLIC_STRIPE"; then
+          STRIPE_VARS="STRIPE_SECRET|STRIPE_3000_SECRET|NEXT_PUBLIC_STRIPE"
+          if git diff origin/main...HEAD | grep -E "$STRIPE_VARS"; then
             echo "❌ Stripe environment variables modified"
             exit 1
           fi
 
       - name: Protect AdSense CMP Logic
         run: |
-          if git diff origin/main...HEAD | grep -E "consent|adsense|cmp|iab"; then
-            echo "⚠️ Ad/Consent logic touched — requires manual review"
+          AD_PATTERNS="consent|adsense|cmp|iab"
+          if git diff origin/main...HEAD | grep -E "$AD_PATTERNS"; then
+            echo "⚠️ Ad/Consent logic touched — manual review required"
           fi
 
       - name: Revenue Lock Passed
