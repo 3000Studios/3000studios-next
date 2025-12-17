@@ -14,20 +14,26 @@ export default function ConsentBanner() {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
-    // Check if user has already given consent
-    const consent = localStorage.getItem('cookie-consent');
-    if (!consent) {
-      setShowBanner(true);
+    // Only access localStorage on client side
+    if (typeof window !== 'undefined') {
+      const consent = localStorage.getItem('cookie-consent');
+      if (!consent) {
+        setShowBanner(true);
+      }
     }
   }, []);
 
   const handleAccept = () => {
-    localStorage.setItem('cookie-consent', 'true');
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('cookie-consent', 'true');
+    }
     setShowBanner(false);
   };
 
   const handleDecline = () => {
-    localStorage.setItem('cookie-consent', 'false');
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('cookie-consent', 'false');
+    }
     setShowBanner(false);
   };
 

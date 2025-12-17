@@ -33,9 +33,12 @@ export default function HomePage() {
   // Exit intent detection
   useEffect(() => {
     const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0 && !localStorage.getItem('exit-intent-shown')) {
-        setShowExitIntent(true);
-        localStorage.setItem('exit-intent-shown', 'true');
+      if (typeof window !== 'undefined' && e.clientY <= 0) {
+        const shown = localStorage.getItem('exit-intent-shown');
+        if (!shown) {
+          setShowExitIntent(true);
+          localStorage.setItem('exit-intent-shown', 'true');
+        }
       }
     };
 
@@ -173,6 +176,9 @@ export default function HomePage() {
       </section>
 
       {/* AdSense Unit - Below Hero */}
+      {/* TODO: Replace slot IDs with actual AdSense slot IDs from your account */}
+      {/* These placeholder IDs (1234567890, 9876543210) won't display ads */}
+      {/* Get real slot IDs from: https://adsense.google.com */}
       {process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID && (
         <div className="max-w-6xl mx-auto px-4 py-8">
           <AdSenseUnit slot="1234567890" style={{ display: 'block', minHeight: '90px' }} />
@@ -281,6 +287,7 @@ export default function HomePage() {
       <AffiliateToolCards />
 
       {/* AdSense Unit - Mid Page */}
+      {/* TODO: Replace with actual AdSense slot ID */}
       {process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID && (
         <div className="max-w-6xl mx-auto px-4 py-8">
           <AdSenseUnit slot="9876543210" style={{ display: 'block', minHeight: '250px' }} />
