@@ -323,10 +323,11 @@ Key takeaways for 2025 involve focusing on performance, accessibility, and genui
     tags: ["Design", "Future", "Trends"],
     featured: false,
   },
-  ,{
+  {
     id: "mastering-dark-mode-design-patterns",
     title: "mastering Dark Mode Design Patterns",
-    excerpt: "An in-depth look at how this trend is reshaping the industry standards for the coming year.",
+    excerpt:
+      "An in-depth look at how this trend is reshaping the industry standards for the coming year.",
     content: `In the rapidly evolving world of digital design, staying ahead of the curve is not just an advantage—it's a necessity. mastering Dark Mode Design Patterns represents a paradigm shift in how we approach user experience.
 
 
@@ -338,8 +339,8 @@ Key takeaways for 2025 involve focusing on performance, accessibility, and genui
     author: "3000 Studios Team",
     date: "2025-12-17",
     readTime: "5 min read",
-    tags: ["Design","Future","Trends"],
-    featured: false
+    tags: ["Design", "Future", "Trends"],
+    featured: false,
   },
 ];
 

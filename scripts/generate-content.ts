@@ -136,8 +136,13 @@ function appendToBlogData(post: any) {
       throw new Error("Could not find end of blogPosts array in file.");
     }
 
-    // Insert before the closing bracket with a preceding comma to ensure validity
-    const newEntryString = `  ,{
+    // Check if we need to add a comma
+    const lastChar = fileContent.slice(0, arrayEndIndex).trim().slice(-1);
+    const prefix = lastChar === "," ? "" : ",";
+
+    // Insert with robust comma handling
+    const newEntryString = `  ${prefix}
+  {
     id: "${post.id}",
     title: "${post.title}",
     excerpt: "${post.excerpt}",
@@ -148,8 +153,7 @@ function appendToBlogData(post: any) {
     readTime: "${post.readTime}",
     tags: ${JSON.stringify(post.tags)},
     featured: ${post.featured}
-  },
-`;
+  }`;
 
     // Insert before the closing bracket
     const updatedContent =
