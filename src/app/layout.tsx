@@ -20,6 +20,7 @@ import Navigation from "./components/Navigation";
 import SmoothScroll from "./components/SmoothScroll";
 import SoundEffects from "./components/SoundEffects";
 import VideoWallpaper from "./components/VideoWallpaper";
+import ConsentBanner from "@/components/ConsentBanner";
 import "./globals.css";
 
 const RAW_ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
@@ -102,6 +103,9 @@ export default function RootLayout({
 
         {/* Gravity Footer - Blueprint Feature */}
         <GravityFooter />
+
+        {/* GDPR Consent Banner - Required for AdSense Approval */}
+        <ConsentBanner />
 
         <Analytics />
       </body>

@@ -19,6 +19,13 @@ jobs:
           node-version: '24'
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
+      
+      # REVENUE LOCK: Critical check before any deployment
+      - name: 🔒 Revenue Lock Validation
+        run: node scripts/validate-revenue-paths.js
+        env:
+          NODE_ENV: production
+      
       - run: pnpm lint
       - run: pnpm type-check
       - run: pnpm build
