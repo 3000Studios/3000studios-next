@@ -6,8 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Stats {
@@ -118,4 +118,25 @@ model OrderItem {
   orderId   String
   product   Product @relation(fields: [productId], references: [id])
   productId String
+}
+
+model AIMemory {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  content   String
+  embedding Unsupported("vector(1536)")?
+  createdAt DateTime @default(now()) @map("created_at")
+  accessCount Int    @default(0) @map("access_count")
+
+  @@map("ai_memory")
+}
+
+model AIUsage {
+  id        Int      @id @default(autoincrement())
+  model     String
+  tokens    Int
+  latencyMs Int      @map("latency_ms")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("ai_usage")
 }

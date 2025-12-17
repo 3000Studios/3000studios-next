@@ -1,12 +1,13 @@
 "use client";
 
-import { useStreamText } from "ai/react";
+// import { useCompletion } from "ai/react";
 
 export function useAI() {
-  return useStreamText({
-    api: "/api/ai/stream",
-    onFinish: ({ usage }: { usage: any }) => {
-      console.log("Tokens used:", usage);
-    },
-  });
+  // return useCompletion({
+  //   api: "/api/ai/stream",
+  //   onFinish: ({ usage }: { usage: any }) => {
+  //     console.log("Tokens used:", usage);
+  //   },
+  // });
+  return null;
 }

@@ -1,26 +1,21 @@
-import { Client } from "pg";
-
-const connectionString = process.env.DATABASE_URL;
-
-let client: Client | null = null;
-
-async function getClient() {
-  if (!client) {
-    if (!connectionString) return null;
-    client = new Client({ connectionString });
-    await client.connect();
-  }
-  return client;
-}
+import { prisma } from "./prisma";
 
 export async function pruneMemory() {
-  const db = await getClient();
-  if (!db) return;
+  const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
 
-  await db.query(`
-    DELETE FROM ai_memory
-    WHERE
-      created_at < now() - interval '30 days'
-      AND access_count < 2
-  `);
+  try {
+    const result = await prisma.aIMemory.deleteMany({
+      where: {
+        createdAt: {
+          lt: thirtyDaysAgo,
+        },
+        accessCount: {
+          lt: 2,
+        },
+      },
+    });
+    console.log(`Pruned ${result.count} memories.`);
+  } catch (error) {
+    console.error("Failed to prune memory:", error);
+  }
 }
