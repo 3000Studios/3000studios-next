@@ -352,6 +352,10 @@ export function getPostsByCategory(category: string): BlogPost[] {
   return blogPosts.filter((post) => post.category === category);
 }
 
+export function getPostById(id: string): BlogPost | undefined {
+  return blogPosts.find((post) => post.id === id);
+}
+
 export function getAllCategories(): string[] {
   return Array.from(new Set(blogPosts.map((post) => post.category)));
 }
