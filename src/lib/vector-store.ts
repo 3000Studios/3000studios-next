@@ -19,20 +19,22 @@ async function getClient() {
   return client;
 }
 
-export async function storeMemory(text: string) {
+export async function storeMemory(userId: string, text: string) {
   const db = await getClient();
   if (!db) return;
 
   const embedding = await createEmbedding(text);
 
   await db.query(
-    `INSERT INTO ai_memory (id, content, embedding)
-     VALUES ($1, $2, $3)`,
-    [uuid(), text, embedding]
+    `
+    INSERT INTO ai_memory (id, user_id, content, embedding)
+    VALUES ($1, $2, $3, $4)
+    `,
+    [uuid(), userId, text, embedding]
   );
 }
 
-export async function recallMemory(query: string) {
+export async function recallMemory(userId: string, query: string) {
   const db = await getClient();
   if (!db) return "";
 
@@ -42,10 +44,11 @@ export async function recallMemory(query: string) {
     `
     SELECT content
     FROM ai_memory
-    ORDER BY embedding <-> $1
+    WHERE user_id = $1
+    ORDER BY embedding <-> $2
     LIMIT 5
     `,
-    [embedding]
+    [userId, embedding]
   );
 
   return rows.map((r) => r.content).join("\n");
