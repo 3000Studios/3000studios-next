@@ -75,7 +75,8 @@ export default function MatrixCommandCenter() {
     // Load initial stats
     loadStats();
     loadLogs();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // router is stable from useRouter, so it's safe to omit loadStats/loadLogs
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   const loadStats = async () => {

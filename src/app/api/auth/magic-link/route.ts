@@ -23,6 +23,18 @@ if (typeof globalThis !== 'undefined') {
   if (!(globalThis as any).__magicTokens) {
     (globalThis as any).__magicTokens = new Map<string, { email: string; expires: number }>();
     
+    // PRODUCTION WARNING: This in-memory storage won't work correctly in:
+    // - Multi-instance deployments (Vercel, AWS Lambda, etc.)
+    // - Server restarts (tokens will be lost)
+    // For production, implement Redis or a database-backed token store
+    if (process.env.NODE_ENV === 'production') {
+      console.warn(
+        '⚠️  PRODUCTION WARNING: Using in-memory token storage. ' +
+        'This will not work correctly with multiple instances or server restarts. ' +
+        'Implement Redis or database storage for production use.'
+      );
+    }
+    
     // Clean up expired tokens every 5 minutes
     setInterval(() => {
       const tokens = (globalThis as any).__magicTokens;
