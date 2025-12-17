@@ -133,10 +133,21 @@ model AIMemory {
 
 model AIUsage {
   id        Int      @id @default(autoincrement())
+  userId    String?  @map("user_id")
   model     String
   tokens    Int
   latencyMs Int      @map("latency_ms")
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("ai_usage")
+}
+
+model AICostLimit {
+  id                 String   @id @default(cuid())
+  userId             String   @unique @map("user_id")
+  monthlyTokenLimit  Int      @map("monthly_token_limit")
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  @@map("ai_cost_limits")
 }
