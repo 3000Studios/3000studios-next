@@ -23,7 +23,7 @@ export async function GET() {
   try {
     const buildIdPath = join(process.cwd(), '.next', 'BUILD_ID');
     buildId = readFileSync(buildIdPath, 'utf8').trim();
-  } catch (err) {
+  } catch {
     // BUILD_ID might not exist in dev mode
     buildId = process.env.VERCEL_GIT_COMMIT_SHA?.substring(0, 7) || 'dev';
   }

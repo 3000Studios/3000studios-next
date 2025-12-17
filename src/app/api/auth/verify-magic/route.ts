@@ -6,6 +6,9 @@
 import { createSessionToken } from '@/lib/auth';
 import { NextRequest, NextResponse } from 'next/server';
 
+// Session duration (configurable via env var, default 24 hours)
+const SESSION_DURATION_SECONDS = parseInt(process.env.SESSION_DURATION_HOURS || '24', 10) * 3600;
+
 // Share the same token store with magic-link route via globalThis
 // In production, this would be Redis or database
 
@@ -58,7 +61,7 @@ export async function POST(request: NextRequest) {
       {
         status: 200,
         headers: {
-          'Set-Cookie': `auth_token=${sessionToken}; Path=/; HttpOnly; SameSite=Strict; Max-Age=86400`,
+          'Set-Cookie': `auth_token=${sessionToken}; Path=/; HttpOnly; SameSite=Strict; Max-Age=${SESSION_DURATION_SECONDS}`,
         },
       }
     );

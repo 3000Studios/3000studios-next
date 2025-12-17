@@ -56,15 +56,15 @@ export default function ShadowAvatar() {
   }, []);
 
   const handleUserInput = useCallback(async (_input: string) => {
-    // Female persona responses
+    // Female persona responses with fallback text for emoji compatibility
     const responses = [
-      "That's fascinating! Would you like to explore our store? I'd love to show you around! 💎",
-      "I really like the way you think! Have you checked out our amazing projects yet? ✨",
-      "Great question! I'm here to help you discover everything 3000 Studios has to offer! 🌟",
-      "Ooh, interesting! You should definitely see our portfolio - it's stunning! 💫",
-      "I hear you! Let me know if you want to see what we're working on. I'm excited to share! 🎨",
-      "That's so cool! Check out our live streams for more exclusive content! 🎭",
-      "I love chatting with you! Want to see some of our premium digital products? 🛍️",
+      "That's fascinating! Would you like to explore our store? I'd love to show you around!",
+      "I really like the way you think! Have you checked out our amazing projects yet?",
+      "Great question! I'm here to help you discover everything 3000 Studios has to offer!",
+      "Ooh, interesting! You should definitely see our portfolio - it's stunning!",
+      "I hear you! Let me know if you want to see what we're working on. I'm excited to share!",
+      "That's so cool! Check out our live streams for more exclusive content!",
+      "I love chatting with you! Want to see some of our premium digital products?",
     ];
 
     const randomResponse = responses[Math.floor(Math.random() * responses.length)];
