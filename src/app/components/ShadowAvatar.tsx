@@ -106,7 +106,8 @@ export default function ShadowAvatar() {
         // Strategy 4: Filter by language and prefer higher-pitched voices
         if (!femaleVoice) {
           const englishVoices = voices.filter(v => v.lang.startsWith('en'));
-          // Prefer voices with certain indicators in their names
+          // Some browser voices use + or numbers for variants (e.g., "Google UK English Female+")
+          // Filter out explicitly male voices and prefer variant voices as they're often higher quality
           femaleVoice = englishVoices.find(v => 
             !/male/i.test(v.name) && (v.name.includes('+') || /\d/.test(v.name))
           );

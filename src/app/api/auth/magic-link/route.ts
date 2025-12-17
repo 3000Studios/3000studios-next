@@ -11,6 +11,8 @@ const CLEANUP_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
 const MAGIC_LINK_EXPIRY_MS = 15 * 60 * 1000; // 15 minutes
 
 // Rate limiting: track requests per IP/email
+// WARNING: In-memory rate limiting won't persist across restarts and won't work in multi-instance deployments
+// For production, use Redis or a distributed cache for rate limiting
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
 const MAX_REQUESTS_PER_WINDOW = 3; // Max 3 magic link requests per 15 minutes
