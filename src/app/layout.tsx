@@ -13,6 +13,7 @@
 
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import Navigation from "./components/Navigation";
 import GravityFooter from "./components/GravityFooter";
@@ -25,8 +26,10 @@ import { ENV } from "@/lib/env";
 export const metadata: Metadata = {
   metadataBase: new URL(ENV.SITE_URL),
   title: "3000 Studios - Award-Winning Creative Studio",
-  description: "Premium digital experiences, innovative solutions, and transformative projects. 250+ successful clients worldwide with 99% satisfaction rate.",
-  keywords: "creative studio, digital agency, web development, premium design, innovation, 3D experiences, AI solutions",
+  description:
+    "Premium digital experiences, innovative solutions, and transformative projects. 250+ successful clients worldwide with 99% satisfaction rate.",
+  keywords:
+    "creative studio, digital agency, web development, premium design, innovation, 3D experiences, AI solutions",
 };
 
 export default function RootLayout({
@@ -39,28 +42,26 @@ export default function RootLayout({
       <body className="antialiased flex flex-col min-h-screen bg-black">
         {/* Live Video Wallpaper Background - Blueprint Feature */}
         <VideoWallpaper opacity={0.25} />
-        
+
         {/* Background Music Engine - Blueprint Feature */}
         <BackgroundMusic />
-        
+
         {/* Smooth Scroll Enhancement */}
         <SmoothScroll />
-        
+
         {/* Interactive Sound Effects */}
         <SoundEffects />
-        
+
         {/* Main Content */}
         <Navigation />
-        <main className="flex-grow pt-16 relative z-10">
-          {children}
-        </main>
-        
+        <main className="flex-grow pt-16 relative z-10">{children}</main>
+
         {/* Gravity Footer - Blueprint Feature */}
         <GravityFooter />
-        
+
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
 }
-
