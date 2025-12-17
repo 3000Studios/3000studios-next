@@ -3,6 +3,9 @@
   "version": "1.0.1",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -73,7 +76,6 @@
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "typescript": "^5",
-    "vercel": "^50.1.0",
     "vitest": "0.34.6"
   }
 }
