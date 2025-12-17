@@ -1,43 +1,34 @@
-import { Client } from "pg";
-
-const connectionString = process.env.DATABASE_URL;
-
-let client: Client | null = null;
-
-async function getClient() {
-  if (!client) {
-    if (!connectionString) return null;
-    client = new Client({ connectionString });
-    await client.connect();
-  }
-  return client;
-}
+import { prisma } from "./prisma";
 
 export async function enforceCostLimit(
   userId: string,
   tokensRequested: number
 ) {
-  const db = await getClient();
-  if (!db) return; // Fail open if DB is down, or throw? Defaulting to safe behavior for now.
+  // Fail open if user ID is missing for some reason
+  if (!userId) return;
 
-  const { rows } = await db.query(
-    `
-    SELECT
-      monthly_token_limit,
-      COALESCE(SUM(tokens), 0) AS used
-    FROM ai_cost_limits l
-    LEFT JOIN ai_usage u ON u.user_id = l.user_id
-    WHERE l.user_id = $1
-    GROUP BY monthly_token_limit
-    `,
-    [userId]
-  );
+  try {
+    const costLimit = await prisma.aICostLimit.findUnique({
+      where: { userId },
+    });
 
-  if (!rows.length) return; // No limit set for user
+    if (!costLimit) return; // No limit set
 
-  const { monthly_token_limit, used } = rows[0];
+    const usage = await prisma.aIUsage.aggregate({
+      where: {
+        userId,
+      },
+      _sum: {
+        tokens: true,
+      },
+    });
 
-  if (used + tokensRequested > monthly_token_limit) {
-    throw new Error("AI usage limit exceeded");
+    const usedTokens = usage._sum.tokens || 0;
+
+    if (usedTokens + tokensRequested > costLimit.monthlyTokenLimit) {
+      throw new Error("AI usage limit exceeded");
+    }
+  } catch (error) {
+    console.warn("Cost guard error, failing open:", error);
   }
 }
