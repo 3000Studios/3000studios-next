@@ -1,7 +1,9 @@
 "use client";
 
-// Note: AI SDK v5 removed React hooks - this needs to be refactored
-// import { useCompletion } from "ai/react";
+// TODO: Migrate to AI SDK v5 compatible hooks or install @ai-sdk/react package
+// Timeline: Q1 2025 - AI SDK v5 removed React hooks from the core package
+// The hooks are now in a separate @ai-sdk/react package or use the streamText API directly
+// See: https://sdk.vercel.ai/docs/migration
 
 export function useAI() {
   // Temporary stub until AI SDK React hooks are properly configured
@@ -12,7 +14,9 @@ export function useAI() {
     error: null,
   };
   
-  /* Original implementation - needs AI SDK v4 or separate @ai-sdk/react package
+  /* Original implementation - requires @ai-sdk/react package
+  import { useCompletion } from "@ai-sdk/react";
+  
   return useCompletion({
     api: "/api/ai/stream",
     onFinish: ({ usage }: { usage: any }) => {
