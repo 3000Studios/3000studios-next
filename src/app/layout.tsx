@@ -30,6 +30,7 @@ const ADSENSE_ACCOUNT = RAW_ADSENSE_ID
   : undefined;
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://3000studios.xyz'),
   title: "3000 Studios - Award-Winning Creative Studio",
   description:
     "Premium digital experiences, innovative solutions, and transformative projects. 250+ successful clients worldwide with 99% satisfaction rate.",
