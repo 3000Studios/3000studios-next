@@ -13,7 +13,7 @@ export async function GET() {
       },
     });
 
-    const formattedStats = stats.map((stat) => ({
+    const formattedStats = stats.map((stat: typeof stats[number]) => ({
       model: stat.model,
       tokens: stat._sum.tokens || 0,
       avg_latency: Math.round(stat._avg.latencyMs || 0),

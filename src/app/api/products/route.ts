@@ -11,7 +11,7 @@ export async function GET(_request: NextRequest) {
     const dbProducts = await prisma.product.findMany();
 
     // Map Prisma 'id' to 'productId' for frontend compatibility
-    const products = dbProducts.map((p) => ({
+    const products = dbProducts.map((p: typeof dbProducts[number]) => ({
       ...p,
       productId: p.id,
     }));
