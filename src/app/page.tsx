@@ -121,7 +121,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto flex justify-center">
           <AdSenseUnit
             slot="5800977493749262"
-            className="block min-h-[100px] w-full"
+            style={{ display: "block", minHeight: "100px", width: "100%" }}
           />
         </div>
       </div>
