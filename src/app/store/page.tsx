@@ -13,22 +13,7 @@ import { useCallback, useEffect, useState } from 'react';
 import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
 import LoadingSkeleton from '../components/LoadingSkeleton';
 import Newsletter from '../components/Newsletter';
-import { getAllCategories, productCatalog } from '../lib/productData';
-
-interface Product {
-  productId: string;
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  rating: number;
-  reviewCount: number;
-  image?: string;
-  inStock: boolean;
-  affiliateLink?: string;
-  featured?: boolean;
-  tags?: string[];
-}
+import { getAllCategories, productCatalog, Product } from '../lib/productData';
 
 const categories = ['All', ...getAllCategories()];
 
@@ -95,8 +80,26 @@ export default function StorePage() {
   });
 
   const handleAddToCart = (product: Product) => {
-    // If it's an affiliate product, open the affiliate link
+    // If it's an affiliate product, track and open the affiliate link
     if (product.affiliateLink) {
+      // Track affiliate click (fire and forget)
+      fetch('/api/analytics', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event: 'affiliate_click',
+          properties: {
+            productId: product.productId,
+            productName: product.name,
+            category: product.category,
+            affiliateLink: product.affiliateLink,
+            commission: product.commission,
+            timestamp: Date.now(),
+          },
+        }),
+      }).catch(() => { /* ignore tracking errors */ });
+      
+      // Open affiliate link
       window.open(product.affiliateLink, '_blank', 'noopener,noreferrer');
       return;
     }

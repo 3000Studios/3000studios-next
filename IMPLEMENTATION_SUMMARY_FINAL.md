@@ -144,10 +144,11 @@ Status: ✅ COMPLETE
 ### Environment Variables Required
 ```env
 # Core Authentication
-ADMIN_EMAIL=mr.jwswain@gmail.com
-ADMIN_PASSWORD=Gabby3000!!!
-MATRIX_ADMIN_EMAIL=mr.jwswain@gmail.com
-MATRIX_ADMIN_PASSWORD=Gabby3000!!!
+# IMPORTANT: Use your own secure credentials! These are examples only.
+ADMIN_EMAIL=your-admin-email@example.com
+ADMIN_PASSWORD=your-secure-password-here
+MATRIX_ADMIN_EMAIL=your-admin-email@example.com
+MATRIX_ADMIN_PASSWORD=your-secure-password-here
 
 # Magic Link (Optional - for email sending)
 SMTP_HOST=smtp.example.com
@@ -157,7 +158,7 @@ SMTP_PASS=your-smtp-password
 ```
 
 ### Production Setup Steps
-1. Update `.env.local` with Gabby3000!!! password
+1. Update `.env.local` with your own secure password (never use example passwords!)
 2. Configure SMTP for magic link emails (optional)
 3. Deploy to Vercel/hosting
 4. Test magic link flow
@@ -192,14 +193,14 @@ SMTP_PASS=your-smtp-password
 ### Magic Link Login
 1. Go to `/login`
 2. Click "Use Magic Link Instead"
-3. Enter admin email (mr.jwswain@gmail.com)
+3. Enter your configured admin email
 4. Check email for magic link (or console in dev)
 5. Click link to auto-login to /matrix
 
 ### Password Login
 1. Go to `/login`
-2. Enter email: mr.jwswain@gmail.com
-3. Enter password: Gabby3000!!!
+2. Enter your configured admin email
+3. Enter your configured admin password
 4. Click "Access Matrix"
 
 ### Testing Avatar
@@ -246,8 +247,7 @@ SMTP_PASS=your-smtp-password
 - `src/app/lib/productData.ts` - Product catalog
 
 ### Testing Credentials
-- Email: mr.jwswain@gmail.com
-- Password: Gabby3000!!!
+Use the credentials you configured in your `.env.local` file.
 
 ---
 
@@ -255,7 +255,7 @@ SMTP_PASS=your-smtp-password
 
 All 5 requirements from Boss Man J have been successfully implemented, tested, and documented. The website is production-ready with:
 
-1. ✅ New password (Gabby3000!!!)
+1. ✅ Updated admin password
 2. ✅ Magic link authentication
 3. ✅ 17 real affiliate products
 4. ✅ 3D female avatar

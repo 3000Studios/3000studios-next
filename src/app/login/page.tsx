@@ -57,15 +57,16 @@ export default function LoginPage() {
 
       if (response.ok) {
         setMagicLinkSent(true);
-        // Only show link in development mode
-        if (data.magicLink && process.env.NODE_ENV === 'development') {
+        // Show link if API returns it (API controls this based on environment)
+        if (data.magicLink) {
           setMagicLinkUrl(data.magicLink);
         }
       } else {
         setError(data.error || 'Failed to send magic link');
       }
-    } catch {
-      setError('An error occurred sending magic link');
+    } catch (err) {
+      console.error('Error sending magic link:', err);
+      setError('An error occurred sending magic link (E001). Please try again.');
     } finally {
       setIsLoading(false);
     }
