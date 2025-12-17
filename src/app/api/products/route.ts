@@ -8,7 +8,13 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(_request: NextRequest) {
   try {
-    const products = await prisma.product.findMany();
+    const dbProducts = await prisma.product.findMany();
+
+    // Map Prisma 'id' to 'productId' for frontend compatibility
+    const products = dbProducts.map((p) => ({
+      ...p,
+      productId: p.id,
+    }));
 
     return NextResponse.json({
       success: true,
