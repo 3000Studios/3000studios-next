@@ -42,7 +42,15 @@ const pages = [
   },
 ];
 
-const template = (p: any) => `
+interface PageData {
+  slug: string;
+  title: string;
+  description: string;
+  keywords: string;
+  content: string;
+}
+
+const template = (p: PageData) => `
 import { Metadata } from 'next';
 import { AFFILIATES } from '@/lib/affiliates';
 
@@ -169,7 +177,7 @@ if (fs.existsSync(dropzoneDir)) {
   });
 }
 
-function generatePage(p: any) {
+function generatePage(p: PageData) {
   const dir = path.join(baseDir, p.slug);
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
