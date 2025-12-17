@@ -59,9 +59,9 @@ git push origin feature/my-awesome-feature
 ## 📁 Files and Documentation
 
 ### Documentation
-- **[BRANCH_PROTECTION_SETUP.md](.github/BRANCH_PROTECTION_SETUP.md)** - Complete setup guide with step-by-step instructions
-- **[BRANCH_PROTECTION_RULES.md](.github/BRANCH_PROTECTION_RULES.md)** - Quick reference for required rules
-- **[README.md](.github/BRANCH_PROTECTION_README.md)** - This file
+- **[BRANCH_PROTECTION_SETUP.md](BRANCH_PROTECTION_SETUP.md)** - Complete setup guide with step-by-step instructions
+- **[BRANCH_PROTECTION_RULES.md](BRANCH_PROTECTION_RULES.md)** - Quick reference for required rules
+- **[BRANCH_PROTECTION_README.md](BRANCH_PROTECTION_README.md)** - This comprehensive workflow guide
 
 ### Scripts
 - **[verify-branch-protection.mjs](../scripts/verify-branch-protection.mjs)** - Check branch protection status

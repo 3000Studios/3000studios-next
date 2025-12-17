@@ -15,6 +15,7 @@
  */
 
 import { Octokit } from '@octokit/rest';
+import { execSync } from 'child_process';
 
 const REQUIRED_RULES = {
   prRequired: 'Pull request before merging',
@@ -134,7 +135,6 @@ async function verifyBranchProtection() {
 
 async function getRepoInfo() {
   try {
-    const { execSync } = await import('child_process');
     const remoteUrl = execSync('git remote get-url origin', { encoding: 'utf-8' }).trim();
     
     // Parse GitHub URL

@@ -81,9 +81,18 @@ fi
 echo "✅ ESLint OK"
 echo ""
 
-# 3. Check for large files
+# 4. Check for large files
 echo "🔵 Checking for large files..."
-large_files=$(git diff --staged --name-only --diff-filter=ACM | while read file; do
+# Get list of files being pushed (compare with remote)
+remote_ref=$(git rev-parse @{u} 2>/dev/null || echo "")
+if [ -n "$remote_ref" ]; then
+  compare_range="$remote_ref..HEAD"
+else
+  # If no upstream, check last commit
+  compare_range="HEAD~1..HEAD"
+fi
+
+large_files=$(git diff --name-only --diff-filter=ACM $compare_range | while read file; do
   if [ -f "$file" ]; then
     size=$(wc -c < "$file")
     if [ $size -gt 5242880 ]; then  # 5MB
@@ -123,10 +132,18 @@ secrets_patterns=(
   "CREDENTIALS"
 )
 
+# Get list of files being pushed
+remote_ref=$(git rev-parse @{u} 2>/dev/null || echo "")
+if [ -n "$remote_ref" ]; then
+  compare_range="$remote_ref..HEAD"
+else
+  compare_range="HEAD~1..HEAD"
+fi
+
 found_secrets=false
 for pattern in "${secrets_patterns[@]}"; do
-  if git diff --staged | grep -iE "$pattern" > /dev/null 2>&1; then
-    if git diff --staged | grep -iE "$pattern" | grep -vE "(\.example|\.sample|\.md|\.txt|SETUP|README)" > /dev/null 2>&1; then
+  if git diff $compare_range | grep -iE "$pattern" > /dev/null 2>&1; then
+    if git diff $compare_range | grep -iE "$pattern" | grep -vE "(\.example|\.sample|\.md|\.txt|SETUP|README)" > /dev/null 2>&1; then
       echo "⚠️  Potential secret found matching pattern: $pattern"
       found_secrets=true
     fi

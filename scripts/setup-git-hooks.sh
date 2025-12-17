@@ -8,8 +8,15 @@ set -e
 echo "🔧 Setting up Git hooks for branch protection..."
 echo ""
 
+# Ensure we're in the repository root
+REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null)
+if [ -z "$REPO_ROOT" ]; then
+  echo "❌ Error: Not in a git repository"
+  exit 1
+fi
+
 # Get the git hooks directory
-HOOKS_DIR=".git/hooks"
+HOOKS_DIR="$REPO_ROOT/.git/hooks"
 
 if [ ! -d "$HOOKS_DIR" ]; then
   echo "❌ Error: .git/hooks directory not found"
@@ -19,7 +26,12 @@ fi
 
 # Install pre-push hook
 PRE_PUSH_HOOK="$HOOKS_DIR/pre-push"
-PRE_PUSH_SCRIPT="scripts/pre-push-hook.sh"
+PRE_PUSH_SCRIPT="$REPO_ROOT/scripts/pre-push-hook.sh"
+
+if [ ! -f "$PRE_PUSH_SCRIPT" ]; then
+  echo "❌ Error: Pre-push script not found at $PRE_PUSH_SCRIPT"
+  exit 1
+fi
 
 if [ -f "$PRE_PUSH_HOOK" ]; then
   echo "⚠️  Pre-push hook already exists"
@@ -28,7 +40,7 @@ if [ -f "$PRE_PUSH_HOOK" ]; then
 fi
 
 # Create symlink to our hook script
-ln -s "../../$PRE_PUSH_SCRIPT" "$PRE_PUSH_HOOK"
+ln -s "$PRE_PUSH_SCRIPT" "$PRE_PUSH_HOOK"
 chmod +x "$PRE_PUSH_HOOK"
 
 echo "✅ Pre-push hook installed"
