@@ -26,9 +26,9 @@ export const ENV = {
   // Public variables (available in browser)
   SITE_URL: required("NEXT_PUBLIC_SITE_URL"),
   
-  // Server-only variables (PayPal)
-  PAYPAL_CLIENT_ID: required("PAYPAL_CLIENT_ID"),
-  PAYPAL_SECRET: required("PAYPAL_SECRET"),
+  // Server-only variables (PayPal) - Optional for build
+  PAYPAL_CLIENT_ID: optional("PAYPAL_CLIENT_ID"),
+  PAYPAL_SECRET: optional("PAYPAL_SECRET"),
   
   // Server-only variables (AI Services) - Optional but recommended
   OPENAI_API_KEY: optional("OPENAI_API_KEY"),
