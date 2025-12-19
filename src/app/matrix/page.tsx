@@ -45,6 +45,7 @@ import ContentGenerator from './components/ContentGenerator';
 import { CompactRealtimeSync } from '@/app/components/RealtimeSync';
 import { useRealtimeSync } from '@/hooks/useRealtimeSync';
 import { forceRedeploy } from '@/lib/services/realtime-sync';
+import FemaleAvatar from './components/FemaleAvatar';
 
 interface StatCardProps {
   title: string;
@@ -214,48 +215,52 @@ export default function MatrixPage() {
               </div>
             </div>
           </div>
-          <div className="card">
-            <h3 className="text-lg font-bold text-white mb-4">⚡ Quick Actions</h3>
-            <div className="space-y-3">
-              <button 
-                onClick={() => window.location.href = '/matrix#voice-editor'}
-                className="w-full p-3 glass border border-gold/30 rounded-lg hover:bg-gold/10 transition-all text-left"
-              >
-                <div className="flex items-center gap-3">
-                  <Mic className="text-gold" size={20} />
-                  <div>
-                    <p className="text-white font-semibold">Voice Command</p>
-                    <p className="text-xs text-gray-400">Deploy with voice</p>
+          <div className="space-y-6">
+            <FemaleAvatar />
+            
+            <div className="card">
+              <h3 className="text-lg font-bold text-white mb-4">⚡ Quick Actions</h3>
+              <div className="space-y-3">
+                <button 
+                  onClick={() => window.location.href = '/matrix#voice-editor'}
+                  className="w-full p-3 glass border border-gold/30 rounded-lg hover:bg-gold/10 transition-all text-left"
+                >
+                  <div className="flex items-center gap-3">
+                    <Mic className="text-gold" size={20} />
+                    <div>
+                      <p className="text-white font-semibold">Voice Command</p>
+                      <p className="text-xs text-gray-400">Deploy with voice</p>
+                    </div>
                   </div>
-                </div>
-              </button>
-              <button 
-                onClick={handleForceDeploy}
-                disabled={isDeploying}
-                className="w-full p-3 glass border border-green-500/30 rounded-lg hover:bg-green-500/10 transition-all text-left disabled:opacity-50"
-              >
-                <div className="flex items-center gap-3">
-                  <Rocket className="text-green-400" size={20} />
-                  <div>
-                    <p className="text-white font-semibold">Force Redeploy</p>
-                    <p className="text-xs text-gray-400">Redeploy current state</p>
+                </button>
+                <button 
+                  onClick={handleForceDeploy}
+                  disabled={isDeploying}
+                  className="w-full p-3 glass border border-green-500/30 rounded-lg hover:bg-green-500/10 transition-all text-left disabled:opacity-50"
+                >
+                  <div className="flex items-center gap-3">
+                    <Rocket className="text-green-400" size={20} />
+                    <div>
+                      <p className="text-white font-semibold">Force Redeploy</p>
+                      <p className="text-xs text-gray-400">Redeploy current state</p>
+                    </div>
                   </div>
-                </div>
-              </button>
-              <a 
-                href="https://github.com/3000Studios/3000studios-next"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full p-3 glass border border-purple-500/30 rounded-lg hover:bg-purple-500/10 transition-all text-left block"
-              >
-                <div className="flex items-center gap-3">
-                  <Code className="text-purple-400" size={20} />
-                  <div>
-                    <p className="text-white font-semibold">View Repository</p>
-                    <p className="text-xs text-gray-400">GitHub main branch</p>
+                </button>
+                <a 
+                  href="https://github.com/3000Studios/3000studios-next"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full p-3 glass border border-purple-500/30 rounded-lg hover:bg-purple-500/10 transition-all text-left block"
+                >
+                  <div className="flex items-center gap-3">
+                    <Code className="text-purple-400" size={20} />
+                    <div>
+                      <p className="text-white font-semibold">View Repository</p>
+                      <p className="text-xs text-gray-400">GitHub main branch</p>
+                    </div>
                   </div>
-                </div>
-              </a>
+                </a>
+              </div>
             </div>
           </div>
         </div>
