@@ -6,11 +6,6 @@
 
 import Link from "next/link";
 import { ArrowRight, Sparkles, Zap, Globe, Lock } from "lucide-react";
-import ShadowAvatar from "./components/ShadowAvatar";
-import ParticleBackground from "./components/ParticleBackground";
-import AnimatedStats from "./components/AnimatedStats";
-import TestimonialsCarousel from "./components/TestimonialsCarousel";
-import PremiumCTA from "./components/PremiumCTA";
 import ServicesShowcase from "./components/ServicesShowcase";
 import { AdSenseUnit } from "@/components/AdSense";
 import Newsletter from "./components/Newsletter";
