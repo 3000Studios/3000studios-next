@@ -22,7 +22,6 @@ import VideoHero from "./components/VideoHero";
 import ConsentBanner from "./components/ConsentBanner";
 import AffiliateToolCards from "./components/AffiliateToolCards";
 import StickyUpgradeButton from "./components/StickyUpgradeButton";
-import { AdSenseUnit } from "@/components/AdSense";
 
 const AnimatedStats = lazy(() => import("./components/AnimatedStats"));
 const Newsletter = lazy(() => import("./components/Newsletter"));
@@ -175,13 +174,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* AdSense Unit - Below Hero */}
-      {/* TODO: Replace slot IDs with actual AdSense slot IDs from your account */}
-      {/* These placeholder IDs (1234567890, 9876543210) won't display ads */}
-      {/* Get real slot IDs from: https://adsense.google.com */}
+      {/* AdSense Auto Ads Placement Hint - Below Hero */}
+      {/* Auto Ads will automatically place ads here once your AdSense account is approved */}
+      {/* After approval, you can create manual ad units in AdSense dashboard and replace this section */}
       {process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID && (
         <div className="max-w-6xl mx-auto px-4 py-8">
-          <AdSenseUnit slot="1234567890" style={{ display: 'block', minHeight: '90px' }} />
+          <div 
+            className="min-h-[90px] flex items-center justify-center"
+            style={{ 
+              background: 'rgba(0, 245, 212, 0.05)',
+              border: '1px dashed rgba(0, 245, 212, 0.2)',
+              borderRadius: '8px'
+            }}
+          >
+            <p className="text-gray-500 text-sm">AdSense Auto Ads will appear here once approved</p>
+          </div>
         </div>
       )}
 
@@ -286,11 +293,21 @@ export default function HomePage() {
       {/* Affiliate Tool Stack */}
       <AffiliateToolCards />
 
-      {/* AdSense Unit - Mid Page */}
-      {/* TODO: Replace with actual AdSense slot ID */}
+      {/* AdSense Auto Ads Placement Hint - Mid Page */}
+      {/* Auto Ads will automatically place ads here once your AdSense account is approved */}
+      {/* After approval, create ad units in AdSense dashboard with slot IDs and use AdSenseUnit component */}
       {process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID && (
         <div className="max-w-6xl mx-auto px-4 py-8">
-          <AdSenseUnit slot="9876543210" style={{ display: 'block', minHeight: '250px' }} />
+          <div 
+            className="min-h-[250px] flex items-center justify-center"
+            style={{ 
+              background: 'rgba(0, 245, 212, 0.05)',
+              border: '1px dashed rgba(0, 245, 212, 0.2)',
+              borderRadius: '8px'
+            }}
+          >
+            <p className="text-gray-500 text-sm">AdSense Auto Ads will appear here once approved</p>
+          </div>
         </div>
       )}
 
