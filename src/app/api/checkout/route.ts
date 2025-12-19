@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
+import { stripe, validateStripeKey } from "@/lib/stripe";
 
 export async function POST(req: NextRequest) {
   try {
+    // Validate Stripe key is set at runtime
+    validateStripeKey();
+    
     const { priceId } = await req.json();
 
     if (!priceId) {
