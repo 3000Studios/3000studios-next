@@ -7,9 +7,53 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 
+// Input validation
+interface TrafficAnalysisRequest {
+  url: string;
+  metrics?: string[];
+}
+
+function validateTrafficRequest(body: unknown): body is TrafficAnalysisRequest {
+  if (!body || typeof body !== 'object') return false;
+  const req = body as Record<string, unknown>;
+  
+  // Validate URL
+  if (typeof req.url !== 'string' || req.url.length === 0) return false;
+  
+  // Validate URL format
+  try {
+    const urlObj = new URL(req.url);
+    // Only allow http/https protocols
+    if (!['http:', 'https:'].includes(urlObj.protocol)) return false;
+  } catch {
+    return false;
+  }
+  
+  // Validate metrics if provided
+  if (req.metrics !== undefined) {
+    if (!Array.isArray(req.metrics)) return false;
+    if (!req.metrics.every(m => typeof m === 'string')) return false;
+  }
+  
+  return true;
+}
+
 export async function POST(request: NextRequest) {
   try {
+    // TODO: Implement authentication
+    // TODO: Check subscription tier (PRO or ENTERPRISE only)
+    // TODO: Implement rate limiting
+    
     const body = await request.json();
+    
+    // Validate input
+    if (!validateTrafficRequest(body)) {
+      return NextResponse.json(
+        { status: 'error', message: 'Invalid request parameters' },
+        { status: 400 }
+      );
+    }
+    
     const { url, metrics } = body;
 
     // Placeholder for future implementation
@@ -17,15 +61,15 @@ export async function POST(request: NextRequest) {
       status: 'success',
       message: 'Traffic analysis API - Coming Soon',
       data: {
-        url,
-        metrics_requested: metrics,
         available_in: ['PRO', 'ENTERPRISE'],
       },
     });
   } catch (error) {
+    // Don't expose error details
+    console.error('Traffic analysis API error:', error);
     return NextResponse.json(
-      { status: 'error', message: 'Invalid request' },
-      { status: 400 }
+      { status: 'error', message: 'Request processing failed' },
+      { status: 500 }
     );
   }
 }
