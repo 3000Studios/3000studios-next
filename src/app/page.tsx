@@ -25,6 +25,7 @@ import StickyUpgradeButton from "./components/StickyUpgradeButton";
 
 const AnimatedStats = lazy(() => import("./components/AnimatedStats"));
 const Newsletter = lazy(() => import("./components/Newsletter"));
+const InteractiveAvatar = lazy(() => import("./components/InteractiveAvatar"));
 
 export default function HomePage() {
   const [showExitIntent, setShowExitIntent] = useState(false);
