@@ -21,6 +21,9 @@
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.88",
     "@anthropic-ai/sdk": "^0.71.2",

@@ -1,56 +1,74 @@
 
-> 3000studios-next@1.0.0 build C:\DEV\3000studios-next
+> 3000studios-next@1.0.0 build
 > next build
 
-   Γû▓ Next.js 16.0.10 (Turbopack)
+   ▲ Next.js 16.0.10 (Turbopack)
    - Environments: .env.local
+   - Experiments (use with caution):
+     · serverActions
 
    Creating an optimized production build ...
- Γ£ô Compiled successfully in 1617.9ms
+ ✓ Compiled successfully in 6.3s
    Running TypeScript ...
-   Collecting page data using 31 workers ...
-   Generating static pages using 31 workers (0/32) ...
-   Generating static pages using 31 workers (8/32) 
- ΓÜá metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
- ΓÜá metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
-   Generating static pages using 31 workers (16/32) 
-   Generating static pages using 31 workers (24/32) 
- Γ£ô Generating static pages using 31 workers (32/32) in 900.5ms
+   Collecting page data using 3 workers ...
+✅ Environment variables validated successfully
+📍 SITE_URL: https://3000studios.com
+🔧 NODE_ENV: production
+✅ Environment variables validated successfully
+📍 SITE_URL: https://3000studios.com
+🔧 NODE_ENV: production
+ ⚠ Using edge runtime on a page currently disables static generation for that page
+✅ Environment variables validated successfully
+📍 SITE_URL: https://3000studios.com
+🔧 NODE_ENV: production
+   Generating static pages using 3 workers (0/33) ...
+✅ Environment variables validated successfully
+📍 SITE_URL: https://3000studios.com
+🔧 NODE_ENV: production
+✅ Environment variables validated successfully
+📍 SITE_URL: https://3000studios.com
+🔧 NODE_ENV: production
+   Generating static pages using 3 workers (8/33) 
+   Generating static pages using 3 workers (16/33) 
+   Generating static pages using 3 workers (24/33) 
+ ✓ Generating static pages using 3 workers (33/33) in 901.2ms
    Finalizing page optimization ...
 
 Route (app)
-Γöî Γùï /
-Γö£ Γùï /_not-found
-Γö£ ╞Æ /api/analytics
-Γö£ ╞Æ /api/auth/login
-Γö£ ╞Æ /api/auth/logout
-Γö£ ╞Æ /api/content/generate-blog
-Γö£ ╞Æ /api/content/generate-product
-Γö£ ╞Æ /api/cron/content
-Γö£ ╞Æ /api/cron/reports
-Γö£ ╞Æ /api/cron/sitemap
-Γö£ ╞Æ /api/cron/store
-Γö£ ╞Æ /api/deployment/rollback
-Γö£ ╞Æ /api/deployment/status
-Γö£ ╞Æ /api/deployment/trigger
-Γö£ ╞Æ /api/health/revenue
-Γö£ ╞Æ /api/paypal/capture-order
-Γö£ ╞Æ /api/paypal/create-order
-Γö£ ╞Æ /api/products
-Γö£ ╞Æ /api/streaming/start
-Γö£ ╞Æ /api/streaming/status
-Γö£ ╞Æ /api/streaming/stop
-Γö£ ╞Æ /api/voice-to-code
-Γö£ Γùï /blog
-Γö£ Γùï /contact
-Γö£ Γùï /live
-Γö£ Γùï /login
-Γö£ Γùï /matrix
-Γö£ Γùï /portfolio
-Γö£ Γùï /projects
-Γöö Γùï /store
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/analytics
+├ ƒ /api/checkout
+├ ƒ /api/content/generate-blog
+├ ƒ /api/content/generate-product
+├ ƒ /api/deployment/status
+├ ƒ /api/deployment/trigger
+├ ƒ /api/deployment/webhook
+├ ƒ /api/env-check
+├ ƒ /api/paypal/capture-order
+├ ƒ /api/paypal/create-order
+├ ƒ /api/products
+├ ƒ /api/realtime-sync
+├ ƒ /api/realtime-sync/status
+├ ƒ /api/streaming/start
+├ ƒ /api/streaming/status
+├ ƒ /api/streaming/stop
+├ ƒ /api/voice-to-code
+├ ○ /blog
+├ ○ /contact
+├ ○ /live
+├ ○ /login
+├ ○ /matrix
+├ ○ /portfolio
+├ ○ /projects
+├ ○ /revenue/best-ai-tools-for-creators
+├ ○ /revenue/best-gaming-laptops-2025
+├ ○ /revenue/best-passive-income-tools
+├ ○ /revenue/ultimate-developer-setup
+├ ○ /revenue/web-design-trends-2025
+└ ○ /store
 
 
-Γùï  (Static)   prerendered as static content
-╞Æ  (Dynamic)  server-rendered on demand
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
 
