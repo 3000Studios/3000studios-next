@@ -6,8 +6,8 @@
 
 'use client';
 
+import { AlertCircle, Check, Gift, Loader2, Mail } from 'lucide-react';
 import { useState } from 'react';
-import { Mail, Check, AlertCircle, Loader2, Gift } from 'lucide-react';
 
 interface NewsletterProps {
   variant?: 'default' | 'compact' | 'hero';
@@ -38,13 +38,13 @@ export default function Newsletter({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validation
     if (!email.trim()) {
       setError('Email is required');
       return;
     }
-    
+
     if (!validateEmail(email)) {
       setError('Please enter a valid email address');
       return;
@@ -69,10 +69,10 @@ export default function Newsletter({
       setMessage('🎉 Welcome aboard! Check your inbox for a confirmation email.');
       setEmail('');
       setName('');
-      
+
       // Track conversion
       // gtag('event', 'newsletter_signup', { method: 'website_form' });
-    } catch (err) {
+    } catch {
       setStatus('error');
       setMessage('Something went wrong. Please try again later.');
     } finally {
@@ -127,19 +127,19 @@ export default function Newsletter({
             )}
           </button>
         </form>
-        
+
         {error && (
           <p className="mt-2 text-red-400 text-sm flex items-center gap-1">
             <AlertCircle size={14} /> {error}
           </p>
         )}
-        
+
         {status === 'success' && (
           <p className="mt-2 text-green-400 text-sm flex items-center gap-1">
             <Check size={14} /> {message}
           </p>
         )}
-        
+
         {status === 'error' && (
           <p className="mt-2 text-red-400 text-sm flex items-center gap-1">
             <AlertCircle size={14} /> {message}
@@ -156,7 +156,7 @@ export default function Newsletter({
           <div className="w-16 h-16 bg-gradient-to-br from-gold to-yellow-500 rounded-full flex items-center justify-center mx-auto mb-6 glow">
             <Gift className="text-black" size={32} />
           </div>
-          
+
           <h2 className="text-3xl md:text-4xl font-bold gradient-text mb-4">
             {title}
           </h2>
@@ -220,7 +220,7 @@ export default function Newsletter({
               <AlertCircle size={18} /> {error}
             </p>
           )}
-          
+
           {status === 'success' && (
             <div className="mt-4 p-4 bg-green-900/30 border border-green-500/50 rounded-lg">
               <p className="text-green-200 flex items-center justify-center gap-2">
@@ -228,7 +228,7 @@ export default function Newsletter({
               </p>
             </div>
           )}
-          
+
           {status === 'error' && (
             <div className="mt-4 p-4 bg-red-900/30 border border-red-500/50 rounded-lg">
               <p className="text-red-200 flex items-center justify-center gap-2">
@@ -257,7 +257,7 @@ export default function Newsletter({
             {title}
           </h3>
         </div>
-        
+
         <p className="text-gray-400 mb-6">
           {description}
         </p>
@@ -317,13 +317,13 @@ export default function Newsletter({
               <AlertCircle size={14} /> {error}
             </p>
           )}
-          
+
           {status === 'success' && (
             <p className="text-green-400 text-sm flex items-center justify-center gap-1">
               <Check size={14} /> {message}
             </p>
           )}
-          
+
           {status === 'error' && (
             <p className="text-red-400 text-sm flex items-center justify-center gap-1">
               <AlertCircle size={14} /> {message}
