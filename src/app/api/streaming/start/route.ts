@@ -3,13 +3,13 @@
  * Initiates WebRTC broadcast
  */
 
-import { NextRequest, NextResponse } from 'next/server';
 import { getWebRTCConfig } from '@/lib/services/webrtc';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { streamTitle, streamDescription } = body;
+    const { streamTitle: _streamTitle, streamDescription: _streamDescription } = body;
 
     // Generate unique stream ID
     const streamId = `stream_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
