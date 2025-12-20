@@ -10,10 +10,13 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     // Stream metadata is preserved for future implementation when stored in database
     // Currently prefixed with underscore as they're part of API contract but not yet persisted
 >>>>>>> origin/copilot/fix-repo-architecture-errors
+=======
+>>>>>>> origin/copilot/update-best-options
     const { streamTitle: _streamTitle, streamDescription: _streamDescription } = body;
 
     // Generate unique stream ID

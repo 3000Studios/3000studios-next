@@ -18,10 +18,16 @@ export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 <<<<<<< HEAD
+<<<<<<< HEAD
   const [_email, _setEmail] = useState('');
   const [_isLoading, _setIsLoading] = useState(false);
 =======
 >>>>>>> origin/copilot/fix-repo-architecture-errors
+=======
+  // email and isLoading are placeholders for future newsletter integration
+  const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+>>>>>>> origin/copilot/update-best-options
 
   const categories = ['All', ...getAllCategories()];
 

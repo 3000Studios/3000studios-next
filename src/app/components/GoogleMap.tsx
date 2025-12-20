@@ -7,10 +7,83 @@
 
 import { useEffect, useRef } from 'react';
 
+<<<<<<< HEAD
 // Declare global google types
 declare global {
   interface Window {
     google: any;
+=======
+// Type declaration for Google Maps API
+declare global {
+  interface Window {
+    google?: typeof google;
+  }
+  namespace google {
+    namespace maps {
+      enum MapTypeControlStyle {
+        DEFAULT,
+        HORIZONTAL_BAR,
+        DROPDOWN_MENU
+      }
+      enum ControlPosition {
+        TOP_LEFT,
+        TOP_CENTER,
+        TOP_RIGHT,
+        LEFT_TOP,
+        LEFT_CENTER,
+        LEFT_BOTTOM,
+        RIGHT_TOP,
+        RIGHT_CENTER,
+        RIGHT_BOTTOM,
+        BOTTOM_LEFT,
+        BOTTOM_CENTER,
+        BOTTOM_RIGHT
+      }
+      enum Animation {
+        BOUNCE = 1,
+        DROP = 2
+      }
+      enum SymbolPath {
+        CIRCLE,
+        FORWARD_CLOSED_ARROW,
+        FORWARD_OPEN_ARROW,
+        BACKWARD_CLOSED_ARROW,
+        BACKWARD_OPEN_ARROW
+      }
+      interface MapOptions {
+        center: { lat: number; lng: number };
+        zoom: number;
+        mapTypeId?: string;
+        styles?: object[];
+        mapTypeControl?: boolean;
+        mapTypeControlOptions?: object;
+        zoomControl?: boolean;
+        streetViewControl?: boolean;
+        fullscreenControl?: boolean;
+      }
+      interface MarkerOptions {
+        position: { lat: number; lng: number };
+        map: Map;
+        title?: string;
+        animation?: Animation;
+        icon?: object;
+      }
+      class Map {
+        constructor(mapDiv: Element | null, opts?: MapOptions);
+      }
+      class Marker {
+        constructor(opts?: MarkerOptions);
+        addListener(eventName: string, handler: () => void): void;
+      }
+      class InfoWindow {
+        constructor(opts?: { content: string });
+        open(map: Map, marker: Marker): void;
+      }
+      namespace event {
+        function clearInstanceListeners(instance: object): void;
+      }
+    }
+>>>>>>> origin/copilot/update-best-options
   }
 }
 
