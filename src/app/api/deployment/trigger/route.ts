@@ -5,6 +5,10 @@
 
 import { triggerDeployment } from '@/lib/services/vercel';
 import { NextRequest, NextResponse } from 'next/server';
+<<<<<<< HEAD
+=======
+import { triggerDeployment } from '@/lib/services/vercel';
+>>>>>>> origin/copilot/fix-repo-architecture-errors
 
 export async function POST(request: NextRequest) {
   try {

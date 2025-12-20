@@ -35,6 +35,7 @@ export default function BackgroundMusic() {
 
   const currentTrack = DEFAULT_TRACKS[currentTrackIndex];
 
+<<<<<<< HEAD
   const handleNextTrack = useCallback(() => {
     setCurrentTrackIndex((idx) => {
       const nextIndex = (idx + 1) % DEFAULT_TRACKS.length;
@@ -62,6 +63,37 @@ export default function BackgroundMusic() {
       audio.removeEventListener('ended', handleNextTrack);
     };
   }, [handleNextTrack, volume]);
+=======
+  const handleNextTrack = () => {
+    const nextIndex = (currentTrackIndex + 1) % DEFAULT_TRACKS.length;
+    setCurrentTrackIndex(nextIndex);
+    
+    if (audioRef.current && isPlaying) {
+      audioRef.current.src = DEFAULT_TRACKS[nextIndex].src;
+      audioRef.current.play().catch(err => console.log('Play error:', err));
+    }
+  };
+
+  useEffect(() => {
+    // Create audio element
+    if (typeof window !== 'undefined') {
+      audioRef.current = new Audio();
+      audioRef.current.volume = volume;
+      audioRef.current.loop = false;
+      
+      // Auto-advance to next track when current ends
+      audioRef.current.addEventListener('ended', handleNextTrack);
+      
+      return () => {
+        if (audioRef.current) {
+          audioRef.current.pause();
+          audioRef.current.removeEventListener('ended', handleNextTrack);
+        }
+      };
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+>>>>>>> origin/copilot/fix-repo-architecture-errors
 
   useEffect(() => {
     if (audioRef.current) {

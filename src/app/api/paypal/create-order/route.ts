@@ -3,9 +3,15 @@
  * Handles PayPal payment processing
  */
 
+<<<<<<< HEAD
 import { prisma } from "@/lib/prisma";
 import { createOrder } from "@/lib/services/paypal";
 import { NextRequest, NextResponse } from "next/server";
+=======
+import { NextRequest, NextResponse } from 'next/server';
+import { createOrder } from '@/lib/services/paypal';
+import { saveOrder } from '@/lib/services/mongodb';
+>>>>>>> origin/copilot/fix-repo-architecture-errors
 
 export async function POST(request: NextRequest) {
   try {
@@ -19,13 +25,18 @@ export async function POST(request: NextRequest) {
     }
 
     // Calculate total
+<<<<<<< HEAD
     const total = items.reduce((sum: number, item: any) => {
       return sum + item.price * item.quantity;
+=======
+    const total = items.reduce((sum: number, item: { price: number; quantity: number }) => {
+      return sum + (item.price * item.quantity);
+>>>>>>> origin/copilot/fix-repo-architecture-errors
     }, 0);
 
     // Create PayPal order
     const paypalOrder = await createOrder({
-      items: items.map((item: any) => ({
+      items: items.map((item: { name: string; description?: string; quantity: number; price: number; affiliateLink?: string }) => ({
         name: item.name,
         description: item.description || item.name,
         quantity: item.quantity,
@@ -40,6 +51,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Save order to database
+<<<<<<< HEAD
     await prisma.order.create({
       data: {
         providerOrderId: paypalOrder.id,
@@ -55,13 +67,32 @@ export async function POST(request: NextRequest) {
           })),
         },
       },
+=======
+    await saveOrder({
+      orderId: paypalOrder.id,
+      userId,
+      items: items.map((item: { id: string; name: string; price: number; quantity: number }) => ({
+        productId: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+      })),
+      total,
+      status: 'pending',
+      paymentMethod: 'paypal',
+      createdAt: new Date(),
+>>>>>>> origin/copilot/fix-repo-architecture-errors
     });
 
     return NextResponse.json({
       success: true,
       orderId: paypalOrder.id,
+<<<<<<< HEAD
       approvalUrl: paypalOrder.links.find((link: any) => link.rel === "approve")
         ?.href,
+=======
+      approvalUrl: paypalOrder.links.find((link: { rel: string; href?: string }) => link.rel === 'approve')?.href,
+>>>>>>> origin/copilot/fix-repo-architecture-errors
     });
   } catch (error) {
     console.error("PayPal create order error:", error);

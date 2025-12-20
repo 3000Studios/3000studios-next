@@ -19,7 +19,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+<<<<<<< HEAD
       - name: Setup Node.js
+=======
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+
+      - name: Setup Node
+>>>>>>> origin/copilot/fix-repo-architecture-errors
         uses: actions/setup-node@v4
         with:
           node-version: "20"

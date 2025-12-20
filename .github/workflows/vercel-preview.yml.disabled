@@ -3,6 +3,7 @@ name: Shadow Preview Deploys
 on:
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   preview:
@@ -11,11 +12,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+
       - name: Install Dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Build Preview
-        run: npm run build
+        run: pnpm run build
 
       - name: Deploy to Vercel (Preview)
         id: preview

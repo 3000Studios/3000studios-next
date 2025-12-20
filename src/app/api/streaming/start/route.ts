@@ -9,6 +9,11 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+<<<<<<< HEAD
+=======
+    // Stream metadata is preserved for future implementation when stored in database
+    // Currently prefixed with underscore as they're part of API contract but not yet persisted
+>>>>>>> origin/copilot/fix-repo-architecture-errors
     const { streamTitle: _streamTitle, streamDescription: _streamDescription } = body;
 
     // Generate unique stream ID
