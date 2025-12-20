@@ -8,7 +8,7 @@ let stripeInstance: Stripe | null = null;
 
 if (process.env.STRIPE_SECRET_KEY) {
   stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY, {
-    apiVersion: "2024-12-18.acacia" as any, // TypeScript might complain about exact version string, casting to any or string is common
+    apiVersion: "2024-12-18.acacia" as string as Stripe.LatestApiVersion,
     typescript: true,
   });
 }
@@ -26,5 +26,9 @@ export function getStripe(): Stripe {
   return stripeInstance;
 }
 
-// Export for backward compatibility
-export const stripe = stripeInstance as Stripe;
+/**
+ * Check if Stripe is configured
+ */
+export function isStripeConfigured(): boolean {
+  return stripeInstance !== null;
+}
