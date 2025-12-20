@@ -34,5 +34,6 @@ export const env = {
   AWS_REGION: optional("AWS_REGION"),
   AWS_S3_BUCKET: optional("AWS_S3_BUCKET"),
   REDIS_URL: optional("REDIS_URL"),
+  SITE_URL: optional("NEXT_PUBLIC_SITE_URL") || optional("NEXTAUTH_URL") || "https://3000studios.com",
   NODE_ENV: process.env.NODE_ENV || "development",
 };
