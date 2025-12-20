@@ -14,10 +14,11 @@
 
 'use client';
 
+import ShadowAvatar from '@/components/ShadowAvatar';
 import { Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-export default function ShadowAvatar() {
+export default function InteractiveAvatar() { // Renaming to InteractiveAvatar to avoid clash if needed, but file export is default
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [userText, setUserText] = useState('');
@@ -104,29 +105,9 @@ export default function ShadowAvatar() {
     <div className="fixed bottom-8 right-8 z-50 max-w-sm">
       {/* Avatar Container */}
       <div className="bg-black/80 backdrop-blur-xl border-2 border-gold rounded-2xl p-6 shadow-2xl">
-        {/* Avatar Visual (Placeholder for 3D model) */}
-        <div className="relative mb-4">
-          <div className="w-32 h-32 mx-auto bg-gradient-to-br from-gold via-sapphire to-platinum rounded-full flex items-center justify-center animate-pulse">
-            <div className={`w-24 h-24 bg-black rounded-full flex items-center justify-center ${isSpeaking ? 'animate-ping' : ''}`}>
-              <span className="text-4xl">👤</span>
-            </div>
-          </div>
-          {isSpeaking && (
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
-              <div className="flex gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="w-1 bg-gold rounded-full animate-pulse"
-                    style={{
-                      height: Math.random() * 20 + 10 + 'px',
-                      animationDelay: `${i * 0.1}s`,
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
+        {/* Avatar Visual (3D Model) */}
+        <div className="relative mb-4 h-48 w-full">
+            <ShadowAvatar isSpeaking={isSpeaking} />
         </div>
 
         {/* Avatar Name */}

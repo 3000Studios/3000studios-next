@@ -1,122 +1,60 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Sphere, MeshDistortMaterial, Float, Environment, Sparkles } from "@react-three/drei";
+import { useRef, useMemo } from "react";
+import * as THREE from "three";
 
-export default function ShadowAvatar(): JSX.Element {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-  const [isSpeaking, setIsSpeaking] = useState(false);
-  const [floatOffset, setFloatOffset] = useState(0);
-
-  const rafRef = useRef<number | null>(null);
-  const floatStartRef = useRef<number | null>(null);
-  const speakingTimeoutRef = useRef<number | null>(null);
-
-  // Floating animation using requestAnimationFrame
-  useEffect(() => {
-    const animate = (timestamp: number) => {
-      if (floatStartRef.current === null) floatStartRef.current = timestamp;
-      const elapsed = (timestamp - floatStartRef.current) / 1000;
-      // amplitude 5px, speed factor 0.6
-      setFloatOffset(Math.sin(elapsed * 0.6) * 5);
-      rafRef.current = requestAnimationFrame(animate);
-    };
-
-    rafRef.current = requestAnimationFrame(animate);
-    return () => {
-      if (rafRef.current !== null) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
-      }
-      floatStartRef.current = null;
-    };
-  }, []);
-
-  // Parallax effect on mouse move
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      const x = ((e.clientX / w) - 0.5) * 20; // -10 .. 10 deg
-      const y = ((e.clientY / h) - 0.5) * 20; // -10 .. 10 deg
-      setMousePos({ x, y });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
-  // Ensure speaking timeout is cleared on unmount
-  useEffect(() => {
-    return () => {
-      if (speakingTimeoutRef.current !== null) {
-        clearTimeout(speakingTimeoutRef.current);
-        speakingTimeoutRef.current = null;
-      }
-    };
-  }, []);
-
-  const handleClick = useCallback(() => {
-    setIsSpeaking(true);
-
-    // clear any existing timeout
-    if (speakingTimeoutRef.current !== null) {
-      clearTimeout(speakingTimeoutRef.current);
-      speakingTimeoutRef.current = null;
+// The 3D Scene Component
+function AvatarScene({ isSpeaking }: { isSpeaking: boolean }) {
+  const meshRef = useRef<THREE.Mesh>(null);
+  
+  useFrame((state) => {
+    if (meshRef.current) {
+      // Rotate slowly
+      meshRef.current.rotation.x = state.clock.getElapsedTime() * 0.2;
+      meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.3;
+      
+      // Pulse scale when speaking
+      const targetScale = isSpeaking ? 1.2 : 1.0;
+      meshRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
     }
-
-    speakingTimeoutRef.current = window.setTimeout(() => {
-      setIsSpeaking(false);
-      speakingTimeoutRef.current = null;
-    }, 3000);
-  }, []);
+  });
 
   return (
-    <div
-      className="relative inline-block"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={handleClick}
-      role="button"
-      tabIndex={0}
-      aria-pressed={isSpeaking}
-      style={{ cursor: "pointer" }}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          handleClick();
-        }
-      }}
-    >
-      <div
-        className="relative transition-transform duration-200 ease-out"
-        style={{
-          transform: `rotateY(${mousePos.x}deg) rotateX(${-mousePos.y}deg) translateY(${floatOffset}px)`,
-        }}
-      >
-        {/* Replace the block below with your avatar SVG/markup */}
-        <div
-          className={`w-24 h-24 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 shadow-xl flex items-center justify-center text-white select-none ${
-            isSpeaking ? "ring-4 ring-yellow-400 animate-pulse" : ""
-          }`}
-        >
-          {/* Example initials or icon */}
-          <span className="font-semibold">SM</span>
-        </div>
-      </div>
+    <>
+      <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
+        <Sphere args={[1.2, 64, 64]} ref={meshRef}>
+          <MeshDistortMaterial
+            color={isSpeaking ? "#FFD700" : "#4F46E5"} // Gold when speaking, Indigo otherwise
+            envMapIntensity={1}
+            clearcoat={1}
+            clearcoatRoughness={0}
+            metalness={0.5}
+            distort={isSpeaking ? 0.6 : 0.3} // More distortion when speaking
+            speed={isSpeaking ? 4 : 2}
+          />
+        </Sphere>
+      </Float>
+      <Sparkles count={50} scale={4} size={4} speed={0.4} opacity={0.5} color="#00F5D4" />
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} intensity={1.5} color="#00F5D4" />
+      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#FF0080" />
+    </>
+  );
+}
 
-      {/* Glow / shadow layer */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden>
-        <div
-          className="w-full h-full rounded-full"
-          style={{
-            boxShadow: isHovered
-              ? "0 20px 40px rgba(99,102,241,0.2)"
-              : "0 10px 20px rgba(0,0,0,0.08)",
-            transition: "box-shadow 200ms ease",
-          }}
-        />
-      </div>
+interface ShadowAvatarProps {
+  isSpeaking?: boolean;
+}
+
+export default function ShadowAvatar({ isSpeaking = false }: ShadowAvatarProps) {
+  return (
+    <div className="w-full h-full min-h-[150px]">
+      <Canvas camera={{ position: [0, 0, 4], fov: 50 }}>
+        <AvatarScene isSpeaking={isSpeaking} />
+        <Environment preset="city" />
+      </Canvas>
     </div>
   );
 }
