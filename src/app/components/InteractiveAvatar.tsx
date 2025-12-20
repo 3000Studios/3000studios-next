@@ -1,24 +1,10 @@
-/**
- * Shadow AI Avatar Component (Home Page Version)
- * This is the conversational, animated avatar that greets visitors
- * Features:
- * - Speech recognition and response
- * - Physics-based animations
- * - Gyroscope responsive (on mobile)
- * - Does NOT edit the website (that's only in THE MATRIX)
- * - Fun, conversational personality
- *
- * NOTE: Full 3D implementation requires Three.js/R3F
- * This is a foundational structure that can be enhanced with 3D models
- */
-
-'use client';
+"use client";
 
 import ShadowAvatar from '@/components/ShadowAvatar';
 import { Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-export default function InteractiveAvatar() { // Renaming to InteractiveAvatar to avoid clash if needed, but file export is default
+export default function InteractiveAvatar() {
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [userText, setUserText] = useState('');
