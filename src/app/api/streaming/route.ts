@@ -2,14 +2,20 @@ import { prisma } from "@/lib/prisma";
 import Mux from "@mux/mux-node";
 import { NextResponse } from "next/server";
 
-const { video } = new Mux({
-  tokenId: process.env.MUX_TOKEN_ID,
-  tokenSecret: process.env.MUX_TOKEN_SECRET,
-});
+const getMuxClient = () => {
+    if (!process.env.MUX_TOKEN_ID || !process.env.MUX_TOKEN_SECRET) {
+        throw new Error("Missing Mux credentials");
+    }
+    return new Mux({
+        tokenId: process.env.MUX_TOKEN_ID,
+        tokenSecret: process.env.MUX_TOKEN_SECRET,
+    });
+};
 
 export async function POST(_request: Request) {
   try {
     // 1. Create a new Live Stream in Mux
+    const { video } = getMuxClient();
     const stream = await video.liveStreams.create({
       playback_policy: ["public"],
       new_asset_settings: { playback_policy: ["public"] },
