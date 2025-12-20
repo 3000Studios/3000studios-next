@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
       (searchParams.get("timeRange") as "day" | "week" | "month") || "day";
 
     // Get stats using Prisma
-    const [userCount, orderCount, revenue] = await Promise.all([
+    const [userCount, _orderCount, revenue] = await Promise.all([
       prisma.user.count(),
       prisma.order.count(),
       prisma.order.aggregate({

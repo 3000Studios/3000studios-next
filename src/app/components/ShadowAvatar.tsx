@@ -86,7 +86,7 @@ export default function ShadowAvatar() {
     ];
     
     const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-    setAvatarText(randomResponse);
+    setAvatarText(randomResponse || 'Hello!');
     
     // Text-to-speech if enabled
     if (audioEnabled && 'speechSynthesis' in window) {

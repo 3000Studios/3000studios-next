@@ -1,0 +1,192 @@
+name: Branch Protection Verification
+
+on:
+  schedule:
+    # Run daily at 9 AM UTC to verify branch protection is still active
+    - cron: '0 9 * * *'
+  workflow_dispatch: # Allow manual trigger
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/branch-protection-check.yml'
+
+permissions:
+  contents: read
+  issues: write # To create issues if protection is disabled
+
+jobs:
+  verify-protection:
+    name: Verify Branch Protection Rules
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Check branch protection rules
+        id: check-protection
+        uses: actions/github-script@v7
+        with:
+          script: |
+            try {
+              const { owner, repo } = context.repo;
+              
+              // Get branch protection rules
+              const protection = await github.rest.repos.getBranchProtection({
+                owner,
+                repo,
+                branch: 'main'
+              });
+              
+              const rules = protection.data;
+              console.log('Branch protection rules:', JSON.stringify(rules, null, 2));
+              
+              // Verify required settings
+              const checks = {
+                prRequired: rules.required_pull_request_reviews !== null,
+                approvalsRequired: rules.required_pull_request_reviews?.required_approving_review_count >= 1,
+                dismissStale: rules.required_pull_request_reviews?.dismiss_stale_reviews === true,
+                statusChecksRequired: rules.required_status_checks !== null,
+                upToDateRequired: rules.required_status_checks?.strict === true,
+                restrictPush: rules.restrictions !== null,
+                enforceAdmins: rules.enforce_admins?.enabled === true
+              };
+              
+              console.log('Protection checks:', checks);
+              
+              // Check for missing protections
+              const missing = [];
+              if (!checks.prRequired) missing.push('Pull request requirement');
+              if (!checks.approvalsRequired) missing.push('Minimum 1 approval');
+              if (!checks.dismissStale) missing.push('Dismiss stale approvals');
+              if (!checks.statusChecksRequired) missing.push('Status checks requirement');
+              if (!checks.upToDateRequired) missing.push('Up-to-date branch requirement');
+              if (!checks.restrictPush) missing.push('Push restrictions');
+              
+              if (missing.length > 0) {
+                core.setOutput('protection-status', 'incomplete');
+                core.setOutput('missing-rules', missing.join(', '));
+                core.setFailed(`Branch protection is incomplete. Missing: ${missing.join(', ')}`);
+              } else {
+                core.setOutput('protection-status', 'complete');
+                console.log('✅ All branch protection rules are properly configured');
+              }
+              
+            } catch (error) {
+              if (error.status === 404) {
+                core.setOutput('protection-status', 'none');
+                core.setFailed('❌ Branch protection is NOT enabled for main branch');
+              } else {
+                throw error;
+              }
+            }
+      
+      - name: Create issue if protection is missing
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const status = '${{ steps.check-protection.outputs.protection-status }}';
+            const missing = '${{ steps.check-protection.outputs.missing-rules }}';
+            
+            let body;
+            if (status === 'none') {
+              body = `## ⚠️ Branch Protection Alert
+            
+            Branch protection rules are **NOT enabled** for the \`main\` branch.
+            
+            This means:
+            - ❌ Direct pushes to main are allowed
+            - ❌ No code review requirement
+            - ❌ No CI checks enforcement
+            - ❌ Risk of revenue-breaking changes
+            
+            ### 🔧 Action Required
+            
+            Repository admin must configure branch protection immediately:
+            
+            1. Go to: **Settings → Branches**
+            2. Click **Add rule** under Branch protection rules
+            3. Set branch name pattern: \`main\`
+            4. Enable all required rules (see [BRANCH_PROTECTION_SETUP.md](.github/BRANCH_PROTECTION_SETUP.md))
+            
+            ### 📋 Required Rules
+            
+            - ✅ Require pull request before merging (1 approval)
+            - ✅ Dismiss stale approvals
+            - ✅ Require status checks (build, lint, type-check)
+            - ✅ Require up-to-date branches
+            - ✅ Restrict push access
+            
+            **Priority:** 🔴 CRITICAL
+            `;
+            } else if (status === 'incomplete') {
+              body = `## ⚠️ Branch Protection Alert
+            
+            Branch protection for \`main\` is **incomplete**.
+            
+            ### Missing Rules
+            ${missing}
+            
+            ### 🔧 Action Required
+            
+            Repository admin must update branch protection settings:
+            
+            1. Go to: **Settings → Branches**
+            2. Edit the \`main\` branch rule
+            3. Enable missing protections
+            
+            See [BRANCH_PROTECTION_SETUP.md](.github/BRANCH_PROTECTION_SETUP.md) for complete setup guide.
+            
+            **Priority:** 🟡 HIGH
+            `;
+            }
+            
+            // Check if issue already exists
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'branch-protection,security'
+            });
+            
+            const existingIssue = issues.data.find(issue => 
+              issue.title.includes('Branch Protection Alert')
+            );
+            
+            if (existingIssue) {
+              // Update existing issue
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existingIssue.number,
+                body: `**Update:** ${new Date().toISOString()}\n\n${body}`
+              });
+            } else {
+              // Create new issue
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: '⚠️ Branch Protection Alert - Configuration Required',
+                body: body,
+                labels: ['branch-protection', 'security', 'critical']
+              });
+            }
+      
+      - name: Summary
+        if: always()
+        run: |
+          echo "### Branch Protection Status" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.check-protection.outputs.protection-status }}" = "complete" ]; then
+            echo "✅ **Status:** All protection rules are properly configured" >> $GITHUB_STEP_SUMMARY
+          elif [ "${{ steps.check-protection.outputs.protection-status }}" = "incomplete" ]; then
+            echo "⚠️ **Status:** Protection rules are incomplete" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Missing:** ${{ steps.check-protection.outputs.missing-rules }}" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **Status:** Branch protection is NOT enabled" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "See [Branch Protection Setup Guide](.github/BRANCH_PROTECTION_SETUP.md) for configuration instructions." >> $GITHUB_STEP_SUMMARY

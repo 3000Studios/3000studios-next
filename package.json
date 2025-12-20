@@ -10,6 +10,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+<<<<<<< HEAD
+<<<<<<< HEAD
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "type-check": "tsc --noEmit",
     "test": "vitest",
@@ -21,6 +23,22 @@
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
+  "engines": {
+    "node": "20.x"
+=======
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "update:deps": "npx npm-check-updates -u && npm install"
+>>>>>>> origin/copilot/prepare-production-readiness
+=======
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "analyze": "ANALYZE=true next build",
+    "clean": "rm -rf .next node_modules/.cache",
+    "audit-fix": "npm audit fix",
+    "predev": "npm run type-check"
+>>>>>>> origin/copilot/update-best-options
+  },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.88",
     "@anthropic-ai/sdk": "^0.71.2",
@@ -29,16 +47,20 @@
     "@mux/mux-node": "^12.8.1",
     "@mux/mux-player-react": "^3.10.1",
     "@octokit/rest": "^22.0.1",
+<<<<<<< HEAD
     "@paypal/paypal-server-sdk": "^2.1.0",
     "@paypal/react-paypal-js": "^8.9.2",
     "@prisma/client": "^6.19.1",
+=======
+    "@paypal/paypal-server-sdk": "^1.0.4",
+>>>>>>> origin/copilot/update-best-options
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.4.2",
     "@stripe/stripe-js": "^8.5.3",
     "@types/pg": "^8.16.0",
     "@types/uuid": "^10.0.0",
     "@vercel/analytics": "^1.6.1",
-    "ai": "^5.0.114",
+    "ai": "^5.0.115",
     "axios": "^1.13.2",
     "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
@@ -48,6 +70,7 @@
     "jsonwebtoken": "^9.0.3",
     "lucide-react": "^0.561.0",
     "mongodb": "^7.0.0",
+<<<<<<< HEAD
     "next": "^16.0.10",
     "next-auth": "^5.0.0-beta.30",
     "nodemailer": "^7.0.11",
@@ -56,6 +79,15 @@
     "pgvector": "^0.2.1",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+=======
+    "next": "16.0.10",
+    "openai": "^6.10.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "simple-peer": "^9.11.1",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+>>>>>>> origin/copilot/update-best-options
     "stripe": "^20.0.0",
     "three": "^0.182.0",
     "uuid": "^13.0.0",
@@ -73,8 +105,8 @@
     "@types/nodemailer": "^7.0.4",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@vitejs/plugin-react": "4.2.1",
-    "@vitest/ui": "^0.34.6",
+    "@vitejs/plugin-react": "4.7.0",
+    "@vitest/ui": "^4.0.16",
     "eslint": "^9",
     "eslint-config-next": "16.0.10",
     "jsdom": "22.1.0",
@@ -82,6 +114,6 @@
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "typescript": "^5",
-    "vitest": "0.34.6"
+    "vitest": "4.0.16"
   }
 }

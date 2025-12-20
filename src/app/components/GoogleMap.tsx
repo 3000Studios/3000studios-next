@@ -7,6 +7,86 @@
 
 import { useEffect, useRef } from 'react';
 
+<<<<<<< HEAD
+// Declare global google types
+declare global {
+  interface Window {
+    google: any;
+=======
+// Type declaration for Google Maps API
+declare global {
+  interface Window {
+    google?: typeof google;
+  }
+  namespace google {
+    namespace maps {
+      enum MapTypeControlStyle {
+        DEFAULT,
+        HORIZONTAL_BAR,
+        DROPDOWN_MENU
+      }
+      enum ControlPosition {
+        TOP_LEFT,
+        TOP_CENTER,
+        TOP_RIGHT,
+        LEFT_TOP,
+        LEFT_CENTER,
+        LEFT_BOTTOM,
+        RIGHT_TOP,
+        RIGHT_CENTER,
+        RIGHT_BOTTOM,
+        BOTTOM_LEFT,
+        BOTTOM_CENTER,
+        BOTTOM_RIGHT
+      }
+      enum Animation {
+        BOUNCE = 1,
+        DROP = 2
+      }
+      enum SymbolPath {
+        CIRCLE,
+        FORWARD_CLOSED_ARROW,
+        FORWARD_OPEN_ARROW,
+        BACKWARD_CLOSED_ARROW,
+        BACKWARD_OPEN_ARROW
+      }
+      interface MapOptions {
+        center: { lat: number; lng: number };
+        zoom: number;
+        mapTypeId?: string;
+        styles?: object[];
+        mapTypeControl?: boolean;
+        mapTypeControlOptions?: object;
+        zoomControl?: boolean;
+        streetViewControl?: boolean;
+        fullscreenControl?: boolean;
+      }
+      interface MarkerOptions {
+        position: { lat: number; lng: number };
+        map: Map;
+        title?: string;
+        animation?: Animation;
+        icon?: object;
+      }
+      class Map {
+        constructor(mapDiv: Element | null, opts?: MapOptions);
+      }
+      class Marker {
+        constructor(opts?: MarkerOptions);
+        addListener(eventName: string, handler: () => void): void;
+      }
+      class InfoWindow {
+        constructor(opts?: { content: string });
+        open(map: Map, marker: Marker): void;
+      }
+      namespace event {
+        function clearInstanceListeners(instance: object): void;
+      }
+    }
+>>>>>>> origin/copilot/update-best-options
+  }
+}
+
 interface GoogleMapProps {
   apiKey: string;
   center?: { lat: number; lng: number };
@@ -21,7 +101,7 @@ export default function GoogleMap({
   mapType = 'satellite'
 }: GoogleMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<google.maps.Map | null>(null);
+  const mapInstanceRef = useRef<any>(null);
 
   useEffect(() => {
     if (!apiKey || apiKey === 'YOUR_GOOGLE_MAPS_API_KEY_HERE') {
@@ -30,7 +110,7 @@ export default function GoogleMap({
     }
 
     const loadGoogleMaps = () => {
-      if (typeof window !== 'undefined' && window.google) {
+      if (typeof window !== 'undefined' && (window as any).google) {
         initializeMap();
         return;
       }
@@ -45,9 +125,9 @@ export default function GoogleMap({
     };
 
     const initializeMap = () => {
-      if (!mapRef.current) return;
+      if (!mapRef.current || !window.google) return;
 
-      const mapOptions: google.maps.MapOptions = {
+      const mapOptions: any = {
         center,
         zoom,
         mapTypeId: mapType,
@@ -60,8 +140,13 @@ export default function GoogleMap({
         ],
         mapTypeControl: true,
         mapTypeControlOptions: {
-          style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-          position: google.maps.ControlPosition.TOP_RIGHT,
+<<<<<<< HEAD
+          style: window.google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+          position: window.google.maps.ControlPosition.TOP_RIGHT,
+=======
+          style: ((window as any).google).maps.MapTypeControlStyle.HORIZONTAL_BAR,
+          position: ((window as any).google).maps.ControlPosition.TOP_RIGHT,
+>>>>>>> origin/copilot/prepare-production-readiness
           mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain']
         },
         streetViewControl: true,
@@ -69,17 +154,31 @@ export default function GoogleMap({
         zoomControl: true,
       };
 
-      const map = new google.maps.Map(mapRef.current, mapOptions);
+<<<<<<< HEAD
+      const map = new window.google.maps.Map(mapRef.current, mapOptions);
       mapInstanceRef.current = map;
 
       // Add marker for location
-      new google.maps.Marker({
+      new window.google.maps.Marker({
         position: center,
         map,
         title: '3000 Studios - Atlanta, Georgia',
-        animation: google.maps.Animation.DROP,
+        animation: window.google.maps.Animation.DROP,
         icon: {
-          path: google.maps.SymbolPath.CIRCLE,
+          path: window.google.maps.SymbolPath.CIRCLE,
+=======
+      const map = new ((window as any).google).maps.Map(mapRef.current, mapOptions);
+      mapInstanceRef.current = map;
+
+      // Add marker for location
+      new ((window as any).google).maps.Marker({
+        position: center,
+        map,
+        title: '3000 Studios - Atlanta, Georgia',
+        animation: ((window as any).google).maps.Animation.DROP,
+        icon: {
+          path: ((window as any).google).maps.SymbolPath.CIRCLE,
+>>>>>>> origin/copilot/prepare-production-readiness
           scale: 10,
           fillColor: '#FFD700',
           fillOpacity: 1,
@@ -89,7 +188,11 @@ export default function GoogleMap({
       });
 
       // Add info window
-      const infoWindow = new google.maps.InfoWindow({
+<<<<<<< HEAD
+      const infoWindow = new window.google.maps.InfoWindow({
+=======
+      const infoWindow = new ((window as any).google).maps.InfoWindow({
+>>>>>>> origin/copilot/prepare-production-readiness
         content: `
           <div style="padding: 10px; color: #000;">
             <h3 style="margin: 0 0 8px 0; font-weight: bold; color: #000;">3000 Studios</h3>
@@ -99,7 +202,11 @@ export default function GoogleMap({
         `,
       });
 
-      const marker = new google.maps.Marker({
+<<<<<<< HEAD
+      const marker = new window.google.maps.Marker({
+=======
+      const marker = new ((window as any).google).maps.Marker({
+>>>>>>> origin/copilot/prepare-production-readiness
         position: center,
         map,
       });
@@ -113,8 +220,13 @@ export default function GoogleMap({
 
     return () => {
       // Cleanup
+<<<<<<< HEAD
+      if (mapInstanceRef.current && window.google) {
+        window.google.maps.event.clearInstanceListeners(mapInstanceRef.current);
+=======
       if (mapInstanceRef.current) {
-        google.maps.event.clearInstanceListeners(mapInstanceRef.current);
+        ((window as any).google).maps.event.clearInstanceListeners(mapInstanceRef.current);
+>>>>>>> origin/copilot/prepare-production-readiness
       }
     };
   }, [apiKey, center, zoom, mapType]);
