@@ -10,6 +10,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+<<<<<<< HEAD
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "type-check": "tsc --noEmit",
     "test": "vitest",
@@ -23,6 +24,11 @@
   },
   "engines": {
     "node": "20.x"
+=======
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "update:deps": "npx npm-check-updates -u && npm install"
+>>>>>>> origin/copilot/prepare-production-readiness
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.88",

@@ -1,6 +1,11 @@
 name: 🚀 CI — Validate, Secure & Optimize
 
 on:
+<<<<<<< HEAD
+=======
+  push:
+    branches: [ main, copilot/prepare-production-readiness ]
+>>>>>>> origin/copilot/prepare-production-readiness
   pull_request:
     branches: [main]
   push:
@@ -23,7 +28,13 @@ jobs:
   code-quality:
     name: 🔍 Code Quality & Security Scan
     runs-on: ubuntu-latest
+<<<<<<< HEAD
     timeout-minutes: 10
+=======
+    strategy:
+      matrix:
+        node-version: [20.x]
+>>>>>>> origin/copilot/prepare-production-readiness
     
     steps:
       - name: 📦 Checkout Code
@@ -77,7 +88,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Validate environment variables
+        run: node scripts/validate-env.js ci
+        continue-on-error: true
+
       - name: Lint
+<<<<<<< HEAD
         run: pnpm run lint --if-present
 
       - name: Run unit tests
@@ -85,12 +101,29 @@ jobs:
 
       - name: Build
         run: pnpm run build --if-present
+=======
+        run: npm run lint
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Run unit tests
+        run: npm test
+        continue-on-error: true
+
+      - name: Build
+        run: npm run build
+        env:
+          # Minimal env vars for build
+          NEXT_PUBLIC_BASE_URL: http://localhost:3000
+>>>>>>> origin/copilot/prepare-production-readiness
 
       - name: Upload build artifact
         if: success()
 >>>>>>> origin/copilot/fix-repo-architecture-errors
         uses: actions/upload-artifact@v4
         with:
+<<<<<<< HEAD
           name: security-audit-report
           path: npm-audit.json
           retention-days: 30
@@ -261,3 +294,17 @@ jobs:
               repo: context.repo.repo,
               body: '✅ **All CI checks passed!** This PR is ready for review and merge. 🚀'
             })
+=======
+          name: build-artifact-${{ github.sha }}
+          path: .next
+          retention-days: 7
+          
+      - name: Build summary
+        if: always()
+        run: |
+          echo "## 🏗️ Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Node Version:** ${{ matrix.node-version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+>>>>>>> origin/copilot/prepare-production-readiness

@@ -6,8 +6,13 @@
 
 'use client';
 
+<<<<<<< HEAD
 import { Pause, Play, SkipForward, Volume2, VolumeX } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
+=======
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { Volume2, VolumeX, SkipForward, Play, Pause } from 'lucide-react';
+>>>>>>> origin/copilot/prepare-production-readiness
 
 interface MusicTrack {
   name: string;
@@ -35,6 +40,7 @@ export default function BackgroundMusic() {
 
   const currentTrack = DEFAULT_TRACKS[currentTrackIndex];
 
+<<<<<<< HEAD
 <<<<<<< HEAD
   const handleNextTrack = useCallback(() => {
     setCurrentTrackIndex((idx) => {
@@ -65,6 +71,9 @@ export default function BackgroundMusic() {
   }, [handleNextTrack, volume]);
 =======
   const handleNextTrack = () => {
+=======
+  const handleNextTrack = useCallback(() => {
+>>>>>>> origin/copilot/prepare-production-readiness
     const nextIndex = (currentTrackIndex + 1) % DEFAULT_TRACKS.length;
     setCurrentTrackIndex(nextIndex);
     
@@ -72,7 +81,11 @@ export default function BackgroundMusic() {
       audioRef.current.src = DEFAULT_TRACKS[nextIndex].src;
       audioRef.current.play().catch(err => console.log('Play error:', err));
     }
+<<<<<<< HEAD
   };
+=======
+  }, [currentTrackIndex, isPlaying]);
+>>>>>>> origin/copilot/prepare-production-readiness
 
   useEffect(() => {
     // Create audio element
@@ -91,9 +104,13 @@ export default function BackgroundMusic() {
         }
       };
     }
+<<<<<<< HEAD
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 >>>>>>> origin/copilot/fix-repo-architecture-errors
+=======
+  }, [handleNextTrack]);
+>>>>>>> origin/copilot/prepare-production-readiness
 
   useEffect(() => {
     if (audioRef.current) {

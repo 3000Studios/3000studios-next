@@ -30,6 +30,7 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+<<<<<<< HEAD
 # Build logs
 build.log
 build-test.log
@@ -37,6 +38,14 @@ build-test.log
 
 # env files (can opt-in for committing if needed)
 .env*
+=======
+# local env files (never commit secrets!)
+.env*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+>>>>>>> origin/copilot/prepare-production-readiness
 
 # vercel
 .vercel
@@ -44,6 +53,7 @@ build-test.log
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+<<<<<<< HEAD
 node_modules/
 .next/
 # package-lock.json
@@ -51,3 +61,5 @@ node_modules/
 # backups
 /backups/
 *.tar.gz
+=======
+>>>>>>> origin/copilot/prepare-production-readiness
