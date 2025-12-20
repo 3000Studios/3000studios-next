@@ -21,10 +21,10 @@ import VideoWallpaper from "./components/VideoWallpaper";
 import BackgroundMusic from "./components/BackgroundMusic";
 import SmoothScroll from "./components/SmoothScroll";
 import SoundEffects from "./components/SoundEffects";
-import { ENV } from "@/lib/env";
+import { env } from "@/lib/env";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(ENV.SITE_URL),
+  metadataBase: new URL(env.SITE_URL),
   title: "3000 Studios - Award-Winning Creative Studio",
   description:
     "Premium digital experiences, innovative solutions, and transformative projects. 250+ successful clients worldwide with 99% satisfaction rate.",
