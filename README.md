@@ -54,20 +54,39 @@ See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete deployment instructions and en
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Create environment variables file
 cp .env.example .env.local
 
 # Run development server
-npm run dev
+pnpm dev
 
 # Build for production
-npm run build
+pnpm build
 
 # Start production server
-npm start
+pnpm start
 ```
+
+### 🔄 Workflow Synchronization
+
+Keep your local workspace, GitHub, and Vercel perfectly synchronized:
+
+- **[SYNC_MASTER_INDEX.md](SYNC_MASTER_INDEX.md)** - Start here! Complete guide index
+- **[WORKFLOW_SYNC_GUIDE.md](WORKFLOW_SYNC_GUIDE.md)** - Comprehensive sync workflow
+- **[VSCODE_INTEGRATION_GUIDE.md](VSCODE_INTEGRATION_GUIDE.md)** - VS Code setup
+- **[ENV_SYNC_GUIDE.md](ENV_SYNC_GUIDE.md)** - Environment variables
+- **[SYNC_QUICK_REFERENCE.md](SYNC_QUICK_REFERENCE.md)** - Command quick reference
+
+**Quick Sync**: Use `.\scripts\secure-sync.ps1` for one-command synchronization.
+
+### 🚀 Release Management
+
+Safe PR merging with automated verification and rollback:
+
+- **[scripts/RELEASE_SCRIPTS_README.md](scripts/RELEASE_SCRIPTS_README.md)** - Release scripts usage guide
+- **Quick Start**: Run `.\scripts\release-merge.ps1 -DryRun` (Windows) or `./scripts/release-merge.sh --dry-run` (Linux/macOS)
 
 ## 🔐 Environment Variables
 
