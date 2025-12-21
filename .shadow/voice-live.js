@@ -1,7 +1,19 @@
 import record from "node-record-lpcm16";
 import WebSocket from "ws";
 
-const ws = new WebSocket("wss://api.elevenlabs.io/v1/voice-stream");
+const ELEVENLABS_WS_URL = process.env.ELEVENLABS_WS_URL || "wss://api.elevenlabs.io/v1/voice-stream";
+const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
+
+if (!ELEVENLABS_API_KEY) {
+  console.error("Missing ELEVENLABS_API_KEY environment variable. Cannot authenticate WebSocket connection.");
+  process.exit(1);
+}
+
+const ws = new WebSocket(ELEVENLABS_WS_URL, {
+  headers: {
+    Authorization: `Bearer ${ELEVENLABS_API_KEY}`,
+  },
+});
 
 console.log("🎙️ Shadow listening (hotword: shadow)");
 
