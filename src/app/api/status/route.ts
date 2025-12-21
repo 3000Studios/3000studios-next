@@ -10,7 +10,7 @@ import { join } from 'path';
 export async function GET() {
   // Read package.json for version info
   let version = 'unknown';
-  let buildId: string;
+  let buildId!: string;
 
   try {
     const packagePath = join(process.cwd(), 'package.json');
