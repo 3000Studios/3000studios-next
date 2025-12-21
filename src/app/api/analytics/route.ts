@@ -24,6 +24,7 @@ export async function GET(request: NextRequest) {
 
     const stats = {
       users: userCount,
+      orders: orderCount,
       sessions: 0, // Implement session tracking if needed
       revenue: revenue._sum.total || 0,
       updatedAt: new Date().toISOString(),
