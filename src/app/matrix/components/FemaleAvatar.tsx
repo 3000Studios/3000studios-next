@@ -1,13 +1,13 @@
 "use client";
 
 import {
-    MeshDistortMaterial,
-    OrbitControls,
-    PerspectiveCamera,
-    Sparkles,
-    Sphere,
-    Text,
-    Torus
+  MeshDistortMaterial,
+  OrbitControls,
+  PerspectiveCamera,
+  Sparkles,
+  Sphere,
+  Text,
+  Torus,
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
@@ -34,25 +34,33 @@ function GyroCyberHead() {
     };
 
     // Check for DeviceOrientation support
-    if (typeof window !== 'undefined' && window.DeviceOrientationEvent) {
-       window.addEventListener('deviceorientation', handleOrientation);
+    if (typeof window !== "undefined" && window.DeviceOrientationEvent) {
+      window.addEventListener("deviceorientation", handleOrientation);
     }
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      window.removeEventListener('deviceorientation', handleOrientation);
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener("deviceorientation", handleOrientation);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
   useFrame((state) => {
     if (meshRef.current) {
-        // Smooth interpolation for the "falling" effect
-        meshRef.current.rotation.x = THREE.MathUtils.lerp(meshRef.current.rotation.x, targetRotation.x, 0.1);
-        meshRef.current.rotation.y = THREE.MathUtils.lerp(meshRef.current.rotation.y, targetRotation.y, 0.1);
-        
-        // Add some idle float
-        meshRef.current.position.y = Math.sin(state.clock.getElapsedTime()) * 0.1;
+      // Smooth interpolation for the "falling" effect
+      meshRef.current.rotation.x = THREE.MathUtils.lerp(
+        meshRef.current.rotation.x,
+        targetRotation.x,
+        0.1,
+      );
+      meshRef.current.rotation.y = THREE.MathUtils.lerp(
+        meshRef.current.rotation.y,
+        targetRotation.y,
+        0.1,
+      );
+
+      // Add some idle float
+      meshRef.current.position.y = Math.sin(state.clock.getElapsedTime()) * 0.1;
     }
   });
 
@@ -60,36 +68,36 @@ function GyroCyberHead() {
     <group ref={meshRef}>
       {/* Main Head Interface */}
       <group>
-          <Sphere args={[1, 32, 32]}>
-            <MeshDistortMaterial
-              color="#00ffcc"
-              emissive="#0044ff"
-              emissiveIntensity={0.8}
-              roughness={0.1}
-              metalness={1}
-              distort={0.4}
-              speed={3}
-              wireframe
-            />
-          </Sphere>
-          
-          {/* Inner Core */}
-          <Sphere args={[0.8, 32, 32]}>
-             <meshStandardMaterial color="#000000" />
-          </Sphere>
+        <Sphere args={[1, 32, 32]}>
+          <MeshDistortMaterial
+            color="#00ffcc"
+            emissive="#0044ff"
+            emissiveIntensity={0.8}
+            roughness={0.1}
+            metalness={1}
+            distort={0.4}
+            speed={3}
+            wireframe
+          />
+        </Sphere>
+
+        {/* Inner Core */}
+        <Sphere args={[0.8, 32, 32]}>
+          <meshStandardMaterial color="#000000" />
+        </Sphere>
       </group>
 
       {/* Holographic Rings - Reacting to tilt by rotating conventionally */}
       <group rotation={[1.5, 0, 0]}>
         <Torus args={[1.5, 0.02, 16, 100]}>
-           <meshBasicMaterial color="#ff00ff" transparent opacity={0.3} />
+          <meshBasicMaterial color="#ff00ff" transparent opacity={0.3} />
         </Torus>
       </group>
 
       <group rotation={[0, 1, 0.5]}>
-         <Torus args={[1.8, 0.01, 16, 100]}>
-           <meshBasicMaterial color="#00ffff" transparent opacity={0.2} />
-         </Torus>
+        <Torus args={[1.8, 0.01, 16, 100]}>
+          <meshBasicMaterial color="#00ffff" transparent opacity={0.2} />
+        </Torus>
       </group>
 
       {/* Eyes / Sensors that always look at cam? */}
@@ -116,7 +124,13 @@ function Scene() {
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} color="#00ffff" intensity={2} />
       <pointLight position={[-10, -10, -10]} color="#ff00ff" intensity={2} />
-      <spotLight position={[0, 10, 0]} angle={0.3} penumbra={1} intensity={1} color="#00ffcc" />
+      <spotLight
+        position={[0, 10, 0]}
+        angle={0.3}
+        penumbra={1}
+        intensity={1}
+        color="#00ffcc"
+      />
 
       <GyroCyberHead />
 
@@ -150,7 +164,7 @@ export default function FemaleAvatar() {
         <Scene />
         <OrbitControls enableZoom={false} enablePan={false} />
       </Canvas>
-      
+
       {/* UI Overlay */}
       <div className="absolute top-4 left-4 z-10 pointer-events-none">
         <div className="flex items-center gap-2">

@@ -6,7 +6,15 @@
 
 "use client";
 
-import { Activity, CheckCircle, Globe, Lock, Mic, MicOff, Terminal } from "lucide-react";
+import {
+  Activity,
+  CheckCircle,
+  Globe,
+  Lock,
+  Mic,
+  MicOff,
+  Terminal,
+} from "lucide-react";
 import { useRef, useState } from "react";
 // Import Avatar for the background effect
 import FemaleAvatar from "./components/FemaleAvatar";
@@ -44,11 +52,11 @@ export default function MatrixCommandCenter() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoginLoading(true);
-    
+
     // Simulating authentication delay for effect
     setTimeout(() => {
-        setIsUnlocked(true);
-        setLoginLoading(false);
+      setIsUnlocked(true);
+      setLoginLoading(false);
     }, 800);
   };
 
@@ -82,10 +90,12 @@ export default function MatrixCommandCenter() {
       console.error("API Error:", error);
       // Fallback for demo if API is missing
       return {
-          success: true,
-          intent: "Update Homepage Typography",
-          description: "Changed font to Inter and increased hero size.",
-          patches: [{ file: "src/app/page.tsx", description: "Update hero properties" }]
+        success: true,
+        intent: "Update Homepage Typography",
+        description: "Changed font to Inter and increased hero size.",
+        patches: [
+          { file: "src/app/page.tsx", description: "Update hero properties" },
+        ],
       };
     }
   };
@@ -104,7 +114,9 @@ export default function MatrixCommandCenter() {
       setPreviewData({
         command: result.intent || "System Update",
         description: result.description || "Executing requested changes...",
-        changes: result.patches ? result.patches.map((p: any) => `${p.file}: ${p.description}`) : ["System: Processing logic..."],
+        changes: result.patches
+          ? result.patches.map((p: any) => `${p.file}: ${p.description}`)
+          : ["System: Processing logic..."],
         patches: result.patches || [],
         visuals: "none",
       });
@@ -159,9 +171,9 @@ export default function MatrixCommandCenter() {
             setPreviewData({
               command: result.intent || "Voice Command",
               description: result.description || "Voice input analyzed.",
-              changes: result.patches ? result.patches.map(
-                (p: any) => `${p.file}: ${p.description}`,
-              ) : [],
+              changes: result.patches
+                ? result.patches.map((p: any) => `${p.file}: ${p.description}`)
+                : [],
               patches: result.patches || [],
               visuals: "none",
             });
@@ -230,55 +242,61 @@ export default function MatrixCommandCenter() {
 
   // --- RENDER: LOCKED (LOGIN) VIEW ---
   if (!isUnlocked) {
-      return (
-        <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
-            {/* 3D Background */}
-            <div className="absolute inset-0 z-0 opacity-40">
-                <FemaleAvatar />
-            </div>
-            
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black z-0" />
-
-            {/* Login Card */}
-            <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="relative z-10 w-full max-w-md p-8 bg-gray-900/40 backdrop-blur-xl border border-gray-800 rounded-2xl shadow-2xl"
-            >
-                <div className="text-center mb-8">
-                    <div className="inline-flex p-4 rounded-full bg-gold/10 mb-4 border border-gold/20">
-                        <Lock className="text-gold" size={32} />
-                    </div>
-                    <h1 className="text-4xl font-black text-white tracking-widest mb-1">THE MATRIX</h1>
-                    <p className="text-gold/60 font-mono text-xs tracking-[0.2em] uppercase">Authorized Personnel Only</p>
-                </div>
-
-                <form onSubmit={handleLogin} className="space-y-6">
-                    <div>
-                        <input 
-                            type="password" 
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="ENTER PASSKEY" 
-                            className="w-full p-4 bg-black/50 border border-gray-700 rounded-lg text-white text-center tracking-[0.5em] focus:border-gold transition-colors outline-none placeholder:tracking-normal placeholder:text-gray-600 font-mono"
-                        />
-                    </div>
-                    <button 
-                        type="submit" 
-                        disabled={loginLoading}
-                        className="w-full py-4 bg-gold text-black font-black tracking-wider rounded-lg hover:bg-yellow-400 transition-all shadow-[0_0_20px_rgba(255,215,0,0.2)] hover:shadow-[0_0_30px_rgba(255,215,0,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                        {loginLoading ? "VERIFYING..." : "ACCESS SYSTEM"}
-                    </button>
-                    
-                    <div className="flex justify-between items-center text-[10px] text-gray-500 font-mono uppercase">
-                        <span>Secure Protocol v3.0</span>
-                        <span className="flex items-center gap-1"><Globe size={10} /> 3000 STUDIOS NETWORK</span>
-                    </div>
-                </form>
-            </motion.div>
+    return (
+      <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
+        {/* 3D Background */}
+        <div className="absolute inset-0 z-0 opacity-40">
+          <FemaleAvatar />
         </div>
-      );
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black z-0" />
+
+        {/* Login Card */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="relative z-10 w-full max-w-md p-8 bg-gray-900/40 backdrop-blur-xl border border-gray-800 rounded-2xl shadow-2xl"
+        >
+          <div className="text-center mb-8">
+            <div className="inline-flex p-4 rounded-full bg-gold/10 mb-4 border border-gold/20">
+              <Lock className="text-gold" size={32} />
+            </div>
+            <h1 className="text-4xl font-black text-white tracking-widest mb-1">
+              THE MATRIX
+            </h1>
+            <p className="text-gold/60 font-mono text-xs tracking-[0.2em] uppercase">
+              Authorized Personnel Only
+            </p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="ENTER PASSKEY"
+                className="w-full p-4 bg-black/50 border border-gray-700 rounded-lg text-white text-center tracking-[0.5em] focus:border-gold transition-colors outline-none placeholder:tracking-normal placeholder:text-gray-600 font-mono"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={loginLoading}
+              className="w-full py-4 bg-gold text-black font-black tracking-wider rounded-lg hover:bg-yellow-400 transition-all shadow-[0_0_20px_rgba(255,215,0,0.2)] hover:shadow-[0_0_30px_rgba(255,215,0,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loginLoading ? "VERIFYING..." : "ACCESS SYSTEM"}
+            </button>
+
+            <div className="flex justify-between items-center text-[10px] text-gray-500 font-mono uppercase">
+              <span>Secure Protocol v3.0</span>
+              <span className="flex items-center gap-1">
+                <Globe size={10} /> 3000 STUDIOS NETWORK
+              </span>
+            </div>
+          </form>
+        </motion.div>
+      </div>
+    );
   }
 
   // --- RENDER: UNLOCKED (DASHBOARD) VIEW ---
@@ -286,27 +304,29 @@ export default function MatrixCommandCenter() {
     <div className="h-full p-4 md:p-8 flex flex-col bg-black text-white">
       {/* HEADER */}
       <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gold shadow-[0_0_15px_rgba(255,215,0,0.5)]">
-                  {/* Small Avatar Preview */}
-                   <div className="bg-gray-800 w-full h-full flex items-center justify-center">
-                       <span className="text-xs font-bold text-gold">AI</span>
-                   </div>
-              </div>
-              <div>
-                  <h1 className="text-2xl font-bold text-white">COMMAND CENTER</h1>
-                  <div className="flex items-center gap-2">
-                       <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                       <span className="text-xs text-brand-secondary font-mono">SYSTEM ONLINE // VOICE ACTIVE</span>
-                  </div>
-              </div>
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gold shadow-[0_0_15px_rgba(255,215,0,0.5)]">
+            {/* Small Avatar Preview */}
+            <div className="bg-gray-800 w-full h-full flex items-center justify-center">
+              <span className="text-xs font-bold text-gold">AI</span>
+            </div>
           </div>
-          <button 
-            onClick={() => setIsUnlocked(false)}
-            className="px-4 py-2 border border-red-900/50 text-red-500/60 hover:text-red-400 hover:border-red-500 rounded-lg text-xs font-mono transition-colors"
-          >
-              TERMINATE SESSION
-          </button>
+          <div>
+            <h1 className="text-2xl font-bold text-white">COMMAND CENTER</h1>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+              <span className="text-xs text-brand-secondary font-mono">
+                SYSTEM ONLINE // VOICE ACTIVE
+              </span>
+            </div>
+          </div>
+        </div>
+        <button
+          onClick={() => setIsUnlocked(false)}
+          className="px-4 py-2 border border-red-900/50 text-red-500/60 hover:text-red-400 hover:border-red-500 rounded-lg text-xs font-mono transition-colors"
+        >
+          TERMINATE SESSION
+        </button>
       </div>
 
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 h-full">
@@ -344,8 +364,10 @@ export default function MatrixCommandCenter() {
               <div className="absolute bottom-0 right-0 left-0 p-2 flex justify-end pointer-events-none">
                 <button
                   type="button"
-                  className={`p-4 rounded-full pointer-events-auto transition-transform shadow-lg border border-white/10 ${isListening ? 'bg-red-600 text-white scale-110' : 'bg-gray-800 text-gray-400 hover:text-white'}`}
-                  onClick={isListening ? stopVoiceRecognition : startVoiceRecognition}
+                  className={`p-4 rounded-full pointer-events-auto transition-transform shadow-lg border border-white/10 ${isListening ? "bg-red-600 text-white scale-110" : "bg-gray-800 text-gray-400 hover:text-white"}`}
+                  onClick={
+                    isListening ? stopVoiceRecognition : startVoiceRecognition
+                  }
                 >
                   {isListening ? (
                     <Mic size={24} className="animate-pulse" />
@@ -397,11 +419,14 @@ export default function MatrixCommandCenter() {
                     </h3>
                     <div className="space-y-2 mb-6">
                       <p className="text-sm text-gray-400 font-mono">
-                         CMD: "{previewData.command}"
+                        CMD: "{previewData.command}"
                       </p>
                       <div className="pl-4 border-l-2 border-blue-500/30 space-y-1">
                         {previewData.changes.map((change, i) => (
-                          <div key={i} className="text-xs font-mono text-green-400/80">
+                          <div
+                            key={i}
+                            className="text-xs font-mono text-green-400/80"
+                          >
                             {">"} {change}
                           </div>
                         ))}
@@ -441,7 +466,9 @@ export default function MatrixCommandCenter() {
             className="flex-1 p-6 rounded-xl border border-gray-800 bg-black font-mono text-sm overflow-y-auto shadow-inner"
           >
             <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-900">
-              <span className="font-bold text-gray-500 tracking-widest">SYSTEM LOGS</span>
+              <span className="font-bold text-gray-500 tracking-widest">
+                SYSTEM LOGS
+              </span>
               <div className="flex gap-2">
                 <div className="w-2 h-2 rounded-full bg-red-500/50" />
                 <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
@@ -451,9 +478,7 @@ export default function MatrixCommandCenter() {
 
             <div className="space-y-2">
               {deployStatus.length === 0 && !previewData && (
-                <div className="text-gray-700 italic">
-                  Awaiting input...
-                </div>
+                <div className="text-gray-700 italic">Awaiting input...</div>
               )}
               {deployStatus.map((status, i) => (
                 <motion.div
