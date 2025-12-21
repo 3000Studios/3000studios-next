@@ -65,15 +65,22 @@ function ProductCard({
 
       {/* Product Image */}
       <div className="relative aspect-square mb-4 rounded-lg overflow-hidden bg-gray-900">
-        <div className="w-full h-full flex items-center justify-center text-gray-600">
-          {/* Placeholder - replace with actual images */}
-          <div className="text-center">
-            <div className="w-20 h-20 bg-gold/20 rounded-full mx-auto mb-2 flex items-center justify-center">
-              <ShoppingCart size={32} className="text-gold" />
+        {product.image ? (
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-gray-600">
+            <div className="text-center">
+              <div className="w-20 h-20 bg-gold/20 rounded-full mx-auto mb-2 flex items-center justify-center">
+                <ShoppingCart size={32} className="text-gold" />
+              </div>
+              <p className="text-xs text-gray-500">No Image</p>
             </div>
-            <p className="text-xs text-gray-500">Product Image</p>
           </div>
-        </div>
+        )}
 
         {/* Hover Overlay */}
         <div
