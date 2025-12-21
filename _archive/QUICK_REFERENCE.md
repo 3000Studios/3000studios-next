@@ -17,12 +17,12 @@ C:\3000Studios\shadow\shadow-dev.ps1
 
 ## ⌨️ VS Code Shortcuts (Daily Use)
 
-| Shortcut | Action |
-|----------|--------|
+| Shortcut       | Action                               |
+| -------------- | ------------------------------------ |
 | `Ctrl+Shift+B` | Start Dev Server (secrets + Next.js) |
-| `Ctrl+Shift+P` | Open command palette |
-| `Ctrl+S` | Save (auto-format + reload) |
-| `Ctrl+`` | Open terminal |
+| `Ctrl+Shift+P` | Open command palette                 |
+| `Ctrl+S`       | Save (auto-format + reload)          |
+| `Ctrl+``       | Open terminal                        |
 
 ---
 
@@ -43,6 +43,7 @@ Press `Ctrl+Shift+B`:
 ## 🔑 Credential Management
 
 ### Store a Key
+
 ```powershell
 # Interactive: Ctrl+Shift+B → "🔑 Store API Key"
 # Or command line:
@@ -50,12 +51,14 @@ cmdkey /generic:OPENAI_API_KEY /user:dev /pass:YOUR_KEY
 ```
 
 ### List All Keys
+
 ```powershell
 # Ctrl+Shift+B → "📋 List Stored Keys"
 # Or: cmdkey /list
 ```
 
 ### Delete a Key
+
 ```powershell
 # Ctrl+Shift+B → "🗑️ Clear API Key"
 # Or: cmdkey /delete:OPENAI_API_KEY
@@ -66,6 +69,7 @@ cmdkey /generic:OPENAI_API_KEY /user:dev /pass:YOUR_KEY
 ## 💻 Daily Commands
 
 ### Start Development
+
 ```powershell
 # Option A: VS Code Ctrl+Shift+B
 # Option B: Terminal command:
@@ -73,6 +77,7 @@ C:\3000Studios\shadow\shadow-dev.ps1
 ```
 
 ### Edit Code
+
 ```
 1. VS Code automatically saves
 2. Dev server auto-reloads
@@ -80,6 +85,7 @@ C:\3000Studios\shadow\shadow-dev.ps1
 ```
 
 ### Commit & Deploy
+
 ```powershell
 git add .
 git commit -m "feat: your change"
@@ -111,12 +117,12 @@ Your app uses credentials securely
 
 ## 📊 File Locations
 
-| What | Where |
-|------|-------|
-| **Shadow Scripts** | `C:\3000Studios\shadow\` |
-| **Project Root** | `C:\Users\MrJws\OneDrive\WorkSpaces\3000studios-next\3000studios-next` |
-| **VS Code Config** | `.vscode\` (in project) |
-| **Documentation** | `.md` files (in project) |
+| What               | Where                                                                  |
+| ------------------ | ---------------------------------------------------------------------- |
+| **Shadow Scripts** | `C:\3000Studios\shadow\`                                               |
+| **Project Root**   | `C:\Users\MrJws\OneDrive\WorkSpaces\3000studios-next\3000studios-next` |
+| **VS Code Config** | `.vscode\` (in project)                                                |
+| **Documentation**  | `.md` files (in project)                                               |
 
 ---
 
@@ -172,12 +178,14 @@ git push origin main
 ## 🛠️ Troubleshooting
 
 ### Dev won't start
+
 ```powershell
 pnpm install
 pnpm dev
 ```
 
 ### API keys not working
+
 ```powershell
 # Check stored: cmdkey /list
 # Update: cmdkey /delete:KEY && cmdkey /generic:KEY /user:dev /pass:VALUE
@@ -185,9 +193,11 @@ pnpm dev
 ```
 
 ### GitHub Actions failing
+
 Check: https://github.com/3000Studios/3000studios-next/actions
 
 ### Vercel deployment stuck
+
 Check: https://vercel.com/3000studios
 
 ---
@@ -207,19 +217,20 @@ Check: https://vercel.com/3000studios
 
 ## 📖 Documentation Files
 
-| File | Read When |
-|------|-----------|
-| `SHADOW_COMPLETE_SETUP.md` | Want full setup details |
-| `SHADOW_SECURE_DEV.md` | Need security deep-dive |
-| `SECURE_WORKFLOW.md` | Want daily workflow guide |
-| `QUICK_START.md` | Need quick overview |
-| `README.md` | Want project info |
+| File                       | Read When                 |
+| -------------------------- | ------------------------- |
+| `SHADOW_COMPLETE_SETUP.md` | Want full setup details   |
+| `SHADOW_SECURE_DEV.md`     | Need security deep-dive   |
+| `SECURE_WORKFLOW.md`       | Want daily workflow guide |
+| `QUICK_START.md`           | Need quick overview       |
+| `README.md`                | Want project info         |
 
 ---
 
 ## 💡 Pro Tips
 
 ✅ **Do:**
+
 - Use VS Code tasks (Ctrl+Shift+B)
 - Let automation handle deployment
 - Keep credentials in Credential Manager
@@ -227,6 +238,7 @@ Check: https://vercel.com/3000studios
 - Check GitHub Actions status
 
 ❌ **Don't:**
+
 - Store secrets in code
 - Commit `.env.local`
 - Push untested code
@@ -238,11 +250,13 @@ Check: https://vercel.com/3000studios
 ## 🚀 You're Ready!
 
 **Just run:**
+
 ```powershell
 C:\3000Studios\shadow\shadow-dev.ps1
 ```
 
 **Then visit:**
+
 ```
 http://localhost:3000
 ```

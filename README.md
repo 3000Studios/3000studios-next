@@ -94,9 +94,9 @@ Edit `src/app/globals.css` to customize the color scheme:
 
 ```css
 :root {
-  --gold: #FFD700;       /* Primary accent */
-  --platinum: #E5E4E2;   /* Secondary accent */
-  --sapphire: #0F52BA;   /* Highlight color */
+  --gold: #ffd700; /* Primary accent */
+  --platinum: #e5e4e2; /* Secondary accent */
+  --sapphire: #0f52ba; /* Highlight color */
 }
 ```
 
@@ -106,7 +106,7 @@ Update `src/app/components/Navigation.tsx`:
 
 ```typescript
 const navLinks = [
-  { href: '/', label: 'Home' },
+  { href: "/", label: "Home" },
   // Add or remove links as needed
 ];
 ```
@@ -122,6 +122,7 @@ Customize stats in `src/app/matrix/page.tsx`:
 ## 🚧 Development Roadmap
 
 ### Phase 1: Foundation ✅ (Completed)
+
 - [x] Project setup and configuration
 - [x] All core pages implemented
 - [x] Navigation and routing
@@ -129,6 +130,7 @@ Customize stats in `src/app/matrix/page.tsx`:
 - [x] Responsive layouts
 
 ### Phase 2: Integration (Next)
+
 - [ ] Backend API routes
 - [ ] Database integration
 - [ ] Authentication system
@@ -136,6 +138,7 @@ Customize stats in `src/app/matrix/page.tsx`:
 - [ ] Email service integration
 
 ### Phase 3: Advanced Features
+
 - [ ] Shadow AI Avatar (3D model integration)
 - [ ] Voice-to-code editor
 - [ ] Live streaming infrastructure
@@ -143,6 +146,7 @@ Customize stats in `src/app/matrix/page.tsx`:
 - [ ] AI product generation
 
 ### Phase 4: Polish & Scale
+
 - [ ] Performance optimization
 - [ ] SEO improvements
 - [ ] Accessibility enhancements
@@ -152,12 +156,14 @@ Customize stats in `src/app/matrix/page.tsx`:
 ## 📝 File Naming Convention
 
 All files include descriptive header comments explaining:
+
 - Purpose of the file
 - Key features included
 - Customization sections (where applicable)
 - Future enhancement notes
 
 Example:
+
 ```typescript
 /**
  * Navigation Component
@@ -212,6 +218,7 @@ npm start
 ## 💡 Contributing
 
 This is a proprietary project for 3000 Studios. For questions or collaboration:
+
 - Email: contact@3000studios.com
 - Admin: mr.jwswain@gmail.com
 
