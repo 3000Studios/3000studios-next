@@ -45,6 +45,7 @@ export default function MatrixCommandCenter() {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState('');
   const [waveform, setWaveform] = useState<number[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currentCommand, setCurrentCommand] = useState<VoiceCommand | null>(null);
   const [commandResult, setCommandResult] = useState<CommandResult | null>(null);
 
@@ -75,6 +76,7 @@ export default function MatrixCommandCenter() {
     // Load initial stats
     loadStats();
     loadLogs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   const loadStats = async () => {
