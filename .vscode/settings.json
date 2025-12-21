@@ -15,8 +15,6 @@
 
   "antigravity.marketplaceGalleryItemURL": "https://open-vsx.org/vscode/item",
   "antigravity.marketplaceExtensionGalleryServiceURL": "https://open-vsx.org/vscode/gallery",
-  "antigravity.workspacePath": "c:\\3000Studios\\3000Studios-next",
-  "antigravity.enabled": true,
 
   /* ======================================================
      FILE SYSTEM / CPU CONTROL
@@ -41,10 +39,6 @@
   "editor.wordWrap": "on",
   "editor.minimap.enabled": false,
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "explicit"
-  },
   "editor.inlineSuggest.enabled": true,
 
   /* ======================================================
@@ -72,20 +66,13 @@
   "typescript.disableAutomaticTypeAcquisition": true,
 
   /* ======================================================
-     GIT (SILENT, NO POPUPS, NO FREEZES + AUTO EVERYTHING)
+     GIT (SILENT, NO POPUPS, NO FREEZES)
   ====================================================== */
 
-  "git.autorefresh": true,
+  "git.autorefresh": false,
   "git.confirmSync": false,
   "git.detectSubmodules": false,
   "git.countBadge": "off",
-  "git.autofetch": true,
-  "git.autofetchPeriod": 60,
-  "git.autoStash": true,
-  "git.enableCommitSigning": false,
-  "git.postCommitCommand": "push",
-  "git.showPushSuccessNotification": false,
-  "git.pruneOnFetch": true,
 
   /* ======================================================
      AI / AGENTS (AGGRESSIVE BUT CONTROLLED)
@@ -97,7 +84,7 @@
   "geminicodeassist.agentDebugMode": false,
   "geminicodeassist.agentYoloMode": true,
 
-  "gitlens.ai.model": "vscode",
+  "gitlens.ai.model": "gitkraken",
   "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
 
   /* ======================================================
@@ -115,38 +102,8 @@
     "npm": true,
     "node": true,
     "git": true,
-    "vercel": true,
-    "pnpm": true,
-    "yarn": true,
-    "pwsh": true,
-    "powershell": true
+    "vercel": true
   },
-  "chat.experimental.autoApplyEdits": true,
-  "chat.experimental.implicitContext.enabled": true,
-
-  /* ======================================================
-     AUTO-EVERYTHING CONFIGURATION
-  ====================================================== */
-
-  "files.autoSaveWorkspaceFilesOnly": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "always",
-    "source.organizeImports": "always",
-    "source.sortImports": "always",
-    "source.removeUnused": "always"
-  },
-  "editor.quickSuggestions": {
-    "other": "on",
-    "comments": "on",
-    "strings": "on"
-  },
-  "editor.suggestOnTriggerCharacters": true,
-  "editor.acceptSuggestionOnEnter": "on",
-  "editor.tabCompletion": "on",
-  "typescript.suggest.autoImports": true,
-  "javascript.suggest.autoImports": true,
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "javascript.updateImportsOnFileMove.enabled": "always",
 
   /* ======================================================
      WORKSPACE TRUST (NO INTERRUPTIONS)
@@ -160,6 +117,5 @@
   ====================================================== */
 
   "github-actions.workflows.pinned.refresh.enabled": true,
-  "github-actions.workflows.pinned.workflows": [],
-  "github-actions.use-enterprise": true
+  "github-actions.workflows.pinned.workflows": []
 }

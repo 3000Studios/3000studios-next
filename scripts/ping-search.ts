@@ -12,7 +12,11 @@ async function pingSearchEngine() {
       console.log("✅ Successfully pinged Google.");
     } else {
       console.error(
+<<<<<<< HEAD
         `❌ Failed to ping Google. Status: ${response.status} ${response.statusText}`,
+=======
+        `❌ Failed to ping Google. Status: ${response.status} ${response.statusText}`
+>>>>>>> origin/pr/50
       );
     }
   } catch (error) {

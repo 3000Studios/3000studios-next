@@ -30,13 +30,11 @@ vercel --prod --yes
 ## Alternative: Use Batch File (Easiest)
 
 Double-click this file in Windows Explorer:
-
 ```
 C:\DEV\3000studios-next\scripts\fix-vercel-env.bat
 ```
 
 Or run from PowerShell:
-
 ```powershell
 cd C:\DEV\3000studios-next
 .\scripts\fix-vercel-env.bat
@@ -60,7 +58,6 @@ NEXT_PUBLIC_SITE_URL
 ## If Still Failing
 
 Use Vercel Dashboard:
-
 1. Go to: https://vercel.com/3000studios/3000studios-next/settings/environment-variables
 2. Delete NEXT_PUBLIC_SITE_URL completely
 3. Add it back with literal value `https://3000studios.com`

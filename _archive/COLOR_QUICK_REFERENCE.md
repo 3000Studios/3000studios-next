@@ -39,7 +39,6 @@
 ## Premium Gradients
 
 ### 1. Sunset Gradient
-
 ```
 🔴🟡🟠 Coral → Gold → Orange
 linear-gradient(135deg, #FF6B6B, #FFD700, #FF8C42)
@@ -47,7 +46,6 @@ Use: Hero sections, energetic CTAs
 ```
 
 ### 2. Ocean Gradient
-
 ```
 🔵🔷🟦 Sapphire → Teal → Turquoise
 linear-gradient(135deg, #0F52BA, #00CED1, #40E0D0)
@@ -55,7 +53,6 @@ Use: Tech features, professional content
 ```
 
 ### 3. Royal Gradient
-
 ```
 🟣💜🟪 Violet → Amethyst → Lavender
 linear-gradient(135deg, #8B5CF6, #9966CC, #B57EDC)
@@ -63,7 +60,6 @@ Use: Premium features, VIP content
 ```
 
 ### 4. Luxury Gradient
-
 ```
 🟡🟤🔴 Gold → Rose Gold → Ruby
 linear-gradient(135deg, #FFD700, #B76E79, #E0115F)
@@ -71,7 +67,6 @@ Use: Exclusive offers, high-end sections
 ```
 
 ### 5. Emerald Gradient
-
 ```
 🟢💚🔷 Emerald → Mint → Teal
 linear-gradient(135deg, #50C878, #98FF98, #00CED1)
@@ -79,7 +74,6 @@ Use: Success metrics, growth indicators
 ```
 
 ### 6. Premium Rainbow Gradient
-
 ```
 🟡⚪🔵🟣🔴 Gold → Platinum → Sapphire → Amethyst → Ruby
 linear-gradient(135deg, #FFD700, #E5E4E2, #0F52BA, #9966CC, #E0115F)
@@ -91,56 +85,51 @@ Use: Hero headlines, signature elements
 ## Quick Usage Guide
 
 ### Buttons
-
 ```html
-<button class="btn-primary">Gold-Sapphire</button>
-<button class="btn-sunset">Coral-Orange</button>
-<button class="btn-ocean">Blue-Turquoise</button>
-<button class="btn-royal">Purple Luxury</button>
-<button class="btn-emerald">Green Success</button>
-<button class="btn-premium">Rainbow Shine ✨</button>
+<button class="btn-primary">   Gold-Sapphire  </button>
+<button class="btn-sunset">    Coral-Orange   </button>
+<button class="btn-ocean">     Blue-Turquoise </button>
+<button class="btn-royal">     Purple Luxury  </button>
+<button class="btn-emerald">   Green Success  </button>
+<button class="btn-premium">   Rainbow Shine ✨</button>
 ```
 
 ### Cards
-
 ```html
-<div class="card">Default (Gold)</div>
-<div class="card-ruby">Passionate Red</div>
-<div class="card-emerald">Success Green</div>
-<div class="card-amethyst">Creative Purple</div>
-<div class="card-ocean">Professional Blue</div>
+<div class="card">           Default (Gold)    </div>
+<div class="card-ruby">      Passionate Red    </div>
+<div class="card-emerald">   Success Green     </div>
+<div class="card-amethyst">  Creative Purple   </div>
+<div class="card-ocean">     Professional Blue </div>
 ```
 
 ### Text Gradients
-
 ```html
-<h1 class="gradient-text">Gold-Sapphire</h1>
-<h1 class="gradient-text-sunset">Warm Sunset</h1>
-<h1 class="gradient-text-ocean">Cool Ocean</h1>
-<h1 class="gradient-text-royal">Royal Purple</h1>
-<h1 class="gradient-text-luxury">Luxury Blend</h1>
-<h1 class="gradient-text-emerald">Fresh Emerald</h1>
-<h1 class="gradient-text-premium">Rainbow Shimmer✨</h1>
+<h1 class="gradient-text">          Gold-Sapphire  </h1>
+<h1 class="gradient-text-sunset">   Warm Sunset    </h1>
+<h1 class="gradient-text-ocean">    Cool Ocean     </h1>
+<h1 class="gradient-text-royal">    Royal Purple   </h1>
+<h1 class="gradient-text-luxury">   Luxury Blend   </h1>
+<h1 class="gradient-text-emerald">  Fresh Emerald  </h1>
+<h1 class="gradient-text-premium">  Rainbow Shimmer✨</h1>
 ```
 
 ### Glow Effects
-
 ```html
-<div class="glow">Gold glow</div>
-<div class="glow-sapphire">Blue glow</div>
-<div class="glow-ruby">Red glow</div>
-<div class="glow-emerald">Green glow</div>
-<div class="glow-amethyst">Purple glow</div>
-<div class="glow-premium">Rainbow pulse ✨</div>
+<div class="glow">            Gold glow          </div>
+<div class="glow-sapphire">   Blue glow          </div>
+<div class="glow-ruby">       Red glow           </div>
+<div class="glow-emerald">    Green glow         </div>
+<div class="glow-amethyst">   Purple glow        </div>
+<div class="glow-premium">    Rainbow pulse ✨   </div>
 ```
 
 ### Backgrounds
-
 ```html
-<div class="mesh-gradient">Multi-color mesh</div>
-<div class="aurora-bg">Northern lights</div>
-<div class="diamond-pattern">Geometric pattern</div>
-<div class="gradient-bg-premium">Animated rainbow ✨</div>
+<div class="mesh-gradient">      Multi-color mesh    </div>
+<div class="aurora-bg">          Northern lights     </div>
+<div class="diamond-pattern">    Geometric pattern   </div>
+<div class="gradient-bg-premium">Animated rainbow ✨ </div>
 ```
 
 ---
@@ -148,42 +137,36 @@ Use: Hero headlines, signature elements
 ## Color Combinations
 
 ### Classic Luxury
-
 ```
 🟡 Gold + 🔵 Sapphire + ⚫ Onyx
 Perfect for: Main brand, navigation
 ```
 
 ### Energetic Bold
-
 ```
 🔴 Ruby + 🔴 Coral + 🟡 Amber
 Perfect for: CTAs, announcements
 ```
 
 ### Professional Trust
-
 ```
 🔵 Sapphire + 🟦 Teal + ⚪ Platinum
 Perfect for: Services, about sections
 ```
 
 ### Creative Innovation
-
 ```
 🟣 Amethyst + 🟣 Violet + 🟣 Lavender
 Perfect for: Portfolio, creative work
 ```
 
 ### Success Growth
-
 ```
 🟢 Emerald + 💚 Mint + 🟦 Teal
 Perfect for: Metrics, testimonials
 ```
 
 ### Premium Exclusive
-
 ```
 🟤 Rose Gold + 🔴 Ruby + 🟡 Gold
 Perfect for: VIP, premium offers
@@ -194,7 +177,6 @@ Perfect for: VIP, premium offers
 ## Animation Effects
 
 ### Available Animations
-
 - ✨ **shimmerText** - Text brightness (3s)
 - ✨ **pulseGlow** - Breathing glow (3s)
 - ✨ **textGlowPulse** - Multi-color text (3s)

@@ -1,8 +1,5 @@
 name: Revenue Lock
 
-permissions:
-  contents: read
-
 on: [pull_request]
 
 jobs:

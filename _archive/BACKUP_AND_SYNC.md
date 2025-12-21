@@ -53,7 +53,6 @@ backups/
 ### Backup Manifest
 
 Each backup includes a `BACKUP_MANIFEST.md` with:
-
 - Timestamp and backup name
 - Git branch and commit hash
 - List of backed up files
@@ -73,7 +72,6 @@ Each backup includes a `BACKUP_MANIFEST.md` with:
 ### Three-Way Sync: Local ↔ GitHub ↔ Vercel
 
 The sync system ensures perfect synchronization between:
-
 1. **Local Repository** (your working directory)
 2. **GitHub Remote** (origin)
 3. **Vercel Deployment** (production)
@@ -297,7 +295,6 @@ COMMIT_MSG="chore: sync local changes $(date +"%Y-%m-%d %H:%M:%S")"
 ### GitHub Actions Dashboard
 
 Monitor deployments:
-
 - **URL:** https://github.com/3000Studios/3000studios-next/actions
 - **Auto-triggers:** On every push to `main` branch
 - **Typical duration:** 60-90 seconds
@@ -305,7 +302,6 @@ Monitor deployments:
 ### Vercel Dashboard
 
 Monitor production deployments:
-
 - **URL:** https://vercel.com/3000studios/3000studios-next
 - **Live site:** https://3000studios.com
 - **Deployment logs:** Available in dashboard

@@ -12,12 +12,29 @@ import {
   Globe,
   Lock,
   Mic,
+<<<<<<< HEAD
   MicOff,
   Terminal,
 } from "lucide-react";
 import { useRef, useState } from "react";
 // Import Avatar for the background effect
 import FemaleAvatar from "./components/FemaleAvatar";
+=======
+  Code,
+  Rocket,
+  GitBranch
+} from 'lucide-react';
+import { verifySessionToken } from '@/lib/auth';
+import Link from 'next/link';
+import VoiceCodeEditor from './components/VoiceCodeEditor';
+import StreamControl from './components/StreamControl';
+import RealAnalytics from './components/RealAnalytics';
+import ContentGenerator from './components/ContentGenerator';
+import { CompactRealtimeSync } from '@/app/components/RealtimeSync';
+import { useRealtimeSync } from '@/hooks/useRealtimeSync';
+import { forceRedeploy } from '@/lib/services/realtime-sync';
+import FemaleAvatar from './components/FemaleAvatar';
+>>>>>>> origin/pr/50
 
 export default function MatrixCommandCenter() {
   // --- AUTHENTICATION STATE ---
@@ -35,8 +52,19 @@ export default function MatrixCommandCenter() {
     visuals: "none" | "jazz" | "glitter";
   } | null>(null);
 
+<<<<<<< HEAD
   const [isDeploying, setIsDeploying] = useState(false);
   const [deployStatus, setDeployStatus] = useState<string[]>([]);
+=======
+export default function MatrixPage() {
+  const router = useRouter();
+  const [currentTime, setCurrentTime] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [userEmail, setUserEmail] = useState('');
+  const [isDeploying, setIsDeploying] = useState(false);
+  const { refreshStatus } = useRealtimeSync();
+>>>>>>> origin/pr/50
 
   // Voice State
   const [isListening, setIsListening] = useState(false);
@@ -60,6 +88,7 @@ export default function MatrixCommandCenter() {
     }, 800);
   };
 
+<<<<<<< HEAD
   // --- API INTERACTION ---
   const processRequest = async (input: {
     audio?: string;
@@ -236,12 +265,26 @@ export default function MatrixCommandCenter() {
         "Error applying patches.",
         "Aborting operation.",
       ]);
+=======
+  const handleForceDeploy = async () => {
+    setIsDeploying(true);
+    try {
+      await forceRedeploy();
+      await refreshStatus();
+    } catch (error) {
+      console.error('Force deploy failed:', error);
+    } finally {
+>>>>>>> origin/pr/50
       setIsDeploying(false);
     }
   };
 
+<<<<<<< HEAD
   // --- RENDER: LOCKED (LOGIN) VIEW ---
   if (!isUnlocked) {
+=======
+  if (isLoading) {
+>>>>>>> origin/pr/50
     return (
       <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
         {/* 3D Background */}
@@ -329,6 +372,7 @@ export default function MatrixCommandCenter() {
         </button>
       </div>
 
+<<<<<<< HEAD
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 h-full">
         {/* LEFT COLUMN: Input & Preview */}
         <div className="space-y-6">
@@ -455,6 +499,120 @@ export default function MatrixCommandCenter() {
               </motion.div>
             )}
           </AnimatePresence>
+=======
+      <div className="max-w-7xl mx-auto space-y-8">
+        {/* Real-Time Deployment Status - NEW */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2">
+            <div className="card">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <Rocket className="text-gold" size={24} />
+                  <h2 className="text-xl font-bold text-white">🚀 Real-Time Deployment</h2>
+                </div>
+                <button
+                  onClick={handleForceDeploy}
+                  disabled={isDeploying}
+                  className="px-4 py-2 bg-gradient-to-r from-gold to-yellow-500 text-black font-semibold rounded-lg hover:from-platinum hover:to-white transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                >
+                  <Zap size={16} />
+                  {isDeploying ? 'Deploying...' : 'Deploy Now'}
+                </button>
+              </div>
+              <CompactRealtimeSync />
+              <div className="mt-4 p-3 glass border border-cyan-500/30 rounded-lg">
+                <div className="flex items-center gap-2 mb-2">
+                  <GitBranch className="text-cyan-400" size={16} />
+                  <p className="text-sm font-semibold text-cyan-400">Production Branch</p>
+                </div>
+                <p className="text-2xl font-bold text-white">main</p>
+                <p className="text-xs text-gray-400 mt-1">
+                  ✅ Single source of truth - All changes deploy directly to production
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="space-y-6">
+            <FemaleAvatar />
+            
+            <div className="card">
+              <h3 className="text-lg font-bold text-white mb-4">⚡ Quick Actions</h3>
+              <div className="space-y-3">
+                <button 
+                  onClick={() => window.location.href = '/matrix#voice-editor'}
+                  className="w-full p-3 glass border border-gold/30 rounded-lg hover:bg-gold/10 transition-all text-left"
+                >
+                  <div className="flex items-center gap-3">
+                    <Mic className="text-gold" size={20} />
+                    <div>
+                      <p className="text-white font-semibold">Voice Command</p>
+                      <p className="text-xs text-gray-400">Deploy with voice</p>
+                    </div>
+                  </div>
+                </button>
+                <button 
+                  onClick={handleForceDeploy}
+                  disabled={isDeploying}
+                  className="w-full p-3 glass border border-green-500/30 rounded-lg hover:bg-green-500/10 transition-all text-left disabled:opacity-50"
+                >
+                  <div className="flex items-center gap-3">
+                    <Rocket className="text-green-400" size={20} />
+                    <div>
+                      <p className="text-white font-semibold">Force Redeploy</p>
+                      <p className="text-xs text-gray-400">Redeploy current state</p>
+                    </div>
+                  </div>
+                </button>
+                <a 
+                  href="https://github.com/3000Studios/3000studios-next"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full p-3 glass border border-purple-500/30 rounded-lg hover:bg-purple-500/10 transition-all text-left block"
+                >
+                  <div className="flex items-center gap-3">
+                    <Code className="text-purple-400" size={20} />
+                    <div>
+                      <p className="text-white font-semibold">View Repository</p>
+                      <p className="text-xs text-gray-400">GitHub main branch</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <StatCard
+            title="Total Revenue"
+            value="$12,450"
+            change="+23.5%"
+            icon={<DollarSign className="text-black" size={24} />}
+            trend="up"
+          />
+          <StatCard
+            title="Active Users"
+            value="1,284"
+            change="+12.3%"
+            icon={<Users className="text-black" size={24} />}
+            trend="up"
+          />
+          <StatCard
+            title="Store Orders"
+            value="324"
+            change="+8.1%"
+            icon={<ShoppingCart className="text-black" size={24} />}
+            trend="up"
+          />
+          <StatCard
+            title="Live Viewers"
+            value="42"
+            change="-5.2%"
+            icon={<Eye className="text-black" size={24} />}
+            trend="down"
+          />
+>>>>>>> origin/pr/50
         </div>
 
         {/* RIGHT COLUMN: Output & Status */}

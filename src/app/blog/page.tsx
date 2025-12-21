@@ -6,6 +6,7 @@
 
 "use client";
 
+<<<<<<< HEAD
 import { motion } from "framer-motion";
 import { Calendar, Clock, Search, Tag, User } from "lucide-react";
 import { useState } from "react";
@@ -13,12 +14,27 @@ import GoogleAdsPlaceholder from "../components/GoogleAdsPlaceholder";
 import LoadingSkeleton from "../components/LoadingSkeleton";
 import Newsletter from "../components/Newsletter";
 import { blogPosts, getAllCategories, getAllTags } from "../lib/blogData";
+=======
+import { useState } from "react";
+import { Calendar, Clock, User, Search, Tag } from "lucide-react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { blogPosts, getAllCategories, getAllTags } from "../lib/blogData";
+import Newsletter from "../components/Newsletter";
+import LoadingSkeleton from "../components/LoadingSkeleton";
+import GoogleAdsPlaceholder from "../components/GoogleAdsPlaceholder";
+>>>>>>> origin/pr/50
 
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+<<<<<<< HEAD
   const [_email, _setEmail] = useState("");
   const [_isLoading, _setIsLoading] = useState(false);
+=======
+  // const [email, setEmail] = useState(""); // Reserved for future use
+  const [isLoading] = useState(false);
+>>>>>>> origin/pr/50
 
   const categories = ["All", ...getAllCategories()];
 
@@ -174,9 +190,12 @@ export default function BlogPage() {
                       </div>
                     </div>
 
-                    <button className="mt-4 text-gold hover:text-platinum transition-colors font-semibold inline-flex items-center gap-2 hover-lift">
+                    <Link
+                      href={`/blog/${post.id}`}
+                      className="mt-4 text-gold hover:text-platinum transition-colors font-semibold inline-flex items-center gap-2 hover-lift"
+                    >
                       Read Full Article →
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </motion.article>
