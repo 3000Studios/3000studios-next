@@ -3,10 +3,10 @@
  * Client-side cart with localStorage persistence
  */
 
-'use client';
+"use client";
 
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export interface CartItem {
   productId: string;
@@ -18,7 +18,7 @@ export interface CartItem {
 
 interface CartState {
   items: CartItem[];
-  addItem: (item: Omit<CartItem, 'quantity'>) => void;
+  addItem: (item: Omit<CartItem, "quantity">) => void;
   removeItem: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
@@ -33,26 +33,26 @@ export const useCart = create<CartState>()(
 
       addItem: (item) => {
         const items = get().items;
-        const existingItem = items.find(i => i.productId === item.productId);
+        const existingItem = items.find((i) => i.productId === item.productId);
 
         if (existingItem) {
           set({
-            items: items.map(i =>
+            items: items.map((i) =>
               i.productId === item.productId
                 ? { ...i, quantity: i.quantity + 1 }
-                : i
-            )
+                : i,
+            ),
           });
         } else {
           set({
-            items: [...items, { ...item, quantity: 1 }]
+            items: [...items, { ...item, quantity: 1 }],
           });
         }
       },
 
       removeItem: (productId) => {
         set({
-          items: get().items.filter(i => i.productId !== productId)
+          items: get().items.filter((i) => i.productId !== productId),
         });
       },
 
@@ -63,9 +63,9 @@ export const useCart = create<CartState>()(
         }
 
         set({
-          items: get().items.map(i =>
-            i.productId === productId ? { ...i, quantity } : i
-          )
+          items: get().items.map((i) =>
+            i.productId === productId ? { ...i, quantity } : i,
+          ),
         });
       },
 
@@ -78,13 +78,16 @@ export const useCart = create<CartState>()(
       },
 
       getTotalPrice: () => {
-        return get().items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      }
+        return get().items.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0,
+        );
+      },
     }),
     {
-      name: '3000studios-cart',
-    }
-  )
+      name: "3000studios-cart",
+    },
+  ),
 );
 
 // Alias for backward compatibility

@@ -8,11 +8,11 @@
 
 :root {
   /* Brand Colors (updated to corporate palette) */
-  --gold: #FFC107; /* deep bold yellow */
-  --platinum: #9CA3AF; /* sleek grey */
-  --sapphire: #FFC107; /* replace blue usages with deep yellow */
-  --color-platinum: #E5E4E2; /* legacy alias */
-  --color-sapphire: #0F52BA; /* legacy alias */
+  --gold: #ffc107; /* deep bold yellow */
+  --platinum: #9ca3af; /* sleek grey */
+  --sapphire: #ffc107; /* replace blue usages with deep yellow */
+  --color-platinum: #e5e4e2; /* legacy alias */
+  --color-sapphire: #0f52ba; /* legacy alias */
   --dark-bg: #0a0a0a;
   --light-bg: #ffffff;
 
@@ -29,37 +29,69 @@
   --hover-bg: rgba(255, 215, 0, 0.1);
 
   /* Shadows */
-  --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
-  --shadow-md: 0 4px 8px rgba(0,0,0,0.2);
-  --shadow-lg: 0 8px 16px rgba(0,0,0,0.3);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.3);
   --shadow-gold: 0 4px 12px rgba(255, 215, 0, 0.3);
 
   /* Electric Theme (aligned to new palette) */
-  --electric-blue: #FFC107; /* deep bold yellow for electric accents */
-  --electric-purple: #6B7280; /* sleek corporate grey */
-  --neon-glow: 0 0 10px var(--electric-blue), 0 0 20px var(--electric-blue), 0 0 40px var(--electric-blue);
+  --electric-blue: #ffc107; /* deep bold yellow for electric accents */
+  --electric-purple: #6b7280; /* sleek corporate grey */
+  --neon-glow:
+    0 0 10px var(--electric-blue), 0 0 20px var(--electric-blue),
+    0 0 40px var(--electric-blue);
 }
 
 @keyframes electric-flicker {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
     opacity: 1;
-    text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 20px var(--electric-blue), 0 0 35px var(--electric-blue), 0 0 40px var(--electric-blue), 0 0 50px var(--electric-blue), 0 0 75px var(--electric-blue);
+    text-shadow:
+      0 0 4px #fff,
+      0 0 10px #fff,
+      0 0 20px var(--electric-blue),
+      0 0 35px var(--electric-blue),
+      0 0 40px var(--electric-blue),
+      0 0 50px var(--electric-blue),
+      0 0 75px var(--electric-blue);
   }
-  20%, 24%, 55% {
+  20%,
+  24%,
+  55% {
     opacity: 0.5;
     text-shadow: none;
   }
 }
 
 @keyframes shock-wave {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.5); opacity: 0.8; }
-  100% { transform: scale(2); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
 }
 
 .electric-text {
   color: #fff;
-  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px var(--electric-blue), 0 0 30px var(--electric-blue), 0 0 40px var(--electric-blue);
+  text-shadow:
+    0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 20px var(--electric-blue),
+    0 0 30px var(--electric-blue),
+    0 0 40px var(--electric-blue);
 }
 
 .glass-morphism {
@@ -89,7 +121,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   /* Corporate font stack */
-  font-family: 'Segoe UI', 'Inter', 'Helvetica Neue', Arial, system-ui, sans-serif;
+  font-family:
+    "Segoe UI", "Inter", "Helvetica Neue", Arial, system-ui, sans-serif;
   overflow-x: hidden;
   min-height: 100vh;
 }
@@ -147,7 +180,8 @@ a:hover {
 
 /* Loading Animation */
 @keyframes pulse-gold {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -176,7 +210,8 @@ a:hover {
 
 /* Particle Effects - GPU accelerated */
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px) translateZ(0);
   }
   50% {
@@ -212,15 +247,17 @@ a:hover {
 
 /* Glow Effect */
 .glow {
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5),
-              0 0 40px rgba(255, 215, 0, 0.3),
-              0 0 60px rgba(255, 215, 0, 0.1);
+  box-shadow:
+    0 0 20px rgba(255, 215, 0, 0.5),
+    0 0 40px rgba(255, 215, 0, 0.3),
+    0 0 60px rgba(255, 215, 0, 0.1);
 }
 
 .glow-sapphire {
-  box-shadow: 0 0 20px rgba(15, 82, 186, 0.5),
-              0 0 40px rgba(15, 82, 186, 0.3),
-              0 0 60px rgba(15, 82, 186, 0.1);
+  box-shadow:
+    0 0 20px rgba(15, 82, 186, 0.5),
+    0 0 40px rgba(15, 82, 186, 0.3),
+    0 0 60px rgba(15, 82, 186, 0.1);
 }
 
 /* Fade In Animations */
@@ -274,7 +311,9 @@ a:hover {
 /* Premium Hover Effects - GPU accelerated */
 .hover-lift {
   will-change: transform, box-shadow;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .hover-lift:hover {
@@ -298,11 +337,19 @@ a:hover {
 }
 
 .gradient-bg-2 {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(15, 82, 186, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.1) 0%,
+    rgba(15, 82, 186, 0.1) 100%
+  );
 }
 
 .gradient-bg-radial {
-  background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 215, 0, 0.1) 0%,
+    transparent 50%
+  );
 }
 
 /* Mesh Gradient Background */
@@ -319,13 +366,15 @@ a:hover {
 
 /* Text Effects */
 .text-shadow-gold {
-  text-shadow: 0 0 20px rgba(255, 215, 0, 0.8),
-               0 0 40px rgba(255, 215, 0, 0.4);
+  text-shadow:
+    0 0 20px rgba(255, 215, 0, 0.8),
+    0 0 40px rgba(255, 215, 0, 0.4);
 }
 
 .text-shadow-sapphire {
-  text-shadow: 0 0 20px rgba(15, 82, 186, 0.8),
-               0 0 40px rgba(15, 82, 186, 0.4);
+  text-shadow:
+    0 0 20px rgba(15, 82, 186, 0.8),
+    0 0 40px rgba(15, 82, 186, 0.4);
 }
 
 /* Selection Styling */
@@ -404,7 +453,8 @@ a:hover {
 
 /* Pulse Animation */
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -432,7 +482,8 @@ a:hover {
 
 /* Bounce Animation */
 @keyframes bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(-25%);
     animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
   }

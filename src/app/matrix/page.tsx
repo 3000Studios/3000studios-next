@@ -142,7 +142,7 @@ export default function MatrixCommandCenter() {
               command: result.intent,
               description: result.description,
               changes: result.patches.map(
-                (p: any) => `${p.file}: ${p.description}`
+                (p: any) => `${p.file}: ${p.description}`,
               ),
               patches: result.patches,
               visuals: "none",

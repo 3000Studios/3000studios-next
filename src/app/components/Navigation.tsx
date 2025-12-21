@@ -75,16 +75,19 @@ const ElectricLink = ({
       "M0,20 Q25,28 50,20 T100,20",
       "M0,20 Q25,16 50,20 T100,20",
     ],
-    []
+    [],
   );
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      if (Math.random() > 0.65 && !isHovered) {
-        setIsZapping(true);
-        setTimeout(() => setIsZapping(false), 220);
-      }
-    }, Math.random() * 3500 + 1800);
+    const timer = setInterval(
+      () => {
+        if (Math.random() > 0.65 && !isHovered) {
+          setIsZapping(true);
+          setTimeout(() => setIsZapping(false), 220);
+        }
+      },
+      Math.random() * 3500 + 1800,
+    );
 
     return () => clearInterval(timer);
   }, [isHovered]);

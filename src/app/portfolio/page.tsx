@@ -4,32 +4,44 @@
  * Features: Detailed project cards, metrics, filtering, testimonials
  */
 
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { Award, ChevronRight, ExternalLink, Filter, Star, TrendingUp, Users } from 'lucide-react';
-import Link from 'next/link';
-import { useState } from 'react';
-import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
-import Newsletter from '../components/Newsletter';
-import { getAllPortfolioCategories, portfolioItems } from '../lib/portfolioData';
+import { motion } from "framer-motion";
+import {
+  Award,
+  ChevronRight,
+  ExternalLink,
+  Filter,
+  Star,
+  TrendingUp,
+  Users,
+} from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import GoogleAdsPlaceholder from "../components/GoogleAdsPlaceholder";
+import Newsletter from "../components/Newsletter";
+import {
+  getAllPortfolioCategories,
+  portfolioItems,
+} from "../lib/portfolioData";
 
 export default function PortfolioPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
 
   const stats = [
-    { icon: <Award size={32} />, value: '250+', label: 'Projects Completed' },
-    { icon: <Users size={32} />, value: '500+', label: 'Happy Clients' },
-    { icon: <TrendingUp size={32} />, value: '300%', label: 'Average ROI' },
-    { icon: <Star size={32} />, value: '4.9', label: 'Client Rating' },
+    { icon: <Award size={32} />, value: "250+", label: "Projects Completed" },
+    { icon: <Users size={32} />, value: "500+", label: "Happy Clients" },
+    { icon: <TrendingUp size={32} />, value: "300%", label: "Average ROI" },
+    { icon: <Star size={32} />, value: "4.9", label: "Client Rating" },
   ];
 
-  const categories = ['All', ...getAllPortfolioCategories()];
+  const categories = ["All", ...getAllPortfolioCategories()];
 
-  const filteredProjects = selectedCategory === 'All'
-    ? portfolioItems
-    : portfolioItems.filter(p => p.category === selectedCategory);
+  const filteredProjects =
+    selectedCategory === "All"
+      ? portfolioItems
+      : portfolioItems.filter((p) => p.category === selectedCategory);
 
   const toggleProject = (id: string) => {
     setExpandedProject(expandedProject === id ? null : id);
@@ -53,7 +65,8 @@ export default function PortfolioPage() {
             transition={{ delay: 0.1 }}
             className="text-xl text-gray-400 max-w-2xl mx-auto"
           >
-            A showcase of excellence, innovation, and transformative digital experiences that drive real results
+            A showcase of excellence, innovation, and transformative digital
+            experiences that drive real results
           </motion.p>
         </div>
 
@@ -70,7 +83,9 @@ export default function PortfolioPage() {
               <div className="w-16 h-16 bg-gradient-to-br from-gold to-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4 glow">
                 <div className="text-black">{stat.icon}</div>
               </div>
-              <h3 className="text-3xl font-bold text-white mb-2">{stat.value}</h3>
+              <h3 className="text-3xl font-bold text-white mb-2">
+                {stat.value}
+              </h3>
               <p className="text-gray-400">{stat.label}</p>
             </motion.div>
           ))}
@@ -88,8 +103,8 @@ export default function PortfolioPage() {
               onClick={() => setSelectedCategory(category)}
               className={`px-6 py-2 rounded-full font-semibold transition-all hover-lift ${
                 selectedCategory === category
-                  ? 'bg-gold text-black'
-                  : 'glass border border-gold/30 text-gold hover:bg-gold/10'
+                  ? "bg-gold text-black"
+                  : "glass border border-gold/30 text-gold hover:bg-gold/10"
               }`}
             >
               {category}
@@ -110,7 +125,9 @@ export default function PortfolioPage() {
             <Star className="text-gold fill-gold" size={32} />
             Featured Case Studies
           </h2>
-          <p className="text-gray-400 mb-8">Deep dives into our most impactful projects</p>
+          <p className="text-gray-400 mb-8">
+            Deep dives into our most impactful projects
+          </p>
 
           <div className="space-y-8">
             {filteredProjects.map((project, index) => (
@@ -119,7 +136,7 @@ export default function PortfolioPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`card-premium ${project.featured ? 'border-gold' : ''}`}
+                className={`card-premium ${project.featured ? "border-gold" : ""}`}
               >
                 <div className="flex flex-col lg:flex-row gap-6">
                   {/* Project Image/Icon */}
@@ -132,14 +149,14 @@ export default function PortfolioPage() {
                         </div>
                       )}
                       <div className="text-8xl group-hover:scale-110 transition-transform duration-300">
-                        {project.category === 'E-Commerce' && '🛍️'}
-                        {project.category === 'SaaS' && '💼'}
-                        {project.category === 'Mobile App' && '📱'}
-                        {project.category === 'Real Estate' && '🏡'}
-                        {project.category === 'Restaurant Tech' && '🍽️'}
-                        {project.category === 'EdTech' && '📚'}
-                        {project.category === 'Non-Profit' && '❤️'}
-                        {project.category === 'Startup' && '🚀'}
+                        {project.category === "E-Commerce" && "🛍️"}
+                        {project.category === "SaaS" && "💼"}
+                        {project.category === "Mobile App" && "📱"}
+                        {project.category === "Real Estate" && "🏡"}
+                        {project.category === "Restaurant Tech" && "🍽️"}
+                        {project.category === "EdTech" && "📚"}
+                        {project.category === "Non-Profit" && "❤️"}
+                        {project.category === "Startup" && "🚀"}
                       </div>
                       <div className="absolute bottom-4 left-4 right-4">
                         <div className="glass-premium px-3 py-1 rounded text-sm text-white font-semibold text-center">
@@ -163,7 +180,9 @@ export default function PortfolioPage() {
                       {project.title}
                     </h3>
 
-                    <p className="text-gray-400 mb-4 italic">Client: {project.client}</p>
+                    <p className="text-gray-400 mb-4 italic">
+                      Client: {project.client}
+                    </p>
 
                     <p className="text-gray-300 mb-6 text-lg">
                       {project.description}
@@ -173,9 +192,16 @@ export default function PortfolioPage() {
                     {project.metrics && (
                       <div className="grid grid-cols-3 gap-4 mb-6">
                         {project.metrics.map((metric, idx) => (
-                          <div key={idx} className="text-center p-3 glass-premium rounded-lg">
-                            <div className="text-2xl font-bold gradient-text">{metric.value}</div>
-                            <div className="text-xs text-gray-400 mt-1">{metric.label}</div>
+                          <div
+                            key={idx}
+                            className="text-center p-3 glass-premium rounded-lg"
+                          >
+                            <div className="text-2xl font-bold gradient-text">
+                              {metric.value}
+                            </div>
+                            <div className="text-xs text-gray-400 mt-1">
+                              {metric.label}
+                            </div>
                           </div>
                         ))}
                       </div>
@@ -186,10 +212,12 @@ export default function PortfolioPage() {
                       onClick={() => toggleProject(project.id)}
                       className="text-gold hover:text-platinum transition-colors font-semibold inline-flex items-center gap-2 mb-4"
                     >
-                      {expandedProject === project.id ? 'Hide Details' : 'View Full Case Study'}
+                      {expandedProject === project.id
+                        ? "Hide Details"
+                        : "View Full Case Study"}
                       <ChevronRight
                         size={20}
-                        className={`transition-transform ${expandedProject === project.id ? 'rotate-90' : ''}`}
+                        className={`transition-transform ${expandedProject === project.id ? "rotate-90" : ""}`}
                       />
                     </button>
 
@@ -197,7 +225,7 @@ export default function PortfolioPage() {
                     {expandedProject === project.id && (
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
+                        animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         className="space-y-6 pt-6 border-t border-gray-800"
                       >
@@ -224,8 +252,14 @@ export default function PortfolioPage() {
                           </h4>
                           <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                             {project.results.map((result, idx) => (
-                              <li key={idx} className="flex items-start gap-2 text-gray-300">
-                                <TrendingUp className="text-green-400 flex-shrink-0 mt-1" size={18} />
+                              <li
+                                key={idx}
+                                className="flex items-start gap-2 text-gray-300"
+                              >
+                                <TrendingUp
+                                  className="text-green-400 flex-shrink-0 mt-1"
+                                  size={18}
+                                />
                                 <span>{result}</span>
                               </li>
                             ))}
@@ -254,7 +288,11 @@ export default function PortfolioPage() {
                           <div className="card bg-gradient-to-br from-gold/10 to-sapphire/10 border-gold">
                             <div className="flex mb-3">
                               {[1, 2, 3, 4, 5].map((star) => (
-                                <Star key={star} className="text-gold fill-gold" size={18} />
+                                <Star
+                                  key={star}
+                                  className="text-gold fill-gold"
+                                  size={18}
+                                />
                               ))}
                             </div>
                             <p className="text-gray-300 mb-4 italic text-lg">
@@ -265,8 +303,12 @@ export default function PortfolioPage() {
                                 <Users className="text-black" size={24} />
                               </div>
                               <div>
-                                <p className="text-white font-semibold">{project.testimonial.author}</p>
-                                <p className="text-gray-400 text-sm">{project.testimonial.position}</p>
+                                <p className="text-white font-semibold">
+                                  {project.testimonial.author}
+                                </p>
+                                <p className="text-gray-400 text-sm">
+                                  {project.testimonial.position}
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -282,22 +324,35 @@ export default function PortfolioPage() {
 
         {/* Services Overview */}
         <div className="card-premium bg-gradient-to-r from-gold/10 to-sapphire/10 border-gold mb-16">
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">Our Expertise</h2>
+          <h2 className="text-3xl font-bold text-white mb-8 text-center">
+            Our Expertise
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center hover-lift">
               <div className="text-5xl mb-4">💻</div>
-              <h3 className="text-xl font-bold text-white mb-2">Web Development</h3>
-              <p className="text-gray-400">Full-stack solutions with cutting-edge frameworks and best practices</p>
+              <h3 className="text-xl font-bold text-white mb-2">
+                Web Development
+              </h3>
+              <p className="text-gray-400">
+                Full-stack solutions with cutting-edge frameworks and best
+                practices
+              </p>
             </div>
             <div className="text-center hover-lift">
               <div className="text-5xl mb-4">📱</div>
               <h3 className="text-xl font-bold text-white mb-2">Mobile Apps</h3>
-              <p className="text-gray-400">Native and cross-platform applications that users love</p>
+              <p className="text-gray-400">
+                Native and cross-platform applications that users love
+              </p>
             </div>
             <div className="text-center hover-lift">
               <div className="text-5xl mb-4">🎨</div>
-              <h3 className="text-xl font-bold text-white mb-2">UI/UX Design</h3>
-              <p className="text-gray-400">Beautiful, user-centric interfaces that drive conversions</p>
+              <h3 className="text-xl font-bold text-white mb-2">
+                UI/UX Design
+              </h3>
+              <p className="text-gray-400">
+                Beautiful, user-centric interfaces that drive conversions
+              </p>
             </div>
           </div>
         </div>
@@ -311,9 +366,12 @@ export default function PortfolioPage() {
 
         {/* CTA */}
         <div className="mt-16 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold gradient-text mb-4">Ready to Start Your Success Story?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold gradient-text mb-4">
+            Ready to Start Your Success Story?
+          </h2>
           <p className="text-gray-400 mb-8 max-w-2xl mx-auto text-lg">
-            Let&apos;s discuss how we can help transform your vision into measurable results
+            Let&apos;s discuss how we can help transform your vision into
+            measurable results
           </p>
           <Link
             href="/contact"
