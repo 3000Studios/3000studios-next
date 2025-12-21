@@ -1,14 +1,9 @@
 /**
  * Root Layout Component
  * Main layout wrapper for the entire application
- * Includes: Global metadata, navigation, footer, and premium UI enhancements
- * Features from 3000structure.txt blueprint:
- * - Video wallpaper backgrounds
- * - Gravity physics footer
- * - Background music engine
- * - Smooth scroll behavior
- * - Interactive sound effects
- * - Ultra-luxe theme with award-winning graphics
+ * REVENUE LOCK — DO NOT MODIFY
+ * Contains critical AdSense and monetization infrastructure
+ * Removing ads.txt verification, consent logic, or ad scripts will break revenue
  */
 
 import type { Metadata } from "next";
