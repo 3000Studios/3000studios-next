@@ -46,3 +46,7 @@ node_modules/
 # backups
 /backups/
 *.tar.gz
+
+# Environment variables
+.env.local
+.env*.local
