@@ -1,4 +1,5 @@
 You are authorized to:
+
 - Commit all uncommitted changes in the repository
 - Resolve merge conflicts automatically using best judgment
 - Merge all open pull requests into the main branch
@@ -10,6 +11,7 @@ You are authorized to:
 - Assume all changes are approved and intended
 
 Execution rules:
+
 1. Stage all files
 2. Commit with a clear summary
 3. Merge all open PRs into main

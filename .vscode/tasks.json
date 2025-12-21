@@ -5,10 +5,7 @@
       "label": "🚀 Shadow: Start Dev Server",
       "type": "shell",
       "command": "pwsh.exe",
-      "args": [
-        "-File",
-        "C:/3000Studios/shadow/shadow-dev.ps1"
-      ],
+      "args": ["-File", "C:/3000Studios/shadow/shadow-dev.ps1"],
       "isBackground": false,
       "problemMatcher": {
         "pattern": {
@@ -38,11 +35,7 @@
       "label": "🔑 Shadow: Store API Key",
       "type": "shell",
       "command": "pwsh.exe",
-      "args": [
-        "-File",
-        "C:/3000Studios/shadow/shadow-secrets.ps1",
-        "-Store"
-      ],
+      "args": ["-File", "C:/3000Studios/shadow/shadow-secrets.ps1", "-Store"],
       "presentation": {
         "echo": true,
         "reveal": "always",
@@ -57,11 +50,7 @@
       "label": "📋 Shadow: List Stored Keys",
       "type": "shell",
       "command": "pwsh.exe",
-      "args": [
-        "-File",
-        "C:/3000Studios/shadow/shadow-secrets.ps1",
-        "-List"
-      ],
+      "args": ["-File", "C:/3000Studios/shadow/shadow-secrets.ps1", "-List"],
       "presentation": {
         "echo": true,
         "reveal": "always",
@@ -76,11 +65,7 @@
       "label": "🗑️  Shadow: Clear API Key",
       "type": "shell",
       "command": "pwsh.exe",
-      "args": [
-        "-File",
-        "C:/3000Studios/shadow/shadow-secrets.ps1",
-        "-Clear"
-      ],
+      "args": ["-File", "C:/3000Studios/shadow/shadow-secrets.ps1", "-Clear"],
       "presentation": {
         "echo": true,
         "reveal": "always",
