@@ -2,6 +2,8 @@ import { prisma } from "@/lib/prisma";
 import Mux from "@mux/mux-node";
 import { NextResponse } from "next/server";
 
+export const dynamic = 'force-dynamic';
+
 const getMuxClient = () => {
     if (!process.env.MUX_TOKEN_ID || !process.env.MUX_TOKEN_SECRET) {
         throw new Error("Missing Mux credentials");
