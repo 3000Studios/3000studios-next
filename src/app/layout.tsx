@@ -30,6 +30,48 @@ export const metadata: Metadata = {
     "Premium digital experiences, innovative solutions, and transformative projects. 250+ successful clients worldwide with 99% satisfaction rate.",
   keywords:
     "creative studio, digital agency, web development, premium design, innovation, 3D experiences, AI solutions",
+  authors: [{ name: "3000 Studios", url: "https://3000studios.com" }],
+  creator: "3000 Studios",
+  publisher: "3000 Studios",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: ENV.SITE_URL,
+    siteName: "3000 Studios",
+    title: "3000 Studios - Award-Winning Creative Studio",
+    description:
+      "Premium digital experiences, innovative solutions, and transformative projects. 250+ successful clients worldwide with 99% satisfaction rate.",
+    images: [
+      {
+        url: `${ENV.SITE_URL}/logo.svg`,
+        width: 1200,
+        height: 630,
+        alt: "3000 Studios Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "3000 Studios - Award-Winning Creative Studio",
+    description:
+      "Premium digital experiences, innovative solutions, and transformative projects.",
+    images: [`${ENV.SITE_URL}/logo.svg`],
+    creator: "@3000Studios",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "google-site-verification-code", // TODO: Add actual verification code
+  },
 };
 
 export default function RootLayout({
