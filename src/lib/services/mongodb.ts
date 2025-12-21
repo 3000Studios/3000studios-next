@@ -84,7 +84,7 @@ export async function getUserByEmail(email: string): Promise<User | null> {
 
 export async function updateUser(
   userId: string,
-  updates: Partial<User>
+  updates: Partial<User>,
 ): Promise<void> {
   const database = await connectToDatabase();
   await database.collection("users").updateOne({ userId }, { $set: updates });
@@ -123,7 +123,7 @@ export interface Product {
 
 // Analytics Functions
 export async function getAnalytics(
-  timeRange: "day" | "week" | "month" = "day"
+  timeRange: "day" | "week" | "month" = "day",
 ): Promise<AnalyticsData> {
   try {
     const database = await connectToDatabase();
@@ -146,7 +146,7 @@ export async function getAnalytics(
 
     const data = await analytics.findOne(
       { timestamp: { $gte: startDate } },
-      { sort: { timestamp: -1 } }
+      { sort: { timestamp: -1 } },
     );
 
     if (!data) {
@@ -261,7 +261,7 @@ export async function getProducts(): Promise<Product[]> {
 
 export async function updateProduct(
   productId: string,
-  updates: Partial<Product>
+  updates: Partial<Product>,
 ): Promise<void> {
   try {
     const database = await connectToDatabase();
@@ -269,7 +269,7 @@ export async function updateProduct(
 
     await products.updateOne(
       { productId },
-      { $set: { ...updates, updatedAt: new Date() } }
+      { $set: { ...updates, updatedAt: new Date() } },
     );
   } catch (error) {
     console.error("Update product error:", error);

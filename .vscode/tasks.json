@@ -117,6 +117,55 @@
       "group": {
         "kind": "test"
       }
+    },
+    {
+      "label": "🤖 Auto: Start Auto-Commit",
+      "type": "shell",
+      "command": "pwsh.exe",
+      "args": ["-File", "${workspaceFolder}/scripts/auto-commit.ps1"],
+      "isBackground": true,
+      "problemMatcher": [],
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "🏥 Auto: Start Auto-Heal",
+      "type": "shell",
+      "command": "pwsh.exe",
+      "args": ["-File", "${workspaceFolder}/scripts/auto-heal.ps1"],
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "🔧 Auto: Fix All Issues",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "lint", "--", "--fix"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🚀 Auto: Deploy to Vercel",
+      "type": "shell",
+      "command": "vercel",
+      "args": ["--prod", "--yes"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🔄 Auto: Full Cycle (Fix→Commit→Push→Deploy)",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "🔧 Auto: Fix All Issues",
+        "✅ Git: Sync & Push",
+        "🚀 Auto: Deploy to Vercel"
+      ],
+      "problemMatcher": []
     }
   ]
 }

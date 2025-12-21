@@ -1,14 +1,13 @@
-
 const getEnv = (name: string, isOptional: boolean = false) => {
   const value = process.env[name];
 
   if (!value) {
     if (isOptional) {
-       return undefined;
+      return undefined;
     }
 
     // Required vars:
-    // If we are in production but the value is missing, we *should* throw, 
+    // If we are in production but the value is missing, we *should* throw,
     // but to allow builds to pass on machines without secrets (like this one),
     // we will return a placeholder and log a warning instead.
     // This restores the behavior you had before (allowing "missing-dev-value" or similar).
@@ -20,14 +19,15 @@ const getEnv = (name: string, isOptional: boolean = false) => {
 };
 
 // safely handle the possibly undefined return for required vars in dev
-const requireEnv = (name: string) => getEnv(name, false) || "missing-required-value";
+const requireEnv = (name: string) =>
+  getEnv(name, false) || "missing-required-value";
 const optionalEnv = (name: string) => getEnv(name, true) || "";
 
 export const ENV = {
   // --- CORE INFRASTRUCTURE (Required) ---
   SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || "https://3000studios.com",
   DATABASE_URL: requireEnv("DATABASE_URL"),
-  
+
   // --- AUTHENTICATION (Required) ---
   NEXTAUTH_URL: requireEnv("NEXTAUTH_URL"),
   NEXTAUTH_SECRET: requireEnv("NEXTAUTH_SECRET"),
@@ -41,12 +41,14 @@ export const ENV = {
   // --- PAYMENTS (Optional) ---
   STRIPE_SECRET_KEY: optionalEnv("STRIPE_SECRET_KEY"),
   // Vercel name: STRIPE_PUBLIC, but code usually expects STRIPE_PUBLISHABLE_KEY
-  STRIPE_PUBLISHABLE_KEY: process.env.STRIPE_PUBLISHABLE_KEY || process.env.STRIPE_PUBLIC || "", 
+  STRIPE_PUBLISHABLE_KEY:
+    process.env.STRIPE_PUBLISHABLE_KEY || process.env.STRIPE_PUBLIC || "",
   STRIPE_WEBHOOK_SECRET: optionalEnv("STRIPE_WEBHOOK_SECRET"),
-  
+
   PAYPAL_CLIENT_ID: optionalEnv("PAYPAL_CLIENT_ID"),
   // Vercel name: PAYPAL_CLIENT_SECRET_PROD
-  PAYPAL_SECRET: process.env.PAYPAL_SECRET || process.env.PAYPAL_CLIENT_SECRET_PROD || "",
+  PAYPAL_SECRET:
+    process.env.PAYPAL_SECRET || process.env.PAYPAL_CLIENT_SECRET_PROD || "",
 
   // --- EMAIL (Optional) ---
   SMTP_HOST: optionalEnv("SMTP_HOST"),
@@ -56,8 +58,8 @@ export const ENV = {
   ADMIN_EMAIL: optionalEnv("ADMIN_EMAIL"),
 
   // --- ASSETS & MEDIA (Optional) ---
-  IMAGEKIT_PUBLIC_KEY: process.env.IMAGEKIT_PUBLIC_KEY || "", 
-  IMAGEKIT_PRIVATE_KEY: process.env.IMAGEKIT_PRIVATE_KEY || "", 
+  IMAGEKIT_PUBLIC_KEY: process.env.IMAGEKIT_PUBLIC_KEY || "",
+  IMAGEKIT_PRIVATE_KEY: process.env.IMAGEKIT_PRIVATE_KEY || "",
   IMAGEKIT_URL_ENDPOINT: process.env.IMAGEKIT_URL_ENDPOINT || "", // Usually needed if using SDK
 
   UNSPLASH_ACCESS_KEY: optionalEnv("UNSPLASH_ACCESS_KEY"),
@@ -77,7 +79,7 @@ export const ENV = {
   AWS_SECRET_ACCESS_KEY: optionalEnv("AWS_SECRET_ACCESS_KEY"),
   AWS_REGION: optionalEnv("AWS_REGION"),
   AWS_S3_BUCKET: optionalEnv("AWS_S3_BUCKET"),
-  
+
   // --- SYSTEM ---
   NODE_ENV: process.env.NODE_ENV || "development",
 };

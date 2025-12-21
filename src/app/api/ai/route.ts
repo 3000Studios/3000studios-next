@@ -21,10 +21,10 @@ export async function POST(req: Request) {
       intent === "code"
         ? agents.coder
         : intent === "research"
-        ? agents.researcher
-        : intent === "writing"
-        ? agents.writer
-        : agents.system;
+          ? agents.researcher
+          : intent === "writing"
+            ? agents.writer
+            : agents.system;
 
     const result = await generateText({
       model,

@@ -2,7 +2,7 @@ import { prisma } from "./prisma";
 
 export async function enforceCostLimit(
   userId: string,
-  tokensRequested: number
+  tokensRequested: number,
 ) {
   // Fail open if user ID is missing for some reason
   if (!userId) return;

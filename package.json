@@ -11,12 +11,21 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "type-check": "tsc --noEmit",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "db:seed": "tsx prisma/seed.ts",
     "clean": "rimraf .next node_modules",
-    "deploy": "vercel --prod --yes"
+    "deploy": "vercel --prod --yes",
+    "auto:commit": "pwsh -File scripts/auto-commit.ps1",
+    "auto:heal": "pwsh -File scripts/auto-heal.ps1",
+    "auto:fix": "npm run lint:fix && npm run format",
+    "auto:all": "npm run auto:fix && git add -A && git commit -m '🤖 Auto: fix and format' && git push && npm run deploy",
+    "generate:content": "tsx scripts/generate-content.ts",
+    "generate:revenue": "tsx scripts/generate-revenue-pages.ts",
+    "verify:sync": "bash scripts/verify-sync.sh"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -74,8 +83,8 @@
     "@types/nodemailer": "^7.0.4",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@vitejs/plugin-react": "4.2.1",
-    "@vitest/ui": "^0.34.6",
+    "@vitejs/plugin-react": "4.7.0",
+    "@vitest/ui": "^4.0.16",
     "eslint": "^9",
     "eslint-config-next": "16.0.10",
     "jsdom": "22.1.0",
@@ -83,6 +92,6 @@
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "typescript": "^5",
-    "vitest": "0.34.6"
+    "vitest": "4.0.16"
   }
 }

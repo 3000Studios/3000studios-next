@@ -27,20 +27,40 @@ export default function Page() {
         "Brands turning webinars into social clips",
       ]}
       faq={[
-        { q: "Do I get caption styles?", a: "Yes—preset styles plus brand color input." },
-        { q: "Is there a free tier?", a: "No. Purchase required; access unlocks post-checkout." },
+        {
+          q: "Do I get caption styles?",
+          a: "Yes—preset styles plus brand color input.",
+        },
+        {
+          q: "Is there a free tier?",
+          a: "No. Purchase required; access unlocks post-checkout.",
+        },
         { q: "Can I export in 4K?", a: "Yes. 1080p and 4K supported." },
       ]}
     >
       <div className="p-6 rounded-2xl border border-amber-300/30 bg-white/5 backdrop-blur-xl shadow-2xl">
-        <h2 className="text-xl font-bold text-amber-200 mb-3">Clip factory kit</h2>
+        <h2 className="text-xl font-bold text-amber-200 mb-3">
+          Clip factory kit
+        </h2>
         <div className="grid md:grid-cols-3 gap-3 text-sm text-gray-100/90">
-          <div className="p-4 rounded-xl bg-black/40 border border-amber-200/20">Hook detector + auto-cut</div>
-          <div className="p-4 rounded-xl bg-black/40 border border-amber-200/20">B-roll slots with stock suggestions</div>
-          <div className="p-4 rounded-xl bg-black/40 border border-amber-200/20">CTA overlays & end screens</div>
-          <div className="p-4 rounded-xl bg-black/40 border border-amber-200/20">Silence trimming + jump cut smoothing</div>
-          <div className="p-4 rounded-xl bg-black/40 border border-amber-200/20">Platform-safe aspect ratios</div>
-          <div className="p-4 rounded-xl bg-black/40 border border-amber-200/20">Batch export queue</div>
+          <div className="p-4 rounded-xl bg-black/40 border border-amber-200/20">
+            Hook detector + auto-cut
+          </div>
+          <div className="p-4 rounded-xl bg-black/40 border border-amber-200/20">
+            B-roll slots with stock suggestions
+          </div>
+          <div className="p-4 rounded-xl bg-black/40 border border-amber-200/20">
+            CTA overlays & end screens
+          </div>
+          <div className="p-4 rounded-xl bg-black/40 border border-amber-200/20">
+            Silence trimming + jump cut smoothing
+          </div>
+          <div className="p-4 rounded-xl bg-black/40 border border-amber-200/20">
+            Platform-safe aspect ratios
+          </div>
+          <div className="p-4 rounded-xl bg-black/40 border border-amber-200/20">
+            Batch export queue
+          </div>
         </div>
       </div>
     </AppLanding>

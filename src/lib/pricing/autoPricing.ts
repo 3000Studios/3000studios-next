@@ -7,13 +7,19 @@ export type PricingContext = {
   ceilingPrice?: number;
 };
 
-export function computeDynamicPrice(product: VendorProduct, ctx: PricingContext = {}) {
+export function computeDynamicPrice(
+  product: VendorProduct,
+  ctx: PricingContext = {},
+) {
   const base = product.price;
   const targetMargin = ctx.minMargin ?? 0.18;
   const ceiling = ctx.ceilingPrice ?? base * 1.8;
   const floor = ctx.floorPrice ?? base * 0.9;
 
-  const adjusted = Math.min(Math.max(base * (1 + targetMargin), floor), ceiling);
+  const adjusted = Math.min(
+    Math.max(base * (1 + targetMargin), floor),
+    ceiling,
+  );
   return Number(adjusted.toFixed(2));
 }
 
