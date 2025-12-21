@@ -1,0 +1,48 @@
+<!-- Shadow Avatar Placeholder -->
+<!-- Replace this file with your custom animated GIF -->
+<!-- Recommended: 320x320px, animated, neon/cyber theme -->
+<!-- Suggested styles: -->
+<!--   - Holographic AI skull -->
+<!--   - Neon geometric shape -->
+<!--   - Pulsing energy orb -->
+<!--   - Demonic AI entity -->
+<!--   - Matrix-style face -->
+
+<svg width="320" height="320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="shadowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00ffff;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0080ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff00ff;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <circle cx="160" cy="160" r="140" fill="none" stroke="url(#shadowGrad)" stroke-width="4">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      from="0 160 160"
+      to="360 160 160"
+      dur="10s"
+      repeatCount="indefinite"/>
+  </circle>
+  
+  <circle cx="160" cy="160" r="100" fill="url(#shadowGrad)" opacity="0.3">
+    <animate attributeName="r" values="100;110;100" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.3;0.6;0.3" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  
+  <text x="160" y="170" font-family="Orbitron" font-size="48" font-weight="900" fill="#00ffff" text-anchor="middle">
+    SHADOW
+  </text>
+  
+  <circle cx="160" cy="160" r="60" fill="none" stroke="#ff00ff" stroke-width="2">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      from="360 160 160"
+      to="0 160 160"
+      dur="5s"
+      repeatCount="indefinite"/>
+  </circle>
+</svg>
