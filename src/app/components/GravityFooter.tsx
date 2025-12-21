@@ -4,11 +4,11 @@
  * Features: parallax effect, hover animations, and gravity-inspired motion
  */
 
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { Github, Twitter, Linkedin, Mail, Heart } from 'lucide-react';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { Github, Twitter, Linkedin, Mail, Heart } from "lucide-react";
 
 export default function GravityFooter() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -22,33 +22,33 @@ export default function GravityFooter() {
       setMousePosition({ x, y });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   // Calculate transform based on mouse position for parallax effect
   const transformStyle = {
     transform: `translate(${mousePosition.x * 10 - 5}px, ${mousePosition.y * 5 - 2.5}px)`,
-    transition: 'transform 0.3s ease-out'
+    transition: "transform 0.3s ease-out",
   };
 
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer 
+    <footer
       className="relative mt-20 border-t border-gold/20 bg-black/80 backdrop-blur-lg"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
       {/* Animated Background Effect */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div 
-          className={`absolute -top-20 left-1/4 w-64 h-64 bg-gold/10 rounded-full filter blur-3xl transition-all duration-700 ${isHovering ? 'scale-150' : 'scale-100'}`}
+        <div
+          className={`absolute -top-20 left-1/4 w-64 h-64 bg-gold/10 rounded-full filter blur-3xl transition-all duration-700 ${isHovering ? "scale-150" : "scale-100"}`}
           style={transformStyle}
         ></div>
-        <div 
-          className={`absolute -top-10 right-1/4 w-48 h-48 bg-sapphire/10 rounded-full filter blur-3xl transition-all duration-700 ${isHovering ? 'scale-150' : 'scale-100'}`}
-          style={{ ...transformStyle, transitionDelay: '0.1s' }}
+        <div
+          className={`absolute -top-10 right-1/4 w-48 h-48 bg-sapphire/10 rounded-full filter blur-3xl transition-all duration-700 ${isHovering ? "scale-150" : "scale-100"}`}
+          style={{ ...transformStyle, transitionDelay: "0.1s" }}
         ></div>
       </div>
 
@@ -58,7 +58,8 @@ export default function GravityFooter() {
           <div className="space-y-4">
             <h3 className="text-2xl font-bold gradient-text">3000 STUDIOS</h3>
             <p className="text-gray-400 text-sm">
-              Professional creative studio delivering cutting-edge digital experiences
+              Professional creative studio delivering cutting-edge digital
+              experiences
             </p>
           </div>
 
@@ -66,10 +67,30 @@ export default function GravityFooter() {
           <div className="space-y-3">
             <h4 className="text-gold font-semibold mb-4">Quick Links</h4>
             <div className="space-y-2">
-              <Link href="/" className="block text-gray-400 hover:text-gold transition-colors">Home</Link>
-              <Link href="/store" className="block text-gray-400 hover:text-gold transition-colors">Store</Link>
-              <Link href="/projects" className="block text-gray-400 hover:text-gold transition-colors">Projects</Link>
-              <Link href="/blog" className="block text-gray-400 hover:text-gold transition-colors">Blog</Link>
+              <Link
+                href="/"
+                className="block text-gray-400 hover:text-gold transition-colors"
+              >
+                Home
+              </Link>
+              <Link
+                href="/store"
+                className="block text-gray-400 hover:text-gold transition-colors"
+              >
+                Store
+              </Link>
+              <Link
+                href="/projects"
+                className="block text-gray-400 hover:text-gold transition-colors"
+              >
+                Projects
+              </Link>
+              <Link
+                href="/blog"
+                className="block text-gray-400 hover:text-gold transition-colors"
+              >
+                Blog
+              </Link>
             </div>
           </div>
 
@@ -77,10 +98,30 @@ export default function GravityFooter() {
           <div className="space-y-3">
             <h4 className="text-gold font-semibold mb-4">Resources</h4>
             <div className="space-y-2">
-              <Link href="/portfolio" className="block text-gray-400 hover:text-gold transition-colors">Portfolio</Link>
-              <Link href="/live" className="block text-gray-400 hover:text-gold transition-colors">Live Stream</Link>
-              <Link href="/contact" className="block text-gray-400 hover:text-gold transition-colors">Contact</Link>
-              <Link href="/login" className="block text-gray-400 hover:text-gold transition-colors">Admin</Link>
+              <Link
+                href="/portfolio"
+                className="block text-gray-400 hover:text-gold transition-colors"
+              >
+                Portfolio
+              </Link>
+              <Link
+                href="/live"
+                className="block text-gray-400 hover:text-gold transition-colors"
+              >
+                Live Stream
+              </Link>
+              <Link
+                href="/contact"
+                className="block text-gray-400 hover:text-gold transition-colors"
+              >
+                Contact
+              </Link>
+              <Link
+                href="/login"
+                className="block text-gray-400 hover:text-gold transition-colors"
+              >
+                Admin
+              </Link>
             </div>
           </div>
 
@@ -88,31 +129,31 @@ export default function GravityFooter() {
           <div className="space-y-3">
             <h4 className="text-gold font-semibold mb-4">Connect</h4>
             <div className="flex gap-4">
-              <a 
-                href="https://github.com" 
-                target="_blank" 
+              <a
+                href="https://github.com"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-gold/10 hover:bg-gold/20 flex items-center justify-center transition-all hover:scale-110"
               >
                 <Github size={20} className="text-gold" />
               </a>
-              <a 
-                href="https://twitter.com" 
-                target="_blank" 
+              <a
+                href="https://twitter.com"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-sapphire/10 hover:bg-sapphire/20 flex items-center justify-center transition-all hover:scale-110"
               >
                 <Twitter size={20} className="text-sapphire" />
               </a>
-              <a 
-                href="https://linkedin.com" 
-                target="_blank" 
+              <a
+                href="https://linkedin.com"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-platinum/10 hover:bg-platinum/20 flex items-center justify-center transition-all hover:scale-110"
               >
                 <Linkedin size={20} className="text-platinum" />
               </a>
-              <a 
+              <a
                 href="mailto:contact@3000studios.com"
                 className="w-10 h-10 rounded-full bg-gold/10 hover:bg-gold/20 flex items-center justify-center transition-all hover:scale-110"
               >
@@ -126,12 +167,26 @@ export default function GravityFooter() {
         <div className="pt-8 border-t border-gold/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
             <p className="flex items-center gap-1">
-              © {currentYear} 3000 Studios. Built with <Heart size={14} className="text-gold" fill="currentColor" /> and cutting-edge tech.
+              © {currentYear} 3000 Studios. Built with{" "}
+              <Heart size={14} className="text-gold" fill="currentColor" /> and
+              cutting-edge tech.
             </p>
             <div className="flex gap-6">
-              <Link href="/privacy" className="hover:text-gold transition-colors">Privacy</Link>
-              <Link href="/terms" className="hover:text-gold transition-colors">Terms</Link>
-              <Link href="/contact" className="hover:text-gold transition-colors">Support</Link>
+              <Link
+                href="/privacy"
+                className="hover:text-gold transition-colors"
+              >
+                Privacy
+              </Link>
+              <Link href="/terms" className="hover:text-gold transition-colors">
+                Terms
+              </Link>
+              <Link
+                href="/contact"
+                className="hover:text-gold transition-colors"
+              >
+                Support
+              </Link>
             </div>
           </div>
         </div>

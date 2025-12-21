@@ -3,38 +3,44 @@
  * AI-powered content creation for blogs and products
  */
 
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { FileText, Package, Wand2, Loader2, CheckCircle } from 'lucide-react';
-import { useContentGeneration } from '@/hooks/useAPI';
+import { useState } from "react";
+import { FileText, Package, Wand2, Loader2, CheckCircle } from "lucide-react";
+import { useContentGeneration } from "@/hooks/useAPI";
 
 export default function ContentGenerator() {
-  const [activeTab, setActiveTab] = useState<'blog' | 'product'>('blog');
-  const [blogTopic, setBlogTopic] = useState('');
-  const [blogKeywords, setBlogKeywords] = useState('');
-  const [productName, setProductName] = useState('');
-  const [productFeatures, setProductFeatures] = useState('');
-  const [generatedContent, setGeneratedContent] = useState('');
+  const [activeTab, setActiveTab] = useState<"blog" | "product">("blog");
+  const [blogTopic, setBlogTopic] = useState("");
+  const [blogKeywords, setBlogKeywords] = useState("");
+  const [productName, setProductName] = useState("");
+  const [productFeatures, setProductFeatures] = useState("");
+  const [generatedContent, setGeneratedContent] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const { generateBlog, generateProductDescription, loading, error } = useContentGeneration();
+  const { generateBlog, generateProductDescription, loading, error } =
+    useContentGeneration();
 
   const handleGenerateBlog = async () => {
     if (!blogTopic.trim()) return;
 
     setSuccess(false);
     try {
-      const keywords = blogKeywords.split(',').map(k => k.trim()).filter(Boolean);
+      const keywords = blogKeywords
+        .split(",")
+        .map((k) => k.trim())
+        .filter(Boolean);
       const result = await generateBlog(blogTopic, keywords, true);
       setGeneratedContent(result.fullContent);
       setSuccess(true);
-      
+
       if (result.wordpressId) {
-        alert(`Blog post saved to WordPress as draft! ID: ${result.wordpressId}`);
+        alert(
+          `Blog post saved to WordPress as draft! ID: ${result.wordpressId}`,
+        );
       }
     } catch (err) {
-      console.error('Blog generation error:', err);
+      console.error("Blog generation error:", err);
     }
   };
 
@@ -43,12 +49,15 @@ export default function ContentGenerator() {
 
     setSuccess(false);
     try {
-      const features = productFeatures.split(',').map(f => f.trim()).filter(Boolean);
+      const features = productFeatures
+        .split(",")
+        .map((f) => f.trim())
+        .filter(Boolean);
       const result = await generateProductDescription(productName, features);
       setGeneratedContent(result.description);
       setSuccess(true);
     } catch (err) {
-      console.error('Product description error:', err);
+      console.error("Product description error:", err);
     }
   };
 
@@ -62,22 +71,22 @@ export default function ContentGenerator() {
       {/* Tabs */}
       <div className="flex gap-2 mb-6">
         <button
-          onClick={() => setActiveTab('blog')}
+          onClick={() => setActiveTab("blog")}
           className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 ${
-            activeTab === 'blog'
-              ? 'bg-indigo-600 text-white'
-              : 'bg-gray-900 text-gray-400 hover:bg-gray-800'
+            activeTab === "blog"
+              ? "bg-indigo-600 text-white"
+              : "bg-gray-900 text-gray-400 hover:bg-gray-800"
           }`}
         >
           <FileText size={20} />
           Blog Posts
         </button>
         <button
-          onClick={() => setActiveTab('product')}
+          onClick={() => setActiveTab("product")}
           className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 ${
-            activeTab === 'product'
-              ? 'bg-indigo-600 text-white'
-              : 'bg-gray-900 text-gray-400 hover:bg-gray-800'
+            activeTab === "product"
+              ? "bg-indigo-600 text-white"
+              : "bg-gray-900 text-gray-400 hover:bg-gray-800"
           }`}
         >
           <Package size={20} />
@@ -86,7 +95,7 @@ export default function ContentGenerator() {
       </div>
 
       {/* Blog Generator */}
-      {activeTab === 'blog' && (
+      {activeTab === "blog" && (
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">
@@ -139,7 +148,7 @@ export default function ContentGenerator() {
       )}
 
       {/* Product Generator */}
-      {activeTab === 'product' && (
+      {activeTab === "product" && (
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">
@@ -205,9 +214,13 @@ export default function ContentGenerator() {
       {/* Generated Content */}
       {generatedContent && (
         <div className="mt-4">
-          <h4 className="text-sm font-semibold text-gray-300 mb-2">Generated Content:</h4>
+          <h4 className="text-sm font-semibold text-gray-300 mb-2">
+            Generated Content:
+          </h4>
           <div className="bg-gray-900 p-4 rounded-lg border border-gray-700 max-h-96 overflow-y-auto">
-            <pre className="text-sm text-gray-300 whitespace-pre-wrap font-sans">{generatedContent}</pre>
+            <pre className="text-sm text-gray-300 whitespace-pre-wrap font-sans">
+              {generatedContent}
+            </pre>
           </div>
         </div>
       )}

@@ -3,9 +3,9 @@
  * AI-powered blog post generation
  */
 
-import { NextRequest, NextResponse } from 'next/server';
-import { generateBlogPost } from '@/lib/services/openai';
-import { createPost } from '@/lib/services/wordpress';
+import { NextRequest, NextResponse } from "next/server";
+import { generateBlogPost } from "@/lib/services/openai";
+import { createPost } from "@/lib/services/wordpress";
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,19 +13,16 @@ export async function POST(request: NextRequest) {
     const { topic, keywords, publishToWordPress } = body;
 
     if (!topic) {
-      return NextResponse.json(
-        { error: 'Topic required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Topic required" }, { status: 400 });
     }
 
     // Generate blog post using AI
     const content = await generateBlogPost(topic, keywords || []);
 
     // Extract title from content (assume first line is title)
-    const lines = content.split('\n');
-    const title = lines[0].replace(/^#\s*/, '');
-    const bodyContent = lines.slice(1).join('\n');
+    const lines = content.split("\n");
+    const title = lines[0].replace(/^#\s*/, "");
+    const bodyContent = lines.slice(1).join("\n");
 
     // Publish to WordPress if requested
     let wordpressId = null;
@@ -34,11 +31,11 @@ export async function POST(request: NextRequest) {
         wordpressId = await createPost({
           title,
           content: bodyContent,
-          status: 'draft', // Save as draft for review
+          status: "draft", // Save as draft for review
           excerpt: bodyContent.substring(0, 200),
         });
       } catch (wpError) {
-        console.error('WordPress publish error:', wpError);
+        console.error("WordPress publish error:", wpError);
         // Continue even if WordPress fails
       }
     }
@@ -49,15 +46,15 @@ export async function POST(request: NextRequest) {
       content: bodyContent,
       fullContent: content,
       wordpressId,
-      message: wordpressId 
-        ? 'Blog post generated and saved to WordPress as draft' 
-        : 'Blog post generated successfully',
+      message: wordpressId
+        ? "Blog post generated and saved to WordPress as draft"
+        : "Blog post generated successfully",
     });
   } catch (error) {
-    console.error('Blog generation API error:', error);
+    console.error("Blog generation API error:", error);
     return NextResponse.json(
-      { error: 'Failed to generate blog post' },
-      { status: 500 }
+      { error: "Failed to generate blog post" },
+      { status: 500 },
     );
   }
 }

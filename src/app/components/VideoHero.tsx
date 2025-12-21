@@ -5,9 +5,9 @@
  * This component is critical for conversion optimization
  */
 
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 interface VideoHeroProps {
   webmSrc?: string;
@@ -22,7 +22,7 @@ export default function VideoHero({
   mp4Src,
   posterSrc,
   opacity = 0.3,
-  className = '',
+  className = "",
 }: VideoHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 

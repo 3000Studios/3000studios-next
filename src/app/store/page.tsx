@@ -1,14 +1,14 @@
-import { CartSidebar } from '@/components/CartSidebar';
-import { CountdownTimer } from '@/components/CountdownTimer';
-import { ProductCard } from '@/components/ProductCard';
-import { SocialProof } from '@/components/SocialProof';
-import { getProducts } from '@/lib/products-data';
-import { Metadata } from 'next';
-import Link from 'next/link';
+import { CartSidebar } from "@/components/CartSidebar";
+import { CountdownTimer } from "@/components/CountdownTimer";
+import { ProductCard } from "@/components/ProductCard";
+import { SocialProof } from "@/components/SocialProof";
+import { getProducts } from "@/lib/products-data";
+import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: 'Store | 3000 Studios',
-  description: 'Browse our premium digital products and services',
+  title: "Store | 3000 Studios",
+  description: "Browse our premium digital products and services",
 };
 
 export default function StorePage() {
@@ -19,7 +19,10 @@ export default function StorePage() {
       {/* Animated background elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div
+          className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: "1s" }}
+        ></div>
       </div>
 
       {/* Urgency Banner */}
@@ -49,7 +52,9 @@ export default function StorePage() {
               <h1 className="text-5xl sm:text-6xl font-black bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-3">
                 3000 Studios Store
               </h1>
-              <p className="text-lg text-purple-300/80">Premium digital products & services</p>
+              <p className="text-lg text-purple-300/80">
+                Premium digital products & services
+              </p>
             </div>
             <CartSidebar />
           </div>
@@ -62,7 +67,9 @@ export default function StorePage() {
         <div className="mb-20">
           <div className="flex items-center justify-between mb-10">
             <div>
-              <h2 className="text-4xl font-bold text-white mb-2">Featured Collection</h2>
+              <h2 className="text-4xl font-bold text-white mb-2">
+                Featured Collection
+              </h2>
               <div className="h-1 w-20 bg-gradient-to-r from-cyan-400 to-purple-400"></div>
             </div>
             <Link
@@ -82,14 +89,21 @@ export default function StorePage() {
         {/* All Products Section */}
         <div id="all-products">
           <div className="mb-10">
-            <h2 className="text-4xl font-bold text-white mb-2">Complete Catalog</h2>
+            <h2 className="text-4xl font-bold text-white mb-2">
+              Complete Catalog
+            </h2>
             <div className="h-1 w-20 bg-gradient-to-r from-purple-400 to-pink-400"></div>
           </div>
 
           {products.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-purple-300/60 text-lg mb-4">No products available yet</p>
-              <Link href="/" className="text-cyan-400 hover:text-cyan-300 font-semibold">
+              <p className="text-purple-300/60 text-lg mb-4">
+                No products available yet
+              </p>
+              <Link
+                href="/"
+                className="text-cyan-400 hover:text-cyan-300 font-semibold"
+              >
                 Return to Home
               </Link>
             </div>
@@ -109,22 +123,34 @@ export default function StorePage() {
               <div className="text-5xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-3">
                 {products.length}+
               </div>
-              <p className="text-purple-300/80 font-semibold">Premium Products</p>
-              <p className="text-purple-400/60 text-sm mt-1">Carefully curated for excellence</p>
+              <p className="text-purple-300/80 font-semibold">
+                Premium Products
+              </p>
+              <p className="text-purple-400/60 text-sm mt-1">
+                Carefully curated for excellence
+              </p>
             </div>
             <div className="text-center group">
               <div className="text-5xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-3">
                 100%
               </div>
-              <p className="text-purple-300/80 font-semibold">Digital Delivery</p>
-              <p className="text-purple-400/60 text-sm mt-1">Instant access to all products</p>
+              <p className="text-purple-300/80 font-semibold">
+                Digital Delivery
+              </p>
+              <p className="text-purple-400/60 text-sm mt-1">
+                Instant access to all products
+              </p>
             </div>
             <div className="text-center group">
               <div className="text-5xl font-black bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent mb-3">
                 ∞
               </div>
-              <p className="text-purple-300/80 font-semibold">Lifetime Updates</p>
-              <p className="text-purple-400/60 text-sm mt-1">Always stay ahead with new features</p>
+              <p className="text-purple-300/80 font-semibold">
+                Lifetime Updates
+              </p>
+              <p className="text-purple-400/60 text-sm mt-1">
+                Always stay ahead with new features
+              </p>
             </div>
           </div>
         </div>

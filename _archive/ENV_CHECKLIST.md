@@ -11,19 +11,23 @@ This document tracks all required environment variables for the real-time deploy
 These environment variables **MUST** be set in GitHub Secrets and Vercel for the site to function:
 
 ### Vercel Deployment (Real-Time System)
+
 - [x] `VERCEL_TOKEN` - Vercel API token for deployment automation
 - [x] `VERCEL_ORG_ID` - Your Vercel organization ID
 - [x] `VERCEL_PROJECT_ID` - Your Vercel project ID
 
 ### GitHub Integration (Voice-to-Code)
+
 - [x] `GITHUB_PAT` - GitHub Personal Access Token for auto-commits
 
 ### AI Services (Voice Commands & Content Generation)
+
 - [x] `OPENAI_API_KEY` - OpenAI API for voice-to-code, transcription
 - [x] `CLAUDE_API_KEY` - Anthropic Claude API (alias: ANTHROPIC_API_KEY)
 - [x] `GEMINI_API_KEY` - Google Gemini API (alias: GOOGLE_GEMINI_API_KEY)
 
 ### Application Configuration
+
 - [x] `NEXT_PUBLIC_BASE_URL` - Base URL (should be: https://3000studios.com)
 - [x] `NEXT_PUBLIC_MAPS_API` - Google Maps API (alias: GOOGLE_MAPS_API)
 
@@ -113,6 +117,7 @@ New variables added for the real-time sync system:
 The following secrets are configured in GitHub Actions workflows:
 
 ### In `.github/workflows/deploy.yml`:
+
 ```yaml
 secrets:
   VERCEL_TOKEN          # ✅ Required
@@ -133,18 +138,21 @@ secrets:
 ## 🔍 How to Verify
 
 ### 1. Check GitHub Secrets
+
 ```bash
 # Navigate to: https://github.com/3000Studios/3000studios-next/settings/secrets/actions
 # Verify all required secrets are present
 ```
 
 ### 2. Check Vercel Environment Variables
+
 ```bash
 # Navigate to: https://vercel.com/3000studios/3000studios-next/settings/environment-variables
 # Verify all required variables are set for Production
 ```
 
 ### 3. Test Deployment
+
 ```bash
 # Push to main branch and monitor workflow
 # Check: https://github.com/3000Studios/3000studios-next/actions
@@ -190,15 +198,18 @@ git push origin main
 ## 🆘 Troubleshooting
 
 ### Build Fails
+
 - Check GitHub Actions logs for missing env vars
 - Verify all required secrets are set in GitHub Secrets
 
 ### Deployment Fails
+
 - Check Vercel deployment logs
 - Verify VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID are correct
 - Ensure project is linked to correct domain
 
 ### Features Not Working
+
 - Check browser console for API errors
 - Verify API keys are valid and not expired
 - Check service-specific error messages
@@ -208,11 +219,13 @@ git push origin main
 ## 📞 Environment Variable Setup Guide
 
 ### GitHub Secrets
+
 1. Go to: `https://github.com/3000Studios/3000studios-next/settings/secrets/actions`
 2. Click "New repository secret"
 3. Add each required secret from the list above
 
 ### Vercel Environment Variables
+
 1. Go to: `https://vercel.com/3000studios/3000studios-next/settings/environment-variables`
 2. Click "Add New"
 3. Add each variable for the "Production" environment

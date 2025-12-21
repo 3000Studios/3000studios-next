@@ -60,6 +60,7 @@ vercel --prod --yes
 ```
 
 Make executable:
+
 ```bash
 chmod +x fix-vercel-site-url.sh
 ```
@@ -69,20 +70,24 @@ chmod +x fix-vercel-site-url.sh
 ## Manual Steps (If Scripts Don't Work)
 
 ### Step 1: Remove Broken Reference
+
 ```bash
 vercel env rm NEXT_PUBLIC_SITE_URL production --yes
 ```
 
 ### Step 2: Add Correct Value
+
 ```bash
 vercel env add NEXT_PUBLIC_SITE_URL production --force
 ```
 
 **When prompted:**
+
 - Enter: `https://3000studios.com`
 - Mark as sensitive? **NO** (This is crucial!)
 
 ### Step 3: Verify
+
 ```bash
 vercel env ls
 ```
@@ -90,6 +95,7 @@ vercel env ls
 Should show `NEXT_PUBLIC_SITE_URL` as "Encrypted" but NOT referencing another secret.
 
 ### Step 4: Deploy
+
 ```bash
 vercel --prod --yes
 ```
@@ -101,11 +107,13 @@ vercel --prod --yes
 Vercel allows environment variables to reference other secrets using `@secret-name` syntax. If `NEXT_PUBLIC_SITE_URL` was accidentally set to `@next_public_site_url`, it creates a circular reference that fails during deployment.
 
 **The problem:**
+
 ```
 NEXT_PUBLIC_SITE_URL=@next_public_site_url  ❌ (References another secret)
 ```
 
 **The solution:**
+
 ```
 NEXT_PUBLIC_SITE_URL=https://3000studios.com  ✅ (Literal value)
 ```
@@ -116,7 +124,7 @@ NEXT_PUBLIC_SITE_URL=https://3000studios.com  ✅ (Literal value)
 
 ### When Adding Environment Variables:
 
-1. **Mark as sensitive?** 
+1. **Mark as sensitive?**
    - For `NEXT_PUBLIC_SITE_URL`: Answer **NO**
    - This is a public URL, not a secret
    - Marking as "NO" ensures it's stored as a literal value
@@ -181,6 +189,7 @@ To prevent this in the future:
 ## Troubleshooting
 
 ### Issue: "Variable not found"
+
 ```bash
 # List all variables first
 vercel env ls
@@ -190,6 +199,7 @@ vercel env rm NEXT_PUBLIC_SITE_URL production
 ```
 
 ### Issue: "Permission denied"
+
 ```bash
 # Make sure you're authenticated
 vercel login
@@ -199,6 +209,7 @@ vercel whoami
 ```
 
 ### Issue: "Deploy still failing"
+
 ```bash
 # Clear Vercel build cache
 vercel --prod --yes --force

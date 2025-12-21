@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { Product } from '@/lib/products-data';
-import { ShoppingCart } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
+import { Product } from "@/lib/products-data";
+import { ShoppingCart } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 interface ProductCardProps {
   product: Product;
@@ -38,7 +38,9 @@ export function ProductCard({ product }: ProductCardProps) {
         )}
 
         {/* Name */}
-        <h3 className="font-bold text-lg text-white mb-2 line-clamp-2">{product.name}</h3>
+        <h3 className="font-bold text-lg text-white mb-2 line-clamp-2">
+          {product.name}
+        </h3>
 
         {/* Description */}
         <p className="text-purple-300/70 text-sm mb-4 line-clamp-2 flex-1">
@@ -47,7 +49,9 @@ export function ProductCard({ product }: ProductCardProps) {
 
         {/* Pricing */}
         <div className="flex items-baseline gap-2 mb-4">
-          <span className="text-2xl font-black bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">${product.price.toFixed(2)}</span>
+          <span className="text-2xl font-black bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            ${product.price.toFixed(2)}
+          </span>
           {product.compareAtPrice && (
             <span className="text-sm text-purple-400/40 line-through">
               ${product.compareAtPrice.toFixed(2)}
@@ -62,7 +66,9 @@ export function ProductCard({ product }: ProductCardProps) {
             In Stock
           </span>
         ) : (
-          <span className="text-sm text-red-400 font-semibold mb-4">Out of Stock</span>
+          <span className="text-sm text-red-400 font-semibold mb-4">
+            Out of Stock
+          </span>
         )}
 
         {/* Actions */}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 /**
  * Interactive Sound Effects System
@@ -11,9 +11,10 @@ export default function SoundEffects() {
 
   useEffect(() => {
     // Initialize Web Audio API
-    if (typeof window === 'undefined') return;
-    
-    const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+    if (typeof window === "undefined") return;
+
+    const AudioContext =
+      window.AudioContext || (window as any).webkitAudioContext;
     audioContextRef.current = new AudioContext();
 
     // Function to create a sophisticated click sound
@@ -29,7 +30,7 @@ export default function SoundEffects() {
 
       // Sophisticated tone - higher frequency for elegant sound
       oscillator.frequency.value = 800;
-      oscillator.type = 'sine';
+      oscillator.type = "sine";
 
       // Envelope for natural sound
       const now = context.currentTime;
@@ -53,7 +54,7 @@ export default function SoundEffects() {
       gainNode.connect(context.destination);
 
       oscillator.frequency.value = 600;
-      oscillator.type = 'sine';
+      oscillator.type = "sine";
 
       const now = context.currentTime;
       gainNode.gain.setValueAtTime(0, now);
@@ -67,10 +68,10 @@ export default function SoundEffects() {
     // Add click sound to all interactive elements
     const addSoundToElements = () => {
       const buttons = document.querySelectorAll('button, a, [role="button"]');
-      
-      buttons.forEach(element => {
-        element.addEventListener('click', playClickSound);
-        element.addEventListener('mouseenter', playHoverSound);
+
+      buttons.forEach((element) => {
+        element.addEventListener("click", playClickSound);
+        element.addEventListener("mouseenter", playHoverSound);
       });
     };
 
@@ -84,7 +85,7 @@ export default function SoundEffects() {
 
     observer.observe(document.body, {
       childList: true,
-      subtree: true
+      subtree: true,
     });
 
     return () => {

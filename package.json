@@ -11,12 +11,21 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "type-check": "tsc --noEmit",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "db:seed": "tsx prisma/seed.ts",
     "clean": "rimraf .next node_modules",
-    "deploy": "vercel --prod --yes"
+    "deploy": "vercel --prod --yes",
+    "auto:commit": "pwsh -File scripts/auto-commit.ps1",
+    "auto:heal": "pwsh -File scripts/auto-heal.ps1",
+    "auto:fix": "npm run lint:fix && npm run format",
+    "auto:all": "npm run auto:fix && git add -A && git commit -m '🤖 Auto: fix and format' && git push && npm run deploy",
+    "generate:content": "tsx scripts/generate-content.ts",
+    "generate:revenue": "tsx scripts/generate-revenue-pages.ts",
+    "verify:sync": "bash scripts/verify-sync.sh"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -63,6 +72,7 @@
     "zustand": "^4.5.5"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.3",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.1",
