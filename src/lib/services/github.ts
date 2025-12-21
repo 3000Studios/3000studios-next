@@ -3,14 +3,14 @@
  * Handles repository operations and auto-commits
  */
 
-import { Octokit } from '@octokit/rest';
+import { Octokit } from "@octokit/rest";
 
 const octokit = new Octokit({
   auth: process.env.GITHUB_PAT,
 });
 
-const REPO_OWNER = '3000Studios'; // Update with actual owner
-const REPO_NAME = '3000studios-next'; // Update with actual repo name
+const REPO_OWNER = "3000Studios"; // Update with actual owner
+const REPO_NAME = "3000studios-next"; // Update with actual repo name
 
 export interface CommitFileChange {
   path: string;
@@ -18,11 +18,13 @@ export interface CommitFileChange {
   message: string;
 }
 
-export async function createCommit(changes: CommitFileChange[]): Promise<string> {
+export async function createCommit(
+  changes: CommitFileChange[],
+): Promise<string> {
   try {
     const owner = REPO_OWNER;
     const repo = REPO_NAME;
-    const branch = 'main';
+    const branch = "main";
 
     // Get the current commit SHA
     const { data: refData } = await octokit.git.getRef({
@@ -46,16 +48,16 @@ export async function createCommit(changes: CommitFileChange[]): Promise<string>
         const { data: blob } = await octokit.git.createBlob({
           owner,
           repo,
-          content: Buffer.from(change.content).toString('base64'),
-          encoding: 'base64',
+          content: Buffer.from(change.content).toString("base64"),
+          encoding: "base64",
         });
         return {
           path: change.path,
-          mode: '100644' as const,
-          type: 'blob' as const,
+          mode: "100644" as const,
+          type: "blob" as const,
           sha: blob.sha,
         };
-      })
+      }),
     );
 
     // Create a new tree
@@ -67,9 +69,10 @@ export async function createCommit(changes: CommitFileChange[]): Promise<string>
     });
 
     // Create a new commit
-    const commitMessage = changes.length === 1 
-      ? changes[0].message 
-      : `Update ${changes.length} files via voice command`;
+    const commitMessage =
+      changes.length === 1
+        ? changes[0].message
+        : `Update ${changes.length} files via voice command`;
 
     const { data: newCommit } = await octokit.git.createCommit({
       owner,
@@ -89,8 +92,8 @@ export async function createCommit(changes: CommitFileChange[]): Promise<string>
 
     return newCommit.sha;
   } catch (error) {
-    console.error('GitHub commit error:', error);
-    throw new Error('Failed to create GitHub commit');
+    console.error("GitHub commit error:", error);
+    throw new Error("Failed to create GitHub commit");
   }
 }
 
@@ -102,14 +105,14 @@ export async function getFileContent(path: string): Promise<string> {
       path,
     });
 
-    if ('content' in data) {
-      return Buffer.from(data.content, 'base64').toString('utf-8');
+    if ("content" in data) {
+      return Buffer.from(data.content, "base64").toString("utf-8");
     }
-    
-    throw new Error('File not found');
+
+    throw new Error("File not found");
   } catch (error) {
-    console.error('GitHub get file error:', error);
-    throw new Error('Failed to get file content');
+    console.error("GitHub get file error:", error);
+    throw new Error("Failed to get file content");
   }
 }
 
@@ -118,7 +121,7 @@ export async function createBranch(branchName: string): Promise<void> {
     const { data: refData } = await octokit.git.getRef({
       owner: REPO_OWNER,
       repo: REPO_NAME,
-      ref: 'heads/main',
+      ref: "heads/main",
     });
 
     await octokit.git.createRef({
@@ -128,15 +131,15 @@ export async function createBranch(branchName: string): Promise<void> {
       sha: refData.object.sha,
     });
   } catch (error) {
-    console.error('GitHub create branch error:', error);
-    throw new Error('Failed to create branch');
+    console.error("GitHub create branch error:", error);
+    throw new Error("Failed to create branch");
   }
 }
 
 export async function createPullRequest(
   title: string,
   body: string,
-  headBranch: string
+  headBranch: string,
 ): Promise<number> {
   try {
     const { data } = await octokit.pulls.create({
@@ -145,12 +148,12 @@ export async function createPullRequest(
       title,
       body,
       head: headBranch,
-      base: 'main',
+      base: "main",
     });
 
     return data.number;
   } catch (error) {
-    console.error('GitHub create PR error:', error);
-    throw new Error('Failed to create pull request');
+    console.error("GitHub create PR error:", error);
+    throw new Error("Failed to create pull request");
   }
 }

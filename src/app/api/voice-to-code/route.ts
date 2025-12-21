@@ -135,7 +135,7 @@ export async function POST(request: NextRequest) {
     console.error("Voice API Error:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -172,7 +172,7 @@ async function applyPatches(patches: CodePatch[]) {
         // Try relaxed matching (trim whitespace)
         // This is a naive implementation; a real system would use a better patcher.
         throw new Error(
-          `Target code not found in ${cleanPath}. Content matching failed.`
+          `Target code not found in ${cleanPath}. Content matching failed.`,
         );
       }
 

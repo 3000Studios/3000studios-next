@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     console.error("PayPal capture order error:", error);
     return NextResponse.json(
       { error: "Failed to capture PayPal order" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

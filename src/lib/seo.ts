@@ -15,32 +15,38 @@ export interface SEOMetadata {
 }
 
 export interface SchemaMarkup {
-  '@context': string;
-  '@type': string;
+  "@context": string;
+  "@type": string;
   [key: string]: unknown;
 }
 
 /**
  * Generate internal link suggestions for content
  */
-export function generateInternalLinks(content: string, existingPages: string[]): string[] {
+export function generateInternalLinks(
+  content: string,
+  existingPages: string[],
+): string[] {
   const links: string[] = [];
 
   // Keywords that should link internally
   const keywordMap: Record<string, string> = {
-    'store': '/store',
-    'products': '/store',
-    'pricing': '/store',
-    'blog': '/blog',
-    'portfolio': '/portfolio',
-    'projects': '/projects',
-    'live stream': '/live',
-    'command center': '/matrix',
-    'voice control': '/matrix',
+    store: "/store",
+    products: "/store",
+    pricing: "/store",
+    blog: "/blog",
+    portfolio: "/portfolio",
+    projects: "/projects",
+    "live stream": "/live",
+    "command center": "/matrix",
+    "voice control": "/matrix",
   };
 
   for (const [keyword, url] of Object.entries(keywordMap)) {
-    if (content.toLowerCase().includes(keyword) && existingPages.includes(url)) {
+    if (
+      content.toLowerCase().includes(keyword) &&
+      existingPages.includes(url)
+    ) {
       links.push(url);
     }
   }
@@ -51,16 +57,19 @@ export function generateInternalLinks(content: string, existingPages: string[]):
 /**
  * Generate Article schema markup
  */
-export function generateArticleSchema(metadata: SEOMetadata, content: string): SchemaMarkup {
+export function generateArticleSchema(
+  metadata: SEOMetadata,
+  content: string,
+): SchemaMarkup {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
     headline: metadata.title,
     description: metadata.description,
-    image: metadata.ogImage || 'https://3000studios.com/og-image.png',
+    image: metadata.ogImage || "https://3000studios.com/og-image.png",
     author: {
-      '@type': 'Organization',
-      name: metadata.author || '3000 Studios',
+      "@type": "Organization",
+      name: metadata.author || "3000 Studios",
     },
     datePublished: metadata.publishedDate || new Date().toISOString(),
     dateModified: metadata.modifiedDate || new Date().toISOString(),
@@ -81,20 +90,20 @@ export function generateProductSchema(product: {
   image?: string;
 }): SchemaMarkup {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
+    "@context": "https://schema.org",
+    "@type": "Product",
     name: product.name,
     description: product.description,
     image: product.image,
     offers: {
-      '@type': 'Offer',
+      "@type": "Offer",
       price: product.price.toString(),
       priceCurrency: product.currency,
-      availability: 'https://schema.org/InStock',
+      availability: "https://schema.org/InStock",
     },
     aggregateRating: product.rating
       ? {
-          '@type': 'AggregateRating',
+          "@type": "AggregateRating",
           ratingValue: product.rating.toString(),
           reviewCount: (product.reviewCount || 0).toString(),
         }
@@ -108,15 +117,15 @@ export function generateProductSchema(product: {
 export function generateSEOMetadata(
   title: string,
   description: string,
-  keywords: string[] = []
+  keywords: string[] = [],
 ): SEOMetadata {
   return {
     title: `${title} | 3000 Studios`,
     description: description.slice(0, 160),
     keywords,
-    ogImage: 'https://3000studios.com/og-image.png',
+    ogImage: "https://3000studios.com/og-image.png",
     canonicalUrl: `https://3000studios.com`,
-    author: '3000 Studios',
+    author: "3000 Studios",
     publishedDate: new Date().toISOString(),
     modifiedDate: new Date().toISOString(),
   };
@@ -148,7 +157,14 @@ Allow: /
 export interface SitemapEntry {
   url: string;
   lastmod?: string;
-  changefreq?: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
+  changefreq?:
+    | "always"
+    | "hourly"
+    | "daily"
+    | "weekly"
+    | "monthly"
+    | "yearly"
+    | "never";
   priority?: number;
 }
 
@@ -160,13 +176,13 @@ ${entries
     (entry) => `
   <url>
     <loc>${entry.url}</loc>
-    ${entry.lastmod ? `<lastmod>${entry.lastmod}</lastmod>` : ''}
-    ${entry.changefreq ? `<changefreq>${entry.changefreq}</changefreq>` : ''}
-    ${entry.priority ? `<priority>${entry.priority}</priority>` : ''}
+    ${entry.lastmod ? `<lastmod>${entry.lastmod}</lastmod>` : ""}
+    ${entry.changefreq ? `<changefreq>${entry.changefreq}</changefreq>` : ""}
+    ${entry.priority ? `<priority>${entry.priority}</priority>` : ""}
   </url>
-`
+`,
   )
-  .join('')}
+  .join("")}
 </urlset>`;
   return xml;
 }
@@ -174,25 +190,28 @@ ${entries
 /**
  * Ping search engines for indexing (IndexNow / Ping API)
  */
-export async function pingSearchEngines(urls: string[], apiKey: string): Promise<boolean> {
+export async function pingSearchEngines(
+  urls: string[],
+  apiKey: string,
+): Promise<boolean> {
   try {
     // IndexNow API
-    await fetch('https://api.indexnow.org/indexnow', {
-      method: 'POST',
+    await fetch("https://api.indexnow.org/indexnow", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        host: '3000studios.com',
+        host: "3000studios.com",
         key: apiKey,
-        keyLocation: 'https://3000studios.com/indexnow.txt',
+        keyLocation: "https://3000studios.com/indexnow.txt",
         urlList: urls,
       }),
     });
 
     return true;
   } catch (error) {
-    console.error('[SEO] Failed to ping search engines:', error);
+    console.error("[SEO] Failed to ping search engines:", error);
     return false;
   }
 }

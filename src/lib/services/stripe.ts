@@ -9,12 +9,12 @@ export const stripe = new Stripe(
   {
     apiVersion: "2025-11-17.clover", // Updated to latest API version
     typescript: true,
-  }
+  },
 );
 
 export async function createCheckoutSession(
   lineItems: Stripe.Checkout.SessionCreateParams.LineItem[],
-  userId?: string
+  userId?: string,
 ) {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],

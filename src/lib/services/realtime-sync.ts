@@ -1,7 +1,7 @@
 /**
  * Real-Time Sync Service
  * Handles instant deployment and live updates for Boss Man J
- * 
+ *
  * Features:
  * - Instant commit to main branch
  * - Real-time deployment triggering
@@ -10,8 +10,8 @@
  * - Zero-downtime deployments
  */
 
-import { createCommit } from './github';
-import { triggerDeployment, getDeploymentStatus } from './vercel';
+import { createCommit } from "./github";
+import { triggerDeployment, getDeploymentStatus } from "./vercel";
 
 export interface SyncResult {
   success: boolean;
@@ -23,7 +23,12 @@ export interface SyncResult {
 }
 
 export interface DeploymentEvent {
-  type: 'commit' | 'deploy_start' | 'deploy_progress' | 'deploy_complete' | 'deploy_error';
+  type:
+    | "commit"
+    | "deploy_start"
+    | "deploy_progress"
+    | "deploy_complete"
+    | "deploy_error";
   data: {
     commitSha?: string;
     deploymentId?: string;
@@ -41,15 +46,15 @@ export async function instantSync(
   filePath: string,
   content: string,
   commitMessage: string,
-  onProgress?: (event: DeploymentEvent) => void
+  onProgress?: (event: DeploymentEvent) => void,
 ): Promise<SyncResult> {
   const timestamp = Date.now();
-  
+
   try {
     // Step 1: Commit to main branch
     onProgress?.({
-      type: 'commit',
-      data: { status: 'Creating commit...' },
+      type: "commit",
+      data: { status: "Creating commit..." },
       timestamp: Date.now(),
     });
 
@@ -62,27 +67,27 @@ export async function instantSync(
     ]);
 
     onProgress?.({
-      type: 'commit',
-      data: { commitSha, status: 'Commit created' },
+      type: "commit",
+      data: { commitSha, status: "Commit created" },
       timestamp: Date.now(),
     });
 
     // Step 2: Trigger instant deployment
     onProgress?.({
-      type: 'deploy_start',
-      data: { commitSha, status: 'Triggering deployment...' },
+      type: "deploy_start",
+      data: { commitSha, status: "Triggering deployment..." },
       timestamp: Date.now(),
     });
 
-    const deployment = await triggerDeployment('main');
+    const deployment = await triggerDeployment("main");
 
     onProgress?.({
-      type: 'deploy_start',
-      data: { 
-        commitSha, 
+      type: "deploy_start",
+      data: {
+        commitSha,
         deploymentId: deployment.id,
         url: deployment.url,
-        status: 'Deployment started' 
+        status: "Deployment started",
       },
       timestamp: Date.now(),
     });
@@ -90,14 +95,14 @@ export async function instantSync(
     // Step 3: Monitor deployment status
     const finalStatus = await monitorDeployment(deployment.id, onProgress);
 
-    if (finalStatus === 'READY') {
+    if (finalStatus === "READY") {
       onProgress?.({
-        type: 'deploy_complete',
-        data: { 
+        type: "deploy_complete",
+        data: {
           commitSha,
           deploymentId: deployment.id,
           url: deployment.url,
-          status: 'Live on production!' 
+          status: "Live on production!",
         },
         timestamp: Date.now(),
       });
@@ -107,17 +112,18 @@ export async function instantSync(
         commitSha,
         deploymentId: deployment.id,
         deploymentUrl: `https://${deployment.url}`,
-        message: 'Changes deployed successfully and are LIVE!',
+        message: "Changes deployed successfully and are LIVE!",
         timestamp,
       };
     } else {
       throw new Error(`Deployment failed with status: ${finalStatus}`);
     }
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+
     onProgress?.({
-      type: 'deploy_error',
+      type: "deploy_error",
       data: { error: errorMessage },
       timestamp: Date.now(),
     });
@@ -137,7 +143,7 @@ async function monitorDeployment(
   deploymentId: string,
   onProgress?: (event: DeploymentEvent) => void,
   maxAttempts: number = 60,
-  interval: number = 2000
+  interval: number = 2000,
 ): Promise<string> {
   let attempts = 0;
 
@@ -146,24 +152,24 @@ async function monitorDeployment(
       const status = await getDeploymentStatus(deploymentId);
 
       onProgress?.({
-        type: 'deploy_progress',
+        type: "deploy_progress",
         data: { deploymentId, status },
         timestamp: Date.now(),
       });
 
-      if (status === 'READY' || status === 'ERROR' || status === 'CANCELED') {
+      if (status === "READY" || status === "ERROR" || status === "CANCELED") {
         return status;
       }
 
-      await new Promise(resolve => setTimeout(resolve, interval));
+      await new Promise((resolve) => setTimeout(resolve, interval));
       attempts++;
     } catch (error) {
-      console.error('Error monitoring deployment:', error);
+      console.error("Error monitoring deployment:", error);
       attempts++;
     }
   }
 
-  return 'TIMEOUT';
+  return "TIMEOUT";
 }
 
 /**
@@ -172,60 +178,60 @@ async function monitorDeployment(
 export async function batchSync(
   files: Array<{ path: string; content: string }>,
   commitMessage: string,
-  onProgress?: (event: DeploymentEvent) => void
+  onProgress?: (event: DeploymentEvent) => void,
 ): Promise<SyncResult> {
   const timestamp = Date.now();
 
   try {
     onProgress?.({
-      type: 'commit',
+      type: "commit",
       data: { status: `Creating batch commit for ${files.length} files...` },
       timestamp: Date.now(),
     });
 
     const commitSha = await createCommit(
-      files.map(file => ({
+      files.map((file) => ({
         path: file.path,
         content: file.content,
         message: commitMessage,
-      }))
+      })),
     );
 
     onProgress?.({
-      type: 'commit',
-      data: { commitSha, status: 'Batch commit created' },
+      type: "commit",
+      data: { commitSha, status: "Batch commit created" },
       timestamp: Date.now(),
     });
 
     onProgress?.({
-      type: 'deploy_start',
-      data: { commitSha, status: 'Triggering deployment...' },
+      type: "deploy_start",
+      data: { commitSha, status: "Triggering deployment..." },
       timestamp: Date.now(),
     });
 
-    const deployment = await triggerDeployment('main');
+    const deployment = await triggerDeployment("main");
 
     onProgress?.({
-      type: 'deploy_start',
-      data: { 
+      type: "deploy_start",
+      data: {
         commitSha,
         deploymentId: deployment.id,
         url: deployment.url,
-        status: 'Deployment started' 
+        status: "Deployment started",
       },
       timestamp: Date.now(),
     });
 
     const finalStatus = await monitorDeployment(deployment.id, onProgress);
 
-    if (finalStatus === 'READY') {
+    if (finalStatus === "READY") {
       onProgress?.({
-        type: 'deploy_complete',
-        data: { 
+        type: "deploy_complete",
+        data: {
           commitSha,
           deploymentId: deployment.id,
           url: deployment.url,
-          status: 'All changes LIVE!' 
+          status: "All changes LIVE!",
         },
         timestamp: Date.now(),
       });
@@ -242,10 +248,11 @@ export async function batchSync(
       throw new Error(`Deployment failed with status: ${finalStatus}`);
     }
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+
     onProgress?.({
-      type: 'deploy_error',
+      type: "deploy_error",
       data: { error: errorMessage },
       timestamp: Date.now(),
     });
@@ -265,7 +272,7 @@ export async function batchSync(
 export async function quickCommit(
   filePath: string,
   content: string,
-  commitMessage: string
+  commitMessage: string,
 ): Promise<{ success: boolean; commitSha?: string; message: string }> {
   try {
     const commitSha = await createCommit([
@@ -279,10 +286,11 @@ export async function quickCommit(
     return {
       success: true,
       commitSha,
-      message: 'Committed to main branch',
+      message: "Committed to main branch",
     };
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
     return {
       success: false,
       message: `Commit failed: ${errorMessage}`,
@@ -295,38 +303,38 @@ export async function quickCommit(
  * Use to redeploy the current state
  */
 export async function forceRedeploy(
-  onProgress?: (event: DeploymentEvent) => void
+  onProgress?: (event: DeploymentEvent) => void,
 ): Promise<SyncResult> {
   const timestamp = Date.now();
 
   try {
     onProgress?.({
-      type: 'deploy_start',
-      data: { status: 'Forcing redeployment...' },
+      type: "deploy_start",
+      data: { status: "Forcing redeployment..." },
       timestamp: Date.now(),
     });
 
-    const deployment = await triggerDeployment('main');
+    const deployment = await triggerDeployment("main");
 
     onProgress?.({
-      type: 'deploy_start',
-      data: { 
+      type: "deploy_start",
+      data: {
         deploymentId: deployment.id,
         url: deployment.url,
-        status: 'Redeployment started' 
+        status: "Redeployment started",
       },
       timestamp: Date.now(),
     });
 
     const finalStatus = await monitorDeployment(deployment.id, onProgress);
 
-    if (finalStatus === 'READY') {
+    if (finalStatus === "READY") {
       onProgress?.({
-        type: 'deploy_complete',
-        data: { 
+        type: "deploy_complete",
+        data: {
           deploymentId: deployment.id,
           url: deployment.url,
-          status: 'Redeployment complete!' 
+          status: "Redeployment complete!",
         },
         timestamp: Date.now(),
       });
@@ -335,17 +343,18 @@ export async function forceRedeploy(
         success: true,
         deploymentId: deployment.id,
         deploymentUrl: `https://${deployment.url}`,
-        message: 'Redeployed successfully!',
+        message: "Redeployed successfully!",
         timestamp,
       };
     } else {
       throw new Error(`Redeployment failed with status: ${finalStatus}`);
     }
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+
     onProgress?.({
-      type: 'deploy_error',
+      type: "deploy_error",
       data: { error: errorMessage },
       timestamp: Date.now(),
     });

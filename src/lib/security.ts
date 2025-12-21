@@ -28,7 +28,7 @@ export const CORS_CONFIG = {
  */
 export function applyCORS(
   request: NextRequest,
-  response: NextResponse
+  response: NextResponse,
 ): NextResponse {
   const origin = request.headers.get("origin") || "";
 
@@ -38,15 +38,15 @@ export function applyCORS(
 
   response.headers.set(
     "Access-Control-Allow-Methods",
-    CORS_CONFIG.allowedMethods.join(", ")
+    CORS_CONFIG.allowedMethods.join(", "),
   );
   response.headers.set(
     "Access-Control-Allow-Headers",
-    CORS_CONFIG.allowedHeaders.join(", ")
+    CORS_CONFIG.allowedHeaders.join(", "),
   );
   response.headers.set(
     "Access-Control-Allow-Credentials",
-    CORS_CONFIG.credentials.toString()
+    CORS_CONFIG.credentials.toString(),
   );
   response.headers.set("Access-Control-Max-Age", CORS_CONFIG.maxAge.toString());
 
@@ -98,7 +98,7 @@ export function applySecurityHeaders(response: NextResponse): NextResponse {
       "form-action 'self' https://www.paypal.com",
       "frame-ancestors 'none'",
       "upgrade-insecure-requests",
-    ].join("; ")
+    ].join("; "),
   );
 
   // Permissions Policy (formerly Feature Policy)
@@ -113,14 +113,14 @@ export function applySecurityHeaders(response: NextResponse): NextResponse {
       "microphone=()",
       "payment=(self)",
       "usb=()",
-    ].join(", ")
+    ].join(", "),
   );
 
   // Strict-Transport-Security (HSTS) - Vercel handles this, but adding for completeness
   if (process.env.NODE_ENV === "production") {
     response.headers.set(
       "Strict-Transport-Security",
-      "max-age=31536000; includeSubDomains; preload"
+      "max-age=31536000; includeSubDomains; preload",
     );
   }
 
@@ -133,7 +133,7 @@ export function applySecurityHeaders(response: NextResponse): NextResponse {
  */
 export function validateRequestBody(
   body: any,
-  requiredFields: string[]
+  requiredFields: string[],
 ): string | null {
   if (!body || typeof body !== "object") {
     return "Invalid request body";
@@ -159,7 +159,7 @@ export function generateCSRFToken(sessionId: string): string {
   const timestamp = Date.now();
   const salt = randomBytes(16).toString("hex");
   const token = Buffer.from(
-    `${sessionId}:${timestamp}:${salt}:${CSRF_SECRET}`
+    `${sessionId}:${timestamp}:${salt}:${CSRF_SECRET}`,
   ).toString("base64");
   return token;
 }
@@ -227,7 +227,7 @@ export function withSecurity(
     cors?: boolean;
     csrf?: boolean;
     validateBody?: string[];
-  } = {}
+  } = {},
 ) {
   return async (request: NextRequest) => {
     // Handle CORS preflight
@@ -245,7 +245,7 @@ export function withSecurity(
 
       if (!csrfToken || !validateCSRFToken(csrfToken, sessionId)) {
         return applySecurityHeaders(
-          NextResponse.json({ error: "Invalid CSRF token" }, { status: 403 })
+          NextResponse.json({ error: "Invalid CSRF token" }, { status: 403 }),
         );
       }
     }
@@ -257,12 +257,12 @@ export function withSecurity(
         const error = validateRequestBody(body, options.validateBody);
         if (error) {
           return applySecurityHeaders(
-            NextResponse.json({ error }, { status: 400 })
+            NextResponse.json({ error }, { status: 400 }),
           );
         }
       } catch {
         return applySecurityHeaders(
-          NextResponse.json({ error: "Invalid JSON body" }, { status: 400 })
+          NextResponse.json({ error: "Invalid JSON body" }, { status: 400 }),
         );
       }
     }

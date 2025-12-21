@@ -3,13 +3,14 @@
  * Initiates WebRTC broadcast
  */
 
-import { getWebRTCConfig } from '@/lib/services/webrtc';
-import { NextRequest, NextResponse } from 'next/server';
+import { getWebRTCConfig } from "@/lib/services/webrtc";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { streamTitle: _streamTitle, streamDescription: _streamDescription } = body;
+    const { streamTitle: _streamTitle, streamDescription: _streamDescription } =
+      body;
 
     // Generate unique stream ID
     const streamId = `stream_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -27,14 +28,15 @@ export async function POST(request: NextRequest) {
       streamId,
       streamKey: `sk_${streamId}`,
       webrtcConfig,
-      signalServerUrl: process.env.NEXT_PUBLIC_SIGNAL_SERVER || 'wss://signal.3000studios.com',
-      message: 'Stream initialized. Use WebRTC config to start broadcasting.',
+      signalServerUrl:
+        process.env.NEXT_PUBLIC_SIGNAL_SERVER || "wss://signal.3000studios.com",
+      message: "Stream initialized. Use WebRTC config to start broadcasting.",
     });
   } catch (error) {
-    console.error('Stream start API error:', error);
+    console.error("Stream start API error:", error);
     return NextResponse.json(
-      { error: 'Failed to start stream' },
-      { status: 500 }
+      { error: "Failed to start stream" },
+      { status: 500 },
     );
   }
 }

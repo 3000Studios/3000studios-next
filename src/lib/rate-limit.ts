@@ -3,7 +3,7 @@
  * Protects API endpoints from abuse and DDoS attacks
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
 interface RateLimitEntry {
   count: number;
@@ -34,8 +34,10 @@ export const RATE_LIMITS = {
  * Uses X-Forwarded-For header (Vercel provides this) or IP
  */
 function getClientId(request: NextRequest): string {
-  const forwarded = request.headers.get('x-forwarded-for');
-  const ip = forwarded ? forwarded.split(',')[0] : request.headers.get('x-real-ip') || 'unknown';
+  const forwarded = request.headers.get("x-forwarded-for");
+  const ip = forwarded
+    ? forwarded.split(",")[0]
+    : request.headers.get("x-real-ip") || "unknown";
   return ip;
 }
 
@@ -60,7 +62,7 @@ setInterval(cleanupExpiredEntries, 60 * 1000);
  */
 export function rateLimit(
   request: NextRequest,
-  config: RateLimitConfig = RATE_LIMITS.standard
+  config: RateLimitConfig = RATE_LIMITS.standard,
 ): NextResponse | null {
   const clientId = getClientId(request);
   const key = `${clientId}:${request.nextUrl.pathname}`;
@@ -81,22 +83,24 @@ export function rateLimit(
     // Rate limit exceeded
     const resetIn = Math.ceil((entry.resetTime - now) / 1000);
 
-    console.warn(`⚠️ Rate limit exceeded for ${clientId} on ${request.nextUrl.pathname}`);
+    console.warn(
+      `⚠️ Rate limit exceeded for ${clientId} on ${request.nextUrl.pathname}`,
+    );
 
     return NextResponse.json(
       {
-        error: config.message || 'Too many requests',
+        error: config.message || "Too many requests",
         retryAfter: resetIn,
       },
       {
         status: 429,
         headers: {
-          'Retry-After': resetIn.toString(),
-          'X-RateLimit-Limit': config.maxRequests.toString(),
-          'X-RateLimit-Remaining': '0',
-          'X-RateLimit-Reset': entry.resetTime.toString(),
+          "Retry-After": resetIn.toString(),
+          "X-RateLimit-Limit": config.maxRequests.toString(),
+          "X-RateLimit-Remaining": "0",
+          "X-RateLimit-Reset": entry.resetTime.toString(),
         },
-      }
+      },
     );
   }
 
@@ -112,7 +116,7 @@ export function rateLimit(
  */
 export function getRateLimitHeaders(
   request: NextRequest,
-  config: RateLimitConfig = RATE_LIMITS.standard
+  config: RateLimitConfig = RATE_LIMITS.standard,
 ): Record<string, string> {
   const clientId = getClientId(request);
   const key = `${clientId}:${request.nextUrl.pathname}`;
@@ -120,15 +124,18 @@ export function getRateLimitHeaders(
 
   if (!entry) {
     return {
-      'X-RateLimit-Limit': config.maxRequests.toString(),
-      'X-RateLimit-Remaining': config.maxRequests.toString(),
+      "X-RateLimit-Limit": config.maxRequests.toString(),
+      "X-RateLimit-Remaining": config.maxRequests.toString(),
     };
   }
 
   return {
-    'X-RateLimit-Limit': config.maxRequests.toString(),
-    'X-RateLimit-Remaining': Math.max(0, config.maxRequests - entry.count).toString(),
-    'X-RateLimit-Reset': entry.resetTime.toString(),
+    "X-RateLimit-Limit": config.maxRequests.toString(),
+    "X-RateLimit-Remaining": Math.max(
+      0,
+      config.maxRequests - entry.count,
+    ).toString(),
+    "X-RateLimit-Reset": entry.resetTime.toString(),
   };
 }
 
@@ -137,7 +144,7 @@ export function getRateLimitHeaders(
  */
 export function withRateLimit(
   handler: (request: NextRequest) => Promise<NextResponse>,
-  config?: RateLimitConfig
+  config?: RateLimitConfig,
 ) {
   return async (request: NextRequest) => {
     const rateLimitResponse = rateLimit(request, config);
