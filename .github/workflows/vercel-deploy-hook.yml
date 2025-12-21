@@ -1,0 +1,23 @@
+name: Deploy via Vercel Deploy Hook
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Deployment environment (informational)"
+        required: false
+        default: "production"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel Deploy Hook
+        env:
+          VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$VERCEL_DEPLOY_HOOK" ]; then
+            echo "VERCEL_DEPLOY_HOOK is not set"
+            exit 1
+          fi
+          curl -fsSL -X POST "$VERCEL_DEPLOY_HOOK"
