@@ -68,7 +68,7 @@ export default function GoogleMap({
         mapTypeControlOptions: {
           style: window.google?.maps?.MapTypeControlStyle?.HORIZONTAL_BAR,
           position: window.google?.maps?.ControlPosition?.TOP_RIGHT,
-          mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain']
+          mapTypeIds: ["roadmap", "satellite", "hybrid", "terrain"],
         },
         streetViewControl: true,
         fullscreenControl: true,
@@ -82,7 +82,7 @@ export default function GoogleMap({
       new window.google.maps.Marker({
         position: center,
         map,
-        title: '3000 Studios - Atlanta, Georgia',
+        title: "3000 Studios - Atlanta, Georgia",
         animation: window.google.maps.Animation.DROP,
         icon: {
           path: window.google.maps.SymbolPath.CIRCLE,
@@ -120,7 +120,9 @@ export default function GoogleMap({
     return () => {
       // Cleanup
       if (mapInstanceRef.current) {
-        window.google?.maps?.event?.clearInstanceListeners(mapInstanceRef.current);
+        window.google?.maps?.event?.clearInstanceListeners(
+          mapInstanceRef.current,
+        );
       }
     };
   }, [apiKey, center, zoom, mapType]);
