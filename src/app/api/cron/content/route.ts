@@ -1,6 +1,8 @@
 import { getContentScheduler } from '@/jobs/contentScheduler';
 import { NextRequest, NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: NextRequest) {
   try {
     // Verify Vercel cron secret
