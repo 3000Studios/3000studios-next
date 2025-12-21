@@ -4,11 +4,10 @@
  * Features: Hover effects, quick view, add to cart, ultra-luxe styling
  */
 
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { ShoppingCart, Eye, Heart, Star } from 'lucide-react';
-import Image from 'next/image';
+import { Eye, Heart, ShoppingCart, Star } from "lucide-react";
+import { useState } from "react";
 
 export interface Product {
   id: string;
@@ -26,12 +25,18 @@ interface ProductGridProps {
   onAddToCart?: (product: Product) => void;
 }
 
-function ProductCard({ product, onAddToCart }: { product: Product; onAddToCart?: (product: Product) => void }) {
+function ProductCard({
+  product,
+  onAddToCart,
+}: {
+  product: Product;
+  onAddToCart?: (product: Product) => void;
+}) {
   const [isHovered, setIsHovered] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
   return (
-    <div 
+    <div
       className="card group relative overflow-hidden cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -52,34 +57,41 @@ function ProductCard({ product, onAddToCart }: { product: Product; onAddToCart?:
         className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full glass border border-gold/20 flex items-center justify-center hover:scale-110 transition-transform"
         aria-label="Add to favorites"
       >
-        <Heart 
-          size={16} 
-          className={isFavorite ? 'text-gold fill-gold' : 'text-gray-400'}
+        <Heart
+          size={16}
+          className={isFavorite ? "text-gold fill-gold" : "text-gray-400"}
         />
       </button>
 
       {/* Product Image */}
       <div className="relative aspect-square mb-4 rounded-lg overflow-hidden bg-gray-900">
-        <div className="w-full h-full flex items-center justify-center text-gray-600">
-          {/* Placeholder - replace with actual images */}
-          <div className="text-center">
-            <div className="w-20 h-20 bg-gold/20 rounded-full mx-auto mb-2 flex items-center justify-center">
-              <ShoppingCart size={32} className="text-gold" />
+        {product.image ? (
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-gray-600">
+            <div className="text-center">
+              <div className="w-20 h-20 bg-gold/20 rounded-full mx-auto mb-2 flex items-center justify-center">
+                <ShoppingCart size={32} className="text-gold" />
+              </div>
+              <p className="text-xs text-gray-500">No Image</p>
             </div>
-            <p className="text-xs text-gray-500">Product Image</p>
           </div>
-        </div>
+        )}
 
         {/* Hover Overlay */}
-        <div 
+        <div
           className={`absolute inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center gap-3 transition-all duration-300 ${
-            isHovered ? 'opacity-100' : 'opacity-0'
+            isHovered ? "opacity-100" : "opacity-0"
           }`}
         >
           <button className="w-10 h-10 rounded-full bg-gold text-black hover:bg-platinum transition-colors flex items-center justify-center">
             <Eye size={18} />
           </button>
-          <button 
+          <button
             onClick={(e) => {
               e.stopPropagation();
               onAddToCart?.(product);
@@ -94,7 +106,9 @@ function ProductCard({ product, onAddToCart }: { product: Product; onAddToCart?:
       {/* Product Info */}
       <div className="space-y-2">
         {/* Category */}
-        <p className="text-xs text-gold uppercase tracking-wide">{product.category}</p>
+        <p className="text-xs text-gold uppercase tracking-wide">
+          {product.category}
+        </p>
 
         {/* Product Name */}
         <h3 className="text-white font-semibold text-lg line-clamp-2 group-hover:text-gold transition-colors">
@@ -113,10 +127,14 @@ function ProductCard({ product, onAddToCart }: { product: Product; onAddToCart?:
               <Star
                 key={i}
                 size={12}
-                className={i < product.rating! ? 'text-gold fill-gold' : 'text-gray-600'}
+                className={
+                  i < product.rating! ? "text-gold fill-gold" : "text-gray-600"
+                }
               />
             ))}
-            <span className="text-xs text-gray-500 ml-1">({product.rating})</span>
+            <span className="text-xs text-gray-500 ml-1">
+              ({product.rating})
+            </span>
           </div>
         )}
 
@@ -141,13 +159,16 @@ function ProductCard({ product, onAddToCart }: { product: Product; onAddToCart?:
   );
 }
 
-export default function ProductGrid({ products, onAddToCart }: ProductGridProps) {
+export default function ProductGrid({
+  products,
+  onAddToCart,
+}: ProductGridProps) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {products.map((product) => (
-        <ProductCard 
-          key={product.id} 
-          product={product} 
+        <ProductCard
+          key={product.id}
+          product={product}
           onAddToCart={onAddToCart}
         />
       ))}

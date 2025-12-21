@@ -1,0 +1,33 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"workbench.editor.enablePreview": false,
+		"workbench.editor.closeOnFileDelete": true,
+		"typescript.tsserver.maxTsServerMemory": 8192,
+		"typescript.disableAutomaticTypeAcquisition": true,
+		"git.autorefresh": true,
+		"git.confirmSync": false,
+		"git.showPushSuccessNotification": false,
+		"gitlens.ai.model": "vscode",
+		"gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
+		"terminal.integrated.gpuAcceleration": "on",
+		"terminal.integrated.scrollback": 10000,
+		"chat.tools.terminal.autoApprove": {
+			"npm": true,
+			"node": true,
+			"git": true,
+			"vercel": true,
+			"pnpm": true,
+			"yarn": true,
+			"pwsh": true,
+			"powershell": true
+		},
+		"github-actions.workflows.pinned.refresh.enabled": true,
+		"github-actions.workflows.pinned.workflows": [],
+		"github-actions.use-enterprise": true
+	}
+}

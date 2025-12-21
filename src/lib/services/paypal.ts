@@ -3,14 +3,16 @@
  * Handles payment processing and order management
  */
 
-import axios from 'axios';
+import axios from "axios";
 
-const PAYPAL_API_BASE = process.env.NODE_ENV === 'production'
-  ? 'https://api-m.paypal.com'
-  : 'https://api-m.sandbox.paypal.com';
+const PAYPAL_API_BASE =
+  process.env.PAYPAL_ENV === "production"
+    ? "https://api-m.paypal.com"
+    : "https://api-m.sandbox.paypal.com";
 
 const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
-const PAYPAL_SECRET = process.env.PAYPAL_SECRET;
+const PAYPAL_SECRET =
+  process.env.PAYPAL_SECRET || process.env.PAYPAL_CLIENT_SECRET;
 
 interface PayPalAccessToken {
   access_token: string;
@@ -25,28 +27,30 @@ async function getAccessToken(): Promise<string> {
   }
 
   try {
-    const auth = Buffer.from(`${PAYPAL_CLIENT_ID}:${PAYPAL_SECRET}`).toString('base64');
-    
+    const auth = Buffer.from(`${PAYPAL_CLIENT_ID}:${PAYPAL_SECRET}`).toString(
+      "base64",
+    );
+
     const response = await axios.post<PayPalAccessToken>(
       `${PAYPAL_API_BASE}/v1/oauth2/token`,
-      'grant_type=client_credentials',
+      "grant_type=client_credentials",
       {
         headers: {
-          'Authorization': `Basic ${auth}`,
-          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization: `Basic ${auth}`,
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-      }
+      },
     );
 
     cachedToken = {
       token: response.data.access_token,
-      expiresAt: Date.now() + (response.data.expires_in * 1000) - 60000, // 1 min buffer
+      expiresAt: Date.now() + response.data.expires_in * 1000 - 60000, // 1 min buffer
     };
 
     return cachedToken.token;
   } catch (error) {
-    console.error('PayPal auth error:', error);
-    throw new Error('Failed to authenticate with PayPal');
+    console.error("PayPal auth error:", error);
+    throw new Error("Failed to authenticate with PayPal");
   }
 }
 
@@ -70,20 +74,20 @@ export async function createOrder(params: CreateOrderParams) {
     const token = await getAccessToken();
 
     const orderData = {
-      intent: 'CAPTURE',
+      intent: "CAPTURE",
       purchase_units: [
         {
           amount: {
-            currency_code: params.currency || 'USD',
+            currency_code: params.currency || "USD",
             value: params.total,
             breakdown: {
               item_total: {
-                currency_code: params.currency || 'USD',
+                currency_code: params.currency || "USD",
                 value: params.total,
               },
             },
           },
-          items: params.items.map(item => ({
+          items: params.items.map((item) => ({
             name: item.name,
             description: item.description,
             quantity: item.quantity.toString(),
@@ -92,11 +96,11 @@ export async function createOrder(params: CreateOrderParams) {
         },
       ],
       application_context: {
-        brand_name: '3000 Studios',
-        landing_page: 'NO_PREFERENCE',
-        user_action: 'PAY_NOW',
-        return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/store/success`,
-        cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/store/cancel`,
+        brand_name: "3000 Studios",
+        landing_page: "NO_PREFERENCE",
+        user_action: "PAY_NOW",
+        return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/success`,
+        cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/cancel`,
       },
     };
 
@@ -105,16 +109,16 @@ export async function createOrder(params: CreateOrderParams) {
       orderData,
       {
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     return response.data;
   } catch (error) {
-    console.error('PayPal create order error:', error);
-    throw new Error('Failed to create PayPal order');
+    console.error("PayPal create order error:", error);
+    throw new Error("Failed to create PayPal order");
   }
 }
 
@@ -127,16 +131,16 @@ export async function captureOrder(orderId: string) {
       {},
       {
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     return response.data;
   } catch (error) {
-    console.error('PayPal capture order error:', error);
-    throw new Error('Failed to capture PayPal order');
+    console.error("PayPal capture order error:", error);
+    throw new Error("Failed to capture PayPal order");
   }
 }
 
@@ -148,15 +152,15 @@ export async function getOrderDetails(orderId: string) {
       `${PAYPAL_API_BASE}/v2/checkout/orders/${orderId}`,
       {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
-      }
+      },
     );
 
     return response.data;
   } catch (error) {
-    console.error('PayPal get order error:', error);
-    throw new Error('Failed to get PayPal order details');
+    console.error("PayPal get order error:", error);
+    throw new Error("Failed to get PayPal order details");
   }
 }
 
@@ -168,12 +172,12 @@ export interface AffiliateProduct {
 
 export async function trackAffiliateSale(
   orderId: string,
-  affiliateProducts: AffiliateProduct[]
+  affiliateProducts: AffiliateProduct[],
 ) {
   try {
     // Store affiliate tracking data
     // This would typically go to a database
-    console.log('Tracking affiliate sale:', {
+    console.log("Tracking affiliate sale:", {
       orderId,
       affiliateProducts,
       timestamp: new Date().toISOString(),
@@ -181,16 +185,16 @@ export async function trackAffiliateSale(
 
     // You can implement webhook calls to affiliate networks here
     // For example: ShareASale, CJ Affiliate, Impact, etc.
-    
+
     return {
       success: true,
       trackedProducts: affiliateProducts.length,
     };
   } catch (error) {
-    console.error('Affiliate tracking error:', error);
+    console.error("Affiliate tracking error:", error);
     return {
       success: false,
-      error: 'Failed to track affiliate sale',
+      error: "Failed to track affiliate sale",
     };
   }
 }

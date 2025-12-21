@@ -304,44 +304,6 @@ A good design system pays dividends: faster development, fewer bugs, and consist
     tags: ["Design Systems", "Components", "Workflow", "Development"],
     featured: false,
   },
-  {
-    id: "the-future-of-digital-aesthetics-2025-prediction",
-    title: "The Future of Digital Aesthetics: 2025 Prediction",
-    excerpt:
-      "An in-depth look at how this trend is reshaping the industry standards for the coming year.",
-    content: `In the rapidly evolving world of digital design, staying ahead of the curve is not just an advantage—it's a necessity. The Future of Digital Aesthetics: 2025 Prediction represents a paradigm shift in how we approach user experience.
-
-
-We are seeing a move towards more immersive, tactile interfaces that bridge the gap between physical and digital. This is not just about aesthetics; it's about functionality and emotional connection.
-
-
-Key takeaways for 2025 involve focusing on performance, accessibility, and genuine user value. At 3000 Studios, we are pioneering these techniques to deliver award-winning experiences for our clients.`,
-    category: "Design",
-    author: "3000 Studios Team",
-    date: "2025-12-17",
-    readTime: "5 min read",
-    tags: ["Design", "Future", "Trends"],
-    featured: false,
-  },
-  {
-    id: "mastering-dark-mode-design-patterns",
-    title: "mastering Dark Mode Design Patterns",
-    excerpt:
-      "An in-depth look at how this trend is reshaping the industry standards for the coming year.",
-    content: `In the rapidly evolving world of digital design, staying ahead of the curve is not just an advantage—it's a necessity. mastering Dark Mode Design Patterns represents a paradigm shift in how we approach user experience.
-
-
-We are seeing a move towards more immersive, tactile interfaces that bridge the gap between physical and digital. This is not just about aesthetics; it's about functionality and emotional connection.
-
-
-Key takeaways for 2025 involve focusing on performance, accessibility, and genuine user value. At 3000 Studios, we are pioneering these techniques to deliver award-winning experiences for our clients.`,
-    category: "Design",
-    author: "3000 Studios Team",
-    date: "2025-12-17",
-    readTime: "5 min read",
-    tags: ["Design", "Future", "Trends"],
-    featured: false,
-  },
 ];
 
 export function getFeaturedPosts(): BlogPost[] {

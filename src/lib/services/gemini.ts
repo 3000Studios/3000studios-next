@@ -3,7 +3,7 @@
  * Alternative AI provider for multimodal generation
  */
 
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 let genAI: GoogleGenerativeAI | null = null;
 
@@ -14,42 +14,45 @@ if (process.env.GEMINI_API_KEY) {
 
 export async function generateWithGemini(prompt: string): Promise<string> {
   if (!genAI) {
-    throw new Error('Gemini API key not configured');
+    throw new Error("Gemini API key not configured");
   }
 
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     const result = await model.generateContent(prompt);
     const response = await result.response;
     return response.text();
   } catch (error) {
-    console.error('Gemini generation error:', error);
-    throw new Error('Failed to generate with Gemini');
+    console.error("Gemini generation error:", error);
+    throw new Error("Failed to generate with Gemini");
   }
 }
 
-export async function analyzeImage(imageBase64: string, prompt: string): Promise<string> {
+export async function analyzeImage(
+  imageBase64: string,
+  prompt: string,
+): Promise<string> {
   if (!genAI) {
-    throw new Error('Gemini API key not configured');
+    throw new Error("Gemini API key not configured");
   }
 
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro-vision' });
-    
+    const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
+
     const result = await model.generateContent([
       prompt,
       {
         inlineData: {
           data: imageBase64,
-          mimeType: 'image/jpeg'
-        }
-      }
+          mimeType: "image/jpeg",
+        },
+      },
     ]);
-    
+
     const response = await result.response;
     return response.text();
   } catch (error) {
-    console.error('Image analysis error:', error);
-    throw new Error('Failed to analyze image');
+    console.error("Image analysis error:", error);
+    throw new Error("Failed to analyze image");
   }
 }

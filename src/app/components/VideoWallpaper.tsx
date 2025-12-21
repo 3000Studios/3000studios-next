@@ -6,17 +6,15 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface VideoWallpaperProps {
   videoSrc?: string;
-  fallbackGradient?: boolean;
   opacity?: number;
 }
 
 export default function VideoWallpaper({
   videoSrc,
-  fallbackGradient = true,
   opacity = 0.3,
 }: VideoWallpaperProps) {
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -50,7 +48,6 @@ export default function VideoWallpaper({
           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
           style={{ opacity: videoLoaded ? opacity : 0 }}
         >
-          <source src={videoSrc.replace(".mp4", ".webm")} type="video/webm" />
           <source src={videoSrc} type="video/mp4" />
         </video>
       )}

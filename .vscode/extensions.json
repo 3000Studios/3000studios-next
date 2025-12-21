@@ -1,0 +1,29 @@
+{
+  "recommendations": [
+    "github.copilot",
+    "github.copilot-chat",
+    "ms-vscode.vscode-typescript-next",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "pranaygp.vscode-css-peek",
+    "visualstudioexptteam.vscodeintellicode",
+    "ms-vscode.remote-repositories",
+    "github.vscode-pull-request-github",
+    "eamodio.gitlens",
+    "github.vscode-github-actions",
+    "ms-azuretools.vscode-docker",
+    "ms-vscode-remote.remote-containers",
+    "usernamehw.errorlens",
+    "wayou.vscode-todo-highlight",
+    "gruntfuggly.todo-tree",
+    "streetsidesoftware.code-spell-checker",
+    "oderwat.indent-rainbow",
+    "pkief.material-icon-theme",
+    "yoavbls.pretty-ts-errors",
+    "dsznajder.es7-react-js-snippets",
+    "ms-vscode.powershell",
+    "redhat.vscode-yaml",
+    "tamasfe.even-better-toml"
+  ]
+}

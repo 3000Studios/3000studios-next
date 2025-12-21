@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     if (!priceId) {
       return NextResponse.json(
         { error: "Price ID is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
     console.error("Stripe Checkout Error:", error);
     return NextResponse.json(
       { error: error.message || "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

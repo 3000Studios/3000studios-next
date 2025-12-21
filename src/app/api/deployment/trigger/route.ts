@@ -3,8 +3,8 @@
  * Triggers Vercel deployment
  */
 
-import { NextRequest, NextResponse } from 'next/server';
-import { triggerDeployment, getDeploymentStatus } from '@/lib/services/vercel';
+import { triggerDeployment } from "@/lib/services/vercel";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,20 +12,20 @@ export async function POST(request: NextRequest) {
     const { branch } = body;
 
     // Trigger deployment
-    const deployment = await triggerDeployment(branch || 'main');
+    const deployment = await triggerDeployment(branch || "main");
 
     return NextResponse.json({
       success: true,
       deploymentId: deployment.id,
       deploymentUrl: `https://${deployment.url}`,
       status: deployment.readyState,
-      message: 'Deployment triggered successfully',
+      message: "Deployment triggered successfully",
     });
   } catch (error) {
-    console.error('Deployment trigger API error:', error);
+    console.error("Deployment trigger API error:", error);
     return NextResponse.json(
-      { error: 'Failed to trigger deployment' },
-      { status: 500 }
+      { error: "Failed to trigger deployment" },
+      { status: 500 },
     );
   }
 }

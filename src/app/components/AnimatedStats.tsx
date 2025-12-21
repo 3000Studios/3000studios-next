@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 interface Stat {
   label: string;
@@ -16,13 +16,15 @@ interface Stat {
  */
 export default function AnimatedStats() {
   const [stats] = useState<Stat[]>([
-    { label: 'Projects Completed', value: 250, suffix: '+', prefix: '' },
-    { label: 'Happy Clients', value: 180, suffix: '+', prefix: '' },
-    { label: 'Years Experience', value: 12, suffix: '', prefix: '' },
-    { label: 'Success Rate', value: 99, suffix: '%', prefix: '' },
+    { label: "Projects Completed", value: 250, suffix: "+", prefix: "" },
+    { label: "Happy Clients", value: 180, suffix: "+", prefix: "" },
+    { label: "Years Experience", value: 12, suffix: "", prefix: "" },
+    { label: "Success Rate", value: 99, suffix: "%", prefix: "" },
   ]);
 
-  const [displayValues, setDisplayValues] = useState<number[]>(stats.map(() => 0));
+  const [displayValues, setDisplayValues] = useState<number[]>(
+    stats.map(() => 0),
+  );
 
   useEffect(() => {
     const duration = 2000; // 2 seconds
@@ -36,7 +38,7 @@ export default function AnimatedStats() {
       const interval = setInterval(() => {
         currentStep++;
         if (currentStep <= steps) {
-          setDisplayValues(prev => {
+          setDisplayValues((prev) => {
             const newValues = [...prev];
             newValues[index] = Math.min(increment * currentStep, stat.value);
             return newValues;
