@@ -52,7 +52,9 @@ export function AppLanding(props: AppLandingProps) {
             <div className="flex items-end gap-3">
               <div className="text-4xl font-black text-amber-300">{price}</div>
               {compareAt && (
-                <div className="text-xl text-gray-400 line-through">{compareAt}</div>
+                <div className="text-xl text-gray-400 line-through">
+                  {compareAt}
+                </div>
               )}
             </div>
             <div className="flex flex-wrap gap-3">
@@ -74,7 +76,9 @@ export function AppLanding(props: AppLandingProps) {
 
           <div className="grid gap-6 md:grid-cols-2">
             <div className="p-6 rounded-2xl border border-amber-300/30 bg-white/5 backdrop-blur-xl shadow-2xl">
-              <h2 className="text-xl font-bold text-amber-200 mb-4">What you get</h2>
+              <h2 className="text-xl font-bold text-amber-200 mb-4">
+                What you get
+              </h2>
               <ul className="space-y-3 text-gray-100/90">
                 {bulletPoints.map((item) => (
                   <li key={item} className="flex gap-3 items-start">
@@ -85,7 +89,9 @@ export function AppLanding(props: AppLandingProps) {
               </ul>
             </div>
             <div className="p-6 rounded-2xl border border-amber-300/30 bg-white/5 backdrop-blur-xl shadow-2xl">
-              <h2 className="text-xl font-bold text-amber-200 mb-4">Designed for</h2>
+              <h2 className="text-xl font-bold text-amber-200 mb-4">
+                Designed for
+              </h2>
               <ul className="space-y-3 text-gray-100/90">
                 {audience.map((item) => (
                   <li key={item} className="flex gap-3 items-start">
@@ -98,12 +104,23 @@ export function AppLanding(props: AppLandingProps) {
           </div>
 
           <div className="p-6 rounded-2xl border border-amber-300/30 bg-white/5 backdrop-blur-xl shadow-2xl">
-            <h2 className="text-xl font-bold text-amber-200 mb-4">Why it wins</h2>
+            <h2 className="text-xl font-bold text-amber-200 mb-4">
+              Why it wins
+            </h2>
             <div className="grid md:grid-cols-3 gap-4">
               {highlights.map((item) => (
-                <div key={item} className="p-4 rounded-xl bg-black/40 border border-amber-200/20">
-                  <p className="font-semibold text-amber-100 mb-1">{item.split(':')[0]}</p>
-                  <p className="text-sm text-gray-200/80">{item.includes(':') ? item.split(':').slice(1).join(':').trim() : item}</p>
+                <div
+                  key={item}
+                  className="p-4 rounded-xl bg-black/40 border border-amber-200/20"
+                >
+                  <p className="font-semibold text-amber-100 mb-1">
+                    {item.split(":")[0]}
+                  </p>
+                  <p className="text-sm text-gray-200/80">
+                    {item.includes(":")
+                      ? item.split(":").slice(1).join(":").trim()
+                      : item}
+                  </p>
                 </div>
               ))}
             </div>
@@ -116,7 +133,10 @@ export function AppLanding(props: AppLandingProps) {
               <h2 className="text-xl font-bold text-amber-200 mb-4">FAQ</h2>
               <div className="space-y-4">
                 {faq.map((item) => (
-                  <div key={item.q} className="border-b border-white/10 pb-4 last:border-0">
+                  <div
+                    key={item.q}
+                    className="border-b border-white/10 pb-4 last:border-0"
+                  >
                     <p className="font-semibold text-amber-100">{item.q}</p>
                     <p className="text-sm text-gray-200/80 mt-1">{item.a}</p>
                   </div>

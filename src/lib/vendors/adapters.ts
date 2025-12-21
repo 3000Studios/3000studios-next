@@ -8,7 +8,8 @@ export type VendorAdapter = {
 
 async function fetchJson(feedUrl: string) {
   const res = await fetch(feedUrl, { cache: "no-store" });
-  if (!res.ok) throw new Error(`Failed to fetch feed ${feedUrl}: ${res.status}`);
+  if (!res.ok)
+    throw new Error(`Failed to fetch feed ${feedUrl}: ${res.status}`);
   return res.json();
 }
 
@@ -29,7 +30,7 @@ export const cjAdapter: VendorAdapter = {
         url: item.link || item.url,
         category: item.category,
         commission: item.commission || item.commissionRate,
-      })
+      }),
     );
   },
 };
@@ -38,7 +39,9 @@ export const shareasaleAdapter: VendorAdapter = {
   id: "shareasale",
   fetchProducts: async (feedUrl: string) => {
     const data = await fetchJson(feedUrl);
-    const items = Array.isArray(data?.products) ? data.products : data?.items || [];
+    const items = Array.isArray(data?.products)
+      ? data.products
+      : data?.items || [];
     return items.map((item: any) =>
       normalizeVendorProduct("shareasale", {
         id: item.merchantId || item.id,
@@ -51,7 +54,7 @@ export const shareasaleAdapter: VendorAdapter = {
         url: item.trackingUrl || item.url,
         category: item.category,
         commission: item.commission,
-      })
+      }),
     );
   },
 };
@@ -60,7 +63,9 @@ export const amazonAdapter: VendorAdapter = {
   id: "amazon",
   fetchProducts: async (feedUrl: string) => {
     const data = await fetchJson(feedUrl);
-    const items = Array.isArray(data?.products) ? data.products : data?.items || [];
+    const items = Array.isArray(data?.products)
+      ? data.products
+      : data?.items || [];
     return items.map((item: any) =>
       normalizeVendorProduct("amazon", {
         id: item.asin || item.id,
@@ -73,7 +78,7 @@ export const amazonAdapter: VendorAdapter = {
         url: item.detailPageURL || item.url,
         category: item.category,
         commission: item.commission,
-      })
+      }),
     );
   },
 };
@@ -95,7 +100,7 @@ export const shopifyAdapter: VendorAdapter = {
         url: item.handle ? `/products/${item.handle}` : item.onlineStoreUrl,
         category: item.product_type,
         commission: item.commission,
-      })
+      }),
     );
   },
 };

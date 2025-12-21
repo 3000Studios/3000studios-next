@@ -4,9 +4,9 @@
  * Supports: local videos, animated gradients, and future live stream integration
  */
 
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 interface VideoWallpaperProps {
   videoSrc?: string;
@@ -15,7 +15,7 @@ interface VideoWallpaperProps {
 
 export default function VideoWallpaper({
   videoSrc,
-  opacity = 0.3
+  opacity = 0.3,
 }: VideoWallpaperProps) {
   const [videoLoaded, setVideoLoaded] = useState(false);
 
@@ -27,8 +27,14 @@ export default function VideoWallpaper({
         style={{ opacity: videoLoaded ? 0 : 1 }}
       >
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold/20 rounded-full filter blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-sapphire/20 rounded-full filter blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-platinum/10 rounded-full filter blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-sapphire/20 rounded-full filter blur-3xl animate-pulse"
+          style={{ animationDelay: "1s" }}
+        ></div>
+        <div
+          className="absolute top-1/2 right-1/3 w-64 h-64 bg-platinum/10 rounded-full filter blur-3xl animate-pulse"
+          style={{ animationDelay: "2s" }}
+        ></div>
       </div>
 
       {/* Video Background - when provided */}

@@ -8,9 +8,9 @@
 export function useAI() {
   // Placeholder implementation
   return {
-    completion: '',
+    completion: "",
     complete: async (_prompt: string) => {
-      console.log('AI completion requested');
+      console.log("AI completion requested");
     },
     isLoading: false,
     error: null,
