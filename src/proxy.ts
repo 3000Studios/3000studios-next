@@ -5,7 +5,7 @@ const RATE_LIMIT = new Map<string, { count: number; ts: number }>();
 const WINDOW_MS = 60_000;
 const MAX_REQUESTS = 30;
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   // Only applying rate limiting to AI routes
   if (req.nextUrl.pathname.startsWith('/api/ai')) {
     const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
