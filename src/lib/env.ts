@@ -82,4 +82,8 @@ export const ENV = {
 
   // --- SYSTEM ---
   NODE_ENV: process.env.NODE_ENV || "development",
+  
+  // Public API keys (prefixed with NEXT_PUBLIC_)
+  MAPS_API: getEnv("NEXT_PUBLIC_MAPS_API"),
+  SIGNAL_SERVER: getEnv("NEXT_PUBLIC_SIGNAL_SERVER", "wss://signal.3000studios.com"),
 };
