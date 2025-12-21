@@ -39,6 +39,10 @@
   "editor.wordWrap": "on",
   "editor.minimap.enabled": false,
   "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
   "editor.inlineSuggest.enabled": true,
 
   /* ======================================================
@@ -69,7 +73,8 @@
      GIT (SILENT, NO POPUPS, NO FREEZES)
   ====================================================== */
 
-  "git.autorefresh": false,
+  "git.autorefresh": true,
+  "git.autofetch": true,
   "git.confirmSync": false,
   "git.detectSubmodules": false,
   "git.countBadge": "off",
