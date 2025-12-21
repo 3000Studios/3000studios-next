@@ -1,0 +1,50 @@
+name: Force Merge PRs & Deploy to Vercel
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_branch:
+        description: "Base branch to merge into"
+        required: true
+        default: "main"
+      force_merge:
+        description: "Use admin override to merge"
+        required: true
+        default: "true"
+
+jobs:
+  merge_and_deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install GitHub CLI
+        uses: cli/cli@v2
+
+      - name: Authenticate GH CLI
+        run: |
+          echo "${{ secrets.GH_TOKEN }}" | gh auth login --with-token
+
+      - name: Force merge all open PRs into base branch
+        env:
+          BASE_BRANCH: ${{ github.event.inputs.base_branch }}
+        run: |
+          prs=$(gh pr list --state open --base "$BASE_BRANCH" --json number -q '.[].number')
+          for pr in $prs; do
+            echo "Merging PR #$pr into $BASE_BRANCH"
+            gh pr merge "$pr" --merge --admin
+          done
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          npm i -g vercel
+          vercel deploy --prod --token "$VERCEL_TOKEN"
