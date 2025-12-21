@@ -5,7 +5,6 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { generateProductDescription } from "@/lib/services/openai";
-import { updateProduct } from "@/lib/services/mongodb";
 
 export async function POST(request: NextRequest) {
   try {

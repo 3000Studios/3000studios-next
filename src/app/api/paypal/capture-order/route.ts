@@ -4,7 +4,7 @@
  */
 
 import { prisma } from "@/lib/prisma";
-import { captureOrder, trackAffiliateSale } from "@/lib/services/paypal";
+import { captureOrder } from "@/lib/services/paypal";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
