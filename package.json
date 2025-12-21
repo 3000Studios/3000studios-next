@@ -7,7 +7,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "analyze": "ANALYZE=true next build",
+    "clean": "rm -rf .next node_modules/.cache",
+    "audit-fix": "npm audit fix",
+    "predev": "npm run type-check"
   },
   "engines": {
     "node": "20.x"
@@ -16,7 +21,7 @@
     "@anthropic-ai/sdk": "^0.71.2",
     "@google/generative-ai": "^0.24.1",
     "@octokit/rest": "^22.0.1",
-    "@paypal/checkout-server-sdk": "^1.0.3",
+    "@paypal/paypal-server-sdk": "^1.0.4",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.4.2",
     "@stripe/stripe-js": "^8.5.3",
