@@ -2,6 +2,8 @@ import { generateSitemapXml } from '@/lib/seo';
 import { getSitemapEntries } from '@/lib/sitemap';
 import { NextRequest, NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(_req: NextRequest) {
   try {
     const entries = await getSitemapEntries();
