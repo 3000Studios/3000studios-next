@@ -41,6 +41,10 @@
   "editor.wordWrap": "on",
   "editor.minimap.enabled": false,
   "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
   "editor.inlineSuggest.enabled": true,
 
   /* ======================================================
@@ -156,6 +160,6 @@
   ====================================================== */
 
   "github-actions.workflows.pinned.refresh.enabled": true,
-"github-actions.workflows.pinned.workflows": [],
-"github-actions.use-enterprise": true
+  "github-actions.workflows.pinned.workflows": [],
+  "github-actions.use-enterprise": true
 }

@@ -36,7 +36,7 @@ function Invoke-AutoMerge {
     
     # Check if there are any PRs to merge (requires gh CLI)
     if (Get-Command gh -ErrorAction SilentlyContinue) {
-        $prs = gh pr list --state open --json number,author
+        $prs = gh pr list --state open --json number, author
         if ($prs) {
             Write-Host "📋 Found open PRs, attempting auto-merge..." -ForegroundColor Cyan
             foreach ($pr in ($prs | ConvertFrom-Json)) {

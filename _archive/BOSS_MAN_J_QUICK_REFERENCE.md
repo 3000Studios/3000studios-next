@@ -3,12 +3,14 @@
 ## 🎤 VOICE COMMANDS (Say These Anywhere)
 
 ### Instant Deployment
+
 - **"Deploy that"** → Commits & deploys to production INSTANTLY
 - **"Make it live"** → Same as deploy that
 - **"Commit that"** → Saves to GitHub (no deploy yet)
 - **"Update the website"** → Full deployment
 
 ### Code Changes
+
 - **"Change [X] to [Y]"** → AI updates and deploys
 - **"Add [feature] to [page]"** → AI creates and deploys
 - **"Fix the [issue]"** → AI analyzes and fixes
@@ -19,12 +21,14 @@
 ## 🎮 MATRIX DASHBOARD (3000studios.com/matrix)
 
 ### Quick Actions
+
 1. **Voice Command Button** → Opens voice-to-code editor
 2. **Deploy Now Button** → Instant redeploy of current state
 3. **Real-Time Status Widget** → See deployment progress live
 4. **View Repository Link** → Opens GitHub main branch
 
 ### What You'll See
+
 - ✅ **Deployment Progress** (0-100%)
 - 🚀 **Live Status Updates** ("Committing...", "Building...", "LIVE!")
 - ⏱️ **Last Deployment Time**
@@ -47,6 +51,7 @@ LIVE ON WEBSITE! (Total: ~20-30 seconds)
 ```
 
 ### You'll See Real-Time Updates:
+
 1. 🔵 "Committing to GitHub..." (25% complete)
 2. 🟡 "Deploying to Vercel..." (50% complete)
 3. 🟠 "Building..." (75% complete)
@@ -68,16 +73,19 @@ LIVE ON WEBSITE! (Total: ~20-30 seconds)
 ## 💡 TIPS
 
 ### For Fastest Deployment
+
 1. Use **"Deploy that"** - commits and deploys in one command
 2. Watch the Matrix dashboard for real-time progress
 3. Changes appear on website in under 30 seconds
 
 ### For Multiple Changes
+
 1. Make several edits
 2. Say **"Commit that"** for each (saves, doesn't deploy)
 3. Then say **"Deploy that"** once to push all changes live
 
 ### If Something Goes Wrong
+
 1. Check Matrix dashboard for error details
 2. Click "Deploy Now" to retry
 3. View repository on GitHub to see commits
@@ -87,16 +95,19 @@ LIVE ON WEBSITE! (Total: ~20-30 seconds)
 ## 📱 NOTIFICATIONS
 
 ### While Deploying
+
 - Popup in bottom-right corner
 - Shows progress bar
 - Lists each step in real-time
 
 ### When Complete
+
 - ✅ Green success notification
 - "Changes are LIVE on production"
 - Auto-hides after 5 seconds
 
 ### If Error
+
 - ❌ Red error notification
 - Shows what went wrong
 - Stays visible until dismissed
@@ -106,21 +117,25 @@ LIVE ON WEBSITE! (Total: ~20-30 seconds)
 ## 🔥 COMMON VOICE COMMANDS
 
 **Homepage Updates:**
+
 - "Change the homepage headline to 'Welcome to 3000 Studios'"
 - "Add a new section to the homepage with our services"
 - "Update the hero image on the homepage"
 
 **Styling Changes:**
+
 - "Make the navigation bar gold instead of gray"
 - "Change the button color to blue"
 - "Add a gradient background to the footer"
 
 **Content Updates:**
+
 - "Add a new blog post about our latest project"
 - "Update the about page with new team photos"
 - "Change the contact email to hello@3000studios.com"
 
 **Feature Additions:**
+
 - "Add a pricing table to the store page"
 - "Create a testimonials section on the homepage"
 - "Add a live chat widget to all pages"
@@ -132,7 +147,7 @@ LIVE ON WEBSITE! (Total: ~20-30 seconds)
 ✅ **Say it** → See it processing → **It's LIVE** (30 seconds)  
 ✅ **ONE repo** → No confusion about where changes go  
 ✅ **Real-time updates** → No page refresh needed  
-✅ **Always works** → Main branch always deploys  
+✅ **Always works** → Main branch always deploys
 
 ---
 
@@ -147,5 +162,5 @@ LIVE ON WEBSITE! (Total: ~20-30 seconds)
 
 ---
 
-*Your commands are law. Your voice is power.*  
-*Welcome to real-time deployment, Boss Man J.* 🖤
+_Your commands are law. Your voice is power._  
+_Welcome to real-time deployment, Boss Man J._ 🖤
