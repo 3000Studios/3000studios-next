@@ -1,46 +1,55 @@
-import { z } from "zod";
+/**
+ * Environment Variables Validation
+ * 
+ * This module validates required environment variables at build time.
+ * If any required variable is missing, the build will fail immediately.
+ * This prevents silent runtime failures and ensures deployment safety.
+ */
 
-const required = (name: string) => {
+function required(name: string): string {
   const value = process.env[name];
   if (!value) {
-    throw new Error(`Missing required environment variable: ${name}`);
+    throw new Error(`❌ Missing required environment variable: ${name}`);
   }
   return value;
-};
+}
 
-const optional = (name: string) => {
-  return process.env[name];
-};
+function optional(name: string, defaultValue: string = ''): string {
+  return process.env[name] || defaultValue;
+}
 
+/**
+ * Validated Environment Variables
+ * Access these instead of process.env directly to ensure type safety
+ */
 export const ENV = {
-  SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || "https://3000studios.com",
-  BASE_URL: process.env.NEXT_PUBLIC_BASE_URL || "https://3000studios.com",
-  SIGNAL_SERVER: process.env.NEXT_PUBLIC_SIGNAL_SERVER || "wss://signal.3000studios.com",
-  MAPS_API: optional("NEXT_PUBLIC_MAPS_API"),
-  DATABASE_URL: optional("DATABASE_URL"),
-  NEXTAUTH_URL: optional("NEXTAUTH_URL"),
-  NEXTAUTH_SECRET: optional("NEXTAUTH_SECRET"),
-  GOOGLE_CLIENT_ID: optional("GOOGLE_CLIENT_ID"),
-  GOOGLE_CLIENT_SECRET: optional("GOOGLE_CLIENT_SECRET"),
-  GITHUB_CLIENT_ID: optional("GITHUB_CLIENT_ID"),
-  GITHUB_CLIENT_SECRET: optional("GITHUB_CLIENT_SECRET"),
-  STRIPE_SECRET_KEY: optional("STRIPE_SECRET_KEY"),
-  STRIPE_PUBLISHABLE_KEY: optional("STRIPE_PUBLISHABLE_KEY"),
-  STRIPE_WEBHOOK_SECRET: optional("STRIPE_WEBHOOK_SECRET"),
-  SMTP_HOST: optional("SMTP_HOST"),
-  SMTP_PORT: optional("SMTP_PORT"),
-  SMTP_USER: optional("SMTP_USER"),
-  SMTP_PASSWORD: optional("SMTP_PASSWORD"),
+  // Public variables (available in browser)
+  SITE_URL: required("NEXT_PUBLIC_SITE_URL"),
+  
+  // Server-only variables (PayPal) - Optional for build
   PAYPAL_CLIENT_ID: optional("PAYPAL_CLIENT_ID"),
   PAYPAL_SECRET: optional("PAYPAL_SECRET"),
-  AWS_ACCESS_KEY_ID: optional("AWS_ACCESS_KEY_ID"),
-  AWS_SECRET_ACCESS_KEY: optional("AWS_SECRET_ACCESS_KEY"),
-  AWS_REGION: optional("AWS_REGION"),
-  AWS_S3_BUCKET: optional("AWS_S3_BUCKET"),
-  REDIS_URL: optional("REDIS_URL"),
-  SITE_URL: optional("NEXT_PUBLIC_SITE_URL") || optional("NEXTAUTH_URL") || "https://3000studios.com",
-  NODE_ENV: process.env.NODE_ENV || "development",
+  
+  // Server-only variables (AI Services) - Optional but recommended
+  OPENAI_API_KEY: optional("OPENAI_API_KEY"),
+  CLAUDE_API_KEY: optional("CLAUDE_API_KEY"),
+  GEMINI_API_KEY: optional("GEMINI_API_KEY"),
+  
+  // Server-only variables (Google Services)
+  GOOGLE_MAPS_API_KEY: optional("GOOGLE_MAPS_API_KEY"),
+  
+  // Server-only variables (Database)
+  MONGO_PUBLIC_KEY: optional("MONGO_PUBLIC_KEY"),
+  MONGO_PRIVATE_KEY: optional("MONGO_PRIVATE_KEY"),
+  MONGO_IP: optional("MONGO_IP"),
+  
+  // Node environment
+  NODE_ENV: process.env.NODE_ENV || 'development',
 };
 
-// Keep env export for backwards compatibility
-export const env = ENV;
+// Validate at module load time (build-time check)
+if (typeof window === 'undefined') {
+  console.log('✅ Environment variables validated successfully');
+  console.log(`📍 SITE_URL: ${ENV.SITE_URL}`);
+  console.log(`🔧 NODE_ENV: ${ENV.NODE_ENV}`);
+}
