@@ -117,6 +117,7 @@ The key is that it should show as "Encrypted" but NOT show any @ symbol or refer
 ## 🎯 Quick Troubleshooting
 
 ### If PowerShell says "script not recognized":
+
 ```powershell
 # Check if file exists
 Test-Path "C:\DEV\3000studios-next\scripts\fix-vercel-env.ps1"
@@ -129,6 +130,7 @@ PowerShell -ExecutionPolicy Bypass -File "C:\DEV\3000studios-next\scripts\fix-ve
 ```
 
 ### If Vercel CLI says "not authenticated":
+
 ```powershell
 vercel login
 # Follow the browser authentication
@@ -136,6 +138,7 @@ vercel login
 ```
 
 ### If variable won't delete:
+
 ```powershell
 # Force remove from all targets
 vercel env rm NEXT_PUBLIC_SITE_URL --yes

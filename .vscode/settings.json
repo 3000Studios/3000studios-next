@@ -160,6 +160,6 @@
   ====================================================== */
 
   "github-actions.workflows.pinned.refresh.enabled": true,
-"github-actions.workflows.pinned.workflows": [],
-"github-actions.use-enterprise": true
+  "github-actions.workflows.pinned.workflows": [],
+  "github-actions.use-enterprise": true
 }

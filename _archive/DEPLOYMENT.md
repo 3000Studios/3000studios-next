@@ -31,12 +31,12 @@ This guide will walk you through deploying the 3000 Studios website to Vercel.
 
 4. **Add Environment Variables**
    Click "Environment Variables" and add:
-   
+
    ```
    ADMIN_EMAIL=mr.jwswain@gmail.com
    ADMIN_PASSWORD=Bossman3000!!!
    ```
-   
+
    **⚠️ IMPORTANT**: These are temporary. In production, you should:
    - Use a proper authentication service (Auth0, NextAuth, etc.)
    - Hash passwords
@@ -77,6 +77,7 @@ vercel --prod
 ### 1. Verify Deployment
 
 Visit your Vercel URL and check:
+
 - [ ] Home page loads correctly
 - [ ] All navigation links work
 - [ ] All 12 pages are accessible
@@ -107,6 +108,7 @@ Visit your Vercel URL and check:
 ## Environment Variables Reference
 
 ### Currently Used
+
 ```env
 ADMIN_EMAIL=your-admin-email@example.com
 ADMIN_PASSWORD=your-secure-password
@@ -165,9 +167,9 @@ Current build is already optimized, but for future reference:
 ```json
 // next.config.ts
 {
-  "output": "standalone",  // Smaller Docker images
+  "output": "standalone", // Smaller Docker images
   "images": {
-    "domains": ["your-cdn.com"],  // Add CDN domains
+    "domains": ["your-cdn.com"], // Add CDN domains
     "formats": ["image/avif", "image/webp"]
   },
   "compress": true,
@@ -228,6 +230,7 @@ If you need to rollback:
 3. Click "..." → "Promote to Production"
 
 Or using CLI:
+
 ```bash
 vercel rollback
 ```

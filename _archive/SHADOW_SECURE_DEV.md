@@ -5,6 +5,7 @@
 Your secrets are now **loaded into memory only**, never written to disk, never committed to GitHub.
 
 ### Architecture:
+
 ```
 Windows Credential Manager (encrypted, system-managed)
         ↓
@@ -50,6 +51,7 @@ C:\3000Studios\shadow\shadow-secrets.ps1 -List
 ```
 
 You should see:
+
 ```
 Stored Shadow Credentials:
 =========================
@@ -62,12 +64,14 @@ Stored Shadow Credentials:
 ### Step 3: Start Development
 
 **Option A: From VS Code (Easiest)**
+
 1. Open VS Code
 2. Press `Ctrl+Shift+B`
 3. Select "🚀 Shadow: Start Dev Server"
 4. Dev server starts with secrets loaded
 
 **Option B: From Terminal**
+
 ```powershell
 C:\3000Studios\shadow\shadow-dev.ps1
 ```
@@ -77,6 +81,7 @@ C:\3000Studios\shadow\shadow-dev.ps1
 ## 📝 Daily Workflow
 
 ### 1. Start Development
+
 ```powershell
 # Press Ctrl+Shift+B in VS Code
 # Or run: C:\3000Studios\shadow\shadow-dev.ps1
@@ -86,12 +91,14 @@ C:\3000Studios\shadow\shadow-dev.ps1
 ```
 
 ### 2. Edit Code
+
 - Make changes in VS Code
 - File auto-saves
 - Dev server auto-reloads
 - Changes visible at http://localhost:3000
 
 ### 3. Commit & Push
+
 ```powershell
 git add .
 git commit -m "feat: your change"
@@ -101,6 +108,7 @@ git push origin main
 ```
 
 ### 4. Check Production
+
 - GitHub Actions log: https://github.com/3000Studios/3000studios-next/actions
 - Vercel dashboard: https://vercel.com/3000studios
 - Live site: https://3000studios.com
@@ -110,24 +118,28 @@ git push origin main
 ## 🔑 Managing Credentials
 
 ### View Stored Credentials
+
 ```powershell
 # VS Code task: Ctrl+Shift+B → "Shadow: List Stored Keys"
 # Or: C:\3000Studios\shadow\shadow-secrets.ps1 -List
 ```
 
 ### Add a New Credential
+
 ```powershell
 # VS Code task: Ctrl+Shift+B → "Shadow: Store API Key"
 # Or: cmdkey /generic:KEY_NAME /user:dev /pass:ACTUAL_KEY
 ```
 
 ### Remove a Credential
+
 ```powershell
 # VS Code task: Ctrl+Shift+B → "Shadow: Clear API Key"
 # Or: cmdkey /delete:KEY_NAME
 ```
 
 ### Update an Existing Credential
+
 ```powershell
 # Remove the old one
 cmdkey /delete:OPENAI_API_KEY
@@ -142,14 +154,14 @@ cmdkey /generic:OPENAI_API_KEY /user:dev /pass:NEW_KEY
 
 ### ✅ What's Secure
 
-| Layer | Method | Safe? |
-|-------|--------|-------|
-| **Storage** | Windows Credential Manager (encrypted) | ✅ Yes |
+| Layer       | Method                                         | Safe?  |
+| ----------- | ---------------------------------------------- | ------ |
+| **Storage** | Windows Credential Manager (encrypted)         | ✅ Yes |
 | **Loading** | PowerShell environment variables (memory only) | ✅ Yes |
-| **Transit** | HTTPS to APIs | ✅ Yes |
-| **Code** | Environment variables (never hardcoded) | ✅ Yes |
-| **Git** | Never committed (in .gitignore) | ✅ Yes |
-| **Disk** | Never written to disk | ✅ Yes |
+| **Transit** | HTTPS to APIs                                  | ✅ Yes |
+| **Code**    | Environment variables (never hardcoded)        | ✅ Yes |
+| **Git**     | Never committed (in .gitignore)                | ✅ Yes |
+| **Disk**    | Never written to disk                          | ✅ Yes |
 
 ### ❌ What's NOT Secure
 
@@ -177,13 +189,13 @@ Credentials are:
 
 ### Available Tasks (Ctrl+Shift+B)
 
-| Task | What It Does |
-|------|-------------|
-| **🚀 Shadow: Start Dev Server** | Load secrets + start pnpm dev |
-| **🔑 Shadow: Store API Key** | Interactive credential storage |
-| **📋 Shadow: List Stored Keys** | Show all stored credentials |
-| **🗑️ Shadow: Clear API Key** | Remove a credential |
-| **✅ Git: Sync & Push** | Stage, commit, push |
+| Task                            | What It Does                   |
+| ------------------------------- | ------------------------------ |
+| **🚀 Shadow: Start Dev Server** | Load secrets + start pnpm dev  |
+| **🔑 Shadow: Store API Key**    | Interactive credential storage |
+| **📋 Shadow: List Stored Keys** | Show all stored credentials    |
+| **🗑️ Shadow: Clear API Key**    | Remove a credential            |
+| **✅ Git: Sync & Push**         | Stage, commit, push            |
 
 ### How to Run a Task
 
@@ -200,6 +212,7 @@ Credentials are:
 **Cause:** You haven't stored the API key yet
 
 **Fix:**
+
 ```powershell
 # Store the missing key
 cmdkey /generic:OPENAI_API_KEY /user:dev /pass:YOUR_KEY
@@ -213,6 +226,7 @@ cmdkey /generic:OPENAI_API_KEY /user:dev /pass:YOUR_KEY
 **Cause:** Dependencies not installed
 
 **Fix:**
+
 ```powershell
 cd "C:\Users\MrJws\OneDrive\WorkSpaces\3000studios-next\3000studios-next"
 pnpm install
@@ -236,6 +250,7 @@ const apiKey = process.env.OPENAI_API_KEY;
 **Cause:** PowerShell doesn't have administrator rights
 
 **Fix:** Run PowerShell as Administrator:
+
 1. Right-click PowerShell
 2. "Run as administrator"
 3. Run the shadow scripts
@@ -283,15 +298,18 @@ const apiKey = process.env.OPENAI_API_KEY;
 ## 📊 Credential Manager Locations
 
 ### Windows Credential Manager UI
+
 - Control Panel → Credential Manager → Windows Credentials
-- Search for credentials starting with "OPENAI_", "GOOGLE_", etc
+- Search for credentials starting with "OPENAI*", "GOOGLE*", etc
 
 ### PowerShell Command
+
 ```powershell
 cmdkey /list
 ```
 
 ### Where They're Stored (on disk, encrypted)
+
 ```
 C:\Users\[YourUsername]\AppData\Local\Microsoft\Credentials
 ```
@@ -303,6 +321,7 @@ C:\Users\[YourUsername]\AppData\Local\Microsoft\Credentials
 ## 🎯 Best Practices
 
 ✅ **Do:**
+
 - Store all API keys in Credential Manager
 - Load them at dev startup
 - Use environment variables in code
@@ -310,6 +329,7 @@ C:\Users\[YourUsername]\AppData\Local\Microsoft\Credentials
 - Log out of VS Code when done (if on shared machine)
 
 ❌ **Don't:**
+
 - Write `.env.local` files
 - Commit credentials to GitHub
 - Hardcode API keys in code
@@ -334,6 +354,7 @@ This keeps production secrets completely separate from your machine.
 ## 📞 Reference
 
 ### Quick Commands
+
 ```powershell
 # List all credentials
 cmdkey /list
@@ -349,11 +370,12 @@ cmdkey /delete:OPENAI_API_KEY
 ```
 
 ### Useful Keyboard Shortcuts
-| Shortcut | Action |
-|----------|--------|
-| `Ctrl+Shift+B` | Run default task (Start Dev Server) |
-| `Ctrl+Shift+P` | Open command palette |
-| `Terminal` → `Run Task` | List all VS Code tasks |
+
+| Shortcut                | Action                              |
+| ----------------------- | ----------------------------------- |
+| `Ctrl+Shift+B`          | Run default task (Start Dev Server) |
+| `Ctrl+Shift+P`          | Open command palette                |
+| `Terminal` → `Run Task` | List all VS Code tasks              |
 
 ---
 
