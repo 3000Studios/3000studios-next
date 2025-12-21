@@ -22,7 +22,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20
           cache: npm
 
       - name: Install dependencies
@@ -35,4 +35,7 @@ jobs:
         run: npm run typecheck --if-present
 
       - name: Build (no deploy)
+        env:
+          NEXT_PUBLIC_SITE_URL: https://3000studios.com
+          STRIPE_SECRET_KEY: sk_test_placeholder_for_ci
         run: npm run build
