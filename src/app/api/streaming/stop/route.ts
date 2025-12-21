@@ -3,7 +3,7 @@
  * Stops WebRTC broadcast
  */
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,8 +12,8 @@ export async function POST(request: NextRequest) {
 
     if (!streamId) {
       return NextResponse.json(
-        { error: 'Stream ID required' },
-        { status: 400 }
+        { error: "Stream ID required" },
+        { status: 400 },
       );
     }
 
@@ -25,13 +25,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       streamId,
-      message: 'Stream stopped successfully',
+      message: "Stream stopped successfully",
     });
   } catch (error) {
-    console.error('Stream stop API error:', error);
+    console.error("Stream stop API error:", error);
     return NextResponse.json(
-      { error: 'Failed to stop stream' },
-      { status: 500 }
+      { error: "Failed to stop stream" },
+      { status: 500 },
     );
   }
 }

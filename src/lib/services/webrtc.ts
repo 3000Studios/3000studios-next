@@ -19,10 +19,10 @@ export function getWebRTCConfig(): WebRTCConfig {
   return {
     iceServers: [
       {
-        urls: 'stun:stun.l.google.com:19302', // Public STUN server
+        urls: "stun:stun.l.google.com:19302", // Public STUN server
       },
       {
-        urls: WEBRTC_TURN_URL || 'turn:turn.example.com:3478',
+        urls: WEBRTC_TURN_URL || "turn:turn.example.com:3478",
         username: WEBRTC_TURN_USER,
         credential: WEBRTC_TURN_PASS,
       },
@@ -46,7 +46,9 @@ export class WebRTCBroadcaster {
     this.config = getWebRTCConfig();
   }
 
-  async startBroadcast(constraints?: MediaStreamConstraints): Promise<MediaStream> {
+  async startBroadcast(
+    constraints?: MediaStreamConstraints,
+  ): Promise<MediaStream> {
     try {
       // Get user media (camera/microphone)
       this.localStream = await navigator.mediaDevices.getUserMedia(
@@ -61,7 +63,7 @@ export class WebRTCBroadcaster {
             noiseSuppression: true,
             autoGainControl: true,
           },
-        }
+        },
       );
 
       // Create peer connection
@@ -74,14 +76,14 @@ export class WebRTCBroadcaster {
 
       return this.localStream;
     } catch (error) {
-      console.error('Start broadcast error:', error);
-      throw new Error('Failed to start broadcast');
+      console.error("Start broadcast error:", error);
+      throw new Error("Failed to start broadcast");
     }
   }
 
   async createOffer(): Promise<RTCSessionDescriptionInit> {
     if (!this.peerConnection) {
-      throw new Error('Peer connection not initialized');
+      throw new Error("Peer connection not initialized");
     }
 
     try {
@@ -93,34 +95,36 @@ export class WebRTCBroadcaster {
       await this.peerConnection.setLocalDescription(offer);
       return offer;
     } catch (error) {
-      console.error('Create offer error:', error);
-      throw new Error('Failed to create offer');
+      console.error("Create offer error:", error);
+      throw new Error("Failed to create offer");
     }
   }
 
   async handleAnswer(answer: RTCSessionDescriptionInit): Promise<void> {
     if (!this.peerConnection) {
-      throw new Error('Peer connection not initialized');
+      throw new Error("Peer connection not initialized");
     }
 
     try {
-      await this.peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
+      await this.peerConnection.setRemoteDescription(
+        new RTCSessionDescription(answer),
+      );
     } catch (error) {
-      console.error('Handle answer error:', error);
-      throw new Error('Failed to handle answer');
+      console.error("Handle answer error:", error);
+      throw new Error("Failed to handle answer");
     }
   }
 
   async addIceCandidate(candidate: RTCIceCandidateInit): Promise<void> {
     if (!this.peerConnection) {
-      throw new Error('Peer connection not initialized');
+      throw new Error("Peer connection not initialized");
     }
 
     try {
       await this.peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
     } catch (error) {
-      console.error('Add ICE candidate error:', error);
-      throw new Error('Failed to add ICE candidate');
+      console.error("Add ICE candidate error:", error);
+      throw new Error("Failed to add ICE candidate");
     }
   }
 
@@ -144,7 +148,9 @@ export class WebRTCBroadcaster {
     }
   }
 
-  onConnectionStateChange(callback: (state: RTCPeerConnectionState) => void): void {
+  onConnectionStateChange(
+    callback: (state: RTCPeerConnectionState) => void,
+  ): void {
     if (this.peerConnection) {
       this.peerConnection.onconnectionstatechange = () => {
         callback(this.peerConnection!.connectionState);
@@ -173,24 +179,28 @@ export class WebRTCViewer {
         });
       };
     } catch (error) {
-      console.error('Viewer connect error:', error);
-      throw new Error('Failed to connect viewer');
+      console.error("Viewer connect error:", error);
+      throw new Error("Failed to connect viewer");
     }
   }
 
-  async handleOffer(offer: RTCSessionDescriptionInit): Promise<RTCSessionDescriptionInit> {
+  async handleOffer(
+    offer: RTCSessionDescriptionInit,
+  ): Promise<RTCSessionDescriptionInit> {
     if (!this.peerConnection) {
-      throw new Error('Peer connection not initialized');
+      throw new Error("Peer connection not initialized");
     }
 
     try {
-      await this.peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
+      await this.peerConnection.setRemoteDescription(
+        new RTCSessionDescription(offer),
+      );
       const answer = await this.peerConnection.createAnswer();
       await this.peerConnection.setLocalDescription(answer);
       return answer;
     } catch (error) {
-      console.error('Handle offer error:', error);
-      throw new Error('Failed to handle offer');
+      console.error("Handle offer error:", error);
+      throw new Error("Failed to handle offer");
     }
   }
 

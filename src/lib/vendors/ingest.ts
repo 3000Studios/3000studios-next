@@ -13,10 +13,7 @@ function getFeedUrl(vendorId: string, override?: string) {
   return envValue;
 }
 
-export async function ingestVendorFeed(
-  vendorId: string,
-  feedUrl?: string
-) {
+export async function ingestVendorFeed(vendorId: string, feedUrl?: string) {
   const resolvedFeedUrl = getFeedUrl(vendorId, feedUrl);
   const adapter = vendorAdapters[vendorId];
 

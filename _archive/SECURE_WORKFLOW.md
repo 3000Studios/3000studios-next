@@ -3,6 +3,7 @@
 ## Your Daily Workflow (5 Minutes to Production)
 
 ### **STEP 1: Start Development Server** (Once)
+
 ```powershell
 cd "C:\Users\MrJws\OneDrive\WorkSpaces\3000studios-next\3000studios-next"
 pnpm dev
@@ -15,6 +16,7 @@ Leave this terminal running. It auto-reloads on file save.
 ---
 
 ### **STEP 2: Edit Code & Save**
+
 - Open any file in VS Code
 - Make your changes
 - **Save** (`Ctrl+S`)
@@ -25,6 +27,7 @@ Leave this terminal running. It auto-reloads on file save.
 ---
 
 ### **STEP 3: Review Your Changes**
+
 ```powershell
 # In a NEW terminal, check what you've modified
 git status
@@ -38,6 +41,7 @@ git diff
 ---
 
 ### **STEP 4: Commit & Push** (When Ready)
+
 ```powershell
 # Stage your changes
 git add .
@@ -50,6 +54,7 @@ git push origin main
 ```
 
 **That's it. GitHub Actions automatically:**
+
 1. ✅ Runs tests (if configured)
 2. ✅ Builds your app
 3. ✅ Deploys to Vercel
@@ -60,6 +65,7 @@ git push origin main
 ## 🔒 How Secrets Are Handled
 
 ### **Local Development (.env.local)**
+
 ```bash
 # .env.local (NEVER commit this)
 NEXT_PUBLIC_MAPS_API=your_maps_key_here
@@ -68,12 +74,14 @@ OPENAI_API_KEY=your_openai_key
 ```
 
 **Setup once, forget about it:**
+
 1. Copy keys to `.env.local`
 2. Git ignores it automatically
 3. Dev server reads it automatically
 4. Never commit it
 
 ### **Production (GitHub Secrets)**
+
 ```
 GitHub Settings → Secrets → Actions
 ├── VERCEL_TOKEN
@@ -83,6 +91,7 @@ GitHub Settings → Secrets → Actions
 ```
 
 **Vercel deploys automatically:**
+
 1. GitHub Actions reads secrets securely
 2. Injects them during build
 3. Never exposed in code
@@ -99,7 +108,7 @@ Your `.vscode/settings.json` now includes:
 ✅ **Tailwind IntelliSense** (autocomplete)  
 ✅ **Git integration** (see changes in editor)  
 ✅ **GitHub Copilot** (code suggestions)  
-✅ **DotENV support** (autocomplete env vars)  
+✅ **DotENV support** (autocomplete env vars)
 
 **No auto-commit. No auto-push. You stay in control.**
 
@@ -151,6 +160,7 @@ Your `.vscode/settings.json` now includes:
 ### For Local Development:
 
 1. **Create `.env.local` in project root:**
+
 ```bash
 NEXT_PUBLIC_MAPS_API=AIz...your_maps_key
 OPENAI_API_KEY=sk-...your_openai_key
@@ -180,6 +190,7 @@ STRIPE_SECRET_KEY=sk_live_...your_stripe_key
 ## 💻 Daily Commands Reference
 
 ### Development
+
 ```powershell
 # Start dev server
 pnpm dev
@@ -192,6 +203,7 @@ pnpm start
 ```
 
 ### Git Workflow
+
 ```powershell
 # See what changed
 git status
@@ -213,6 +225,7 @@ git pull origin main
 ```
 
 ### Troubleshooting
+
 ```powershell
 # See recent commits
 git log --oneline -5
@@ -232,6 +245,7 @@ git checkout .
 ## ✅ What NOT to Do
 
 ❌ **Don't:**
+
 - Run `git commit --no-verify` (skips safety checks)
 - Use `git push --force` (overwrites history)
 - Store API keys in version control
@@ -240,6 +254,7 @@ git checkout .
 - Set `git.confirmSync` to false (auto-syncs without review)
 
 ✅ **Do:**
+
 - Review changes with `git diff` before committing
 - Use clear, descriptive commit messages
 - Test locally before pushing (`pnpm build`)
@@ -298,25 +313,28 @@ git push origin main
 ✅ No auto-commit loops  
 ✅ No root/admin privilege escalation  
 ✅ All changes reviewed before commit  
-✅ Audit trail of all deployments  
+✅ Audit trail of all deployments
 
 ---
 
 ## 📞 If Something Goes Wrong
 
 ### "Build failed in GitHub Actions"
+
 1. Go to: https://github.com/3000Studios/3000studios-next/actions
 2. Click the failed workflow
 3. Expand the "Build" step to see the error
 4. Common issues: Missing env vars, linting errors
 
 ### "Dev server won't start locally"
+
 ```powershell
 pnpm install
 pnpm dev
 ```
 
 ### "Git won't push"
+
 ```powershell
 # Check git status
 git status
@@ -329,6 +347,7 @@ git push origin main
 ```
 
 ### "Secrets not working"
+
 1. Verify secret is added in GitHub
 2. Check secret name matches exactly (case-sensitive)
 3. Rebuild and redeploy in Vercel
@@ -347,6 +366,7 @@ git push origin main
 ## 🚀 You're All Set!
 
 Your workflow is now:
+
 - ✅ Secure (no exposed credentials)
 - ✅ Automated (GitHub → Vercel)
 - ✅ Reviewable (you control commits)

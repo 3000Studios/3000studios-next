@@ -4,10 +4,10 @@
  * Features: Auto-play, track rotation, volume control, and user controls
  */
 
-'use client';
+"use client";
 
-import { Pause, Play, SkipForward, Volume2, VolumeX } from 'lucide-react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { Pause, Play, SkipForward, Volume2, VolumeX } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface MusicTrack {
   name: string;
@@ -19,10 +19,18 @@ interface MusicTrack {
 // TODO: Add actual music files to /public/music/ directory
 // Or configure these paths via environment variables
 const DEFAULT_TRACKS: MusicTrack[] = [
-  { name: 'Ambient Waves', src: '/music/ambient-1.mp3', artist: '3000 Studios' },
-  { name: 'Jazz Corporate', src: '/music/jazz-1.mp3', artist: '3000 Studios' },
-  { name: 'Electronic Flow', src: '/music/electronic-1.mp3', artist: '3000 Studios' },
-  { name: 'Chill Vibes', src: '/music/chill-1.mp3', artist: '3000 Studios' },
+  {
+    name: "Ambient Waves",
+    src: "/music/ambient-1.mp3",
+    artist: "3000 Studios",
+  },
+  { name: "Jazz Corporate", src: "/music/jazz-1.mp3", artist: "3000 Studios" },
+  {
+    name: "Electronic Flow",
+    src: "/music/electronic-1.mp3",
+    artist: "3000 Studios",
+  },
+  { name: "Chill Vibes", src: "/music/chill-1.mp3", artist: "3000 Studios" },
 ];
 
 export default function BackgroundMusic() {
@@ -41,7 +49,7 @@ export default function BackgroundMusic() {
 
       if (audioRef.current && isPlaying) {
         audioRef.current.src = DEFAULT_TRACKS[nextIndex].src;
-        audioRef.current.play().catch(err => console.log('Play error:', err));
+        audioRef.current.play().catch((err) => console.log("Play error:", err));
       }
 
       return nextIndex;
@@ -49,17 +57,17 @@ export default function BackgroundMusic() {
   }, [isPlaying]);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     const audio = new Audio();
     audio.volume = volume;
     audio.loop = false;
-    audio.addEventListener('ended', handleNextTrack);
+    audio.addEventListener("ended", handleNextTrack);
     audioRef.current = audio;
 
     return () => {
       audio.pause();
-      audio.removeEventListener('ended', handleNextTrack);
+      audio.removeEventListener("ended", handleNextTrack);
     };
   }, [handleNextTrack, volume]);
 
@@ -80,8 +88,8 @@ export default function BackgroundMusic() {
       if (audioRef.current.src !== currentTrack.src) {
         audioRef.current.src = currentTrack.src;
       }
-      audioRef.current.play().catch(err => {
-        console.log('Music playback error (audio files may not exist):', err);
+      audioRef.current.play().catch((err) => {
+        console.log("Music playback error (audio files may not exist):", err);
         setIsPlaying(false);
       });
       setIsPlaying(true);
@@ -103,7 +111,7 @@ export default function BackgroundMusic() {
         <button
           onClick={handlePlayPause}
           className="text-gold hover:text-platinum transition-colors"
-          aria-label={isPlaying ? 'Pause music' : 'Play music'}
+          aria-label={isPlaying ? "Pause music" : "Play music"}
         >
           {isPlaying ? <Pause size={24} /> : <Play size={24} />}
         </button>
@@ -112,13 +120,17 @@ export default function BackgroundMusic() {
       {/* Expanded Controls */}
       <div
         className={`absolute bottom-16 right-0 glass rounded-lg p-4 border border-gold/20 transition-all duration-300 ${
-          showControls ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+          showControls
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-4 pointer-events-none"
         }`}
-        style={{ minWidth: '250px' }}
+        style={{ minWidth: "250px" }}
       >
         {/* Track Info */}
         <div className="mb-4">
-          <p className="text-white font-semibold text-sm">{currentTrack.name}</p>
+          <p className="text-white font-semibold text-sm">
+            {currentTrack.name}
+          </p>
           {currentTrack.artist && (
             <p className="text-gray-400 text-xs">{currentTrack.artist}</p>
           )}
@@ -129,7 +141,7 @@ export default function BackgroundMusic() {
           <button
             onClick={toggleMute}
             className="text-gold hover:text-platinum transition-colors"
-            aria-label={isMuted ? 'Unmute' : 'Mute'}
+            aria-label={isMuted ? "Unmute" : "Mute"}
           >
             {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
           </button>
@@ -137,7 +149,7 @@ export default function BackgroundMusic() {
           <button
             onClick={handlePlayPause}
             className="text-gold hover:text-platinum transition-colors"
-            aria-label={isPlaying ? 'Pause' : 'Play'}
+            aria-label={isPlaying ? "Pause" : "Play"}
           >
             {isPlaying ? <Pause size={20} /> : <Play size={20} />}
           </button>
@@ -170,7 +182,7 @@ export default function BackgroundMusic() {
             <div
               key={index}
               className={`h-1 flex-1 rounded-full transition-all ${
-                index === currentTrackIndex ? 'bg-gold' : 'bg-gray-700'
+                index === currentTrackIndex ? "bg-gold" : "bg-gray-700"
               }`}
             />
           ))}

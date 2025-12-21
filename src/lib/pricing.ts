@@ -30,12 +30,15 @@ export interface ProductMetrics {
 export class PricingEngine {
   private rules: Map<string, PricingRule> = new Map();
   private metrics: Map<string, ProductMetrics> = new Map();
-  private priceHistory: Map<string, Array<{ price: number; timestamp: number }>> = new Map();
+  private priceHistory: Map<
+    string,
+    Array<{ price: number; timestamp: number }>
+  > = new Map();
 
   /**
    * Create pricing rule for product
    */
-  createRule(rule: Omit<PricingRule, 'id'>): PricingRule {
+  createRule(rule: Omit<PricingRule, "id">): PricingRule {
     const id = `rule_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     const fullRule: PricingRule = { ...rule, id };
 
@@ -126,17 +129,24 @@ export class PricingEngine {
   /**
    * Get price history
    */
-  getPriceHistory(productId: string, hoursBack: number = 24): Array<{ price: number; timestamp: number }> {
+  getPriceHistory(
+    productId: string,
+    hoursBack: number = 24,
+  ): Array<{ price: number; timestamp: number }> {
     const history = this.priceHistory.get(productId) || [];
     const cutoff = Date.now() - hoursBack * 60 * 60 * 1000;
 
-    return history.filter(h => h.timestamp >= cutoff);
+    return history.filter((h) => h.timestamp >= cutoff);
   }
 
   /**
    * Recommend price based on metrics
    */
-  recommendPrice(productId: string): { current: number; recommended: number; reason: string } {
+  recommendPrice(productId: string): {
+    current: number;
+    recommended: number;
+    reason: string;
+  } {
     const metrics = this.metrics.get(productId);
     const rule = this.rules.get(productId);
 
@@ -144,30 +154,30 @@ export class PricingEngine {
       return {
         current: rule?.basePrice || 0,
         recommended: rule?.basePrice || 0,
-        reason: 'No data available',
+        reason: "No data available",
       };
     }
 
     const current = this.calculatePrice(productId);
     let recommended = rule.basePrice;
-    let reason = 'Baseline pricing';
+    let reason = "Baseline pricing";
 
     // High velocity → increase price
     if (metrics.salesPerDay > 10) {
       recommended = rule.basePrice * 1.15;
-      reason = 'High demand detected';
+      reason = "High demand detected";
     }
 
     // Low conversion → decrease price
     if (metrics.conversionRate < 0.02) {
       recommended = rule.basePrice * 0.85;
-      reason = 'Low conversion, reduce friction';
+      reason = "Low conversion, reduce friction";
     }
 
     // Positive trend → increase price
     if (metrics.weekTrend > 0.5) {
       recommended = Math.min(rule.maxPrice, recommended * 1.1);
-      reason = 'Positive momentum, increase price';
+      reason = "Positive momentum, increase price";
     }
 
     // Apply bounds
@@ -187,7 +197,10 @@ export class PricingEngine {
     const lowPerformers: string[] = [];
 
     for (const [productId, metrics] of this.metrics) {
-      if (metrics.conversionRate < minConversionRate && metrics.salesPerDay < 1) {
+      if (
+        metrics.conversionRate < minConversionRate &&
+        metrics.salesPerDay < 1
+      ) {
         lowPerformers.push(productId);
       }
     }
@@ -198,11 +211,13 @@ export class PricingEngine {
   /**
    * Get top products
    */
-  getTopProducts(limit: number = 5): Array<{ productId: string; salesPerDay: number }> {
+  getTopProducts(
+    limit: number = 5,
+  ): Array<{ productId: string; salesPerDay: number }> {
     return Array.from(this.metrics.values())
       .sort((a, b) => b.salesPerDay - a.salesPerDay)
       .slice(0, limit)
-      .map(m => ({ productId: m.productId, salesPerDay: m.salesPerDay }));
+      .map((m) => ({ productId: m.productId, salesPerDay: m.salesPerDay }));
   }
 }
 
