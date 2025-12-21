@@ -174,7 +174,7 @@ export class WebRTCViewer {
       this.remoteStream = new MediaStream();
 
       this.peerConnection.ontrack = (event) => {
-        event.streams[0].getTracks().forEach((track) => {
+        event.streams[0]?.getTracks().forEach((track) => {
           this.remoteStream?.addTrack(track);
         });
       };
