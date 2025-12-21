@@ -181,24 +181,92 @@ Example:
 
 ## 🌐 Deployment
 
-### Vercel (Recommended)
+### 🚀 Quick Deploy to Production
+
+**Shadow Overlord Commands** (use in PR comments or issues):
+```bash
+/shadow deploy          # Deploy all features to production
+/shadow preview         # Create preview deployment
+/shadow sync            # Sync branch to main
+```
+
+### Automated Deployment (Recommended)
+
+The repository includes a complete CI/CD pipeline:
+
+1. **Push to `main` branch** - Automatically triggers production deployment
+2. **Workflow runs** - Builds, validates, and deploys all features
+3. **Verification** - Automatically checks all deployed pages
+4. **Live in minutes** - Full deployment takes ~5 minutes
+
+**Workflow**: `.github/workflows/deploy-all.yml`
+
+### Manual Deployment via Vercel
 
 1. Push code to GitHub
 2. Import project in Vercel dashboard
-3. Add environment variables in Vercel settings
-4. Deploy automatically
+3. Add environment variables in Vercel settings:
+   ```bash
+   VERCEL_TOKEN=<your-token>
+   VERCEL_ORG_ID=<your-org-id>
+   VERCEL_PROJECT_ID=<your-project-id>
+   ```
+4. Deploy automatically or use CLI:
+   ```bash
+   npm i -g vercel
+   vercel --prod
+   ```
 
+### Environment Setup
+
+**Required for production**:
 ```bash
-# Or use Vercel CLI
-npm i -g vercel
-vercel
+NEXT_PUBLIC_SITE_URL=https://3000studios.com
+NEXT_PUBLIC_BASE_URL=https://3000studios.com
+VERCEL_TOKEN=<vercel-token>
 ```
 
-### Manual Deployment
-
+**Optional for full features**:
 ```bash
-npm run build
-npm start
+# Payment Processing
+STRIPE_SECRET_KEY=<stripe-key>
+PAYPAL_CLIENT_ID=<paypal-id>
+PAYPAL_SECRET=<paypal-secret>
+
+# AI Services
+OPENAI_API_KEY=<openai-key>
+CLAUDE_API_KEY=<anthropic-key>
+
+# Live Streaming
+NEXT_PUBLIC_SIGNAL_SERVER=wss://signal.3000studios.com
+```
+
+### Production URLs
+
+Once deployed, access your site at:
+- **Main Site**: https://3000studios.com
+- **Store**: https://3000studios.com/store
+- **Blog**: https://3000studios.com/blog
+- **Portfolio**: https://3000studios.com/portfolio
+- **Live Stream**: https://3000studios.com/live
+- **Admin Matrix**: https://3000studios.com/matrix
+
+### Deployment Status
+
+Check `.github/workflows/deploy-all.yml` for:
+- ✅ Build validation
+- ✅ Revenue page generation
+- ✅ Production deployment
+- ✅ Post-deployment verification
+
+See `DEPLOYMENT.md` for complete deployment guide.
+
+### Build Performance
+```
+Build Time: ~9 seconds (Turbopack)
+Static Pages: 33 pages
+API Routes: 17 endpoints
+Total Routes: 55+ routes
 ```
 
 ## 📊 Performance
