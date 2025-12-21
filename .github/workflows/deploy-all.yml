@@ -14,6 +14,9 @@ on:
           - production
           - preview
 
+permissions:
+  contents: read
+
 concurrency:
   group: deploy-all-${{ github.ref }}
   cancel-in-progress: false
