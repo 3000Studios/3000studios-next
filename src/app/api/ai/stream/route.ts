@@ -3,6 +3,8 @@ import { streamText } from 'ai';
 import { z } from 'zod';
 import { logAIEvent } from '@/lib/ai-logger';
 
+export const dynamic = 'force-dynamic';
+
 const InputSchema = z.object({
   prompt: z.string().min(1).max(4000),
 });
