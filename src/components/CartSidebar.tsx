@@ -1,14 +1,15 @@
-'use client';
+"use client";
 
-import { useCartStore } from '@/lib/cart-store';
-import { ShoppingCart, X } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
+import { useCartStore } from "@/lib/cart-store";
+import { ShoppingCart, X } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
 export function CartSidebar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { items, removeItem, updateQuantity, getTotalPrice, getTotalItems } = useCartStore();
+  const { items, removeItem, updateQuantity, getTotalPrice, getTotalItems } =
+    useCartStore();
 
   const totalItems = getTotalItems();
   const totalPrice = getTotalPrice();
@@ -46,10 +47,15 @@ export function CartSidebar() {
           {/* Items */}
           <div className="flex-1 overflow-y-auto p-6 space-y-4">
             {items.length === 0 ? (
-              <p className="text-purple-300/60 text-center py-8">Your cart is empty</p>
+              <p className="text-purple-300/60 text-center py-8">
+                Your cart is empty
+              </p>
             ) : (
               items.map((item) => (
-                <div key={item.productId} className="flex gap-4 p-4 bg-slate-800/50 border border-purple-500/20 rounded-lg backdrop-blur-sm">
+                <div
+                  key={item.productId}
+                  className="flex gap-4 p-4 bg-slate-800/50 border border-purple-500/20 rounded-lg backdrop-blur-sm"
+                >
                   {item.image && (
                     <div className="relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
                       <Image
@@ -61,18 +67,28 @@ export function CartSidebar() {
                     </div>
                   )}
                   <div className="flex-1">
-                    <h3 className="font-semibold text-sm text-white">{item.name}</h3>
-                    <p className="text-cyan-400 text-sm font-semibold">${item.price.toFixed(2)}</p>
+                    <h3 className="font-semibold text-sm text-white">
+                      {item.name}
+                    </h3>
+                    <p className="text-cyan-400 text-sm font-semibold">
+                      ${item.price.toFixed(2)}
+                    </p>
                     <div className="flex items-center gap-2 mt-2">
                       <button
-                        onClick={() => updateQuantity(item.productId, item.quantity - 1)}
+                        onClick={() =>
+                          updateQuantity(item.productId, item.quantity - 1)
+                        }
                         className="px-2 py-1 bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/30 rounded text-sm text-purple-300 transition-colors"
                       >
                         −
                       </button>
-                      <span className="text-sm font-medium text-white">{item.quantity}</span>
+                      <span className="text-sm font-medium text-white">
+                        {item.quantity}
+                      </span>
                       <button
-                        onClick={() => updateQuantity(item.productId, item.quantity + 1)}
+                        onClick={() =>
+                          updateQuantity(item.productId, item.quantity + 1)
+                        }
                         className="px-2 py-1 bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/30 rounded text-sm text-purple-300 transition-colors"
                       >
                         +
@@ -95,7 +111,9 @@ export function CartSidebar() {
             <div className="border-t border-purple-500/20 p-6 space-y-4 bg-gradient-to-r from-slate-900 to-purple-900/20">
               <div className="flex justify-between text-lg font-bold">
                 <span className="text-white">Total:</span>
-                <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">${totalPrice.toFixed(2)}</span>
+                <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                  ${totalPrice.toFixed(2)}
+                </span>
               </div>
               <Link
                 href="/store/checkout"

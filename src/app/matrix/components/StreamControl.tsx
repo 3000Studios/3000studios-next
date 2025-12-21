@@ -3,22 +3,23 @@
  * WebRTC broadcast controls for THE MATRIX
  */
 
-'use client';
+"use client";
 
-import { useStreaming } from '@/hooks/useAPI';
-import { WebRTCBroadcaster } from '@/lib/services/webrtc';
-import { Radio, Users, Video, VideoOff } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useStreaming } from "@/hooks/useAPI";
+import { WebRTCBroadcaster } from "@/lib/services/webrtc";
+import { Radio, Users, Video, VideoOff } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 export default function StreamControl() {
   const [isStreaming, setIsStreaming] = useState(false);
   const [streamId, setStreamId] = useState<string | null>(null);
   const [viewerCount, setViewerCount] = useState(0);
-  const [streamTitle, setStreamTitle] = useState('');
+  const [streamTitle, setStreamTitle] = useState("");
   const videoRef = useRef<HTMLVideoElement>(null);
   const broadcasterRef = useRef<WebRTCBroadcaster | null>(null);
 
-  const { startStream, stopStream, getStreamStatus, loading, error } = useStreaming();
+  const { startStream, stopStream, getStreamStatus, loading, error } =
+    useStreaming();
 
   useEffect(() => {
     // Poll for viewer count when streaming
@@ -28,7 +29,7 @@ export default function StreamControl() {
           const status = await getStreamStatus(streamId);
           setViewerCount(status.viewerCount || 0);
         } catch (err) {
-          console.error('Status check error:', err);
+          console.error("Status check error:", err);
         }
       }, 5000);
 
@@ -38,7 +39,7 @@ export default function StreamControl() {
 
   const handleStartStream = async () => {
     if (!streamTitle.trim()) {
-      alert('Please enter a stream title');
+      alert("Please enter a stream title");
       return;
     }
 
@@ -60,15 +61,17 @@ export default function StreamControl() {
 
       // Create offer and send to signaling server
       const offer = await broadcaster.createOffer();
-      console.log('WebRTC Offer created:', offer);
+      console.log("WebRTC Offer created:", offer);
 
       // In production, send offer to signaling server
       // await fetch(streamData.signalServerUrl, { ... })
 
       setIsStreaming(true);
     } catch (err) {
-      console.error('Start stream error:', err);
-      alert('Failed to start stream. Please check camera/microphone permissions.');
+      console.error("Start stream error:", err);
+      alert(
+        "Failed to start stream. Please check camera/microphone permissions.",
+      );
     }
   };
 
@@ -77,7 +80,7 @@ export default function StreamControl() {
       try {
         await stopStream(streamId);
       } catch (err) {
-        console.error('Stop stream error:', err);
+        console.error("Stop stream error:", err);
       }
     }
 
@@ -116,7 +119,9 @@ export default function StreamControl() {
             </div>
             <div className="px-3 py-2 bg-black/70 rounded-lg flex items-center gap-2">
               <Users className="text-white" size={16} />
-              <span className="text-white text-sm font-semibold">{viewerCount}</span>
+              <span className="text-white text-sm font-semibold">
+                {viewerCount}
+              </span>
             </div>
           </div>
         )}
@@ -153,7 +158,9 @@ export default function StreamControl() {
       ) : (
         <div className="space-y-3">
           <div className="p-4 bg-gray-900 rounded-lg border border-gray-700">
-            <p className="text-sm font-semibold text-purple-400 mb-1">Now Streaming:</p>
+            <p className="text-sm font-semibold text-purple-400 mb-1">
+              Now Streaming:
+            </p>
             <p className="text-white">{streamTitle}</p>
             <p className="text-xs text-gray-500 mt-2">Stream ID: {streamId}</p>
           </div>
@@ -177,7 +184,8 @@ export default function StreamControl() {
       {/* Stream Info */}
       <div className="mt-4 p-4 bg-gray-900/50 rounded-lg border border-gray-700">
         <p className="text-xs text-gray-400">
-          💡 Viewers can watch at: <span className="text-purple-400">/live</span>
+          💡 Viewers can watch at:{" "}
+          <span className="text-purple-400">/live</span>
         </p>
         <p className="text-xs text-gray-500 mt-1">
           WebRTC streaming with TURN server support

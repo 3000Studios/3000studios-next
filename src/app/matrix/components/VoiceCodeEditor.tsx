@@ -3,21 +3,22 @@
  * AI-powered voice command interface for code generation
  */
 
-'use client';
+"use client";
 
-import { useState, useRef } from 'react';
-import { Mic, Code, Play, Save, Upload, Loader2 } from 'lucide-react';
-import { useVoiceToCode } from '@/hooks/useAPI';
+import { useState, useRef } from "react";
+import { Mic, Code, Play, Save, Upload, Loader2 } from "lucide-react";
+import { useVoiceToCode } from "@/hooks/useAPI";
 
 export default function VoiceCodeEditor() {
   const [isRecording, setIsRecording] = useState(false);
-  const [prompt, setPrompt] = useState('');
-  const [preview, setPreview] = useState('');
-  const [explanation, setExplanation] = useState('');
+  const [prompt, setPrompt] = useState("");
+  const [preview, setPreview] = useState("");
+  const [explanation, setExplanation] = useState("");
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
 
-  const { generateCode, transcribeAndGenerate, loading, error } = useVoiceToCode();
+  const { generateCode, transcribeAndGenerate, loading, error } =
+    useVoiceToCode();
 
   const startRecording = async () => {
     try {
@@ -33,8 +34,8 @@ export default function VoiceCodeEditor() {
       mediaRecorder.start();
       setIsRecording(true);
     } catch (err) {
-      console.error('Microphone access error:', err);
-      alert('Please allow microphone access to use voice commands');
+      console.error("Microphone access error:", err);
+      alert("Please allow microphone access to use voice commands");
     }
   };
 
@@ -44,21 +45,23 @@ export default function VoiceCodeEditor() {
       setIsRecording(false);
 
       mediaRecorderRef.current.onstop = async () => {
-        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+        const audioBlob = new Blob(audioChunksRef.current, {
+          type: "audio/webm",
+        });
         const reader = new FileReader();
-        
+
         reader.onloadend = async () => {
-          const base64Audio = (reader.result as string).split(',')[1];
+          const base64Audio = (reader.result as string).split(",")[1];
           try {
-            const result = await transcribeAndGenerate(base64Audio, 'preview');
-            setPrompt(result.transcription || '');
-            setPreview(result.code || '');
-            setExplanation(result.explanation || '');
+            const result = await transcribeAndGenerate(base64Audio, "preview");
+            setPrompt(result.transcription || "");
+            setPreview(result.code || "");
+            setExplanation(result.explanation || "");
           } catch (err) {
-            console.error('Transcription error:', err);
+            console.error("Transcription error:", err);
           }
         };
-        
+
         reader.readAsDataURL(audioBlob);
       };
     }
@@ -68,11 +71,11 @@ export default function VoiceCodeEditor() {
     if (!prompt.trim()) return;
 
     try {
-      const result = await generateCode(prompt, 'preview');
-      setPreview(result.code || '');
-      setExplanation(result.explanation || '');
+      const result = await generateCode(prompt, "preview");
+      setPreview(result.code || "");
+      setExplanation(result.explanation || "");
     } catch (err) {
-      console.error('Code generation error:', err);
+      console.error("Code generation error:", err);
     }
   };
 
@@ -80,25 +83,25 @@ export default function VoiceCodeEditor() {
     if (!prompt.trim()) return;
 
     try {
-      const result = await generateCode(prompt, 'apply');
+      const result = await generateCode(prompt, "apply");
       alert(`Code committed! SHA: ${result.commitSha}`);
     } catch (err) {
-      console.error('Apply error:', err);
+      console.error("Apply error:", err);
     }
   };
 
   const handleDeploy = async () => {
     if (!prompt.trim()) return;
 
-    if (!confirm('This will commit and deploy to production. Continue?')) {
+    if (!confirm("This will commit and deploy to production. Continue?")) {
       return;
     }
 
     try {
-      const result = await generateCode(prompt, 'deploy');
+      const result = await generateCode(prompt, "deploy");
       alert(`Deployed! URL: ${result.deploymentUrl}`);
     } catch (err) {
-      console.error('Deploy error:', err);
+      console.error("Deploy error:", err);
     }
   };
 
@@ -110,19 +113,19 @@ export default function VoiceCodeEditor() {
           <Mic className="text-gold" size={24} />
           Voice Command Interface
         </h3>
-        
+
         <div className="flex gap-4 mb-4">
           <button
             onClick={isRecording ? stopRecording : startRecording}
             disabled={loading}
             className={`flex-1 py-4 px-6 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 ${
               isRecording
-                ? 'bg-red-600 hover:bg-red-700 text-white animate-pulse'
-                : 'bg-gold hover:bg-platinum text-black'
+                ? "bg-red-600 hover:bg-red-700 text-white animate-pulse"
+                : "bg-gold hover:bg-platinum text-black"
             }`}
           >
             <Mic size={20} />
-            {isRecording ? 'Stop Recording' : 'Start Voice Command'}
+            {isRecording ? "Stop Recording" : "Start Voice Command"}
           </button>
         </div>
 
@@ -144,7 +147,11 @@ export default function VoiceCodeEditor() {
             disabled={loading || !prompt.trim()}
             className="flex-1 py-3 bg-sapphire hover:bg-sapphire/80 text-white rounded-lg font-semibold transition-all flex items-center justify-center gap-2 disabled:opacity-50"
           >
-            {loading ? <Loader2 className="animate-spin" size={20} /> : <Play size={20} />}
+            {loading ? (
+              <Loader2 className="animate-spin" size={20} />
+            ) : (
+              <Play size={20} />
+            )}
             Preview Code
           </button>
           <button
@@ -179,10 +186,12 @@ export default function VoiceCodeEditor() {
             <Code className="text-gold" size={24} />
             Generated Code Preview
           </h3>
-          
+
           {explanation && (
             <div className="mb-4 p-4 bg-gray-900 rounded-lg border border-gray-700">
-              <p className="text-sm font-semibold text-gold mb-2">AI Explanation:</p>
+              <p className="text-sm font-semibold text-gold mb-2">
+                AI Explanation:
+              </p>
               <p className="text-gray-300 text-sm">{explanation}</p>
             </div>
           )}

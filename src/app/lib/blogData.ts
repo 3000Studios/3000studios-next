@@ -20,7 +20,8 @@ export const blogPosts: BlogPost[] = [
   {
     id: "web-design-trends-2025",
     title: "10 Web Design Trends Dominating 2025",
-    excerpt: "Discover the cutting-edge design trends that are shaping the digital landscape and how to implement them in your projects.",
+    excerpt:
+      "Discover the cutting-edge design trends that are shaping the digital landscape and how to implement them in your projects.",
     content: `The digital landscape is evolving faster than ever. As we navigate through 2025, several groundbreaking trends are reshaping how we approach web design.
 
 AI-powered personalization is no longer a buzzword—it's the foundation of modern web experiences. Websites now adapt in real-time to user behavior, preferences, and context.
@@ -33,12 +34,13 @@ At 3000 Studios, we combine these cutting-edge techniques with proven UX princip
     date: "2024-12-10",
     readTime: "8 min read",
     tags: ["Web Design", "Trends", "UX", "UI"],
-    featured: true
+    featured: true,
   },
   {
     id: "roi-of-premium-design",
     title: "The ROI of Premium Web Design: Why Quality Matters",
-    excerpt: "Investing in quality design isn't an expense—it's a strategic move that pays dividends. Here's the data to prove it.",
+    excerpt:
+      "Investing in quality design isn't an expense—it's a strategic move that pays dividends. Here's the data to prove it.",
     content: `Your website is often the first impression customers have of your business. Studies show that 75% of users judge a company's credibility based on website design.
 
 Our clients typically see 200-400% increases in conversion rates after redesigns. Real examples include a 312% increase in online sales for an e-commerce client and a 4x increase in qualified leads for a B2B service.
@@ -49,12 +51,13 @@ We don't just make pretty websites—we build revenue-generating digital assets.
     date: "2024-12-08",
     readTime: "6 min read",
     tags: ["Business", "ROI", "Strategy"],
-    featured: true
+    featured: true,
   },
   {
     id: "creative-workflow-optimization",
     title: "Optimizing Your Creative Workflow",
-    excerpt: "From chaos to clarity: the systems and tools that help us deliver exceptional work consistently.",
+    excerpt:
+      "From chaos to clarity: the systems and tools that help us deliver exceptional work consistently.",
     content: `Great creativity thrives within smart systems. At 3000 Studios, we use Figma for design collaboration, Linear for project management, and Notion for documentation.
 
 Our tech stack includes Next.js, Tailwind CSS, Framer Motion, and Vercel—chosen for speed, flexibility, and developer experience.
@@ -65,12 +68,13 @@ Quality control is paramount: design reviews, user testing, code reviews, perfor
     date: "2024-12-05",
     readTime: "7 min read",
     tags: ["Workflow", "Tools", "Productivity"],
-    featured: false
+    featured: false,
   },
   {
     id: "portfolio-that-converts",
     title: "Building a Portfolio That Converts Clients",
-    excerpt: "Your portfolio isn't just a showcase—it's a sales tool. Here's how to make it work for you.",
+    excerpt:
+      "Your portfolio isn't just a showcase—it's a sales tool. Here's how to make it work for you.",
     content: `A portfolio should actively sell your services. Every project should tell a story: the challenge, your solution, and measurable results.
 
 Strategic project selection is key—show your best work that represents the clients you want to attract. Use a proven case study format: context, challenge, solution, results, and beautiful visuals.
@@ -81,12 +85,13 @@ Your portfolio's technical quality speaks volumes. Lightning-fast loading, flawl
     date: "2024-12-03",
     readTime: "6 min read",
     tags: ["Portfolio", "Marketing", "Sales"],
-    featured: false
+    featured: false,
   },
   {
     id: "future-of-ecommerce",
     title: "The Future of E-Commerce",
-    excerpt: "E-commerce is evolving beyond transactions into immersive, personalized experiences.",
+    excerpt:
+      "E-commerce is evolving beyond transactions into immersive, personalized experiences.",
     content: `Online shopping is transforming. AR and VR integration allows customers to see furniture in their room before buying and try on clothes virtually.
 
 AI-powered personalization creates shopping experiences that adapt to each customer with smart recommendations and predictive inventory management.
@@ -97,12 +102,13 @@ Social commerce is booming—Instagram and TikTok storefronts, live shopping eve
     date: "2024-12-01",
     readTime: "7 min read",
     tags: ["E-Commerce", "Future", "Technology"],
-    featured: true
+    featured: true,
   },
   {
     id: "ai-revolution-creative-industry",
     title: "AI Revolution in the Creative Industry",
-    excerpt: "How artificial intelligence is transforming creative workflows and what it means for designers and developers.",
+    excerpt:
+      "How artificial intelligence is transforming creative workflows and what it means for designers and developers.",
     content: `AI is not replacing creatives—it's amplifying their capabilities. Tools like Midjourney, DALL-E, and ChatGPT are revolutionizing how we ideate, prototype, and produce content.
 
 Smart designers are integrating AI into their workflow for rapid prototyping, content generation, and automated testing. The key is using AI as a collaborative tool, not a replacement.
@@ -113,12 +119,13 @@ At 3000 Studios, we leverage AI for tasks like image optimization, copy suggesti
     date: "2024-11-28",
     readTime: "9 min read",
     tags: ["AI", "Technology", "Innovation", "Workflow"],
-    featured: true
+    featured: true,
   },
   {
     id: "accessibility-not-optional",
     title: "Why Accessibility Is Not Optional in 2025",
-    excerpt: "Building inclusive web experiences isn't just good ethics—it's good business. Here's why accessibility should be your priority.",
+    excerpt:
+      "Building inclusive web experiences isn't just good ethics—it's good business. Here's why accessibility should be your priority.",
     content: `Over 1 billion people worldwide live with disabilities. That's 15% of your potential audience you're excluding with inaccessible design.
 
 WCAG 2.2 guidelines are now the standard. Keyboard navigation, screen reader compatibility, color contrast, and clear focus states are non-negotiable.
@@ -131,12 +138,13 @@ At 3000 Studios, every project undergoes thorough accessibility audits using aut
     date: "2024-11-25",
     readTime: "7 min read",
     tags: ["Accessibility", "UX", "WCAG", "Inclusive Design"],
-    featured: false
+    featured: false,
   },
   {
     id: "conversion-rate-optimization",
     title: "Conversion Rate Optimization: Data-Driven Design Decisions",
-    excerpt: "Turn more visitors into customers with proven CRO strategies that actually work.",
+    excerpt:
+      "Turn more visitors into customers with proven CRO strategies that actually work.",
     content: `Conversion rate optimization isn't guesswork—it's science. Every 1% increase in conversion rate can mean thousands in additional revenue.
 
 Start with heat mapping and session recordings to understand user behavior. Tools like Hotjar reveal exactly where users get stuck, what they click, and where they abandon.
@@ -149,12 +157,13 @@ Our proven CRO framework: Analyze data, form hypotheses, design variations, run 
     date: "2024-11-22",
     readTime: "10 min read",
     tags: ["CRO", "Marketing", "Analytics", "Testing"],
-    featured: true
+    featured: true,
   },
   {
     id: "mobile-first-essential",
     title: "Why Mobile-First Design Is Essential in 2025",
-    excerpt: "Over 60% of web traffic is mobile. Is your site ready? Here's how to nail mobile-first design.",
+    excerpt:
+      "Over 60% of web traffic is mobile. Is your site ready? Here's how to nail mobile-first design.",
     content: `Mobile traffic dominates the web. If your site doesn't work perfectly on mobile, you're losing more than half your audience.
 
 Mobile-first doesn't mean mobile-only. It means designing for the smallest screen first, then progressively enhancing for larger screens. This ensures core functionality works everywhere.
@@ -167,12 +176,13 @@ Touch targets, readable text, and thumb-friendly navigation are essential. Butto
     date: "2024-11-20",
     readTime: "8 min read",
     tags: ["Mobile", "Responsive", "Performance", "UX"],
-    featured: false
+    featured: false,
   },
   {
     id: "brand-identity-guide",
     title: "Creating a Brand Identity That Stands Out",
-    excerpt: "Your brand is more than a logo. Learn how to build a cohesive identity that resonates with your audience.",
+    excerpt:
+      "Your brand is more than a logo. Learn how to build a cohesive identity that resonates with your audience.",
     content: `A strong brand identity creates instant recognition and builds trust. Think Apple, Nike, or Coca-Cola—their branding is unmistakable.
 
 Start with your brand strategy. Who are you? What do you stand for? Who's your audience? What makes you different? These answers inform every design decision.
@@ -187,12 +197,13 @@ We help clients build comprehensive brand guidelines that ensure consistency whe
     date: "2024-11-18",
     readTime: "11 min read",
     tags: ["Branding", "Identity", "Strategy", "Design"],
-    featured: false
+    featured: false,
   },
   {
     id: "jamstack-architecture",
     title: "JAMstack Architecture: The Future of Web Development",
-    excerpt: "Discover why JAMstack is becoming the standard for modern web applications and how it benefits your business.",
+    excerpt:
+      "Discover why JAMstack is becoming the standard for modern web applications and how it benefits your business.",
     content: `JAMstack (JavaScript, APIs, Markup) represents a paradigm shift in web development. Pre-rendered pages served from CDNs offer unmatched performance and security.
 
 Benefits are clear: 10x faster page loads, better security (no server to hack), lower costs (static hosting is cheap), and improved developer experience.
@@ -205,12 +216,13 @@ We've migrated dozens of clients from traditional stacks to JAMstack. The result
     date: "2024-11-15",
     readTime: "9 min read",
     tags: ["JAMstack", "Next.js", "Performance", "Architecture"],
-    featured: false
+    featured: false,
   },
   {
     id: "user-research-methods",
     title: "User Research Methods That Actually Work",
-    excerpt: "Stop guessing what users want. Use these proven research methods to make data-driven design decisions.",
+    excerpt:
+      "Stop guessing what users want. Use these proven research methods to make data-driven design decisions.",
     content: `User research eliminates guesswork. Understanding your users' needs, behaviors, and pain points is the foundation of great design.
 
 Quantitative methods include surveys, analytics, and A/B testing. These give you the "what"—what users are doing and where problems exist.
@@ -225,12 +237,13 @@ One client's conversion rate jumped 87% after we discovered through user testing
     date: "2024-11-12",
     readTime: "10 min read",
     tags: ["UX Research", "User Testing", "Data", "Strategy"],
-    featured: true
+    featured: true,
   },
   {
     id: "seo-fundamentals-2025",
     title: "SEO Fundamentals for 2025: What Actually Matters",
-    excerpt: "Cut through the noise. These are the SEO strategies that will actually move the needle for your business.",
+    excerpt:
+      "Cut through the noise. These are the SEO strategies that will actually move the needle for your business.",
     content: `SEO in 2025 is about user experience first, keywords second. Google's algorithm is sophisticated enough to understand context and intent.
 
 Technical SEO remains crucial. Fast loading, mobile optimization, clean code, and proper schema markup are table stakes. Core Web Vitals are ranking factors you can't ignore.
@@ -245,12 +258,13 @@ Our SEO approach is holistic: technical excellence, valuable content, strategic 
     date: "2024-11-10",
     readTime: "12 min read",
     tags: ["SEO", "Marketing", "Content", "Technical"],
-    featured: true
+    featured: true,
   },
   {
     id: "animations-performance",
     title: "Balancing Animations and Performance",
-    excerpt: "Smooth animations elevate user experience, but they can tank performance. Here's how to have both.",
+    excerpt:
+      "Smooth animations elevate user experience, but they can tank performance. Here's how to have both.",
     content: `Animations bring interfaces to life. They provide feedback, guide attention, and create delight. But poorly implemented animations cause jank and frustration.
 
 Use CSS transforms and opacity for animations—they're GPU-accelerated and perform well. Avoid animating properties like width, height, or margin that trigger layout recalculations.
@@ -265,12 +279,13 @@ We measure animation performance with Chrome DevTools, ensuring smooth 60fps acr
     date: "2024-11-08",
     readTime: "8 min read",
     tags: ["Animations", "Performance", "UX", "Development"],
-    featured: false
+    featured: false,
   },
   {
     id: "building-design-systems",
     title: "Building Design Systems That Scale",
-    excerpt: "Design systems ensure consistency and speed up development. Here's how to build one that actually gets used.",
+    excerpt:
+      "Design systems ensure consistency and speed up development. Here's how to build one that actually gets used.",
     content: `Design systems are more than component libraries—they're the shared language between designers and developers that ensures consistency at scale.
 
 Start with your design tokens: colors, typography, spacing, shadows, and borders. These are the building blocks everything else is built on.
@@ -287,27 +302,27 @@ A good design system pays dividends: faster development, fewer bugs, and consist
     date: "2024-11-05",
     readTime: "11 min read",
     tags: ["Design Systems", "Components", "Workflow", "Development"],
-    featured: false
-  }
+    featured: false,
+  },
 ];
 
 export function getFeaturedPosts(): BlogPost[] {
-  return blogPosts.filter(post => post.featured);
+  return blogPosts.filter((post) => post.featured);
 }
 
 export function getPostsByCategory(category: string): BlogPost[] {
-  return blogPosts.filter(post => post.category === category);
+  return blogPosts.filter((post) => post.category === category);
 }
 
 export function getPostById(id: string): BlogPost | undefined {
-  return blogPosts.find(post => post.id === id);
+  return blogPosts.find((post) => post.id === id);
 }
 
 export function getAllCategories(): string[] {
-  return Array.from(new Set(blogPosts.map(post => post.category)));
+  return Array.from(new Set(blogPosts.map((post) => post.category)));
 }
 
 export function getAllTags(): string[] {
-  const tags = blogPosts.flatMap(post => post.tags);
+  const tags = blogPosts.flatMap((post) => post.tags);
   return Array.from(new Set(tags));
 }

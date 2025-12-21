@@ -17,7 +17,7 @@ export interface Experiment {
   variants: Variant[];
   startDate: number;
   endDate: number;
-  status: 'active' | 'paused' | 'ended';
+  status: "active" | "paused" | "ended";
   winner?: string;
   conversionMetric: string; // e.g., 'purchase', 'click', 'signup'
   minSampleSize: number;
@@ -39,7 +39,7 @@ export class ExperimentEngine {
   /**
    * Create a new experiment
    */
-  createExperiment(experiment: Omit<Experiment, 'id'>): Experiment {
+  createExperiment(experiment: Omit<Experiment, "id">): Experiment {
     const id = `exp_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     const exp: Experiment = {
       ...experiment,
@@ -56,7 +56,7 @@ export class ExperimentEngine {
    */
   getVariant(experimentId: string, userId: string): string | null {
     const experiment = this.experiments.get(experimentId);
-    if (!experiment || experiment.status !== 'active') return null;
+    if (!experiment || experiment.status !== "active") return null;
 
     // Consistent hash-based bucketing
     const hash = this.hashUserId(userId, experimentId);
@@ -79,7 +79,7 @@ export class ExperimentEngine {
     const results = this.results.get(experimentId);
     if (!results) return;
 
-    const existing = results.find(r => r.variantName === variantName);
+    const existing = results.find((r) => r.variantName === variantName);
     if (existing) {
       existing.conversions++;
     } else {
@@ -102,7 +102,7 @@ export class ExperimentEngine {
     const results = this.results.get(experimentId);
     if (!results) return;
 
-    const existing = results.find(r => r.variantName === variantName);
+    const existing = results.find((r) => r.variantName === variantName);
     if (existing) {
       existing.impressions++;
     } else {
@@ -133,7 +133,7 @@ export class ExperimentEngine {
       if (result.impressions > 30) {
         result.confidence = Math.min(
           0.95,
-          0.5 + (result.conversionRate / 2) * (result.impressions / 100)
+          0.5 + (result.conversionRate / 2) * (result.impressions / 100),
         );
       }
     }
@@ -150,15 +150,15 @@ export class ExperimentEngine {
 
     // Find variant with highest conversion rate that meets minimum sample size
     const qualified = results.filter(
-      r =>
+      (r) =>
         r.impressions >= experiment.minSampleSize &&
-        r.confidence >= experiment.confidenceThreshold
+        r.confidence >= experiment.confidenceThreshold,
     );
 
     if (qualified.length === 0) return null;
 
     const winner = qualified.reduce((best, current) =>
-      current.conversionRate > best.conversionRate ? current : best
+      current.conversionRate > best.conversionRate ? current : best,
     );
 
     return winner.variantName;
@@ -174,7 +174,7 @@ export class ExperimentEngine {
     if (!experiment || !winner) return false;
 
     experiment.winner = winner;
-    experiment.status = 'ended';
+    experiment.status = "ended";
     return true;
   }
 
@@ -189,7 +189,9 @@ export class ExperimentEngine {
    * Get active experiments
    */
   getActiveExperiments(): Experiment[] {
-    return Array.from(this.experiments.values()).filter(e => e.status === 'active');
+    return Array.from(this.experiments.values()).filter(
+      (e) => e.status === "active",
+    );
   }
 
   /**

@@ -9,13 +9,7 @@
 
 import { brand } from "@/design/brand";
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  CheckCircle,
-  Play,
-  Sparkles,
-  Zap,
-} from "lucide-react";
+import { ArrowRight, CheckCircle, Play, Sparkles, Zap } from "lucide-react";
 import Link from "next/link";
 import { Suspense, lazy, useEffect, useState } from "react";
 import VideoHero from "./components/VideoHero";
@@ -33,11 +27,11 @@ export default function HomePage() {
   // Exit intent detection
   useEffect(() => {
     const handleMouseLeave = (e: MouseEvent) => {
-      if (typeof window !== 'undefined' && e.clientY <= 0) {
-        const shown = localStorage.getItem('exit-intent-shown');
+      if (typeof window !== "undefined" && e.clientY <= 0) {
+        const shown = localStorage.getItem("exit-intent-shown");
         if (!shown) {
           setShowExitIntent(true);
-          localStorage.setItem('exit-intent-shown', 'true');
+          localStorage.setItem("exit-intent-shown", "true");
         }
       }
     };
@@ -60,10 +54,7 @@ export default function HomePage() {
       {/* Hero Section - Above the Fold */}
       <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
         {/* Video Hero Background */}
-        <VideoHero 
-          mp4Src="/media/bg.mp4"
-          opacity={0.2}
-        />
+        <VideoHero mp4Src="/media/bg.mp4" opacity={0.2} />
 
         <div className="relative z-10 max-w-5xl mx-auto text-center">
           {/* Main Value Proposition */}
@@ -101,7 +92,8 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            From zero to revenue in 10 seconds • No code required • Scale automatically
+            From zero to revenue in 10 seconds • No code required • Scale
+            automatically
           </motion.p>
 
           {/* Primary CTA */}
@@ -111,17 +103,14 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/store"
                 className="px-10 py-5 font-bold rounded-lg flex items-center gap-3 text-lg shadow-2xl"
                 style={{
                   background: brand.colors.gradient.primary,
                   color: brand.colors.text.inverse,
-                  boxShadow: '0 0 40px rgba(0, 245, 212, 0.6)',
+                  boxShadow: "0 0 40px rgba(0, 245, 212, 0.6)",
                 }}
               >
                 <Zap size={24} fill="currentColor" />
@@ -131,15 +120,12 @@ export default function HomePage() {
             </motion.div>
 
             {/* Secondary CTA */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="#how-it-works"
                 className="px-10 py-5 font-bold rounded-lg flex items-center gap-3 text-lg"
                 style={{
-                  background: 'rgba(0, 0, 0, 0.5)',
+                  background: "rgba(0, 0, 0, 0.5)",
                   color: brand.colors.text.primary,
                   border: `2px solid ${brand.colors.action.secondary}`,
                   backdropFilter: "blur(10px)",
@@ -160,15 +146,24 @@ export default function HomePage() {
             style={{ color: brand.colors.text.secondary }}
           >
             <div className="flex items-center gap-2">
-              <CheckCircle size={18} style={{ color: brand.colors.revenue.positive }} />
+              <CheckCircle
+                size={18}
+                style={{ color: brand.colors.revenue.positive }}
+              />
               <span>No Credit Card Required</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle size={18} style={{ color: brand.colors.revenue.positive }} />
+              <CheckCircle
+                size={18}
+                style={{ color: brand.colors.revenue.positive }}
+              />
               <span>Setup in 60 Seconds</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle size={18} style={{ color: brand.colors.revenue.positive }} />
+              <CheckCircle
+                size={18}
+                style={{ color: brand.colors.revenue.positive }}
+              />
               <span>Cancel Anytime</span>
             </div>
           </motion.div>
@@ -180,21 +175,27 @@ export default function HomePage() {
       {/* After approval, you can create manual ad units in AdSense dashboard and replace this section */}
       {process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID && (
         <div className="max-w-6xl mx-auto px-4 py-8">
-          <div 
+          <div
             className="min-h-[90px] flex items-center justify-center"
-            style={{ 
-              background: 'rgba(0, 245, 212, 0.05)',
-              border: '1px dashed rgba(0, 245, 212, 0.2)',
-              borderRadius: '8px'
+            style={{
+              background: "rgba(0, 245, 212, 0.05)",
+              border: "1px dashed rgba(0, 245, 212, 0.2)",
+              borderRadius: "8px",
             }}
           >
-            <p className="text-gray-500 text-sm">AdSense Auto Ads will appear here once approved</p>
+            <p className="text-gray-500 text-sm">
+              AdSense Auto Ads will appear here once approved
+            </p>
           </div>
         </div>
       )}
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-24 px-4" style={{ background: brand.colors.bg.secondary }}>
+      <section
+        id="how-it-works"
+        className="py-24 px-4"
+        style={{ background: brand.colors.bg.secondary }}
+      >
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -203,7 +204,7 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 
+            <h2
               className="text-4xl md:text-5xl font-bold mb-4"
               style={{ color: brand.colors.text.primary }}
             >
@@ -217,21 +218,24 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                step: '01',
-                title: 'Choose Your Tools',
-                description: 'Select from AI-powered tools, templates, and automations designed to generate revenue',
+                step: "01",
+                title: "Choose Your Tools",
+                description:
+                  "Select from AI-powered tools, templates, and automations designed to generate revenue",
                 icon: <Sparkles size={40} />,
               },
               {
-                step: '02',
-                title: 'Set & Forget',
-                description: 'Configure once and let AI automation handle content, marketing, and sales 24/7',
+                step: "02",
+                title: "Set & Forget",
+                description:
+                  "Configure once and let AI automation handle content, marketing, and sales 24/7",
                 icon: <Zap size={40} />,
               },
               {
-                step: '03',
-                title: 'Watch It Grow',
-                description: 'Monitor real-time analytics as your automated empire generates passive income',
+                step: "03",
+                title: "Watch It Grow",
+                description:
+                  "Monitor real-time analytics as your automated empire generates passive income",
                 icon: <CheckCircle size={40} />,
               },
             ].map((item, idx) => (
@@ -246,14 +250,14 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: idx * 0.2 }}
-                whileHover={{ 
+                whileHover={{
                   y: -8,
                   borderColor: brand.colors.action.primary,
                   transition: { duration: 0.3 },
                 }}
               >
                 {/* Step Number */}
-                <div 
+                <div
                   className="text-6xl font-bold mb-4 opacity-20"
                   style={{ color: brand.colors.action.primary }}
                 >
@@ -299,15 +303,17 @@ export default function HomePage() {
       {/* After approval, create ad units in AdSense dashboard with slot IDs and use AdSenseUnit component */}
       {process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID && (
         <div className="max-w-6xl mx-auto px-4 py-8">
-          <div 
+          <div
             className="min-h-[250px] flex items-center justify-center"
-            style={{ 
-              background: 'rgba(0, 245, 212, 0.05)',
-              border: '1px dashed rgba(0, 245, 212, 0.2)',
-              borderRadius: '8px'
+            style={{
+              background: "rgba(0, 245, 212, 0.05)",
+              border: "1px dashed rgba(0, 245, 212, 0.2)",
+              borderRadius: "8px",
             }}
           >
-            <p className="text-gray-500 text-sm">AdSense Auto Ads will appear here once approved</p>
+            <p className="text-gray-500 text-sm">
+              AdSense Auto Ads will appear here once approved
+            </p>
           </div>
         </div>
       )}
@@ -325,7 +331,11 @@ export default function HomePage() {
         style={{ background: brand.colors.bg.secondary }}
       >
         <Suspense fallback={<div className="h-64" />}>
-          <Newsletter variant="hero" title="Get Free Revenue Playbook" description="Join 10,000+ creators earning passive income with AI automation" />
+          <Newsletter
+            variant="hero"
+            title="Get Free Revenue Playbook"
+            description="Join 10,000+ creators earning passive income with AI automation"
+          />
         </Suspense>
       </section>
 
@@ -349,9 +359,7 @@ export default function HomePage() {
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div 
-              className="absolute -top-8 left-1/2 transform -translate-x-1/2 text-6xl"
-            >
+            <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 text-6xl">
               🎁
             </div>
             <h3
@@ -360,8 +368,18 @@ export default function HomePage() {
             >
               Wait! Special Offer
             </h3>
-            <p className="mb-6 text-center text-lg" style={{ color: brand.colors.text.secondary }}>
-              Get <span className="text-2xl font-bold" style={{ color: brand.colors.revenue.positive }}>50% OFF</span> your first month + exclusive AI automation templates
+            <p
+              className="mb-6 text-center text-lg"
+              style={{ color: brand.colors.text.secondary }}
+            >
+              Get{" "}
+              <span
+                className="text-2xl font-bold"
+                style={{ color: brand.colors.revenue.positive }}
+              >
+                50% OFF
+              </span>{" "}
+              your first month + exclusive AI automation templates
             </p>
             <div className="space-y-3">
               <Link
