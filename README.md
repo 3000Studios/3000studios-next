@@ -288,7 +288,6 @@ Total Routes: 55+ routes
 This is a proprietary project for 3000 Studios. For questions or collaboration:
 
 - Email: contact@3000studios.com
-- Admin: mr.jwswain@gmail.com
 
 ## 📄 License
 
