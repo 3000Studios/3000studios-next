@@ -57,7 +57,16 @@ export async function getMatrixStats(): Promise<StatItem[]> {
     stats = await prisma.stats.findMany();
   }
 
-  return stats.map((s) => ({
+  return stats.map((s: {
+    id: number;
+    title: string;
+    value: string;
+    change: string;
+    trend: string;
+    iconName: string;
+    color: string;
+    updatedAt: Date;
+  }) => ({
     ...s,
     icon: null, // UI handles icon rendering logic
     trend: s.trend as "up" | "down",
