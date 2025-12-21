@@ -5,7 +5,10 @@
 This guide covers the **complete reset and reconfiguration** of all Vercel environment variables for the 3000 Studios Next.js application.
 
 **Use this when:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - Starting fresh with Vercel configuration
 - Fixing multiple environment variable issues
 - Migrating to new Vercel project
@@ -19,20 +22,29 @@ This guide covers the **complete reset and reconfiguration** of all Vercel envir
 ### Method 1: Automated Script (Recommended)
 
 **PowerShell (Windows):**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```powershell
 cd C:\DEV\3000studios-next
 .\scripts\vercel-reset-and-deploy.ps1
 ```
 
 **Or with execution policy bypass:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```powershell
 PowerShell -ExecutionPolicy Bypass -File ".\scripts\vercel-reset-and-deploy.ps1"
 ```
 
 **Or right-click → Run with PowerShell:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - Navigate to `scripts` folder
 - Right-click `vercel-reset-and-deploy.ps1`
 - Select "Run with PowerShell"
@@ -42,20 +54,29 @@ PowerShell -ExecutionPolicy Bypass -File ".\scripts\vercel-reset-and-deploy.ps1"
 ## 📋 What the Script Does
 
 ### 1. Project Setup
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - ✅ Navigates to project root (`C:\DEV\3000studios-next`)
 - ✅ Verifies Vercel CLI authentication
 - ✅ Removes local `.vercel` directory (clears cache)
 - ✅ Re-links project to Vercel
 
 ### 2. Environment Cleanup
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - ✅ Removes `NEXT_PUBLIC_SITE_URL` from all environments
 - ✅ Removes `next_public_site_url` (broken reference) from all environments
 - ✅ Ensures clean state with no circular dependencies
 
 ### 3. Required Variables
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - ✅ `NEXT_PUBLIC_SITE_URL` → `https://3000studios.com` (literal value, NOT sensitive)
 - ✅ `ADMIN_EMAIL` → Your admin email
 - ✅ `ADMIN_PASSWORD` → Your admin password
@@ -65,7 +86,10 @@ PowerShell -ExecutionPolicy Bypass -File ".\scripts\vercel-reset-and-deploy.ps1"
 The script will prompt you for each of these variables:
 
 **AI Services:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - `OPENAI_API_KEY`
 - `CLAUDE_API_KEY`
 - `CLAUDE_ALT_KEY`
@@ -74,17 +98,26 @@ The script will prompt you for each of these variables:
 - `AI_GATEWAY_API_KEY`
 
 **Google Services:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - `GOOGLE_CLOUD_API_KEY`
 - `GOOGLE_MAPS_API_KEY`
 
 **Payment:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - `PAYPAL_CLIENT_ID`
 - `PAYPAL_SECRET`
 
 **Other Services:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - `MXBAI_API_KEY`
 - `MXBAI_STORE_ID`
 - `SHADOW_PASSWORD`
@@ -92,13 +125,19 @@ The script will prompt you for each of these variables:
 - `GITHUB3000_PAT_TOKEN`
 
 **Database:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - `MONGO_PUBLIC_KEY`
 - `MONGO_PRIVATE_KEY`
 - `MONGO_IP`
 
 ### 5. Deployment
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - ✅ Verifies all environment variables
 - ✅ Lists current configuration
 - ✅ Optionally deploys to production
@@ -120,7 +159,10 @@ Answer: n (or just press Enter)
 ```
 
 **Why this matters:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - ✅ This must be a **literal value** (not a secret reference)
 - ✅ Must NOT be marked as sensitive (it's a public URL)
 - ✅ Marking it correctly prevents circular dependency errors
@@ -140,7 +182,10 @@ The script will ask for each API key individually. You have three options:
 ## 🔍 Step-by-Step Execution
 
 ### Step 1: Pre-Flight Checks
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```
 ✅ Vercel CLI installed
 ✅ Authenticated with Vercel
@@ -148,7 +193,10 @@ The script will ask for each API key individually. You have three options:
 ```
 
 ### Step 2: Clean Slate
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```
 🗑️ Remove .vercel directory
 🔗 Re-link to Vercel project
@@ -156,7 +204,10 @@ The script will ask for each API key individually. You have three options:
 ```
 
 ### Step 3: Add Core Variables
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```
 ➕ NEXT_PUBLIC_SITE_URL (literal value)
 ➕ ADMIN_EMAIL
@@ -164,7 +215,10 @@ The script will ask for each API key individually. You have three options:
 ```
 
 ### Step 4: Add API Keys (Interactive)
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```
 For each variable:
   - Prompt: Add this variable? [y/n/s]
@@ -174,14 +228,20 @@ For each variable:
 ```
 
 ### Step 5: Verify
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```
 📋 List all environment variables
 🔍 Review configuration
 ```
 
 ### Step 6: Deploy
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```
 🚀 Deploy to production (optional)
 ✅ Site live at https://3000studios.com
@@ -194,13 +254,19 @@ For each variable:
 ### Script Execution Policy Error
 
 **Error:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```
 cannot be loaded because running scripts is disabled
 ```
 
 **Fix:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```powershell
 PowerShell -ExecutionPolicy Bypass -File ".\scripts\vercel-reset-and-deploy.ps1"
 ```
@@ -208,13 +274,19 @@ PowerShell -ExecutionPolicy Bypass -File ".\scripts\vercel-reset-and-deploy.ps1"
 ### Not Authenticated Error
 
 **Error:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```
 ❌ Not authenticated with Vercel
 ```
 
 **Fix:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```bash
 vercel login
 ```
@@ -222,39 +294,57 @@ vercel login
 ### Project Not Found
 
 **Error:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```
 ⚠️ Directory C:\DEV\3000studios-next not found
 ```
 
 **Fix:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - Edit script and change project path
 - Or run from correct directory
 
 ### Variable Already Exists
 
 **Error:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```
 Environment Variable "X" already exists
 ```
 
 **Fix:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - Script automatically removes duplicates
 - Or manually remove via `vercel env rm X production --yes`
 
 ### Deployment Fails
 
 **Error:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```
 ❌ Deployment failed
 ```
 
 **Fix:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 1. Check build logs: `vercel logs`
 2. Verify all required environment variables are set
 3. Check for TypeScript errors
@@ -265,37 +355,58 @@ Environment Variable "X" already exists
 ## 📊 Environment Variable Checklist
 
 ### Required (Must Have)
+<<<<<<< HEAD
 
 - [x] `NEXT_PUBLIC_SITE_URL` - `https://3000studios.com`
 
 ### Authentication
 
+=======
+- [x] `NEXT_PUBLIC_SITE_URL` - `https://3000studios.com`
+
+### Authentication
+>>>>>>> origin/pr/50
 - [ ] `ADMIN_EMAIL`
 - [ ] `ADMIN_PASSWORD`
 
 ### AI Services (At Least One)
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - [ ] `OPENAI_API_KEY`
 - [ ] `CLAUDE_API_KEY`
 - [ ] `GEMINI_API_KEY`
 
 ### Google Services
+<<<<<<< HEAD
 
 - [ ] `GOOGLE_MAPS_API_KEY`
 
 ### Payment (For Store)
 
+=======
+- [ ] `GOOGLE_MAPS_API_KEY`
+
+### Payment (For Store)
+>>>>>>> origin/pr/50
 - [ ] `PAYPAL_CLIENT_ID`
 - [ ] `PAYPAL_SECRET`
 
 ### Database
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - [ ] `MONGO_PUBLIC_KEY`
 - [ ] `MONGO_PRIVATE_KEY`
 - [ ] `MONGO_IP`
 
 ### Optional
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - [ ] `CLAUDE_ALT_KEY`
 - [ ] `GEMINI_ALT_KEY`
 - [ ] `GOOGLE_CLOUD_API_KEY`
@@ -313,7 +424,10 @@ Environment Variable "X" already exists
 If you prefer to use Vercel Dashboard:
 
 ### Step 1: Clean Environment Variables
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
 2. Select project: `3000studios-next`
 3. Go to **Settings → Environment Variables**
@@ -321,7 +435,10 @@ If you prefer to use Vercel Dashboard:
 5. Delete any variables with `@secret` references
 
 ### Step 2: Add Variables
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 1. Click **Add New** for each variable
 2. Name: Variable name (e.g., `NEXT_PUBLIC_SITE_URL`)
 3. Value: Actual value (e.g., `https://3000studios.com`)
@@ -330,7 +447,10 @@ If you prefer to use Vercel Dashboard:
 6. Click **Save**
 
 ### Step 3: Deploy
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 1. Go to **Deployments** tab
 2. Click **Redeploy** on latest deployment
 3. Check **Use existing Build Cache**: Off
@@ -354,7 +474,10 @@ After running the script, you should see:
 ```
 
 **Verification:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 1. ✅ Site loads: https://3000studios.com
 2. ✅ No build errors in Vercel logs
 3. ✅ All 9 pages accessible (Home, Store, Projects, etc.)
@@ -366,7 +489,10 @@ After running the script, you should see:
 ## 🚀 Post-Deployment Steps
 
 1. **Test the Site**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
    ```bash
    curl https://3000studios.com
    curl https://3000studios.com/api/health
@@ -446,19 +572,28 @@ vercel env pull .env.local
 ## 🆘 Need Help?
 
 **Script Issues:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - See `VERCEL_FIX_NOW.md` for alternative methods
 - See `QUICK_FIX_COMMANDS.md` for manual commands
 - See `VERCEL_ENV_FIX.md` for detailed troubleshooting
 
 **Deployment Issues:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - Check `MERGE_AND_DEPLOY.md` for deployment guide
 - Check `PRODUCTION_READY.md` for status checklist
 - Check `ENV_CHECKLIST.md` for required variables
 
 **General Help:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - Vercel Documentation: https://vercel.com/docs
 - Vercel Support: https://vercel.com/support
 - Project Issues: https://github.com/3000Studios/3000studios-next/issues

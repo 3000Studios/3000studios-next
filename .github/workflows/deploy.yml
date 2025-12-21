@@ -1,8 +1,5 @@
 name: CD — Deploy Production
 
-permissions:
-  contents: read
-
 on:
   push:
     branches: [main]

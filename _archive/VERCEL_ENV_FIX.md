@@ -60,7 +60,10 @@ vercel --prod --yes
 ```
 
 Make executable:
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```bash
 chmod +x fix-vercel-site-url.sh
 ```
@@ -70,24 +73,36 @@ chmod +x fix-vercel-site-url.sh
 ## Manual Steps (If Scripts Don't Work)
 
 ### Step 1: Remove Broken Reference
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```bash
 vercel env rm NEXT_PUBLIC_SITE_URL production --yes
 ```
 
 ### Step 2: Add Correct Value
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```bash
 vercel env add NEXT_PUBLIC_SITE_URL production --force
 ```
 
 **When prompted:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 - Enter: `https://3000studios.com`
 - Mark as sensitive? **NO** (This is crucial!)
 
 ### Step 3: Verify
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```bash
 vercel env ls
 ```
@@ -95,7 +110,10 @@ vercel env ls
 Should show `NEXT_PUBLIC_SITE_URL` as "Encrypted" but NOT referencing another secret.
 
 ### Step 4: Deploy
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```bash
 vercel --prod --yes
 ```
@@ -107,13 +125,19 @@ vercel --prod --yes
 Vercel allows environment variables to reference other secrets using `@secret-name` syntax. If `NEXT_PUBLIC_SITE_URL` was accidentally set to `@next_public_site_url`, it creates a circular reference that fails during deployment.
 
 **The problem:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```
 NEXT_PUBLIC_SITE_URL=@next_public_site_url  ❌ (References another secret)
 ```
 
 **The solution:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```
 NEXT_PUBLIC_SITE_URL=https://3000studios.com  ✅ (Literal value)
 ```
@@ -124,7 +148,11 @@ NEXT_PUBLIC_SITE_URL=https://3000studios.com  ✅ (Literal value)
 
 ### When Adding Environment Variables:
 
+<<<<<<< HEAD
 1. **Mark as sensitive?**
+=======
+1. **Mark as sensitive?** 
+>>>>>>> origin/pr/50
    - For `NEXT_PUBLIC_SITE_URL`: Answer **NO**
    - This is a public URL, not a secret
    - Marking as "NO" ensures it's stored as a literal value
@@ -189,7 +217,10 @@ To prevent this in the future:
 ## Troubleshooting
 
 ### Issue: "Variable not found"
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```bash
 # List all variables first
 vercel env ls
@@ -199,7 +230,10 @@ vercel env rm NEXT_PUBLIC_SITE_URL production
 ```
 
 ### Issue: "Permission denied"
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```bash
 # Make sure you're authenticated
 vercel login
@@ -209,7 +243,10 @@ vercel whoami
 ```
 
 ### Issue: "Deploy still failing"
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/pr/50
 ```bash
 # Clear Vercel build cache
 vercel --prod --yes --force

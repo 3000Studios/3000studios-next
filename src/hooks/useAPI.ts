@@ -14,7 +14,11 @@ export function useVoiceToCode() {
 
   const generateCode = async (
     prompt: string,
+<<<<<<< HEAD
     action: "preview" | "apply" | "deploy",
+=======
+    action: "preview" | "apply" | "deploy"
+>>>>>>> origin/pr/50
   ) => {
     setLoading(true);
     setError(null);
@@ -45,7 +49,11 @@ export function useVoiceToCode() {
 
   const transcribeAndGenerate = async (
     audioBase64: string,
+<<<<<<< HEAD
     action: "preview" | "apply" | "deploy",
+=======
+    action: "preview" | "apply" | "deploy"
+>>>>>>> origin/pr/50
   ) => {
     setLoading(true);
     setError(null);
@@ -141,13 +149,53 @@ export function usePayPalCheckout() {
   return { createOrder, captureOrder, loading, error };
 }
 
+// Stripe Checkout Hook
+export function useStripeCheckout() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const createCheckoutSession = async (priceId: string) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ priceId }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to create checkout session");
+      }
+
+      return data; // Returns { url: string }
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : "An error occurred";
+      setError(errorMessage);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { createCheckoutSession, loading, error };
+}
+
 // Analytics Hook
 export function useAnalytics() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const fetchAnalytics = async (
+<<<<<<< HEAD
     timeRange: "day" | "week" | "month" = "day",
+=======
+    timeRange: "day" | "week" | "month" = "day"
+>>>>>>> origin/pr/50
   ) => {
     setLoading(true);
     setError(null);
@@ -182,7 +230,11 @@ export function useContentGeneration() {
   const generateBlog = async (
     topic: string,
     keywords?: string[],
+<<<<<<< HEAD
     publishToWordPress?: boolean,
+=======
+    publishToWordPress?: boolean
+>>>>>>> origin/pr/50
   ) => {
     setLoading(true);
     setError(null);

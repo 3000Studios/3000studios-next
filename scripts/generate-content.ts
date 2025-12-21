@@ -11,7 +11,11 @@ const API_KEY = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
 
 if (!API_KEY) {
   console.error(
+<<<<<<< HEAD
     "Error: GOOGLE_API_KEY or GEMINI_API_KEY not found in environment.",
+=======
+    "Error: GOOGLE_API_KEY or GEMINI_API_KEY not found in environment."
+>>>>>>> origin/pr/50
   );
   process.exit(1);
 }
@@ -24,7 +28,11 @@ const TARGET_FILE = path.join(
   "src",
   "app",
   "lib",
+<<<<<<< HEAD
   "blogData.ts",
+=======
+  "blogData.ts"
+>>>>>>> origin/pr/50
 );
 
 const TOPICS = [

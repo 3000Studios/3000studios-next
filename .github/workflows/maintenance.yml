@@ -1,8 +1,5 @@
 name: Maintenance — Repo Hygiene
 
-permissions:
-  contents: read
-
 on:
   schedule:
     - cron: "0 4 * * *"

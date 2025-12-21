@@ -6,14 +6,25 @@
  * Removing ads.txt verification, consent logic, or ad scripts will break revenue
  */
 
+<<<<<<< HEAD
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import Script from "next/script";
+=======
+import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import "./globals.css";
+import Navigation from "./components/Navigation";
+import GravityFooter from "./components/GravityFooter";
+import VideoWallpaper from "./components/VideoWallpaper";
+>>>>>>> origin/pr/50
 import BackgroundMusic from "./components/BackgroundMusic";
 import GravityFooter from "./components/GravityFooter";
 import Navigation from "./components/Navigation";
 import SmoothScroll from "./components/SmoothScroll";
 import SoundEffects from "./components/SoundEffects";
+<<<<<<< HEAD
 import VideoWallpaper from "./components/VideoWallpaper";
 import "./globals.css";
 
@@ -23,13 +34,18 @@ const ADSENSE_ACCOUNT = RAW_ADSENSE_ID
     ? RAW_ADSENSE_ID
     : `ca-pub-${RAW_ADSENSE_ID}`
   : undefined;
+=======
+import { ENV } from "@/lib/env";
+>>>>>>> origin/pr/50
 
 export const metadata: Metadata = {
+  metadataBase: new URL(ENV.SITE_URL),
   title: "3000 Studios - Award-Winning Creative Studio",
   description:
     "Premium digital experiences, innovative solutions, and transformative projects. 250+ successful clients worldwide with 99% satisfaction rate.",
   keywords:
     "creative studio, digital agency, web development, premium design, innovation, 3D experiences, AI solutions",
+<<<<<<< HEAD
   authors: [{ name: "3000 Studios" }],
   robots: "index, follow",
   openGraph: {
@@ -59,6 +75,8 @@ export const metadata: Metadata = {
   other: ADSENSE_ACCOUNT
     ? { "google-adsense-account": ADSENSE_ACCOUNT }
     : undefined,
+=======
+>>>>>>> origin/pr/50
 };
 
 export default function RootLayout({
@@ -93,12 +111,17 @@ export default function RootLayout({
 
         {/* Main Content */}
         <Navigation />
+<<<<<<< HEAD
         <main className="flex-grow pt-20 relative z-10">{children}</main>
+=======
+        <main className="flex-grow pt-16 relative z-10">{children}</main>
+>>>>>>> origin/pr/50
 
         {/* Gravity Footer - Blueprint Feature */}
         <GravityFooter />
 
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

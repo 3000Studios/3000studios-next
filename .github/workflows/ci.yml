@@ -1,8 +1,5 @@
 name: 🚀 CI — Validate, Secure & Optimize
 
-permissions:
-  contents: read
-
 on:
   pull_request:
     branches: [main]
