@@ -7,7 +7,9 @@ import axios from "axios";
 
 const VERCEL_TOKEN = process.env.VERCEL_TOKEN;
 const VERCEL_API = "https://api.vercel.com";
-const PROJECT_NAME = "3000studios-next"; // Update with actual project name
+const PROJECT_NAME = "3000studios-next";
+const PROJECT_ID =
+  process.env.VERCEL_PROJECT_ID || "prj_vaQtOh2emuK0ZsMzCEQJUHd1EezI";
 
 export interface DeploymentResponse {
   id: string;
@@ -72,7 +74,7 @@ export async function getDeploymentStatus(
 export async function getLatestDeployment(): Promise<DeploymentResponse | null> {
   try {
     const response = await axios.get(
-      `${VERCEL_API}/v6/deployments?projectId=${PROJECT_NAME}&limit=1`,
+      `${VERCEL_API}/v6/deployments?projectId=${PROJECT_ID}&limit=1`,
       {
         headers: {
           Authorization: `Bearer ${VERCEL_TOKEN}`,
