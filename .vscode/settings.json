@@ -117,5 +117,6 @@
   ====================================================== */
 
   "github-actions.workflows.pinned.refresh.enabled": true,
-  "github-actions.workflows.pinned.workflows": []
+  "github-actions.workflows.pinned.workflows": [],
+  "chat.agent.maxRequests": 50
 }
