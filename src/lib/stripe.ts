@@ -1,14 +1,19 @@
 import Stripe from "stripe";
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error(
-    "STRIPE_SECRET_KEY is missing. Please set it in your .env file.",
-  );
-}
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY || "";
+
+export const stripe = new Stripe(stripeSecretKey, {
+  apiVersion: "2025-01-27-acacia" as any, // Use latest or specific version
+  typescript: true,
+});
 
 /**
  * Check if Stripe is configured
  */
 export function isStripeConfigured(): boolean {
-  return stripeInstance !== null;
+  return !!process.env.STRIPE_SECRET_KEY;
+}
+
+export function getStripe() {
+  return stripe;
 }

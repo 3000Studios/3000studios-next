@@ -29,7 +29,6 @@ export class StoreOptimizer {
    */
   async optimize(): Promise<OptimizationAction[]> {
     const newActions: OptimizationAction[] = [];
-    const _pricingEngine = getPricingEngine();
 
     // 1. Auto-adjust prices
     const priceUpdates = await this.optimizePricing();
@@ -58,13 +57,13 @@ export class StoreOptimizer {
    */
   private async optimizePricing(): Promise<OptimizationAction[]> {
     const actions: OptimizationAction[] = [];
-    const _pricingEngine = getPricingEngine();
+    const pricingEngine = getPricingEngine();
 
     // Get all products and recommendations
-    const topProducts = _pricingEngine.getTopProducts(20);
+    const topProducts = pricingEngine.getTopProducts(20);
 
     for (const { productId } of topProducts) {
-      const recommendation = _pricingEngine.recommendPrice(productId);
+      const recommendation = pricingEngine.recommendPrice(productId);
 
       if (recommendation.recommended !== recommendation.current) {
         actions.push({
@@ -98,7 +97,7 @@ export class StoreOptimizer {
         type: "product_featured",
         productId,
         newValue: "featured",
-        reason: "Top performer",
+        reason: "Top performing product",
         automated: true,
       });
     }
@@ -134,10 +133,6 @@ export class StoreOptimizer {
    */
   private async rotateAffiliates(): Promise<OptimizationAction[]> {
     const actions: OptimizationAction[] = [];
-
-    // Affiliate rotation logic (implementation depends on affiliate service)
-    // This is a placeholder for affiliate product rotation strategy
-
     return actions;
   }
 
@@ -145,9 +140,7 @@ export class StoreOptimizer {
    * Start optimization loop
    */
   start(intervalMs: number = 3600000): void {
-    // Default: 1 hour
     if (this.optimizationInterval) return;
-
     this.optimizationInterval = setInterval(() => {
       this.optimize().catch((err) =>
         console.error("[StoreOptimizer] Error:", err),
@@ -171,25 +164,6 @@ export class StoreOptimizer {
   getActions(limit: number = 100): OptimizationAction[] {
     return this.actions.slice(-limit);
   }
-
-  /**
-   * Get actions by type
-   */
-  getActionsByType(type: OptimizationAction["type"]): OptimizationAction[] {
-    return this.actions.filter((a) => a.type === type);
-  }
-
-  /**
-   * Rollback action
-   */
-  rollbackAction(actionId: string): boolean {
-    const action = this.actions.find((a) => a.id === actionId);
-    if (!action) return false;
-
-    // In production, would revert the actual change
-    console.log("[StoreOptimizer] Rolled back action:", actionId);
-    return true;
-  }
 }
 
 // Singleton
@@ -200,4 +174,9 @@ export function getStoreOptimizer(): StoreOptimizer {
     optimizer = new StoreOptimizer();
   }
   return optimizer;
+}
+
+export async function optimizeStore() {
+  const opt = getStoreOptimizer();
+  return await opt.optimize();
 }

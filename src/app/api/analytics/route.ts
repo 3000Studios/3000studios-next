@@ -3,8 +3,8 @@
  * Returns real-time analytics data from MongoDB
  */
 
-import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
       prisma.order.count(),
       prisma.order.aggregate({
         _sum: { total: true },
-        where: { status: "paid" }, // Assuming paid status
+        where: { status: "PAID" }, // Assuming paid status
       }),
     ]);
 

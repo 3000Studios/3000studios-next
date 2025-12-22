@@ -19,7 +19,7 @@ npm install
 
 # Fix Lint Errors
 echo "✨ Auto-fixing lint errors..."
-npm run lint -- --fix
+npm run lint:fix
 
 # Build
 echo "🏗️  Attempting build..."
