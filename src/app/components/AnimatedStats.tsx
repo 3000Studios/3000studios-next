@@ -71,7 +71,7 @@ export default function AnimatedStats() {
             >
               <div className="gradient-text text-5xl md:text-6xl font-bold mb-2">
                 {stat.prefix}
-                {Math.floor(displayValues[index])}
+                {Math.floor(displayValues[index] ?? 0)}
                 {stat.suffix}
               </div>
               <div className="text-platinum text-sm md:text-base opacity-80">

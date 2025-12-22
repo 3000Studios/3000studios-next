@@ -155,9 +155,7 @@ export default function LiveAnalytics() {
                 <div className="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-gradient-to-r from-gold to-sapphire rounded-full transition-all duration-500"
-                    style={{
-                      width: `${(page.count / analytics.activePages[0]?.count) * 100}%`,
-                    }}
+                    style={{ width: `${(page.count / (analytics.activePages[0]?.count || 1)) * 100}%` }}
                   ></div>
                 </div>
               </div>

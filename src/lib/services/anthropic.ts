@@ -31,7 +31,7 @@ export async function generateWithClaude(
     });
 
     const content = response.content[0];
-    return content.type === "text" ? content.text : "";
+    return content && content.type === 'text' ? content.text : '';
   } catch (error) {
     console.error("Claude generation error:", error);
     throw new Error("Failed to generate with Claude");

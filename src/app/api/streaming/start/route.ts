@@ -9,8 +9,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { streamTitle: _streamTitle, streamDescription: _streamDescription } =
-      body;
+    const { streamTitle: _streamTitle, streamDescription: _streamDescription } = body;
 
     // Generate unique stream ID
     const streamId = `stream_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;

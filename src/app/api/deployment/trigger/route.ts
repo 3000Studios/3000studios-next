@@ -3,8 +3,8 @@
  * Triggers Vercel deployment
  */
 
-import { triggerDeployment } from "@/lib/services/vercel";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
+import { triggerDeployment } from '@/lib/services/vercel';
 
 export async function POST(request: NextRequest) {
   try {
