@@ -1,0 +1,123 @@
+{
+  "$schema": "https://3000studios.ai/schemas/autonomous-system.v1.json",
+  "gitAutomation": {
+    "onChange": [
+      "autoFix",
+      "autoCommit",
+      "autoMerge",
+      "autoPush"
+    ],
+    "branchPolicy": {
+      "mainIsTruth": true,
+      "noPRs": true,
+      "noManualMerges": true
+    },
+    "commitMessage": "auto: heal optimize deploy"
+  },
+  "deployment": {
+    "platform": "vercel",
+    "autoDeploy": true,
+    "on": ["commit", "merge"],
+    "healthCheck": true,
+    "rollbackOnFailure": true,
+    "cli": {
+      "useVercelCLI": true,
+      "environment": "production"
+    }
+  },
+  "payments": {
+    "providers": {
+      "paypal": {
+        "enabled": true,
+        "mode": "primary",
+        "verification": "webhook",
+        "autoRetry": true,
+        "payout": "instant"
+      },
+      "stripe": {
+        "enabled": true,
+        "mode": "subscriptions",
+        "autoManagePlans": true,
+        "autoRetry": true
+      }
+    },
+    "rules": {
+      "noDeliveryWithoutPayment": true,
+      "idempotentCharges": true,
+      "fraudDetection": true
+    }
+  },
+  "storeAutomation": {
+    "autoGenerateProducts": true,
+    "sources": [
+      "aiGenerated",
+      "usageBased",
+      "bundles"
+    ],
+    "pricing": {
+      "dynamic": true,
+      "increaseOnHighConversion": true,
+      "discountOnLowConversion": true
+    }
+  },
+  "contentEngine": {
+    "autoBlog": true,
+    "frequency": "daily",
+    "types": [
+      "seoEvergreen",
+      "comparison",
+      "tutorial",
+      "moneyPages"
+    ],
+    "autoInternalLinking": true,
+    "autoCTAInjection": true
+  },
+  "seo": {
+    "autoKeywords": true,
+    "autoMeta": true,
+    "autoSchema": true,
+    "rewriteLowPerformers": true,
+    "redirectDeadPages": true
+  },
+  "analyticsAutomation": {
+    "track": [
+      "conversion",
+      "bounce",
+      "revenuePerVisitor",
+      "scrollDepth"
+    ],
+    "actions": {
+      "lowConversion": "rewrite",
+      "highConversion": "amplify",
+      "zeroRevenue": "archive"
+    }
+  },
+  "maintenance": {
+    "autoRemoveUnusedDependencies": true,
+    "autoArchiveUnusedFiles": true,
+    "autoUpdateSafeDependencies": true
+  },
+  "commandRouter": {
+    "enabled": true,
+    "commands": {
+      "deploy": ["autoFix", "autoCommit", "deploy"],
+      "add product": ["generateProduct", "publish"],
+      "write blog": ["generateContent", "seoOptimize", "publish"],
+      "optimize site": ["seoAudit", "rewrite", "deploy"],
+      "make money": ["generateProduct", "publish", "promote"]
+    }
+  },
+  "learning": {
+    "enabled": true,
+    "inputs": [
+      "repoState",
+      "analytics",
+      "revenue"
+    ],
+    "optimizeFor": [
+      "conversion",
+      "stability",
+      "speed"
+    ]
+  }
+}

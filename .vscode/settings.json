@@ -2,57 +2,50 @@
   "$schema": "https://3000studios.ai/schemas/autonomous-system.v1.json",
 
   /* ======================================================
-     EDITOR / VS CODE AUTONOMY (settings.json merged)
+     EDITOR / VS CODE SETTINGS (Fixed)
   ====================================================== */
-  "vscode": {
-    "files": {
-      "autoSave": "afterDelay",
-      "autoSaveDelay": 500,
-      "trimTrailingWhitespace": true,
-      "insertFinalNewline": true,
-      "eol": "\n",
-      "watcherExclude": [
-        "**/.git/**",
-        "**/node_modules/**",
-        "**/.next/**",
-        "**/.vercel/**",
-        "**/dist/**",
-        "**/build/**",
-        "**/.pnpm-store/**"
-      ]
-    },
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 500,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.eol": "\n",
+  "files.watcherExclude": {
+    "**/.git/**": true,
+    "**/node_modules/**": true,
+    "**/.next/**": true,
+    "**/.vercel/**": true,
+    "**/dist/**": true,
+    "**/build/**": true,
+    "**/.pnpm-store/**": true
+  },
 
-    "editor": {
-      "formatOnSave": true,
-      "formatOnPaste": true,
-      "codeActionsOnSave": [
-        "source.fixAll",
-        "source.fixAll.eslint",
-        "source.organizeImports"
-      ],
-      "defaultFormatter": "prettier",
-      "inlineSuggest": true,
-      "acceptSuggestionOnEnter": true,
-      "linkedEditing": true,
-      "bracketPairColorization": true
-    },
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.inlineSuggest.enabled": true,
+  "editor.acceptSuggestionOnEnter": "on",
+  "editor.linkedEditing": true,
+  "editor.bracketPairColorization.enabled": true,
 
-    "typescript": {
-      "maxMemoryMB": 8192,
-      "updateImportsOnMove": true
-    },
+  "typescript.tsserver.maxTsServerMemory": 8192,
+  "typescript.updateImportsOnMove.enabled": "always",
 
-    "eslint": {
-      "enabled": true,
-      "mode": "heal-never-block"
-    },
+  "eslint.enable": true,
+  "eslint.run": "onSave",
 
-    "git": {
-      "autoFetch": true,
-      "smartCommit": true,
-      "noConfirmations": true
-    },
+  "git.autofetch": true,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
 
+  /* ======================================================
+     CUSTOM AUTONOMY SETTINGS
+  ====================================================== */
+  "vscode.custom": {
     "terminal": {
       "autoApproveCommands": [
         "pnpm",
@@ -65,7 +58,6 @@
         "python"
       ]
     },
-
     "extensions": {
       "allowed": [
         "esbenp.prettier-vscode",

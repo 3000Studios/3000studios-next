@@ -13,6 +13,20 @@
       "maxDuration": 60
     }
   },
+  "crons": [
+    {
+      "path": "/api/cron/seo",
+      "schedule": "0 0 * * *"
+    },
+    {
+      "path": "/api/cron/content",
+      "schedule": "0 12 * * *"
+    },
+    {
+      "path": "/api/cron/payments",
+      "schedule": "0 */1 * * *"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
