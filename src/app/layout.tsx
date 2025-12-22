@@ -25,40 +25,59 @@ const ADSENSE_ACCOUNT = RAW_ADSENSE_ID
   : undefined;
 
 export const metadata: Metadata = {
-  title: "3000 Studios - Award-Winning Creative Studio",
-  description:
-    "Premium digital experiences, innovative solutions, and transformative projects. 250+ successful clients worldwide with 99% satisfaction rate.",
-  keywords:
-    "creative studio, digital agency, web development, premium design, innovation, 3D experiences, AI solutions",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://3000studios.com'),
+  title: {
+    default: "3000 Studios - Award-Winning Creative Studio",
+    template: "%s | 3000 Studios"
+  },
+  description: "Premium digital experiences, innovative solutions, and transformative projects. 250+ successful clients worldwide with 99% satisfaction rate. Specializing in AI-powered solutions, live streaming, and cutting-edge web development.",
+  keywords: ["creative studio", "digital agency", "web development", "premium design", "innovation", "3D experiences", "AI solutions", "live streaming", "e-commerce", "luxury brand"],
   authors: [{ name: "3000 Studios" }],
-  robots: "index, follow",
+  creator: "3000 Studios",
+  publisher: "3000 Studios",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://3000studios.vercel.app",
-    siteName: "3000 Studios",
-    title: "3000 Studios - Award-Winning Creative Studio",
-    description:
-      "Premium digital experiences, innovative solutions, and transformative projects.",
+    type: 'website',
+    locale: 'en_US',
+    url: '/',
+    siteName: '3000 Studios',
+    title: '3000 Studios - Award-Winning Creative Studio',
+    description: 'Premium digital experiences and innovative solutions. 250+ successful clients worldwide.',
     images: [
       {
-        url: "/brand-logo.png",
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: "3000 Studios",
-      },
+        alt: '3000 Studios - Premium Creative Agency',
+      }
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    site: "@3000studios",
-    title: "3000 Studios - Award-Winning Creative Studio",
-    description:
-      "Premium digital experiences, innovative solutions, and transformative projects.",
+    card: 'summary_large_image',
+    title: '3000 Studios - Award-Winning Creative Studio',
+    description: 'Premium digital experiences and innovative solutions.',
+    images: ['/og-image.jpg'],
+    creator: '@3000studios',
   },
-  other: ADSENSE_ACCOUNT
-    ? { "google-adsense-account": ADSENSE_ACCOUNT }
-    : undefined,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'google-verification-code',
+    // Add other verification codes as needed
+  },
 };
 
 export default function RootLayout({

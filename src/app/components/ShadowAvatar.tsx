@@ -92,11 +92,10 @@ export default function ShadowAvatar() {
       "I hear you! Let me know if you want to see what we're working on.",
       "Cool! Check out our live streams for more content.",
     ];
-
-    const randomResponse =
-      responses[Math.floor(Math.random() * responses.length)];
-    setAvatarText(randomResponse);
-
+    
+    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+    setAvatarText(randomResponse || 'Hello!');
+    
     // Text-to-speech if enabled
     if (audioEnabled && "speechSynthesis" in window) {
       const utterance = new SpeechSynthesisUtterance(randomResponse);

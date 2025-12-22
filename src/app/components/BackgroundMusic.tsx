@@ -78,7 +78,7 @@ export default function BackgroundMusic() {
   }, [volume, isMuted]);
 
   const handlePlayPause = () => {
-    if (!audioRef.current) return;
+    if (!audioRef.current || !currentTrack) return;
 
     if (isPlaying) {
       audioRef.current.pause();
@@ -93,6 +93,17 @@ export default function BackgroundMusic() {
         setIsPlaying(false);
       });
       setIsPlaying(true);
+    }
+  };
+
+  const handleNextTrack = () => {
+    const nextIndex = (currentTrackIndex + 1) % DEFAULT_TRACKS.length;
+    setCurrentTrackIndex(nextIndex);
+    
+    const nextTrack = DEFAULT_TRACKS[nextIndex];
+    if (audioRef.current && isPlaying && nextTrack) {
+      audioRef.current.src = nextTrack.src;
+      audioRef.current.play().catch(err => console.log('Play error:', err));
     }
   };
 
@@ -128,10 +139,8 @@ export default function BackgroundMusic() {
       >
         {/* Track Info */}
         <div className="mb-4">
-          <p className="text-white font-semibold text-sm">
-            {currentTrack.name}
-          </p>
-          {currentTrack.artist && (
+          <p className="text-white font-semibold text-sm">{currentTrack?.name || 'No Track'}</p>
+          {currentTrack?.artist && (
             <p className="text-gray-400 text-xs">{currentTrack.artist}</p>
           )}
         </div>

@@ -15,10 +15,11 @@ import Newsletter from "../components/Newsletter";
 import { blogPosts, getAllCategories, getAllTags } from "../lib/blogData";
 
 export default function BlogPage() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const [_email, _setEmail] = useState("");
-  const [_isLoading, _setIsLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  // email and isLoading are placeholders for future newsletter integration
+  const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const categories = ["All", ...getAllCategories()];
 

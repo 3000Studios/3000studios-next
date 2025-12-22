@@ -69,10 +69,9 @@ export async function createCommit(
     });
 
     // Create a new commit
-    const commitMessage =
-      changes.length === 1
-        ? changes[0].message
-        : `Update ${changes.length} files via voice command`;
+    const commitMessage = changes.length === 1 
+      ? (changes[0]?.message || 'Update file via voice command')
+      : `Update ${changes.length} files via voice command`;
 
     const { data: newCommit } = await octokit.git.createCommit({
       owner,
