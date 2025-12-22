@@ -17,14 +17,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: 'npm'
 
-      - run: npm install
+      - run: npm ci
 
       - name: Generate Revenue Pages
-        run: npx tsx scripts/generate-revenue-pages.ts
+        run: npm run generate:revenue
 
       - name: 🔒 Verify Revenue Lock
-        run: npx tsx scripts/verify-revenue-lock.ts
+        run: npm run verify:revenue
 
       - run: npm run build
 

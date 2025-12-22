@@ -4,9 +4,9 @@
     {
       "label": "🚀 Shadow: Start Dev Server",
       "type": "shell",
-      "command": "pwsh.exe",
-      "args": ["-File", "C:/3000Studios/shadow/shadow-dev.ps1"],
-      "isBackground": false,
+      "command": "npm",
+      "args": ["run", "dev"],
+      "isBackground": true,
       "problemMatcher": {
         "pattern": {
           "regexp": "^ready - started server.*",
@@ -106,8 +106,8 @@
     {
       "label": "🤖 Auto: Start Auto-Commit",
       "type": "shell",
-      "command": "pwsh.exe",
-      "args": ["-File", "${workspaceFolder}/scripts/auto-commit.ps1"],
+      "command": "bash",
+      "args": ["${workspaceFolder}/scripts/auto-commit.sh"],
       "isBackground": true,
       "problemMatcher": [],
       "runOptions": {
@@ -117,8 +117,8 @@
     {
       "label": "🏥 Auto: Start Auto-Heal",
       "type": "shell",
-      "command": "pwsh.exe",
-      "args": ["-File", "${workspaceFolder}/scripts/auto-heal.ps1"],
+      "command": "bash",
+      "args": ["${workspaceFolder}/scripts/auto-heal.sh"],
       "isBackground": true,
       "problemMatcher": []
     },

@@ -28,22 +28,22 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: "npm"
 
       - name: Install Dependencies
         run: npm ci || npm install
 
       - name: Auto Fix ESLint Issues
-        run: npm run lint -- --fix || true
+        run: npm run lint:fix || true
         continue-on-error: true
 
       - name: Auto Format with Prettier
-        run: npx prettier --write "**/*.{js,jsx,ts,tsx,json,css,md}" || true
+        run: npm run format || true
         continue-on-error: true
 
       - name: Auto Fix TypeScript Issues
-        run: npx tsc --noEmit || true
+        run: npm run type-check || true
         continue-on-error: true
 
       - name: Commit Auto-Fixes

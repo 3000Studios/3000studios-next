@@ -23,16 +23,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install GitHub CLI
-        uses: cli/cli@v2
-
-      - name: Authenticate GH CLI
-        run: |
-          echo "${{ secrets.GH_TOKEN }}" | gh auth login --with-token
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
 
       - name: Force merge all open PRs into base branch
         env:
           BASE_BRANCH: ${{ github.event.inputs.base_branch }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN || secrets.GITHUB_TOKEN }}
         run: |
           prs=$(gh pr list --state open --base "$BASE_BRANCH" --json number -q '.[].number')
           for pr in $prs; do
@@ -46,5 +46,4 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
-          npm i -g vercel
-          vercel deploy --prod --token "$VERCEL_TOKEN"
+          npx vercel deploy --prod --yes --token "$VERCEL_TOKEN"

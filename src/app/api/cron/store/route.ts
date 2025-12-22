@@ -1,7 +1,6 @@
+import { optimizeStore } from "@/jobs/storeOptimizer";
 import { getPricingEngine } from "@/lib/pricing";
 import { NextRequest, NextResponse } from "next/server";
-import { optimizeStore } from "@/jobs/storeOptimizer";
-import { logAIEvent } from "@/lib/ai-logger";
 
 export const dynamic = "force-dynamic";
 
@@ -17,8 +16,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const optimizer = getStoreOptimizer();
-    const actions = await optimizer.optimize();
+    const actions = await optimizeStore();
 
     // Get top products after optimization
     const pricingEngine = getPricingEngine();
