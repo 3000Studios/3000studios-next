@@ -1,0 +1,12 @@
+{
+  "name": "shadow-core",
+  "version": "1.0.0",
+  "description": "3000 Studios Shadow Engine Core",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "echo \"Shadow core has no build step\"",
+    "start": "node index.js"
+  },
+  "license": "MIT"
+}

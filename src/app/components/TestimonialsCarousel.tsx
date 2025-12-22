@@ -98,7 +98,7 @@ export default function TestimonialsCarousel() {
             >
               {/* Stars */}
               <div className="flex gap-1 mb-6">
-                {[...Array(testimonials[currentIndex]?.rating || 5)].map((_, i) => (
+                {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
                   <svg
                     key={i}
                     className="w-6 h-6 text-gold"
@@ -112,16 +112,17 @@ export default function TestimonialsCarousel() {
 
               {/* Content */}
               <p className="text-lg md:text-xl text-foreground mb-8 italic leading-relaxed">
-                &quot;{testimonials[currentIndex]?.content || ''}&quot;
+                &quot;{testimonials[currentIndex].content}&quot;
               </p>
 
               {/* Author */}
               <div>
                 <div className="text-gold font-semibold text-lg">
-                  {testimonials[currentIndex]?.name || ''}
+                  {testimonials[currentIndex].name}
                 </div>
                 <div className="text-platinum opacity-80">
-                  {testimonials[currentIndex]?.role || ''} at {testimonials[currentIndex]?.company || ''}
+                  {testimonials[currentIndex].role} at{" "}
+                  {testimonials[currentIndex].company}
                 </div>
               </div>
             </motion.div>

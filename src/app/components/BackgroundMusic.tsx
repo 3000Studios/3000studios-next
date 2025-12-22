@@ -6,8 +6,8 @@
 
 "use client";
 
-import { Pause, Play, SkipForward, Volume2, VolumeX } from 'lucide-react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { Pause, Play, SkipForward, Volume2, VolumeX } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface MusicTrack {
   name: string;
@@ -49,7 +49,7 @@ export default function BackgroundMusic() {
 
       if (audioRef.current && isPlaying) {
         audioRef.current.src = DEFAULT_TRACKS[nextIndex].src;
-        audioRef.current.play().catch(err => console.log('Play error:', err));
+        audioRef.current.play().catch((err) => console.log("Play error:", err));
       }
 
       return nextIndex;
@@ -57,17 +57,17 @@ export default function BackgroundMusic() {
   }, [isPlaying]);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     const audio = new Audio();
     audio.volume = volume;
     audio.loop = false;
-    audio.addEventListener('ended', handleNextTrack);
+    audio.addEventListener("ended", handleNextTrack);
     audioRef.current = audio;
 
     return () => {
       audio.pause();
-      audio.removeEventListener('ended', handleNextTrack);
+      audio.removeEventListener("ended", handleNextTrack);
     };
   }, [handleNextTrack, volume]);
 
@@ -78,7 +78,7 @@ export default function BackgroundMusic() {
   }, [volume, isMuted]);
 
   const handlePlayPause = () => {
-    if (!audioRef.current || !currentTrack) return;
+    if (!audioRef.current) return;
 
     if (isPlaying) {
       audioRef.current.pause();
@@ -128,8 +128,10 @@ export default function BackgroundMusic() {
       >
         {/* Track Info */}
         <div className="mb-4">
-          <p className="text-white font-semibold text-sm">{currentTrack?.name || 'No Track'}</p>
-          {currentTrack?.artist && (
+          <p className="text-white font-semibold text-sm">
+            {currentTrack.name}
+          </p>
+          {currentTrack.artist && (
             <p className="text-gray-400 text-xs">{currentTrack.artist}</p>
           )}
         </div>

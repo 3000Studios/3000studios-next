@@ -6,13 +6,24 @@
 
 "use client";
 
-import { motion } from 'framer-motion';
-import { Award, ChevronRight, ExternalLink, Filter, Star, TrendingUp, Users } from 'lucide-react';
-import Link from 'next/link';
-import { useState } from 'react';
-import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
-import Newsletter from '../components/Newsletter';
-import { getAllPortfolioCategories, portfolioItems } from '../lib/portfolioData';
+import { motion } from "framer-motion";
+import {
+  Award,
+  ChevronRight,
+  ExternalLink,
+  Filter,
+  Star,
+  TrendingUp,
+  Users,
+} from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import GoogleAdsPlaceholder from "../components/GoogleAdsPlaceholder";
+import Newsletter from "../components/Newsletter";
+import {
+  getAllPortfolioCategories,
+  portfolioItems,
+} from "../lib/portfolioData";
 
 export default function PortfolioPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -27,9 +38,10 @@ export default function PortfolioPage() {
 
   const categories = ["All", ...getAllPortfolioCategories()];
 
-  const filteredProjects = selectedCategory === 'All'
-    ? portfolioItems
-    : portfolioItems.filter(p => p.category === selectedCategory);
+  const filteredProjects =
+    selectedCategory === "All"
+      ? portfolioItems
+      : portfolioItems.filter((p) => p.category === selectedCategory);
 
   const toggleProject = (id: string) => {
     setExpandedProject(expandedProject === id ? null : id);
@@ -113,7 +125,9 @@ export default function PortfolioPage() {
             <Star className="text-gold fill-gold" size={32} />
             Featured Case Studies
           </h2>
-          <p className="text-gray-400 mb-8">Deep dives into our most impactful projects</p>
+          <p className="text-gray-400 mb-8">
+            Deep dives into our most impactful projects
+          </p>
 
           <div className="space-y-8">
             {filteredProjects.map((project, index) => (
@@ -166,7 +180,9 @@ export default function PortfolioPage() {
                       {project.title}
                     </h3>
 
-                    <p className="text-gray-400 mb-4 italic">Client: {project.client}</p>
+                    <p className="text-gray-400 mb-4 italic">
+                      Client: {project.client}
+                    </p>
 
                     <p className="text-gray-300 mb-6 text-lg">
                       {project.description}
@@ -196,10 +212,12 @@ export default function PortfolioPage() {
                       onClick={() => toggleProject(project.id)}
                       className="text-gold hover:text-platinum transition-colors font-semibold inline-flex items-center gap-2 mb-4"
                     >
-                      {expandedProject === project.id ? 'Hide Details' : 'View Full Case Study'}
+                      {expandedProject === project.id
+                        ? "Hide Details"
+                        : "View Full Case Study"}
                       <ChevronRight
                         size={20}
-                        className={`transition-transform ${expandedProject === project.id ? 'rotate-90' : ''}`}
+                        className={`transition-transform ${expandedProject === project.id ? "rotate-90" : ""}`}
                       />
                     </button>
 

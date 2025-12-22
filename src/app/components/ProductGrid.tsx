@@ -6,8 +6,8 @@
 
 "use client";
 
-import { Eye, Heart, ShoppingCart, Star } from 'lucide-react';
-import { useState } from 'react';
+import { Eye, Heart, ShoppingCart, Star } from "lucide-react";
+import { useState } from "react";
 
 export interface Product {
   id: string;
@@ -59,7 +59,7 @@ function ProductCard({
       >
         <Heart
           size={16}
-          className={isFavorite ? 'text-gold fill-gold' : 'text-gray-400'}
+          className={isFavorite ? "text-gold fill-gold" : "text-gray-400"}
         />
       </button>
 

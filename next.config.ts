@@ -1,73 +1,80 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  reactStrictMode: true,
-  poweredByHeader: false,
-  compress: true,
+  /* Real-Time Sync Configuration for Boss Man J */
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> origin/pr/50
+  // Enable experimental features for faster updates
+  experimental: {
+    // Enable Server Actions for real-time updates
+    serverActions: {
+<<<<<<< HEAD
+      bodySizeLimit: "2mb",
+=======
+      bodySizeLimit: '2mb',
+>>>>>>> origin/pr/50
+    },
+  },
+
+  // Incremental Static Regeneration (ISR)
+  // Allows pages to be updated without full rebuild
   async headers() {
     return [
       {
-        source: '/:path*',
+<<<<<<< HEAD
+        source: "/:path*",
         headers: [
-          // Security headers
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
-          },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=(self)',
-          },
-          // HTTPS enforcement
-          {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=31536000; includeSubDomains; preload',
-          },
-        ],
-      },
-      // CSP header for enhanced security
-      {
+            key: "Cache-Control",
+            value: "public, max-age=0, s-maxage=60, stale-while-revalidate=120",
+=======
         source: '/:path*',
         headers: [
           {
-            key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://tinyurl.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https:",
+            key: 'Cache-Control',
+            value: 'public, max-age=0, s-maxage=60, stale-while-revalidate=120',
+>>>>>>> origin/pr/50
           },
         ],
       },
     ];
   },
 
-  async redirects() {
-    return [
-      // Redirect HTTP to HTTPS in production
+  // Image optimization
+  images: {
+    remotePatterns: [
       {
-        source: '/:path*',
-        destination: 'https://:host/:path*',
-        permanent: true,
-        has: [
-          {
-            type: 'header',
-            key: 'x-forwarded-proto',
-            value: 'http',
-          },
-        ],
+<<<<<<< HEAD
+        protocol: "https",
+        hostname: "3000studios.com",
       },
-    ];
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
+    ],
+    formats: ["image/avif", "image/webp"],
+=======
+        protocol: 'https',
+        hostname: '3000studios.com',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+      },
+    ],
+    formats: ['image/avif', 'image/webp'],
+>>>>>>> origin/pr/50
   },
+
+  // Enable compression
+  compress: true,
+
+  // Production source maps for debugging (can be disabled for faster builds)
+  productionBrowserSourceMaps: false,
 };
 
 export default nextConfig;
