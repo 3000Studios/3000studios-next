@@ -19,6 +19,8 @@
     "db:seed": "tsx prisma/seed.ts",
     "clean": "rimraf .next node_modules",
     "deploy": "vercel --prod --yes",
+    "auto:commit": "pwsh -File scripts/auto-commit.ps1",
+    "auto:heal": "pwsh -File scripts/auto-heal.ps1",
     "auto:fix": "npm run lint:fix && npm run format",
     "auto:all": "npm run auto:fix && git add -A && git commit -m '🤖 Auto: fix and format' && git push && npm run deploy",
     "generate:content": "tsx scripts/generate-content.ts",
