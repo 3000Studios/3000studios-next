@@ -1,5 +1,10 @@
 "use client";
-import { ReactNode } from "react";
-export function FramerMotionProvider({ children }: { children: ReactNode }) {
-  return <>{children}</>;
+import { AnimatePresence } from "framer-motion";
+
+export function FramerMotionProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <AnimatePresence mode="wait">{children}</AnimatePresence>;
 }
