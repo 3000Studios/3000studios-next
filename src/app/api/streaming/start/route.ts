@@ -3,8 +3,8 @@
  * Initiates WebRTC broadcast
  */
 
-import { getWebRTCConfig } from "@/lib/services/webrtc";
-import { NextRequest, NextResponse } from "next/server";
+import { getWebRTCConfig } from '@/lib/services/webrtc';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {

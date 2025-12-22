@@ -6,20 +6,19 @@
 
 "use client";
 
-import { motion } from "framer-motion";
-import { Calendar, Clock, Search, Tag, User } from "lucide-react";
-import { useState } from "react";
-import GoogleAdsPlaceholder from "../components/GoogleAdsPlaceholder";
-import LoadingSkeleton from "../components/LoadingSkeleton";
-import Newsletter from "../components/Newsletter";
-import { blogPosts, getAllCategories, getAllTags } from "../lib/blogData";
+import { motion } from 'framer-motion';
+import { Calendar, Clock, Search, Tag, User } from 'lucide-react';
+import { useState } from 'react';
+import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
+import LoadingSkeleton from '../components/LoadingSkeleton';
+import Newsletter from '../components/Newsletter';
+import { blogPosts, getAllCategories, getAllTags } from '../lib/blogData';
 
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  // email and isLoading are placeholders for future newsletter integration
-  const [email, setEmail] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [_email, _setEmail] = useState('');
+  const [_isLoading, _setIsLoading] = useState(false);
 
   const categories = ["All", ...getAllCategories()];
 
@@ -31,6 +30,13 @@ export default function BlogPage() {
 
     const matchesCategory =
       selectedCategory === "All" || post.category === selectedCategory;
+
+  const filteredPosts = blogPosts.filter(post => {
+    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         post.content.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
 
     return matchesSearch && matchesCategory;
   });
@@ -189,14 +195,9 @@ export default function BlogPage() {
         {filteredPosts.length === 0 && !_isLoading && (
           <div className="text-center py-12">
             <div className="text-6xl mb-4 opacity-50">📝</div>
-            <p className="text-gray-400 text-lg">
-              No articles found matching your search
-            </p>
+            <p className="text-gray-400 text-lg">No articles found matching your search</p>
             <button
-              onClick={() => {
-                setSearchTerm("");
-                setSelectedCategory("All");
-              }}
+              onClick={() => { setSearchTerm(''); setSelectedCategory('All'); }}
               className="mt-4 px-6 py-2 bg-gold text-black font-semibold rounded-lg hover:bg-platinum transition-all"
             >
               Clear Filters

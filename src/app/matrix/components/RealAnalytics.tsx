@@ -5,17 +5,9 @@
 
 "use client";
 
-import { useAnalytics } from "@/hooks/useAPI";
-import {
-  BarChart3,
-  DollarSign,
-  Eye,
-  RefreshCw,
-  ShoppingCart,
-  TrendingUp,
-  Users,
-} from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useAnalytics } from '@/hooks/useAPI';
+import { BarChart3, DollarSign, Eye, RefreshCw, ShoppingCart, TrendingUp, Users } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface StatCardProps {
   title: string;

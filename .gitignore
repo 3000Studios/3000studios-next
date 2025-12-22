@@ -1,65 +1,191 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# ============================================
+# 3000 Studios - Git Ignore Configuration
+# ============================================
+# See https://help.github.com/articles/ignoring-files/
 
-# dependencies
-/node_modules
+# ============================================
+# Dependencies
+# ============================================
+node_modules/
 /.pnp
 .pnp.*
+.pnp.js
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+.pnpm-store/
 
-# testing
+# ============================================
+# Testing & Coverage
+# ============================================
 /coverage
-*.test.ts.snap
-*.test.tsx.snap
+/coverage.json
+/.nyc_output
+/test-results/
 
-# next.js
+# ============================================
+# Next.js Build Output
+# ============================================
 /.next/
 /out/
-/analyze/
+/build
+.next/
+next-env.d.ts
 
-# production
+# ============================================
+# Production Build
+# ============================================
 /build
 /dist
+*.tsbuildinfo
 
-# misc
-.DS_Store
-*.pem
-.vscode/settings.json
-.idea/
+# ============================================
+# Environment Variables (NEVER COMMIT!)
+# ============================================
+.env
+.env.local
+.env*.local
+.env.development.local
+.env.test.local
+.env.production.local
+!.env.example
+!.env.schema
 
-# debug
+# ============================================
+# Vercel Deployment
+# ============================================
+.vercel
+.vercel/
+
+# ============================================
+# Debug Logs
+# ============================================
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
+pnpm-debug.log*
 lerna-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
-!.env.example
+# ============================================
+# Operating System Files
+# ============================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
 
-# vercel
-.vercel
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-node_modules/
-.next/
+# Linux
+*~
+.directory
+
+# ============================================
+# Editor & IDE Files
+# ============================================
+# VS Code (keep workspace settings, ignore personal)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace.local
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.vim/
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# ============================================
+# Certificates & Keys (SECURITY)
+# ============================================
+*.pem
+*.key
+*.cert
+*.crt
+*.p12
+*.pfx
+
+# ============================================
+# Lock Files (Keep only pnpm)
+# ============================================
 package-lock.json
+yarn.lock
+# Keep pnpm-lock.yaml
 
-# turbo
-.turbo
-
-# generated files
-public/sitemap.xml
-public/sw.js
-public/workbox-*.js
-
-# temporary files
+# ============================================
+# Temporary Files
+# ============================================
+*.tmp
+*.temp
+*.cache
+.cache/
+.temp/
 .tmp/
-tmp/
-temp/
+
+# ============================================
+# Backup Files
+# ============================================
+*.bak
+*.backup
+*.old
+*.orig
+
+# ============================================
+# Archive Files (if accidentally created)
+# ============================================
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# ============================================
+# Documentation Build Output
+# ============================================
+/docs/build/
+/.docusaurus/
+
+# ============================================
+# Storybook
+# ============================================
+storybook-static/
+
+# ============================================
+# Local Development
+# ============================================
+/scripts/*.local.*
+/scripts/temp/
+.local/
+
+# ============================================
+# End of .gitignore
+# ============================================

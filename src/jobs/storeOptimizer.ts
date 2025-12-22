@@ -3,16 +3,12 @@
  * Automatically optimizes products, pricing, and inventory
  */
 
-import { getPricingEngine } from "@/lib/pricing";
+import { getPricingEngine } from '@/lib/pricing';
 
 export interface OptimizationAction {
   id: string;
   timestamp: number;
-  type:
-    | "price_adjustment"
-    | "product_featured"
-    | "product_disabled"
-    | "affiliate_rotation";
+  type: 'price_adjustment' | 'product_featured' | 'product_disabled' | 'affiliate_rotation';
   productId?: string;
   oldValue?: unknown;
   newValue?: unknown;
@@ -29,6 +25,7 @@ export class StoreOptimizer {
    */
   async optimize(): Promise<OptimizationAction[]> {
     const newActions: OptimizationAction[] = [];
+    const _pricingEngine = getPricingEngine();
 
     // 1. Auto-adjust prices
     const priceUpdates = await this.optimizePricing();
@@ -57,19 +54,19 @@ export class StoreOptimizer {
    */
   private async optimizePricing(): Promise<OptimizationAction[]> {
     const actions: OptimizationAction[] = [];
-    const pricingEngine = getPricingEngine();
+    const _pricingEngine = getPricingEngine();
 
     // Get all products and recommendations
-    const topProducts = pricingEngine.getTopProducts(20);
+    const topProducts = _pricingEngine.getTopProducts(20);
 
     for (const { productId } of topProducts) {
-      const recommendation = pricingEngine.recommendPrice(productId);
+      const recommendation = _pricingEngine.recommendPrice(productId);
 
       if (recommendation.recommended !== recommendation.current) {
         actions.push({
           id: `action_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
           timestamp: Date.now(),
-          type: "price_adjustment",
+          type: 'price_adjustment',
           productId,
           oldValue: recommendation.current,
           newValue: recommendation.recommended,
@@ -94,10 +91,10 @@ export class StoreOptimizer {
       actions.push({
         id: `action_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
         timestamp: Date.now(),
-        type: "product_featured",
+        type: 'product_featured',
         productId,
-        newValue: "featured",
-        reason: "Top performing product",
+        newValue: 'featured',
+        reason: 'Top performer',
         automated: true,
       });
     }
@@ -117,10 +114,10 @@ export class StoreOptimizer {
       actions.push({
         id: `action_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
         timestamp: Date.now(),
-        type: "product_disabled",
+        type: 'product_disabled',
         productId,
-        newValue: "disabled",
-        reason: "Low conversion rate",
+        newValue: 'disabled',
+        reason: 'Low conversion rate',
         automated: true,
       });
     }
@@ -133,6 +130,10 @@ export class StoreOptimizer {
    */
   private async rotateAffiliates(): Promise<OptimizationAction[]> {
     const actions: OptimizationAction[] = [];
+
+    // Affiliate rotation logic (implementation depends on affiliate service)
+    // This is a placeholder for affiliate product rotation strategy
+
     return actions;
   }
 
@@ -140,11 +141,11 @@ export class StoreOptimizer {
    * Start optimization loop
    */
   start(intervalMs: number = 3600000): void {
+    // Default: 1 hour
     if (this.optimizationInterval) return;
+
     this.optimizationInterval = setInterval(() => {
-      this.optimize().catch((err) =>
-        console.error("[StoreOptimizer] Error:", err),
-      );
+      this.optimize().catch(err => console.error('[StoreOptimizer] Error:', err));
     }, intervalMs);
   }
 
@@ -164,6 +165,25 @@ export class StoreOptimizer {
   getActions(limit: number = 100): OptimizationAction[] {
     return this.actions.slice(-limit);
   }
+
+  /**
+   * Get actions by type
+   */
+  getActionsByType(type: OptimizationAction['type']): OptimizationAction[] {
+    return this.actions.filter(a => a.type === type);
+  }
+
+  /**
+   * Rollback action
+   */
+  rollbackAction(actionId: string): boolean {
+    const action = this.actions.find(a => a.id === actionId);
+    if (!action) return false;
+
+    // In production, would revert the actual change
+    console.log('[StoreOptimizer] Rolled back action:', actionId);
+    return true;
+  }
 }
 
 // Singleton
@@ -174,9 +194,4 @@ export function getStoreOptimizer(): StoreOptimizer {
     optimizer = new StoreOptimizer();
   }
   return optimizer;
-}
-
-export async function optimizeStore() {
-  const opt = getStoreOptimizer();
-  return await opt.optimize();
 }

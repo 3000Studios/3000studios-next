@@ -7,12 +7,12 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand Colors (updated to corporate palette) */
-  --gold: #ffc107; /* deep bold yellow */
-  --platinum: #9ca3af; /* sleek grey */
-  --sapphire: #ffc107; /* replace blue usages with deep yellow */
-  --color-platinum: #e5e4e2; /* legacy alias */
-  --color-sapphire: #0f52ba; /* legacy alias */
+  /* Brand Colors */
+  --gold: #ffd700;
+  --platinum: #e5e4e2;
+  --sapphire: #0f52ba;
+  --color-platinum: #E5E4E2; /* legacy alias */
+  --color-sapphire: #0F52BA; /* legacy alias */
   --dark-bg: #0a0a0a;
   --light-bg: #ffffff;
 
@@ -34,64 +34,32 @@
   --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.3);
   --shadow-gold: 0 4px 12px rgba(255, 215, 0, 0.3);
 
-  /* Electric Theme (aligned to new palette) */
-  --electric-blue: #ffc107; /* deep bold yellow for electric accents */
-  --electric-purple: #6b7280; /* sleek corporate grey */
-  --neon-glow:
-    0 0 10px var(--electric-blue), 0 0 20px var(--electric-blue),
-    0 0 40px var(--electric-blue);
+  /* Electric Theme */
+  --electric-blue: #00f3ff;
+  --electric-purple: #bc13fe;
+  --neon-glow: 0 0 10px var(--electric-blue), 0 0 20px var(--electric-blue), 0 0 40px var(--electric-blue);
 }
 
 @keyframes electric-flicker {
-  0%,
-  19%,
-  21%,
-  23%,
-  25%,
-  54%,
-  56%,
-  100% {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
     opacity: 1;
-    text-shadow:
-      0 0 4px #fff,
-      0 0 10px #fff,
-      0 0 20px var(--electric-blue),
-      0 0 35px var(--electric-blue),
-      0 0 40px var(--electric-blue),
-      0 0 50px var(--electric-blue),
-      0 0 75px var(--electric-blue);
+    text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 20px var(--electric-blue), 0 0 35px var(--electric-blue), 0 0 40px var(--electric-blue), 0 0 50px var(--electric-blue), 0 0 75px var(--electric-blue);
   }
-  20%,
-  24%,
-  55% {
+  20%, 24%, 55% {
     opacity: 0.5;
     text-shadow: none;
   }
 }
 
 @keyframes shock-wave {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.8; }
+  100% { transform: scale(2); opacity: 0; }
 }
 
 .electric-text {
   color: #fff;
-  text-shadow:
-    0 0 5px #fff,
-    0 0 10px #fff,
-    0 0 20px var(--electric-blue),
-    0 0 30px var(--electric-blue),
-    0 0 40px var(--electric-blue);
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px var(--electric-blue), 0 0 30px var(--electric-blue), 0 0 40px var(--electric-blue);
 }
 
 .glass-morphism {
@@ -210,8 +178,7 @@ a:hover {
 
 /* Particle Effects - GPU accelerated */
 @keyframes float {
-  0%,
-  100% {
+  0%, 100% {
     transform: translateY(0px) translateZ(0);
   }
   50% {
@@ -311,9 +278,7 @@ a:hover {
 /* Premium Hover Effects - GPU accelerated */
 .hover-lift {
   will-change: transform, box-shadow;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .hover-lift:hover {

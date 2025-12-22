@@ -1,25 +1,28 @@
 /**
- * Homepage - Conversion Optimized
- * 10-second cold traffic → revenue conversion
- * REVENUE LOCK — DO NOT MODIFY
- * Every element designed for monetization
+ * Enhanced Homepage with Brand System
+ * High-conversion hero, proof section, funnels, exit-intent
  */
 
-"use client";
+'use client';
 
-import { brand } from "@/design/brand";
-import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle, Play, Sparkles, Zap } from "lucide-react";
-import Link from "next/link";
-import { Suspense, lazy, useEffect, useState } from "react";
-import VideoHero from "./components/VideoHero";
-import ConsentBanner from "./components/ConsentBanner";
-import AffiliateToolCards from "./components/AffiliateToolCards";
-import StickyUpgradeButton from "./components/StickyUpgradeButton";
+import { brand } from '@/design/brand';
+import { motion } from 'framer-motion';
+import {
+    ArrowRight,
+    DollarSign,
+    MessageSquare,
+    ShoppingCart,
+    Sparkles,
+    Trophy,
+    Users,
+    Zap
+} from 'lucide-react';
+import Link from 'next/link';
+import { lazy, Suspense, useEffect, useState } from 'react';
 
-const AnimatedStats = lazy(() => import("./components/AnimatedStats"));
-const Newsletter = lazy(() => import("./components/Newsletter"));
-const InteractiveAvatar = lazy(() => import("./components/InteractiveAvatar"));
+const ShadowAvatar = lazy(() => import('./components/ShadowAvatar'));
+const AnimatedStats = lazy(() => import('./components/AnimatedStats'));
+const Newsletter = lazy(() => import('./components/Newsletter'));
 
 export default function HomePage() {
   const [showExitIntent, setShowExitIntent] = useState(false);
@@ -27,17 +30,13 @@ export default function HomePage() {
   // Exit intent detection
   useEffect(() => {
     const handleMouseLeave = (e: MouseEvent) => {
-      if (typeof window !== "undefined" && e.clientY <= 0) {
-        const shown = localStorage.getItem("exit-intent-shown");
-        if (!shown) {
-          setShowExitIntent(true);
-          localStorage.setItem("exit-intent-shown", "true");
-        }
+      if (e.clientY <= 0) {
+        setShowExitIntent(true);
       }
     };
 
-    document.addEventListener("mouseleave", handleMouseLeave);
-    return () => document.removeEventListener("mouseleave", handleMouseLeave);
+    document.addEventListener('mouseleave', handleMouseLeave);
+    return () => document.removeEventListener('mouseleave', handleMouseLeave);
   }, []);
 
   return (
@@ -45,284 +44,266 @@ export default function HomePage() {
       className="min-h-screen relative"
       style={{ background: brand.colors.bg.primary }}
     >
-      {/* Sticky Upgrade Button */}
-      <StickyUpgradeButton />
+      {/* Shadow AI Avatar */}
+      <Suspense fallback={null}>
+        <ShadowAvatar />
+      </Suspense>
 
-      {/* Consent Banner for GDPR/AdSense Compliance */}
-      <ConsentBanner />
-
-      {/* Hero Section - Above the Fold */}
+      {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
-        {/* Video Hero Background */}
-        <VideoHero mp4Src="/media/bg.mp4" opacity={0.2} />
+        {/* Background Glow Effects */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full filter blur-3xl"
+            style={{ background: brand.colors.gradient.glow }}
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
+          <motion.div
+            className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full filter blur-3xl"
+            style={{
+              background: 'radial-gradient(circle, rgba(0, 255, 136, 0.2) 0%, transparent 70%)'
+            }}
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.2, 0.4, 0.2],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay: 2,
+            }}
+          />
+        </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto text-center">
-          {/* Main Value Proposition */}
+        <div className="relative z-10 max-w-6xl mx-auto text-center">
+          {/* Main Headline */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
           >
             <h1
-              className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+              className="font-bold mb-6"
               style={{
+                ...brand.typography.styles.h1,
                 color: brand.colors.text.primary,
                 textShadow: brand.colors.shadow.glow,
               }}
             >
+              Command Your
+              <br />
               <span
                 style={{
                   background: brand.colors.gradient.primary,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
                 }}
               >
-                AI-Powered Tools, Content, and Automations
+                Digital Empire
               </span>
-              <br />
-              That Make Money While You Sleep
             </h1>
           </motion.div>
 
-          {/* Supporting Copy */}
+          {/* Value Proposition */}
           <motion.p
-            className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto"
+            className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto"
             style={{ color: brand.colors.text.secondary }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            From zero to revenue in 10 seconds • No code required • Scale
-            automatically
+            Elite AI-powered platform • Voice-controlled deployments • Real-time revenue optimization
+            <br />
+            <span style={{ color: brand.colors.action.secondary }}>
+              The only studio that obeys your voice commands
+            </span>
           </motion.p>
 
-          {/* Primary CTA */}
+          {/* Primary CTAs */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div
+              whileHover={brand.motion.microInteractions.buttonHover}
+              whileTap={brand.motion.microInteractions.buttonTap}
+            >
               <Link
                 href="/store"
-                className="px-10 py-5 font-bold rounded-lg flex items-center gap-3 text-lg shadow-2xl"
+                className="px-8 py-4 font-bold rounded-lg flex items-center gap-2 text-lg"
                 style={{
                   background: brand.colors.gradient.primary,
                   color: brand.colors.text.inverse,
-                  boxShadow: "0 0 40px rgba(0, 245, 212, 0.6)",
+                  boxShadow: brand.colors.shadow.glow,
                 }}
               >
-                <Zap size={24} fill="currentColor" />
-                Start Free
+                <ShoppingCart size={24} />
+                Explore Store
                 <ArrowRight size={24} />
               </Link>
             </motion.div>
 
-            {/* Secondary CTA */}
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div
+              whileHover={brand.motion.microInteractions.buttonHover}
+              whileTap={brand.motion.microInteractions.buttonTap}
+            >
               <Link
-                href="#how-it-works"
-                className="px-10 py-5 font-bold rounded-lg flex items-center gap-3 text-lg"
+                href="/matrix"
+                className="px-8 py-4 font-bold rounded-lg flex items-center gap-2 text-lg"
                 style={{
-                  background: "rgba(0, 0, 0, 0.5)",
-                  color: brand.colors.text.primary,
+                  background: brand.colors.bg.glass,
+                  color: brand.colors.action.secondary,
                   border: `2px solid ${brand.colors.action.secondary}`,
-                  backdropFilter: "blur(10px)",
+                  backdropFilter: 'blur(10px)',
                 }}
               >
-                <Play size={24} />
-                See How It Works
+                <Zap size={24} />
+                Command Center
               </Link>
             </motion.div>
           </motion.div>
 
-          {/* Trust Indicators */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.6 }}
-            className="flex flex-wrap justify-center gap-8 text-sm"
-            style={{ color: brand.colors.text.secondary }}
-          >
-            <div className="flex items-center gap-2">
-              <CheckCircle
-                size={18}
-                style={{ color: brand.colors.revenue.positive }}
-              />
-              <span>No Credit Card Required</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle
-                size={18}
-                style={{ color: brand.colors.revenue.positive }}
-              />
-              <span>Setup in 60 Seconds</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle
-                size={18}
-                style={{ color: brand.colors.revenue.positive }}
-              />
-              <span>Cancel Anytime</span>
-            </div>
-          </motion.div>
+          {/* Social Proof / Live Stats */}
+          <Suspense fallback={<div className="h-32" />}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 0.6 }}
+            >
+              <AnimatedStats />
+            </motion.div>
+          </Suspense>
         </div>
       </section>
 
-      {/* AdSense Auto Ads Placement Hint - Below Hero */}
-      {/* Auto Ads will automatically place ads here once your AdSense account is approved */}
-      {/* After approval, you can create manual ad units in AdSense dashboard and replace this section */}
-      {process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID && (
-        <div className="max-w-6xl mx-auto px-4 py-8">
-          <div
-            className="min-h-[90px] flex items-center justify-center"
-            style={{
-              background: "rgba(0, 245, 212, 0.05)",
-              border: "1px dashed rgba(0, 245, 212, 0.2)",
-              borderRadius: "8px",
-            }}
-          >
-            <p className="text-gray-500 text-sm">
-              AdSense Auto Ads will appear here once approved
-            </p>
-          </div>
-        </div>
-      )}
-
-      {/* How It Works Section */}
+      {/* Value Propositions Section */}
       <section
-        id="how-it-works"
         className="py-24 px-4"
         style={{ background: brand.colors.bg.secondary }}
       >
         <div className="max-w-6xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial="initial"
+            whileInView="animate"
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            variants={brand.motion.variants.staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
           >
-            <h2
-              className="text-4xl md:text-5xl font-bold mb-4"
-              style={{ color: brand.colors.text.primary }}
-            >
-              Revenue in 3 Simple Steps
-            </h2>
-            <p style={{ color: brand.colors.text.secondary }}>
-              Start earning while you focus on what matters
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                step: "01",
-                title: "Choose Your Tools",
-                description:
-                  "Select from AI-powered tools, templates, and automations designed to generate revenue",
-                icon: <Sparkles size={40} />,
+                icon: <Trophy size={32} />,
+                title: 'Award-Winning Design',
+                description: 'Elite UI/UX that converts visitors into customers',
+                color: brand.colors.action.primary,
               },
               {
-                step: "02",
-                title: "Set & Forget",
-                description:
-                  "Configure once and let AI automation handle content, marketing, and sales 24/7",
-                icon: <Zap size={40} />,
+                icon: <MessageSquare size={32} />,
+                title: 'Voice-Controlled',
+                description: 'Update your site by speaking—no code required',
+                color: brand.colors.action.secondary,
               },
               {
-                step: "03",
-                title: "Watch It Grow",
-                description:
-                  "Monitor real-time analytics as your automated empire generates passive income",
-                icon: <CheckCircle size={40} />,
+                icon: <DollarSign size={32} />,
+                title: 'Revenue-Optimized',
+                description: 'Every pixel designed to maximize conversions',
+                color: brand.colors.revenue.positive,
               },
             ].map((item, idx) => (
               <motion.div
                 key={idx}
-                className="p-8 rounded-lg text-center relative"
+                variants={brand.motion.variants.slideUp}
+                className="p-8 rounded-lg text-center"
                 style={{
-                  background: brand.colors.bg.elevated,
-                  border: `1px solid ${brand.colors.border.default}`,
+                  background: brand.colors.bg.glass,
+                  backdropFilter: 'blur(10px)',
+                  border: `1px solid ${brand.colors.border.subtle}`,
                 }}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.2 }}
                 whileHover={{
                   y: -8,
-                  borderColor: brand.colors.action.primary,
+                  boxShadow: brand.colors.shadow.lg,
                   transition: { duration: 0.3 },
                 }}
               >
-                {/* Step Number */}
                 <div
-                  className="text-6xl font-bold mb-4 opacity-20"
-                  style={{ color: brand.colors.action.primary }}
-                >
-                  {item.step}
-                </div>
-
-                {/* Icon */}
-                <div
-                  className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
+                  className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
                   style={{
-                    background: brand.colors.gradient.primary,
-                    boxShadow: brand.colors.shadow.glow,
+                    background: item.color,
+                    boxShadow: `0 0 20px ${item.color}80`,
                   }}
                 >
-                  <div style={{ color: brand.colors.text.inverse }}>
-                    {item.icon}
-                  </div>
+                  {item.icon}
                 </div>
-
-                {/* Title */}
                 <h3
                   className="text-2xl font-bold mb-3"
                   style={{ color: brand.colors.text.primary }}
                 >
                   {item.title}
                 </h3>
-
-                {/* Description */}
                 <p style={{ color: brand.colors.text.secondary }}>
                   {item.description}
                 </p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Affiliate Tool Stack */}
-      <AffiliateToolCards />
-
-      {/* AdSense Auto Ads Placement Hint - Mid Page */}
-      {/* Auto Ads will automatically place ads here once your AdSense account is approved */}
-      {/* After approval, create ad units in AdSense dashboard with slot IDs and use AdSenseUnit component */}
-      {process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID && (
-        <div className="max-w-6xl mx-auto px-4 py-8">
-          <div
-            className="min-h-[250px] flex items-center justify-center"
-            style={{
-              background: "rgba(0, 245, 212, 0.05)",
-              border: "1px dashed rgba(0, 245, 212, 0.2)",
-              borderRadius: "8px",
-            }}
+      {/* Funnels Section - Quick Access */}
+      <section className="py-24 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2
+            className="text-4xl md:text-5xl font-bold mb-12"
+            style={{ color: brand.colors.text.primary }}
           >
-            <p className="text-gray-500 text-sm">
-              AdSense Auto Ads will appear here once approved
-            </p>
+            Choose Your Path
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { href: '/store', label: 'Shop Products', icon: <ShoppingCart size={24} /> },
+              { href: '/projects', label: 'View Projects', icon: <Sparkles size={24} /> },
+              { href: '/live', label: 'Watch Live', icon: <Users size={24} /> },
+              { href: '/matrix', label: 'Voice Control', icon: <Zap size={24} /> },
+            ].map((funnel, idx) => (
+              <motion.div
+                key={idx}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Link
+                  href={funnel.href}
+                  className="block p-6 rounded-lg"
+                  style={{
+                    background: brand.colors.bg.elevated,
+                    border: `1px solid ${brand.colors.border.default}`,
+                  }}
+                >
+                  <div className="flex flex-col items-center gap-3">
+                    <div style={{ color: brand.colors.action.primary }}>
+                      {funnel.icon}
+                    </div>
+                    <span
+                      className="font-semibold"
+                      style={{ color: brand.colors.text.primary }}
+                    >
+                      {funnel.label}
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </div>
-      )}
-
-      {/* Social Proof Stats */}
-      <section className="py-16 px-4">
-        <Suspense fallback={<div className="h-32" />}>
-          <AnimatedStats />
-        </Suspense>
       </section>
 
       {/* Newsletter / Email Capture */}
@@ -331,11 +312,7 @@ export default function HomePage() {
         style={{ background: brand.colors.bg.secondary }}
       >
         <Suspense fallback={<div className="h-64" />}>
-          <Newsletter
-            variant="hero"
-            title="Get Free Revenue Playbook"
-            description="Join 10,000+ creators earning passive income with AI automation"
-          />
+          <Newsletter />
         </Suspense>
       </section>
 
@@ -351,7 +328,7 @@ export default function HomePage() {
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="max-w-md p-8 rounded-lg relative"
+            className="max-w-md p-8 rounded-lg"
             style={{
               background: brand.colors.bg.elevated,
               border: `2px solid ${brand.colors.action.primary}`,
@@ -359,57 +336,32 @@ export default function HomePage() {
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 text-6xl">
-              🎁
-            </div>
             <h3
-              className="text-3xl font-bold mb-4 text-center"
+              className="text-2xl font-bold mb-4"
               style={{ color: brand.colors.text.primary }}
             >
-              Wait! Special Offer
+              Wait! Before you go...
             </h3>
             <p
-              className="mb-6 text-center text-lg"
+              className="mb-6"
               style={{ color: brand.colors.text.secondary }}
             >
-              Get{" "}
-              <span
-                className="text-2xl font-bold"
-                style={{ color: brand.colors.revenue.positive }}
-              >
-                50% OFF
-              </span>{" "}
-              your first month + exclusive AI automation templates
+              Get 20% off your first purchase + exclusive voice control access
             </p>
-            <div className="space-y-3">
-              <Link
-                href="/store"
-                className="block w-full text-center px-6 py-4 rounded-lg font-bold text-lg"
-                style={{
-                  background: brand.colors.gradient.primary,
-                  color: brand.colors.text.inverse,
-                  boxShadow: brand.colors.shadow.glow,
-                }}
-                onClick={() => setShowExitIntent(false)}
-              >
-                Claim Offer Now
-              </Link>
-              <button
-                onClick={() => setShowExitIntent(false)}
-                className="w-full text-sm"
-                style={{ color: brand.colors.text.secondary }}
-              >
-                No thanks, I'll pay full price
-              </button>
-            </div>
+            <Link
+              href="/store"
+              className="block w-full text-center px-6 py-3 rounded-lg font-bold"
+              style={{
+                background: brand.colors.gradient.primary,
+                color: brand.colors.text.inverse,
+              }}
+              onClick={() => setShowExitIntent(false)}
+            >
+              Claim Your Discount
+            </Link>
           </motion.div>
         </motion.div>
       )}
-
-      {/* Shadow AI Avatar - Always present on Home */}
-      <Suspense fallback={null}>
-        <InteractiveAvatar />
-      </Suspense>
     </div>
   );
 }

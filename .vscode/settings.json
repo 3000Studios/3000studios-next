@@ -1,45 +1,12 @@
 {
-  /* ======================================================
-     CORE WORKSPACE BEHAVIOR (STABLE + FAST)
-  ====================================================== */
+  // ============================================
+  // 3000 Studios - Optimal VS Code Settings
+  // Lean, fast, eslint+prettier first
+  // ============================================
+  "git.autofetch": true,
+  "git.confirmSync": false,
 
-  "telemetry.telemetryLevel": "off",
-  "workbench.enableExperiments": false,
-  "workbench.startupEditor": "none",
-  "workbench.editor.enablePreview": false,
-  "workbench.editor.closeOnFileDelete": true,
-
-  /* ======================================================
-     ANTI-GRAVITY / OPEN-VSX
-  ====================================================== */
-
-  "antigravity.marketplaceGalleryItemURL": "https://open-vsx.org/vscode/item",
-  "antigravity.marketplaceExtensionGalleryServiceURL": "https://open-vsx.org/vscode/gallery",
-  "antigravity.workspacePath": "c:\\3000Studios\\3000Studios-next",
-  "antigravity.enabled": true,
-
-  /* ======================================================
-     FILE SYSTEM / CPU CONTROL
-  ====================================================== */
-
-  "files.autoSave": "afterDelay",
-  "files.autoSaveDelay": 800,
-  "files.watcherExclude": {
-    "**/.git/**": true,
-    "**/.next/**": true,
-    "**/node_modules/**": true,
-    "**/.vercel/**": true,
-    "**/.pnpm-store/**": true
-  },
-
-  /* ======================================================
-     EDITOR UX (CONSISTENT + CI-SAFE)
-  ====================================================== */
-
-  "editor.fontSize": 15,
-  "editor.fontFamily": "JetBrains Mono, Consolas, 'Courier New', monospace",
-  "editor.wordWrap": "on",
-  "editor.minimap.enabled": false,
+  // Formatting & linting
   "editor.formatOnSave": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "eslint.validate": ["javascript", "typescript", "typescriptreact"],
@@ -48,121 +15,74 @@
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "explicit"
   },
-  "editor.inlineSuggest.enabled": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "eslint.workingDirectories": ["./src"],
 
-  /* ======================================================
-     FORMATTERS (MATCH CI + PREVENT DIFF NOISE)
-  ====================================================== */
-
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-
-  /* ======================================================
-     TYPESCRIPT / NEXT.JS PERFORMANCE
-  ====================================================== */
-
-  "typescript.tsserver.maxTsServerMemory": 8192,
-  "typescript.disableAutomaticTypeAcquisition": true,
-
-  /* ======================================================
-     GIT (SILENT, NO POPUPS, NO FREEZES + AUTO EVERYTHING)
-  ====================================================== */
-
-  "git.autorefresh": true,
-  "git.confirmSync": false,
-  "git.detectSubmodules": false,
-  "git.countBadge": "off",
-  "git.autofetch": true,
-  "git.autofetchPeriod": 60,
-  "git.autoStash": true,
-  "git.enableCommitSigning": false,
-  "git.postCommitCommand": "push",
-  "git.showPushSuccessNotification": false,
-  "git.pruneOnFetch": true,
-
-  /* ======================================================
-     AI / AGENTS (AGGRESSIVE BUT CONTROLLED)
-  ====================================================== */
-
-  "github.copilot.editor.enableAutoCompletions": true,
-
-  "geminicodeassist.project": "studios-ai-agent-3k",
-  "geminicodeassist.agentDebugMode": false,
-  "geminicodeassist.agentYoloMode": true,
-
-  "gitlens.ai.model": "vscode",
-  "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
-
-  /* ======================================================
-     TERMINAL (GPU + NO LIMITS)
-  ====================================================== */
-
-  "terminal.integrated.gpuAcceleration": "on",
-  "terminal.integrated.scrollback": 10000,
-
-  /* ======================================================
-     CHAT / COMMAND AUTO-APPROVAL
-  ====================================================== */
-
-  "chat.tools.terminal.autoApprove": {
-    "npm": true,
-    "node": true,
-    "git": true,
-    "vercel": true,
-    "pnpm": true,
-    "yarn": true,
-    "pwsh": true,
-    "powershell": true
-  },
-  "chat.experimental.autoApplyEdits": true,
-  "chat.experimental.implicitContext.enabled": true,
-
-  /* ======================================================
-     AUTO-EVERYTHING CONFIGURATION
-  ====================================================== */
-
-  "files.autoSaveWorkspaceFilesOnly": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "always",
-    "source.organizeImports": "always",
-    "source.sortImports": "always",
-    "source.removeUnused": "always"
-  },
-  "editor.quickSuggestions": {
-    "other": "on",
-    "comments": "on",
-    "strings": "on"
-  },
-  "editor.suggestOnTriggerCharacters": true,
-  "editor.acceptSuggestionOnEnter": "on",
-  "editor.tabCompletion": "on",
-  "typescript.suggest.autoImports": true,
-  "javascript.suggest.autoImports": true,
-  "typescript.updateImportsOnFileMove.enabled": "always",
+  // TypeScript
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
 
-  /* ======================================================
-     WORKSPACE TRUST (NO INTERRUPTIONS)
-  ====================================================== */
+  // Copilot
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false
+  },
 
-  "security.workspace.trust.enabled": true,
-  "security.workspace.trust.startupPrompt": "never",
+  // Tailwind helpers
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"] ,
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  "tailwindCSS.includeLanguages": {
+    "typescript": "javascript",
+    "typescriptreact": "javascript"
+  },
 
-  /* ======================================================
-     GITHUB ACTIONS VISIBILITY (NOT ENTERPRISE-LOCKED)
-  ====================================================== */
+  // Files & performance
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.next": true,
+    "**/node_modules": true,
+    "**/.pnpm-store": true,
+    "**/dist": true,
+    "**/build": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.next/**": true,
+    "**/node_modules/**": true,
+    "**/.pnpm-store/**": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/dist": true,
+    "**/.pnpm-store": true,
+    "**/pnpm-lock.yaml": true
+  },
+  "files.maxMemoryForLargeFilesMB": 4096,
 
-  "github-actions.workflows.pinned.refresh.enabled": true,
-  "github-actions.workflows.pinned.workflows": [],
-  "github-actions.use-enterprise": true
+  // Editor ergonomics
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+
+  // Terminal
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    }
+  }
 }
