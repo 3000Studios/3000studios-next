@@ -1,47 +1,5 @@
 /**
  * Voice-to-Code API Route
-<<<<<<< HEAD
- * Converts natural language commands into actionable code changes
- * Uses OpenAI to parse intent and generate code patches
- * NOW SUPPORTS: File System Writes (fs/promises)
- */
-
-import fs from "fs/promises";
-import { NextRequest, NextResponse } from "next/server";
-import path from "path";
-
-// Lazy-load OpenAI dynamically
-let openaiInstance: any = null;
-
-async function getOpenAI() {
-  if (!process.env.OPENAI_API_KEY) return null;
-  if (!openaiInstance) {
-    try {
-      const { default: OpenAI } = await import("openai");
-      openaiInstance = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-    } catch {
-      return null;
-    }
-  }
-  return openaiInstance;
-}
-
-interface VoiceInput {
-  transcript?: string;
-  audio?: string;
-  prompt?: string;
-  currentContext?: string;
-  action?: "preview" | "commit" | "deploy";
-  patches?: CodePatch[]; // For commit action
-}
-
-interface CodePatch {
-  file: string;
-  description: string;
-  oldCode: string; // Used for fuzzy matching verification
-  newCode: string;
-}
-=======
  * Converts voice commands to code changes with INSTANT deployment
  * Boss Man J edition - changes go LIVE immediately!
  */
@@ -136,13 +94,6 @@ export async function POST(request: NextRequest) {
 
     const parsed = JSON.parse(completion.choices[0].message.content || "{}");
 
-<<<<<<< HEAD
-    return NextResponse.json({
-      success: true,
-      ...parsed,
-      action: "preview",
-    });
-=======
       case 'apply':
         // Quick commit without deploying (for batching changes)
         const filePath = body.filePath || 'src/app/generated.tsx';

@@ -339,8 +339,6 @@ export const productCatalog: Product[] = [
     inStock: true,
     featured: true,
     tags: ["Real Estate", "Listings", "Search"],
-<<<<<<< HEAD
-=======
   },
   {
     productId: "gear-001",
@@ -637,9 +635,6 @@ export function searchProducts(query: string): Product[] {
     (p) =>
       p.name.toLowerCase().includes(lowerQuery) ||
       p.description.toLowerCase().includes(lowerQuery) ||
-<<<<<<< HEAD
-      p.tags?.some((tag) => tag.toLowerCase().includes(lowerQuery)),
-=======
       p.tags?.some((tag) => tag.toLowerCase().includes(lowerQuery))
 >>>>>>> origin/pr/50
   );

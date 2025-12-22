@@ -3,16 +3,6 @@
  * Server-Sent Events endpoint for live deployment updates
  */
 
-<<<<<<< HEAD
-import { NextRequest } from "next/server";
-import {
-  instantSync,
-  batchSync,
-  DeploymentEvent,
-} from "@/lib/services/realtime-sync";
-
-export const runtime = "edge";
-=======
 import { NextRequest } from 'next/server';
 import { instantSync, batchSync, DeploymentEvent } from '@/lib/services/realtime-sync';
 
@@ -36,15 +26,6 @@ export async function POST(request: NextRequest) {
         try {
           let result;
 
-<<<<<<< HEAD
-          if (action === "batch" && files) {
-            // Batch sync multiple files
-            result = await batchSync(
-              files,
-              commitMessage || "Batch update",
-              sendEvent,
-            );
-=======
           if (action === 'batch' && files) {
             // Batch sync multiple files
             result = await batchSync(files, commitMessage || 'Batch update', sendEvent);
@@ -54,15 +35,6 @@ export async function POST(request: NextRequest) {
             result = await instantSync(
               filePath,
               content,
-<<<<<<< HEAD
-              commitMessage || "Voice command update",
-              sendEvent,
-            );
-          } else {
-            throw new Error(
-              "Invalid request: missing filePath/content or files array",
-            );
-=======
               commitMessage || 'Voice command update',
               sendEvent
             );
@@ -73,9 +45,6 @@ export async function POST(request: NextRequest) {
 
           // Send final result
           const finalEvent: DeploymentEvent = {
-<<<<<<< HEAD
-            type: result.success ? "deploy_complete" : "deploy_error",
-=======
             type: result.success ? 'deploy_complete' : 'deploy_error',
 >>>>>>> origin/pr/50
             data: {
@@ -91,11 +60,6 @@ export async function POST(request: NextRequest) {
           controller.close();
         } catch (error) {
           const errorEvent: DeploymentEvent = {
-<<<<<<< HEAD
-            type: "deploy_error",
-            data: {
-              error: error instanceof Error ? error.message : "Unknown error",
-=======
             type: 'deploy_error',
             data: {
               error: error instanceof Error ? error.message : 'Unknown error',
@@ -111,24 +75,6 @@ export async function POST(request: NextRequest) {
 
     return new Response(stream, {
       headers: {
-<<<<<<< HEAD
-        "Content-Type": "text/event-stream",
-        "Cache-Control": "no-cache",
-        Connection: "keep-alive",
-      },
-    });
-  } catch (error) {
-    console.error("Real-time sync API error:", error);
-    return new Response(
-      JSON.stringify({
-        error: "Failed to process sync request",
-        message: error instanceof Error ? error.message : "Unknown error",
-      }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      },
-=======
         'Content-Type': 'text/event-stream',
         'Cache-Control': 'no-cache',
         'Connection': 'keep-alive',
