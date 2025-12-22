@@ -1,8 +1,55 @@
 {
+  "env": {
+    "NEXT_PUBLIC_SITE_URL": "https://3000studios.com"
+  },
   "crons": [
     {
-      "path": "/api/generate-content",
-      "schedule": "0 */6 * * *"
+      "path": "/api/cron/content",
+      "schedule": "0 9 * * *"
+    },
+    {
+      "path": "/api/cron/store",
+      "schedule": "0 12 * * *"
+    },
+    {
+      "path": "/api/cron/reports",
+      "schedule": "0 18 * * *"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://3000studios.com/$1",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.3000studios.com"
+        }
+      ]
+    }
+  ],
+  "headers": [
+    {
+      "source": "/:path*",
+      "headers": [
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains; preload"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
     }
   ]
 }

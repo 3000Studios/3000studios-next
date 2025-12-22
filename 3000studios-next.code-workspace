@@ -1,33 +1,57 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {
-		"workbench.editor.enablePreview": false,
-		"workbench.editor.closeOnFileDelete": true,
-		"typescript.tsserver.maxTsServerMemory": 8192,
-		"typescript.disableAutomaticTypeAcquisition": true,
-		"git.autorefresh": true,
-		"git.confirmSync": false,
-		"git.showPushSuccessNotification": false,
-		"gitlens.ai.model": "vscode",
-		"gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
-		"terminal.integrated.gpuAcceleration": "on",
-		"terminal.integrated.scrollback": 10000,
-		"chat.tools.terminal.autoApprove": {
-			"npm": true,
-			"node": true,
-			"git": true,
-			"vercel": true,
-			"pnpm": true,
-			"yarn": true,
-			"pwsh": true,
-			"powershell": true
-		},
-		"github-actions.workflows.pinned.refresh.enabled": true,
-		"github-actions.workflows.pinned.workflows": [],
-		"github-actions.use-enterprise": true
-	}
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    },
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "git.autofetch": false,
+    "git.confirmSync": false,
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "security.workspace.trust.enabled": false,
+    "github.copilot.enable": {
+      "*": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/.vercel": true,
+      "**/dist": true,
+      "**/build": true
+    },
+    "files.exclude": {
+      "**/.git": true,
+      "**/.next": true,
+      "**/node_modules": false
+    },
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+      "*.ts": "${capture}.js",
+      "*.tsx": "${capture}.js",
+      "package.json": "package-lock.json, pnpm-lock.yaml, yarn.lock"
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "github.copilot",
+      "github.copilot-chat",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "bradlc.vscode-tailwindcss"
+    ],
+    "unwantedRecommendations": [
+      "ms-python.python",
+      "ms-azuretools.vscode-docker",
+      "continue.continue",
+      "codegpt.codegpt",
+      "blackboxapp.blackbox"
+    ]
+  }
 }

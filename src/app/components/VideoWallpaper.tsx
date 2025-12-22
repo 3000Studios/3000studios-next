@@ -6,7 +6,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState } from 'react';
 
 interface VideoWallpaperProps {
   videoSrc?: string;
@@ -15,7 +15,7 @@ interface VideoWallpaperProps {
 
 export default function VideoWallpaper({
   videoSrc,
-  opacity = 0.3,
+  opacity = 0.3
 }: VideoWallpaperProps) {
   const [videoLoaded, setVideoLoaded] = useState(false);
 

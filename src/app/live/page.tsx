@@ -7,12 +7,12 @@
 
 "use client";
 
-import { MessageCircle, Radio, Users } from "lucide-react";
-import { useEffect, useState } from "react";
+import { MessageCircle, Radio, Users } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export default function LivePage() {
   const [viewerCount, setViewerCount] = useState(42);
-  const [isLive, setIsLive] = useState(false);
+  const [isLive] = useState(false);
 
   useEffect(() => {
     // Check initial status

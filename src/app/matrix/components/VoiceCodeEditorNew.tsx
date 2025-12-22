@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { AlertCircle, CheckCircle, Eye, Mic, StopCircle } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { AlertCircle, CheckCircle, Eye, Mic, StopCircle } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 interface CodePatch {
   file: string;
@@ -21,12 +21,12 @@ interface VoiceResponse {
 
 export default function VoiceCodeEditor() {
   const [isListening, setIsListening] = useState(false);
-  const [transcript, setTranscript] = useState("");
+  const [transcript, setTranscript] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [response, setResponse] = useState<VoiceResponse | null>(null);
   const [showPreview, setShowPreview] = useState(false);
-  const [error, setError] = useState("");
-  const [status, setStatus] = useState("");
+  const [error, setError] = useState('');
+  const [status, setStatus] = useState('');
   const recognitionRef = useRef<any>(null);
 
   // Cleanup on unmount
@@ -49,14 +49,12 @@ export default function VoiceCodeEditor() {
     }
 
     try {
-      setError("");
-      setStatus("🎤 Listening...");
+      setError('');
+      setStatus('🎤 Listening...');
 
-      const SpeechRecognition =
-        (window as any).webkitSpeechRecognition ||
-        (window as any).SpeechRecognition;
+      const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
       if (!SpeechRecognition) {
-        setError("Speech Recognition not supported in your browser");
+        setError('Speech Recognition not supported in your browser');
         return;
       }
 
@@ -64,46 +62,43 @@ export default function VoiceCodeEditor() {
       recognitionRef.current = recognition;
       recognition.continuous = true;
       recognition.interimResults = true;
-      recognition.language = "en-US";
+      recognition.language = 'en-US';
 
       recognition.onstart = () => {
         setIsListening(true);
-        setTranscript("");
+        setTranscript('');
       };
 
       recognition.onresult = (event: any) => {
-        let interimTranscript = "";
+        let interimTranscript = '';
         for (let i = event.resultIndex; i < event.results.length; i++) {
           const transcript_part = event.results[i][0].transcript;
           if (event.results[i].isFinal) {
-            setTranscript((prev) => prev + transcript_part + " ");
+            setTranscript((prev) => prev + transcript_part + ' ');
           } else {
             interimTranscript += transcript_part;
           }
         }
         if (interimTranscript) {
-          setTranscript(
-            (prev) =>
-              prev.split(" ").slice(0, -1).join(" ") + " " + interimTranscript,
-          );
+          setTranscript((prev) => prev.split(' ').slice(0, -1).join(' ') + ' ' + interimTranscript);
         }
       };
 
       recognition.onerror = (event: any) => {
-        console.error("[VOICE] Recognition error:", event.error);
+        console.error('[VOICE] Recognition error:', event.error);
         setError(`Error: ${event.error}`);
         setIsListening(false);
         recognitionRef.current = null;
-
+        
         // Auto-disable on repeated errors (failsafe)
-        if (event.error === "no-speech" || event.error === "aborted") {
+        if (event.error === 'no-speech' || event.error === 'aborted') {
           setStatus('⚠️ Voice disabled - click "Start Speaking" to retry');
         }
       };
 
       recognition.onend = () => {
         setIsListening(false);
-        setStatus("");
+        setStatus('');
         recognitionRef.current = null;
       };
 
@@ -120,37 +115,37 @@ export default function VoiceCodeEditor() {
       try {
         recognitionRef.current.stop();
       } catch (err) {
-        console.error("Stop recognition error:", err);
+        console.error('Stop recognition error:', err);
       }
       recognitionRef.current = null;
     }
     setIsListening(false);
-    setStatus("");
+    setStatus('');
   };
 
   const processCommand = async () => {
     if (!transcript.trim()) {
-      setError("Please speak a command first");
+      setError('Please speak a command first');
       return;
     }
 
     setIsProcessing(true);
-    setError("");
-    setStatus("🤖 Processing your command...");
+    setError('');
+    setStatus('🤖 Processing your command...');
 
     try {
-      const res = await fetch("/api/voice-to-code", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/api/voice-to-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           transcript: transcript.trim(),
-          action: "preview",
+          action: 'preview',
         }),
       });
 
       if (!res.ok) {
         const errorData = await res.json();
-        setError(errorData.error || "Failed to process command");
+        setError(errorData.error || 'Failed to process command');
         return;
       }
 
@@ -169,31 +164,31 @@ export default function VoiceCodeEditor() {
     if (!response) return;
 
     setIsProcessing(true);
-    setStatus("📤 Committing changes...");
+    setStatus('📤 Committing changes...');
 
     try {
       // Call API to commit the changes
-      const res = await fetch("/api/voice-to-code", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/api/voice-to-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           transcript: transcript.trim(),
-          action: "commit",
+          action: 'commit',
         }),
       });
 
       if (!res.ok) {
         const errorData = await res.json();
-        setError(errorData.error || "Failed to commit changes");
+        setError(errorData.error || 'Failed to commit changes');
         return;
       }
 
-      setStatus("✅ Changes committed! Ready to deploy.");
+      setStatus('✅ Changes committed! Ready to deploy.');
       setTimeout(() => {
-        setTranscript("");
+        setTranscript('');
         setResponse(null);
         setShowPreview(false);
-        setStatus("");
+        setStatus('');
       }, 2000);
     } catch (err) {
       setError(`Commit failed: ${err}`);
@@ -203,11 +198,11 @@ export default function VoiceCodeEditor() {
   };
 
   const resetForm = () => {
-    setTranscript("");
+    setTranscript('');
     setResponse(null);
     setShowPreview(false);
-    setError("");
-    setStatus("");
+    setError('');
+    setStatus('');
   };
 
   return (
@@ -216,9 +211,7 @@ export default function VoiceCodeEditor() {
       <div className="card">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-xl font-bold text-gold">🎤 Voice Command</h3>
-          {isListening && (
-            <span className="animate-pulse text-red-500">Recording...</span>
-          )}
+          {isListening && <span className="animate-pulse text-red-500">Recording...</span>}
         </div>
 
         {/* Transcript Display */}
@@ -257,7 +250,7 @@ export default function VoiceCodeEditor() {
               className="flex items-center gap-2 bg-sapphire hover:bg-sapphire/80 text-white px-6 py-3 rounded-lg font-semibold disabled:opacity-50"
             >
               <Eye size={20} />
-              {isProcessing ? "Processing..." : "Preview Changes"}
+              {isProcessing ? 'Processing...' : 'Preview Changes'}
             </button>
           )}
 
@@ -291,9 +284,7 @@ export default function VoiceCodeEditor() {
       {showPreview && response && (
         <div className="card border-2 border-gold">
           <div className="mb-6">
-            <h3 className="text-2xl font-bold text-gold mb-2">
-              {response.intent}
-            </h3>
+            <h3 className="text-2xl font-bold text-gold mb-2">{response.intent}</h3>
             <p className="text-gray-300">{response.description}</p>
           </div>
 
@@ -310,7 +301,7 @@ export default function VoiceCodeEditor() {
               className="flex items-center gap-2 btn-primary px-8 py-3 font-bold disabled:opacity-50"
             >
               <CheckCircle size={20} />
-              {isProcessing ? "Committing..." : "Commit & Deploy"}
+              {isProcessing ? 'Committing...' : 'Commit & Deploy'}
             </button>
             <button
               onClick={() => setShowPreview(false)}

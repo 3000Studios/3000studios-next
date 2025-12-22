@@ -6,13 +6,138 @@ import { getProducts } from "@/lib/products-data";
 import { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Store | 3000 Studios",
-  description: "Browse our premium digital products and services",
-};
+'use client';
+
+import { usePayPalCheckout, useProducts } from '@/hooks/useAPI';
+import { Filter, Loader2, Search, ShoppingCart, SlidersHorizontal, Star } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
+import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
+import LoadingSkeleton from '../components/LoadingSkeleton';
+import Newsletter from '../components/Newsletter';
+import { getAllCategories, productCatalog } from '../lib/productData';
+
+interface Product {
+  productId: string;
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  rating: number;
+  reviewCount: number;
+  image?: string;
+  inStock: boolean;
+  affiliateLink?: string;
+  featured?: boolean;
+  tags?: string[];
+}
+
+const categories = ['All', ...getAllCategories()];
+
+type SortOption = 'featured' | 'price-low' | 'price-high' | 'rating' | 'newest';
 
 export default function StorePage() {
-  const products = getProducts();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [sortBy, setSortBy] = useState<SortOption>('featured');
+  const [cart, setCart] = useState<Array<Product & { quantity: number }>>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
+
+  const { fetchProducts } = useProducts();
+  const { createOrder, loading: checkoutLoading, error: checkoutError } = usePayPalCheckout();
+
+  const loadProducts = useCallback(async () => {
+    try {
+      // Try to fetch from API first
+      const data = await fetchProducts();
+      if (data.products && data.products.length > 0) {
+        setProducts(data.products);
+      } else {
+        // Fallback to local product catalog
+        setProducts(productCatalog);
+      }
+    } catch (err) {
+      console.error('Failed to load products:', err);
+      // Use local catalog as fallback
+      setProducts(productCatalog);
+    } finally {
+      setIsLoadingProducts(false);
+    }
+  }, [fetchProducts]);
+
+  useEffect(() => {
+    loadProducts();
+  }, [loadProducts]);
+
+  const filteredProducts = products.filter(product => {
+    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         product.tags?.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+    const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
+
+  // Sort products
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    switch (sortBy) {
+      case 'price-low':
+        return a.price - b.price;
+      case 'price-high':
+        return b.price - a.price;
+      case 'rating':
+        return b.rating - a.rating;
+      case 'newest':
+        return 0; // Would use actual date if available
+      case 'featured':
+      default:
+        return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
+    }
+  });
+
+  const handleAddToCart = (product: Product) => {
+    setCart(prev => {
+      const existing = prev.find(item => item.productId === product.productId);
+      if (existing) {
+        return prev.map(item =>
+          item.productId === product.productId
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+      return [...prev, { ...product, quantity: 1 }];
+    });
+  };
+
+  const handleCheckout = async () => {
+    if (cart.length === 0) {
+      alert('Your cart is empty');
+      return;
+    }
+
+    try {
+      const orderData = await createOrder(
+        cart.map(item => ({
+          id: item.productId,
+          name: item.name,
+          description: item.description,
+          price: item.price,
+          quantity: item.quantity,
+          affiliateLink: item.affiliateLink,
+        }))
+      );
+
+      // Redirect to PayPal approval URL
+      if (orderData.approvalUrl) {
+        window.location.href = orderData.approvalUrl;
+      }
+    } catch {
+      alert('Checkout failed. Please try again.');
+    }
+  };
+
+  const cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950">
@@ -56,25 +181,10 @@ export default function StorePage() {
                 Premium digital products & services
               </p>
             </div>
-            <CartSidebar />
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Featured Section */}
-        <div className="mb-20">
-          <div className="flex items-center justify-between mb-10">
-            <div>
-              <h2 className="text-4xl font-bold text-white mb-2">
-                Featured Collection
-              </h2>
-              <div className="h-1 w-20 bg-gradient-to-r from-cyan-400 to-purple-400"></div>
-            </div>
-            <Link
-              href="#all-products"
-              className="text-cyan-400 hover:text-cyan-300 font-semibold text-sm flex items-center gap-2 transition-colors"
+            <button
+              className="relative p-3 glass-premium rounded-lg border border-gold hover:bg-gold/10 transition-all hover-lift"
+              onClick={handleCheckout}
+              aria-label="View shopping cart"
             >
               View All <span className="text-lg">→</span>
             </Link>
@@ -86,31 +196,65 @@ export default function StorePage() {
           </div>
         </div>
 
-        {/* All Products Section */}
-        <div id="all-products">
-          <div className="mb-10">
-            <h2 className="text-4xl font-bold text-white mb-2">
-              Complete Catalog
-            </h2>
-            <div className="h-1 w-20 bg-gradient-to-r from-purple-400 to-pink-400"></div>
+        {/* Google Ads Placeholder - Revenue Generation */}
+        <GoogleAdsPlaceholder
+          slot="store-top-banner"
+          format="horizontal"
+          className="mb-8"
+        />
+
+        {/* Products Grid */}
+        {isLoadingProducts ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+            <LoadingSkeleton variant="product" count={8} />
           </div>
 
-          {products.length === 0 ? (
-            <div className="text-center py-20">
-              <p className="text-purple-300/60 text-lg mb-4">
-                No products available yet
-              </p>
-              <Link
-                href="/"
-                className="text-cyan-400 hover:text-cyan-300 font-semibold"
-              >
-                Return to Home
-              </Link>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                  {/* Product Info */}
+                  <div className="mb-4">
+                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-gold transition-colors line-clamp-2">
+                      {product.name}
+                    </h3>
+                    <p className="text-sm text-gray-400 mb-2 line-clamp-2">{product.description}</p>
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="flex items-center">
+                        <Star className="text-gold fill-gold" size={16} />
+                        <span className="text-white text-sm ml-1">{product.rating}</span>
+                      </div>
+                      <span className="text-gray-500 text-sm">•</span>
+                      <span className="text-gray-400 text-sm">({product.reviewCount} reviews)</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-2xl font-bold text-gold">
+                        ${product.price.toFixed(2)}
+                      </span>
+                      {product.inStock && (
+                        <span className="text-green-400 text-sm font-medium">In Stock</span>
+                      )}
+                    </div>
+                    {/* Tags */}
+                    {product.tags && product.tags.length > 0 && (
+                      <div className="flex flex-wrap gap-1 mt-2">
+                        {product.tags.slice(0, 2).map((tag, idx) => (
+                          <span
+                            key={idx}
+                            className="px-2 py-0.5 bg-sapphire/20 text-sapphire rounded text-xs"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Add to Cart Button */}
+                  <button
+                    onClick={() => handleAddToCart(product)}
+                    disabled={!product.inStock}
+                    className="w-full py-2 bg-gradient-to-r from-gold to-yellow-500 text-black font-semibold rounded-lg hover:from-platinum hover:to-white transition-all duration-300 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed hover-lift"
+                  >
+                    {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+                  </button>
+                </div>
               ))}
             </div>
           )}
@@ -130,16 +274,72 @@ export default function StorePage() {
                 Carefully curated for excellence
               </p>
             </div>
-            <div className="text-center group">
-              <div className="text-5xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-3">
-                100%
-              </div>
-              <p className="text-purple-300/80 font-semibold">
-                Digital Delivery
-              </p>
-              <p className="text-purple-400/60 text-sm mt-1">
-                Instant access to all products
-              </p>
+            <button
+              onClick={handleCheckout}
+              disabled={checkoutLoading}
+              className="w-full py-3 bg-gold text-black font-bold rounded-lg hover:bg-platinum transition-all duration-300 hover:shadow-lg flex items-center justify-center gap-2 disabled:opacity-50"
+            >
+              {checkoutLoading ? (
+                <>
+                  <Loader2 className="animate-spin" size={20} />
+                  Processing...
+                </>
+              ) : (
+                <>
+                  <ShoppingCart size={20} />
+                  Checkout with PayPal
+                </>
+              )}
+            </button>
+            {checkoutError && (
+              <p className="mt-3 text-red-400 text-sm text-center">{checkoutError}</p>
+            )}
+          </div>
+        )}
+
+        {/* No Results */}
+        {sortedProducts.length === 0 && !isLoadingProducts && (
+          <div className="text-center py-12">
+            <div className="text-6xl mb-4 opacity-50">🔍</div>
+            <p className="text-gray-400 text-lg mb-4">No products found matching your criteria</p>
+            <button
+              onClick={() => {
+                setSearchTerm('');
+                setSelectedCategory('All');
+                setSortBy('featured');
+              }}
+              className="px-6 py-2 bg-gold text-black font-semibold rounded-lg hover:bg-platinum transition-all"
+            >
+              Clear Filters
+            </button>
+          </div>
+        )}
+
+        {/* Mid-Content Ad */}
+        {sortedProducts.length > 8 && (
+          <GoogleAdsPlaceholder
+            slot="store-mid-content"
+            format="rectangle"
+            className="my-12"
+          />
+        )}
+
+        {/* Newsletter Signup */}
+        <div className="my-12">
+          <Newsletter
+            title="Get Exclusive Product Updates"
+            description="Be the first to know about new products, special discounts, and limited-time offers"
+            showBenefits={false}
+          />
+        </div>
+
+        {/* Info Section */}
+        <div className="card-premium bg-gradient-to-r from-gold/10 to-sapphire/10 border-gold">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div className="hover-lift">
+              <div className="text-4xl mb-2">🔒</div>
+              <h3 className="text-lg font-bold text-white mb-2">Secure Checkout</h3>
+              <p className="text-gray-400 text-sm">PayPal integration - fully encrypted & secure</p>
             </div>
             <div className="text-center group">
               <div className="text-5xl font-black bg-gradient-to-r from-pink-400 to-cyan-400 bg-clip-text text-transparent mb-3">

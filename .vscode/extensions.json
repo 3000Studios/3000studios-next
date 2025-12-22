@@ -1,20 +1,11 @@
 {
   "recommendations": [
-    "github.vscode-pull-request-github",
-    "eamodio.gitlens",
-    "github.vscode-github-actions",
-    "vercel.vercel-vscode",
-    "yoavbls.pretty-ts-errors",
-    "dsznajder.es7-react-js-snippets",
-    "t3-oss.create-t3-app",
-    "continue.continue"
+    "github.copilot",
+    "github.copilot-chat",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "ms-vscode.vscode-typescript-next"
   ],
-  "unwantedRecommendations": [
-    "angular.ng-template",
-    "ms-azuretools.vscode-azureappservice",
-    "ms-kubernetes-tools.vscode-kubernetes-tools",
-    "blackboxapp.blackbox",
-    "genieai.chatgpt-vscode",
-    "wordpress.wordpress-vscode-extension"
-  ]
+  "unwantedRecommendations": []
 }
