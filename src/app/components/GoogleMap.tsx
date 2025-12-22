@@ -13,6 +13,13 @@ declare global {
   }
 }
 
+// Declare global google types
+declare global {
+  interface Window {
+    google: any;
+  }
+}
+
 // Type declaration for Google Maps API
 declare global {
   interface Window {
@@ -124,7 +131,7 @@ export default function GoogleMap({
     };
 
     const initializeMap = () => {
-      if (!mapRef.current) return;
+      if (!mapRef.current || !window.google) return;
 
       const mapOptions: any = {
         center,
@@ -139,9 +146,15 @@ export default function GoogleMap({
         ],
         mapTypeControl: true,
         mapTypeControlOptions: {
+<<<<<<< HEAD
           style: window.google?.maps?.MapTypeControlStyle?.HORIZONTAL_BAR,
           position: window.google?.maps?.ControlPosition?.TOP_RIGHT,
           mapTypeIds: ["roadmap", "satellite", "hybrid", "terrain"],
+=======
+          style: window.google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+          position: window.google.maps.ControlPosition.TOP_RIGHT,
+          mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain']
+>>>>>>> origin/pr/50
         },
         streetViewControl: true,
         fullscreenControl: true,
@@ -155,7 +168,11 @@ export default function GoogleMap({
       new window.google.maps.Marker({
         position: center,
         map,
+<<<<<<< HEAD
         title: "3000 Studios - Atlanta, Georgia",
+=======
+        title: '3000 Studios - Atlanta, Georgia',
+>>>>>>> origin/pr/50
         animation: window.google.maps.Animation.DROP,
         icon: {
           path: window.google.maps.SymbolPath.CIRCLE,
@@ -192,10 +209,15 @@ export default function GoogleMap({
 
     return () => {
       // Cleanup
+<<<<<<< HEAD
       if (mapInstanceRef.current) {
         window.google?.maps?.event?.clearInstanceListeners(
           mapInstanceRef.current,
         );
+=======
+      if (mapInstanceRef.current && window.google) {
+        window.google.maps.event.clearInstanceListeners(mapInstanceRef.current);
+>>>>>>> origin/pr/50
       }
     };
   }, [apiKey, center, zoom, mapType]);

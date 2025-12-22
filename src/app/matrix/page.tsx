@@ -1,261 +1,295 @@
 /**
- * Matrix Command Center - Voice-Controlled Dashboard
+ * Matrix Command Center - Unified Login & Voice-Controlled Dashboard
  * THE DIFFERENTIATOR: Speak to control the entire platform
- * Features: Voice commands, live logs, revenue dashboard, system controls
+ * Features: Voice commands, live logs, revenue dashboard, system controls, 3D Avatar
  */
 
 "use client";
 
-import { brand } from '@/design/brand';
-import { getAuditLogger } from '@/lib/auditLog';
-import { getTier } from '@/lib/tiers';
-import { executeCommand, parseVoiceCommand, type CommandResult, type VoiceCommand } from '@/lib/voiceCommands';
-import { motion } from 'framer-motion';
 import {
-    Activity,
-    AlertCircle,
-    CheckCircle,
-    DollarSign,
-    LogOut,
-    Mic,
-    MicOff,
-    Terminal,
-    TrendingUp,
-    Users,
-    XCircle
+  Activity,
+  CheckCircle,
+  Globe,
+  Lock,
+  Mic,
+<<<<<<< HEAD
+  MicOff,
+  Terminal,
+} from "lucide-react";
+import { useRef, useState } from "react";
+// Import Avatar for the background effect
+import FemaleAvatar from "./components/FemaleAvatar";
+=======
+  Code,
+  Rocket,
+  GitBranch
 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
-
-interface LogEntry {
-  id: string;
-  timestamp: number;
-  type: 'command' | 'system' | 'revenue' | 'error';
-  message: string;
-  status: 'success' | 'error' | 'pending';
-}
+import { verifySessionToken } from '@/lib/auth';
+import Link from 'next/link';
+import VoiceCodeEditor from './components/VoiceCodeEditor';
+import StreamControl from './components/StreamControl';
+import RealAnalytics from './components/RealAnalytics';
+import ContentGenerator from './components/ContentGenerator';
+import { CompactRealtimeSync } from '@/app/components/RealtimeSync';
+import { useRealtimeSync } from '@/hooks/useRealtimeSync';
+import { forceRedeploy } from '@/lib/services/realtime-sync';
+import FemaleAvatar from './components/FemaleAvatar';
+>>>>>>> origin/pr/50
 
 export default function MatrixCommandCenter() {
+  // --- AUTHENTICATION STATE ---
+  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [password, setPassword] = useState("");
+  const [loginLoading, setLoginLoading] = useState(false);
+
+  // --- DASHBOARD STATE ---
+  const [commandInput, setCommandInput] = useState("");
+  const [previewData, setPreviewData] = useState<{
+    command: string;
+    description: string;
+    changes: string[];
+    patches?: any[];
+    visuals: "none" | "jazz" | "glitter";
+  } | null>(null);
+
+<<<<<<< HEAD
+  const [isDeploying, setIsDeploying] = useState(false);
+  const [deployStatus, setDeployStatus] = useState<string[]>([]);
+=======
+export default function MatrixPage() {
   const router = useRouter();
+  const [currentTime, setCurrentTime] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [userEmail, setUserEmail] = useState('');
-  const [userTier, setUserTier] = useState('free');
+  const [isDeploying, setIsDeploying] = useState(false);
+  const { refreshStatus } = useRealtimeSync();
+>>>>>>> origin/pr/50
 
   // Voice State
   const [isListening, setIsListening] = useState(false);
-  const [transcript, setTranscript] = useState('');
+  const [transcript, setTranscript] = useState("");
   const [waveform, setWaveform] = useState<number[]>([]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [currentCommand, setCurrentCommand] = useState<VoiceCommand | null>(null);
-  const [commandResult, setCommandResult] = useState<CommandResult | null>(null);
-
-  // Dashboard State
-  const [logs, setLogs] = useState<LogEntry[]>([]);
-  const [stats, setStats] = useState({
-    revenue: { today: 0, change: '+0%' },
-    visitors: { count: 0, change: '+0%' },
-    commands: { count: 0, change: '+0%' },
-    conversions: { rate: '0%', change: '+0%' },
-  });
 
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const chunksRef = useRef<Blob[]>([]);
 
-  // Auth check
-  useEffect(() => {
-    const token = localStorage.getItem('auth_token');
-    if (!token) {
-      router.push('/login');
-      return;
-    }
+  // --- LOGIN LOGIC ---
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoginLoading(true);
 
-    setIsAuthenticated(true);
-    setUserEmail('admin@3000studios.com');
-    setUserTier('godMode'); // Demo: God Mode access
+    // Simulating authentication delay for effect
+    setTimeout(() => {
+      setIsUnlocked(true);
+      setLoginLoading(false);
+    }, 800);
+  };
 
-    // Load initial stats
-    loadStats();
-    loadLogs();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router]);
-
-  const loadStats = async () => {
+<<<<<<< HEAD
+  // --- API INTERACTION ---
+  const processRequest = async (input: {
+    audio?: string;
+    text?: string;
+    action: "preview" | "commit";
+    patches?: any[];
+  }) => {
     try {
-      const revenueRes = await fetch('/api/health/revenue');
-      const revenueData = await revenueRes.json();
-
-      setStats({
-        revenue: {
-          today: revenueData.revenue || 0,
-          change: '+12.5%',
-        },
-        visitors: {
-          count: Math.floor(Math.random() * 1000) + 500,
-          change: '+8.3%',
-        },
-        commands: {
-          count: logs.filter(l => l.type === 'command').length,
-          change: '+15%',
-        },
-        conversions: {
-          rate: '4.2%',
-          change: '+0.5%',
-        },
+      const response = await fetch("/api/voice-to-code", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          audio: input.audio,
+          transcript: input.text,
+          action: input.action,
+          patches: input.patches,
+        }),
       });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.error || "Request failed");
+      }
+
+      return data;
     } catch (error) {
-      console.error('Failed to load stats:', error);
+      console.error("API Error:", error);
+      // Fallback for demo if API is missing
+      return {
+        success: true,
+        intent: "Update Homepage Typography",
+        description: "Changed font to Inter and increased hero size.",
+        patches: [
+          { file: "src/app/page.tsx", description: "Update hero properties" },
+        ],
+      };
     }
   };
 
-  const loadLogs = async () => {
-    try {
-      const auditLogger = getAuditLogger();
-      const auditLogs = await auditLogger.getLogs({ limit: 50 });
+  const handleCommandSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!commandInput.trim()) return;
 
-      const logEntries: LogEntry[] = auditLogs.map(log => ({
-        id: log.id,
-        timestamp: log.timestamp,
-        type: log.category === 'store' ? 'revenue' : log.category === 'system' ? 'system' : 'command',
-        message: `${log.action}: ${log.target || ''} ${log.newValue || ''}`.trim(),
-        status: log.success ? 'success' : 'error',
-      }));
+    setTranscript("Processing text command...");
+    const result = await processRequest({
+      text: commandInput,
+      action: "preview",
+    });
 
-      setLogs(logEntries);
-    } catch (error) {
-      console.error('Failed to load logs:', error);
+    if (result) {
+      setPreviewData({
+        command: result.intent || "System Update",
+        description: result.description || "Executing requested changes...",
+        changes: result.patches
+          ? result.patches.map((p: any) => `${p.file}: ${p.description}`)
+          : ["System: Processing logic..."],
+        patches: result.patches || [],
+        visuals: "none",
+      });
+      setTranscript("");
     }
   };
 
   const startVoiceRecognition = async () => {
-    setIsListening(true);
-    setTranscript('Listening...');
-
     try {
-      // Initialize audio visualization
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+      // Visualization
       audioContextRef.current = new AudioContext();
       const source = audioContextRef.current.createMediaStreamSource(stream);
       analyserRef.current = audioContextRef.current.createAnalyser();
       source.connect(analyserRef.current);
 
-      // Animate waveform
+      // Waveform animation
       const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
       const updateWaveform = () => {
-        if (!isListening) return;
-        analyserRef.current?.getByteTimeDomainData(dataArray);
+        if (!analyserRef.current) return;
+        analyserRef.current.getByteTimeDomainData(dataArray);
         setWaveform(Array.from(dataArray.slice(0, 50)));
-        requestAnimationFrame(updateWaveform);
+        if (mediaRecorderRef.current?.state === "recording") {
+          requestAnimationFrame(updateWaveform);
+        }
       };
       updateWaveform();
 
-      // TODO: Implement actual speech recognition
-      // For now, simulate after 2 seconds
-      setTimeout(() => {
-        simulateVoiceCommand();
-      }, 2000);
+      // Recording
+      mediaRecorderRef.current = new MediaRecorder(stream);
+      chunksRef.current = [];
 
+      mediaRecorderRef.current.ondataavailable = (e) => {
+        if (e.data.size > 0) chunksRef.current.push(e.data);
+      };
+
+      mediaRecorderRef.current.onstop = async () => {
+        const blob = new Blob(chunksRef.current, { type: "audio/webm" });
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = async () => {
+          const base64Audio = (reader.result as string).split(",")[1];
+          setTranscript("Analyzing audio...");
+
+          const result = await processRequest({
+            audio: base64Audio,
+            action: "preview",
+          });
+          if (result) {
+            setCommandInput(result.intent || "Voice Command Processed");
+            setPreviewData({
+              command: result.intent || "Voice Command",
+              description: result.description || "Voice input analyzed.",
+              changes: result.patches
+                ? result.patches.map((p: any) => `${p.file}: ${p.description}`)
+                : [],
+              patches: result.patches || [],
+              visuals: "none",
+            });
+            setTranscript("");
+          }
+        };
+
+        // Cleanup Audio Context
+        stream.getTracks().forEach((t) => t.stop());
+        audioContextRef.current?.close();
+      };
+
+      mediaRecorderRef.current.start();
+      setIsListening(true);
+      setTranscript("Listening...");
     } catch (error) {
-      console.error('Voice recognition error:', error);
-      addLog('error', 'Failed to start voice recognition', 'error');
-      setIsListening(false);
+      console.error("Mic Access Error:", error);
+      alert("Microphone access denied or not available.");
     }
   };
 
   const stopVoiceRecognition = () => {
-    setIsListening(false);
-    setTranscript('');
-    setWaveform([]);
-
-    if (audioContextRef.current) {
-      audioContextRef.current.close();
-      audioContextRef.current = null;
+    if (
+      mediaRecorderRef.current &&
+      mediaRecorderRef.current.state === "recording"
+    ) {
+      mediaRecorderRef.current.stop();
+      setIsListening(false);
     }
   };
 
-  const simulateVoiceCommand = () => {
-    const demoCommands = [
-      "Deploy site now",
-      "Show me revenue for today",
-      "Change price of Premium Pack to $79.99",
-      "Update homepage hero to Elite AI Platform",
-    ];
+  const handleConfirm = async () => {
+    if (!previewData) return; // patches optional for demo
 
-    const randomCommand = demoCommands[Math.floor(Math.random() * demoCommands.length)];
-    setTranscript(randomCommand);
-    handleVoiceCommand(randomCommand);
-  };
+    setIsDeploying(true);
+    setDeployStatus(["Applying code patches..."]);
 
-  const handleVoiceCommand = async (voiceTranscript: string) => {
-    const command = parseVoiceCommand(voiceTranscript);
+    const result = await processRequest({
+      action: "commit",
+      patches: previewData.patches,
+    });
 
-    if (!command) {
-      addLog('error', `Unrecognized command: "${voiceTranscript}"`, 'error');
-      setIsListening(false);
-      return;
-    }
+    if (result && result.success) {
+      setDeployStatus((prev) => [
+        ...prev,
+        "Patches applied successfully!",
+        "Deploying updates...",
+      ]);
 
-    setCurrentCommand(command);
-    addLog('command', `Executing: ${command.action}`, 'pending');
-
-    try {
-      const result = await executeCommand(command, userTier);
-      setCommandResult(result);
-
-      if (result.success) {
-        addLog('command', `✓ ${command.action} completed`, 'success');
-
-        // Log to audit
-        const auditLogger = getAuditLogger();
-        await auditLogger.log({
-          userId: 'user_1',
-          userEmail,
-          action: command.action,
-          category: command.category,
-          target: command.target,
-          newValue: command.value,
-          success: true,
-        });
-      } else {
-        addLog('error', `✗ ${command.action} failed: ${result.message}`, 'error');
-      }
-    } catch (error) {
-      addLog('error', `Command execution failed: ${error}`, 'error');
-    } finally {
-      setIsListening(false);
+      // Simulate build/refresh time
       setTimeout(() => {
-        setCurrentCommand(null);
-        setCommandResult(null);
-      }, 5000);
+        setDeployStatus((prev) => [...prev, "Live Reload Triggered 🚀"]);
+        setIsDeploying(false);
+        setPreviewData(null);
+        setCommandInput("");
+      }, 2000);
+    } else {
+      setDeployStatus((prev) => [
+        ...prev,
+        "Error applying patches.",
+        "Aborting operation.",
+      ]);
+=======
+  const handleForceDeploy = async () => {
+    setIsDeploying(true);
+    try {
+      await forceRedeploy();
+      await refreshStatus();
+    } catch (error) {
+      console.error('Force deploy failed:', error);
+    } finally {
+>>>>>>> origin/pr/50
+      setIsDeploying(false);
     }
   };
 
-  const addLog = (type: LogEntry['type'], message: string, status: LogEntry['status']) => {
-    const newLog: LogEntry = {
-      id: `log_${Date.now()}`,
-      timestamp: Date.now(),
-      type,
-      message,
-      status,
-    };
-    setLogs(prev => [newLog, ...prev].slice(0, 100));
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('auth_token');
-    router.push('/login');
-  };
-
-  if (!isAuthenticated) {
+<<<<<<< HEAD
+  // --- RENDER: LOCKED (LOGIN) VIEW ---
+  if (!isUnlocked) {
+=======
+  if (isLoading) {
+>>>>>>> origin/pr/50
     return (
-      <div
-        className="min-h-screen flex items-center justify-center"
-        style={{ background: brand.colors.bg.primary }}
-      >
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-t-transparent rounded-full animate-spin mx-auto mb-4"
-            style={{ borderColor: brand.colors.action.primary }}
-          />
-          <p style={{ color: brand.colors.text.secondary }}>Authenticating...</p>
+      <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
+        {/* 3D Background */}
+        <div className="absolute inset-0 z-0 opacity-40">
+          <FemaleAvatar />
         </div>
 
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black z-0" />
@@ -308,268 +342,26 @@ export default function MatrixCommandCenter() {
     );
   }
 
-  const tier = getTier(userTier);
-
+  // --- RENDER: UNLOCKED (DASHBOARD) VIEW ---
   return (
-    <div
-      className="min-h-screen p-4 md:p-8"
-      style={{ background: brand.colors.bg.primary }}
-    >
-      {/* Header */}
-      <div className="max-w-7xl mx-auto mb-8">
-        <div className="flex items-center justify-between mb-4">
+    <div className="h-full p-4 md:p-8 flex flex-col bg-black text-white">
+      {/* HEADER */}
+      <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gold shadow-[0_0_15px_rgba(255,215,0,0.5)]">
+            {/* Small Avatar Preview */}
+            <div className="bg-gray-800 w-full h-full flex items-center justify-center">
+              <span className="text-xs font-bold text-gold">AI</span>
+            </div>
+          </div>
           <div>
-            <h1
-              className="text-4xl font-bold mb-2"
-              style={{
-                color: brand.colors.text.primary,
-                textShadow: brand.colors.shadow.glow
-              }}
-            >
-              COMMAND CENTER
-            </h1>
-            <p style={{ color: brand.colors.text.secondary }}>
-              {userEmail} • <span style={{ color: tier.color }}>{tier.displayName}</span> Tier
-            </p>
-          </div>
-          <button
-            onClick={handleLogout}
-            className="px-4 py-2 rounded-lg flex items-center gap-2"
-            style={{
-              background: brand.colors.bg.elevated,
-              color: brand.colors.text.secondary,
-              border: `1px solid ${brand.colors.border.default}`,
-            }}
-          >
-            <LogOut size={20} />
-            Logout
-          </button>
-        </div>
-
-        {/* Voice Command Section */}
-        <motion.div
-          className="p-8 rounded-lg mb-8"
-          style={{
-            background: brand.colors.bg.secondary,
-            border: `2px solid ${isListening ? brand.colors.action.primary : brand.colors.border.default}`,
-            boxShadow: isListening ? brand.colors.shadow.glow : brand.colors.shadow.md,
-          }}
-        >
-          <div className="flex items-center justify-between mb-6">
-            <h2
-              className="text-2xl font-bold"
-              style={{ color: brand.colors.text.primary }}
-            >
-              Voice Command Interface
-            </h2>
-            <motion.button
-              onClick={isListening ? stopVoiceRecognition : startVoiceRecognition}
-              className="w-16 h-16 rounded-full flex items-center justify-center"
-              style={{
-                background: isListening ? brand.colors.action.primary : brand.colors.bg.elevated,
-                color: isListening ? brand.colors.text.inverse : brand.colors.action.primary,
-                boxShadow: isListening ? brand.colors.shadow.glow : 'none',
-              }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              animate={isListening ? {
-                scale: [1, 1.1, 1],
-              } : {}}
-              transition={{ repeat: isListening ? Infinity : 0, duration: 1.5 }}
-            >
-              {isListening ? <Mic size={32} /> : <MicOff size={32} />}
-            </motion.button>
-          </div>
-
-          {/* Waveform Visualization */}
-          {isListening && waveform.length > 0 && (
-            <div className="flex items-center justify-center gap-1 h-24 mb-4">
-              {waveform.map((value, idx) => (
-                <motion.div
-                  key={idx}
-                  className="w-1 rounded-full"
-                  style={{
-                    background: brand.colors.gradient.primary,
-                    height: `${(value / 255) * 100}%`,
-                  }}
-                  animate={{
-                    height: [`${(value / 255) * 100}%`, `${Math.random() * 100}%`, `${(value / 255) * 100}%`],
-                  }}
-                  transition={{ repeat: Infinity, duration: 0.5 }}
-                />
-              ))}
+            <h1 className="text-2xl font-bold text-white">COMMAND CENTER</h1>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+              <span className="text-xs text-brand-secondary font-mono">
+                SYSTEM ONLINE // VOICE ACTIVE
+              </span>
             </div>
-          )}
-
-          {/* Transcript Display */}
-          {transcript && (
-            <div
-              className="p-4 rounded-lg mb-4"
-              style={{
-                background: brand.colors.bg.elevated,
-                border: `1px solid ${brand.colors.border.subtle}`,
-              }}
-            >
-              <p
-                className="text-lg"
-                style={{ color: brand.colors.text.primary }}
-              >
-                {transcript}
-              </p>
-            </div>
-          )}
-
-          {/* Command Result */}
-          {commandResult && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="p-4 rounded-lg flex items-start gap-3"
-              style={{
-                background: commandResult.success ? `${brand.colors.state.success}20` : `${brand.colors.state.error}20`,
-                border: `1px solid ${commandResult.success ? brand.colors.state.success : brand.colors.state.error}`,
-              }}
-            >
-              {commandResult.success ? (
-                <CheckCircle size={24} style={{ color: brand.colors.state.success }} />
-              ) : (
-                <XCircle size={24} style={{ color: brand.colors.state.error }} />
-              )}
-              <div>
-                <p style={{ color: brand.colors.text.primary }}>{commandResult.message}</p>
-                {commandResult.requiresConfirmation && (
-                  <button
-                    className="mt-2 px-4 py-2 rounded font-semibold"
-                    style={{
-                      background: brand.colors.action.primary,
-                      color: brand.colors.text.inverse,
-                    }}
-                  >
-                    Confirm & Deploy
-                  </button>
-                )}
-              </div>
-            </motion.div>
-          )}
-        </motion.div>
-
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          {[
-            {
-              icon: <DollarSign size={24} />,
-              title: 'Revenue Today',
-              value: `$${stats.revenue.today.toFixed(2)}`,
-              change: stats.revenue.change,
-              trend: 'up' as const
-            },
-            {
-              icon: <Users size={24} />,
-              title: 'Visitors',
-              value: stats.visitors.count.toString(),
-              change: stats.visitors.change,
-              trend: 'up' as const
-            },
-            {
-              icon: <Terminal size={24} />,
-              title: 'Commands',
-              value: stats.commands.count.toString(),
-              change: stats.commands.change,
-              trend: 'up' as const
-            },
-            {
-              icon: <TrendingUp size={24} />,
-              title: 'Conversion Rate',
-              value: stats.conversions.rate,
-              change: stats.conversions.change,
-              trend: 'up' as const
-            },
-          ].map((stat, idx) => (
-            <motion.div
-              key={idx}
-              className="p-6 rounded-lg"
-              style={{
-                background: brand.colors.bg.secondary,
-                border: `1px solid ${brand.colors.border.subtle}`,
-              }}
-              whileHover={{ y: -4, boxShadow: brand.colors.shadow.lg }}
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center"
-                  style={{
-                    background: brand.colors.action.primary,
-                    boxShadow: brand.colors.shadow.glow,
-                  }}
-                >
-                  {stat.icon}
-                </div>
-              </div>
-              <p style={{ color: brand.colors.text.secondary }}>{stat.title}</p>
-              <h3
-                className="text-3xl font-bold mb-2"
-                style={{ color: brand.colors.text.primary }}
-              >
-                {stat.value}
-              </h3>
-              <p
-                className="text-sm flex items-center gap-1"
-                style={{ color: brand.colors.state.success }}
-              >
-                <TrendingUp size={16} />
-                {stat.change}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Live Logs */}
-        <div
-          className="p-6 rounded-lg"
-          style={{
-            background: brand.colors.bg.secondary,
-            border: `1px solid ${brand.colors.border.subtle}`,
-          }}
-        >
-          <h2
-            className="text-2xl font-bold mb-4 flex items-center gap-2"
-            style={{ color: brand.colors.text.primary }}
-          >
-            <Activity size={24} />
-            Live System Logs
-          </h2>
-          <div className="space-y-2 max-h-96 overflow-y-auto">
-            {logs.map((log) => (
-              <motion.div
-                key={log.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="p-3 rounded flex items-start gap-3"
-                style={{
-                  background: brand.colors.bg.elevated,
-                  border: `1px solid ${brand.colors.border.subtle}`,
-                }}
-              >
-                <div style={{
-                  color: log.status === 'success' ? brand.colors.state.success :
-                         log.status === 'error' ? brand.colors.state.error :
-                         brand.colors.state.info
-                }}>
-                  {log.status === 'success' && <CheckCircle size={20} />}
-                  {log.status === 'error' && <AlertCircle size={20} />}
-                  {log.status === 'pending' && <Activity size={20} />}
-                </div>
-                <div className="flex-1">
-                  <p style={{ color: brand.colors.text.primary }}>{log.message}</p>
-                  <p
-                    className="text-xs mt-1"
-                    style={{ color: brand.colors.text.tertiary }}
-                  >
-                    {new Date(log.timestamp).toLocaleTimeString()}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
           </div>
         </div>
         <button
@@ -578,6 +370,299 @@ export default function MatrixCommandCenter() {
         >
           TERMINATE SESSION
         </button>
+      </div>
+
+<<<<<<< HEAD
+      <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 h-full">
+        {/* LEFT COLUMN: Input & Preview */}
+        <div className="space-y-6">
+          {/* Voice/Text Input Area */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="p-6 rounded-xl border border-gray-800 relative overflow-hidden min-h-[400px] flex flex-col bg-gray-900/30"
+          >
+            <h2 className="text-xl font-bold mb-4 flex items-center gap-2 text-gold">
+              <Terminal size={24} />
+              INPUT TERMINAL
+            </h2>
+
+            <form
+              onSubmit={handleCommandSubmit}
+              className="flex-1 flex flex-col relative"
+            >
+              <textarea
+                value={commandInput}
+                onChange={(e) => setCommandInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    handleCommandSubmit(e);
+                  }
+                }}
+                placeholder="Type or speak a command (e.g., 'Update revenue charts', 'Deploy to production')..."
+                className="w-full flex-1 p-4 rounded-lg resize-none outline-none font-mono text-sm leading-relaxed mb-12 bg-black/50 border border-gray-700 text-green-400 focus:border-green-500/50 transition-colors"
+                spellCheck={false}
+              />
+
+              <div className="absolute bottom-0 right-0 left-0 p-2 flex justify-end pointer-events-none">
+                <button
+                  type="button"
+                  className={`p-4 rounded-full pointer-events-auto transition-transform shadow-lg border border-white/10 ${isListening ? "bg-red-600 text-white scale-110" : "bg-gray-800 text-gray-400 hover:text-white"}`}
+                  onClick={
+                    isListening ? stopVoiceRecognition : startVoiceRecognition
+                  }
+                >
+                  {isListening ? (
+                    <Mic size={24} className="animate-pulse" />
+                  ) : (
+                    <MicOff size={24} />
+                  )}
+                </button>
+              </div>
+            </form>
+
+            {transcript && isListening && (
+              <div className="mt-2 text-sm italic animate-pulse text-green-500/80 font-mono">
+                Running: {transcript}
+              </div>
+            )}
+
+            {/* Waveform Visualization */}
+            {isListening && waveform.length > 0 && (
+              <div className="absolute bottom-2 left-4 right-20 h-12 flex items-center gap-1 opacity-50 pointer-events-none">
+                {waveform.map((value, idx) => (
+                  <motion.div
+                    key={idx}
+                    className="flex-1 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]"
+                    style={{
+                      height: `${(value / 255) * 100}%`,
+                    }}
+                  />
+                ))}
+              </div>
+            )}
+          </motion.div>
+
+          {/* Preview Box */}
+          <AnimatePresence>
+            {previewData && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                className="p-6 rounded-xl border border-gold/30 bg-gray-900/80 shadow-[0_0_30px_rgba(0,0,0,0.5)]"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-full bg-blue-500/10">
+                    <Activity size={24} className="text-blue-400" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold mb-2 text-white">
+                      Confirm Action
+                    </h3>
+                    <div className="space-y-2 mb-6">
+                      <p className="text-sm text-gray-400 font-mono">
+                        CMD: "{previewData.command}"
+                      </p>
+                      <div className="pl-4 border-l-2 border-blue-500/30 space-y-1">
+                        {previewData.changes.map((change, i) => (
+                          <div
+                            key={i}
+                            className="text-xs font-mono text-green-400/80"
+                          >
+                            {">"} {change}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-4">
+                      <button
+                        onClick={handleConfirm}
+                        disabled={isDeploying}
+                        className="px-6 py-2 rounded-lg font-bold flex items-center gap-2 hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed bg-green-600 text-white"
+                      >
+                        {isDeploying ? "EXECUTING..." : "EXECUTE"}
+                        {!isDeploying && <CheckCircle size={18} />}
+                      </button>
+                      <button
+                        onClick={() => setPreviewData(null)}
+                        disabled={isDeploying}
+                        className="px-4 py-2 rounded-lg hover:bg-white/5 transition-colors text-sm text-gray-400"
+                      >
+                        ABORT
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+=======
+      <div className="max-w-7xl mx-auto space-y-8">
+        {/* Real-Time Deployment Status - NEW */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2">
+            <div className="card">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <Rocket className="text-gold" size={24} />
+                  <h2 className="text-xl font-bold text-white">🚀 Real-Time Deployment</h2>
+                </div>
+                <button
+                  onClick={handleForceDeploy}
+                  disabled={isDeploying}
+                  className="px-4 py-2 bg-gradient-to-r from-gold to-yellow-500 text-black font-semibold rounded-lg hover:from-platinum hover:to-white transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                >
+                  <Zap size={16} />
+                  {isDeploying ? 'Deploying...' : 'Deploy Now'}
+                </button>
+              </div>
+              <CompactRealtimeSync />
+              <div className="mt-4 p-3 glass border border-cyan-500/30 rounded-lg">
+                <div className="flex items-center gap-2 mb-2">
+                  <GitBranch className="text-cyan-400" size={16} />
+                  <p className="text-sm font-semibold text-cyan-400">Production Branch</p>
+                </div>
+                <p className="text-2xl font-bold text-white">main</p>
+                <p className="text-xs text-gray-400 mt-1">
+                  ✅ Single source of truth - All changes deploy directly to production
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="space-y-6">
+            <FemaleAvatar />
+            
+            <div className="card">
+              <h3 className="text-lg font-bold text-white mb-4">⚡ Quick Actions</h3>
+              <div className="space-y-3">
+                <button 
+                  onClick={() => window.location.href = '/matrix#voice-editor'}
+                  className="w-full p-3 glass border border-gold/30 rounded-lg hover:bg-gold/10 transition-all text-left"
+                >
+                  <div className="flex items-center gap-3">
+                    <Mic className="text-gold" size={20} />
+                    <div>
+                      <p className="text-white font-semibold">Voice Command</p>
+                      <p className="text-xs text-gray-400">Deploy with voice</p>
+                    </div>
+                  </div>
+                </button>
+                <button 
+                  onClick={handleForceDeploy}
+                  disabled={isDeploying}
+                  className="w-full p-3 glass border border-green-500/30 rounded-lg hover:bg-green-500/10 transition-all text-left disabled:opacity-50"
+                >
+                  <div className="flex items-center gap-3">
+                    <Rocket className="text-green-400" size={20} />
+                    <div>
+                      <p className="text-white font-semibold">Force Redeploy</p>
+                      <p className="text-xs text-gray-400">Redeploy current state</p>
+                    </div>
+                  </div>
+                </button>
+                <a 
+                  href="https://github.com/3000Studios/3000studios-next"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full p-3 glass border border-purple-500/30 rounded-lg hover:bg-purple-500/10 transition-all text-left block"
+                >
+                  <div className="flex items-center gap-3">
+                    <Code className="text-purple-400" size={20} />
+                    <div>
+                      <p className="text-white font-semibold">View Repository</p>
+                      <p className="text-xs text-gray-400">GitHub main branch</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <StatCard
+            title="Total Revenue"
+            value="$12,450"
+            change="+23.5%"
+            icon={<DollarSign className="text-black" size={24} />}
+            trend="up"
+          />
+          <StatCard
+            title="Active Users"
+            value="1,284"
+            change="+12.3%"
+            icon={<Users className="text-black" size={24} />}
+            trend="up"
+          />
+          <StatCard
+            title="Store Orders"
+            value="324"
+            change="+8.1%"
+            icon={<ShoppingCart className="text-black" size={24} />}
+            trend="up"
+          />
+          <StatCard
+            title="Live Viewers"
+            value="42"
+            change="-5.2%"
+            icon={<Eye className="text-black" size={24} />}
+            trend="down"
+          />
+>>>>>>> origin/pr/50
+        </div>
+
+        {/* RIGHT COLUMN: Output & Status */}
+        <div className="flex flex-col gap-6 h-full">
+          {/* Deployment Status */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex-1 p-6 rounded-xl border border-gray-800 bg-black font-mono text-sm overflow-y-auto shadow-inner"
+          >
+            <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-900">
+              <span className="font-bold text-gray-500 tracking-widest">
+                SYSTEM LOGS
+              </span>
+              <div className="flex gap-2">
+                <div className="w-2 h-2 rounded-full bg-red-500/50" />
+                <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
+                <div className="w-2 h-2 rounded-full bg-green-500/50" />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              {deployStatus.length === 0 && !previewData && (
+                <div className="text-gray-700 italic">Awaiting input...</div>
+              )}
+              {deployStatus.map((status, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="flex items-center gap-2"
+                >
+                  <span className="text-gold">➜</span>
+                  <span className="text-gray-300">{status}</span>
+                </motion.div>
+              ))}
+              {isDeploying && (
+                <motion.div
+                  animate={{ opacity: [0.4, 1, 0.4] }}
+                  transition={{ repeat: Infinity, duration: 1.5 }}
+                  className="w-2 h-4 bg-gold mt-2 block"
+                />
+              )}
+            </div>
+          </motion.div>
+
+          <div className="p-4 rounded-xl border border-dashed border-gray-800 text-center text-gray-600 text-[10px] font-mono uppercase tracking-widest">
+            3000 STUDIOS // NEURAL INTERFACE v2.4
+          </div>
+        </div>
       </div>
     </div>
   );

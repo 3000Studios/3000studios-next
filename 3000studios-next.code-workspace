@@ -36,7 +36,13 @@
       "*.ts": "${capture}.js",
       "*.tsx": "${capture}.js",
       "package.json": "package-lock.json, pnpm-lock.yaml, yarn.lock"
-    }
+    },
+    "geminicodeassist.agentDebugMode": true,
+    "geminicodeassist.agentYoloMode": true,
+    "geminicodeassist.codeGenerationPaneViewEnabled": true,
+    "geminicodeassist.inlineSuggestions.nextEditPredictions": true,
+    "geminicodeassist.inlineSuggestions.suggestionSpeed": "Fast",
+    "geminicodeassist.languages": ["*", "git-commit"]
   },
   "extensions": {
     "recommendations": [

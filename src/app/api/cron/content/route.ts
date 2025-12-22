@@ -1,19 +1,21 @@
-import { getContentScheduler } from '@/jobs/contentScheduler';
-import { NextRequest, NextResponse } from 'next/server';
+import { getContentScheduler } from "@/jobs/contentScheduler";
+import { NextRequest, NextResponse } from "next/server";
+
+export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest) {
   try {
     // Verify Vercel cron secret
-    const secret = req.headers.get('x-vercel-cron-secret');
+    const secret = req.headers.get("x-vercel-cron-secret");
     if (secret !== process.env.CRON_SECRET) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const scheduler = getContentScheduler();
     await scheduler.processScheduledContent();
 
     const scheduled = scheduler.getScheduled();
-    const published = scheduler.getByStatus('published');
+    const published = scheduler.getByStatus("published");
 
     return NextResponse.json({
       success: true,
@@ -22,12 +24,9 @@ export async function POST(req: NextRequest) {
       timestamp: new Date().toISOString(),
     });
   } catch (error) {
-    console.error('[Cron] Content processing error:', error);
-    return NextResponse.json(
-      { error: 'Processing failed' },
-      { status: 500 }
-    );
+    console.error("[Cron] Content processing error:", error);
+    return NextResponse.json({ error: "Processing failed" }, { status: 500 });
   }
 }
 
-export const preferredRegion = 'auto';
+export const preferredRegion = "auto";

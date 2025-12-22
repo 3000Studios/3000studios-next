@@ -1,16 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getStripe } from "@/lib/stripe";
+import { stripe, validateStripeKey } from "@/lib/stripe";
 
 export async function POST(req: NextRequest) {
   try {
-    const stripe = getStripe();
-
+    // Validate Stripe key is set at runtime
+    validateStripeKey();
+    
     const { priceId } = await req.json();
 
     if (!priceId) {
       return NextResponse.json(
         { error: "Price ID is required" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -32,7 +33,7 @@ export async function POST(req: NextRequest) {
     console.error("Stripe Checkout Error:", error);
     return NextResponse.json(
       { error: error.message || "Internal Server Error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

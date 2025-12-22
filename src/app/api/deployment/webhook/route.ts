@@ -3,19 +3,31 @@
  * Receives deployment status updates from GitHub Actions and Vercel
  */
 
+<<<<<<< HEAD
 import { NextRequest, NextResponse } from "next/server";
+=======
+import { NextRequest, NextResponse } from 'next/server';
+>>>>>>> origin/pr/50
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { status, branch, commit, timestamp, source } = body;
 
+<<<<<<< HEAD
     console.log("📡 Deployment webhook received:", {
+=======
+    console.log('📡 Deployment webhook received:', {
+>>>>>>> origin/pr/50
       status,
       branch,
       commit: commit?.substring(0, 7),
       timestamp,
+<<<<<<< HEAD
       source: source || "github-actions",
+=======
+      source: source || 'github-actions',
+>>>>>>> origin/pr/50
     });
 
     // In a production environment, you would:
@@ -27,7 +39,11 @@ export async function POST(request: NextRequest) {
     // For now, just acknowledge receipt
     return NextResponse.json({
       success: true,
+<<<<<<< HEAD
       message: "Deployment webhook processed",
+=======
+      message: 'Deployment webhook processed',
+>>>>>>> origin/pr/50
       received: {
         status,
         branch,
@@ -35,10 +51,17 @@ export async function POST(request: NextRequest) {
       },
     });
   } catch (error) {
+<<<<<<< HEAD
     console.error("Webhook processing error:", error);
     return NextResponse.json(
       { error: "Failed to process webhook" },
       { status: 500 },
+=======
+    console.error('Webhook processing error:', error);
+    return NextResponse.json(
+      { error: 'Failed to process webhook' },
+      { status: 500 }
+>>>>>>> origin/pr/50
     );
   }
 }
@@ -46,11 +69,19 @@ export async function POST(request: NextRequest) {
 // Handle GET requests for webhook verification
 export async function GET(request: NextRequest) {
   return NextResponse.json({
+<<<<<<< HEAD
     status: "ok",
     message: "Deployment webhook endpoint",
     endpoints: {
       post: "Receive deployment status updates",
       get: "Webhook health check",
+=======
+    status: 'ok',
+    message: 'Deployment webhook endpoint',
+    endpoints: {
+      post: 'Receive deployment status updates',
+      get: 'Webhook health check',
+>>>>>>> origin/pr/50
     },
   });
 }

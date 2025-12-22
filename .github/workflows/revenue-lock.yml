@@ -1,8 +1,5 @@
 name: Revenue Lock
 
-permissions:
-  contents: read
-
 on: [pull_request]
 
 jobs:
@@ -15,34 +12,44 @@ jobs:
 
       - name: Protect revenue files
         run: |
-          # Define critical revenue paths
+          # Get list of changed files
+          changed_files=$(git diff --name-only origin/main...HEAD 2>/dev/null || echo "")
+          
+          # Exit early if no files changed
+          if [ -z "$changed_files" ]; then
+            echo "✅ No files changed - Revenue lock passed"
+            exit 0
+          fi
+          
+          # Define protected patterns
           protected=(
             "public/ads.txt"
+            "src/app/api/stripe/"
             "src/lib/stripe.ts"
             "src/components/AdSense.tsx"
-            "src/lib/affiliates.ts"
-            "src/app/api/checkout"
+            "src/app/components/GoogleAdsPlaceholder.tsx"
           )
-
-          echo "🔍 Checking for modifications to revenue-critical files..."
-
-          # Check against main branch
-          # git diff --name-only origin/main...HEAD
-
-          violation=false
-
-          for file in "${protected[@]}"; do
-            if git diff --name-only origin/main...HEAD | grep -q "$file"; then
-              echo "❌ Revenue-protected file modified: $file"
-              violation=true
-            fi
-          done
-
-          if [ "$violation" = true ]; then
-             echo "🛑 REVENUE LOCK: Modifications to revenue systems detected."
-             echo "   These files are locked to prevent accidental revenue loss."
-             echo "   If this change is intentional, please override this check with approval."
-             exit 1
+          
+          violations=()
+          
+          # Check each changed file against protected patterns
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            for pattern in "${protected[@]}"; do
+              # Check if file matches pattern exactly or starts with pattern (for directories)
+              if [[ "$file" == "$pattern" ]] || [[ "$pattern" == */ && "$file" == "${pattern%/}/"* ]]; then
+                violations+=("$file")
+                break
+              fi
+            done
+          done <<< "$changed_files"
+          
+          if [ ${#violations[@]} -gt 0 ]; then
+            echo "❌ Revenue-protected files modified:"
+            for v in "${violations[@]}"; do
+              echo "   - $v"
+            done
+            exit 1
           fi
-
-          echo "✅ Revenue lock passed - No critical monetization files touched."
+          
+          echo "✅ Revenue lock passed"

@@ -6,9 +6,17 @@
 
 "use client";
 
-import { AlertCircle, Check, Loader2, Mail, MapPin, Phone, Send } from 'lucide-react';
-import { useState } from 'react';
-import GoogleMap from '../components/GoogleMap';
+import {
+  AlertCircle,
+  Check,
+  Loader2,
+  Mail,
+  MapPin,
+  Phone,
+  Send,
+} from "lucide-react";
+import { useState } from "react";
+import GoogleMap from "../components/GoogleMap";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -31,14 +39,15 @@ export default function ContactPage() {
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
+    if (!formData.name.trim()) newErrors.name = "Name is required";
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "Invalid email format";
     }
-    if (!formData.message.trim()) newErrors.message = 'Message is required';
-    if (formData.message.length < 20) newErrors.message = 'Message must be at least 20 characters';
+    if (!formData.message.trim()) newErrors.message = "Message is required";
+    if (formData.message.length < 20)
+      newErrors.message = "Message must be at least 20 characters";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -68,22 +77,22 @@ export default function ContactPage() {
         throw new Error("Failed to send message");
       }
 
-      setSubmitStatus('success');
-      setSubmitMessage('Thank you! We\'ll get back to you within 24 hours.');
+      setSubmitStatus("success");
+      setSubmitMessage("Thank you! We'll get back to you within 24 hours.");
       setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        company: '',
-        subject: '',
-        budget: '',
-        message: '',
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        subject: "",
+        budget: "",
+        message: "",
         newsletter: true,
       });
       setErrors({});
     } catch {
-      setSubmitStatus('error');
-      setSubmitMessage('Something went wrong. Please try again later.');
+      setSubmitStatus("error");
+      setSubmitMessage("Something went wrong. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -97,7 +106,7 @@ export default function ContactPage() {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
 
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
@@ -215,7 +224,9 @@ export default function ContactPage() {
           {/* Enhanced Contact Form */}
           <div className="lg:col-span-2">
             <div className="card">
-              <h2 className="text-2xl font-bold text-white mb-6">Send us a Message</h2>
+              <h2 className="text-2xl font-bold text-white mb-6">
+                Send us a Message
+              </h2>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -476,8 +487,11 @@ export default function ContactPage() {
         <div className="mt-12 card p-0 overflow-hidden hover-lift">
           <div className="w-full h-96">
             <GoogleMap
-              apiKey={process.env.NEXT_PUBLIC_MAPS_API || 'YOUR_GOOGLE_MAPS_API_KEY_HERE'}
-              center={{ lat: 33.7490, lng: -84.3880 }} // Atlanta, Georgia
+              apiKey={
+                process.env.NEXT_PUBLIC_MAPS_API ||
+                "YOUR_GOOGLE_MAPS_API_KEY_HERE"
+              }
+              center={{ lat: 33.749, lng: -84.388 }} // Atlanta, Georgia
               zoom={13}
               mapType="satellite"
             />

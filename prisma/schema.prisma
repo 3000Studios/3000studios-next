@@ -1,58 +1,93 @@
-// prisma/schema.prisma
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  extensions = [pgvector(map: "vector")]
 }
 
-// ============================================
-// USER & AUTHENTICATION
-// ============================================
+model Stats {
+  id        Int      @id @default(autoincrement())
+  title     String
+  value     String
+  change    String
+  trend     String   // "up" or "down"
+  iconName  String
+  color     String
+  updatedAt DateTime @updatedAt
+}
+
+model Stream {
+  id        Int      @id @default(autoincrement())
+  isLive    Boolean  @default(false)
+  playbackId String?
+  streamKey  String?
+  startedAt  DateTime?
+}
+
+model Product {
+  id               String   @id @default(cuid())
+  name             String
+  description      String?
+  price            Float
+  compareAtPrice   Float?
+  category         String
+  images           String // Comma-separated list of URLs
+  inStock          Boolean  @default(true)
+  inventory        Int      @default(0)
+  sku              String?  @unique
+  supplier         String?
+  features         String // Comma-separated list
+  specifications   String? // JSON string
+  shippingWeight   Float?
+  tags             String // Comma-separated list
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  orderItems       OrderItem[]
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  total           Float
+  status          String // e.g., "pending", "paid", "shipped"
+  provider        String // e.g., "stripe", "paypal"
+  providerOrderId String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  items           OrderItem[]
+  userId          String?
+  user            User?       @relation(fields: [userId], references: [id])
+}
+
 model User {
   id            String    @id @default(cuid())
-  email         String    @unique
   name          String?
+  email         String?   @unique
+  emailVerified DateTime?
   image         String?
-  role          Role      @default(USER)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
-  // Relationships
+  password      String?
   accounts      Account[]
   sessions      Session[]
   orders        Order[]
-  subscriptions Subscription[]
-  apiUsage      ApiUsage[]
-  vectorMemory  VectorMemory[]
-
-  @@index([email])
-}
-
-enum Role {
-  USER
-  VENDOR
-  ADMIN
-  SUPER_ADMIN
 }
 
 model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?
+  access_token       String?
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?
+  session_state      String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -75,225 +110,44 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-// ============================================
-// E-COMMERCE
-// ============================================
-model Product {
-  id              String   @id @default(cuid())
-  sku             String   @unique
-  name            String
-  description     String
-  price           Float
-  compareAtPrice  Float?
-  category        String
-  images          String[]
-  inStock         Boolean  @default(true)
-  inventory       Int      @default(0)
-  supplier        String
-  features        Json
-  specifications  Json
-  tags            String[]
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-
-  orderItems      OrderItem[]
-
-  @@index([category, inStock])
-  @@index([sku])
-}
-
-model Order {
-  id              String      @id @default(cuid())
-  orderNumber     String      @unique
-  userId          String
-  providerOrderId String?     // PayPal/Stripe order ID
-  status          OrderStatus @default(PENDING)
-  total           Float
-  subtotal        Float
-  tax             Float?
-  shipping        Float?
-  paymentMethod   String
-  paymentId       String?
-  shippingAddress Json?
-  billingAddress  Json?
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
-
-  user       User        @relation(fields: [userId], references: [id])
-  items      OrderItem[]
-  fulfillment Fulfillment?
-
-  @@index([userId, status])
-  @@index([orderNumber])
-}
-
-enum OrderStatus {
-  PENDING
-  PAID
-  PROCESSING
-  SHIPPED
-  DELIVERED
-  CANCELLED
-  REFUNDED
-}
-
 model OrderItem {
-  id         String  @id @default(cuid())
-  orderId    String
-  productId  String
-  quantity   Int
-  price      Float
-
-  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product Product @relation(fields: [productId], references: [id])
-
-  @@index([orderId])
+  id        String  @id @default(cuid())
+  quantity  Int
+  price     Float
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
 }
 
-model Fulfillment {
-  id            String   @id @default(cuid())
-  orderId       String   @unique
-  trackingNumber String?
-  carrier       String?
-  shippedAt     DateTime?
-  deliveredAt   DateTime?
-  notes         String?
-
-  order Order @relation(fields: [orderId], references: [id])
-}
-
-// ============================================
-// SUBSCRIPTIONS & REVENUE
-// ============================================
-model Subscription {
-  id              String             @id @default(cuid())
-  userId          String
-  plan            String
-  status          SubscriptionStatus @default(ACTIVE)
-  currentPeriodStart DateTime
-  currentPeriodEnd   DateTime
-  cancelAt        DateTime?
-  canceledAt      DateTime?
-  stripeSubscriptionId String?      @unique
-  priceId         String
-  quantity        Int               @default(1)
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-
-  user User @relation(fields: [userId], references: [id])
-
-  @@index([userId, status])
-}
-
-enum SubscriptionStatus {
-  ACTIVE
-  CANCELED
-  PAST_DUE
-  INCOMPLETE
-  TRIALING
-}
-
-model Revenue {
-  id          String   @id @default(cuid())
-  amount      Float
-  source      String   // "product", "subscription", "affiliate", "ads"
-  sourceId    String?
-  date        DateTime @default(now())
-  metadata    Json?
-
-  @@index([source, date])
-}
-
-// ============================================
-// AI & AUTOMATION
-// ============================================
-model ApiUsage {
-  id         String   @id @default(cuid())
-  userId     String
-  endpoint   String
-  model      String?
-  tokens     Int?
-  cost       Float
-  timestamp  DateTime @default(now())
-
-  user User @relation(fields: [userId], references: [id])
-
-  @@index([userId, timestamp])
-}
-
-model VectorMemory {
-  id        String                 @id @default(cuid())
-  userId    String
-  content   String
-  embedding Unsupported("vector")?
-  metadata  Json?
-  createdAt DateTime               @default(now())
-
-  user User @relation(fields: [userId], references: [id])
-
-  @@index([userId])
-}
-
-// ============================================
-// ANALYTICS & TRACKING
-// ============================================
-model PageView {
-  id         String   @id @default(cuid())
-  page       String
-  referrer   String?
-  userAgent  String?
-  ip         String?
-  country    String?
-  timestamp  DateTime @default(now())
-  sessionId  String?
-
-  @@index([page, timestamp])
-}
-
-model ConversionEvent {
+model AIMemory {
   id        String   @id @default(cuid())
-  type      String   // "signup", "purchase", "upgrade", etc.
-  value     Float?
-  metadata  Json?
-  timestamp DateTime @default(now())
+  userId    String   @map("user_id")
+  content   String
+  embedding Unsupported("vector(1536)")?
+  createdAt DateTime @default(now()) @map("created_at")
+  accessCount Int    @default(0) @map("access_count")
 
-  @@index([type, timestamp])
+  @@map("ai_memory")
 }
 
-// ============================================
-// CONTENT MANAGEMENT
-// ============================================
-model BlogPost {
-  id          String   @id @default(cuid())
-  slug        String   @unique
-  title       String
-  content     String
-  excerpt     String?
-  coverImage  String?
-  published   Boolean  @default(false)
-  publishedAt DateTime?
-  tags        String[]
-  author      String?
-  seo         Json?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+model AIUsage {
+  id        Int      @id @default(autoincrement())
+  userId    String?  @map("user_id")
+  model     String
+  tokens    Int
+  latencyMs Int      @map("latency_ms")
+  createdAt DateTime @default(now()) @map("created_at")
 
-  @@index([published, publishedAt])
-  @@index([slug])
+  @@map("ai_usage")
 }
 
-model Portfolio {
-  id          String   @id @default(cuid())
-  slug        String   @unique
-  title       String
-  description String
-  images      String[]
-  category    String
-  client      String?
-  url         String?
-  featured    Boolean  @default(false)
-  tags        String[]
-  createdAt   DateTime @default(now())
+model AICostLimit {
+  id                 String   @id @default(cuid())
+  userId             String   @unique @map("user_id")
+  monthlyTokenLimit  Int      @map("monthly_token_limit")
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
 
-  @@index([category, featured])
+  @@map("ai_cost_limits")
 }

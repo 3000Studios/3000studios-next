@@ -6,19 +6,35 @@
 
 "use client";
 
-import { motion } from 'framer-motion';
-import { Calendar, Clock, Search, Tag, User } from 'lucide-react';
-import { useState } from 'react';
-import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
-import LoadingSkeleton from '../components/LoadingSkeleton';
-import Newsletter from '../components/Newsletter';
-import { blogPosts, getAllCategories, getAllTags } from '../lib/blogData';
+<<<<<<< HEAD
+import { motion } from "framer-motion";
+import { Calendar, Clock, Search, Tag, User } from "lucide-react";
+import { useState } from "react";
+import GoogleAdsPlaceholder from "../components/GoogleAdsPlaceholder";
+import LoadingSkeleton from "../components/LoadingSkeleton";
+import Newsletter from "../components/Newsletter";
+import { blogPosts, getAllCategories, getAllTags } from "../lib/blogData";
+=======
+import { useState } from "react";
+import { Calendar, Clock, User, Search, Tag } from "lucide-react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { blogPosts, getAllCategories, getAllTags } from "../lib/blogData";
+import Newsletter from "../components/Newsletter";
+import LoadingSkeleton from "../components/LoadingSkeleton";
+import GoogleAdsPlaceholder from "../components/GoogleAdsPlaceholder";
+>>>>>>> origin/pr/50
 
 export default function BlogPage() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [_email, _setEmail] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+<<<<<<< HEAD
+  const [_email, _setEmail] = useState("");
   const [_isLoading, _setIsLoading] = useState(false);
+=======
+  // const [email, setEmail] = useState(""); // Reserved for future use
+  const [isLoading] = useState(false);
+>>>>>>> origin/pr/50
 
   const categories = ["All", ...getAllCategories()];
 
@@ -30,13 +46,6 @@ export default function BlogPage() {
 
     const matchesCategory =
       selectedCategory === "All" || post.category === selectedCategory;
-
-  const filteredPosts = blogPosts.filter(post => {
-    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         post.content.toLowerCase().includes(searchTerm.toLowerCase());
-
-    const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
 
     return matchesSearch && matchesCategory;
   });
@@ -181,9 +190,12 @@ export default function BlogPage() {
                       </div>
                     </div>
 
-                    <button className="mt-4 text-gold hover:text-platinum transition-colors font-semibold inline-flex items-center gap-2 hover-lift">
+                    <Link
+                      href={`/blog/${post.id}`}
+                      className="mt-4 text-gold hover:text-platinum transition-colors font-semibold inline-flex items-center gap-2 hover-lift"
+                    >
                       Read Full Article →
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </motion.article>
@@ -195,9 +207,14 @@ export default function BlogPage() {
         {filteredPosts.length === 0 && !_isLoading && (
           <div className="text-center py-12">
             <div className="text-6xl mb-4 opacity-50">📝</div>
-            <p className="text-gray-400 text-lg">No articles found matching your search</p>
+            <p className="text-gray-400 text-lg">
+              No articles found matching your search
+            </p>
             <button
-              onClick={() => { setSearchTerm(''); setSelectedCategory('All'); }}
+              onClick={() => {
+                setSearchTerm("");
+                setSelectedCategory("All");
+              }}
               className="mt-4 px-6 py-2 bg-gold text-black font-semibold rounded-lg hover:bg-platinum transition-all"
             >
               Clear Filters

@@ -1,88 +1,121 @@
 {
-  // ============================================
-  // 3000 Studios - Optimal VS Code Settings
-  // Lean, fast, eslint+prettier first
-  // ============================================
-  "git.autofetch": true,
-  "git.confirmSync": false,
+  /* ======================================================
+     CORE WORKSPACE BEHAVIOR (STABLE + FAST)
+  ====================================================== */
 
-  // Formatting & linting
-  "editor.formatOnSave": true,
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "eslint.validate": ["javascript", "typescript", "typescriptreact"],
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "explicit"
-  },
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
-  "eslint.workingDirectories": ["./src"],
+  "telemetry.telemetryLevel": "off",
+  "workbench.enableExperiments": false,
+  "workbench.startupEditor": "none",
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.closeOnFileDelete": true,
 
-  // TypeScript
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "typescript.updateImportsOnFileMove.enabled": "always",
+  /* ======================================================
+     ANTI-GRAVITY / OPEN-VSX
+  ====================================================== */
 
-  // Copilot
-  "github.copilot.enable": {
-    "*": true,
-    "plaintext": false
-  },
+  "antigravity.marketplaceGalleryItemURL": "https://open-vsx.org/vscode/item",
+  "antigravity.marketplaceExtensionGalleryServiceURL": "https://open-vsx.org/vscode/gallery",
 
-  // Tailwind helpers
-  "tailwindCSS.experimental.classRegex": [
-    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"] ,
-    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
-  ],
-  "tailwindCSS.includeLanguages": {
-    "typescript": "javascript",
-    "typescriptreact": "javascript"
-  },
+  /* ======================================================
+     FILE SYSTEM / CPU CONTROL
+  ====================================================== */
 
-  // Files & performance
-  "files.eol": "\n",
-  "files.exclude": {
-    "**/.git": true,
-    "**/.next": true,
-    "**/node_modules": true,
-    "**/.pnpm-store": true,
-    "**/dist": true,
-    "**/build": true
-  },
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 800,
   "files.watcherExclude": {
-    "**/.git/objects/**": true,
+    "**/.git/**": true,
     "**/.next/**": true,
     "**/node_modules/**": true,
+    "**/.vercel/**": true,
     "**/.pnpm-store/**": true
   },
-  "search.exclude": {
-    "**/node_modules": true,
-    "**/.next": true,
-    "**/dist": true,
-    "**/.pnpm-store": true,
-    "**/pnpm-lock.yaml": true
-  },
-  "files.maxMemoryForLargeFilesMB": 4096,
 
-  // Editor ergonomics
-  "editor.tabSize": 2,
-  "editor.detectIndentation": false,
-  "editor.quickSuggestions": {
-    "strings": true
+  /* ======================================================
+     EDITOR UX (CONSISTENT + CI-SAFE)
+  ====================================================== */
+
+  "editor.fontSize": 15,
+  "editor.fontFamily": "JetBrains Mono, Consolas, 'Courier New', monospace",
+  "editor.wordWrap": "on",
+  "editor.minimap.enabled": false,
+  "editor.formatOnSave": true,
+  "editor.inlineSuggest.enabled": true,
+
+  /* ======================================================
+     FORMATTERS (MATCH CI + PREVENT DIFF NOISE)
+  ====================================================== */
+
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
-  // Terminal
-  "terminal.integrated.defaultProfile.windows": "PowerShell",
-  "terminal.integrated.profiles.windows": {
-    "PowerShell": {
-      "source": "PowerShell",
-      "icon": "terminal-powershell"
-    }
-  }
+  /* ======================================================
+     TYPESCRIPT / NEXT.JS PERFORMANCE
+  ====================================================== */
+
+  "typescript.tsserver.maxTsServerMemory": 8192,
+  "typescript.disableAutomaticTypeAcquisition": true,
+
+  /* ======================================================
+     GIT (SILENT, NO POPUPS, NO FREEZES)
+  ====================================================== */
+
+  "git.autorefresh": false,
+  "git.confirmSync": false,
+  "git.detectSubmodules": false,
+  "git.countBadge": "off",
+
+  /* ======================================================
+     AI / AGENTS (AGGRESSIVE BUT CONTROLLED)
+  ====================================================== */
+
+  "github.copilot.editor.enableAutoCompletions": true,
+
+  "geminicodeassist.project": "studios-ai-agent-3k",
+  "geminicodeassist.agentDebugMode": false,
+  "geminicodeassist.agentYoloMode": true,
+
+  "gitlens.ai.model": "gitkraken",
+  "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
+
+  /* ======================================================
+     TERMINAL (GPU + NO LIMITS)
+  ====================================================== */
+
+  "terminal.integrated.gpuAcceleration": "on",
+  "terminal.integrated.scrollback": 10000,
+
+  /* ======================================================
+     CHAT / COMMAND AUTO-APPROVAL
+  ====================================================== */
+
+  "chat.tools.terminal.autoApprove": {
+    "npm": true,
+    "node": true,
+    "git": true,
+    "vercel": true
+  },
+
+  /* ======================================================
+     WORKSPACE TRUST (NO INTERRUPTIONS)
+  ====================================================== */
+
+  "security.workspace.trust.enabled": true,
+  "security.workspace.trust.startupPrompt": "never",
+
+  /* ======================================================
+     GITHUB ACTIONS VISIBILITY (NOT ENTERPRISE-LOCKED)
+  ====================================================== */
+
+  "github-actions.workflows.pinned.refresh.enabled": true,
+  "github-actions.workflows.pinned.workflows": []
 }

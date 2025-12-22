@@ -1,191 +1,49 @@
-# ============================================
-# 3000 Studios - Git Ignore Configuration
-# ============================================
-# See https://help.github.com/articles/ignoring-files/
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# ============================================
-# Dependencies
-# ============================================
-node_modules/
+# dependencies
+/node_modules
 /.pnp
 .pnp.*
-.pnp.js
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
-.pnpm-store/
+package-lock.json
 
-# ============================================
-# Testing & Coverage
-# ============================================
+# testing
 /coverage
-/coverage.json
-/.nyc_output
-/test-results/
 
-# ============================================
-# Next.js Build Output
-# ============================================
+# next.js
 /.next/
 /out/
+
+# production
 /build
-.next/
-next-env.d.ts
 
-# ============================================
-# Production Build
-# ============================================
-/build
-/dist
-*.tsbuildinfo
+# misc
+.DS_Store
+*.pem
 
-# ============================================
-# Environment Variables (NEVER COMMIT!)
-# ============================================
-.env
-.env.local
-.env*.local
-.env.development.local
-.env.test.local
-.env.production.local
-!.env.example
-!.env.schema
-
-# ============================================
-# Vercel Deployment
-# ============================================
-.vercel
-.vercel/
-
-# ============================================
-# Debug Logs
-# ============================================
-*.log
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+.pnpm-debug.log*
 
-# ============================================
-# Operating System Files
-# ============================================
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-._*
-.Spotlight-V100
-.Trashes
+# local env files (never commit secrets!)
+.env*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Windows
-Thumbs.db
-Thumbs.db:encryptable
-ehthumbs.db
-ehthumbs_vista.db
-Desktop.ini
-$RECYCLE.BIN/
+# vercel
+.vercel
 
-# Linux
-*~
-.directory
+# typescript
+*.tsbuildinfo
+next-env.d.ts
 
-# ============================================
-# Editor & IDE Files
-# ============================================
-# VS Code (keep workspace settings, ignore personal)
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-*.code-workspace.local
-
-# JetBrains IDEs
-.idea/
-*.iml
-*.iws
-*.ipr
-
-# Sublime Text
-*.sublime-project
-*.sublime-workspace
-
-# Vim
-*.swp
-*.swo
-*~
-.vim/
-
-# Emacs
-*~
-\#*\#
-.\#*
-
-# ============================================
-# Certificates & Keys (SECURITY)
-# ============================================
-*.pem
-*.key
-*.cert
-*.crt
-*.p12
-*.pfx
-
-# ============================================
-# Lock Files (Keep only pnpm)
-# ============================================
+# package lock files (using pnpm)
 package-lock.json
-yarn.lock
-# Keep pnpm-lock.yaml
-
-# ============================================
-# Temporary Files
-# ============================================
-*.tmp
-*.temp
-*.cache
-.cache/
-.temp/
-.tmp/
-
-# ============================================
-# Backup Files
-# ============================================
-*.bak
-*.backup
-*.old
-*.orig
-
-# ============================================
-# Archive Files (if accidentally created)
-# ============================================
-*.zip
-*.tar
-*.tar.gz
-*.rar
-*.7z
-
-# ============================================
-# Documentation Build Output
-# ============================================
-/docs/build/
-/.docusaurus/
-
-# ============================================
-# Storybook
-# ============================================
-storybook-static/
-
-# ============================================
-# Local Development
-# ============================================
-/scripts/*.local.*
-/scripts/temp/
-.local/
-
-# ============================================
-# End of .gitignore
-# ============================================
