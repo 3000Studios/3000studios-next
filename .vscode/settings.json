@@ -1,122 +1,238 @@
 {
-  /* ======================================================
-     CORE WORKSPACE BEHAVIOR (STABLE + FAST)
-  ====================================================== */
-
-  "telemetry.telemetryLevel": "off",
-  "workbench.enableExperiments": false,
-  "workbench.startupEditor": "none",
-  "workbench.editor.enablePreview": false,
-  "workbench.editor.closeOnFileDelete": true,
+  "$schema": "https://3000studios.ai/schemas/autonomous-system.v1.json",
 
   /* ======================================================
-     ANTI-GRAVITY / OPEN-VSX
+     EDITOR / VS CODE AUTONOMY (settings.json merged)
   ====================================================== */
+  "vscode": {
+    "files": {
+      "autoSave": "afterDelay",
+      "autoSaveDelay": 500,
+      "trimTrailingWhitespace": true,
+      "insertFinalNewline": true,
+      "eol": "\n",
+      "watcherExclude": [
+        "**/.git/**",
+        "**/node_modules/**",
+        "**/.next/**",
+        "**/.vercel/**",
+        "**/dist/**",
+        "**/build/**",
+        "**/.pnpm-store/**"
+      ]
+    },
 
-  "antigravity.marketplaceGalleryItemURL": "https://open-vsx.org/vscode/item",
-  "antigravity.marketplaceExtensionGalleryServiceURL": "https://open-vsx.org/vscode/gallery",
+    "editor": {
+      "formatOnSave": true,
+      "formatOnPaste": true,
+      "codeActionsOnSave": [
+        "source.fixAll",
+        "source.fixAll.eslint",
+        "source.organizeImports"
+      ],
+      "defaultFormatter": "prettier",
+      "inlineSuggest": true,
+      "acceptSuggestionOnEnter": true,
+      "linkedEditing": true,
+      "bracketPairColorization": true
+    },
 
-  /* ======================================================
-     FILE SYSTEM / CPU CONTROL
-  ====================================================== */
+    "typescript": {
+      "maxMemoryMB": 8192,
+      "updateImportsOnMove": true
+    },
 
-  "files.autoSave": "afterDelay",
-  "files.autoSaveDelay": 800,
-  "files.watcherExclude": {
-    "**/.git/**": true,
-    "**/.next/**": true,
-    "**/node_modules/**": true,
-    "**/.vercel/**": true,
-    "**/.pnpm-store/**": true
+    "eslint": {
+      "enabled": true,
+      "mode": "heal-never-block"
+    },
+
+    "git": {
+      "autoFetch": true,
+      "smartCommit": true,
+      "noConfirmations": true
+    },
+
+    "terminal": {
+      "autoApproveCommands": [
+        "pnpm",
+        "npm",
+        "yarn",
+        "git",
+        "node",
+        "npx",
+        "vercel",
+        "python"
+      ]
+    },
+
+    "extensions": {
+      "allowed": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "github.copilot"
+      ],
+      "autoRemoveUnapproved": true
+    }
   },
 
   /* ======================================================
-     EDITOR UX (CONSISTENT + CI-SAFE)
+     GIT / REPO AUTONOMY
   ====================================================== */
-
-  "editor.fontSize": 15,
-  "editor.fontFamily": "JetBrains Mono, Consolas, 'Courier New', monospace",
-  "editor.wordWrap": "on",
-  "editor.minimap.enabled": false,
-  "editor.formatOnSave": true,
-  "editor.inlineSuggest.enabled": true,
-
-  /* ======================================================
-     FORMATTERS (MATCH CI + PREVENT DIFF NOISE)
-  ====================================================== */
-
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "gitAutomation": {
+    "onChange": [
+      "autoFix",
+      "autoCommit",
+      "autoMerge",
+      "autoPush"
+    ],
+    "branchPolicy": {
+      "mainIsTruth": true,
+      "noPRs": true,
+      "noManualMerges": true
+    },
+    "commitMessage": "auto: heal optimize deploy"
   },
 
   /* ======================================================
-     TYPESCRIPT / NEXT.JS PERFORMANCE
+     DEPLOYMENT (VERCEL)
   ====================================================== */
-
-  "typescript.tsserver.maxTsServerMemory": 8192,
-  "typescript.disableAutomaticTypeAcquisition": true,
-
-  /* ======================================================
-     GIT (SILENT, NO POPUPS, NO FREEZES)
-  ====================================================== */
-
-  "git.autorefresh": false,
-  "git.confirmSync": false,
-  "git.detectSubmodules": false,
-  "git.countBadge": "off",
-
-  /* ======================================================
-     AI / AGENTS (AGGRESSIVE BUT CONTROLLED)
-  ====================================================== */
-
-  "github.copilot.editor.enableAutoCompletions": true,
-
-  "geminicodeassist.project": "studios-ai-agent-3k",
-  "geminicodeassist.agentDebugMode": false,
-  "geminicodeassist.agentYoloMode": true,
-
-  "gitlens.ai.model": "gitkraken",
-  "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
-
-  /* ======================================================
-     TERMINAL (GPU + NO LIMITS)
-  ====================================================== */
-
-  "terminal.integrated.gpuAcceleration": "on",
-  "terminal.integrated.scrollback": 10000,
-
-  /* ======================================================
-     CHAT / COMMAND AUTO-APPROVAL
-  ====================================================== */
-
-  "chat.tools.terminal.autoApprove": {
-    "npm": true,
-    "node": true,
-    "git": true,
-    "vercel": true
+  "deployment": {
+    "platform": "vercel",
+    "autoDeploy": true,
+    "on": ["commit", "merge"],
+    "healthCheck": true,
+    "rollbackOnFailure": true,
+    "cli": {
+      "useVercelCLI": true,
+      "environment": "production"
+    }
   },
 
   /* ======================================================
-     WORKSPACE TRUST (NO INTERRUPTIONS)
+     REVENUE FLOW (PAYPAL + STRIPE)
   ====================================================== */
-
-  "security.workspace.trust.enabled": true,
-  "security.workspace.trust.startupPrompt": "never",
+  "payments": {
+    "providers": {
+      "paypal": {
+        "enabled": true,
+        "mode": "primary",
+        "verification": "webhook",
+        "autoRetry": true,
+        "payout": "instant"
+      },
+      "stripe": {
+        "enabled": true,
+        "mode": "subscriptions",
+        "autoManagePlans": true,
+        "autoRetry": true
+      }
+    },
+    "rules": {
+      "noDeliveryWithoutPayment": true,
+      "idempotentCharges": true,
+      "fraudDetection": true
+    }
+  },
 
   /* ======================================================
-     GITHUB ACTIONS VISIBILITY (NOT ENTERPRISE-LOCKED)
+     AUTO PRODUCT + STORE GENERATION
   ====================================================== */
+  "storeAutomation": {
+    "autoGenerateProducts": true,
+    "sources": [
+      "aiGenerated",
+      "usageBased",
+      "bundles"
+    ],
+    "pricing": {
+      "dynamic": true,
+      "increaseOnHighConversion": true,
+      "discountOnLowConversion": true
+    }
+  },
 
-  "github-actions.workflows.pinned.refresh.enabled": true,
-  "github-actions.workflows.pinned.workflows": [],
-  "chat.agent.maxRequests": 50
+  /* ======================================================
+     CONTENT + BLOG AUTOMATION
+  ====================================================== */
+  "contentEngine": {
+    "autoBlog": true,
+    "frequency": "daily",
+    "types": [
+      "seoEvergreen",
+      "comparison",
+      "tutorial",
+      "moneyPages"
+    ],
+    "autoInternalLinking": true,
+    "autoCTAInjection": true
+  },
+
+  /* ======================================================
+     SEO AUTONOMY
+  ====================================================== */
+  "seo": {
+    "autoKeywords": true,
+    "autoMeta": true,
+    "autoSchema": true,
+    "rewriteLowPerformers": true,
+    "redirectDeadPages": true
+  },
+
+  /* ======================================================
+     ANALYTICS → ACTION LOOP
+  ====================================================== */
+  "analyticsAutomation": {
+    "track": [
+      "conversion",
+      "bounce",
+      "revenuePerVisitor",
+      "scrollDepth"
+    ],
+    "actions": {
+      "lowConversion": "rewrite",
+      "highConversion": "amplify",
+      "zeroRevenue": "archive"
+    }
+  },
+
+  /* ======================================================
+     TOOL / DEPENDENCY HYGIENE
+  ====================================================== */
+  "maintenance": {
+    "autoRemoveUnusedDependencies": true,
+    "autoArchiveUnusedFiles": true,
+    "autoUpdateSafeDependencies": true
+  },
+
+  /* ======================================================
+     COMMAND ROUTER (YOU SAY IT → IT HAPPENS)
+  ====================================================== */
+  "commandRouter": {
+    "enabled": true,
+    "commands": {
+      "deploy": ["autoFix", "autoCommit", "deploy"],
+      "add product": ["generateProduct", "publish"],
+      "write blog": ["generateContent", "seoOptimize", "publish"],
+      "optimize site": ["seoAudit", "rewrite", "deploy"],
+      "make money": ["generateProduct", "publish", "promote"]
+    }
+  },
+
+  /* ======================================================
+     LEARNING / SELF-IMPROVEMENT
+  ====================================================== */
+  "learning": {
+    "enabled": true,
+    "inputs": [
+      "repoState",
+      "analytics",
+      "revenue"
+    ],
+    "optimizeFor": [
+      "conversion",
+      "stability",
+      "speed"
+    ]
+  }
 }
