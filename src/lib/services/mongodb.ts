@@ -84,9 +84,6 @@ export async function getUserByEmail(email: string): Promise<User | null> {
 
 export async function updateUser(
   userId: string,
-<<<<<<< HEAD
-  updates: Partial<User>,
-=======
   updates: Partial<User>
 >>>>>>> origin/pr/50
 ): Promise<void> {
@@ -127,9 +124,6 @@ export interface Product {
 
 // Analytics Functions
 export async function getAnalytics(
-<<<<<<< HEAD
-  timeRange: "day" | "week" | "month" = "day",
-=======
   timeRange: "day" | "week" | "month" = "day"
 >>>>>>> origin/pr/50
 ): Promise<AnalyticsData> {
@@ -269,9 +263,6 @@ export async function getProducts(): Promise<Product[]> {
 
 export async function updateProduct(
   productId: string,
-<<<<<<< HEAD
-  updates: Partial<Product>,
-=======
   updates: Partial<Product>
 >>>>>>> origin/pr/50
 ): Promise<void> {

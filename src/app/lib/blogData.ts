@@ -304,8 +304,6 @@ A good design system pays dividends: faster development, fewer bugs, and consist
     tags: ["Design Systems", "Components", "Workflow", "Development"],
     featured: false,
   },
-<<<<<<< HEAD
-=======
   {
     id: "the-future-of-digital-aesthetics-2025-prediction",
     title: "The Future of Digital Aesthetics: 2025 Prediction",

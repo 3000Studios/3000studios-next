@@ -6,9 +6,6 @@
 
 "use client";
 
-<<<<<<< HEAD
-import { useState } from "react";
-=======
 import { useEffect, useState } from "react";
 >>>>>>> origin/pr/50
 
@@ -19,8 +16,6 @@ interface VideoWallpaperProps {
 
 export default function VideoWallpaper({
   videoSrc,
-<<<<<<< HEAD
-=======
   fallbackGradient = true,
 >>>>>>> origin/pr/50
   opacity = 0.3,

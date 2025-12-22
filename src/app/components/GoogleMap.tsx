@@ -146,11 +146,6 @@ export default function GoogleMap({
         ],
         mapTypeControl: true,
         mapTypeControlOptions: {
-<<<<<<< HEAD
-          style: window.google?.maps?.MapTypeControlStyle?.HORIZONTAL_BAR,
-          position: window.google?.maps?.ControlPosition?.TOP_RIGHT,
-          mapTypeIds: ["roadmap", "satellite", "hybrid", "terrain"],
-=======
           style: window.google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
           position: window.google.maps.ControlPosition.TOP_RIGHT,
           mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain']
@@ -168,9 +163,6 @@ export default function GoogleMap({
       new window.google.maps.Marker({
         position: center,
         map,
-<<<<<<< HEAD
-        title: "3000 Studios - Atlanta, Georgia",
-=======
         title: '3000 Studios - Atlanta, Georgia',
 >>>>>>> origin/pr/50
         animation: window.google.maps.Animation.DROP,
@@ -209,12 +201,6 @@ export default function GoogleMap({
 
     return () => {
       // Cleanup
-<<<<<<< HEAD
-      if (mapInstanceRef.current) {
-        window.google?.maps?.event?.clearInstanceListeners(
-          mapInstanceRef.current,
-        );
-=======
       if (mapInstanceRef.current && window.google) {
         window.google.maps.event.clearInstanceListeners(mapInstanceRef.current);
 >>>>>>> origin/pr/50
