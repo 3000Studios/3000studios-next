@@ -84,8 +84,7 @@ export async function getUserByEmail(email: string): Promise<User | null> {
 
 export async function updateUser(
   userId: string,
-  updates: Partial<User>
->>>>>>> origin/pr/50
+  updates: Partial<User>,
 ): Promise<void> {
   const database = await connectToDatabase();
   await database.collection("users").updateOne({ userId }, { $set: updates });
@@ -124,8 +123,7 @@ export interface Product {
 
 // Analytics Functions
 export async function getAnalytics(
-  timeRange: "day" | "week" | "month" = "day"
->>>>>>> origin/pr/50
+  timeRange: "day" | "week" | "month" = "day",
 ): Promise<AnalyticsData> {
   try {
     const database = await connectToDatabase();
@@ -263,8 +261,7 @@ export async function getProducts(): Promise<Product[]> {
 
 export async function updateProduct(
   productId: string,
-  updates: Partial<Product>
->>>>>>> origin/pr/50
+  updates: Partial<Product>,
 ): Promise<void> {
   try {
     const database = await connectToDatabase();

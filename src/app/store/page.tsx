@@ -165,7 +165,6 @@ export default function StorePage() {
     0
   );
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
->>>>>>> origin/pr/50
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950">
@@ -214,7 +213,6 @@ export default function StorePage() {
               className="relative p-3 glass-premium rounded-lg border border-gold hover:bg-gold/10 transition-all hover-lift"
               onClick={handleCheckout}
               aria-label="View shopping cart"
->>>>>>> origin/pr/50
             >
               View All <span className="text-lg">→</span>
             </Link>
@@ -290,7 +288,6 @@ export default function StorePage() {
                   </span>
                 )}
               </button>
->>>>>>> origin/pr/50
             ))}
           </div>
         </div>
@@ -384,7 +381,6 @@ export default function StorePage() {
                     {product.inStock ? "Add to Cart" : "Out of Stock"}
                   </button>
                 </div>
->>>>>>> origin/pr/50
               ))}
             </div>
           )}
@@ -420,7 +416,6 @@ export default function StorePage() {
               <div className="flex items-center justify-between text-lg font-bold">
                 <span className="text-white">Total:</span>
                 <span className="text-gold">${cartTotal.toFixed(2)}</span>
->>>>>>> origin/pr/50
               </div>
               <p className="text-purple-300/80 font-semibold">
                 Premium Products
@@ -520,7 +515,6 @@ export default function StorePage() {
               </h3>
               <p className="text-gray-400 text-sm">
                 Curated collection of top-tier products
->>>>>>> origin/pr/50
               </p>
             </div>
           </div>
@@ -533,8 +527,8 @@ export default function StorePage() {
           <p>✅ Affiliate link tracking enabled</p>
           <p>✅ {products.length}+ premium products available</p>
         </div>
->>>>>>> origin/pr/50
       </div>
     </div>
   );
 }
+

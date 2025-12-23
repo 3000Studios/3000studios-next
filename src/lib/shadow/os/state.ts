@@ -5,30 +5,39 @@
  * Based on 3000structure.txt blueprint MODULE 17
  */
 
-'use client';
+"use client";
 
-import { create } from 'zustand';
+import { create } from "zustand";
 
-export type UIMood = 'neutral' | 'gold' | 'blue' | 'purple-alert' | 'teal' | 'cyber-cyan';
-export type Emotion = 'neutral' | 'happy' | 'excited' | 'focused' | 'alert' | 'calm';
->>>>>>> origin/pr/50
+export type UIMood =
+  | "neutral"
+  | "gold"
+  | "blue"
+  | "purple-alert"
+  | "teal"
+  | "cyber-cyan";
+export type Emotion =
+  | "neutral"
+  | "happy"
+  | "excited"
+  | "focused"
+  | "alert"
+  | "calm";
 
 interface ShadowOSState {
   // UI Mood for reactive theming
   uiMood: UIMood;
   setUIMood: (mood: UIMood) => void;
-  
->>>>>>> origin/pr/50
+
   // Avatar emotion state
   emotion: Emotion;
   intensity: number;
   updateEmotion: (emotion: Emotion, intensity: number) => void;
-  
+
   // Response tracking
   lastResponse: string;
   setResponse: (response: string) => void;
-  
->>>>>>> origin/pr/50
+
   // Avatar audio
   avatarAudio: string;
   setAvatarAudio: (audio: string) => void;
@@ -36,25 +45,25 @@ interface ShadowOSState {
 
 export const useShadowOS = create<ShadowOSState>((set) => ({
   // Initial state
-  uiMood: 'neutral',
-  emotion: 'neutral',
+  uiMood: "neutral",
+  emotion: "neutral",
   intensity: 0.4,
-  lastResponse: '',
-  avatarAudio: '',
-  
+  lastResponse: "",
+  avatarAudio: "",
+
   // Actions
   setUIMood: (mood) => set({ uiMood: mood }),
-  
-  updateEmotion: (emotion, intensity) => set({ 
-    emotion, 
-    intensity,
-    // Auto-update UI mood based on emotion
-    uiMood: emotionToMood(emotion)
-  }),
-  
+
+  updateEmotion: (emotion, intensity) =>
+    set({
+      emotion,
+      intensity,
+      // Auto-update UI mood based on emotion
+      uiMood: emotionToMood(emotion),
+    }),
+
   setResponse: (response) => set({ lastResponse: response }),
-  
->>>>>>> origin/pr/50
+
   setAvatarAudio: (audio) => set({ avatarAudio: audio }),
 }));
 
@@ -63,17 +72,16 @@ export const useShadowOS = create<ShadowOSState>((set) => ({
  */
 function emotionToMood(emotion: Emotion): UIMood {
   switch (emotion) {
-    case 'happy':
-    case 'excited':
-      return 'gold';
-    case 'focused':
-      return 'cyber-cyan';
-    case 'alert':
-      return 'purple-alert';
-    case 'calm':
-      return 'teal';
+    case "happy":
+    case "excited":
+      return "gold";
+    case "focused":
+      return "cyber-cyan";
+    case "alert":
+      return "purple-alert";
+    case "calm":
+      return "teal";
     default:
-      return 'neutral';
->>>>>>> origin/pr/50
+      return "neutral";
   }
 }

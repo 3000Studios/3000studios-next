@@ -7,7 +7,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { generateCode, transcribeAudio } from '@/lib/services/openai';
 import { instantSync, quickCommit } from '@/lib/services/realtime-sync';
->>>>>>> origin/pr/50
 
 export async function POST(request: NextRequest) {
   try {
@@ -143,7 +142,6 @@ export async function POST(request: NextRequest) {
           { status: 400 }
         );
     }
->>>>>>> origin/pr/50
   } catch (error) {
     console.error("Voice API Error:", error);
     return NextResponse.json(
@@ -203,3 +201,4 @@ async function applyPatches(patches: CodePatch[]) {
     results,
   });
 }
+

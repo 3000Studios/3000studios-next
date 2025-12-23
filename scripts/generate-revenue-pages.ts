@@ -168,11 +168,8 @@ if (fs.existsSync(dropzoneDir)) {
         console.log(`[Dropzone] Ingested: ${file} -> /revenue/${p.slug}`);
       } else {
         console.warn(
-<<<<<<< HEAD
-          `[Dropzone] Skipped ${file}: Missing requisite fields (slug, title, content).`,
-=======
-          `[Dropzone] Skipped ${file}: Missing requisite fields (slug, title, content).`
->>>>>>> origin/pr/50
+`[Dropzone] Skipped ${file}: Missing requisite fields (slug, title, content).`
+
         );
       }
     } catch (err) {

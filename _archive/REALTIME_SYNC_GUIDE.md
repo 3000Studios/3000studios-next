@@ -11,10 +11,7 @@ When Boss Man J says "commit that" or makes voice changes to the website, those 
 ## 🏗️ ARCHITECTURE OVERVIEW
 
 ### Single Repository System
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pr/50
 - **Repository**: `https://github.com/3000Studios/3000studios-next`
 - **Production Branch**: `main` (ONLY branch that matters)
 - **Deployment Target**: `https://3000studios.com` (Vercel)
@@ -76,10 +73,7 @@ Located at: `/src/lib/services/realtime-sync.ts`
 Endpoint: `/api/realtime-sync`
 
 **Event Types:**
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pr/50
 - `commit` - Code committed to GitHub
 - `deploy_start` - Deployment triggered
 - `deploy_progress` - Build in progress
@@ -142,20 +136,14 @@ The Matrix Dashboard (`/matrix`) includes real-time deployment controls:
 Boss Man J can use these voice commands:
 
 ### Instant Deployment Commands
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pr/50
 - **"Commit that"** - Commits current changes to main
 - **"Deploy that"** - Commits and deploys to production
 - **"Make it live"** - Instant deployment
 - **"Update the website"** - Deploy changes
 
 ### Code Generation Commands
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pr/50
 - **"Change [element] to [value]"** - Updates specific elements
 - **"Add a [component] on [page]"** - Generates and deploys new components
 - **"Fix the [issue]"** - AI analyzes and fixes issues
@@ -187,10 +175,7 @@ GOOGLE_GEMINI_API_KEY=your_gemini_key
 File: `.github/workflows/deploy.yml`
 
 **Features:**
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pr/50
 - Triggers on every push to `main`
 - Caches dependencies for faster builds
 - Parallel build process
@@ -202,20 +187,14 @@ File: `.github/workflows/deploy.yml`
 ## 📊 DEPLOYMENT METRICS
 
 ### Target Performance
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pr/50
 - **Commit Time**: < 5 seconds
 - **Build Time**: 10-15 seconds
 - **Deploy Time**: 5-10 seconds
 - **Total Time**: **< 30 seconds** (voice to live)
 
 ### Monitoring
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pr/50
 - Real-time SSE updates during deployment
 - Progress indicators (0-100%)
 - Status notifications
@@ -226,30 +205,21 @@ File: `.github/workflows/deploy.yml`
 ## 🛠️ TROUBLESHOOTING
 
 ### Deployment Failed
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pr/50
 1. Check GitHub Actions workflow logs
 2. Verify environment variables are set
 3. Check Vercel dashboard for errors
 4. Review deployment events in Matrix dashboard
 
 ### Slow Deployments
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pr/50
 1. Check Vercel deployment queue
 2. Review GitHub Actions cache
 3. Verify network connectivity
 4. Check for large bundle sizes
 
 ### Voice Commands Not Working
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pr/50
 1. Check microphone permissions
 2. Verify OpenAI API key
 3. Test with text prompt instead
@@ -305,10 +275,7 @@ File: `.github/workflows/deploy.yml`
 ## 📱 REAL-TIME UI COMPONENTS
 
 ### RealtimeSync Component
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pr/50
 ```typescript
 import RealtimeSync from '@/app/components/RealtimeSync';
 
@@ -318,10 +285,7 @@ import RealtimeSync from '@/app/components/RealtimeSync';
 ```
 
 **Features:**
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pr/50
 - Auto-shows during deployment
 - Progress bar with percentage
 - Event timeline
@@ -333,20 +297,14 @@ import RealtimeSync from '@/app/components/RealtimeSync';
 ## 🔐 SECURITY
 
 ### Deployment Permissions
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pr/50
 - Only authenticated Matrix users can trigger deployments
 - GitHub PAT has repo-level access
 - Vercel token has project-level access
 - All secrets stored in environment variables
 
 ### Webhook Security
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pr/50
 - Deployment webhooks include signatures
 - Verify webhook origin
 - Use HTTPS only
@@ -391,10 +349,7 @@ git push origin main
 ## 🎨 UI/UX FEATURES
 
 ### Live Deployment Indicator
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pr/50
 - Shows in bottom-right corner during deployment
 - Real-time progress bar
 - Event timeline
@@ -402,10 +357,7 @@ git push origin main
 - Auto-dismisses after 5 seconds
 
 ### Matrix Dashboard Integration
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pr/50
 - Compact status widget
 - Deploy now button
 - Last deployment timestamp
@@ -417,20 +369,14 @@ git push origin main
 ## 📞 SUPPORT
 
 ### Issues?
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pr/50
 - Check Matrix Dashboard for deployment status
 - Review GitHub Actions logs
 - Check Vercel deployment logs
 - Contact development team
 
 ### Feature Requests?
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pr/50
 - Voice command not working? Report it!
 - Need new deployment features? Let us know!
 - Want faster deployments? We're optimizing!
@@ -443,21 +389,15 @@ git push origin main
 ✅ **ONE branch** - Main only, no confusion  
 ✅ **INSTANT deployment** - < 30 seconds voice to live  
 ✅ **REAL-TIME updates** - Live status without refresh  
-<<<<<<< HEAD
-✅ **VOICE-DRIVEN** - "Commit that" works instantly
-=======
 ✅ **VOICE-DRIVEN** - "Commit that" works instantly  
->>>>>>> origin/pr/50
+
 
 ---
 
 ## 🖤 SHADOW OVERLORD APPROVED
 
 This system is designed for Boss Man J's workflow:
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/pr/50
 - Say it → See it LIVE
 - No delays, no friction
 - One repo, one branch, one truth
@@ -468,10 +408,6 @@ This system is designed for Boss Man J's workflow:
 
 ---
 
-<<<<<<< HEAD
-_Last Updated: December 2024_  
-_Version: 1.0 - Real-Time Sync Consolidation_
-=======
 *Last Updated: December 2024*  
 *Version: 1.0 - Real-Time Sync Consolidation*
->>>>>>> origin/pr/50
+

@@ -383,11 +383,8 @@ git push origin main
 git pull origin main
 
 # If conflicts occur, Git will mark them in files:
-# <<<<<<< HEAD
-# Your local changes
-# =======
-# Remote changes
-# >>>>>>> origin/main
+# # Remote changes
+# 
 
 # Edit conflicted files to resolve
 # Remove conflict markers, keep desired changes

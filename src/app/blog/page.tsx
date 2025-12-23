@@ -14,14 +14,12 @@ import { blogPosts, getAllCategories, getAllTags } from "../lib/blogData";
 import Newsletter from "../components/Newsletter";
 import LoadingSkeleton from "../components/LoadingSkeleton";
 import GoogleAdsPlaceholder from "../components/GoogleAdsPlaceholder";
->>>>>>> origin/pr/50
 
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   // const [email, setEmail] = useState(""); // Reserved for future use
   const [isLoading] = useState(false);
->>>>>>> origin/pr/50
 
   const categories = ["All", ...getAllCategories()];
 

@@ -3,9 +3,8 @@
  * Get current deployment status
  */
 
-import { NextRequest, NextResponse } from 'next/server';
-import { getLatestDeployment } from '@/lib/services/vercel';
->>>>>>> origin/pr/50
+import { NextRequest, NextResponse } from "next/server";
+import { getLatestDeployment } from "@/lib/services/vercel";
 
 export async function GET(request: NextRequest) {
   try {
@@ -13,15 +12,13 @@ export async function GET(request: NextRequest) {
 
     if (!deployment) {
       return NextResponse.json({
-        status: 'no_deployments',
-        message: 'No deployments found',
->>>>>>> origin/pr/50
+        status: "no_deployments",
+        message: "No deployments found",
       });
     }
 
     return NextResponse.json({
-      status: 'success',
->>>>>>> origin/pr/50
+      status: "success",
       deployment: {
         id: deployment.id,
         url: `https://${deployment.url}`,
@@ -30,11 +27,10 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('Deployment status API error:', error);
+    console.error("Deployment status API error:", error);
     return NextResponse.json(
-      { error: 'Failed to get deployment status' },
-      { status: 500 }
->>>>>>> origin/pr/50
+      { error: "Failed to get deployment status" },
+      { status: 500 },
     );
   }
 }

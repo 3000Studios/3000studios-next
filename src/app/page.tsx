@@ -10,8 +10,8 @@ import ServicesShowcase from "./components/ServicesShowcase";
 import { AdSenseUnit } from "@/components/AdSense";
 import Newsletter from "./components/Newsletter";
 import VideoWallpaper from "./components/VideoWallpaper";
->>>>>>> origin/pr/50
 
+export default function Home() {
   return (
     <div className="min-h-screen bg-black text-white relative font-sans selection:bg-gold selection:text-black">
       {/* Sticky Upgrade Button - Revenue */}
@@ -167,7 +167,6 @@ import VideoWallpaper from "./components/VideoWallpaper";
                   ))}
                 </div>
               </div>
->>>>>>> origin/pr/50
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle
@@ -320,7 +319,6 @@ import VideoWallpaper from "./components/VideoWallpaper";
             title="Join the Inner Circle"
             description="Get the exact strategies we use to scale revenue delivered to your inbox."
           />
->>>>>>> origin/pr/50
         </div>
       )}
 
@@ -332,7 +330,7 @@ import VideoWallpaper from "./components/VideoWallpaper";
       </section>
 
       {/* Footer is handled by layout */}
->>>>>>> origin/pr/50
     </div>
   );
 }
+

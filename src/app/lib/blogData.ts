@@ -342,7 +342,6 @@ Key takeaways for 2025 involve focusing on performance, accessibility, and genui
     tags: ["Design", "Future", "Trends"],
     featured: false,
   },
->>>>>>> origin/pr/50
 ];
 
 export function getFeaturedPosts(): BlogPost[] {

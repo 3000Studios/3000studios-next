@@ -4,12 +4,11 @@
  * Shows real-time sync status and deployment progress
  */
 
-'use client';
+"use client";
 
-import { useRealtimeSync } from '@/hooks/useRealtimeSync';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Rocket, CheckCircle, XCircle, Loader2, Zap } from 'lucide-react';
->>>>>>> origin/pr/50
+import { useRealtimeSync } from "@/hooks/useRealtimeSync";
+import { motion, AnimatePresence } from "framer-motion";
+import { Rocket, CheckCircle, XCircle, Loader2, Zap } from "lucide-react";
 
 export default function RealtimeSync() {
   const { deploymentStatus } = useRealtimeSync();
@@ -31,9 +30,12 @@ export default function RealtimeSync() {
                 <Zap className="w-3 h-3 text-yellow-400 absolute top-0 right-0 animate-pulse" />
               </div>
               <div className="flex-1">
-                <h3 className="text-gold font-bold text-sm">🚀 Deploying to Production</h3>
-                <p className="text-gray-300 text-xs">{deploymentStatus.status}</p>
->>>>>>> origin/pr/50
+                <h3 className="text-gold font-bold text-sm">
+                  🚀 Deploying to Production
+                </h3>
+                <p className="text-gray-300 text-xs">
+                  {deploymentStatus.status}
+                </p>
               </div>
             </div>
 
@@ -57,10 +59,15 @@ export default function RealtimeSync() {
                   animate={{ opacity: 1, x: 0 }}
                   className="flex items-center gap-2 text-xs text-gray-400"
                 >
-                  {event.type === 'deploy_complete' && <CheckCircle className="w-3 h-3 text-green-400" />}
-                  {event.type === 'deploy_error' && <XCircle className="w-3 h-3 text-red-400" />}
-                  {(event.type === 'commit' || event.type === 'deploy_start' || event.type === 'deploy_progress') && (
->>>>>>> origin/pr/50
+                  {event.type === "deploy_complete" && (
+                    <CheckCircle className="w-3 h-3 text-green-400" />
+                  )}
+                  {event.type === "deploy_error" && (
+                    <XCircle className="w-3 h-3 text-red-400" />
+                  )}
+                  {(event.type === "commit" ||
+                    event.type === "deploy_start" ||
+                    event.type === "deploy_progress") && (
                     <div className="w-3 h-3 rounded-full bg-gold/50 animate-pulse" />
                   )}
                   <span>{event.data.status || event.type}</span>
@@ -83,9 +90,12 @@ export default function RealtimeSync() {
             <div className="flex items-center gap-3">
               <CheckCircle className="w-6 h-6 text-green-400" />
               <div>
-                <h3 className="text-green-400 font-bold text-sm">✅ Deployed Successfully!</h3>
-                <p className="text-gray-300 text-xs">Changes are LIVE on production</p>
->>>>>>> origin/pr/50
+                <h3 className="text-green-400 font-bold text-sm">
+                  ✅ Deployed Successfully!
+                </h3>
+                <p className="text-gray-300 text-xs">
+                  Changes are LIVE on production
+                </p>
               </div>
             </div>
           </div>
@@ -104,9 +114,12 @@ export default function RealtimeSync() {
             <div className="flex items-center gap-3">
               <XCircle className="w-6 h-6 text-red-400" />
               <div>
-                <h3 className="text-red-400 font-bold text-sm">❌ Deployment Failed</h3>
-                <p className="text-gray-300 text-xs">{deploymentStatus.error}</p>
->>>>>>> origin/pr/50
+                <h3 className="text-red-400 font-bold text-sm">
+                  ❌ Deployment Failed
+                </h3>
+                <p className="text-gray-300 text-xs">
+                  {deploymentStatus.error}
+                </p>
               </div>
             </div>
           </div>
@@ -125,9 +138,12 @@ export function CompactRealtimeSync() {
   return (
     <div className="glass border border-gray-800 rounded-lg p-3">
       <div className="flex items-center justify-between mb-2">
-        <h4 className="text-sm font-semibold text-gray-300">Deployment Status</h4>
-        {deploymentStatus.isDeploying && <Loader2 className="w-4 h-4 text-gold animate-spin" />}
->>>>>>> origin/pr/50
+        <h4 className="text-sm font-semibold text-gray-300">
+          Deployment Status
+        </h4>
+        {deploymentStatus.isDeploying && (
+          <Loader2 className="w-4 h-4 text-gold animate-spin" />
+        )}
         {!deploymentStatus.isDeploying && deploymentStatus.progress === 100 && (
           <CheckCircle className="w-4 h-4 text-green-400" />
         )}
@@ -147,8 +163,10 @@ export function CompactRealtimeSync() {
 
       {deploymentStatus.latestDeployment && !deploymentStatus.isDeploying && (
         <div className="mt-2 text-xs text-gray-500">
-          Last deployed: {new Date(deploymentStatus.latestDeployment.createdAt).toLocaleString()}
->>>>>>> origin/pr/50
+          Last deployed:{" "}
+          {new Date(
+            deploymentStatus.latestDeployment.createdAt,
+          ).toLocaleString()}
         </div>
       )}
     </div>

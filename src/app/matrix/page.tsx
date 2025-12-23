@@ -26,7 +26,6 @@ import { CompactRealtimeSync } from '@/app/components/RealtimeSync';
 import { useRealtimeSync } from '@/hooks/useRealtimeSync';
 import { forceRedeploy } from '@/lib/services/realtime-sync';
 import FemaleAvatar from './components/FemaleAvatar';
->>>>>>> origin/pr/50
 
 export default function MatrixCommandCenter() {
   // --- AUTHENTICATION STATE ---
@@ -52,7 +51,6 @@ export default function MatrixPage() {
   const [userEmail, setUserEmail] = useState('');
   const [isDeploying, setIsDeploying] = useState(false);
   const { refreshStatus } = useRealtimeSync();
->>>>>>> origin/pr/50
 
   // Voice State
   const [isListening, setIsListening] = useState(false);
@@ -84,13 +82,11 @@ export default function MatrixPage() {
     } catch (error) {
       console.error('Force deploy failed:', error);
     } finally {
->>>>>>> origin/pr/50
       setIsDeploying(false);
     }
   };
 
   if (isLoading) {
->>>>>>> origin/pr/50
     return (
       <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
         {/* 3D Background */}
@@ -290,7 +286,6 @@ export default function MatrixPage() {
             icon={<Eye className="text-black" size={24} />}
             trend="down"
           />
->>>>>>> origin/pr/50
         </div>
 
         {/* RIGHT COLUMN: Output & Status */}
@@ -345,3 +340,4 @@ export default function MatrixPage() {
     </div>
   );
 }
+

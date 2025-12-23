@@ -30,7 +30,7 @@ declare global {
       enum MapTypeControlStyle {
         DEFAULT,
         HORIZONTAL_BAR,
-        DROPDOWN_MENU
+        DROPDOWN_MENU,
       }
       enum ControlPosition {
         TOP_LEFT,
@@ -44,18 +44,18 @@ declare global {
         RIGHT_BOTTOM,
         BOTTOM_LEFT,
         BOTTOM_CENTER,
-        BOTTOM_RIGHT
+        BOTTOM_RIGHT,
       }
       enum Animation {
         BOUNCE = 1,
-        DROP = 2
+        DROP = 2,
       }
       enum SymbolPath {
         CIRCLE,
         FORWARD_CLOSED_ARROW,
         FORWARD_OPEN_ARROW,
         BACKWARD_CLOSED_ARROW,
-        BACKWARD_OPEN_ARROW
+        BACKWARD_OPEN_ARROW,
       }
       interface MapOptions {
         center: { lat: number; lng: number };
@@ -148,8 +148,7 @@ export default function GoogleMap({
         mapTypeControlOptions: {
           style: window.google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
           position: window.google.maps.ControlPosition.TOP_RIGHT,
-          mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain']
->>>>>>> origin/pr/50
+          mapTypeIds: ["roadmap", "satellite", "hybrid", "terrain"],
         },
         streetViewControl: true,
         fullscreenControl: true,
@@ -163,8 +162,7 @@ export default function GoogleMap({
       new window.google.maps.Marker({
         position: center,
         map,
-        title: '3000 Studios - Atlanta, Georgia',
->>>>>>> origin/pr/50
+        title: "3000 Studios - Atlanta, Georgia",
         animation: window.google.maps.Animation.DROP,
         icon: {
           path: window.google.maps.SymbolPath.CIRCLE,
@@ -203,7 +201,6 @@ export default function GoogleMap({
       // Cleanup
       if (mapInstanceRef.current && window.google) {
         window.google.maps.event.clearInstanceListeners(mapInstanceRef.current);
->>>>>>> origin/pr/50
       }
     };
   }, [apiKey, center, zoom, mapType]);

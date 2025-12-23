@@ -4,5 +4,4 @@ export const AFFILIATES = {
   software: (id: string) =>
     `https://partner.site.com/?ref=3000studios&id=${id}`,
   general: (url: string) => `${url}?ref=3000studios`,
->>>>>>> origin/pr/50
 };

@@ -292,11 +292,8 @@ gh auth login
 ```powershell
 # 1. Open conflicted files
 # 2. Look for conflict markers:
-#    <<<<<<< HEAD
-#    Your changes
-#    =======
-#    Their changes
-#    >>>>>>> branch-name
+#    #    Their changes
+#    
 # 3. Edit to keep desired changes
 # 4. Remove conflict markers
 # 5. Stage resolved files

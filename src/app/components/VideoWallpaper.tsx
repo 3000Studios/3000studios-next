@@ -7,7 +7,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
->>>>>>> origin/pr/50
 
 interface VideoWallpaperProps {
   videoSrc?: string;
@@ -17,7 +16,6 @@ interface VideoWallpaperProps {
 export default function VideoWallpaper({
   videoSrc,
   fallbackGradient = true,
->>>>>>> origin/pr/50
   opacity = 0.3,
 }: VideoWallpaperProps) {
   const [videoLoaded, setVideoLoaded] = useState(false);

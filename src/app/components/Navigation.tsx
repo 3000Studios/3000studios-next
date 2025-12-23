@@ -5,7 +5,6 @@
  * Features: Mobile menu, active link highlighting, smooth transitions, premium marble background
  * Updated with framer-motion animations and ShadowOS mood-reactive colors (MODULE 17 PART 3)
  */
->>>>>>> origin/pr/50
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -15,14 +14,13 @@ import { usePathname, useRouter } from "next/navigation";
 import type { MouseEvent } from "react";
 import { useEffect, useMemo, useState } from "react";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
-import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
-import { useShadowOS } from '@/lib/shadow/os/state';
->>>>>>> origin/pr/50
+import Link from "next/link";
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
+import { useShadowOS } from "@/lib/shadow/os/state";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,46 +35,48 @@ export default function Navigation() {
   }, []);
 
   const navLinks = [
-    { href: '/', label: 'Home', hoverColor: 'hover:text-gold' },
-    { href: '/store', label: 'Store', hoverColor: 'hover:text-gold' },
-    { href: '/projects', label: 'Projects', hoverColor: 'hover:text-teal' },
-    { href: '/portfolio', label: 'Portfolio', hoverColor: 'hover:text-platinum' },
-    { href: '/live', label: 'Live', hoverColor: 'hover:text-sapphire' },
-    { href: '/blog', label: 'Blog', hoverColor: 'hover:text-purple-400' },
-    { href: '/contact', label: 'Contact', hoverColor: 'hover:text-gold' },
-    { href: '/matrix', label: 'Matrix', hoverColor: 'hover:text-cyan-400' },
-    { href: '/login', label: 'Login', hoverColor: 'hover:text-gold' },
->>>>>>> origin/pr/50
+    { href: "/", label: "Home", hoverColor: "hover:text-gold" },
+    { href: "/store", label: "Store", hoverColor: "hover:text-gold" },
+    { href: "/projects", label: "Projects", hoverColor: "hover:text-teal" },
+    {
+      href: "/portfolio",
+      label: "Portfolio",
+      hoverColor: "hover:text-platinum",
+    },
+    { href: "/live", label: "Live", hoverColor: "hover:text-sapphire" },
+    { href: "/blog", label: "Blog", hoverColor: "hover:text-purple-400" },
+    { href: "/contact", label: "Contact", hoverColor: "hover:text-gold" },
+    { href: "/matrix", label: "Matrix", hoverColor: "hover:text-cyan-400" },
+    { href: "/login", label: "Login", hoverColor: "hover:text-gold" },
   ];
-  
+
   // Mood-reactive shadow colors based on ShadowOS state
   const moodColors = {
-    neutral: 'shadow-gray-800',
-    gold: 'shadow-yellow-500',
-    blue: 'shadow-blue-500',
-    'purple-alert': 'shadow-purple-500',
-    teal: 'shadow-teal-400',
-    'cyber-cyan': 'shadow-cyan-400',
+    neutral: "shadow-gray-800",
+    gold: "shadow-yellow-500",
+    blue: "shadow-blue-500",
+    "purple-alert": "shadow-purple-500",
+    teal: "shadow-teal-400",
+    "cyber-cyan": "shadow-cyan-400",
   };
 
   const isActiveLink = (href: string) => pathname === href;
 
   return (
-    <motion.nav 
+    <motion.nav
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 1.2, ease: 'easeOut' }}
+      transition={{ duration: 1.2, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? 'glass-premium border-b border-gold/30 shadow-2xl' 
-          : 'glass border-b border-gray-800/50'
+        scrolled
+          ? "glass-premium border-b border-gold/30 shadow-2xl"
+          : "glass border-b border-gray-800/50"
       } ${moodColors[uiMood]}`}
     >
       {/* Premium Marble Background Effect */}
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 opacity-90 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent"></div>
       </div>
->>>>>>> origin/pr/50
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -113,13 +113,13 @@ export default function Navigation() {
                   href={link.href}
                   className={`relative text-sm lg:text-base font-medium transition-all duration-200 ${
                     isActiveLink(link.href)
-                      ? 'text-gold'
+                      ? "text-gold"
                       : `text-gray-300 ${link.hoverColor}`
                   }`}
                 >
                   {link.label}
                   {isActiveLink(link.href) && (
-                    <motion.span 
+                    <motion.span
                       layoutId="activeLink"
                       className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gold rounded-full"
                       initial={{ opacity: 0 }}
@@ -130,7 +130,6 @@ export default function Navigation() {
                 </Link>
               </motion.div>
             ))}
->>>>>>> origin/pr/50
           </div>
 
           <button
@@ -145,16 +144,15 @@ export default function Navigation() {
 
       {/* Enhanced Mobile Menu */}
       {isMenuOpen && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
+          animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
           transition={{ duration: 0.3 }}
           className="md:hidden glass-premium border-t border-gold/20 backdrop-blur-xl"
         >
           <div className="px-4 pt-3 pb-4 space-y-2 max-h-[80vh] overflow-y-auto">
             {navLinks.map((link) => (
->>>>>>> origin/pr/50
               <Link
                 href="/login"
                 onClick={() => setIsMenuOpen(false)}
@@ -167,6 +165,5 @@ export default function Navigation() {
         </motion.div>
       )}
     </motion.nav>
->>>>>>> origin/pr/50
   );
 }
