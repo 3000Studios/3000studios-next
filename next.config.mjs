@@ -3,7 +3,7 @@ const nextConfig = {
   experimental: {
     serverActions: {},
   },
-  turbopack: {},
+
   typescript: {
     ignoreBuildErrors: true,
   },
