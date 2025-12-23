@@ -195,11 +195,22 @@ export function validateCSRFToken(token: string, sessionId: string): boolean {
  * Sanitize string input (basic XSS prevention)
  */
 export function sanitizeInput(input: string): string {
-  return input
-    .replace(/[<>]/g, "") // Remove < and >
-    .replace(/javascript:/gi, "") // Remove javascript: protocol
-    .replace(/on\w+=/gi, "") // Remove inline event handlers
-    .trim();
+  let sanitized = input;
+
+  // Remove < and >
+  sanitized = sanitized.replace(/[<>]/g, "");
+
+  // Remove javascript: protocol
+  sanitized = sanitized.replace(/javascript:/gi, "");
+
+  // Remove inline event handlers (apply repeatedly to avoid incomplete sanitization)
+  let previous: string;
+  do {
+    previous = sanitized;
+    sanitized = sanitized.replace(/on\w+=/gi, "");
+  } while (sanitized !== previous);
+
+  return sanitized.trim();
 }
 
 /**
