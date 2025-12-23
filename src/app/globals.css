@@ -58,3 +58,10 @@
     @apply text-sm text-neutral-400;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
