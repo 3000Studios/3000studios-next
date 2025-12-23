@@ -47,3 +47,5 @@ next-env.d.ts
 
 # package lock files (using pnpm)
 package-lock.json
+
+.env.ps1
