@@ -4,9 +4,6 @@ const nextConfig = {
     serverActions: {}
   },
   turbopack: {},
-  eslint: {
-    ignoreDuringBuilds: true
-  },
   typescript: {
     ignoreBuildErrors: true
   }
