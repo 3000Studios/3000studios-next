@@ -1,2 +1,4 @@
 "use client";
-export default function FusionEventHandler() { return null; }
+export default function FusionEventHandler() {
+  return null;
+}

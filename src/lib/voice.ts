@@ -1,9 +1,9 @@
 /**
  * Voice Integration Library
- * 
+ *
  * Provides Web Speech API abstraction, server-side TTS/STT fallback,
  * voice activation hooks, and transcription utilities.
- * 
+ *
  * Features:
  * - Browser Web Speech API for speech recognition
  * - Server-side OpenAI Whisper fallback
@@ -13,7 +13,7 @@
  * - Multi-language support
  */
 
-import { openai } from './apiClients';
+import { openai } from "./apiClients";
 
 // ==========================================
 // TYPES & INTERFACES
@@ -110,29 +110,35 @@ export class VoiceRecognition {
   private config: VoiceConfig;
   private callbacks: VoiceRecognitionCallbacks;
 
-  constructor(config: Partial<VoiceConfig> = {}, callbacks: VoiceRecognitionCallbacks = {}) {
+  constructor(
+    config: Partial<VoiceConfig> = {},
+    callbacks: VoiceRecognitionCallbacks = {},
+  ) {
     this.config = {
-      language: config.language || process.env.VOICE_LANGUAGE || 'en-US',
-      continuous: config.continuous ?? (process.env.VOICE_CONTINUOUS === 'true'),
+      language: config.language || process.env.VOICE_LANGUAGE || "en-US",
+      continuous: config.continuous ?? process.env.VOICE_CONTINUOUS === "true",
       interimResults: config.interimResults ?? true,
       maxAlternatives: config.maxAlternatives || 3,
     };
     this.callbacks = callbacks;
-    
+
     this.initializeRecognition();
   }
 
   private initializeRecognition() {
-    if (typeof window === 'undefined') {
-      console.warn('Voice recognition is only available in browser environments');
+    if (typeof window === "undefined") {
+      console.warn(
+        "Voice recognition is only available in browser environments",
+      );
       return;
     }
 
     const win = window as unknown as WindowWithSpeech;
-    const SpeechRecognition = win.SpeechRecognition || win.webkitSpeechRecognition;
-    
+    const SpeechRecognition =
+      win.SpeechRecognition || win.webkitSpeechRecognition;
+
     if (!SpeechRecognition) {
-      console.warn('Speech recognition not supported in this browser');
+      console.warn("Speech recognition not supported in this browser");
       return;
     }
 
@@ -158,7 +164,7 @@ export class VoiceRecognition {
       const transcript = result[0].transcript;
       const confidence = result[0].confidence;
       const isFinal = result.isFinal;
-      
+
       const alternatives = Array.from(result)
         .slice(1)
         .map((alt: any) => alt.transcript);
@@ -172,15 +178,17 @@ export class VoiceRecognition {
     };
 
     this.recognition.onerror = (event: any) => {
-      this.callbacks.onError?.(new Error(`Speech recognition error: ${event.error}`));
+      this.callbacks.onError?.(
+        new Error(`Speech recognition error: ${event.error}`),
+      );
     };
   }
 
   start() {
     if (!this.recognition) {
-      throw new Error('Speech recognition not available');
+      throw new Error("Speech recognition not available");
     }
-    
+
     if (!this.isListening) {
       this.recognition.start();
     }
@@ -213,7 +221,7 @@ export class TextToSpeech {
   private voices: SpeechSynthesisVoice[] = [];
 
   constructor() {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       this.synth = window.speechSynthesis;
       this.loadVoices();
     }
@@ -223,7 +231,7 @@ export class TextToSpeech {
     if (!this.synth) return;
 
     this.voices = this.synth.getVoices();
-    
+
     // Chrome loads voices asynchronously
     if (this.voices.length === 0) {
       this.synth.onvoiceschanged = () => {
@@ -234,23 +242,23 @@ export class TextToSpeech {
 
   speak(text: string, options: TTSOptions = {}) {
     if (!this.synth) {
-      throw new Error('Text-to-speech not available');
+      throw new Error("Text-to-speech not available");
     }
 
     const utterance = new SpeechSynthesisUtterance(text);
-    
+
     if (options.voice) {
-      const voice = this.voices.find(v => v.name === options.voice);
+      const voice = this.voices.find((v) => v.name === options.voice);
       if (voice) utterance.voice = voice;
     }
-    
+
     if (options.pitch !== undefined) utterance.pitch = options.pitch;
     if (options.rate !== undefined) utterance.rate = options.rate;
     if (options.volume !== undefined) utterance.volume = options.volume;
     if (options.lang) utterance.lang = options.lang;
 
     this.synth.speak(utterance);
-    
+
     return new Promise<void>((resolve, reject) => {
       utterance.onend = () => resolve();
       utterance.onerror = (error) => reject(error);
@@ -293,30 +301,32 @@ export async function transcribeAudio(
   options: {
     language?: string;
     prompt?: string;
-    model?: 'whisper-1';
-  } = {}
+    model?: "whisper-1";
+  } = {},
 ): Promise<{ text: string; language?: string }> {
   try {
     if (!openai.isConfigured()) {
-      throw new Error('OpenAI API key not configured for server-side transcription');
+      throw new Error(
+        "OpenAI API key not configured for server-side transcription",
+      );
     }
 
     const formData = new FormData();
-    formData.append('file', audioFile);
-    formData.append('model', options.model || 'whisper-1');
-    
+    formData.append("file", audioFile);
+    formData.append("model", options.model || "whisper-1");
+
     if (options.language) {
-      formData.append('language', options.language);
+      formData.append("language", options.language);
     }
-    
+
     if (options.prompt) {
-      formData.append('prompt', options.prompt);
+      formData.append("prompt", options.prompt);
     }
 
     const client = openai.client;
     const response = await client.audio.transcriptions.create({
       file: audioFile as any,
-      model: options.model || 'whisper-1',
+      model: options.model || "whisper-1",
       language: options.language,
       prompt: options.prompt,
     });
@@ -326,8 +336,8 @@ export async function transcribeAudio(
       language: options.language,
     };
   } catch (error) {
-    console.error('Transcription error:', error);
-    throw new Error('Failed to transcribe audio');
+    console.error("Transcription error:", error);
+    throw new Error("Failed to transcribe audio");
   }
 }
 
@@ -338,28 +348,28 @@ export async function transcribeAudio(
 export async function generateSpeech(
   text: string,
   options: {
-    voice?: 'alloy' | 'echo' | 'fable' | 'onyx' | 'nova' | 'shimmer';
-    model?: 'tts-1' | 'tts-1-hd';
+    voice?: "alloy" | "echo" | "fable" | "onyx" | "nova" | "shimmer";
+    model?: "tts-1" | "tts-1-hd";
     speed?: number;
-  } = {}
+  } = {},
 ): Promise<ArrayBuffer> {
   try {
     if (!openai.isConfigured()) {
-      throw new Error('OpenAI API key not configured for server-side TTS');
+      throw new Error("OpenAI API key not configured for server-side TTS");
     }
 
     const client = openai.client;
     const response = await client.audio.speech.create({
-      model: options.model || 'tts-1',
-      voice: options.voice || 'alloy',
+      model: options.model || "tts-1",
+      voice: options.voice || "alloy",
       input: text,
       speed: options.speed,
     });
 
     return await response.arrayBuffer();
   } catch (error) {
-    console.error('TTS error:', error);
-    throw new Error('Failed to generate speech');
+    console.error("TTS error:", error);
+    throw new Error("Failed to generate speech");
   }
 }
 
@@ -381,7 +391,7 @@ export class VoiceActivationDetector {
     callbacks: {
       onActivation?: () => void;
       onDeactivation?: () => void;
-    } = {}
+    } = {},
   ) {
     this.threshold = threshold;
     this.onActivation = callbacks.onActivation;
@@ -389,25 +399,27 @@ export class VoiceActivationDetector {
   }
 
   async start() {
-    if (typeof window === 'undefined') {
-      throw new Error('Voice activation detection is only available in browser');
+    if (typeof window === "undefined") {
+      throw new Error(
+        "Voice activation detection is only available in browser",
+      );
     }
 
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      
+
       this.audioContext = new AudioContext();
       this.analyser = this.audioContext.createAnalyser();
       this.analyser.fftSize = 512;
       this.analyser.smoothingTimeConstant = 0.8;
-      
+
       this.microphone = this.audioContext.createMediaStreamSource(stream);
       this.microphone.connect(this.analyser);
-      
+
       this.isMonitoring = true;
       this.monitor();
     } catch (error) {
-      console.error('Failed to start voice activation detection:', error);
+      console.error("Failed to start voice activation detection:", error);
       throw error;
     }
   }
@@ -417,35 +429,35 @@ export class VoiceActivationDetector {
 
     const bufferLength = this.analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
-    
+
     const check = () => {
       if (!this.isMonitoring) return;
-      
+
       this.analyser!.getByteFrequencyData(dataArray);
-      
+
       const average = dataArray.reduce((a, b) => a + b) / bufferLength;
       const normalized = average / 255;
-      
+
       if (normalized > this.threshold) {
         this.onActivation?.();
       } else {
         this.onDeactivation?.();
       }
-      
+
       requestAnimationFrame(check);
     };
-    
+
     check();
   }
 
   stop() {
     this.isMonitoring = false;
-    
+
     if (this.microphone) {
       this.microphone.disconnect();
       this.microphone = null;
     }
-    
+
     if (this.audioContext) {
       this.audioContext.close();
       this.audioContext = null;
@@ -465,10 +477,9 @@ export class VoiceActivationDetector {
  * Check if browser supports speech recognition
  */
 export function isSpeechRecognitionSupported(): boolean {
-  if (typeof window === 'undefined') return false;
+  if (typeof window === "undefined") return false;
   return !!(
-    (window as any).SpeechRecognition || 
-    (window as any).webkitSpeechRecognition
+    (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
   );
 }
 
@@ -476,8 +487,8 @@ export function isSpeechRecognitionSupported(): boolean {
  * Check if browser supports speech synthesis
  */
 export function isSpeechSynthesisSupported(): boolean {
-  if (typeof window === 'undefined') return false;
-  return 'speechSynthesis' in window;
+  if (typeof window === "undefined") return false;
+  return "speechSynthesis" in window;
 }
 
 /**
@@ -485,29 +496,36 @@ export function isSpeechSynthesisSupported(): boolean {
  */
 export function getSupportedLanguages(): string[] {
   return [
-    'en-US', 'en-GB', 'en-AU', 'en-CA', 'en-IN',
-    'es-ES', 'es-MX', 'es-US',
-    'fr-FR', 'fr-CA',
-    'de-DE',
-    'it-IT',
-    'pt-BR', 'pt-PT',
-    'ru-RU',
-    'ja-JP',
-    'zh-CN', 'zh-TW',
-    'ko-KR',
-    'ar-SA',
-    'hi-IN',
+    "en-US",
+    "en-GB",
+    "en-AU",
+    "en-CA",
+    "en-IN",
+    "es-ES",
+    "es-MX",
+    "es-US",
+    "fr-FR",
+    "fr-CA",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "pt-PT",
+    "ru-RU",
+    "ja-JP",
+    "zh-CN",
+    "zh-TW",
+    "ko-KR",
+    "ar-SA",
+    "hi-IN",
   ];
 }
 
 /**
  * Record audio from microphone
  */
-export async function recordAudio(
-  duration: number = 5000
-): Promise<Blob> {
-  if (typeof window === 'undefined') {
-    throw new Error('Audio recording is only available in browser');
+export async function recordAudio(duration: number = 5000): Promise<Blob> {
+  if (typeof window === "undefined") {
+    throw new Error("Audio recording is only available in browser");
   }
 
   const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -520,13 +538,13 @@ export async function recordAudio(
     };
 
     mediaRecorder.onstop = () => {
-      const blob = new Blob(chunks, { type: 'audio/webm' });
-      stream.getTracks().forEach(track => track.stop());
+      const blob = new Blob(chunks, { type: "audio/webm" });
+      stream.getTracks().forEach((track) => track.stop());
       resolve(blob);
     };
 
     mediaRecorder.onerror = (error) => {
-      stream.getTracks().forEach(track => track.stop());
+      stream.getTracks().forEach((track) => track.stop());
       reject(error);
     };
 

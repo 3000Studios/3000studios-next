@@ -3,8 +3,8 @@
  * Generates and sends a one-time magic link for passwordless authentication to /matrix
  */
 
-import { NextRequest, NextResponse } from 'next/server';
-import crypto from 'crypto';
+import { NextRequest, NextResponse } from "next/server";
+import crypto from "crypto";
 
 // Constants for token management
 const CLEANUP_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
@@ -19,22 +19,25 @@ const MAX_REQUESTS_PER_WINDOW = 3; // Max 3 magic link requests per 15 minutes
 
 // In-memory store for magic link tokens (in production, use Redis or database)
 // Use global store so it's shared across API routes
-if (typeof globalThis !== 'undefined') {
+if (typeof globalThis !== "undefined") {
   if (!(globalThis as any).__magicTokens) {
-    (globalThis as any).__magicTokens = new Map<string, { email: string; expires: number }>();
-    
+    (globalThis as any).__magicTokens = new Map<
+      string,
+      { email: string; expires: number }
+    >();
+
     // PRODUCTION WARNING: This in-memory storage won't work correctly in:
     // - Multi-instance deployments (Vercel, AWS Lambda, etc.)
     // - Server restarts (tokens will be lost)
     // For production, implement Redis or a database-backed token store
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === "production") {
       console.warn(
-        '⚠️  PRODUCTION WARNING: Using in-memory token storage. ' +
-        'This will not work correctly with multiple instances or server restarts. ' +
-        'Implement Redis or database storage for production use.'
+        "⚠️  PRODUCTION WARNING: Using in-memory token storage. " +
+          "This will not work correctly with multiple instances or server restarts. " +
+          "Implement Redis or database storage for production use.",
       );
     }
-    
+
     // Clean up expired tokens every 5 minutes
     setInterval(() => {
       const tokens = (globalThis as any).__magicTokens;
@@ -53,27 +56,25 @@ export async function POST(request: NextRequest) {
     const { email } = await request.json();
 
     if (!email) {
-      return NextResponse.json(
-        { error: 'Email is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
-        { error: 'Invalid email format' },
-        { status: 400 }
+        { error: "Invalid email format" },
+        { status: 400 },
       );
     }
 
     // Check if email is authorized (only admin email can access matrix)
-    const adminEmail = process.env.MATRIX_ADMIN_EMAIL || process.env.ADMIN_EMAIL;
+    const adminEmail =
+      process.env.MATRIX_ADMIN_EMAIL || process.env.ADMIN_EMAIL;
     if (email !== adminEmail) {
       return NextResponse.json(
-        { error: 'Email not authorized for Matrix access' },
-        { status: 403 }
+        { error: "Email not authorized for Matrix access" },
+        { status: 403 },
       );
     }
 
@@ -81,26 +82,32 @@ export async function POST(request: NextRequest) {
     const rateLimitKey = email;
     const now = Date.now();
     const rateLimit = rateLimitMap.get(rateLimitKey);
-    
+
     if (rateLimit) {
       if (now < rateLimit.resetTime) {
         if (rateLimit.count >= MAX_REQUESTS_PER_WINDOW) {
           return NextResponse.json(
-            { error: 'Too many requests. Please try again later.' },
-            { status: 429 }
+            { error: "Too many requests. Please try again later." },
+            { status: 429 },
           );
         }
         rateLimit.count++;
       } else {
         // Reset window
-        rateLimitMap.set(rateLimitKey, { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS });
+        rateLimitMap.set(rateLimitKey, {
+          count: 1,
+          resetTime: now + RATE_LIMIT_WINDOW_MS,
+        });
       }
     } else {
-      rateLimitMap.set(rateLimitKey, { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS });
+      rateLimitMap.set(rateLimitKey, {
+        count: 1,
+        resetTime: now + RATE_LIMIT_WINDOW_MS,
+      });
     }
 
     // Generate unique token
-    const token = crypto.randomBytes(32).toString('hex');
+    const token = crypto.randomBytes(32).toString("hex");
     const expires = Date.now() + MAGIC_LINK_EXPIRY_MS;
 
     // Store token in global store
@@ -108,7 +115,7 @@ export async function POST(request: NextRequest) {
     tokens.set(token, { email, expires });
 
     // Generate magic link
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
     const magicLink = `${baseUrl}/matrix/auth?token=${token}`;
 
     // TODO: In production, send email via service like SendGrid, AWS SES, or Resend
@@ -121,41 +128,44 @@ export async function POST(request: NextRequest) {
 
     if (!emailSent) {
       return NextResponse.json(
-        { error: 'Failed to send magic link email' },
-        { status: 500 }
+        { error: "Failed to send magic link email" },
+        { status: 500 },
       );
     }
 
     return NextResponse.json({
       success: true,
-      message: 'Magic link sent to your email',
+      message: "Magic link sent to your email",
       // Include link in development mode only
-      ...(process.env.NODE_ENV === 'development' && { magicLink }),
+      ...(process.env.NODE_ENV === "development" && { magicLink }),
     });
   } catch (error) {
-    console.error('Magic link error:', error);
+    console.error("Magic link error:", error);
     return NextResponse.json(
-      { error: 'Failed to generate magic link' },
-      { status: 500 }
+      { error: "Failed to generate magic link" },
+      { status: 500 },
     );
   }
 }
 
-async function sendMagicLinkEmail(email: string, magicLink: string): Promise<boolean> {
+async function sendMagicLinkEmail(
+  email: string,
+  magicLink: string,
+): Promise<boolean> {
   try {
     // In production, integrate with email service
     // Example with SendGrid, AWS SES, Resend, etc.
-    
+
     // For development, log to console
-    console.log('\n═══════════════════════════════════════════════════════');
-    console.log('📧 MAGIC LINK EMAIL');
-    console.log('═══════════════════════════════════════════════════════');
+    console.log("\n═══════════════════════════════════════════════════════");
+    console.log("📧 MAGIC LINK EMAIL");
+    console.log("═══════════════════════════════════════════════════════");
     console.log(`To: ${email}`);
     console.log(`Subject: Your Magic Link to The Matrix`);
-    console.log('\nClick the link below to access The Matrix:\n');
+    console.log("\nClick the link below to access The Matrix:\n");
     console.log(magicLink);
-    console.log('\nThis link expires in 15 minutes.');
-    console.log('═══════════════════════════════════════════════════════\n');
+    console.log("\nThis link expires in 15 minutes.");
+    console.log("═══════════════════════════════════════════════════════\n");
 
     // TODO: Implement actual email sending
     // Example:
@@ -179,7 +189,7 @@ async function sendMagicLinkEmail(email: string, magicLink: string): Promise<boo
 
     return true; // Return true for development
   } catch (error) {
-    console.error('Email send error:', error);
+    console.error("Email send error:", error);
     return false;
   }
 }

@@ -1,2 +1,4 @@
 "use client";
-export default function EventBus() { return null; }
+export default function EventBus() {
+  return null;
+}

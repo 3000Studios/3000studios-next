@@ -1,6 +1,6 @@
 export const shadowAuth = {
   verify: async (token: string) => true,
-  createSession: async (user: any) => ({ sessionId: "session-1" })
+  createSession: async (user: any) => ({ sessionId: "session-1" }),
 };
 
 export const validateShadowSession = async (sessionId: string) => {

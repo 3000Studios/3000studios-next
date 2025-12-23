@@ -1,1 +1,4 @@
-export const createTerminal = () => ({ write: (data: string) => {}, read: () => "" });
+export const createTerminal = () => ({
+  write: (data: string) => {},
+  read: () => "",
+});

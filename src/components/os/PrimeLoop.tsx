@@ -1,2 +1,4 @@
 "use client";
-export default function PrimeLoop() { return null; }
+export default function PrimeLoop() {
+  return null;
+}

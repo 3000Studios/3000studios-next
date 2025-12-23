@@ -12,10 +12,10 @@
  * NOTE: Enhanced with feminine characteristics and styling
  */
 
-'use client';
+"use client";
 
-import { Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { Mic, MicOff, Volume2, VolumeX } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 // Animation timing constants
 const BASE_BLINK_INTERVAL = 3000; // 3 seconds
@@ -25,8 +25,10 @@ const BLINK_DURATION = 150; // milliseconds
 export default function ShadowAvatar() {
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [userText, setUserText] = useState('');
-  const [avatarText, setAvatarText] = useState("Hey there! I'm Shadow, your AI assistant. Ask me anything!");
+  const [userText, setUserText] = useState("");
+  const [avatarText, setAvatarText] = useState(
+    "Hey there! I'm Shadow, your AI assistant. Ask me anything!",
+  );
   const [audioEnabled, setAudioEnabled] = useState(true);
   const [isBlinking, setIsBlinking] = useState(false);
   const recognitionRef = useRef<any>(null);
@@ -34,17 +36,20 @@ export default function ShadowAvatar() {
 
   // Blinking animation for more lifelike avatar
   useEffect(() => {
-    const blinkInterval = setInterval(() => {
-      setIsBlinking(true);
-      // Clear any previous timeout before setting a new one
-      if (blinkTimeoutRef.current) {
-        clearTimeout(blinkTimeoutRef.current);
-      }
-      blinkTimeoutRef.current = setTimeout(() => {
-        setIsBlinking(false);
-        blinkTimeoutRef.current = null;
-      }, BLINK_DURATION);
-    }, BASE_BLINK_INTERVAL + Math.random() * BLINK_RANDOM_RANGE);
+    const blinkInterval = setInterval(
+      () => {
+        setIsBlinking(true);
+        // Clear any previous timeout before setting a new one
+        if (blinkTimeoutRef.current) {
+          clearTimeout(blinkTimeoutRef.current);
+        }
+        blinkTimeoutRef.current = setTimeout(() => {
+          setIsBlinking(false);
+          blinkTimeoutRef.current = null;
+        }, BLINK_DURATION);
+      },
+      BASE_BLINK_INTERVAL + Math.random() * BLINK_RANDOM_RANGE,
+    );
 
     return () => {
       clearInterval(blinkInterval);
@@ -55,103 +60,143 @@ export default function ShadowAvatar() {
     };
   }, []);
 
-  const handleUserInput = useCallback(async (_input: string) => {
-    // Female persona responses with fallback text for emoji compatibility
-    const responses = [
-      "That's fascinating! Would you like to explore our store? I'd love to show you around!",
-      "I really like the way you think! Have you checked out our amazing projects yet?",
-      "Great question! I'm here to help you discover everything 3000 Studios has to offer!",
-      "Ooh, interesting! You should definitely see our portfolio - it's stunning!",
-      "I hear you! Let me know if you want to see what we're working on. I'm excited to share!",
-      "That's so cool! Check out our live streams for more exclusive content!",
-      "I love chatting with you! Want to see some of our premium digital products?",
-    ];
+  const handleUserInput = useCallback(
+    async (_input: string) => {
+      // Female persona responses with fallback text for emoji compatibility
+      const responses = [
+        "That's fascinating! Would you like to explore our store? I'd love to show you around!",
+        "I really like the way you think! Have you checked out our amazing projects yet?",
+        "Great question! I'm here to help you discover everything 3000 Studios has to offer!",
+        "Ooh, interesting! You should definitely see our portfolio - it's stunning!",
+        "I hear you! Let me know if you want to see what we're working on. I'm excited to share!",
+        "That's so cool! Check out our live streams for more exclusive content!",
+        "I love chatting with you! Want to see some of our premium digital products?",
+      ];
 
-    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-    setAvatarText(randomResponse);
+      const randomResponse =
+        responses[Math.floor(Math.random() * responses.length)];
+      setAvatarText(randomResponse);
 
-    // Text-to-speech with FEMALE voice if enabled
-    if (audioEnabled && 'speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance(randomResponse);
-      
-      // Configure for female voice with async voice loading support
-      const setVoice = () => {
-        const voices = window.speechSynthesis.getVoices();
-        
-        // Strategy 1: Check for gender property (if available)
-        let femaleVoice = voices.find(voice => (voice as any).gender === 'female');
-        
-        // Strategy 2: Look for 'female' in name or voiceURI (case-insensitive)
-        if (!femaleVoice) {
-          femaleVoice = voices.find(
-            voice =>
-              /female/i.test(voice.name) ||
-              /female/i.test(voice.voiceURI)
+      // Text-to-speech with FEMALE voice if enabled
+      if (audioEnabled && "speechSynthesis" in window) {
+        const utterance = new SpeechSynthesisUtterance(randomResponse);
+
+        // Configure for female voice with async voice loading support
+        const setVoice = () => {
+          const voices = window.speechSynthesis.getVoices();
+
+          // Strategy 1: Check for gender property (if available)
+          let femaleVoice = voices.find(
+            (voice) => (voice as any).gender === "female",
           );
+
+          // Strategy 2: Look for 'female' in name or voiceURI (case-insensitive)
+          if (!femaleVoice) {
+            femaleVoice = voices.find(
+              (voice) =>
+                /female/i.test(voice.name) || /female/i.test(voice.voiceURI),
+            );
+          }
+
+          // Strategy 3: Common female voice names across platforms (expanded list)
+          if (!femaleVoice) {
+            const commonFemaleNames = [
+              "Samantha",
+              "Victoria",
+              "Karen",
+              "Zira",
+              "Susan",
+              "Tessa",
+              "Joanna",
+              "Emma",
+              "Linda",
+              "Amy",
+              "Jenny",
+              "Aria",
+              "Mia",
+              "Olivia",
+              "Lila",
+              "Catherine",
+              "Hazel",
+              "Shelley",
+              "Allison",
+              "Fiona",
+              "Moira",
+              "Veena",
+              "Rishi",
+              "Nicky",
+              "Paulina",
+              "Princess",
+              "Kathy",
+              "Alice",
+              "Nicole",
+            ];
+            femaleVoice = voices.find((voice) =>
+              commonFemaleNames.some((name) =>
+                voice.name.toLowerCase().includes(name.toLowerCase()),
+              ),
+            );
+          }
+
+          // Strategy 4: Filter by language and prefer higher-pitched voices
+          if (!femaleVoice) {
+            const englishVoices = voices.filter((v) => v.lang.startsWith("en"));
+            // Some browser voices use + or numbers for variants (e.g., "Google UK English Female+")
+            // Filter out explicitly male voices and prefer variant voices as they're often higher quality
+            femaleVoice = englishVoices.find(
+              (v) =>
+                !/male/i.test(v.name) &&
+                (v.name.includes("+") || /\d/.test(v.name)),
+            );
+          }
+
+          if (femaleVoice) {
+            utterance.voice = femaleVoice;
+          }
+        };
+
+        // Try to set voice immediately
+        setVoice();
+
+        // If voices not loaded yet, wait for them
+        if (window.speechSynthesis.getVoices().length === 0) {
+          window.speechSynthesis.addEventListener("voiceschanged", setVoice, {
+            once: true,
+          });
         }
-        
-        // Strategy 3: Common female voice names across platforms (expanded list)
-        if (!femaleVoice) {
-          const commonFemaleNames = [
-            'Samantha', 'Victoria', 'Karen', 'Zira', 'Susan', 'Tessa', 'Joanna', 
-            'Emma', 'Linda', 'Amy', 'Jenny', 'Aria', 'Mia', 'Olivia', 'Lila', 
-            'Catherine', 'Hazel', 'Shelley', 'Allison', 'Fiona', 'Moira', 'Veena',
-            'Rishi', 'Nicky', 'Paulina', 'Princess', 'Kathy', 'Alice', 'Nicole'
-          ];
-          femaleVoice = voices.find(voice =>
-            commonFemaleNames.some(name => voice.name.toLowerCase().includes(name.toLowerCase()))
-          );
-        }
-        
-        // Strategy 4: Filter by language and prefer higher-pitched voices
-        if (!femaleVoice) {
-          const englishVoices = voices.filter(v => v.lang.startsWith('en'));
-          // Some browser voices use + or numbers for variants (e.g., "Google UK English Female+")
-          // Filter out explicitly male voices and prefer variant voices as they're often higher quality
-          femaleVoice = englishVoices.find(v => 
-            !/male/i.test(v.name) && (v.name.includes('+') || /\d/.test(v.name))
-          );
-        }
-        
-        if (femaleVoice) {
-          utterance.voice = femaleVoice;
-        }
-      };
-      
-      // Try to set voice immediately
-      setVoice();
-      
-      // If voices not loaded yet, wait for them
-      if (window.speechSynthesis.getVoices().length === 0) {
-        window.speechSynthesis.addEventListener('voiceschanged', setVoice, { once: true });
+
+        utterance.rate = 1.05; // Slightly faster, more energetic
+        utterance.pitch = 1.2; // Higher pitch for feminine voice
+        utterance.volume = 0.9;
+
+        utterance.onstart = () => setIsSpeaking(true);
+        utterance.onend = () => setIsSpeaking(false);
+        window.speechSynthesis.speak(utterance);
       }
-      
-      utterance.rate = 1.05; // Slightly faster, more energetic
-      utterance.pitch = 1.2; // Higher pitch for feminine voice
-      utterance.volume = 0.9;
-      
-      utterance.onstart = () => setIsSpeaking(true);
-      utterance.onend = () => setIsSpeaking(false);
-      window.speechSynthesis.speak(utterance);
-    }
-  }, [audioEnabled]);
+    },
+    [audioEnabled],
+  );
 
   // Initialize speech recognition
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       // Check for standard API first, then webkit
-      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      const SpeechRecognition =
+        (window as any).SpeechRecognition ||
+        (window as any).webkitSpeechRecognition;
 
       if (!SpeechRecognition) {
-        console.warn('Speech recognition not supported in this browser');
-        setAvatarText("Hey! Speech recognition isn't supported in your browser, but I can still chat via text! 💬");
+        console.warn("Speech recognition not supported in this browser");
+        setAvatarText(
+          "Hey! Speech recognition isn't supported in your browser, but I can still chat via text! 💬",
+        );
         return;
       }
 
       recognitionRef.current = new SpeechRecognition();
       recognitionRef.current.continuous = false;
       recognitionRef.current.interimResults = false;
-      recognitionRef.current.lang = 'en-US';
+      recognitionRef.current.lang = "en-US";
 
       recognitionRef.current.onresult = (event: any) => {
         const transcript = event.results[0][0].transcript;
@@ -160,7 +205,7 @@ export default function ShadowAvatar() {
       };
 
       recognitionRef.current.onerror = (event: any) => {
-        console.error('Speech recognition error:', event.error);
+        console.error("Speech recognition error:", event.error);
         setIsListening(false);
       };
 
@@ -172,7 +217,9 @@ export default function ShadowAvatar() {
 
   const toggleListening = () => {
     if (!recognitionRef.current) {
-      alert('Speech recognition is not supported in your browser. Please use Chrome or Edge.');
+      alert(
+        "Speech recognition is not supported in your browser. Please use Chrome or Edge.",
+      );
       return;
     }
 
@@ -185,7 +232,6 @@ export default function ShadowAvatar() {
     }
   };
 
-
   return (
     <div className="fixed bottom-8 right-8 z-50 max-w-sm">
       {/* Avatar Container */}
@@ -193,20 +239,26 @@ export default function ShadowAvatar() {
         {/* Avatar Visual - Enhanced 3D Female Representation */}
         <div className="relative mb-4">
           <div className="w-32 h-32 mx-auto bg-gradient-to-br from-pink-400 via-purple-500 to-gold rounded-full flex items-center justify-center animate-pulse shadow-lg shadow-pink-500/50">
-            <div className={`w-24 h-24 bg-gradient-to-br from-purple-900 to-black rounded-full flex items-center justify-center relative ${isSpeaking ? 'animate-ping' : ''}`}>
+            <div
+              className={`w-24 h-24 bg-gradient-to-br from-purple-900 to-black rounded-full flex items-center justify-center relative ${isSpeaking ? "animate-ping" : ""}`}
+            >
               {/* Female Avatar Face */}
               <div className="relative">
                 {/* Head */}
                 <div className="w-16 h-20 bg-gradient-to-b from-pink-200 to-pink-300 rounded-full relative">
                   {/* Hair */}
                   <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-20 h-16 bg-gradient-to-b from-purple-600 to-purple-800 rounded-t-full z-0"></div>
-                  
+
                   {/* Eyes */}
                   <div className="absolute top-7 left-1/2 transform -translate-x-1/2 flex gap-3 z-10">
-                    <div className={`w-2 h-2 bg-blue-400 rounded-full shadow-lg shadow-blue-400/50 transition-all ${isBlinking ? 'h-0.5' : ''}`}></div>
-                    <div className={`w-2 h-2 bg-blue-400 rounded-full shadow-lg shadow-blue-400/50 transition-all ${isBlinking ? 'h-0.5' : ''}`}></div>
+                    <div
+                      className={`w-2 h-2 bg-blue-400 rounded-full shadow-lg shadow-blue-400/50 transition-all ${isBlinking ? "h-0.5" : ""}`}
+                    ></div>
+                    <div
+                      className={`w-2 h-2 bg-blue-400 rounded-full shadow-lg shadow-blue-400/50 transition-all ${isBlinking ? "h-0.5" : ""}`}
+                    ></div>
                   </div>
-                  
+
                   {/* Eyelashes */}
                   {!isBlinking && (
                     <>
@@ -214,10 +266,10 @@ export default function ShadowAvatar() {
                       <div className="absolute top-6 right-3 w-1 h-1 border-r border-black"></div>
                     </>
                   )}
-                  
+
                   {/* Smile */}
                   <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-6 h-3 border-b-2 border-pink-600 rounded-full"></div>
-                  
+
                   {/* Blush */}
                   <div className="absolute top-9 left-1 w-3 h-2 bg-pink-400 rounded-full opacity-40"></div>
                   <div className="absolute top-9 right-1 w-3 h-2 bg-pink-400 rounded-full opacity-40"></div>
@@ -233,7 +285,7 @@ export default function ShadowAvatar() {
                     key={i}
                     className="w-1 bg-gradient-to-t from-gold via-pink-400 to-purple-500 rounded-full animate-pulse"
                     style={{
-                      height: Math.random() * 20 + 10 + 'px',
+                      height: Math.random() * 20 + 10 + "px",
                       animationDelay: `${i * 0.1}s`,
                     }}
                   />
@@ -247,21 +299,19 @@ export default function ShadowAvatar() {
         <h3 className="text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-gold font-bold text-xl mb-2">
           Shadow AI Assistant
         </h3>
-        <p className="text-center text-xs text-gray-400 mb-3">Your Intelligent 3D Female Guide</p>
+        <p className="text-center text-xs text-gray-400 mb-3">
+          Your Intelligent 3D Female Guide
+        </p>
 
         {/* Avatar Speech Bubble */}
         <div className="bg-gradient-to-br from-purple-900/50 to-gray-900 rounded-lg p-4 mb-4 min-h-[80px] border border-pink-500/30 shadow-lg shadow-pink-500/20">
-          <p className="text-white text-sm italic">
-            "{avatarText}"
-          </p>
+          <p className="text-white text-sm italic">"{avatarText}"</p>
         </div>
 
         {/* User Input Display */}
         {userText && (
           <div className="bg-sapphire/20 rounded-lg p-3 mb-4 border border-sapphire/30">
-            <p className="text-gray-300 text-xs">
-              You: "{userText}"
-            </p>
+            <p className="text-gray-300 text-xs">You: "{userText}"</p>
           </div>
         )}
 
@@ -271,30 +321,39 @@ export default function ShadowAvatar() {
             onClick={toggleListening}
             className={`p-3 rounded-full transition-all ${
               isListening
-                ? 'bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 animate-pulse'
-                : 'bg-gradient-to-r from-gold to-pink-400 hover:from-platinum hover:to-pink-300'
+                ? "bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 animate-pulse"
+                : "bg-gradient-to-r from-gold to-pink-400 hover:from-platinum hover:to-pink-300"
             }`}
-            title={isListening ? 'Stop listening' : 'Start listening'}
+            title={isListening ? "Stop listening" : "Start listening"}
           >
-            {isListening ? <MicOff className="text-white" size={20} /> : <Mic className="text-black" size={20} />}
+            {isListening ? (
+              <MicOff className="text-white" size={20} />
+            ) : (
+              <Mic className="text-black" size={20} />
+            )}
           </button>
 
           <button
             onClick={() => setAudioEnabled(!audioEnabled)}
             className={`p-3 rounded-full transition-all ${
-              audioEnabled 
-                ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600' 
-                : 'bg-gray-600 hover:bg-gray-700'
+              audioEnabled
+                ? "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+                : "bg-gray-600 hover:bg-gray-700"
             }`}
-            title={audioEnabled ? 'Mute audio' : 'Enable audio'}
+            title={audioEnabled ? "Mute audio" : "Enable audio"}
           >
-            {audioEnabled ? <Volume2 className="text-white" size={20} /> : <VolumeX className="text-white" size={20} />}
+            {audioEnabled ? (
+              <Volume2 className="text-white" size={20} />
+            ) : (
+              <VolumeX className="text-white" size={20} />
+            )}
           </button>
         </div>
 
         {/* Info Note */}
         <p className="text-xs text-gray-500 text-center mt-4">
-          I'm your friendly AI guide! 💜 (I don't edit the site - that's in THE MATRIX)
+          I'm your friendly AI guide! 💜 (I don't edit the site - that's in THE
+          MATRIX)
         </p>
       </div>
     </div>

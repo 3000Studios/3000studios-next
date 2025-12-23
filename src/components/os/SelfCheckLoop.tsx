@@ -1,2 +1,4 @@
 "use client";
-export default function SelfCheckLoop() { return null; }
+export default function SelfCheckLoop() {
+  return null;
+}

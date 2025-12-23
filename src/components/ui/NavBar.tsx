@@ -25,7 +25,10 @@ export default function NavBar() {
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link href="/" className="text-3xl font-black text-gold hover:text-yellow-400 transition-colors">
+          <Link
+            href="/"
+            className="text-3xl font-black text-gold hover:text-yellow-400 transition-colors"
+          >
             3000
           </Link>
 
