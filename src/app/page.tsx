@@ -6,15 +6,13 @@ export default function Home() {
 
         <div className="relative section">
           <div className="container flex flex-col gap-6">
-            <h1 className="text-4xl leading-tight font-bold md:text-6xl">
-              Ethereal AI
-            </h1>
+            <h1>Ethereal AI</h1>
 
-            <p className="max-w-prose text-neutral-300">
-              Premium AI systems built for scale, automation, and revenue.
+            <p className="max-w-prose">
+              Premium AI systems built for automation, scale, and revenue.
             </p>
 
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
               <button className="btn-primary">
                 Get Started
               </button>
@@ -22,6 +20,13 @@ export default function Home() {
               <button className="rounded-xl border border-neutral-700 px-5 py-3 text-sm">
                 Learn More
               </button>
+            </div>
+
+            <div className="cta mt-8">
+              <div className="cta-title">Built to monetize</div>
+              <div className="cta-text">
+                Infrastructure designed for subscriptions, automation, and growth.
+              </div>
             </div>
           </div>
         </div>

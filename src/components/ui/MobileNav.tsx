@@ -6,7 +6,7 @@ export default function MobileNav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="w-full border-b border-neutral-800">
+    <nav className="border-b border-neutral-800">
       <div className="container flex items-center justify-between py-4">
         <span className="font-semibold">3000 Studios</span>
 
@@ -20,9 +20,9 @@ export default function MobileNav() {
 
       {open && (
         <div className="container pb-4 flex flex-col gap-3">
-          <a className="text-sm" href="/projects">Projects</a>
-          <a className="text-sm" href="/store">Store</a>
-          <a className="text-sm" href="/login">Login</a>
+          <a href="/projects">Projects</a>
+          <a href="/store">Store</a>
+          <a href="/login">Login</a>
         </div>
       )}
     </nav>

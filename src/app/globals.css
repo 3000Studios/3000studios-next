@@ -11,7 +11,7 @@
     @apply text-sm leading-relaxed;
   }
 
-  h1 { @apply text-3xl font-bold tracking-tight; }
+  h1 { @apply text-4xl font-bold tracking-tight md:text-6xl; }
   h2 { @apply text-2xl font-semibold; }
   h3 { @apply text-xl font-semibold; }
 
@@ -22,30 +22,22 @@
 
 @layer components {
   .page {
-    @apply min-h-screen w-full;
+    @apply min-h-screen w-full overflow-x-hidden;
   }
 
   .container {
-    @apply mx-auto w-full px-4;
+    @apply mx-auto w-full max-w-6xl px-4;
   }
 
   .section {
-    @apply py-12;
+    @apply py-14;
   }
 
   .btn-primary {
     @apply rounded-xl bg-white text-black px-5 py-3 text-sm font-medium
            active:scale-95 transition;
   }
-}
 
-@layer utilities {
-  .safe-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-}
-
-@layer components {
   .cta {
     @apply rounded-2xl border border-neutral-800 bg-neutral-900 p-6;
   }
