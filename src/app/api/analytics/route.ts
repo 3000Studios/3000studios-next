@@ -3,8 +3,8 @@
  * Returns real-time analytics data from MongoDB
  */
 
-import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
 export async function GET(request: NextRequest) {
   try {
@@ -13,12 +13,12 @@ export async function GET(request: NextRequest) {
       (searchParams.get("timeRange") as "day" | "week" | "month") || "day";
 
     // Get stats using Prisma
-    const [userCount, orderCount, revenue] = await Promise.all([
+    const [userCount, _orderCount, revenue] = await Promise.all([
       prisma.user.count(),
       prisma.order.count(),
       prisma.order.aggregate({
         _sum: { total: true },
-        where: { status: "PAID" }, // Assuming paid status
+        where: { status: "paid" }, // Assuming paid status
       }),
     ]);
 
@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
     console.error("Analytics API error:", error);
     return NextResponse.json(
       { error: "Failed to fetch analytics" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

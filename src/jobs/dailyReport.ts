@@ -19,7 +19,7 @@ export interface DailyReport {
 }
 
 export interface Alert {
-  level: "info" | "warning" | "critical";
+  level: 'info' | 'warning' | 'critical';
   message: string;
   metric: string;
   threshold: number;
@@ -33,7 +33,7 @@ export class ReportGenerator {
    * Generate daily report
    */
   async generateDailyReport(): Promise<DailyReport> {
-    const today = new Date().toISOString().split("T")[0];
+    const today = new Date().toISOString().split('T')[0];
 
     // Fetch metrics from analytics
     const metrics = await this.aggregateMetrics();
@@ -54,7 +54,7 @@ export class ReportGenerator {
   /**
    * Aggregate daily metrics
    */
-  private async aggregateMetrics(): Promise<DailyReport["metrics"]> {
+  private async aggregateMetrics(): Promise<DailyReport['metrics']> {
     // In production, fetch from analytics backend
     return {
       revenue: Math.random() * 5000,
@@ -62,7 +62,7 @@ export class ReportGenerator {
       conversions: Math.floor(Math.random() * 50),
       conversionRate: Math.random() * 0.1,
       visitors: Math.floor(Math.random() * 10000),
-      topProduct: "Premium Package",
+      topProduct: 'Premium Package',
       topProductRevenue: Math.random() * 2000,
     };
   }
@@ -70,14 +70,14 @@ export class ReportGenerator {
   /**
    * Detect anomalies and threshold violations
    */
-  private detectAnomalies(metrics: DailyReport["metrics"]): Alert[] {
+  private detectAnomalies(metrics: DailyReport['metrics']): Alert[] {
     const alerts: Alert[] = [];
 
     if (metrics.revenue < 100) {
       alerts.push({
-        level: "warning",
-        message: "Revenue below expected daily minimum",
-        metric: "revenue",
+        level: 'warning',
+        message: 'Revenue below expected daily minimum',
+        metric: 'revenue',
         threshold: 100,
         current: metrics.revenue,
       });
@@ -85,9 +85,9 @@ export class ReportGenerator {
 
     if (metrics.conversionRate < 0.01) {
       alerts.push({
-        level: "critical",
-        message: "Conversion rate critically low",
-        metric: "conversionRate",
+        level: 'critical',
+        message: 'Conversion rate critically low',
+        metric: 'conversionRate',
         threshold: 0.01,
         current: metrics.conversionRate,
       });
@@ -95,9 +95,9 @@ export class ReportGenerator {
 
     if (metrics.visitors < 100) {
       alerts.push({
-        level: "info",
-        message: "Low traffic day",
-        metric: "visitors",
+        level: 'info',
+        message: 'Low traffic day',
+        metric: 'visitors',
         threshold: 100,
         current: metrics.visitors,
       });
@@ -109,34 +109,25 @@ export class ReportGenerator {
   /**
    * Generate actionable recommendations
    */
-  private generateRecommendations(
-    metrics: DailyReport["metrics"],
-    alerts: Alert[],
-  ): string[] {
+  private generateRecommendations(metrics: DailyReport['metrics'], alerts: Alert[]): string[] {
     const recommendations: string[] = [];
 
     if (metrics.conversionRate < 0.02) {
       recommendations.push(
-        "A/B test your homepage CTA - conversion rate is below target",
+        'A/B test your homepage CTA - conversion rate is below target'
       );
     }
 
     if (metrics.topProductRevenue > metrics.revenue * 0.4) {
-      recommendations.push(
-        "Promote alternative products - over-reliance on single product",
-      );
+      recommendations.push('Promote alternative products - over-reliance on single product');
     }
 
-    if (alerts.some((a) => a.level === "critical")) {
-      recommendations.push(
-        "Review marketing channels - critical metrics need attention",
-      );
+    if (alerts.some(a => a.level === 'critical')) {
+      recommendations.push('Review marketing channels - critical metrics need attention');
     }
 
     if (metrics.revenue > metrics.visitors * 0.5) {
-      recommendations.push(
-        "Increase marketing spend - strong revenue per visitor",
-      );
+      recommendations.push('Increase marketing spend - strong revenue per visitor');
     }
 
     return recommendations;
@@ -171,15 +162,15 @@ export class ReportGenerator {
     return `
 📊 Daily Report - ${report.date}
 
-💰 Revenue: $${report.metrics.revenue.toFixed(2)} (${report.metrics.revenueChange > 0 ? "+" : ""}${report.metrics.revenueChange.toFixed(2)}%)
+💰 Revenue: $${report.metrics.revenue.toFixed(2)} (${report.metrics.revenueChange > 0 ? '+' : ''}${report.metrics.revenueChange.toFixed(2)}%)
 📈 Conversions: ${report.metrics.conversions} (${(report.metrics.conversionRate * 100).toFixed(2)}%)
 👥 Visitors: ${report.metrics.visitors}
 🏆 Top Product: ${report.metrics.topProduct} ($${report.metrics.topProductRevenue.toFixed(2)})
 
-${report.alerts.length > 0 ? `⚠️ Alerts:\n${report.alerts.map((a) => `  • [${a.level.toUpperCase()}] ${a.message}`).join("\n")}\n` : ""}
+${report.alerts.length > 0 ? `⚠️ Alerts:\n${report.alerts.map(a => `  • [${a.level.toUpperCase()}] ${a.message}`).join('\n')}\n` : ''}
 
 💡 Recommendations:
-${report.recommendations.map((r) => `  • ${r}`).join("\n")}
+${report.recommendations.map(r => `  • ${r}`).join('\n')}
     `;
   }
 }

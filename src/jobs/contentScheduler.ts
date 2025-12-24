@@ -5,11 +5,11 @@
 
 export interface ScheduledContent {
   id: string;
-  type: "blog" | "product";
+  type: 'blog' | 'product';
   title: string;
   description: string;
   scheduledFor: number; // timestamp
-  status: "scheduled" | "generated" | "published" | "failed";
+  status: 'scheduled' | 'generated' | 'published' | 'failed';
   approvalRequired: boolean;
   approvedBy?: string;
   approvedAt?: number;
@@ -23,16 +23,11 @@ export class ContentScheduler {
   /**
    * Schedule content generation
    */
-  scheduleContent(
-    content: Omit<
-      ScheduledContent,
-      "id" | "status" | "approvedBy" | "approvedAt" | "error"
-    >,
-  ) {
+  scheduleContent(content: Omit<ScheduledContent, 'id' | 'status' | 'approvedBy' | 'approvedAt' | 'error'>) {
     const scheduled: ScheduledContent = {
       ...content,
       id: `scheduled_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      status: "scheduled",
+      status: 'scheduled',
     };
 
     this.queue.push(scheduled);
@@ -43,10 +38,10 @@ export class ContentScheduler {
    * Approve content for publication
    */
   approveContent(contentId: string, approver: string): boolean {
-    const content = this.queue.find((c) => c.id === contentId);
+    const content = this.queue.find(c => c.id === contentId);
     if (!content) return false;
 
-    content.status = "generated";
+    content.status = 'generated';
     content.approvedBy = approver;
     content.approvedAt = Date.now();
     return true;
@@ -59,34 +54,26 @@ export class ContentScheduler {
     const now = Date.now();
 
     for (const content of this.queue) {
-      if (content.status === "scheduled" && content.scheduledFor <= now) {
+      if (content.status === 'scheduled' && content.scheduledFor <= now) {
         try {
           await this.generateContent(content);
         } catch (error) {
-          content.status = "failed";
-          content.error =
-            error instanceof Error ? error.message : "Unknown error";
+          content.status = 'failed';
+          content.error = error instanceof Error ? error.message : 'Unknown error';
         }
       }
 
       // Auto-publish if not requiring approval
-      if (content.status === "generated" && !content.approvalRequired) {
+      if (content.status === 'generated' && !content.approvalRequired) {
         await this.publishContent(content);
       }
 
       // Re-attempt failed content
-      if (
-        content.status === "failed" &&
-        now - (content.scheduledFor + 3600000) > 0
-      ) {
+      if (content.status === 'failed' && now - (content.scheduledFor + 3600000) > 0) {
         try {
           await this.generateContent(content);
         } catch (error) {
-          console.error(
-            "[ContentScheduler] Failed to generate content:",
-            content.id,
-            error,
-          );
+          console.error('[ContentScheduler] Failed to generate content:', content.id, error);
         }
       }
     }
@@ -96,14 +83,14 @@ export class ContentScheduler {
    * Generate content via API
    */
   private async generateContent(content: ScheduledContent): Promise<void> {
-    let endpoint = "/api/content/generate-blog";
-    if (content.type === "product") {
-      endpoint = "/api/content/generate-product";
+    let endpoint = '/api/content/generate-blog';
+    if (content.type === 'product') {
+      endpoint = '/api/content/generate-product';
     }
 
     const response = await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         title: content.title,
         description: content.description,
@@ -114,7 +101,7 @@ export class ContentScheduler {
       throw new Error(`Content generation failed: ${response.statusText}`);
     }
 
-    content.status = "generated";
+    content.status = 'generated';
   }
 
   /**
@@ -122,10 +109,8 @@ export class ContentScheduler {
    */
   private async publishContent(content: ScheduledContent): Promise<void> {
     // Mark as published (in production, would save to database)
-    content.status = "published";
-    console.log(
-      `[ContentScheduler] Published: ${content.type} - ${content.title}`,
-    );
+    content.status = 'published';
+    console.log(`[ContentScheduler] Published: ${content.type} - ${content.title}`);
 
     // Trigger sitemap refresh
     await this.refreshSitemap();
@@ -136,9 +121,9 @@ export class ContentScheduler {
    */
   private async refreshSitemap(): Promise<void> {
     try {
-      await fetch("/api/cron/sitemap", { method: "POST" });
+      await fetch('/api/cron/sitemap', { method: 'POST' });
     } catch (error) {
-      console.error("[ContentScheduler] Failed to refresh sitemap:", error);
+      console.error('[ContentScheduler] Failed to refresh sitemap:', error);
     }
   }
 
@@ -149,8 +134,8 @@ export class ContentScheduler {
     if (this.processInterval) return;
 
     this.processInterval = setInterval(() => {
-      this.processScheduledContent().catch((err) =>
-        console.error("[ContentScheduler] Processing error:", err),
+      this.processScheduledContent().catch(err =>
+        console.error('[ContentScheduler] Processing error:', err)
       );
     }, intervalMs);
   }
@@ -175,8 +160,8 @@ export class ContentScheduler {
   /**
    * Get content by status
    */
-  getByStatus(status: ScheduledContent["status"]): ScheduledContent[] {
-    return this.queue.filter((c) => c.status === status);
+  getByStatus(status: ScheduledContent['status']): ScheduledContent[] {
+    return this.queue.filter(c => c.status === status);
   }
 }
 

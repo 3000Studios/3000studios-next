@@ -10,14 +10,7 @@ export interface AnalyticsEvent {
 }
 
 export interface ConversionEvent {
-  event:
-    | "page_view"
-    | "cta_click"
-    | "add_to_cart"
-    | "checkout_start"
-    | "purchase"
-    | "signup"
-    | "upgrade";
+  event: 'page_view' | 'cta_click' | 'add_to_cart' | 'checkout_start' | 'purchase' | 'signup' | 'upgrade';
   page?: string;
   value?: number;
   currency?: string;
@@ -43,8 +36,8 @@ class AnalyticsService {
       properties: {
         ...properties,
         sessionId: this.sessionId,
-        url: typeof window !== "undefined" ? window.location.href : "",
-        referrer: typeof document !== "undefined" ? document.referrer : "",
+        url: typeof window !== 'undefined' ? window.location.href : '',
+        referrer: typeof document !== 'undefined' ? document.referrer : '',
       },
       timestamp: Date.now(),
     };
@@ -55,8 +48,8 @@ class AnalyticsService {
     this.sendToBackend(analyticsEvent);
 
     // Log in development
-    if (process.env.NODE_ENV === "development") {
-      console.log("[Analytics]", analyticsEvent);
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[Analytics]', analyticsEvent);
     }
   }
 
@@ -64,7 +57,7 @@ class AnalyticsService {
     this.track(conversion.event, {
       page: conversion.page,
       value: conversion.value,
-      currency: conversion.currency || "USD",
+      currency: conversion.currency || 'USD',
       productId: conversion.productId,
       tier: conversion.tier,
       isConversion: true,
@@ -72,16 +65,16 @@ class AnalyticsService {
   }
 
   trackPageView(page: string): void {
-    this.track("page_view", { page });
+    this.track('page_view', { page });
   }
 
   trackCTAClick(ctaLabel: string, destination: string): void {
-    this.track("cta_click", { ctaLabel, destination });
+    this.track('cta_click', { ctaLabel, destination });
   }
 
-  trackPurchase(productId: string, value: number, currency = "USD"): void {
+  trackPurchase(productId: string, value: number, currency = 'USD'): void {
     this.trackConversion({
-      event: "purchase",
+      event: 'purchase',
       productId,
       value,
       currency,
@@ -90,7 +83,7 @@ class AnalyticsService {
 
   trackUpgrade(fromTier: string, toTier: string, value: number): void {
     this.trackConversion({
-      event: "upgrade",
+      event: 'upgrade',
       tier: `${fromTier}_to_${toTier}`,
       value,
     });
@@ -98,15 +91,15 @@ class AnalyticsService {
 
   private async sendToBackend(event: AnalyticsEvent): Promise<void> {
     try {
-      await fetch("/api/analytics", {
-        method: "POST",
+      await fetch('/api/analytics', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(event),
       });
     } catch (error) {
-      console.error("[Analytics] Failed to send event:", error);
+      console.error('[Analytics] Failed to send event:', error);
     }
   }
 
