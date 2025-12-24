@@ -40,8 +40,7 @@ export const AFFILIATES = {
   // Helper methods for generating affiliate links
   general: (url: string) => {
     // Add affiliate tracking parameter
-    const trackingParam = '?ref=3000studios';
-    return url.includes('?') ? `${url}&ref=3000studios` : `${url}${trackingParam}`;
+    return url.includes('?') ? `${url}&ref=3000studios` : `${url}?ref=3000studios`;
   },
   amazon: (asin: string) => {
     const amazonTag = process.env.NEXT_PUBLIC_AMAZON_TAG || '3000studios-20';

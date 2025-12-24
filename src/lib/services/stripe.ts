@@ -7,7 +7,7 @@ import Stripe from "stripe";
 export const stripe = new Stripe(
   process.env.STRIPE_SECRET_KEY || "sk_test_mock_key",
   {
-    apiVersion: "2025-11-17.clover", // Use supported API version
+    apiVersion: "2024-06-20", // Use standard Stripe API version
     typescript: true,
   }
 );
