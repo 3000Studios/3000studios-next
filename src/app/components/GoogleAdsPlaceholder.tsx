@@ -4,20 +4,20 @@
  * Displays ad slot ready for Google AdSense integration
  */
 
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 interface GoogleAdsProps {
   slot: string;
-  format?: "auto" | "rectangle" | "vertical" | "horizontal";
+  format?: 'auto' | 'rectangle' | 'vertical' | 'horizontal';
   className?: string;
 }
 
-export default function GoogleAdsPlaceholder({
-  slot,
-  format = "auto",
-  className = "",
+export default function GoogleAdsPlaceholder({ 
+  slot, 
+  format = 'auto',
+  className = '' 
 }: GoogleAdsProps) {
   const [isClient, setIsClient] = useState(false);
 
@@ -30,10 +30,7 @@ export default function GoogleAdsPlaceholder({
 
   if (!isClient) {
     return (
-      <div
-        className={`skeleton rounded-lg ${className}`}
-        style={{ minHeight: "250px" }}
-      >
+      <div className={`skeleton rounded-lg ${className}`} style={{ minHeight: '250px' }}>
         {/* Loading skeleton */}
       </div>
     );
@@ -59,14 +56,12 @@ export default function GoogleAdsPlaceholder({
           </svg>
         </div>
         <p className="text-gray-400 text-sm font-medium">Advertisement</p>
-        <p className="text-gray-600 text-xs mt-1">
-          Google AdSense Slot: {slot}
-        </p>
+        <p className="text-gray-600 text-xs mt-1">Google AdSense Slot: {slot}</p>
         <div className="mt-3 text-xs text-gray-700">
           Format: {format} | Ready for monetization
         </div>
       </div>
-
+      
       {/* Shimmer Effect */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="shimmer opacity-20"></div>

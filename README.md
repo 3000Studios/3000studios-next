@@ -1,19 +1,6 @@
 # 3000 Studios - Professional Creative Studio Platform
 
-A cutting-edge Next.js 16 website featuring a luxury design theme, comprehensive page structure, and advanced features including AI integrations, voice-to-web capabilities, payment processing, and live streaming.
-
-## 🚀 Deployment
-
-**Canonical Vercel Project:** `3000studios-next` (Production)
-
-- **Production URL:** https://3000studios-next.vercel.app (or custom domain)
-- **Deployment:** Automated via GitHub integration
-- **Branch Strategy:** 
-  - `main` → Production deployment
-  - `develop` → Preview deployments
-  - Feature branches → Preview deployments
-
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete deployment instructions and environment setup.
+A cutting-edge Next.js 16 website featuring a luxury design theme, comprehensive page structure, and preparation for advanced features like AI avatars, voice-to-code editing, and live streaming.
 
 ## 🚀 Features
 
@@ -54,39 +41,20 @@ See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete deployment instructions and en
 
 ```bash
 # Install dependencies
-pnpm install
+npm install
 
 # Create environment variables file
 cp .env.example .env.local
 
 # Run development server
-pnpm dev
+npm run dev
 
 # Build for production
-pnpm build
+npm run build
 
 # Start production server
-pnpm start
+npm start
 ```
-
-### 🔄 Workflow Synchronization
-
-Keep your local workspace, GitHub, and Vercel perfectly synchronized:
-
-- **[SYNC_MASTER_INDEX.md](SYNC_MASTER_INDEX.md)** - Start here! Complete guide index
-- **[WORKFLOW_SYNC_GUIDE.md](WORKFLOW_SYNC_GUIDE.md)** - Comprehensive sync workflow
-- **[VSCODE_INTEGRATION_GUIDE.md](VSCODE_INTEGRATION_GUIDE.md)** - VS Code setup
-- **[ENV_SYNC_GUIDE.md](ENV_SYNC_GUIDE.md)** - Environment variables
-- **[SYNC_QUICK_REFERENCE.md](SYNC_QUICK_REFERENCE.md)** - Command quick reference
-
-**Quick Sync**: Use `.\scripts\secure-sync.ps1` for one-command synchronization.
-
-### 🚀 Release Management
-
-Safe PR merging with automated verification and rollback:
-
-- **[scripts/RELEASE_SCRIPTS_README.md](scripts/RELEASE_SCRIPTS_README.md)** - Release scripts usage guide
-- **Quick Start**: Run `.\scripts\release-merge.ps1 -DryRun` (Windows) or `./scripts/release-merge.sh --dry-run` (Linux/macOS)
 
 ## 🔐 Environment Variables
 
@@ -126,9 +94,9 @@ Edit `src/app/globals.css` to customize the color scheme:
 
 ```css
 :root {
-  --gold: #ffd700; /* Primary accent */
-  --platinum: #e5e4e2; /* Secondary accent */
-  --sapphire: #0f52ba; /* Highlight color */
+  --gold: #FFD700;       /* Primary accent */
+  --platinum: #E5E4E2;   /* Secondary accent */
+  --sapphire: #0F52BA;   /* Highlight color */
 }
 ```
 
@@ -138,7 +106,7 @@ Update `src/app/components/Navigation.tsx`:
 
 ```typescript
 const navLinks = [
-  { href: "/", label: "Home" },
+  { href: '/', label: 'Home' },
   // Add or remove links as needed
 ];
 ```
@@ -154,7 +122,6 @@ Customize stats in `src/app/matrix/page.tsx`:
 ## 🚧 Development Roadmap
 
 ### Phase 1: Foundation ✅ (Completed)
-
 - [x] Project setup and configuration
 - [x] All core pages implemented
 - [x] Navigation and routing
@@ -162,7 +129,6 @@ Customize stats in `src/app/matrix/page.tsx`:
 - [x] Responsive layouts
 
 ### Phase 2: Integration (Next)
-
 - [ ] Backend API routes
 - [ ] Database integration
 - [ ] Authentication system
@@ -170,7 +136,6 @@ Customize stats in `src/app/matrix/page.tsx`:
 - [ ] Email service integration
 
 ### Phase 3: Advanced Features
-
 - [ ] Shadow AI Avatar (3D model integration)
 - [ ] Voice-to-code editor
 - [ ] Live streaming infrastructure
@@ -178,7 +143,6 @@ Customize stats in `src/app/matrix/page.tsx`:
 - [ ] AI product generation
 
 ### Phase 4: Polish & Scale
-
 - [ ] Performance optimization
 - [ ] SEO improvements
 - [ ] Accessibility enhancements
@@ -188,14 +152,12 @@ Customize stats in `src/app/matrix/page.tsx`:
 ## 📝 File Naming Convention
 
 All files include descriptive header comments explaining:
-
 - Purpose of the file
 - Key features included
 - Customization sections (where applicable)
 - Future enhancement notes
 
 Example:
-
 ```typescript
 /**
  * Navigation Component
@@ -213,92 +175,24 @@ Example:
 
 ## 🌐 Deployment
 
-### 🚀 Quick Deploy to Production
-
-**Shadow Overlord Commands** (use in PR comments or issues):
-```bash
-/shadow deploy          # Deploy all features to production
-/shadow preview         # Create preview deployment
-/shadow sync            # Sync branch to main
-```
-
-### Automated Deployment (Recommended)
-
-The repository includes a complete CI/CD pipeline:
-
-1. **Push to `main` branch** - Automatically triggers production deployment
-2. **Workflow runs** - Builds, validates, and deploys all features
-3. **Verification** - Automatically checks all deployed pages
-4. **Live in minutes** - Full deployment takes ~5 minutes
-
-**Workflow**: `.github/workflows/deploy-all.yml`
-
-### Manual Deployment via Vercel
+### Vercel (Recommended)
 
 1. Push code to GitHub
 2. Import project in Vercel dashboard
-3. Add environment variables in Vercel settings:
-   ```bash
-   VERCEL_TOKEN=<your-token>
-   VERCEL_ORG_ID=<your-org-id>
-   VERCEL_PROJECT_ID=<your-project-id>
-   ```
-4. Deploy automatically or use CLI:
-   ```bash
-   npm i -g vercel
-   vercel --prod
-   ```
+3. Add environment variables in Vercel settings
+4. Deploy automatically
 
-### Environment Setup
-
-**Required for production**:
 ```bash
-NEXT_PUBLIC_SITE_URL=https://3000studios.com
-NEXT_PUBLIC_BASE_URL=https://3000studios.com
-VERCEL_TOKEN=<vercel-token>
+# Or use Vercel CLI
+npm i -g vercel
+vercel
 ```
 
-**Optional for full features**:
+### Manual Deployment
+
 ```bash
-# Payment Processing
-STRIPE_SECRET_KEY=<stripe-key>
-PAYPAL_CLIENT_ID=<paypal-id>
-PAYPAL_SECRET=<paypal-secret>
-
-# AI Services
-OPENAI_API_KEY=<openai-key>
-CLAUDE_API_KEY=<anthropic-key>
-
-# Live Streaming
-NEXT_PUBLIC_SIGNAL_SERVER=wss://signal.3000studios.com
-```
-
-### Production URLs
-
-Once deployed, access your site at:
-- **Main Site**: https://3000studios.com
-- **Store**: https://3000studios.com/store
-- **Blog**: https://3000studios.com/blog
-- **Portfolio**: https://3000studios.com/portfolio
-- **Live Stream**: https://3000studios.com/live
-- **Admin Matrix**: https://3000studios.com/matrix
-
-### Deployment Status
-
-Check `.github/workflows/deploy-all.yml` for:
-- ✅ Build validation
-- ✅ Revenue page generation
-- ✅ Production deployment
-- ✅ Post-deployment verification
-
-See `DEPLOYMENT.md` for complete deployment guide.
-
-### Build Performance
-```
-Build Time: ~9 seconds (Turbopack)
-Static Pages: 33 pages
-API Routes: 17 endpoints
-Total Routes: 55+ routes
+npm run build
+npm start
 ```
 
 ## 📊 Performance
@@ -318,8 +212,8 @@ Total Routes: 55+ routes
 ## 💡 Contributing
 
 This is a proprietary project for 3000 Studios. For questions or collaboration:
-
 - Email: contact@3000studios.com
+- Admin: mr.jwswain@gmail.com
 
 ## 📄 License
 

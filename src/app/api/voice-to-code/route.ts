@@ -10,88 +10,40 @@ import { instantSync, quickCommit } from '@/lib/services/realtime-sync';
 
 export async function POST(request: NextRequest) {
   try {
-    const body = (await request.json()) as VoiceInput;
-    const { transcript, audio, prompt, currentContext, action, patches } = body;
+    const body = await request.json();
+    const { audio, prompt, action, context, language } = body;
 
-    // --- CASE 1: COMMIT (Apply patches) ---
-    if (action === "commit" && patches && patches.length > 0) {
-      return await applyPatches(patches);
+    // Step 1: Transcribe audio if provided
+    let textPrompt = prompt;
+    if (audio) {
+      textPrompt = await transcribeAudio(audio);
     }
 
-    // --- CASE 2: PREVIEW (Generate patches) ---
-    const userInput = transcript || prompt;
-    let finalTranscript = userInput || "";
-
-    // Transcribe if Audio
-    if (audio && process.env.OPENAI_API_KEY) {
-      try {
-        const audioBuffer = Buffer.from(audio, "base64");
-        const audioFile = new File([audioBuffer], "audio.webm", {
-          type: "audio/webm",
-        });
-        const openai = await getOpenAI();
-        if (openai) {
-          const transcription = await openai.audio.transcriptions.create({
-            file: audioFile,
-            model: "whisper-1",
-          });
-          finalTranscript = transcription.text;
-        }
-      } catch (err) {
-        console.error("Transcription failed", err);
-      }
+    if (!textPrompt) {
+      return NextResponse.json(
+        { error: 'No prompt provided' },
+        { status: 400 }
+      );
     }
 
-    if (!finalTranscript) {
-      return NextResponse.json({ error: "No input detected" }, { status: 400 });
-    }
-
-    // Fallback Demo Response
-    if (!process.env.OPENAI_API_KEY) {
-      return NextResponse.json({
-        success: true,
-        intent: "Demo Mode (No API Key)",
-        description:
-          "This is a simulation. Add OPENAI_API_KEY to .env for real AI code generation.",
-        patches: [
-          {
-            file: "src/app/page.tsx",
-            description: "Mock change: Update homepage title",
-            oldCode: 'const title = "Welcome";',
-            newCode: 'const title = "Welcome to the Future";',
-          },
-        ],
-        action: "preview",
-      });
-    }
-
-    // OpenAI Generation
-    const openai = await getOpenAI();
-    const systemPrompt = `You are an expert Next.js developer. 
-    Convert requests into file patches.
-    - TARGET ONLY files in 'src/'.
-    - RESPOND AS JSON: 
-    {
-      "intent": "summary",
-      "description": "details",
-      "patches": [{ "file": "src/path/to/file.tsx", "description": "...", "oldCode": "exact string to find", "newCode": "string to replace with" }]
-    }`;
-
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o",
-      messages: [
-        { role: "system", content: systemPrompt },
-        {
-          role: "user",
-          content: `Request: ${finalTranscript}\nContext: ${
-            currentContext || "Next.js App"
-          }`,
-        },
-      ],
-      response_format: { type: "json_object" },
+    // Step 2: Generate code from prompt
+    const codeResult = await generateCode({
+      prompt: textPrompt,
+      language,
+      context,
     });
 
-    const parsed = JSON.parse(completion.choices[0].message.content || "{}");
+    // Step 3: Handle different actions
+    switch (action) {
+      case 'preview':
+        // Return code for preview only
+        return NextResponse.json({
+          success: true,
+          preview: codeResult.preview,
+          code: codeResult.code,
+          explanation: codeResult.explanation,
+          transcription: audio ? textPrompt : undefined,
+        });
 
       case 'apply':
         // Quick commit without deploying (for batching changes)
@@ -143,62 +95,10 @@ export async function POST(request: NextRequest) {
         );
     }
   } catch (error) {
-    console.error("Voice API Error:", error);
+    console.error('Voice-to-code API error:', error);
     return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 },
+      { error: 'Failed to process voice command' },
+      { status: 500 }
     );
   }
 }
-
-async function applyPatches(patches: CodePatch[]) {
-  const results = [];
-
-  for (const patch of patches) {
-    try {
-      // Safety Check: Only allow writes to src/
-      const cleanPath = path
-        .normalize(patch.file)
-        .replace(/^(\.\.(\/|\\|$))+/, "");
-      if (!cleanPath.startsWith("src/") && !cleanPath.startsWith("src\\")) {
-        throw new Error("Invalid file path. Must be in src/");
-      }
-
-      const activePath = path.join(process.cwd(), cleanPath);
-
-      // Check if file exists
-      try {
-        await fs.access(activePath);
-      } catch {
-        throw new Error(`File not found: ${cleanPath}`);
-      }
-
-      const currentContent = await fs.readFile(activePath, "utf8");
-
-      // Replace Strategy: Simple string replace (could be improved with fuzzy match or AST)
-      // We use replaceAll to handle multiple occurrences if intended, or just first.
-      // For safety, let's assume unique code blocks or simple replace.
-
-      if (!currentContent.includes(patch.oldCode)) {
-        // Try relaxed matching (trim whitespace)
-        // This is a naive implementation; a real system would use a better patcher.
-        throw new Error(
-          `Target code not found in ${cleanPath}. Content matching failed.`,
-        );
-      }
-
-      const newContent = currentContent.replace(patch.oldCode, patch.newCode);
-      await fs.writeFile(activePath, newContent, "utf8");
-      results.push({ file: cleanPath, status: "success" });
-    } catch (err: any) {
-      results.push({ file: patch.file, status: "error", error: err.message });
-    }
-  }
-
-  return NextResponse.json({
-    success: true,
-    action: "commit",
-    results,
-  });
-}
-

@@ -5,21 +5,21 @@
  */
 
 interface LoadingSkeletonProps {
-  variant?: "card" | "text" | "avatar" | "button" | "product" | "blog";
+  variant?: 'card' | 'text' | 'avatar' | 'button' | 'product' | 'blog';
   count?: number;
   className?: string;
 }
 
-export default function LoadingSkeleton({
-  variant = "card",
+export default function LoadingSkeleton({ 
+  variant = 'card', 
   count = 1,
-  className = "",
+  className = '' 
 }: LoadingSkeletonProps) {
   const skeletons = Array.from({ length: count });
 
   const renderSkeleton = () => {
     switch (variant) {
-      case "product":
+      case 'product':
         return (
           <div className={`card ${className}`}>
             <div className="skeleton w-full h-48 rounded-lg mb-4"></div>
@@ -33,8 +33,8 @@ export default function LoadingSkeleton({
             <div className="skeleton h-10 w-full rounded-lg"></div>
           </div>
         );
-
-      case "blog":
+      
+      case 'blog':
         return (
           <div className={`card ${className}`}>
             <div className="flex flex-col md:flex-row gap-6">
@@ -55,16 +55,16 @@ export default function LoadingSkeleton({
             </div>
           </div>
         );
-
-      case "text":
+      
+      case 'text':
         return (
           <div className={className}>
             <div className="skeleton h-4 w-full rounded mb-2"></div>
             <div className="skeleton h-4 w-5/6 rounded"></div>
           </div>
         );
-
-      case "avatar":
+      
+      case 'avatar':
         return (
           <div className={`flex items-center gap-3 ${className}`}>
             <div className="skeleton w-12 h-12 rounded-full"></div>
@@ -74,13 +74,11 @@ export default function LoadingSkeleton({
             </div>
           </div>
         );
-
-      case "button":
-        return (
-          <div className={`skeleton h-10 w-32 rounded-lg ${className}`}></div>
-        );
-
-      case "card":
+      
+      case 'button':
+        return <div className={`skeleton h-10 w-32 rounded-lg ${className}`}></div>;
+      
+      case 'card':
       default:
         return (
           <div className={`card ${className}`}>

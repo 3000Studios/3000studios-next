@@ -1,16 +1,36 @@
 /**
- * Matrix Command Center - Unified Login & Voice-Controlled Dashboard
- * THE DIFFERENTIATOR: Speak to control the entire platform
- * Features: Voice commands, live logs, revenue dashboard, system controls, 3D Avatar
+ * Matrix Admin Dashboard
+ * Central command center for site administration  
+ * Features: Analytics, site management, voice-to-code editor integration points
+ * Access: Protected - requires authentication (mr.jwswain@gmail.com / Bossman3000!!!)
+ * 
+ * This is THE MATRIX - the admin control center that contains:
+ * - Voice-to-code editor (foundation)
+ * - Analytics dashboard
+ * - Store management
+ * - Live stream controls
+ * - Avatar controller
+ * - All admin tools
  */
 
-"use client";
+'use client';
 
-import {
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { 
+  BarChart3, 
+  Users, 
+  DollarSign, 
+  TrendingUp,
+  Settings,
+  Package,
+  Video,
+  Edit3,
   Activity,
-  CheckCircle,
-  Globe,
-  Lock,
+  ShoppingCart,
+  Eye,
+  Zap,
+  LogOut,
   Mic,
   Code,
   Rocket,
@@ -27,21 +47,33 @@ import { useRealtimeSync } from '@/hooks/useRealtimeSync';
 import { forceRedeploy } from '@/lib/services/realtime-sync';
 import FemaleAvatar from './components/FemaleAvatar';
 
-export default function MatrixCommandCenter() {
-  // --- AUTHENTICATION STATE ---
-  const [isUnlocked, setIsUnlocked] = useState(false);
-  const [password, setPassword] = useState("");
-  const [loginLoading, setLoginLoading] = useState(false);
+interface StatCardProps {
+  title: string;
+  value: string;
+  change: string;
+  icon: React.ReactNode;
+  trend: 'up' | 'down';
+}
 
-  // --- DASHBOARD STATE ---
-  const [commandInput, setCommandInput] = useState("");
-  const [previewData, setPreviewData] = useState<{
-    command: string;
-    description: string;
-    changes: string[];
-    patches?: any[];
-    visuals: "none" | "jazz" | "glitter";
-  } | null>(null);
+function StatCard({ title, value, change, icon, trend }: StatCardProps) {
+  return (
+    <div className="card">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex-1">
+          <p className="text-sm text-gray-400 mb-1">{title}</p>
+          <h3 className="text-3xl font-bold text-white">{value}</h3>
+        </div>
+        <div className="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+          {icon}
+        </div>
+      </div>
+      <div className={`flex items-center text-sm ${trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
+        <TrendingUp size={16} className={trend === 'down' ? 'rotate-180' : ''} />
+        <span className="ml-1">{change} from last month</span>
+      </div>
+    </div>
+  );
+}
 
 export default function MatrixPage() {
   const router = useRouter();
@@ -52,26 +84,47 @@ export default function MatrixPage() {
   const [isDeploying, setIsDeploying] = useState(false);
   const { refreshStatus } = useRealtimeSync();
 
-  // Voice State
-  const [isListening, setIsListening] = useState(false);
-  const [transcript, setTranscript] = useState("");
-  const [waveform, setWaveform] = useState<number[]>([]);
+  useEffect(() => {
+    // Check authentication
+    const token = localStorage.getItem('auth_token');
+    if (!token) {
+      router.push('/login');
+      return;
+    }
 
-  const audioContextRef = useRef<AudioContext | null>(null);
-  const analyserRef = useRef<AnalyserNode | null>(null);
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const chunksRef = useRef<Blob[]>([]);
+    const result = verifySessionToken(token);
+    if (!result.success) {
+      localStorage.removeItem('auth_token');
+      router.push('/login');
+      return;
+    }
 
-  // --- LOGIN LOGIC ---
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoginLoading(true);
+    setIsAuthenticated(true);
+    setUserEmail(result.user?.email || '');
+    setIsLoading(false);
 
-    // Simulating authentication delay for effect
-    setTimeout(() => {
-      setIsUnlocked(true);
-      setLoginLoading(false);
-    }, 800);
+    // Update time
+    const updateTime = () => {
+      const now = new Date();
+      setCurrentTime(now.toLocaleString('en-US', {
+        weekday: 'short',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      }));
+    };
+    
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, [router]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('auth_token');
+    router.push('/login');
   };
 
   const handleForceDeploy = async () => {
@@ -88,90 +141,46 @@ export default function MatrixPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
-        {/* 3D Background */}
-        <div className="absolute inset-0 z-0 opacity-40">
-          <FemaleAvatar />
+      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-gold border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gold text-lg">Accessing THE MATRIX...</p>
         </div>
-
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black z-0" />
-
-        {/* Login Card */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="relative z-10 w-full max-w-md p-8 bg-gray-900/40 backdrop-blur-xl border border-gray-800 rounded-2xl shadow-2xl"
-        >
-          <div className="text-center mb-8">
-            <div className="inline-flex p-4 rounded-full bg-gold/10 mb-4 border border-gold/20">
-              <Lock className="text-gold" size={32} />
-            </div>
-            <h1 className="text-4xl font-black text-white tracking-widest mb-1">
-              THE MATRIX
-            </h1>
-            <p className="text-gold/60 font-mono text-xs tracking-[0.2em] uppercase">
-              Authorized Personnel Only
-            </p>
-          </div>
-
-          <form onSubmit={handleLogin} className="space-y-6">
-            <div>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="ENTER PASSKEY"
-                className="w-full p-4 bg-black/50 border border-gray-700 rounded-lg text-white text-center tracking-[0.5em] focus:border-gold transition-colors outline-none placeholder:tracking-normal placeholder:text-gray-600 font-mono"
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={loginLoading}
-              className="w-full py-4 bg-gold text-black font-black tracking-wider rounded-lg hover:bg-yellow-400 transition-all shadow-[0_0_20px_rgba(255,215,0,0.2)] hover:shadow-[0_0_30px_rgba(255,215,0,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loginLoading ? "VERIFYING..." : "ACCESS SYSTEM"}
-            </button>
-
-            <div className="flex justify-between items-center text-[10px] text-gray-500 font-mono uppercase">
-              <span>Secure Protocol v3.0</span>
-              <span className="flex items-center gap-1">
-                <Globe size={10} /> 3000 STUDIOS NETWORK
-              </span>
-            </div>
-          </form>
-        </motion.div>
       </div>
     );
   }
 
-  // --- RENDER: UNLOCKED (DASHBOARD) VIEW ---
+  if (!isAuthenticated) {
+    return null;
+  }
+
   return (
-    <div className="h-full p-4 md:p-8 flex flex-col bg-black text-white">
-      {/* HEADER */}
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gold shadow-[0_0_15px_rgba(255,215,0,0.5)]">
-            {/* Small Avatar Preview */}
-            <div className="bg-gray-800 w-full h-full flex items-center justify-center">
-              <span className="text-xs font-bold text-gold">AI</span>
-            </div>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-4 md:p-8">
+      {/* Header */}
+      <div className="max-w-7xl mx-auto mb-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-white">COMMAND CENTER</h1>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-xs text-brand-secondary font-mono">
-                SYSTEM ONLINE // VOICE ACTIVE
-              </span>
+            <h1 className="text-4xl md:text-5xl font-bold gradient-text mb-2">
+              THE MATRIX
+            </h1>
+            <p className="text-gray-400">
+              Command Center • All Systems Online • Welcome, {userEmail.split('@')[0]}
+            </p>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="glass px-4 py-2 rounded-lg border border-gold">
+              <p className="text-sm text-gray-300">{currentTime}</p>
             </div>
+            <button
+              onClick={handleLogout}
+              className="p-3 glass border border-red-500 rounded-lg hover:bg-red-500/10 transition-all flex items-center gap-2"
+              title="Logout"
+            >
+              <LogOut className="text-red-500" size={20} />
+              <span className="text-red-500 text-sm hidden md:inline">Logout</span>
+            </button>
           </div>
         </div>
-        <button
-          onClick={() => setIsUnlocked(false)}
-          className="px-4 py-2 border border-red-900/50 text-red-500/60 hover:text-red-400 hover:border-red-500 rounded-lg text-xs font-mono transition-colors"
-        >
-          TERMINATE SESSION
-        </button>
       </div>
 
       <div className="max-w-7xl mx-auto space-y-8">
@@ -288,56 +297,18 @@ export default function MatrixPage() {
           />
         </div>
 
-        {/* RIGHT COLUMN: Output & Status */}
-        <div className="flex flex-col gap-6 h-full">
-          {/* Deployment Status */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex-1 p-6 rounded-xl border border-gray-800 bg-black font-mono text-sm overflow-y-auto shadow-inner"
-          >
-            <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-900">
-              <span className="font-bold text-gray-500 tracking-widest">
-                SYSTEM LOGS
-              </span>
-              <div className="flex gap-2">
-                <div className="w-2 h-2 rounded-full bg-red-500/50" />
-                <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
-                <div className="w-2 h-2 rounded-full bg-green-500/50" />
-              </div>
-            </div>
+        {/* Voice-to-Code Editor - FULL IMPLEMENTATION */}
+        <VoiceCodeEditor />
 
-            <div className="space-y-2">
-              {deployStatus.length === 0 && !previewData && (
-                <div className="text-gray-700 italic">Awaiting input...</div>
-              )}
-              {deployStatus.map((status, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  className="flex items-center gap-2"
-                >
-                  <span className="text-gold">➜</span>
-                  <span className="text-gray-300">{status}</span>
-                </motion.div>
-              ))}
-              {isDeploying && (
-                <motion.div
-                  animate={{ opacity: [0.4, 1, 0.4] }}
-                  transition={{ repeat: Infinity, duration: 1.5 }}
-                  className="w-2 h-4 bg-gold mt-2 block"
-                />
-              )}
-            </div>
-          </motion.div>
+        {/* Stream Control - WebRTC Live Streaming */}
+        <StreamControl />
 
-          <div className="p-4 rounded-xl border border-dashed border-gray-800 text-center text-gray-600 text-[10px] font-mono uppercase tracking-widest">
-            3000 STUDIOS // NEURAL INTERFACE v2.4
-          </div>
-        </div>
+        {/* Content Generator - AI Blog & Product Descriptions */}
+        <ContentGenerator />
+
+        {/* Real Analytics from MongoDB */}
+        <RealAnalytics />
       </div>
     </div>
   );
 }
-

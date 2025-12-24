@@ -52,8 +52,7 @@ CHECKS.forEach((check) => {
   if (!content.includes(check.requiredContent)) {
     console.error(check.error);
     console.error(
-`   Required string "${check.requiredContent}" not found in ${check.path}`
-
+      `   Required string "${check.requiredContent}" not found in ${check.path}`
     );
     failed = true;
   } else {
@@ -70,8 +69,7 @@ if (failed) {
   process.exit(1);
 } else {
   console.log(
-"\n✨ Revenue Lock: All Systems Operational. Proceeding to Deploy."
-
+    "\n✨ Revenue Lock: All Systems Operational. Proceeding to Deploy."
   );
   process.exit(0);
 }
