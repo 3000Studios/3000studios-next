@@ -5,18 +5,30 @@
  * Removing this component risks AdSense approval and compliance
  */
 
+<<<<<<< HEAD
 "use client";
 
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
+=======
+'use client';
+
+import { X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 export default function ConsentBanner() {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
     // Only access localStorage on client side
+<<<<<<< HEAD
     if (typeof window !== "undefined") {
       const consent = localStorage.getItem("cookie-consent");
+=======
+    if (typeof window !== 'undefined') {
+      const consent = localStorage.getItem('cookie-consent');
+>>>>>>> origin/copilot/update-main-with-all-branches
       if (!consent) {
         setShowBanner(true);
       }
@@ -24,15 +36,25 @@ export default function ConsentBanner() {
   }, []);
 
   const handleAccept = () => {
+<<<<<<< HEAD
     if (typeof window !== "undefined") {
       localStorage.setItem("cookie-consent", "true");
+=======
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('cookie-consent', 'true');
+>>>>>>> origin/copilot/update-main-with-all-branches
     }
     setShowBanner(false);
   };
 
   const handleDecline = () => {
+<<<<<<< HEAD
     if (typeof window !== "undefined") {
       localStorage.setItem("cookie-consent", "false");
+=======
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('cookie-consent', 'false');
+>>>>>>> origin/copilot/update-main-with-all-branches
     }
     setShowBanner(false);
   };
@@ -43,12 +65,19 @@ export default function ConsentBanner() {
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-black/95 backdrop-blur-lg border-t border-cyan-500/30">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex-1 text-sm text-gray-300">
+<<<<<<< HEAD
           <p className="font-semibold text-white mb-1">
             Cookie & Privacy Notice
           </p>
           <p>
             We use cookies and similar technologies to enhance your experience,
             serve personalized ads, and analyze traffic. By clicking "Accept",
+=======
+          <p className="font-semibold text-white mb-1">Cookie & Privacy Notice</p>
+          <p>
+            We use cookies and similar technologies to enhance your experience, 
+            serve personalized ads, and analyze traffic. By clicking "Accept", 
+>>>>>>> origin/copilot/update-main-with-all-branches
             you consent to our use of cookies.
           </p>
         </div>

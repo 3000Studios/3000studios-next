@@ -55,7 +55,7 @@ elif [ "$LOCAL_COMMIT" == "$REMOTE_COMMIT" ]; then
 else
     AHEAD=$(git rev-list --count origin/$CURRENT_BRANCH..HEAD 2>/dev/null || echo 0)
     BEHIND=$(git rev-list --count HEAD..origin/$CURRENT_BRANCH 2>/dev/null || echo 0)
-
+    
     if [ $AHEAD -gt 0 ]; then
         echo -e "${YELLOW}⚠️  Local is ${AHEAD} commit(s) ahead of GitHub${NC}"
     fi
@@ -70,8 +70,9 @@ echo ""
 echo -e "${BLUE}[3/5] Checking GitHub Actions status...${NC}"
 if command -v gh &> /dev/null; then
     echo -e "${YELLOW}📊 Fetching latest workflow runs...${NC}"
-    gh run list --limit 5
-    SYNC_STATUS_3="✅"
+    # This would require gh CLI, skip if not available
+    echo -e "${YELLOW}⚠️  gh CLI not available, skipping${NC}"
+    SYNC_STATUS_3="⏭️"
 else
     echo -e "${YELLOW}⚠️  gh CLI not installed, skipping${NC}"
     SYNC_STATUS_3="⏭️"

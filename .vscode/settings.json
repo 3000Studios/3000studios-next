@@ -1,7 +1,36 @@
 {
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+  /* ======================================================
+     CORE WORKSPACE BEHAVIOR (STABLE + FAST)
+  ====================================================== */
+
+  "telemetry.telemetryLevel": "off",
+  "workbench.enableExperiments": false,
+  "workbench.startupEditor": "none",
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.closeOnFileDelete": true,
+
+  /* ======================================================
+     ANTI-GRAVITY / OPEN-VSX
+  ====================================================== */
+
+  "antigravity.marketplaceGalleryItemURL": "https://open-vsx.org/vscode/item",
+  "antigravity.marketplaceExtensionGalleryServiceURL": "https://open-vsx.org/vscode/gallery",
+
+  /* ======================================================
+     FILE SYSTEM / CPU CONTROL
+  ====================================================== */
+
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 800,
+=======
   "telemetry.telemetryLevel": "off",
   "workbench.enableExperiments": false,
 
+>>>>>>> origin/copilot/resolve-git-conflicts
   "files.watcherExclude": {
     "**/.git/**": true,
     "**/.next/**": true,
@@ -10,14 +39,84 @@
     "**/.pnpm-store/**": true
   },
 
+<<<<<<< HEAD
+  /* ======================================================
+     EDITOR UX (CONSISTENT + CI-SAFE)
+  ====================================================== */
+
+  "editor.fontSize": 15,
+  "editor.fontFamily": "JetBrains Mono, Consolas, 'Courier New', monospace",
+  "editor.wordWrap": "on",
+  "editor.minimap.enabled": false,
+  "editor.formatOnSave": true,
+  "editor.inlineSuggest.enabled": true,
+
+  /* ======================================================
+     FORMATTERS (MATCH CI + PREVENT DIFF NOISE)
+  ====================================================== */
+
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  /* ======================================================
+     TYPESCRIPT / NEXT.JS PERFORMANCE
+  ====================================================== */
+=======
+  "git.autorefresh": false,
+  "git.confirmSync": false,
+  "git.detectSubmodules": false,
+  "git.countBadge": "off",
+>>>>>>> origin/copilot/resolve-git-conflicts
+
+  "typescript.tsserver.maxTsServerMemory": 8192,
+  "typescript.disableAutomaticTypeAcquisition": true,
+
+<<<<<<< HEAD
+  /* ======================================================
+     GIT (SILENT, NO POPUPS, NO FREEZES)
+  ====================================================== */
+
   "git.autorefresh": false,
   "git.confirmSync": false,
   "git.detectSubmodules": false,
   "git.countBadge": "off",
 
-  "typescript.tsserver.maxTsServerMemory": 8192,
-  "typescript.disableAutomaticTypeAcquisition": true,
+  /* ======================================================
+     AI / AGENTS (AGGRESSIVE BUT CONTROLLED)
+  ====================================================== */
 
+  "github.copilot.editor.enableAutoCompletions": true,
+
+  "geminicodeassist.project": "studios-ai-agent-3k",
+  "geminicodeassist.agentDebugMode": false,
+  "geminicodeassist.agentYoloMode": true,
+
+  "gitlens.ai.model": "gitkraken",
+  "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
+
+  /* ======================================================
+     TERMINAL (GPU + NO LIMITS)
+  ====================================================== */
+
+  "terminal.integrated.gpuAcceleration": "on",
+  "terminal.integrated.scrollback": 10000,
+
+  /* ======================================================
+     CHAT / COMMAND AUTO-APPROVAL
+  ====================================================== */
+
+  "chat.tools.terminal.autoApprove": {
+=======
   "workbench.editor.enablePreview": false,
   "workbench.editor.closeOnFileDelete": true,
   "editor.formatOnSave": true,
@@ -27,12 +126,30 @@
 
   "chat.tools.terminal.autoApprove": {
     "pnpm": true,
+>>>>>>> origin/copilot/resolve-git-conflicts
     "npm": true,
     "node": true,
     "git": true,
     "vercel": true
   },
 
+<<<<<<< HEAD
+  /* ======================================================
+     WORKSPACE TRUST (NO INTERRUPTIONS)
+  ====================================================== */
+
+  "security.workspace.trust.enabled": true,
+  "security.workspace.trust.startupPrompt": "never",
+
+  /* ======================================================
+     GITHUB ACTIONS VISIBILITY (NOT ENTERPRISE-LOCKED)
+  ====================================================== */
+
+  "github-actions.workflows.pinned.refresh.enabled": true,
+<<<<<<< HEAD
+  "github-actions.workflows.pinned.workflows": []
+<<<<<<< HEAD
+=======
   "ai.experimental.codeActions": true,
   "chat.experimental.promptCaching": true,
 
@@ -50,4 +167,11 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit"
   }
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+"github-actions.workflows.pinned.workflows": [],
+"github-actions.use-enterprise": true
+>>>>>>> origin/copilot/update-main-with-all-branches
 }

@@ -5,7 +5,11 @@
  * This endpoint will be monetized through credits/usage
  */
 
+<<<<<<< HEAD
 import { NextRequest, NextResponse } from "next/server";
+=======
+import { NextRequest, NextResponse } from 'next/server';
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 // Input validation schema
 interface ContentRequest {
@@ -15,6 +19,7 @@ interface ContentRequest {
 }
 
 function validateContentRequest(body: unknown): body is ContentRequest {
+<<<<<<< HEAD
   if (!body || typeof body !== "object") return false;
   const req = body as Record<string, unknown>;
 
@@ -29,6 +34,22 @@ function validateContentRequest(body: unknown): body is ContentRequest {
   const allowedTypes = ["text", "blog", "social", "marketing"];
   if (!allowedTypes.includes(req.type)) return false;
 
+=======
+  if (!body || typeof body !== 'object') return false;
+  const req = body as Record<string, unknown>;
+  
+  // Validate required fields
+  if (typeof req.prompt !== 'string' || req.prompt.length === 0) return false;
+  if (typeof req.type !== 'string' || req.type.length === 0) return false;
+  
+  // Validate prompt length (prevent abuse)
+  if (req.prompt.length > 5000) return false;
+  
+  // Validate type is allowed
+  const allowedTypes = ['text', 'blog', 'social', 'marketing'];
+  if (!allowedTypes.includes(req.type)) return false;
+  
+>>>>>>> origin/copilot/update-main-with-all-branches
   return true;
 }
 
@@ -37,6 +58,7 @@ export async function POST(request: NextRequest) {
     // TODO: Implement authentication
     // TODO: Implement rate limiting
     // TODO: Check subscription tier and usage limits
+<<<<<<< HEAD
 
     const body = await request.json();
 
@@ -48,6 +70,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
+=======
+    
+    const body = await request.json();
+    
+    // Validate input
+    if (!validateContentRequest(body)) {
+      return NextResponse.json(
+        { status: 'error', message: 'Invalid request parameters' },
+        { status: 400 }
+      );
+    }
+    
+>>>>>>> origin/copilot/update-main-with-all-branches
     const { prompt, type, tier } = body;
 
     // Sanitize prompt to prevent injection attacks
@@ -55,25 +90,41 @@ export async function POST(request: NextRequest) {
 
     // Placeholder response
     return NextResponse.json({
+<<<<<<< HEAD
       status: "success",
       message: "Content generation API - Coming Soon",
       data: {
         type,
         tier: tier || "free",
+=======
+      status: 'success',
+      message: 'Content generation API - Coming Soon',
+      data: {
+        type,
+        tier: tier || 'free',
+>>>>>>> origin/copilot/update-main-with-all-branches
         cost: 0, // Future: Calculate based on usage
         credits_remaining: 0, // Future: Track user credits
       },
     });
   } catch (error) {
     // Don't expose error details
+<<<<<<< HEAD
     console.error("Content generation API error:", error);
     return NextResponse.json(
       { status: "error", message: "Request processing failed" },
       { status: 500 },
+=======
+    console.error('Content generation API error:', error);
+    return NextResponse.json(
+      { status: 'error', message: 'Request processing failed' },
+      { status: 500 }
+>>>>>>> origin/copilot/update-main-with-all-branches
     );
   }
 }
 
+<<<<<<< HEAD
 export async function GET(request: NextRequest) {
   // Verify Vercel Cron secret if needed (optional for public demo but good practice)
   const authHeader = request.headers.get("authorization");
@@ -106,5 +157,17 @@ export async function GET(request: NextRequest) {
       new_topic: randomTopic,
       priority: "high",
     },
+=======
+export async function GET() {
+  return NextResponse.json({
+    endpoint: '/api/generate-content',
+    status: 'active',
+    pricing: {
+      free: '10 requests/day',
+      pro: '1000 requests/month',
+      enterprise: 'unlimited',
+    },
+    documentation: 'https://docs.3000studios.com/api/generate-content',
+>>>>>>> origin/copilot/update-main-with-all-branches
   });
 }

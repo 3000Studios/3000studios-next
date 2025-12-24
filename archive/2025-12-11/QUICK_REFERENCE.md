@@ -17,12 +17,21 @@ C:\3000Studios\shadow\shadow-dev.ps1
 
 ## ⌨️ VS Code Shortcuts (Daily Use)
 
+<<<<<<< HEAD
 | Shortcut       | Action                               |
 | -------------- | ------------------------------------ |
 | `Ctrl+Shift+B` | Start Dev Server (secrets + Next.js) |
 | `Ctrl+Shift+P` | Open command palette                 |
 | `Ctrl+S`       | Save (auto-format + reload)          |
 | `Ctrl+``       | Open terminal                        |
+=======
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl+Shift+B` | Start Dev Server (secrets + Next.js) |
+| `Ctrl+Shift+P` | Open command palette |
+| `Ctrl+S` | Save (auto-format + reload) |
+| `Ctrl+`` | Open terminal |
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 ---
 
@@ -43,7 +52,10 @@ Press `Ctrl+Shift+B`:
 ## 🔑 Credential Management
 
 ### Store a Key
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 # Interactive: Ctrl+Shift+B → "🔑 Store API Key"
 # Or command line:
@@ -51,14 +63,20 @@ cmdkey /generic:OPENAI_API_KEY /user:dev /pass:YOUR_KEY
 ```
 
 ### List All Keys
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 # Ctrl+Shift+B → "📋 List Stored Keys"
 # Or: cmdkey /list
 ```
 
 ### Delete a Key
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 # Ctrl+Shift+B → "🗑️ Clear API Key"
 # Or: cmdkey /delete:OPENAI_API_KEY
@@ -69,7 +87,10 @@ cmdkey /generic:OPENAI_API_KEY /user:dev /pass:YOUR_KEY
 ## 💻 Daily Commands
 
 ### Start Development
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 # Option A: VS Code Ctrl+Shift+B
 # Option B: Terminal command:
@@ -77,7 +98,10 @@ C:\3000Studios\shadow\shadow-dev.ps1
 ```
 
 ### Edit Code
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```
 1. VS Code automatically saves
 2. Dev server auto-reloads
@@ -85,7 +109,10 @@ C:\3000Studios\shadow\shadow-dev.ps1
 ```
 
 ### Commit & Deploy
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 git add .
 git commit -m "feat: your change"
@@ -117,12 +144,21 @@ Your app uses credentials securely
 
 ## 📊 File Locations
 
+<<<<<<< HEAD
 | What               | Where                                                                  |
 | ------------------ | ---------------------------------------------------------------------- |
 | **Shadow Scripts** | `C:\3000Studios\shadow\`                                               |
 | **Project Root**   | `C:\Users\MrJws\OneDrive\WorkSpaces\3000studios-next\3000studios-next` |
 | **VS Code Config** | `.vscode\` (in project)                                                |
 | **Documentation**  | `.md` files (in project)                                               |
+=======
+| What | Where |
+|------|-------|
+| **Shadow Scripts** | `C:\3000Studios\shadow\` |
+| **Project Root** | `C:\Users\MrJws\OneDrive\WorkSpaces\3000studios-next\3000studios-next` |
+| **VS Code Config** | `.vscode\` (in project) |
+| **Documentation** | `.md` files (in project) |
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 ---
 
@@ -178,14 +214,20 @@ git push origin main
 ## 🛠️ Troubleshooting
 
 ### Dev won't start
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 pnpm install
 pnpm dev
 ```
 
 ### API keys not working
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 # Check stored: cmdkey /list
 # Update: cmdkey /delete:KEY && cmdkey /generic:KEY /user:dev /pass:VALUE
@@ -193,11 +235,17 @@ pnpm dev
 ```
 
 ### GitHub Actions failing
+<<<<<<< HEAD
 
 Check: https://github.com/3000Studios/3000studios-next/actions
 
 ### Vercel deployment stuck
 
+=======
+Check: https://github.com/3000Studios/3000studios-next/actions
+
+### Vercel deployment stuck
+>>>>>>> origin/copilot/update-main-with-all-branches
 Check: https://vercel.com/3000studios
 
 ---
@@ -217,6 +265,7 @@ Check: https://vercel.com/3000studios
 
 ## 📖 Documentation Files
 
+<<<<<<< HEAD
 | File                       | Read When                 |
 | -------------------------- | ------------------------- |
 | `SHADOW_COMPLETE_SETUP.md` | Want full setup details   |
@@ -224,13 +273,25 @@ Check: https://vercel.com/3000studios
 | `SECURE_WORKFLOW.md`       | Want daily workflow guide |
 | `QUICK_START.md`           | Need quick overview       |
 | `README.md`                | Want project info         |
+=======
+| File | Read When |
+|------|-----------|
+| `SHADOW_COMPLETE_SETUP.md` | Want full setup details |
+| `SHADOW_SECURE_DEV.md` | Need security deep-dive |
+| `SECURE_WORKFLOW.md` | Want daily workflow guide |
+| `QUICK_START.md` | Need quick overview |
+| `README.md` | Want project info |
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 ---
 
 ## 💡 Pro Tips
 
 ✅ **Do:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 - Use VS Code tasks (Ctrl+Shift+B)
 - Let automation handle deployment
 - Keep credentials in Credential Manager
@@ -238,7 +299,10 @@ Check: https://vercel.com/3000studios
 - Check GitHub Actions status
 
 ❌ **Don't:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 - Store secrets in code
 - Commit `.env.local`
 - Push untested code
@@ -250,13 +314,19 @@ Check: https://vercel.com/3000studios
 ## 🚀 You're Ready!
 
 **Just run:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 C:\3000Studios\shadow\shadow-dev.ps1
 ```
 
 **Then visit:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```
 http://localhost:3000
 ```

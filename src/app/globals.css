@@ -7,6 +7,63 @@
 @import "tailwindcss";
 
 :root {
+<<<<<<< HEAD
+<<<<<<< HEAD
+  /* Award-Winning Primary Colors - Luxury Theme */
+  --gold: #FFD700;              /* Brilliant Gold */
+  --rose-gold: #B76E79;         /* Rose Gold */
+  --platinum: #E5E4E2;          /* Platinum Silver */
+  --sapphire: #0F52BA;          /* Royal Sapphire */
+  --emerald: #50C878;           /* Premium Emerald */
+  --ruby: #E0115F;              /* Vibrant Ruby */
+  --amethyst: #9966CC;          /* Royal Amethyst */
+  --topaz: #FFC87C;             /* Warm Topaz */
+  --diamond: #B9F2FF;           /* Diamond Blue */
+  --onyx: #0a0a0a;              /* Deep Onyx */
+  
+  /* Award-Winning Accent Colors */
+  --coral: #FF6B6B;             /* Vibrant Coral */
+  --teal: #00CED1;              /* Electric Teal */
+  --violet: #8B5CF6;            /* Deep Violet */
+  --amber: #FFBF00;             /* Warm Amber */
+  --mint: #98FF98;              /* Fresh Mint */
+  --lavender: #B57EDC;          /* Soft Lavender */
+  --peach: #FFE5B4;             /* Elegant Peach */
+  --turquoise: #40E0D0;         /* Bright Turquoise */
+  
+  /* Premium Gradients */
+  --gradient-sunset: linear-gradient(135deg, #FF6B6B 0%, #FFD700 50%, #FF8C42 100%);
+  --gradient-ocean: linear-gradient(135deg, #0F52BA 0%, #00CED1 50%, #40E0D0 100%);
+  --gradient-royal: linear-gradient(135deg, #8B5CF6 0%, #9966CC 50%, #B57EDC 100%);
+  --gradient-luxury: linear-gradient(135deg, #FFD700 0%, #B76E79 50%, #E0115F 100%);
+  --gradient-emerald: linear-gradient(135deg, #50C878 0%, #98FF98 50%, #00CED1 100%);
+  --gradient-premium: linear-gradient(135deg, #FFD700 0%, #E5E4E2 25%, #0F52BA 50%, #9966CC 75%, #E0115F 100%);
+  
+  /* Backgrounds */
+=======
+  /* Brand Colors (updated to corporate palette) */
+  --gold: #FFC107; /* deep bold yellow */
+  --platinum: #9CA3AF; /* sleek grey */
+  --sapphire: #FFC107; /* replace blue usages with deep yellow */
+  --color-platinum: #E5E4E2; /* legacy alias */
+  --color-sapphire: #0F52BA; /* legacy alias */
+>>>>>>> origin/copilot/update-main-with-all-branches
+  --dark-bg: #0a0a0a;
+  --light-bg: #ffffff;
+
+  /* Semantic Colors */
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --accent: var(--gold);
+  --secondary: var(--platinum);
+  --highlight: var(--sapphire);
+<<<<<<< HEAD
+  --success: var(--emerald);
+  --danger: var(--ruby);
+  --warning: var(--amber);
+  --info: var(--diamond);
+  
+=======
   /* Brand Colors (updated to corporate palette) */
   --gold: #FFC107; /* deep bold yellow */
   --platinum: #9CA3AF; /* sleek grey */
@@ -23,10 +80,149 @@
   --secondary: var(--platinum);
   --highlight: var(--sapphire);
 
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+
+>>>>>>> origin/copilot/update-main-with-all-branches
   /* UI Element Colors */
   --card-bg: rgba(255, 255, 255, 0.05);
   --card-border: rgba(255, 215, 0, 0.2);
   --hover-bg: rgba(255, 215, 0, 0.1);
+<<<<<<< HEAD
+<<<<<<< HEAD
+  
+  /* Award-Winning Shadows */
+=======
+
+  /* Shadows */
+>>>>>>> origin/copilot/update-main-with-all-branches
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 8px rgba(0,0,0,0.2);
+  --shadow-lg: 0 8px 16px rgba(0,0,0,0.3);
+  --shadow-gold: 0 4px 12px rgba(255, 215, 0, 0.3);
+
+  /* Electric Theme (aligned to new palette) */
+  --electric-blue: #FFC107; /* deep bold yellow for electric accents */
+  --electric-purple: #6B7280; /* sleek corporate grey */
+  --neon-glow: 0 0 10px var(--electric-blue), 0 0 20px var(--electric-blue), 0 0 40px var(--electric-blue);
+}
+
+@keyframes electric-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 20px var(--electric-blue), 0 0 35px var(--electric-blue), 0 0 40px var(--electric-blue), 0 0 50px var(--electric-blue), 0 0 75px var(--electric-blue);
+  }
+  20%, 24%, 55% {
+    opacity: 0.5;
+    text-shadow: none;
+  }
+}
+
+@keyframes shock-wave {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.8; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+.electric-text {
+  color: #fff;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px var(--electric-blue), 0 0 30px var(--electric-blue), 0 0 40px var(--electric-blue);
+}
+
+.glass-morphism {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #f5f5f5;
+    --foreground: #171717;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --card-border: rgba(255, 215, 0, 0.3);
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  /* Corporate font stack */
+  font-family: 'Segoe UI', 'Inter', 'Helvetica Neue', Arial, system-ui, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Professional Button Styles */
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold), var(--sapphire));
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+}
+
+/* Card Styles */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--gold);
+  box-shadow: var(--shadow-gold);
+  transform: translateY(-4px);
+}
+
+/* Professional Link Styles */
+a {
+  color: var(--gold);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  color: var(--platinum);
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+/* Loading Animation */
+@keyframes pulse-gold {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+=======
 
   /* Shadows */
   --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
@@ -155,6 +351,7 @@ a:hover {
   }
 }
 
+>>>>>>> origin/copilot/resolve-git-conflicts
 .loading {
   animation: pulse-gold 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
@@ -167,6 +364,60 @@ a:hover {
   -webkit-text-fill-color: transparent;
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+.gradient-text-sunset {
+  background: var(--gradient-sunset);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-ocean {
+  background: var(--gradient-ocean);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-royal {
+  background: var(--gradient-royal);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-luxury {
+  background: var(--gradient-luxury);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-emerald {
+  background: var(--gradient-emerald);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-premium {
+  background: var(--gradient-premium);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerText 3s ease-in-out infinite;
+}
+
+@keyframes shimmerText {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
+}
+
+=======
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 /* Glass Morphism */
 .glass {
   background: rgba(255, 255, 255, 0.05);
@@ -174,6 +425,20 @@ a:hover {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+/* Particle Effects */
+=======
+/* Particle Effects - GPU accelerated */
+>>>>>>> origin/copilot/update-main-with-all-branches
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) translateZ(0);
+  }
+  50% {
+<<<<<<< HEAD
+    transform: translateY(-20px);
+=======
 /* Particle Effects - GPU accelerated */
 @keyframes float {
   0%, 100% {
@@ -181,11 +446,22 @@ a:hover {
   }
   50% {
     transform: translateY(-20px) translateZ(0);
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+    transform: translateY(-20px) translateZ(0);
+>>>>>>> origin/copilot/update-main-with-all-branches
   }
 }
 
 .float-animation {
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
   will-change: transform;
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+  will-change: transform;
+>>>>>>> origin/copilot/update-main-with-all-branches
   animation: float 6s ease-in-out infinite;
 }
 
@@ -223,6 +499,48 @@ a:hover {
               0 0 60px rgba(15, 82, 186, 0.1);
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+.glow-ruby {
+  box-shadow: 0 0 20px rgba(224, 17, 95, 0.5),
+              0 0 40px rgba(224, 17, 95, 0.3),
+              0 0 60px rgba(224, 17, 95, 0.1);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 20px rgba(80, 200, 120, 0.5),
+              0 0 40px rgba(80, 200, 120, 0.3),
+              0 0 60px rgba(80, 200, 120, 0.1);
+}
+
+.glow-amethyst {
+  box-shadow: 0 0 20px rgba(153, 102, 204, 0.5),
+              0 0 40px rgba(153, 102, 204, 0.3),
+              0 0 60px rgba(153, 102, 204, 0.1);
+}
+
+.glow-premium {
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.4),
+              0 0 50px rgba(15, 82, 186, 0.3),
+              0 0 70px rgba(224, 17, 95, 0.2);
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { 
+    filter: brightness(1);
+    transform: scale(1);
+  }
+  50% { 
+    filter: brightness(1.2);
+    transform: scale(1.02);
+  }
+}
+
+=======
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 /* Fade In Animations */
 @keyframes fadeInUp {
   from {
@@ -271,13 +589,42 @@ a:hover {
   animation: slideInLeft 0.8s ease-out forwards;
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+/* Premium Hover Effects */
+.hover-lift {
+=======
 /* Premium Hover Effects - GPU accelerated */
 .hover-lift {
   will-change: transform, box-shadow;
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+/* Premium Hover Effects - GPU accelerated */
+.hover-lift {
+  will-change: transform, box-shadow;
+>>>>>>> origin/copilot/update-main-with-all-branches
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .hover-lift:hover {
+<<<<<<< HEAD
+<<<<<<< HEAD
+  transform: translateY(-8px) scale(1.02);
+=======
+  transform: translateY(-8px) scale(1.02) translateZ(0);
+>>>>>>> origin/copilot/update-main-with-all-branches
+  box-shadow: 0 12px 24px rgba(255, 215, 0, 0.3);
+}
+
+/* Tilt Effect - GPU accelerated */
+.tilt {
+  will-change: transform;
+}
+
+.tilt:hover {
+<<<<<<< HEAD
+  transform: perspective(1000px) rotateX(2deg) rotateY(2deg);
+=======
   transform: translateY(-8px) scale(1.02) translateZ(0);
   box-shadow: 0 12px 24px rgba(255, 215, 0, 0.3);
 }
@@ -289,6 +636,10 @@ a:hover {
 
 .tilt:hover {
   transform: perspective(1000px) rotateX(2deg) rotateY(2deg) translateZ(0);
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+  transform: perspective(1000px) rotateX(2deg) rotateY(2deg) translateZ(0);
+>>>>>>> origin/copilot/update-main-with-all-branches
   transition: transform 0.5s ease;
 }
 
@@ -305,6 +656,91 @@ a:hover {
   background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+.gradient-bg-sunset {
+  background: var(--gradient-sunset);
+}
+
+.gradient-bg-ocean {
+  background: var(--gradient-ocean);
+}
+
+.gradient-bg-royal {
+  background: var(--gradient-royal);
+}
+
+.gradient-bg-luxury {
+  background: var(--gradient-luxury);
+}
+
+.gradient-bg-emerald {
+  background: var(--gradient-emerald);
+}
+
+.gradient-bg-premium {
+  background: var(--gradient-premium);
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Animated Mesh Gradient Background */
+=======
+/* Mesh Gradient Background */
+>>>>>>> origin/copilot/update-main-with-all-branches
+.mesh-gradient {
+  background:
+    radial-gradient(at 40% 20%, rgba(255, 215, 0, 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, rgba(15, 82, 186, 0.15) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, rgba(229, 228, 226, 0.1) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, rgba(255, 215, 0, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(15, 82, 186, 0.1) 0px, transparent 50%),
+    radial-gradient(at 80% 100%, rgba(255, 215, 0, 0.15) 0px, transparent 50%),
+    #0a0a0a;
+<<<<<<< HEAD
+  animation: meshFloat 20s ease-in-out infinite;
+}
+
+@keyframes meshFloat {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Premium Aurora Background */
+.aurora-bg {
+  background: linear-gradient(135deg, 
+    rgba(255, 215, 0, 0.1) 0%,
+    rgba(15, 82, 186, 0.1) 20%,
+    rgba(153, 102, 204, 0.1) 40%,
+    rgba(80, 200, 120, 0.1) 60%,
+    rgba(224, 17, 95, 0.1) 80%,
+    rgba(255, 215, 0, 0.1) 100%
+  );
+  background-size: 400% 400%;
+  animation: auroraMove 20s ease infinite;
+}
+
+@keyframes auroraMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Diamond Pattern Background */
+.diamond-pattern {
+  background-image: 
+    linear-gradient(45deg, rgba(255, 215, 0, 0.1) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(15, 82, 186, 0.1) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(224, 17, 95, 0.1) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(153, 102, 204, 0.1) 75%);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+  background-color: #0a0a0a;
+=======
 /* Mesh Gradient Background */
 .mesh-gradient {
   background:
@@ -315,6 +751,9 @@ a:hover {
     radial-gradient(at 0% 100%, rgba(15, 82, 186, 0.1) 0px, transparent 50%),
     radial-gradient(at 80% 100%, rgba(255, 215, 0, 0.15) 0px, transparent 50%),
     #0a0a0a;
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 }
 
 /* Text Effects */
@@ -328,6 +767,52 @@ a:hover {
                0 0 40px rgba(15, 82, 186, 0.4);
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+.text-shadow-ruby {
+  text-shadow: 0 0 20px rgba(224, 17, 95, 0.8),
+               0 0 40px rgba(224, 17, 95, 0.4);
+}
+
+.text-shadow-emerald {
+  text-shadow: 0 0 20px rgba(80, 200, 120, 0.8),
+               0 0 40px rgba(80, 200, 120, 0.4);
+}
+
+.text-shadow-amethyst {
+  text-shadow: 0 0 20px rgba(153, 102, 204, 0.8),
+               0 0 40px rgba(153, 102, 204, 0.4);
+}
+
+.text-shadow-premium {
+  text-shadow: 
+    0 0 10px rgba(255, 215, 0, 0.8),
+    0 0 20px rgba(15, 82, 186, 0.6),
+    0 0 30px rgba(224, 17, 95, 0.4),
+    0 0 40px rgba(153, 102, 204, 0.3);
+  animation: textGlowPulse 3s ease-in-out infinite;
+}
+
+@keyframes textGlowPulse {
+  0%, 100% { 
+    text-shadow: 
+      0 0 10px rgba(255, 215, 0, 0.8),
+      0 0 20px rgba(15, 82, 186, 0.6),
+      0 0 30px rgba(224, 17, 95, 0.4);
+  }
+  50% { 
+    text-shadow: 
+      0 0 20px rgba(255, 215, 0, 1),
+      0 0 30px rgba(15, 82, 186, 0.8),
+      0 0 40px rgba(224, 17, 95, 0.6),
+      0 0 50px rgba(153, 102, 204, 0.4);
+  }
+}
+
+=======
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 /* Selection Styling */
 ::selection {
   background: rgba(255, 215, 0, 0.3);
@@ -446,6 +931,33 @@ a:hover {
   animation: bounce 1s infinite;
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+/* Enhanced Hover States */
+.hover-scale:hover {
+  transform: scale(1.05);
+=======
+/* Enhanced Hover States - GPU accelerated */
+.hover-scale {
+  will-change: transform;
+>>>>>>> origin/copilot/update-main-with-all-branches
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05) translateZ(0);
+}
+
+.hover-glow {
+  will-change: box-shadow;
+  transition: box-shadow 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+<<<<<<< HEAD
+  transition: box-shadow 0.3s ease;
+=======
 /* Enhanced Hover States - GPU accelerated */
 .hover-scale {
   will-change: transform;
@@ -463,6 +975,9 @@ a:hover {
 
 .hover-glow:hover {
   box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 }
 
 /* Focus States for Accessibility */
@@ -477,7 +992,15 @@ a:focus-visible {
   outline-offset: 2px;
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+/* Enhanced Card Variants */
+=======
 /* Enhanced Card Variants - GPU accelerated */
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+/* Enhanced Card Variants - GPU accelerated */
+>>>>>>> origin/copilot/update-main-with-all-branches
 .card-premium {
   background: linear-gradient(
     135deg,
@@ -488,17 +1011,42 @@ a:focus-visible {
   border-radius: 1rem;
   padding: 2rem;
   backdrop-filter: blur(15px);
+<<<<<<< HEAD
+<<<<<<< HEAD
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+=======
   box-shadow:
     0 10px 40px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   will-change: transform, border-color, box-shadow;
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  will-change: transform, border-color, box-shadow;
+>>>>>>> origin/copilot/update-main-with-all-branches
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-premium:hover {
+<<<<<<< HEAD
+<<<<<<< HEAD
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--gold);
+  box-shadow: 
+=======
   transform: translateY(-8px) scale(1.02) translateZ(0);
   border-color: var(--gold);
   box-shadow:
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+  transform: translateY(-8px) scale(1.02) translateZ(0);
+  border-color: var(--gold);
+  box-shadow:
+>>>>>>> origin/copilot/update-main-with-all-branches
     0 20px 60px rgba(255, 215, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }

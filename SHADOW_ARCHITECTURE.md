@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!--
 
 
@@ -396,5 +397,10 @@ Push to GitHub to deploy. 🚀The Shadow OS v2.5 is now organized with enterpris
   All rights reserved.
   Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 -->
+=======
+Copyright (c) 2025 NAME.
+All rights reserved.
+Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 # 🏗️ SHADOW OS v2.5 — MODULAR ARCHITECTURE REFERENCE

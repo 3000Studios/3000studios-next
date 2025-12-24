@@ -5,11 +5,19 @@
  * Each card generates affiliate revenue
  */
 
+<<<<<<< HEAD
 "use client";
 
 import { motion } from "framer-motion";
 import { Bot, DollarSign, Server, Video } from "lucide-react";
 import { brand } from "@/design/brand";
+=======
+'use client';
+
+import { motion } from 'framer-motion';
+import { Bot, DollarSign, Server, Video } from 'lucide-react';
+import { brand } from '@/design/brand';
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 interface AffiliateTool {
   name: string;
@@ -23,6 +31,7 @@ interface AffiliateTool {
 
 const affiliateTools: AffiliateTool[] = [
   {
+<<<<<<< HEAD
     name: "ChatGPT Plus",
     category: "AI",
     description: "Most powerful AI for content creation and automation",
@@ -57,6 +66,42 @@ const affiliateTools: AffiliateTool[] = [
     affiliateLink: "https://riverside.fm",
     price: "$15/mo",
     badge: "Creator Pick",
+=======
+    name: 'ChatGPT Plus',
+    category: 'AI',
+    description: 'Most powerful AI for content creation and automation',
+    icon: <Bot size={32} />,
+    affiliateLink: 'https://chat.openai.com/plus',
+    price: '$20/mo',
+    badge: 'Essential',
+  },
+  {
+    name: 'Vercel Pro',
+    category: 'Hosting',
+    description: 'Lightning-fast hosting with automatic deployments',
+    icon: <Server size={32} />,
+    affiliateLink: 'https://vercel.com/pricing',
+    price: '$20/mo',
+    badge: 'Recommended',
+  },
+  {
+    name: 'Stripe',
+    category: 'Finance',
+    description: 'Accept payments and scale revenue globally',
+    icon: <DollarSign size={32} />,
+    affiliateLink: 'https://stripe.com',
+    price: 'Free',
+    badge: 'Free Start',
+  },
+  {
+    name: 'Riverside.fm',
+    category: 'Video',
+    description: 'Studio-quality remote recording for creators',
+    icon: <Video size={32} />,
+    affiliateLink: 'https://riverside.fm',
+    price: '$15/mo',
+    badge: 'Creator Pick',
+>>>>>>> origin/copilot/update-main-with-all-branches
   },
 ];
 
@@ -71,7 +116,11 @@ export default function AffiliateToolCards() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
+<<<<<<< HEAD
           <h2
+=======
+          <h2 
+>>>>>>> origin/copilot/update-main-with-all-branches
             className="text-3xl md:text-4xl font-bold mb-4"
             style={{ color: brand.colors.text.primary }}
           >
@@ -98,14 +147,22 @@ export default function AffiliateToolCards() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
+<<<<<<< HEAD
               whileHover={{
+=======
+              whileHover={{ 
+>>>>>>> origin/copilot/update-main-with-all-branches
                 y: -8,
                 boxShadow: brand.colors.shadow.lg,
               }}
             >
               {/* Badge */}
               {tool.badge && (
+<<<<<<< HEAD
                 <div
+=======
+                <div 
+>>>>>>> origin/copilot/update-main-with-all-branches
                   className="absolute top-3 right-3 px-2 py-1 text-xs font-bold rounded"
                   style={{
                     background: brand.colors.gradient.primary,
@@ -128,7 +185,11 @@ export default function AffiliateToolCards() {
               </div>
 
               {/* Category */}
+<<<<<<< HEAD
               <div
+=======
+              <div 
+>>>>>>> origin/copilot/update-main-with-all-branches
                 className="text-xs font-semibold uppercase tracking-wider mb-2"
                 style={{ color: brand.colors.action.secondary }}
               >
@@ -136,7 +197,11 @@ export default function AffiliateToolCards() {
               </div>
 
               {/* Name */}
+<<<<<<< HEAD
               <h3
+=======
+              <h3 
+>>>>>>> origin/copilot/update-main-with-all-branches
                 className="text-xl font-bold mb-2"
                 style={{ color: brand.colors.text.primary }}
               >
@@ -144,7 +209,11 @@ export default function AffiliateToolCards() {
               </h3>
 
               {/* Description */}
+<<<<<<< HEAD
               <p
+=======
+              <p 
+>>>>>>> origin/copilot/update-main-with-all-branches
                 className="text-sm mb-4"
                 style={{ color: brand.colors.text.secondary }}
               >
@@ -153,13 +222,21 @@ export default function AffiliateToolCards() {
 
               {/* Price */}
               <div className="flex items-center justify-between">
+<<<<<<< HEAD
                 <span
+=======
+                <span 
+>>>>>>> origin/copilot/update-main-with-all-branches
                   className="font-bold"
                   style={{ color: brand.colors.revenue.positive }}
                 >
                   {tool.price}
                 </span>
+<<<<<<< HEAD
                 <span
+=======
+                <span 
+>>>>>>> origin/copilot/update-main-with-all-branches
                   className="text-sm group-hover:translate-x-1 transition-transform"
                   style={{ color: brand.colors.action.primary }}
                 >

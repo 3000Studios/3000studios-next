@@ -1,0 +1,81 @@
+name: Delete Consolidated Branches
+
+# This workflow automatically deletes all branches except main
+# after the branch consolidation PR is merged
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  delete-branches:
+    # Only run if the PR was merged (not just closed)
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.title, 'consolidate') || contains(github.event.pull_request.title, 'branch')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Get list of branches to delete
+        id: get-branches
+        run: |
+          echo "Getting list of branches..."
+          BRANCHES=$(git ls-remote --heads origin | awk '{print $2}' | sed 's|refs/heads/||' | grep -v '^main$' | tr '\n' ' ')
+          echo "branches=$BRANCHES" >> $GITHUB_OUTPUT
+          echo "Found branches: $BRANCHES"
+
+      - name: Delete branches
+        if: steps.get-branches.outputs.branches != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Deleting consolidated branches..."
+          BRANCHES="${{ steps.get-branches.outputs.branches }}"
+          
+          # Convert space-separated list to array
+          IFS=' ' read -ra BRANCH_ARRAY <<< "$BRANCHES"
+          
+          deleted_count=0
+          failed_count=0
+          
+          for branch in "${BRANCH_ARRAY[@]}"; do
+            if [ -n "$branch" ]; then
+              echo "Deleting branch: $branch"
+              if gh api -X DELETE "repos/${{ github.repository }}/git/refs/heads/$branch" 2>&1; then
+                echo "  ✓ Deleted: $branch"
+                ((deleted_count++))
+              else
+                echo "  ✗ Failed to delete: $branch (may be protected or already deleted)"
+                ((failed_count++))
+              fi
+            fi
+          done
+          
+          echo ""
+          echo "=========================================="
+          echo "Deletion Summary:"
+          echo "  Successfully deleted: $deleted_count"
+          echo "  Failed to delete: $failed_count"
+          echo "=========================================="
+
+      - name: Verify remaining branches
+        run: |
+          echo "Remaining branches:"
+          git ls-remote --heads origin | awk '{print $2}' | sed 's|refs/heads/||'
+
+      - name: Summary
+        run: |
+          echo "## Branch Consolidation Complete! 🎉" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "All branches have been consolidated into \`main\` and old branches have been deleted." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Remaining Branches" >> $GITHUB_STEP_SUMMARY
+          git ls-remote --heads origin | awk '{print $2}' | sed 's|refs/heads/||' >> $GITHUB_STEP_SUMMARY

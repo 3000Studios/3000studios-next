@@ -8,6 +8,19 @@ import { usePathname, useRouter } from "next/navigation";
 import type { MouseEvent } from "react";
 import { useEffect, useMemo, useState } from "react";
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+import Link from 'next/link';
+import Image from 'next/image';
+import { useState, useEffect } from 'react';
+import { Menu, X, ChevronDown } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { motion } from 'framer-motion';
+import { useShadowOS } from '@/lib/shadow/os/state';
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 // --- Sound Generation Utility ---
 const playElectricSound = () => {
   try {
@@ -183,6 +196,12 @@ const ElectricLink = ({
     </div>
   );
 };
+<<<<<<< HEAD
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -196,6 +215,29 @@ export default function Navigation() {
   }, []);
 
   const navLinks = [
+<<<<<<< HEAD
+<<<<<<< HEAD
+    { href: '/', label: 'Home', hoverColor: 'hover:text-gold' },
+    { href: '/store', label: 'Store', hoverColor: 'hover:text-gold' },
+    { href: '/projects', label: 'Projects', hoverColor: 'hover:text-teal' },
+    { href: '/portfolio', label: 'Portfolio', hoverColor: 'hover:text-platinum' },
+    { href: '/live', label: 'Live', hoverColor: 'hover:text-sapphire' },
+    { href: '/blog', label: 'Blog', hoverColor: 'hover:text-purple-400' },
+    { href: '/contact', label: 'Contact', hoverColor: 'hover:text-gold' },
+    { href: '/matrix', label: 'Matrix', hoverColor: 'hover:text-cyan-400' },
+    { href: '/login', label: 'Login', hoverColor: 'hover:text-gold' },
+  ];
+  
+  // Mood-reactive shadow colors based on ShadowOS state
+  const moodColors = {
+    neutral: 'shadow-gray-800',
+    gold: 'shadow-yellow-500',
+    blue: 'shadow-blue-500',
+    'purple-alert': 'shadow-purple-500',
+    teal: 'shadow-teal-400',
+    'cyber-cyan': 'shadow-cyan-400',
+  };
+=======
     { href: "/", label: "HOME" },
     { href: "/store", label: "STORE" },
     { href: "/vendors-platform", label: "VENDORS" },
@@ -205,16 +247,49 @@ export default function Navigation() {
     { href: "/blog", label: "BLOG" },
     { href: "/contact", label: "CONTACT" },
   ];
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+    { href: "/", label: "HOME" },
+    { href: "/store", label: "STORE" },
+    { href: "/vendors-platform", label: "VENDORS" },
+    { href: "/projects", label: "PROJECTS" },
+    { href: "/portfolio", label: "PORTFOLIO" },
+    { href: "/live", label: "LIVE" },
+    { href: "/blog", label: "BLOG" },
+    { href: "/contact", label: "CONTACT" },
+  ];
+>>>>>>> origin/copilot/update-main-with-all-branches
 
   const isActiveLink = (href: string) => pathname === href;
 
   return (
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+    <motion.nav 
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 1.2, ease: 'easeOut' }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled 
+          ? 'glass-premium border-b border-gold/30 shadow-2xl' 
+          : 'glass border-b border-gray-800/50'
+      } ${moodColors[uiMood]}`}
+=======
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? "bg-black/70 backdrop-blur-md py-2 border-b border-[var(--platinum)]/40"
           : "bg-black/50 backdrop-blur-sm py-4 border-b border-[var(--platinum)]/30"
       }`}
+<<<<<<< HEAD
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
     >
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(0,243,255,0.12),_transparent_45%)]" />
 
@@ -247,6 +322,30 @@ export default function Navigation() {
                 <ElectricLink
                   key={link.href}
                   href={link.href}
+<<<<<<< HEAD
+<<<<<<< HEAD
+                  className={`relative text-sm lg:text-base font-medium transition-all duration-200 ${
+                    isActiveLink(link.href)
+                      ? 'text-gold'
+                      : `text-gray-300 ${link.hoverColor}`
+                  }`}
+                >
+                  {link.label}
+                  {isActiveLink(link.href) && (
+                    <motion.span 
+                      layoutId="activeLink"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gold rounded-full"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  )}
+                </Link>
+              </motion.div>
+            ))}
+=======
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
                   label={link.label}
                   isActive={isActiveLink(link.href)}
                 />
@@ -264,6 +363,10 @@ export default function Navigation() {
                 LOGIN
               </span>
             </Link>
+<<<<<<< HEAD
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
           </div>
 
           <button
@@ -276,6 +379,22 @@ export default function Navigation() {
         </div>
       </div>
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+      {/* Enhanced Mobile Menu */}
+      {isMenuOpen && (
+        <motion.div 
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.3 }}
+          className="md:hidden glass-premium border-t border-gold/20 backdrop-blur-xl"
+        >
+          <div className="px-4 pt-3 pb-4 space-y-2 max-h-[80vh] overflow-y-auto">
+            {navLinks.map((link) => (
+=======
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -294,6 +413,10 @@ export default function Navigation() {
                   onClick={() => setIsMenuOpen(false)}
                 />
               ))}
+<<<<<<< HEAD
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
               <Link
                 href="/login"
                 onClick={() => setIsMenuOpen(false)}

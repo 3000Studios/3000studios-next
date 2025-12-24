@@ -2,6 +2,7 @@
 
 ## ✅ What You Now Have
 
+<<<<<<< HEAD
 | Component              | Status | Details                                                       |
 | ---------------------- | ------ | ------------------------------------------------------------- |
 | **Local Development**  | ✅     | Next.js dev server running on `http://localhost:3000`         |
@@ -10,20 +11,36 @@
 | **GitHub Actions**     | ✅     | Automatic build & deploy on every push to `main`              |
 | **Google Maps**        | ✅     | Integrated on contact page (Atlanta, GA + satellite view)     |
 | **VS Code Extensions** | ✅     | 24 dev tools installed (TypeScript, ESLint, Tailwind, etc)    |
+=======
+| Component | Status | Details |
+|-----------|--------|---------|
+| **Local Development** | ✅ | Next.js dev server running on `http://localhost:3000` |
+| **Secure Git Auth** | ✅ | GitHub CLI + Windows Credential Manager (no plaintext tokens) |
+| **Auto-Sync Scripts** | ✅ | `./scripts/secure-sync.ps1` for easy git push |
+| **GitHub Actions** | ✅ | Automatic build & deploy on every push to `main` |
+| **Google Maps** | ✅ | Integrated on contact page (Atlanta, GA + satellite view) |
+| **VS Code Extensions** | ✅ | 24 dev tools installed (TypeScript, ESLint, Tailwind, etc) |
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 ---
 
 ## 🎯 Your Daily Workflow
 
 ### **1. Make Changes Locally**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 # Edit files in VS Code
 # Dev server auto-refreshes at http://localhost:3000
 ```
 
 ### **2. Commit & Push (No Prompts!)**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 # Option A: Manual git
 git add .
@@ -35,7 +52,10 @@ git push origin main
 ```
 
 ### **3. Automatic Deployment**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```
 GitHub detects push to 'main' branch
 → Triggers GitHub Actions workflow
@@ -72,26 +92,41 @@ See `GITHUB_SECRETS_SETUP.md` for detailed instructions.
 ## 📁 Key Files Created
 
 ### Workflows
+<<<<<<< HEAD
 
 - `.github/workflows/deploy.yml` - Auto-deploys to Vercel on push
 
 ### Scripts
 
+=======
+- `.github/workflows/deploy.yml` - Auto-deploys to Vercel on push
+
+### Scripts
+>>>>>>> origin/copilot/update-main-with-all-branches
 - `scripts/secure-sync.ps1` - Safe git sync with authentication check
 - `scripts/auto-sync.ps1` - Alternative sync script
 
 ### Components
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 - `src/app/components/GoogleMap.tsx` - Google Maps integration
 - `src/app/contact/page.tsx` - Updated with Google Maps
 
 ### Documentation
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 - `GITHUB_SETUP.md` - Secure auth configuration guide
 - `GITHUB_SECRETS_SETUP.md` - Secrets setup walkthrough
 
 ### Environment
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 - `.env.local` - Local development (add your NEXT_PUBLIC_MAPS_API)
 
 ---
@@ -170,7 +205,10 @@ Your site goes LIVE 🚀
 ## 🔧 Useful Commands
 
 ### Development
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 # Start dev server (already running)
 pnpm dev
@@ -183,7 +221,10 @@ pnpm start
 ```
 
 ### Git
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 # Check git status
 git status
@@ -196,7 +237,10 @@ git diff --cached
 ```
 
 ### GitHub CLI
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 # View repo info
 gh repo view 3000Studios/3000studios-next
@@ -209,7 +253,10 @@ gh workflow run deploy.yml
 ```
 
 ### Vercel
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 # Install Vercel CLI
 npm install -g vercel
@@ -226,14 +273,20 @@ vercel --prod
 ## 🚨 Troubleshooting
 
 ### "Dev server won't start"
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 pnpm install
 pnpm dev
 ```
 
 ### "Git push fails with auth error"
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 # Check authentication
 gh auth status
@@ -243,14 +296,20 @@ gh auth login
 ```
 
 ### "Deployment stuck in GitHub Actions"
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 1. Go to: https://github.com/3000Studios/3000studios-next/actions
 2. Click the failing workflow
 3. Check step output for errors
 4. Common issues: missing secrets, invalid API keys
 
 ### "Google Maps not showing"
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 1. Add `NEXT_PUBLIC_MAPS_API` to GitHub Secrets
 2. Verify key is valid in Google Cloud Console
 3. Check `.env.local` has the key for local development
@@ -259,19 +318,31 @@ gh auth login
 
 ## 📚 Documentation
 
+<<<<<<< HEAD
 | File                           | Purpose                      |
 | ------------------------------ | ---------------------------- |
 | `GITHUB_SETUP.md`              | Secure authentication setup  |
 | `GITHUB_SECRETS_SETUP.md`      | GitHub Secrets configuration |
 | `README.md`                    | Project overview             |
 | `.github/workflows/deploy.yml` | Deployment automation        |
+=======
+| File | Purpose |
+|------|---------|
+| `GITHUB_SETUP.md` | Secure authentication setup |
+| `GITHUB_SECRETS_SETUP.md` | GitHub Secrets configuration |
+| `README.md` | Project overview |
+| `.github/workflows/deploy.yml` | Deployment automation |
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 ---
 
 ## ✨ What's Automated
 
 ✅ **On Every Push to `main`:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 - Automatic build validation
 - Production deployment
 - Environment variables injected securely
@@ -279,7 +350,10 @@ gh auth login
 - DNS propagation happens automatically
 
 ✅ **No Manual Steps:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 - No SSH keys to manage
 - No manual CLI deploys
 - No credential exposure
@@ -320,7 +394,10 @@ gh auth login
 **You're all set!** 🚀
 
 Your infrastructure is:
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 - ✅ Secure
 - ✅ Automated
 - ✅ Scalable

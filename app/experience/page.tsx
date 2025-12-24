@@ -1,5 +1,6 @@
 "use client";
 
+<<<<<<< HEAD
 import { Navigation } from "@/components/ui/Navigation";
 import { Footer } from "@/components/ui/Footer";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -65,5 +66,15 @@ export default function ExperiencePage() {
 
       <Footer />
     </main>
+=======
+export default function Experience() {
+  return (
+    <div className="min-h-screen bg-black text-white p-10">
+      <h1 className="text-5xl font-bold">Experience</h1>
+      <p className="mt-4 text-lg text-gray-300">
+        Immersive 3000 Studios experience coming alive.
+      </p>
+    </div>
+>>>>>>> origin/copilot/update-main-with-all-branches
   );
 }

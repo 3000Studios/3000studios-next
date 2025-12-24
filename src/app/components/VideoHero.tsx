@@ -5,9 +5,15 @@
  * This component is critical for conversion optimization
  */
 
+<<<<<<< HEAD
 "use client";
 
 import { useEffect, useRef } from "react";
+=======
+'use client';
+
+import { useEffect, useRef } from 'react';
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 interface VideoHeroProps {
   webmSrc?: string;
@@ -22,7 +28,11 @@ export default function VideoHero({
   mp4Src,
   posterSrc,
   opacity = 0.3,
+<<<<<<< HEAD
   className = "",
+=======
+  className = '',
+>>>>>>> origin/copilot/update-main-with-all-branches
 }: VideoHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 

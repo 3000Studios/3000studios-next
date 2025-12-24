@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * Shadow AI Avatar Component (Home Page Version)
  * This is the conversational, animated avatar that greets visitors
@@ -18,6 +19,15 @@ import { Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 export default function ShadowAvatar() {
+=======
+"use client";
+
+import ShadowAvatar from '@/components/ShadowAvatar';
+import { Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
+export default function InteractiveAvatar() {
+>>>>>>> origin/copilot/update-main-with-all-branches
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [userText, setUserText] = useState('');
@@ -104,6 +114,7 @@ export default function ShadowAvatar() {
     <div className="fixed bottom-8 right-8 z-50 max-w-sm">
       {/* Avatar Container */}
       <div className="bg-black/80 backdrop-blur-xl border-2 border-gold rounded-2xl p-6 shadow-2xl">
+<<<<<<< HEAD
         {/* Avatar Visual (Placeholder for 3D model) */}
         <div className="relative mb-4">
           <div className="w-32 h-32 mx-auto bg-gradient-to-br from-gold via-sapphire to-platinum rounded-full flex items-center justify-center animate-pulse">
@@ -127,6 +138,11 @@ export default function ShadowAvatar() {
               </div>
             </div>
           )}
+=======
+        {/* Avatar Visual (3D Model) */}
+        <div className="relative mb-4 h-48 w-full">
+            <ShadowAvatar isSpeaking={isSpeaking} />
+>>>>>>> origin/copilot/update-main-with-all-branches
         </div>
 
         {/* Avatar Name */}

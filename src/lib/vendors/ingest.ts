@@ -2,6 +2,7 @@ import { vendorAdapters } from "./adapters";
 import { normalizeVendorProduct } from "./normalize";
 import { VENDORS } from "./registry";
 
+<<<<<<< HEAD
 function isSafeFeedUrl(override?: string): boolean {
   if (!override) return false;
 
@@ -41,6 +42,10 @@ function isSafeFeedUrl(override?: string): boolean {
 function getFeedUrl(vendorId: string, override?: string) {
   const safeOverride = isSafeFeedUrl(override) ? override : undefined;
   if (safeOverride) return safeOverride;
+=======
+function getFeedUrl(vendorId: string, override?: string) {
+  if (override) return override;
+>>>>>>> origin/copilot/update-main-with-all-branches
   const vendorEntry = Object.values(VENDORS).find((v) => v.id === vendorId);
   const envKey = vendorEntry?.feedUrlEnv || "VENDOR_FEED_URL";
   const envValue = process.env[envKey];
