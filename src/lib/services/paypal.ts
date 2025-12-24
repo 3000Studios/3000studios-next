@@ -6,12 +6,10 @@
 import axios from 'axios';
 
 const PAYPAL_API_BASE = process.env.PAYPAL_ENV === 'production'
-const PAYPAL_API_BASE = process.env.PAYPAL_ENV === 'production'
   ? 'https://api-m.paypal.com'
   : 'https://api-m.sandbox.paypal.com';
 
 const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
-const PAYPAL_SECRET = process.env.PAYPAL_SECRET || process.env.PAYPAL_CLIENT_SECRET;
 const PAYPAL_SECRET = process.env.PAYPAL_SECRET || process.env.PAYPAL_CLIENT_SECRET;
 
 interface PayPalAccessToken {
@@ -98,8 +96,6 @@ export async function createOrder(params: CreateOrderParams) {
         brand_name: '3000 Studios',
         landing_page: 'NO_PREFERENCE',
         user_action: 'PAY_NOW',
-        return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/success`,
-        cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/cancel`,
         return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/success`,
         cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/cancel`,
       },

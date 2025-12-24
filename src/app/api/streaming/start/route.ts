@@ -5,8 +5,6 @@
 
 import { getWebRTCConfig } from '@/lib/services/webrtc';
 import { NextRequest, NextResponse } from 'next/server';
-import { NextRequest, NextResponse } from 'next/server';
-import { getWebRTCConfig } from '@/lib/services/webrtc';
 import { getWebRTCConfig } from '@/lib/services/webrtc';
 import { NextRequest, NextResponse } from 'next/server';
 
