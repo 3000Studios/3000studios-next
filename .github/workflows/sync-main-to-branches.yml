@@ -1,0 +1,59 @@
+name: Sync main into branches (create PRs)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  create-prs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create PRs from main into open branches
+        env:
+          REPO_OWNER: 3000Studios
+          REPO_NAME: 3000studios-next
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          api="https://api.github.com"
+          auth="Authorization: token ${GITHUB_TOKEN}"
+          page=1
+          per_page=100
+          while :; do
+            resp=$(curl -s -H "$auth" "$api/repos/$REPO_OWNER/$REPO_NAME/branches?page=$page&per_page=$per_page")
+            names=$(echo "$resp" | jq -r '.[].name')
+            if [ -z "$names" ]; then
+              break
+            fi
+            for branch in $names; do
+              if [ "$branch" = "main" ]; then
+                continue
+              fi
+              # skip common special branches
+              if [[ "$branch" =~ ^(gh-pages|production|staging)$ ]]; then
+                echo "Skipping special branch: $branch"
+                continue
+              fi
+              existing=$(curl -s -H "$auth" "$api/repos/$REPO_OWNER/$REPO_NAME/pulls?head=${REPO_OWNER}:main&base=$branch&state=open" | jq -r 'length')
+              if [ "$existing" -gt 0 ]; then
+                echo "PR already exists for $branch; skipping"
+                continue
+              fi
+              title="chore(sync): update $branch from main"
+              body="Automated PR to bring $branch up-to-date with main"
+              payload=$(jq -n --arg t "$title" --arg b "$body" --arg head "main" --arg base "$branch" \
+                '{title:$t, body:$b, head:$head, base:$base, maintainer_can_modify:true}')
+              echo "Creating PR main -> $branch"
+              resp2=$(curl -s -H "$auth" -X POST "$api/repos/$REPO_OWNER/$REPO_NAME/pulls" -d "$payload")
+              echo "$resp2" | jq -r '.html_url // .message'
+            done
+            # break if fewer than per_page returned
+            count=$(echo "$resp" | jq -r 'length')
+            if [ "$count" -lt "$per_page" ]; then
+              break
+            fi
+            page=$((page+1))
+          done
