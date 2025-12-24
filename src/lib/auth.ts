@@ -10,11 +10,9 @@
  * This implementation is for development/demo purposes.
  */
 
-// TODO: Move to environment variables in production
-// process.env.ADMIN_EMAIL and process.env.ADMIN_PASSWORD_HASH
 const ADMIN_CREDENTIALS = {
-  email: 'mr.jwswain@gmail.com',
-  password: 'Bossman3000!!!', // TODO: Hash with bcrypt
+  email: process.env.ADMIN_EMAIL ?? '',
+  password: process.env.ADMIN_PASSWORD ?? '',
 };
 
 export interface AuthResult {
@@ -27,7 +25,12 @@ export interface AuthResult {
 }
 
 export function verifyAdmin(email: string, password: string): AuthResult {
-  if (email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password) {
+  if (
+    ADMIN_CREDENTIALS.email &&
+    ADMIN_CREDENTIALS.password &&
+    email === ADMIN_CREDENTIALS.email &&
+    password === ADMIN_CREDENTIALS.password
+  ) {
     return {
       success: true,
       message: 'Authentication successful',
