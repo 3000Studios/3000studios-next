@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   /* ======================================================
      CORE WORKSPACE BEHAVIOR (STABLE + FAST)
   ====================================================== */
@@ -22,6 +23,11 @@
 
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 800,
+=======
+  "telemetry.telemetryLevel": "off",
+  "workbench.enableExperiments": false,
+
+>>>>>>> origin/copilot/resolve-git-conflicts
   "files.watcherExclude": {
     "**/.git/**": true,
     "**/.next/**": true,
@@ -30,6 +36,7 @@
     "**/.pnpm-store/**": true
   },
 
+<<<<<<< HEAD
   /* ======================================================
      EDITOR UX (CONSISTENT + CI-SAFE)
   ====================================================== */
@@ -61,10 +68,17 @@
   /* ======================================================
      TYPESCRIPT / NEXT.JS PERFORMANCE
   ====================================================== */
+=======
+  "git.autorefresh": false,
+  "git.confirmSync": false,
+  "git.detectSubmodules": false,
+  "git.countBadge": "off",
+>>>>>>> origin/copilot/resolve-git-conflicts
 
   "typescript.tsserver.maxTsServerMemory": 8192,
   "typescript.disableAutomaticTypeAcquisition": true,
 
+<<<<<<< HEAD
   /* ======================================================
      GIT (SILENT, NO POPUPS, NO FREEZES)
   ====================================================== */
@@ -99,12 +113,24 @@
   ====================================================== */
 
   "chat.tools.terminal.autoApprove": {
+=======
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.closeOnFileDelete": true,
+  "editor.formatOnSave": true,
+  "editor.inlineSuggest.enabled": true,
+
+  "github.copilot.editor.enableAutoCompletions": false,
+
+  "chat.tools.terminal.autoApprove": {
+    "pnpm": true,
+>>>>>>> origin/copilot/resolve-git-conflicts
     "npm": true,
     "node": true,
     "git": true,
     "vercel": true
   },
 
+<<<<<<< HEAD
   /* ======================================================
      WORKSPACE TRUST (NO INTERRUPTIONS)
   ====================================================== */
@@ -118,4 +144,23 @@
 
   "github-actions.workflows.pinned.refresh.enabled": true,
   "github-actions.workflows.pinned.workflows": []
+=======
+  "ai.experimental.codeActions": true,
+  "chat.experimental.promptCaching": true,
+
+  "terminal.integrated.gpuAcceleration": "on",
+  "terminal.integrated.scrollback": 10000,
+
+  "task.showDecorations": false,
+  "problems.decorations.enabled": false,
+  "editor.minimap.enabled": false,
+  "workbench.list.horizontalScrolling": true,
+
+  "security.workspace.trust.enabled": true,
+  "security.workspace.trust.startupPrompt": "never",
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  }
+>>>>>>> origin/copilot/resolve-git-conflicts
 }

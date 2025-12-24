@@ -1,9 +1,12 @@
+<<<<<<< HEAD
 name: CI — Validate
+=======
+name: ci
+>>>>>>> origin/copilot/resolve-git-conflicts
 
 on:
-  pull_request:
-    branches: [main]
   push:
+<<<<<<< HEAD
     branches-ignore: [main]
 
 concurrency:
@@ -39,3 +42,21 @@ jobs:
           NEXT_PUBLIC_SITE_URL: https://3000studios.com
           STRIPE_SECRET_KEY: sk_test_placeholder_for_ci
         run: npm run build
+=======
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+>>>>>>> origin/copilot/resolve-git-conflicts

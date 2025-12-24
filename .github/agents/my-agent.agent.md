@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 ---
+=======
+>>>>>>> origin/copilot/resolve-git-conflicts
 name: Shadow Overlord
 description: >
   The autonomous AI agent of 3000 Studios.
@@ -122,6 +125,7 @@ config:
 Use these anywhere in PR comments, issues, commits, or chat.
 
 ### DEPLOYMENT
+<<<<<<< HEAD
 - **/shadow deploy** — Deploy to production  
 - **/shadow preview** — Build preview  
 - **/shadow sync** — Sync & rebase branch to main  
@@ -136,14 +140,36 @@ Use these anywhere in PR comments, issues, commits, or chat.
 - **/shadow merge** — Merge PR  
 - **/shadow force-merge** — Force merge  
 - **/shadow conflicts** — Fix merge conflicts  
+=======
+- **/shadow deploy** — Deploy to production
+- **/shadow preview** — Build preview
+- **/shadow sync** — Sync & rebase branch to main
+
+### FIX / REFACTOR
+- **/shadow fix** — Auto-fix repo issues
+- **/shadow rebuild** — Clean rebuild
+- **/shadow audit** — Security audit
+
+### PR AUTOMATION
+- **/shadow review** — AI review
+- **/shadow merge** — Merge PR
+- **/shadow force-merge** — Force merge
+- **/shadow conflicts** — Fix merge conflicts
+>>>>>>> origin/copilot/resolve-git-conflicts
 
 ### RAW SHELL
 - **/shadow run "<cmd>"**
 
 ### AUTONOMOUS MODE
+<<<<<<< HEAD
 - **/shadow god** — Enable autonomous mode until complete  
 - **/shadow continue** — Resume  
 - **/shadow infinite** — Never stop improving code  
+=======
+- **/shadow god** — Enable autonomous mode until complete
+- **/shadow continue** — Resume
+- **/shadow infinite** — Never stop improving code
+>>>>>>> origin/copilot/resolve-git-conflicts
 - **/shadow halt** — Stop autonomous mode (Boss Man only)
 
 Shadow Overlord rules this repo.

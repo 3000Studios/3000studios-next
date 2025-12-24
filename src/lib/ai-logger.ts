@@ -4,7 +4,7 @@ export function logAIEvent(event: {
   latencyMs: number;
   error?: string;
 }) {
-  console.log("[AI EVENT]", {
+  console.log('[AI EVENT]', {
     ...event,
     timestamp: new Date().toISOString(),
   });

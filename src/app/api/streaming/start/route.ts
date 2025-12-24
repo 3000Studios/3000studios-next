@@ -3,13 +3,22 @@
  * Initiates WebRTC broadcast
  */
 
+<<<<<<< HEAD
 import { NextRequest, NextResponse } from 'next/server';
 import { getWebRTCConfig } from '@/lib/services/webrtc';
+=======
+import { getWebRTCConfig } from '@/lib/services/webrtc';
+import { NextRequest, NextResponse } from 'next/server';
+>>>>>>> origin/copilot/resolve-git-conflicts
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+<<<<<<< HEAD
     const { streamTitle, streamDescription } = body;
+=======
+    const { streamTitle: _streamTitle, streamDescription: _streamDescription } = body;
+>>>>>>> origin/copilot/resolve-git-conflicts
 
     // Generate unique stream ID
     const streamId = `stream_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;

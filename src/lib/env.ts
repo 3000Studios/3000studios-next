@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * Environment Variables Validation
  * 
@@ -5,15 +6,23 @@
  * If any required variable is missing, the build will fail immediately.
  * This prevents silent runtime failures and ensures deployment safety.
  */
+=======
+import { z } from "zod";
+>>>>>>> origin/copilot/resolve-git-conflicts
 
-function required(name: string): string {
-  const value = process.env[name];
-  if (!value) {
-    throw new Error(`❌ Missing required environment variable: ${name}`);
-  }
-  return value;
-}
+const envSchema = z.object({
+  DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
+  NEXTAUTH_SECRET: z.string().min(1, "NEXTAUTH_SECRET is required"),
+  NEXT_PUBLIC_BASE_URL: z.string().url(),
+  STRIPE_SECRET_KEY: z.string().optional(),
+  STRIPE_WEBHOOK_SECRET: z.string().optional(),
+  PAYPAL_CLIENT_ID: z.string().optional(),
+  PAYPAL_CLIENT_SECRET: z.string().optional(),
+  MUX_TOKEN_ID: z.string().optional(),
+  MUX_TOKEN_SECRET: z.string().optional(),
+});
 
+<<<<<<< HEAD
 function optional(name: string, defaultValue: string = ''): string {
   return process.env[name] || defaultValue;
 }
@@ -53,3 +62,6 @@ if (typeof window === 'undefined') {
   console.log(`📍 SITE_URL: ${ENV.SITE_URL}`);
   console.log(`🔧 NODE_ENV: ${ENV.NODE_ENV}`);
 }
+=======
+export const env = envSchema.parse(process.env);
+>>>>>>> origin/copilot/resolve-git-conflicts

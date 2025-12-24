@@ -64,7 +64,11 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('PayPal create order error:', error);
     return NextResponse.json(
+<<<<<<< HEAD
       { error: 'Failed to create PayPal order' },
+=======
+      { error: "Failed to create PayPal order" },
+>>>>>>> origin/copilot/resolve-git-conflicts
       { status: 500 }
     );
   }

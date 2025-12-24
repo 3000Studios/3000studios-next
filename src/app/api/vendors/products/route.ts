@@ -10,13 +10,8 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(products);
   } catch (error) {
     return NextResponse.json(
-      {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Failed to ingest vendor feed",
-      },
-      { status: 400 },
+      { error: error instanceof Error ? error.message : "Failed to ingest vendor feed" },
+      { status: 400 }
     );
   }
 }

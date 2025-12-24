@@ -8,7 +8,10 @@ import axios from 'axios';
 const VERCEL_TOKEN = process.env.VERCEL_TOKEN;
 const VERCEL_API = 'https://api.vercel.com';
 const PROJECT_NAME = '3000studios-next'; // Update with actual project name
+<<<<<<< HEAD
 const PROJECT_ID = process.env.VERCEL_PROJECT_ID;
+=======
+>>>>>>> origin/copilot/resolve-git-conflicts
 
 export interface DeploymentResponse {
   id: string;
@@ -75,7 +78,7 @@ export async function getLatestDeployment(): Promise<DeploymentResponse | null> 
     }
 
     const response = await axios.get(
-      `${VERCEL_API}/v6/deployments?projectId=${PROJECT_ID}&limit=1`,
+      `${VERCEL_API}/v6/deployments?projectId=${PROJECT_NAME}&limit=1`,
       {
         headers: {
           'Authorization': `Bearer ${VERCEL_TOKEN}`,

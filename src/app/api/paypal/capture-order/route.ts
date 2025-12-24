@@ -3,9 +3,15 @@
  * Captures approved PayPal orders
  */
 
+<<<<<<< HEAD
 import { NextRequest, NextResponse } from 'next/server';
 import { captureOrder, trackAffiliateSale } from '@/lib/services/paypal';
 import { getOrders } from '@/lib/services/mongodb';
+=======
+import { prisma } from "@/lib/prisma";
+import { captureOrder } from "@/lib/services/paypal";
+import { NextRequest, NextResponse } from "next/server";
+>>>>>>> origin/copilot/resolve-git-conflicts
 
 export async function POST(request: NextRequest) {
   try {
@@ -50,7 +56,11 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('PayPal capture order error:', error);
     return NextResponse.json(
+<<<<<<< HEAD
       { error: 'Failed to capture PayPal order' },
+=======
+      { error: "Failed to capture PayPal order" },
+>>>>>>> origin/copilot/resolve-git-conflicts
       { status: 500 }
     );
   }

@@ -8,7 +8,17 @@ import { getProducts } from '@/lib/services/mongodb';
 
 export async function GET(request: NextRequest) {
   try {
+<<<<<<< HEAD
     const products = await getProducts();
+=======
+    const dbProducts = await prisma.product.findMany();
+
+    // Map Prisma 'id' to 'productId' for frontend compatibility
+    const products = dbProducts.map((p: { id: string; [key: string]: unknown }) => ({
+      ...p,
+      productId: p.id,
+    }));
+>>>>>>> origin/copilot/resolve-git-conflicts
 
     return NextResponse.json({
       success: true,

@@ -5,11 +5,8 @@ export async function POST(req: NextRequest) {
   const { name, description, price, image, url, category } = body;
 
   const seoTitle = `${name} | Premium ${category || "Product"}`;
-  const seoDescription =
-    description?.slice(0, 150) || `Discover ${name} at 3000 Studios.`;
-  const slug =
-    url ||
-    `/products/${encodeURIComponent(name.toLowerCase().replace(/\s+/g, "-"))}`;
+  const seoDescription = description?.slice(0, 150) || `Discover ${name} at 3000 Studios.`;
+  const slug = url || `/products/${encodeURIComponent(name.toLowerCase().replace(/\s+/g, "-"))}`;
 
   return NextResponse.json({
     success: true,
@@ -19,14 +16,7 @@ export async function POST(req: NextRequest) {
       slug,
       image,
       price,
-      schema: buildSchema({
-        name,
-        description: seoDescription,
-        price,
-        image,
-        url: slug,
-        category,
-      }),
+      schema: buildSchema({ name, description: seoDescription, price, image, url: slug, category }),
     },
   });
 }

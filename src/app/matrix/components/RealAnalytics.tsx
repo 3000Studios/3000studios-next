@@ -5,9 +5,15 @@
 
 'use client';
 
+<<<<<<< HEAD
 import { useState, useEffect, useCallback } from 'react';
 import { BarChart3, TrendingUp, DollarSign, Users, ShoppingCart, Eye, RefreshCw } from 'lucide-react';
 import { useAnalytics } from '@/hooks/useAPI';
+=======
+import { useAnalytics } from '@/hooks/useAPI';
+import { BarChart3, DollarSign, Eye, RefreshCw, ShoppingCart, TrendingUp, Users } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
+>>>>>>> origin/copilot/resolve-git-conflicts
 
 interface StatCardProps {
   title: string;

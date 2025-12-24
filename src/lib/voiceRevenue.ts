@@ -3,21 +3,21 @@
  * Extend voice system with automated revenue operations
  */
 
-import { getContentScheduler } from "@/jobs/contentScheduler";
-import { getStoreOptimizer } from "@/jobs/storeOptimizer";
-import { getPricingEngine } from "./pricing";
-import { type CommandResult } from "./voiceCommands";
+import { getContentScheduler } from '@/jobs/contentScheduler';
+import { getStoreOptimizer } from '@/jobs/storeOptimizer';
+import { getPricingEngine } from './pricing';
+import { type CommandResult } from './voiceCommands';
 
 export type RevenueCommandType =
-  | "promote_product"
-  | "launch_sale"
-  | "generate_content_batch"
-  | "optimize_store"
-  | "adjust_pricing"
-  | "rotate_affiliates";
+  | 'promote_product'
+  | 'launch_sale'
+  | 'generate_content_batch'
+  | 'optimize_store'
+  | 'adjust_pricing'
+  | 'rotate_affiliates';
 
 export interface RevenueCommand {
-  category: "revenue";
+  category: 'revenue';
   action: RevenueCommandType;
   target?: string;
   params?: Record<string, unknown>;
@@ -30,28 +30,27 @@ export function parseRevenueCommand(transcript: string): RevenueCommand | null {
   const patterns = [
     {
       regex: /promote\s+(?:the\s+)?top\s+(?:selling\s+)?product/i,
-      action: "promote_product" as const,
+      action: 'promote_product' as const,
     },
     {
-      regex:
-        /launch\s+(?:a\s+)?(?:sale|discount)\s+(\d+)%?\s+(?:for\s+)?(\d+)\s+hours?/i,
-      action: "launch_sale" as const,
+      regex: /launch\s+(?:a\s+)?(?:sale|discount)\s+(\d+)%?\s+(?:for\s+)?(\d+)\s+hours?/i,
+      action: 'launch_sale' as const,
     },
     {
       regex: /generate\s+(\d+)\s+(?:blog\s+)?(?:posts?|articles?|content)/i,
-      action: "generate_content_batch" as const,
+      action: 'generate_content_batch' as const,
     },
     {
       regex: /(?:run|start)\s+store\s+optimization/i,
-      action: "optimize_store" as const,
+      action: 'optimize_store' as const,
     },
     {
       regex: /adjust\s+pricing\s+(?:automatically|for\s+demand)/i,
-      action: "adjust_pricing" as const,
+      action: 'adjust_pricing' as const,
     },
     {
       regex: /rotate\s+(?:the\s+)?affiliate\s+products?/i,
-      action: "rotate_affiliates" as const,
+      action: 'rotate_affiliates' as const,
     },
   ];
 
@@ -59,9 +58,9 @@ export function parseRevenueCommand(transcript: string): RevenueCommand | null {
     const match = transcript.match(pattern.regex);
     if (match) {
       return {
-        category: "revenue",
+        category: 'revenue',
         action: pattern.action,
-        target: "store",
+        target: 'store',
         params: {
           discount: match[1],
           duration: match[2],
@@ -79,13 +78,13 @@ export function parseRevenueCommand(transcript: string): RevenueCommand | null {
  */
 export async function executeRevenueCommand(
   command: RevenueCommand,
-  userTier: string,
+  userTier: string
 ): Promise<CommandResult> {
   // Only Pro+ can run revenue commands
-  if (!["pro", "godMode"].includes(userTier)) {
+  if (!['pro', 'godMode'].includes(userTier)) {
     return {
       success: false,
-      message: "Revenue automation requires Pro tier or higher",
+      message: 'Revenue automation requires Pro tier or higher',
     };
   }
 
@@ -93,50 +92,48 @@ export async function executeRevenueCommand(
     let result: CommandResult | null = null;
 
     switch (command.action) {
-      case "promote_product":
+      case 'promote_product':
         result = await promoteTopProduct();
         break;
 
-      case "launch_sale":
+      case 'launch_sale':
         result = await launchSale(
           command.params?.discount as number,
-          command.params?.duration as number,
+          command.params?.duration as number
         );
         break;
 
-      case "generate_content_batch":
+      case 'generate_content_batch':
         result = await generateContentBatch(command.params?.count as number);
         break;
 
-      case "optimize_store":
+      case 'optimize_store':
         result = await optimizeStore();
         break;
 
-      case "adjust_pricing":
+      case 'adjust_pricing':
         result = await adjustPricing();
         break;
 
-      case "rotate_affiliates":
+      case 'rotate_affiliates':
         result = await rotateAffiliates();
         break;
 
       default:
         result = {
           success: false,
-          message: "Unknown revenue command",
+          message: 'Unknown revenue command',
         };
     }
 
-    return (
-      result || {
-        success: false,
-        message: "Command execution failed",
-      }
-    );
+    return result || {
+      success: false,
+      message: 'Command execution failed',
+    };
   } catch (error) {
     return {
       success: false,
-      message: error instanceof Error ? error.message : "Unknown error",
+      message: error instanceof Error ? error.message : 'Unknown error',
     };
   }
 }
@@ -148,7 +145,7 @@ async function promoteTopProduct(): Promise<CommandResult> {
   if (topProducts.length === 0) {
     return {
       success: false,
-      message: "No products to promote",
+      message: 'No products to promote',
     };
   }
 
@@ -159,14 +156,11 @@ async function promoteTopProduct(): Promise<CommandResult> {
   };
 }
 
-async function launchSale(
-  discount: number,
-  durationHours: number,
-): Promise<CommandResult> {
+async function launchSale(discount: number, durationHours: number): Promise<CommandResult> {
   if (!discount || !durationHours) {
     return {
       success: false,
-      message: "Sale requires discount % and duration in hours",
+      message: 'Sale requires discount % and duration in hours',
     };
   }
 
@@ -189,7 +183,7 @@ async function generateContentBatch(count: number): Promise<CommandResult> {
   if (!count || count < 1 || count > 10) {
     return {
       success: false,
-      message: "Generate 1-10 blog posts per command",
+      message: 'Generate 1-10 blog posts per command',
     };
   }
 
@@ -197,7 +191,7 @@ async function generateContentBatch(count: number): Promise<CommandResult> {
   for (let i = 0; i < count; i++) {
     const topic = `Auto-Generated Topic ${i + 1}`;
     const scheduled_item = scheduler.scheduleContent({
-      type: "blog",
+      type: 'blog',
       title: topic,
       description: `Auto-generated content about ${topic}`,
       scheduledFor: Date.now() + i * 60 * 60 * 1000,
@@ -228,9 +222,7 @@ async function adjustPricing(): Promise<CommandResult> {
   const pricingEngine = getPricingEngine();
   const topProducts = pricingEngine.getTopProducts(5);
 
-  const adjustments = topProducts.map((p) =>
-    pricingEngine.recommendPrice(p.productId),
-  );
+  const adjustments = topProducts.map(p => pricingEngine.recommendPrice(p.productId));
 
   return {
     success: true,
@@ -244,7 +236,7 @@ async function rotateAffiliates(): Promise<CommandResult> {
   // Affiliate rotation logic
   return {
     success: true,
-    message: "Affiliate products rotated",
+    message: 'Affiliate products rotated',
     data: {},
   };
 }

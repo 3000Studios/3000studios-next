@@ -5,12 +5,20 @@
 
 import axios from 'axios';
 
+<<<<<<< HEAD
 const PAYPAL_API_BASE = process.env.NODE_ENV === 'production'
+=======
+const PAYPAL_API_BASE = process.env.PAYPAL_ENV === 'production'
+>>>>>>> origin/copilot/resolve-git-conflicts
   ? 'https://api-m.paypal.com'
   : 'https://api-m.sandbox.paypal.com';
 
 const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
+<<<<<<< HEAD
 const PAYPAL_SECRET = process.env.PAYPAL_SECRET;
+=======
+const PAYPAL_SECRET = process.env.PAYPAL_SECRET || process.env.PAYPAL_CLIENT_SECRET;
+>>>>>>> origin/copilot/resolve-git-conflicts
 
 interface PayPalAccessToken {
   access_token: string;
@@ -26,7 +34,11 @@ async function getAccessToken(): Promise<string> {
 
   try {
     const auth = Buffer.from(`${PAYPAL_CLIENT_ID}:${PAYPAL_SECRET}`).toString('base64');
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/copilot/resolve-git-conflicts
     const response = await axios.post<PayPalAccessToken>(
       `${PAYPAL_API_BASE}/v1/oauth2/token`,
       'grant_type=client_credentials',
@@ -95,8 +107,13 @@ export async function createOrder(params: CreateOrderParams) {
         brand_name: '3000 Studios',
         landing_page: 'NO_PREFERENCE',
         user_action: 'PAY_NOW',
+<<<<<<< HEAD
         return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/store/success`,
         cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/store/cancel`,
+=======
+        return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/success`,
+        cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/cancel`,
+>>>>>>> origin/copilot/resolve-git-conflicts
       },
     };
 

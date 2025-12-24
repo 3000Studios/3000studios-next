@@ -6,8 +6,13 @@
 
 'use client';
 
+<<<<<<< HEAD
 import { useState, useEffect, useRef } from 'react';
 import { Volume2, VolumeX, SkipForward, Play, Pause } from 'lucide-react';
+=======
+import { Pause, Play, SkipForward, Volume2, VolumeX } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+>>>>>>> origin/copilot/resolve-git-conflicts
 
 interface MusicTrack {
   name: string;
@@ -35,6 +40,7 @@ export default function BackgroundMusic() {
 
   const currentTrack = DEFAULT_TRACKS[currentTrackIndex];
 
+<<<<<<< HEAD
   useEffect(() => {
     // Create audio element
     if (typeof window !== 'undefined') {
@@ -53,6 +59,35 @@ export default function BackgroundMusic() {
       };
     }
   }, []);
+=======
+  const handleNextTrack = useCallback(() => {
+    setCurrentTrackIndex((idx) => {
+      const nextIndex = (idx + 1) % DEFAULT_TRACKS.length;
+
+      if (audioRef.current && isPlaying) {
+        audioRef.current.src = DEFAULT_TRACKS[nextIndex].src;
+        audioRef.current.play().catch(err => console.log('Play error:', err));
+      }
+
+      return nextIndex;
+    });
+  }, [isPlaying]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const audio = new Audio();
+    audio.volume = volume;
+    audio.loop = false;
+    audio.addEventListener('ended', handleNextTrack);
+    audioRef.current = audio;
+
+    return () => {
+      audio.pause();
+      audio.removeEventListener('ended', handleNextTrack);
+    };
+  }, [handleNextTrack, volume]);
+>>>>>>> origin/copilot/resolve-git-conflicts
 
   useEffect(() => {
     if (audioRef.current) {

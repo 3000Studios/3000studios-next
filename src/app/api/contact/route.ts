@@ -9,7 +9,7 @@ export async function POST(request: Request) {
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: "Missing required fields" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -26,13 +26,13 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       { message: "Message received successfully" },
-      { status: 200 },
+      { status: 200 }
     );
   } catch (error) {
     console.error("Contact API Error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

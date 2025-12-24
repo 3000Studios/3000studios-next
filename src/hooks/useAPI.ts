@@ -3,39 +3,42 @@
  * Client-side hooks for interacting with backend services
  */
 
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
 // Voice-to-Code Hook
 export function useVoiceToCode() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+<<<<<<< HEAD
   const generateCode = async (
     prompt: string,
     action: "preview" | "apply" | "deploy"
   ) => {
+=======
+  const generateCode = async (prompt: string, action: 'preview' | 'apply' | 'deploy') => {
+>>>>>>> origin/copilot/resolve-git-conflicts
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch("/api/voice-to-code", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/voice-to-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt, action }),
       });
 
       const data = await response.json();
-
+      
       if (!response.ok) {
-        throw new Error(data.error || "Failed to generate code");
+        throw new Error(data.error || 'Failed to generate code');
       }
 
       return data;
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "An error occurred";
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -43,30 +46,33 @@ export function useVoiceToCode() {
     }
   };
 
+<<<<<<< HEAD
   const transcribeAndGenerate = async (
     audioBase64: string,
     action: "preview" | "apply" | "deploy"
   ) => {
+=======
+  const transcribeAndGenerate = async (audioBase64: string, action: 'preview' | 'apply' | 'deploy') => {
+>>>>>>> origin/copilot/resolve-git-conflicts
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch("/api/voice-to-code", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/voice-to-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ audio: audioBase64, action }),
       });
 
       const data = await response.json();
-
+      
       if (!response.ok) {
-        throw new Error(data.error || "Failed to process audio");
+        throw new Error(data.error || 'Failed to process audio');
       }
 
       return data;
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "An error occurred";
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -87,22 +93,21 @@ export function usePayPalCheckout() {
     setError(null);
 
     try {
-      const response = await fetch("/api/paypal/create-order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/paypal/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ items, userId }),
       });
 
       const data = await response.json();
-
+      
       if (!response.ok) {
-        throw new Error(data.error || "Failed to create order");
+        throw new Error(data.error || 'Failed to create order');
       }
 
       return data;
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "An error occurred";
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -115,22 +120,21 @@ export function usePayPalCheckout() {
     setError(null);
 
     try {
-      const response = await fetch("/api/paypal/capture-order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/paypal/capture-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ orderId }),
       });
 
       const data = await response.json();
-
+      
       if (!response.ok) {
-        throw new Error(data.error || "Failed to capture order");
+        throw new Error(data.error || 'Failed to capture order');
       }
 
       return data;
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "An error occurred";
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -141,65 +145,32 @@ export function usePayPalCheckout() {
   return { createOrder, captureOrder, loading, error };
 }
 
-// Stripe Checkout Hook
-export function useStripeCheckout() {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const createCheckoutSession = async (priceId: string) => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ priceId }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to create checkout session");
-      }
-
-      return data; // Returns { url: string }
-    } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "An error occurred";
-      setError(errorMessage);
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return { createCheckoutSession, loading, error };
-}
-
 // Analytics Hook
 export function useAnalytics() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+<<<<<<< HEAD
   const fetchAnalytics = async (
     timeRange: "day" | "week" | "month" = "day"
   ) => {
+=======
+  const fetchAnalytics = async (timeRange: 'day' | 'week' | 'month' = 'day') => {
+>>>>>>> origin/copilot/resolve-git-conflicts
     setLoading(true);
     setError(null);
 
     try {
       const response = await fetch(`/api/analytics?timeRange=${timeRange}`);
       const data = await response.json();
-
+      
       if (!response.ok) {
-        throw new Error(data.error || "Failed to fetch analytics");
+        throw new Error(data.error || 'Failed to fetch analytics');
       }
 
       return data;
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "An error occurred";
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -215,31 +186,34 @@ export function useContentGeneration() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+<<<<<<< HEAD
   const generateBlog = async (
     topic: string,
     keywords?: string[],
     publishToWordPress?: boolean
   ) => {
+=======
+  const generateBlog = async (topic: string, keywords?: string[], publishToWordPress?: boolean) => {
+>>>>>>> origin/copilot/resolve-git-conflicts
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch("/api/content/generate-blog", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/content/generate-blog', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topic, keywords, publishToWordPress }),
       });
 
       const data = await response.json();
-
+      
       if (!response.ok) {
-        throw new Error(data.error || "Failed to generate blog post");
+        throw new Error(data.error || 'Failed to generate blog post');
       }
 
       return data;
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "An error occurred";
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -257,22 +231,21 @@ export function useContentGeneration() {
     setError(null);
 
     try {
-      const response = await fetch("/api/content/generate-product", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/content/generate-product', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ productName, features, productId, autoSave }),
       });
 
       const data = await response.json();
-
+      
       if (!response.ok) {
-        throw new Error(data.error || "Failed to generate product description");
+        throw new Error(data.error || 'Failed to generate product description');
       }
 
       return data;
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "An error occurred";
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -293,25 +266,21 @@ export function useStreaming() {
     setError(null);
 
     try {
-      const response = await fetch("/api/streaming/start", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          streamTitle: title,
-          streamDescription: description,
-        }),
+      const response = await fetch('/api/streaming/start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ streamTitle: title, streamDescription: description }),
       });
 
       const data = await response.json();
-
+      
       if (!response.ok) {
-        throw new Error(data.error || "Failed to start stream");
+        throw new Error(data.error || 'Failed to start stream');
       }
 
       return data;
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "An error occurred";
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -324,22 +293,21 @@ export function useStreaming() {
     setError(null);
 
     try {
-      const response = await fetch("/api/streaming/stop", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/streaming/stop', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ streamId }),
       });
 
       const data = await response.json();
-
+      
       if (!response.ok) {
-        throw new Error(data.error || "Failed to stop stream");
+        throw new Error(data.error || 'Failed to stop stream');
       }
 
       return data;
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "An error occurred";
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -352,20 +320,17 @@ export function useStreaming() {
     setError(null);
 
     try {
-      const url = streamId
-        ? `/api/streaming/status?streamId=${streamId}`
-        : "/api/streaming/status";
+      const url = streamId ? `/api/streaming/status?streamId=${streamId}` : '/api/streaming/status';
       const response = await fetch(url);
       const data = await response.json();
-
+      
       if (!response.ok) {
-        throw new Error(data.error || "Failed to get stream status");
+        throw new Error(data.error || 'Failed to get stream status');
       }
 
       return data;
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "An error occurred";
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -386,22 +351,21 @@ export function useDeployment() {
     setError(null);
 
     try {
-      const response = await fetch("/api/deployment/trigger", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/deployment/trigger', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ branch }),
       });
 
       const data = await response.json();
-
+      
       if (!response.ok) {
-        throw new Error(data.error || "Failed to trigger deployment");
+        throw new Error(data.error || 'Failed to trigger deployment');
       }
 
       return data;
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "An error occurred";
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -414,20 +378,19 @@ export function useDeployment() {
     setError(null);
 
     try {
-      const url = deploymentId
-        ? `/api/deployment/status?deploymentId=${deploymentId}`
-        : "/api/deployment/status";
+      const url = deploymentId 
+        ? `/api/deployment/status?deploymentId=${deploymentId}` 
+        : '/api/deployment/status';
       const response = await fetch(url);
       const data = await response.json();
-
+      
       if (!response.ok) {
-        throw new Error(data.error || "Failed to get deployment status");
+        throw new Error(data.error || 'Failed to get deployment status');
       }
 
       return data;
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "An error occurred";
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -448,17 +411,16 @@ export function useProducts() {
     setError(null);
 
     try {
-      const response = await fetch("/api/products");
+      const response = await fetch('/api/products');
       const data = await response.json();
-
+      
       if (!response.ok) {
-        throw new Error(data.error || "Failed to fetch products");
+        throw new Error(data.error || 'Failed to fetch products');
       }
 
       return data;
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "An error occurred";
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {

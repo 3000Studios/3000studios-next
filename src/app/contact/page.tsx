@@ -87,7 +87,15 @@ export default function ContactPage() {
     }
   };
 
+<<<<<<< HEAD
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+=======
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+>>>>>>> origin/copilot/resolve-git-conflicts
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
     
