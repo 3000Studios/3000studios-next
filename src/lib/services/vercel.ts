@@ -10,6 +10,14 @@ const VERCEL_API = 'https://api.vercel.com';
 const PROJECT_NAME = '3000studios-next'; // Update with actual project name
 const PROJECT_ID = process.env.VERCEL_PROJECT_ID;
 
+function validateDeploymentId(deploymentId: string): void {
+  // Allow only typical Vercel deployment ID characters to avoid URL path injection
+  const DEPLOYMENT_ID_REGEX = /^[A-Za-z0-9\-_]{1,64}$/;
+  if (!DEPLOYMENT_ID_REGEX.test(deploymentId)) {
+    throw new Error('Invalid deploymentId');
+  }
+}
+
 export interface DeploymentResponse {
   id: string;
   url: string;
@@ -52,6 +60,8 @@ export async function triggerDeployment(
 
 export async function getDeploymentStatus(deploymentId: string): Promise<string> {
   try {
+    validateDeploymentId(deploymentId);
+
     const response = await axios.get(
       `${VERCEL_API}/v13/deployments/${deploymentId}`,
       {
@@ -103,6 +113,8 @@ export async function getLatestDeployment(): Promise<DeploymentResponse | null> 
 
 export async function cancelDeployment(deploymentId: string): Promise<void> {
   try {
+    validateDeploymentId(deploymentId);
+
     await axios.patch(
       `${VERCEL_API}/v12/deployments/${deploymentId}/cancel`,
       {},
