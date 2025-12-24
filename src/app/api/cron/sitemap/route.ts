@@ -2,11 +2,8 @@ import { generateSitemapXml } from '@/lib/seo';
 import { getSitemapEntries } from '@/lib/sitemap';
 import { NextRequest, NextResponse } from 'next/server';
 
-<<<<<<< HEAD
-=======
 export const dynamic = 'force-dynamic';
 
->>>>>>> origin/copilot/update-main-with-all-branches
 export async function GET(_req: NextRequest) {
   try {
     const entries = await getSitemapEntries();

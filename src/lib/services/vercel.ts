@@ -8,13 +8,8 @@ import axios from 'axios';
 const VERCEL_TOKEN = process.env.VERCEL_TOKEN;
 const VERCEL_API = 'https://api.vercel.com';
 const PROJECT_NAME = '3000studios-next'; // Update with actual project name
-<<<<<<< HEAD
-<<<<<<< HEAD
-const PROJECT_ID = process.env.VERCEL_PROJECT_ID;
-=======
 >>>>>>> origin/copilot/resolve-git-conflicts
 =======
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 
 export interface DeploymentResponse {
   id: string;

@@ -7,11 +7,7 @@ import Stripe from "stripe";
 export const stripe = new Stripe(
   process.env.STRIPE_SECRET_KEY || "sk_test_mock_key",
   {
-<<<<<<< HEAD
-    apiVersion: "2025-12-15.clover", // Updated to match package type definition
-=======
     apiVersion: "2025-11-17.clover", // Updated to latest API version
->>>>>>> origin/copilot/update-main-with-all-branches
     typescript: true,
   }
 );

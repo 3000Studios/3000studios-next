@@ -6,15 +6,8 @@
 
 'use client';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { useState, useEffect, useRef } from 'react';
-import { Volume2, VolumeX, SkipForward, Play, Pause } from 'lucide-react';
-<<<<<<< HEAD
-=======
 import { Pause, Play, SkipForward, Volume2, VolumeX } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 =======
@@ -52,10 +45,6 @@ export default function BackgroundMusic() {
 
   const currentTrack = DEFAULT_TRACKS[currentTrackIndex];
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 =======
   const handleNextTrack = useCallback(() => {
@@ -89,7 +78,6 @@ export default function BackgroundMusic() {
   const handleNextTrack = () => {
 =======
   const handleNextTrack = useCallback(() => {
->>>>>>> origin/copilot/prepare-production-readiness
     const nextIndex = (currentTrackIndex + 1) % DEFAULT_TRACKS.length;
     setCurrentTrackIndex(nextIndex);
     
@@ -97,11 +85,7 @@ export default function BackgroundMusic() {
       audioRef.current.src = DEFAULT_TRACKS[nextIndex].src;
       audioRef.current.play().catch(err => console.log('Play error:', err));
     }
-<<<<<<< HEAD
-  };
-=======
   }, [currentTrackIndex, isPlaying]);
->>>>>>> origin/copilot/prepare-production-readiness
 
 >>>>>>> origin/copilot/update-main-with-all-branches
   useEffect(() => {
@@ -121,12 +105,6 @@ export default function BackgroundMusic() {
         }
       };
     }
-<<<<<<< HEAD
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
   const handleNextTrack = useCallback(() => {
     setCurrentTrackIndex((idx) => {
       const nextIndex = (idx + 1) % DEFAULT_TRACKS.length;
@@ -154,7 +132,6 @@ export default function BackgroundMusic() {
       audio.removeEventListener('ended', handleNextTrack);
     };
   }, [handleNextTrack, volume]);
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 =======
@@ -189,8 +166,6 @@ export default function BackgroundMusic() {
     }
   };
 
-<<<<<<< HEAD
-=======
   const handleNextTrack = () => {
     const nextIndex = (currentTrackIndex + 1) % DEFAULT_TRACKS.length;
     setCurrentTrackIndex(nextIndex);
@@ -202,7 +177,6 @@ export default function BackgroundMusic() {
     }
   };
 
->>>>>>> origin/copilot/update-best-options
   const toggleMute = () => {
     setIsMuted(!isMuted);
   };

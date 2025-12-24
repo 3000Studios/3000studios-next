@@ -13,13 +13,7 @@ export async function POST(request: NextRequest) {
 
     if (!productName) {
       return NextResponse.json(
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        { error: 'Product name required' },
-=======
         { error: "Product name required" },
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
         { error: 'Product name required' },
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
@@ -59,13 +53,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("Product description API error:", error);
     return NextResponse.json(
-<<<<<<< HEAD
-<<<<<<< HEAD
-      { error: 'Failed to generate product description' },
-<<<<<<< HEAD
-=======
       { error: "Failed to generate product description" },
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 =======

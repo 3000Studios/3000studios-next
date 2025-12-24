@@ -67,13 +67,6 @@ export async function getMatrixStats(): Promise<StatItem[]> {
     color: string;
     updatedAt: Date;
   }) => ({
-<<<<<<< HEAD
-    ...s,
-    icon: null, // UI handles icon rendering logic
-    trend: s.trend as "up" | "down",
-    iconName: s.iconName as "DollarSign" | "Users" | "Calendar" | "BarChart2",
-  })) as StatItem[];
-=======
     title: s.title,
     value: s.value,
     change: s.change,
@@ -82,5 +75,4 @@ export async function getMatrixStats(): Promise<StatItem[]> {
     iconName: s.iconName as "DollarSign" | "Users" | "Calendar" | "BarChart2",
     color: s.color,
   }));
->>>>>>> origin/copilot/update-main-with-all-branches
 }

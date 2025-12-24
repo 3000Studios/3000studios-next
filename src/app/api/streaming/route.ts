@@ -2,12 +2,6 @@ import { prisma } from "@/lib/prisma";
 import Mux from "@mux/mux-node";
 import { NextResponse } from "next/server";
 
-<<<<<<< HEAD
-const { video } = new Mux({
-  tokenId: process.env.MUX_TOKEN_ID,
-  tokenSecret: process.env.MUX_TOKEN_SECRET,
-});
-=======
 export const dynamic = 'force-dynamic';
 
 const getMuxClient = () => {
@@ -19,15 +13,11 @@ const getMuxClient = () => {
         tokenSecret: process.env.MUX_TOKEN_SECRET,
     });
 };
->>>>>>> origin/copilot/update-main-with-all-branches
 
 export async function POST(_request: Request) {
   try {
     // 1. Create a new Live Stream in Mux
-<<<<<<< HEAD
-=======
     const { video } = getMuxClient();
->>>>>>> origin/copilot/update-main-with-all-branches
     const stream = await video.liveStreams.create({
       playback_policy: ["public"],
       new_asset_settings: { playback_policy: ["public"] },

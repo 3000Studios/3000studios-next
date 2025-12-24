@@ -1,15 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-/**
- * Environment Variables Validation
- * 
- * This module validates required environment variables at build time.
- * If any required variable is missing, the build will fail immediately.
- * This prevents silent runtime failures and ensures deployment safety.
- */
-=======
 import { z } from "zod";
->>>>>>> origin/copilot/resolve-git-conflicts
 
 const envSchema = z.object({
   DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
@@ -23,9 +12,6 @@ const envSchema = z.object({
   MUX_TOKEN_SECRET: z.string().optional(),
 });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 function optional(name: string, defaultValue: string = ''): string {
   return process.env[name] || defaultValue;
@@ -78,7 +64,6 @@ const getEnv = (name: string, isOptional: boolean = false) => {
   }
 
   return value;
->>>>>>> origin/copilot/update-main-with-all-branches
 };
 
 // safely handle the possibly undefined return for required vars in dev
@@ -179,11 +164,6 @@ export interface EnvConfig {
   vercelToken?: string;
   githubPat?: string;
 }
-<<<<<<< HEAD
-=======
-export const env = envSchema.parse(process.env);
->>>>>>> origin/copilot/resolve-git-conflicts
-=======
 
 class EnvironmentValidator {
   private static instance: EnvironmentValidator;
@@ -277,5 +257,4 @@ export const env = EnvironmentValidator.getInstance();
 if (env.isProduction()) {
   env.validateRequiredVars(['baseUrl']);
 }
->>>>>>> origin/copilot/update-best-options
 >>>>>>> origin/copilot/update-main-with-all-branches

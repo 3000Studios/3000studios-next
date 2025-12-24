@@ -4,11 +4,8 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-<<<<<<< HEAD
-=======
 export const dynamic = 'force-dynamic';
 
->>>>>>> origin/copilot/update-main-with-all-branches
 export async function POST(req: Request) {
   const body = await req.text();
   const signature = (await headers()).get("Stripe-Signature") as string;

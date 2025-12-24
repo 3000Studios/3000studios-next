@@ -1,11 +1,8 @@
 import { getContentScheduler } from '@/jobs/contentScheduler';
 import { NextRequest, NextResponse } from 'next/server';
 
-<<<<<<< HEAD
-=======
 export const dynamic = 'force-dynamic';
 
->>>>>>> origin/copilot/update-main-with-all-branches
 export async function POST(req: NextRequest) {
   try {
     // Verify Vercel cron secret

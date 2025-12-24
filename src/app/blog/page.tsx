@@ -17,21 +17,10 @@ import { blogPosts, getAllCategories, getAllTags } from '../lib/blogData';
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-<<<<<<< HEAD
-  const [_email, _setEmail] = useState('');
-  const [_isLoading, _setIsLoading] = useState(false);
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-  const [_email, _setEmail] = useState('');
-  const [_isLoading, _setIsLoading] = useState(false);
-=======
->>>>>>> origin/copilot/fix-repo-architecture-errors
 =======
   // email and isLoading are placeholders for future newsletter integration
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
->>>>>>> origin/copilot/update-best-options
 >>>>>>> origin/copilot/update-main-with-all-branches
 
   const categories = ['All', ...getAllCategories()];
@@ -99,18 +88,8 @@ export default function BlogPage() {
         />
 
         {/* Blog Posts Grid */}
-<<<<<<< HEAD
-        {_isLoading ? (
-          <div className="space-y-8">
-            <LoadingSkeleton variant="blog" count={3} />
-          </div>
-        ) : (
-          <div className="space-y-8">
-            {filteredPosts.map((post, index) => (
-=======
         <div className="space-y-8">
           {filteredPosts.map((post, index) => (
->>>>>>> origin/copilot/fix-repo-architecture-errors
               <motion.article
                 key={post.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -190,11 +169,7 @@ export default function BlogPage() {
         )
 
         {/* No Results */}
-<<<<<<< HEAD
-        {filteredPosts.length === 0 && !_isLoading && (
-=======
         {filteredPosts.length === 0 && (
->>>>>>> origin/copilot/fix-repo-architecture-errors
           <div className="text-center py-12">
             <div className="text-6xl mb-4 opacity-50">📝</div>
             <p className="text-gray-400 text-lg">No articles found matching your search</p>

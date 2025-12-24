@@ -5,12 +5,7 @@
 
 import axios from 'axios';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-const PAYPAL_API_BASE = process.env.NODE_ENV === 'production'
-=======
 const PAYPAL_API_BASE = process.env.PAYPAL_ENV === 'production'
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
 const PAYPAL_API_BASE = process.env.PAYPAL_ENV === 'production'
 >>>>>>> origin/copilot/update-main-with-all-branches
@@ -18,13 +13,7 @@ const PAYPAL_API_BASE = process.env.PAYPAL_ENV === 'production'
   : 'https://api-m.sandbox.paypal.com';
 
 const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
-<<<<<<< HEAD
-<<<<<<< HEAD
-const PAYPAL_SECRET = process.env.PAYPAL_SECRET;
-<<<<<<< HEAD
-=======
 const PAYPAL_SECRET = process.env.PAYPAL_SECRET || process.env.PAYPAL_CLIENT_SECRET;
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 =======
@@ -45,12 +34,7 @@ async function getAccessToken(): Promise<string> {
 
   try {
     const auth = Buffer.from(`${PAYPAL_CLIENT_ID}:${PAYPAL_SECRET}`).toString('base64');
-<<<<<<< HEAD
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
 
 >>>>>>> origin/copilot/update-main-with-all-branches
@@ -122,15 +106,8 @@ export async function createOrder(params: CreateOrderParams) {
         brand_name: '3000 Studios',
         landing_page: 'NO_PREFERENCE',
         user_action: 'PAY_NOW',
-<<<<<<< HEAD
-<<<<<<< HEAD
-        return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/store/success`,
-        cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/store/cancel`,
-<<<<<<< HEAD
-=======
         return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/success`,
         cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/cancel`,
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 =======

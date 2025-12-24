@@ -6,17 +6,6 @@
 
 export const SUBSCRIPTION_TIERS = {
   FREE: {
-<<<<<<< HEAD
-    name: "Free",
-    price: 0,
-    interval: "forever",
-    features: [
-      "Ads shown",
-      "Limited tools (10/day)",
-      "Email capture",
-      "Basic templates",
-      "Community support",
-=======
     name: 'Free',
     price: 0,
     interval: 'forever',
@@ -26,7 +15,6 @@ export const SUBSCRIPTION_TIERS = {
       'Email capture',
       'Basic templates',
       'Community support',
->>>>>>> origin/copilot/update-main-with-all-branches
     ],
     limits: {
       api_calls: 10,
@@ -35,20 +23,6 @@ export const SUBSCRIPTION_TIERS = {
     },
   },
   PRO: {
-<<<<<<< HEAD
-    name: "Pro",
-    price: 19,
-    priceYearly: 190, // ~2 months free
-    interval: "month",
-    features: [
-      "No ads",
-      "Premium content",
-      "Unlimited tools",
-      "Advanced dashboards",
-      "Priority support",
-      "Custom branding",
-      "API access (1000 calls/mo)",
-=======
     name: 'Pro',
     price: 19,
     priceYearly: 190, // ~2 months free
@@ -61,7 +35,6 @@ export const SUBSCRIPTION_TIERS = {
       'Priority support',
       'Custom branding',
       'API access (1000 calls/mo)',
->>>>>>> origin/copilot/update-main-with-all-branches
     ],
     limits: {
       api_calls: 1000,
@@ -71,20 +44,6 @@ export const SUBSCRIPTION_TIERS = {
     stripe_price_id: process.env.STRIPE_PRO_PRICE_ID,
   },
   BUSINESS: {
-<<<<<<< HEAD
-    name: "Business",
-    price: 49,
-    priceYearly: 490,
-    interval: "month",
-    features: [
-      "Everything in Pro",
-      "Team collaboration (up to 10 users)",
-      "Advanced analytics",
-      "White-label options",
-      "API access (10,000 calls/mo)",
-      "Dedicated support",
-      "Custom integrations",
-=======
     name: 'Business',
     price: 49,
     priceYearly: 490,
@@ -97,7 +56,6 @@ export const SUBSCRIPTION_TIERS = {
       'API access (10,000 calls/mo)',
       'Dedicated support',
       'Custom integrations',
->>>>>>> origin/copilot/update-main-with-all-branches
     ],
     limits: {
       api_calls: 10000,
@@ -108,26 +66,6 @@ export const SUBSCRIPTION_TIERS = {
     stripe_price_id: process.env.STRIPE_BUSINESS_PRICE_ID,
   },
   ENTERPRISE: {
-<<<<<<< HEAD
-    name: "Enterprise",
-    price: "Custom",
-    interval: "custom",
-    features: [
-      "Everything in Business",
-      "Unlimited team members",
-      "Unlimited API access",
-      "Custom automation",
-      "Priority compute",
-      "SLA guarantee",
-      "Dedicated account manager",
-      "Custom development",
-    ],
-    limits: {
-      api_calls: "unlimited",
-      storage_gb: "unlimited",
-      projects: "unlimited",
-      team_members: "unlimited",
-=======
     name: 'Enterprise',
     price: 'Custom',
     interval: 'custom',
@@ -146,18 +84,13 @@ export const SUBSCRIPTION_TIERS = {
       storage_gb: 'unlimited',
       projects: 'unlimited',
       team_members: 'unlimited',
->>>>>>> origin/copilot/update-main-with-all-branches
     },
     contact_sales: true,
   },
 } as const;
 
 export type TierName = keyof typeof SUBSCRIPTION_TIERS;
-<<<<<<< HEAD
-export type Tier = (typeof SUBSCRIPTION_TIERS)[TierName];
-=======
 export type Tier = typeof SUBSCRIPTION_TIERS[TierName];
->>>>>>> origin/copilot/update-main-with-all-branches
 
 /**
  * Kill-switch protection
@@ -165,13 +98,7 @@ export type Tier = typeof SUBSCRIPTION_TIERS[TierName];
  * If ads fail, subscriptions continue
  */
 export const REVENUE_FAILSAFE = {
-<<<<<<< HEAD
-  stripe_fallback: "show_ads",
-  adsense_fallback: "highlight_subscriptions",
-  both_fail: "basic_access_maintained",
-=======
   stripe_fallback: 'show_ads',
   adsense_fallback: 'highlight_subscriptions',
   both_fail: 'basic_access_maintained',
->>>>>>> origin/copilot/update-main-with-all-branches
 } as const;

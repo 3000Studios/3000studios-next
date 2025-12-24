@@ -1,23 +1,12 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { defineConfig, globalIgnores } from "eslint/config";
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
-=======
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
 import { defineConfig, globalIgnores } from "eslint/config";
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
 >>>>>>> origin/copilot/update-main-with-all-branches
 
-<<<<<<< HEAD
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-=======
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
@@ -55,8 +44,6 @@ const eslintConfig = defineConfig([
     "node_modules/**",
     ".vercel/**",
   ]),
-<<<<<<< HEAD
-=======
   {
     ignores: ["node_modules/**"],
     rules: {
@@ -77,9 +64,7 @@ const eslintConfig = defineConfig([
       "@next/next/no-html-link-for-pages": "off",
     },
   },
->>>>>>> origin/copilot/resolve-git-conflicts
 ]);
->>>>>>> origin/copilot/update-best-options
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,

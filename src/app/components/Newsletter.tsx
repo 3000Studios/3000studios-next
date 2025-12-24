@@ -6,14 +6,8 @@
 
 'use client';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { useState } from 'react';
-import { Mail, Check, AlertCircle, Loader2, Gift } from 'lucide-react';
-=======
 import { AlertCircle, Check, Gift, Loader2, Mail } from 'lucide-react';
 import { useState } from 'react';
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
 import { AlertCircle, Check, Gift, Loader2, Mail } from 'lucide-react';
 import { useState } from 'react';
@@ -74,28 +68,7 @@ export default function Newsletter({
 
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
-<<<<<<< HEAD
-=======
-
-      setStatus('success');
-      setMessage('🎉 Welcome aboard! Check your inbox for a confirmation email.');
-      setEmail('');
-      setName('');
->>>>>>> origin/copilot/resolve-git-conflicts
-
-      setStatus('success');
-      setMessage('🎉 Welcome aboard! Check your inbox for a confirmation email.');
-      setEmail('');
-      setName('');
-
-      // Track conversion
-      // gtag('event', 'newsletter_signup', { method: 'website_form' });
-<<<<<<< HEAD
-<<<<<<< HEAD
-    } catch (err) {
-=======
     } catch {
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
     } catch {
 >>>>>>> origin/copilot/update-main-with-all-branches
@@ -159,13 +132,7 @@ export default function Newsletter({
             <AlertCircle size={14} /> {error}
           </p>
         )}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
         
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
@@ -177,13 +144,7 @@ export default function Newsletter({
             <Check size={14} /> {message}
           </p>
         )}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
         
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
@@ -270,13 +231,7 @@ export default function Newsletter({
               <AlertCircle size={18} /> {error}
             </p>
           )}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-          
-=======
 
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
           
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
@@ -290,13 +245,7 @@ export default function Newsletter({
               </p>
             </div>
           )}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-          
-=======
 
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
           
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
@@ -331,15 +280,10 @@ export default function Newsletter({
             {title}
           </h3>
         </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
         
 =======
 
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
 
 >>>>>>> origin/copilot/update-main-with-all-branches
@@ -402,13 +346,7 @@ export default function Newsletter({
               <AlertCircle size={14} /> {error}
             </p>
           )}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-          
-=======
 
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
           
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
@@ -420,13 +358,7 @@ export default function Newsletter({
               <Check size={14} /> {message}
             </p>
           )}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-          
-=======
 
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
           
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy

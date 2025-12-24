@@ -6,16 +6,8 @@
 
 'use client';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { useState } from 'react';
-import { ShoppingCart, Eye, Heart, Star } from 'lucide-react';
-import Image from 'next/image';
-<<<<<<< HEAD
-=======
 import { Eye, Heart, ShoppingCart, Star } from 'lucide-react';
 import { useState } from 'react';
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 =======
@@ -65,15 +57,8 @@ function ProductCard({ product, onAddToCart }: { product: Product; onAddToCart?:
         className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full glass border border-gold/20 flex items-center justify-center hover:scale-110 transition-transform"
         aria-label="Add to favorites"
       >
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <Heart 
-          size={16} 
-=======
         <Heart
           size={16}
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
         <Heart 
           size={16} 

@@ -8,13 +8,7 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(_request: NextRequest) {
   try {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    const products = await getProducts();
-<<<<<<< HEAD
 =======
-=======
->>>>>>> origin/copilot/update-main-with-all-branches
     const dbProducts = await prisma.product.findMany();
 
     // Map Prisma 'id' to 'productId' for frontend compatibility
@@ -22,12 +16,8 @@ export async function GET(_request: NextRequest) {
       ...p,
       productId: p.id,
     }));
-<<<<<<< HEAD
->>>>>>> origin/copilot/resolve-git-conflicts
-=======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 =======
->>>>>>> origin/copilot/update-main-with-all-branches
 
     return NextResponse.json({
       success: true,

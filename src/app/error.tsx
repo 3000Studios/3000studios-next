@@ -1,23 +1,13 @@
-<<<<<<< HEAD
-"use client";
-=======
 'use client';
->>>>>>> origin/copilot/update-main-with-all-branches
 
 /**
  * Global Error Boundary
  * Catches and handles runtime errors in the application
  */
 
-<<<<<<< HEAD
-import { useEffect } from "react";
-import { AlertTriangle, RefreshCw, Home } from "lucide-react";
-import Link from "next/link";
-=======
 import { useEffect } from 'react';
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
 import Link from 'next/link';
->>>>>>> origin/copilot/update-main-with-all-branches
 
 export default function Error({
   error,
@@ -28,11 +18,7 @@ export default function Error({
 }) {
   useEffect(() => {
     // Log error to monitoring service in production
-<<<<<<< HEAD
-    console.error("Application error:", error);
-=======
     console.error('Application error:', error);
->>>>>>> origin/copilot/update-main-with-all-branches
   }, [error]);
 
   return (
@@ -44,30 +30,17 @@ export default function Error({
             <AlertTriangle className="w-16 h-16 text-red-500" />
           </div>
         </div>
-<<<<<<< HEAD
-
-=======
         
->>>>>>> origin/copilot/update-main-with-all-branches
         {/* Error Message */}
         <h1 className="text-4xl font-bold text-white mb-4">
           Something went wrong!
         </h1>
         <p className="text-gray-400 mb-8">
-<<<<<<< HEAD
-          We encountered an unexpected error. Don't worry, our team has been
-          notified.
-        </p>
-
-        {/* Error Details (Development only) */}
-        {process.env.NODE_ENV === "development" && (
-=======
           We encountered an unexpected error. Don't worry, our team has been notified.
         </p>
         
         {/* Error Details (Development only) */}
         {process.env.NODE_ENV === 'development' && (
->>>>>>> origin/copilot/update-main-with-all-branches
           <div className="mb-8 p-4 bg-white/5 rounded-lg text-left">
             <p className="text-sm font-mono text-red-400 break-all">
               {error.message}
@@ -79,11 +52,7 @@ export default function Error({
             )}
           </div>
         )}
-<<<<<<< HEAD
-
-=======
         
->>>>>>> origin/copilot/update-main-with-all-branches
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
@@ -93,11 +62,7 @@ export default function Error({
             <RefreshCw className="w-5 h-5" />
             Try Again
           </button>
-<<<<<<< HEAD
-
-=======
           
->>>>>>> origin/copilot/update-main-with-all-branches
           <Link
             href="/"
             className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-white font-semibold rounded-lg hover:bg-white/20 transition-colors backdrop-blur-sm"

@@ -1,15 +1,8 @@
 /**
-<<<<<<< HEAD
-<<<<<<< HEAD
- * Home Page (Main Landing Page)
- * Features: High-conversion video hero, monetized UI, affiliate stacks, premium CTAs
- * Award-winning UI with premium animations and interactive elements
-=======
  * Homepage - Conversion Optimized
  * 10-second cold traffic → revenue conversion
  * REVENUE LOCK — DO NOT MODIFY
  * Every element designed for monetization
->>>>>>> origin/copilot/update-main-with-all-branches
  */
 
 "use client";
@@ -301,72 +294,6 @@ export default function HomePage() {
       {/* Affiliate Tool Stack */}
       <AffiliateToolCards />
 
-<<<<<<< HEAD
-      {/* Mid-Page AdSense */}
-      <div className="py-12 bg-gray-900/50">
-        <div className="max-w-4xl mx-auto flex justify-center px-4">
-          <AdSenseUnit
-            slot="5800977493749262"
-            style={{ display: "block", minHeight: "100px", width: "100%" }}
-          />
-        </div>
-      </div>
-
-      {/* Featured Section */}
-      <section className="py-24 px-4 relative z-10 bg-gradient-to-b from-black to-gray-900">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-5xl font-bold leading-tight">
-                Unlock the <span className="text-gold">Pro Tier</span>
-              </h2>
-              <p className="text-gray-400 text-lg">
-                Get access to exclusive API endpoints, advanced automation
-                workflows, and priority compute power.
-              </p>
-              <ul className="space-y-3 text-gray-300">
-                <li className="flex items-center gap-2">
-                  <Sparkles className="text-gold" size={16} /> Unlimited AI
-                  Generation
-                </li>
-                <li className="flex items-center gap-2">
-                  <Sparkles className="text-gold" size={16} /> Priority API
-                  Access
-                </li>
-                <li className="flex items-center gap-2">
-                  <Sparkles className="text-gold" size={16} /> 24/7 Support
-                  Channel
-                </li>
-              </ul>
-              <Link
-                href="/store?plan=pro"
-                className="inline-flex mt-6 bg-sapphire text-white px-8 py-4 rounded-lg font-bold hover:bg-blue-600 transition-colors"
-              >
-                Go Pro - $49/mo
-              </Link>
-            </div>
-            <div className="card glass-premium p-1 hover:rotate-1 transition-transform duration-500">
-              <div className="bg-gray-900 rounded-xl p-8 h-full">
-                <div className="flex justify-between items-center mb-8">
-                  <span className="text-gray-400">Current Plan</span>
-                  <span className="text-green-400 font-mono">Active</span>
-                </div>
-                <div className="text-4xl font-mono mb-2">$1,240.50</div>
-                <div className="text-gray-500 text-sm mb-8">
-                  This Month's Revenue
-                </div>
-                <div className="h-32 bg-gray-800 rounded-lg flex items-end p-2 gap-1">
-                  {[40, 65, 45, 80, 55, 90, 75].map((h, i) => (
-                    <div
-                      key={i}
-                      className="flex-1 bg-gold/50 hover:bg-gold transition-colors"
-                      style={{ height: `${h}%` }}
-                    ></div>
-                  ))}
-                </div>
-              </div>
-            </div>
-=======
  * Enhanced Homepage with Brand System
  * High-conversion hero, proof section, funnels, exit-intent
  */
@@ -685,7 +612,6 @@ export default function HomePage() {
                 </Link>
               </motion.div>
             ))}
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
       {/* AdSense Auto Ads Placement Hint - Mid Page */}
       {/* Auto Ads will automatically place ads here once your AdSense account is approved */}
@@ -713,21 +639,6 @@ export default function HomePage() {
         </Suspense>
       </section>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-      {/* Newsletter Section - Revenue/Lead Generation */}
-      <section className="py-24 px-4 bg-black">
-        <div className="max-w-4xl mx-auto">
-          <Newsletter
-            variant="hero"
-            title="Join the Inner Circle"
-            description="Get the exact strategies we use to scale revenue delivered to your inbox."
-          />
-        </div>
-      </section>
-
-      {/* Footer is handled by layout */}
-=======
       {/* Newsletter / Email Capture */}
       <section
         className="py-24 px-4"
@@ -749,7 +660,6 @@ export default function HomePage() {
         </Suspense>
       </section>
 
->>>>>>> origin/copilot/update-main-with-all-branches
       {/* Exit Intent Modal */}
       {showExitIntent && (
         <motion.div
@@ -762,11 +672,7 @@ export default function HomePage() {
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-<<<<<<< HEAD
-            className="max-w-md p-8 rounded-lg"
-=======
             className="max-w-md p-8 rounded-lg relative"
->>>>>>> origin/copilot/update-main-with-all-branches
             style={{
               background: brand.colors.bg.elevated,
               border: `2px solid ${brand.colors.action.primary}`,
@@ -774,32 +680,6 @@ export default function HomePage() {
             }}
             onClick={(e) => e.stopPropagation()}
           >
-<<<<<<< HEAD
-            <h3
-              className="text-2xl font-bold mb-4"
-              style={{ color: brand.colors.text.primary }}
-            >
-              Wait! Before you go...
-            </h3>
-            <p className="mb-6" style={{ color: brand.colors.text.secondary }}>
-              Get 20% off your first purchase + exclusive voice control access
-            </p>
-            <Link
-              href="/store"
-              className="block w-full text-center px-6 py-3 rounded-lg font-bold"
-              style={{
-                background: brand.colors.gradient.primary,
-                color: brand.colors.text.inverse,
-              }}
-              onClick={() => setShowExitIntent(false)}
-            >
-              Claim Your Discount
-            </Link>
-          </motion.div>
-        </motion.div>
-      )}
->>>>>>> origin/copilot/resolve-git-conflicts
-=======
             <div 
               className="absolute -top-8 left-1/2 transform -translate-x-1/2 text-6xl"
             >
@@ -843,7 +723,6 @@ export default function HomePage() {
       <Suspense fallback={null}>
         <InteractiveAvatar />
       </Suspense>
->>>>>>> origin/copilot/update-main-with-all-branches
     </div>
   );
 }

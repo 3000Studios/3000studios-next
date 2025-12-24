@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-=======
-import { validateSession } from "@/lib/matrix/auth";
-import { validateShadowSession } from "@/lib/shadow/auth";
->>>>>>> origin/copilot/update-main-with-all-branches
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
-
-export async function middleware(req: NextRequest) {
-  const url = req.nextUrl;
-
-<<<<<<< HEAD
-=======
   // Protect /matrix routes
   if (url.pathname.startsWith("/matrix")) {
     const sessionCookie = req.cookies.get("matrix-session")?.value;
@@ -56,7 +43,6 @@ export async function middleware(req: NextRequest) {
     }
   }
 
->>>>>>> origin/copilot/update-main-with-all-branches
   // Protect /live with optional password
   if (url.pathname.startsWith("/live") && process.env.LIVE_PASSWORD) {
     const pass = url.searchParams.get("access");
@@ -69,9 +55,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-<<<<<<< HEAD
-  matcher: ["/live/:path*"],
-=======
   matcher: ["/matrix/:path*", "/shadow/:path*", "/api/shadow/:path*", "/live/:path*"],
->>>>>>> origin/copilot/update-main-with-all-branches
 };

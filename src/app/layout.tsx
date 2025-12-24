@@ -6,11 +6,7 @@
  * Removing ads.txt verification, consent logic, or ad scripts will break revenue
  */
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import { Analytics } from "@vercel/analytics/next";
->>>>>>> origin/copilot/update-main-with-all-branches
 import type { Metadata } from "next";
 import Script from "next/script";
 import BackgroundMusic from "./components/BackgroundMusic";
@@ -30,9 +26,6 @@ const ADSENSE_ACCOUNT = RAW_ADSENSE_ID
   : undefined;
 
 export const metadata: Metadata = {
-<<<<<<< HEAD
-  metadataBase: new URL(ENV.SITE_URL),
-=======
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import Script from "next/script";
@@ -52,38 +45,8 @@ const ADSENSE_ACCOUNT = RAW_ADSENSE_ID
   : undefined;
 
 export const metadata: Metadata = {
->>>>>>> origin/copilot/resolve-git-conflicts
-=======
-<<<<<<< HEAD
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://3000studios.xyz'),
->>>>>>> origin/copilot/update-main-with-all-branches
-  title: "3000 Studios - Award-Winning Creative Studio",
-  description:
-    "Premium digital experiences, innovative solutions, and transformative projects. 250+ successful clients worldwide with 99% satisfaction rate.",
-  keywords:
-    "creative studio, digital agency, web development, premium design, innovation, 3D experiences, AI solutions",
-<<<<<<< HEAD
-<<<<<<< HEAD
-  authors: [{ name: "3000 Studios", url: "https://3000studios.com" }],
-  creator: "3000 Studios",
-  publisher: "3000 Studios",
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: ENV.SITE_URL,
-    siteName: "3000 Studios",
-    title: "3000 Studios - Award-Winning Creative Studio",
-    description:
-      "Premium digital experiences, innovative solutions, and transformative projects. 250+ successful clients worldwide with 99% satisfaction rate.",
-    images: [
-      {
-        url: `${ENV.SITE_URL}/logo.svg`,
-        width: 1200,
-        height: 630,
-        alt: "3000 Studios Logo",
 =======
 =======
->>>>>>> origin/copilot/update-main-with-all-branches
   authors: [{ name: "3000 Studios" }],
   robots: "index, follow",
   openGraph: {
@@ -100,40 +63,13 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: "3000 Studios",
-<<<<<<< HEAD
->>>>>>> origin/copilot/resolve-git-conflicts
-=======
 >>>>>>> origin/copilot/update-main-with-all-branches
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-<<<<<<< HEAD
-<<<<<<< HEAD
-    title: "3000 Studios - Award-Winning Creative Studio",
-    description:
-      "Premium digital experiences, innovative solutions, and transformative projects.",
-    images: [`${ENV.SITE_URL}/logo.svg`],
-    creator: "@3000Studios",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  // verification: {
-  //   google: "google-site-verification-code", // Add actual verification code from Google Search Console
-  // },
 =======
-=======
->>>>>>> origin/copilot/update-main-with-all-branches
     site: "@3000studios",
     title: "3000 Studios - Award-Winning Creative Studio",
     description:
@@ -142,9 +78,6 @@ export const metadata: Metadata = {
   other: ADSENSE_ACCOUNT
     ? { "google-adsense-account": ADSENSE_ACCOUNT }
     : undefined,
-<<<<<<< HEAD
->>>>>>> origin/copilot/resolve-git-conflicts
-=======
 =======
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://3000studios.com'),
   title: {
@@ -199,8 +132,6 @@ export const metadata: Metadata = {
     google: 'google-verification-code',
     // Add other verification codes as needed
   },
->>>>>>> origin/copilot/update-best-options
->>>>>>> origin/copilot/update-main-with-all-branches
 };
 
 export default function RootLayout({
@@ -211,11 +142,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased flex flex-col min-h-screen bg-black">
-<<<<<<< HEAD
-<<<<<<< HEAD
 =======
-=======
->>>>>>> origin/copilot/update-main-with-all-branches
         {/* Google AdSense Auto Ads (enabled when NEXT_PUBLIC_ADSENSE_PUBLISHER_ID is set) */}
         {ADSENSE_ACCOUNT ? (
           <Script
@@ -226,9 +153,6 @@ export default function RootLayout({
             crossOrigin="anonymous"
           />
         ) : null}
-<<<<<<< HEAD
->>>>>>> origin/copilot/resolve-git-conflicts
-=======
 >>>>>>> origin/copilot/update-main-with-all-branches
         {/* Live Video Wallpaper Background - Blueprint Feature */}
         <VideoWallpaper opacity={0.25} />
@@ -244,15 +168,9 @@ export default function RootLayout({
 
         {/* Main Content */}
         <Navigation />
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <main className="flex-grow pt-16 relative z-10">{children}</main>
+        <main className="flex-grow pt-20 relative z-10">{children}</main>
 =======
         <main className="flex-grow pt-20 relative z-10">{children}</main>
->>>>>>> origin/copilot/resolve-git-conflicts
-=======
-        <main className="flex-grow pt-20 relative z-10">{children}</main>
->>>>>>> origin/copilot/update-main-with-all-branches
 
         {/* Gravity Footer - Blueprint Feature */}
         <GravityFooter />
@@ -261,14 +179,8 @@ export default function RootLayout({
         <ConsentBanner />
 
         <Analytics />
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <SpeedInsights />
-<<<<<<< HEAD
-=======
 >>>>>>> origin/copilot/resolve-git-conflicts
 =======
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 =======
 >>>>>>> origin/copilot/update-main-with-all-branches
       </body>

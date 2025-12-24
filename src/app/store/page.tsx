@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 /**
  * Store Page
@@ -9,10 +5,6 @@
  * Features: Enhanced product grid, filtering, sorting, search, PayPal checkout
  * Connected to MongoDB for real products and PayPal for payments
  */
-<<<<<<< HEAD
-=======
-=======
->>>>>>> origin/copilot/update-main-with-all-branches
 import { CartSidebar } from '@/components/CartSidebar';
 import { CountdownTimer } from '@/components/CountdownTimer';
 import { ProductCard } from '@/components/ProductCard';
@@ -20,12 +12,7 @@ import { SocialProof } from '@/components/SocialProof';
 import { getProducts } from '@/lib/products-data';
 import { Metadata } from 'next';
 import Link from 'next/link';
-<<<<<<< HEAD
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
->>>>>>> origin/copilot/update-main-with-all-branches
 
 export const metadata: Metadata = {
   title: 'Store | 3000 Studios',
@@ -36,20 +23,12 @@ export default function StorePage() {
   const products = getProducts();
 
   return (
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
     <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black py-8 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-<<<<<<< HEAD
-=======
-=======
->>>>>>> origin/copilot/update-main-with-all-branches
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950">
       {/* Animated background elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -80,12 +59,7 @@ export default function StorePage() {
       <div className="relative border-b border-purple-500/20 bg-gradient-to-b from-slate-900/80 to-slate-950/50 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex items-center justify-between">
-<<<<<<< HEAD
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
->>>>>>> origin/copilot/update-main-with-all-branches
             <div>
               <h1 className="text-5xl sm:text-6xl font-black bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-3">
                 3000 Studios Store
@@ -150,13 +124,8 @@ export default function StorePage() {
               <div className="text-5xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-3">
                 {products.length}+
               </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
               <p className="text-purple-300/80 font-semibold">Premium Products</p>
               <p className="text-purple-400/60 text-sm mt-1">Carefully curated for excellence</p>
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 =======

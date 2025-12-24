@@ -126,91 +126,24 @@ export async function POST(request: NextRequest) {
 
     const parsed = JSON.parse(completion.choices[0].message.content || "{}");
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 >>>>>>> origin/copilot/update-main-with-all-branches
     return NextResponse.json({
       success: true,
       ...parsed,
       action: "preview",
     });
-<<<<<<< HEAD
-=======
-      case 'apply':
-        // Quick commit without deploying (for batching changes)
-        const filePath = body.filePath || 'src/app/generated.tsx';
-        const commitResult = await quickCommit(
-          filePath,
-          codeResult.code,
-          `Voice command: ${textPrompt.substring(0, 50)}...`
-        );
-
-        return NextResponse.json({
-          success: commitResult.success,
-          commitSha: commitResult.commitSha,
-          code: codeResult.code,
-          explanation: codeResult.explanation,
-          message: commitResult.message,
-        });
-
-      case 'deploy':
-        // INSTANT SYNC - Commit and deploy to LIVE in one flow
-        const deployFilePath = body.filePath || 'src/app/generated.tsx';
-        const events: any[] = [];
-        
-        const syncResult = await instantSync(
-          deployFilePath,
-          codeResult.code,
-          `🎤 Voice deployment: ${textPrompt.substring(0, 50)}...`,
-          (event) => {
-            events.push(event);
-          }
-        );
-
-        return NextResponse.json({
-          success: syncResult.success,
-          commitSha: syncResult.commitSha,
-          deploymentId: syncResult.deploymentId,
-          deploymentUrl: syncResult.deploymentUrl,
-          code: codeResult.code,
-          explanation: codeResult.explanation,
-          message: syncResult.message,
-          events: events, // Include deployment events for tracking
-          timestamp: syncResult.timestamp,
-        });
-
-      default:
-        return NextResponse.json(
-          { error: 'Invalid action. Use: preview, apply, or deploy' },
-          { status: 400 }
-        );
-    }
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
 >>>>>>> origin/copilot/update-main-with-all-branches
   } catch (error) {
     console.error("Voice API Error:", error);
     return NextResponse.json(
-<<<<<<< HEAD
-<<<<<<< HEAD
-      { error: 'Failed to process voice command' },
+      { error: "Internal Server Error" },
 =======
       { error: "Internal Server Error" },
->>>>>>> origin/copilot/resolve-git-conflicts
-=======
-      { error: "Internal Server Error" },
->>>>>>> origin/copilot/update-main-with-all-branches
       { status: 500 }
     );
   }
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 =======
-=======
->>>>>>> origin/copilot/update-main-with-all-branches
 
 async function applyPatches(patches: CodePatch[]) {
   const results = [];
@@ -262,9 +195,5 @@ async function applyPatches(patches: CodePatch[]) {
     results,
   });
 }
-<<<<<<< HEAD
->>>>>>> origin/copilot/resolve-git-conflicts
-=======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 =======
->>>>>>> origin/copilot/update-main-with-all-branches

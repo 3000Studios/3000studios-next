@@ -6,11 +6,6 @@
 
 'use client';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { useState } from 'react';
-import { Award, Users, TrendingUp, Star, ExternalLink, Filter, ChevronRight } from 'lucide-react';
-=======
 >>>>>>> origin/copilot/update-main-with-all-branches
 import { motion } from 'framer-motion';
 import { Award, ChevronRight, ExternalLink, Filter, Star, TrendingUp, Users } from 'lucide-react';
@@ -18,19 +13,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
 import Newsletter from '../components/Newsletter';
-<<<<<<< HEAD
-=======
-import { motion } from 'framer-motion';
-import { Award, ChevronRight, ExternalLink, Filter, Star, TrendingUp, Users } from 'lucide-react';
-import Link from 'next/link';
-import { useState } from 'react';
-import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
-import Newsletter from '../components/Newsletter';
 import { getAllPortfolioCategories, portfolioItems } from '../lib/portfolioData';
->>>>>>> origin/copilot/resolve-git-conflicts
-=======
-import { getAllPortfolioCategories, portfolioItems } from '../lib/portfolioData';
->>>>>>> origin/copilot/update-main-with-all-branches
 
 export default function PortfolioPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -45,14 +28,8 @@ export default function PortfolioPage() {
 
   const categories = ['All', ...getAllPortfolioCategories()];
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  const filteredProjects = selectedCategory === 'All' 
-    ? portfolioItems 
-=======
   const filteredProjects = selectedCategory === 'All'
     ? portfolioItems
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
   const filteredProjects = selectedCategory === 'All'
     ? portfolioItems
@@ -139,13 +116,7 @@ export default function PortfolioPage() {
             Featured Case Studies
           </h2>
           <p className="text-gray-400 mb-8">Deep dives into our most impactful projects</p>
-<<<<<<< HEAD
-<<<<<<< HEAD
-          
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 =======
@@ -201,17 +172,9 @@ export default function PortfolioPage() {
                     <h3 className="text-3xl font-bold text-white mb-2 hover:text-gold transition-colors">
                       {project.title}
                     </h3>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    
-                    <p className="text-gray-400 mb-4 italic">Client: {project.client}</p>
-                    
-=======
 
                     <p className="text-gray-400 mb-4 italic">Client: {project.client}</p>
 
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
                     
                     <p className="text-gray-400 mb-4 italic">Client: {project.client}</p>
@@ -244,15 +207,8 @@ export default function PortfolioPage() {
                       className="text-gold hover:text-platinum transition-colors font-semibold inline-flex items-center gap-2 mb-4"
                     >
                       {expandedProject === project.id ? 'Hide Details' : 'View Full Case Study'}
-<<<<<<< HEAD
-<<<<<<< HEAD
-                      <ChevronRight 
-                        size={20} 
-<<<<<<< HEAD
-=======
                       <ChevronRight
                         size={20}
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 =======

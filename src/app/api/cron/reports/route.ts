@@ -2,11 +2,8 @@ import { getReportGenerator } from '@/jobs/dailyReport';
 import { getAnalytics } from '@/lib/analytics';
 import { NextRequest, NextResponse } from 'next/server';
 
-<<<<<<< HEAD
-=======
 export const dynamic = 'force-dynamic';
 
->>>>>>> origin/copilot/update-main-with-all-branches
 export async function POST(req: NextRequest) {
   try {
     // Verify Vercel cron secret

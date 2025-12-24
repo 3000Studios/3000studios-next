@@ -5,11 +5,7 @@
  * Primary API revenue stream for power users
  */
 
-<<<<<<< HEAD
-import { NextRequest, NextResponse } from "next/server";
-=======
 import { NextRequest, NextResponse } from 'next/server';
->>>>>>> origin/copilot/update-main-with-all-branches
 
 // Input validation
 interface AIToolRequest {
@@ -18,27 +14,6 @@ interface AIToolRequest {
 }
 
 function validateAIToolRequest(body: unknown): body is AIToolRequest {
-<<<<<<< HEAD
-  if (!body || typeof body !== "object") return false;
-  const req = body as Record<string, unknown>;
-
-  // Validate required fields
-  if (typeof req.tool !== "string" || req.tool.length === 0) return false;
-
-  // Validate tool is allowed
-  const allowedTools = [
-    "content-writer",
-    "image-generator",
-    "video-editor",
-    "code-generator",
-    "seo-optimizer",
-  ];
-  if (!allowedTools.includes(req.tool)) return false;
-
-  // Validate params if provided
-  if (req.params !== undefined && typeof req.params !== "object") return false;
-
-=======
   if (!body || typeof body !== 'object') return false;
   const req = body as Record<string, unknown>;
   
@@ -58,7 +33,6 @@ function validateAIToolRequest(body: unknown): body is AIToolRequest {
   // Validate params if provided
   if (req.params !== undefined && typeof req.params !== 'object') return false;
   
->>>>>>> origin/copilot/update-main-with-all-branches
   return true;
 }
 
@@ -67,19 +41,6 @@ export async function POST(request: NextRequest) {
     // TODO: Implement authentication
     // TODO: Implement rate limiting
     // TODO: Check user credits and subscription
-<<<<<<< HEAD
-
-    const body = await request.json();
-
-    // Validate input
-    if (!validateAIToolRequest(body)) {
-      return NextResponse.json(
-        { status: "error", message: "Invalid request parameters" },
-        { status: 400 },
-      );
-    }
-
-=======
     
     const body = await request.json();
     
@@ -91,63 +52,30 @@ export async function POST(request: NextRequest) {
       );
     }
     
->>>>>>> origin/copilot/update-main-with-all-branches
     const { tool, params } = body;
 
     // Placeholder for future AI tool integrations
     return NextResponse.json({
-<<<<<<< HEAD
-      status: "success",
-      message: "AI Tools API - Coming Soon",
-      data: {
-        tool,
-        estimated_cost: 0,
-        processing_time: "< 5s",
-=======
       status: 'success',
       message: 'AI Tools API - Coming Soon',
       data: {
         tool,
         estimated_cost: 0,
         processing_time: '< 5s',
->>>>>>> origin/copilot/update-main-with-all-branches
       },
     });
   } catch (error) {
     // Don't expose error details
-<<<<<<< HEAD
-    console.error("AI Tools API error:", error);
-    return NextResponse.json(
-      { status: "error", message: "Request processing failed" },
-      { status: 500 },
-=======
     console.error('AI Tools API error:', error);
     return NextResponse.json(
       { status: 'error', message: 'Request processing failed' },
       { status: 500 }
->>>>>>> origin/copilot/update-main-with-all-branches
     );
   }
 }
 
 export async function GET() {
   return NextResponse.json({
-<<<<<<< HEAD
-    endpoint: "/api/ai-tools",
-    status: "active",
-    available_tools: [
-      "content-writer",
-      "image-generator",
-      "video-editor",
-      "code-generator",
-      "seo-optimizer",
-    ],
-    pricing_model: "credits",
-    rates: {
-      content_writer: "1 credit per 1000 words",
-      image_generator: "5 credits per image",
-      video_editor: "10 credits per minute",
-=======
     endpoint: '/api/ai-tools',
     status: 'active',
     available_tools: [
@@ -162,7 +90,6 @@ export async function GET() {
       content_writer: '1 credit per 1000 words',
       image_generator: '5 credits per image',
       video_editor: '10 credits per minute',
->>>>>>> origin/copilot/update-main-with-all-branches
     },
   });
 }

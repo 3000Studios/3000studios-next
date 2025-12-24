@@ -7,12 +7,6 @@
 
 import { useEffect, useRef } from 'react';
 
-<<<<<<< HEAD
-// Declare global google types
-declare global {
-  interface Window {
-    google: any;
-=======
 // Type declaration for Google Maps API
 declare global {
   interface Window {
@@ -83,14 +77,9 @@ declare global {
         function clearInstanceListeners(instance: object): void;
       }
     }
->>>>>>> origin/copilot/update-best-options
   }
 }
 
-<<<<<<< HEAD
-=======
->>>>>>> origin/copilot/resolve-git-conflicts
-=======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 interface GoogleMapProps {
   apiKey: string;
@@ -145,17 +134,9 @@ export default function GoogleMap({
         ],
         mapTypeControl: true,
         mapTypeControlOptions: {
-<<<<<<< HEAD
-          style: window.google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-          position: window.google.maps.ControlPosition.TOP_RIGHT,
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
           style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
           position: google.maps.ControlPosition.TOP_RIGHT,
->>>>>>> origin/copilot/resolve-git-conflicts
 =======
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 =======
 =======
           style: ((window as any).google).maps.MapTypeControlStyle.HORIZONTAL_BAR,
@@ -169,31 +150,8 @@ export default function GoogleMap({
         zoomControl: true,
       };
 
-<<<<<<< HEAD
-      const map = new google.maps.Map(mapRef.current, mapOptions);
-=======
-<<<<<<< HEAD
-      const map = new window.google.maps.Map(mapRef.current, mapOptions);
->>>>>>> origin/copilot/update-main-with-all-branches
-      mapInstanceRef.current = map;
-
-      // Add marker for location
-      new google.maps.Marker({
-        position: center,
-        map,
-        title: '3000 Studios - Atlanta, Georgia',
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-        animation: window.google.maps.Animation.DROP,
-=======
         animation: google.maps.Animation.DROP,
->>>>>>> origin/copilot/resolve-git-conflicts
         icon: {
-<<<<<<< HEAD
-          path: google.maps.SymbolPath.CIRCLE,
-=======
           path: window.google.maps.SymbolPath.CIRCLE,
 =======
       const map = new ((window as any).google).maps.Map(mapRef.current, mapOptions);
@@ -207,8 +165,6 @@ export default function GoogleMap({
         animation: ((window as any).google).maps.Animation.DROP,
         icon: {
           path: ((window as any).google).maps.SymbolPath.CIRCLE,
->>>>>>> origin/copilot/prepare-production-readiness
->>>>>>> origin/copilot/update-main-with-all-branches
           scale: 10,
           fillColor: '#FFD700',
           fillOpacity: 1,
@@ -218,15 +174,7 @@ export default function GoogleMap({
       });
 
       // Add info window
-<<<<<<< HEAD
-      const infoWindow = new google.maps.InfoWindow({
-=======
-<<<<<<< HEAD
-      const infoWindow = new window.google.maps.InfoWindow({
-=======
       const infoWindow = new ((window as any).google).maps.InfoWindow({
->>>>>>> origin/copilot/prepare-production-readiness
->>>>>>> origin/copilot/update-main-with-all-branches
         content: `
           <div style="padding: 10px; color: #000;">
             <h3 style="margin: 0 0 8px 0; font-weight: bold; color: #000;">3000 Studios</h3>
@@ -236,15 +184,7 @@ export default function GoogleMap({
         `,
       });
 
-<<<<<<< HEAD
-      const marker = new google.maps.Marker({
-=======
-<<<<<<< HEAD
-      const marker = new window.google.maps.Marker({
-=======
       const marker = new ((window as any).google).maps.Marker({
->>>>>>> origin/copilot/prepare-production-readiness
->>>>>>> origin/copilot/update-main-with-all-branches
         position: center,
         map,
       });
@@ -258,18 +198,8 @@ export default function GoogleMap({
 
     return () => {
       // Cleanup
-<<<<<<< HEAD
-      if (mapInstanceRef.current) {
-        google.maps.event.clearInstanceListeners(mapInstanceRef.current);
-=======
-<<<<<<< HEAD
-      if (mapInstanceRef.current && window.google) {
-        window.google.maps.event.clearInstanceListeners(mapInstanceRef.current);
-=======
       if (mapInstanceRef.current) {
         ((window as any).google).maps.event.clearInstanceListeners(mapInstanceRef.current);
->>>>>>> origin/copilot/prepare-production-readiness
->>>>>>> origin/copilot/update-main-with-all-branches
       }
     };
   }, [apiKey, center, zoom, mapType]);

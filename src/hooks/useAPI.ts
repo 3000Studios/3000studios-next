@@ -12,14 +12,7 @@ export function useVoiceToCode() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-<<<<<<< HEAD
-  const generateCode = async (
-    prompt: string,
-    action: "preview" | "apply" | "deploy"
-  ) => {
-=======
   const generateCode = async (prompt: string, action: 'preview' | 'apply' | 'deploy') => {
->>>>>>> origin/copilot/resolve-git-conflicts
     setLoading(true);
     setError(null);
 
@@ -46,14 +39,7 @@ export function useVoiceToCode() {
     }
   };
 
-<<<<<<< HEAD
-  const transcribeAndGenerate = async (
-    audioBase64: string,
-    action: "preview" | "apply" | "deploy"
-  ) => {
-=======
   const transcribeAndGenerate = async (audioBase64: string, action: 'preview' | 'apply' | 'deploy') => {
->>>>>>> origin/copilot/resolve-git-conflicts
     setLoading(true);
     setError(null);
 
@@ -150,13 +136,7 @@ export function useAnalytics() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-<<<<<<< HEAD
-  const fetchAnalytics = async (
-    timeRange: "day" | "week" | "month" = "day"
-  ) => {
-=======
   const fetchAnalytics = async (timeRange: 'day' | 'week' | 'month' = 'day') => {
->>>>>>> origin/copilot/resolve-git-conflicts
     setLoading(true);
     setError(null);
 
@@ -186,15 +166,7 @@ export function useContentGeneration() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-<<<<<<< HEAD
-  const generateBlog = async (
-    topic: string,
-    keywords?: string[],
-    publishToWordPress?: boolean
-  ) => {
-=======
   const generateBlog = async (topic: string, keywords?: string[], publishToWordPress?: boolean) => {
->>>>>>> origin/copilot/resolve-git-conflicts
     setLoading(true);
     setError(null);
 
