@@ -15,9 +15,10 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 // MongoDB is optional - only import if available
 let MongoClient: any = null;
 try {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const mongodb = require("mongodb");
   MongoClient = mongodb.MongoClient;
-} catch (e) {
+} catch (_e) {
   // MongoDB not installed - that's okay
 }
 
@@ -413,7 +414,7 @@ export const getConfiguredServices = () => {
 };
 
 // Export all clients as default for convenience
-export default {
+const apiClients = {
   stripe,
   paypal,
   openai,
@@ -429,3 +430,5 @@ export default {
   checkFeatureAvailability,
   getConfiguredServices,
 };
+
+export default apiClients;
