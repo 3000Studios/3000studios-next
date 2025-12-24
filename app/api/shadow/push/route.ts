@@ -5,28 +5,68 @@
  */
 
 import { NextResponse } from "next/server";
-import { exec } from "child_process";
+import { exec, execFile } from "child_process";
 
 export async function POST(): Promise<Response> {
   const repo = process.cwd();
-
-  const commands = [
-    `cd ${repo}`,
-    "git add .",
-    `git commit -m \"Shadow Auto-Push $(date +%s)\"`,
-    "git push origin main",
-  ].join(" && ");
+  const commitMessage = `Shadow Auto-Push ${Date.now()}`;
 
   return new Promise<Response>((resolve) => {
-    exec(commands, (error, stdout, stderr) => {
-      resolve(
-        NextResponse.json({
-          success: !error,
-          stdout,
-          stderr,
-          error: error ? error.message : null,
-        }),
-      );
+    let combinedStdout = "";
+    let combinedStderr = "";
+
+    const runGitCommand = (
+      args: string[],
+      callback: (error: Error | null) => void,
+    ) => {
+      execFile("git", args, { cwd: repo }, (error, stdout, stderr) => {
+        if (stdout) {
+          combinedStdout += stdout;
+        }
+        if (stderr) {
+          combinedStderr += stderr;
+        }
+        callback(error);
+      });
+    };
+
+    runGitCommand(["add", "."], (addError) => {
+      if (addError) {
+        resolve(
+          NextResponse.json({
+            success: false,
+            stdout: combinedStdout,
+            stderr: combinedStderr,
+            error: addError.message,
+          }),
+        );
+        return;
+      }
+
+      runGitCommand(["commit", "-m", commitMessage], (commitError) => {
+        if (commitError) {
+          resolve(
+            NextResponse.json({
+              success: false,
+              stdout: combinedStdout,
+              stderr: combinedStderr,
+              error: commitError.message,
+            }),
+          );
+          return;
+        }
+
+        runGitCommand(["push", "origin", "main"], (pushError) => {
+          resolve(
+            NextResponse.json({
+              success: !pushError,
+              stdout: combinedStdout,
+              stderr: combinedStderr,
+              error: pushError ? pushError.message : null,
+            }),
+          );
+        });
+      });
     });
   });
 }
