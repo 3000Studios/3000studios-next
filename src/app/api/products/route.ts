@@ -11,12 +11,10 @@ export async function GET(_request: NextRequest) {
     const dbProducts = await prisma.product.findMany();
 
     // Map Prisma 'id' to 'productId' for frontend compatibility
-    const products = dbProducts.map(
-      (p: { id: string; [key: string]: unknown }) => ({
-        ...p,
-        productId: p.id,
-      }),
-    );
+    const products = dbProducts.map((p: { id: string; [key: string]: unknown }) => ({
+      ...p,
+      productId: p.id,
+    }));
 
     return NextResponse.json({
       success: true,

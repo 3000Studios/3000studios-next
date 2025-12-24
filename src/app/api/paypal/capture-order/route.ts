@@ -4,7 +4,7 @@
  */
 
 import { prisma } from "@/lib/prisma";
-import { captureOrder, trackAffiliateSale } from "@/lib/services/paypal";
+import { captureOrder } from "@/lib/services/paypal";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     console.error("PayPal capture order error:", error);
     return NextResponse.json(
       { error: "Failed to capture PayPal order" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

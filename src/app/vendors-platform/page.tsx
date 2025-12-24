@@ -9,45 +9,25 @@ export default function VendorsDashboard() {
         <h1 className="text-4xl font-bold mb-8">Vendor Platform</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <Link
-            href="/vendors"
-            className="card hover:border-[var(--electric-blue)] p-6 cursor-pointer"
-          >
-            <h2 className="text-xl font-bold text-[var(--electric-blue)]">
-              Vendor Sign Up
-            </h2>
-            <p className="text-gray-400 mt-2">
-              Submit your feed and join our platform
-            </p>
+          <Link href="/vendors" className="card hover:border-[var(--electric-blue)] p-6 cursor-pointer">
+            <h2 className="text-xl font-bold text-[var(--electric-blue)]">Vendor Sign Up</h2>
+            <p className="text-gray-400 mt-2">Submit your feed and join our platform</p>
           </Link>
 
-          <Link
-            href="/api/vendors/products?vendor=custom"
-            className="card hover:border-[var(--electric-blue)] p-6 cursor-pointer"
-          >
-            <h2 className="text-xl font-bold text-[var(--electric-blue)]">
-              Browse Products
-            </h2>
-            <p className="text-gray-400 mt-2">
-              View all ingested vendor products
-            </p>
+          <Link href="/api/vendors/products?vendor=custom" className="card hover:border-[var(--electric-blue)] p-6 cursor-pointer">
+            <h2 className="text-xl font-bold text-[var(--electric-blue)]">Browse Products</h2>
+            <p className="text-gray-400 mt-2">View all ingested vendor products</p>
           </Link>
         </div>
 
         <div className="card p-6 mb-8">
           <h2 className="text-2xl font-bold mb-4">Features</h2>
           <ul className="space-y-3 text-gray-300">
-            <li>
-              ✅ Multi-vendor product ingestion (CJ, ShareASale, Amazon,
-              Shopify)
-            </li>
+            <li>✅ Multi-vendor product ingestion (CJ, ShareASale, Amazon, Shopify)</li>
             <li>✅ Auto-pricing with margin guardrails</li>
             <li>✅ AI product ranking and relevance scoring</li>
             <li>✅ Commission tracking and analytics</li>
-            <li>
-              ✅ Vendor self-signup with multiple models (affiliate, listing
-              fee, commission override, dropship)
-            </li>
+            <li>✅ Vendor self-signup with multiple models (affiliate, listing fee, commission override, dropship)</li>
             <li>✅ Dropship fulfillment webhooks and routing</li>
             <li>✅ AI-generated product pages with SEO schema</li>
             <li>✅ Voice-only Matrix OS mode for operations</li>

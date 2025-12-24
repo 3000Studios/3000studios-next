@@ -4,10 +4,10 @@
  * Features: Project gallery, filtering by type, detailed project cards
  */
 
-"use client";
+'use client';
 
-import { useState } from "react";
-import { ExternalLink, Github, Code } from "lucide-react";
+import { useState } from 'react';
+import { ExternalLink, Github, Code } from 'lucide-react';
 
 interface Project {
   id: number;
@@ -22,64 +22,56 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "E-Commerce Platform",
-    description:
-      "Full-stack e-commerce solution with AI-powered recommendations",
-    category: "Web Development",
-    tags: ["Next.js", "React", "Stripe"],
+    title: 'E-Commerce Platform',
+    description: 'Full-stack e-commerce solution with AI-powered recommendations',
+    category: 'Web Development',
+    tags: ['Next.js', 'React', 'Stripe'],
   },
   {
     id: 2,
-    title: "Brand Identity System",
-    description: "Complete brand identity and design system for tech startup",
-    category: "Design",
-    tags: ["Branding", "UI/UX", "Design System"],
+    title: 'Brand Identity System',
+    description: 'Complete brand identity and design system for tech startup',
+    category: 'Design',
+    tags: ['Branding', 'UI/UX', 'Design System'],
   },
   {
     id: 3,
-    title: "Mobile App Experience",
-    description: "Premium mobile app with real-time features",
-    category: "Mobile",
-    tags: ["React Native", "Firebase", "Animation"],
+    title: 'Mobile App Experience',
+    description: 'Premium mobile app with real-time features',
+    category: 'Mobile',
+    tags: ['React Native', 'Firebase', 'Animation'],
   },
   {
     id: 4,
-    title: "AI Dashboard Analytics",
-    description: "Real-time analytics dashboard with machine learning insights",
-    category: "Web Development",
-    tags: ["AI/ML", "Data Viz", "React"],
+    title: 'AI Dashboard Analytics',
+    description: 'Real-time analytics dashboard with machine learning insights',
+    category: 'Web Development',
+    tags: ['AI/ML', 'Data Viz', 'React'],
   },
   {
     id: 5,
-    title: "3D Product Configurator",
-    description: "Interactive 3D product visualization and customization",
-    category: "Interactive",
-    tags: ["Three.js", "WebGL", "3D"],
+    title: '3D Product Configurator',
+    description: 'Interactive 3D product visualization and customization',
+    category: 'Interactive',
+    tags: ['Three.js', 'WebGL', '3D'],
   },
   {
     id: 6,
-    title: "SaaS Platform",
-    description: "Multi-tenant SaaS platform with subscription management",
-    category: "Web Development",
-    tags: ["Full-stack", "SaaS", "Payments"],
+    title: 'SaaS Platform',
+    description: 'Multi-tenant SaaS platform with subscription management',
+    category: 'Web Development',
+    tags: ['Full-stack', 'SaaS', 'Payments'],
   },
 ];
 
-const categories = [
-  "All",
-  "Web Development",
-  "Design",
-  "Mobile",
-  "Interactive",
-];
+const categories = ['All', 'Web Development', 'Design', 'Mobile', 'Interactive'];
 
 export default function ProjectsPage() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const filteredProjects =
-    selectedCategory === "All"
-      ? projects
-      : projects.filter((project) => project.category === selectedCategory);
+  const filteredProjects = selectedCategory === 'All'
+    ? projects
+    : projects.filter(project => project.category === selectedCategory);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black py-8 px-4">
@@ -90,8 +82,7 @@ export default function ProjectsPage() {
             Our Projects
           </h1>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Showcasing our finest work across web, mobile, and interactive
-            experiences
+            Showcasing our finest work across web, mobile, and interactive experiences
           </p>
         </div>
 
@@ -103,8 +94,8 @@ export default function ProjectsPage() {
               onClick={() => setSelectedCategory(category)}
               className={`px-6 py-2 rounded-lg font-medium transition-all ${
                 selectedCategory === category
-                  ? "bg-gold text-black"
-                  : "glass border border-gray-700 text-gray-300 hover:border-gold"
+                  ? 'bg-gold text-black'
+                  : 'glass border border-gray-700 text-gray-300 hover:border-gold'
               }`}
             >
               {category}
@@ -132,7 +123,9 @@ export default function ProjectsPage() {
               <h3 className="text-xl font-bold text-white mb-2 group-hover:text-gold transition-colors">
                 {project.title}
               </h3>
-              <p className="text-gray-400 mb-4">{project.description}</p>
+              <p className="text-gray-400 mb-4">
+                {project.description}
+              </p>
 
               {/* Tags */}
               <div className="flex flex-wrap gap-2 mb-4">
@@ -169,8 +162,7 @@ export default function ProjectsPage() {
             Have a Project in Mind?
           </h3>
           <p className="text-gray-400 mb-6 max-w-md mx-auto">
-            Let&apos;s collaborate and bring your vision to life with
-            cutting-edge technology
+            Let&apos;s collaborate and bring your vision to life with cutting-edge technology
           </p>
           <button className="px-8 py-3 bg-gold text-black font-bold rounded-lg hover:bg-platinum transition-all hover:shadow-lg">
             Start a Project

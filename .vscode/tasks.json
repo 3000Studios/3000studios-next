@@ -4,9 +4,12 @@
     {
       "label": "🚀 Shadow: Start Dev Server",
       "type": "shell",
-      "command": "npm",
-      "args": ["run", "dev"],
-      "isBackground": true,
+      "command": "pwsh.exe",
+      "args": [
+        "-File",
+        "C:/3000Studios/shadow/shadow-dev.ps1"
+      ],
+      "isBackground": false,
       "problemMatcher": {
         "pattern": {
           "regexp": "^ready - started server.*",
@@ -35,7 +38,11 @@
       "label": "🔑 Shadow: Store API Key",
       "type": "shell",
       "command": "pwsh.exe",
-      "args": ["-File", "C:/3000Studios/shadow/shadow-secrets.ps1", "-Store"],
+      "args": [
+        "-File",
+        "C:/3000Studios/shadow/shadow-secrets.ps1",
+        "-Store"
+      ],
       "presentation": {
         "echo": true,
         "reveal": "always",
@@ -50,7 +57,11 @@
       "label": "📋 Shadow: List Stored Keys",
       "type": "shell",
       "command": "pwsh.exe",
-      "args": ["-File", "C:/3000Studios/shadow/shadow-secrets.ps1", "-List"],
+      "args": [
+        "-File",
+        "C:/3000Studios/shadow/shadow-secrets.ps1",
+        "-List"
+      ],
       "presentation": {
         "echo": true,
         "reveal": "always",
@@ -65,7 +76,11 @@
       "label": "🗑️  Shadow: Clear API Key",
       "type": "shell",
       "command": "pwsh.exe",
-      "args": ["-File", "C:/3000Studios/shadow/shadow-secrets.ps1", "-Clear"],
+      "args": [
+        "-File",
+        "C:/3000Studios/shadow/shadow-secrets.ps1",
+        "-Clear"
+      ],
       "presentation": {
         "echo": true,
         "reveal": "always",
@@ -102,55 +117,6 @@
       "group": {
         "kind": "test"
       }
-    },
-    {
-      "label": "🤖 Auto: Start Auto-Commit",
-      "type": "shell",
-      "command": "bash",
-      "args": ["${workspaceFolder}/scripts/auto-commit.sh"],
-      "isBackground": true,
-      "problemMatcher": [],
-      "runOptions": {
-        "runOn": "folderOpen"
-      }
-    },
-    {
-      "label": "🏥 Auto: Start Auto-Heal",
-      "type": "shell",
-      "command": "bash",
-      "args": ["${workspaceFolder}/scripts/auto-heal.sh"],
-      "isBackground": true,
-      "problemMatcher": []
-    },
-    {
-      "label": "🔧 Auto: Fix All Issues",
-      "type": "shell",
-      "command": "npm",
-      "args": ["run", "lint", "--", "--fix"],
-      "presentation": {
-        "reveal": "always",
-        "panel": "new"
-      }
-    },
-    {
-      "label": "🚀 Auto: Deploy to Vercel",
-      "type": "shell",
-      "command": "vercel",
-      "args": ["--prod", "--yes"],
-      "presentation": {
-        "reveal": "always",
-        "panel": "new"
-      }
-    },
-    {
-      "label": "🔄 Auto: Full Cycle (Fix→Commit→Push→Deploy)",
-      "dependsOrder": "sequence",
-      "dependsOn": [
-        "🔧 Auto: Fix All Issues",
-        "✅ Git: Sync & Push",
-        "🚀 Auto: Deploy to Vercel"
-      ],
-      "problemMatcher": []
     }
   ]
 }
