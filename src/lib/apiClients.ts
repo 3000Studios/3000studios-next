@@ -8,10 +8,18 @@
  */
 
 import Stripe from "stripe";
-import { MongoClient } from "mongodb";
 import OpenAI from "openai";
 import Anthropic from "@anthropic-ai/sdk";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+
+// MongoDB is optional - only import if available
+let MongoClient: any = null;
+try {
+  const mongodb = require("mongodb");
+  MongoClient = mongodb.MongoClient;
+} catch (e) {
+  // MongoDB not installed - that's okay
+}
 
 // ==========================================
 // STRIPE CLIENT
@@ -29,7 +37,7 @@ export const getStripeClient = (): Stripe => {
     }
 
     stripeClient = new Stripe(secretKey, {
-      apiVersion: "2025-11-17.clover",
+      apiVersion: "2025-12-15.clover",
       typescript: true,
     });
   }
@@ -170,10 +178,16 @@ export const gemini = {
 // ==========================================
 // MONGODB CLIENT
 // ==========================================
-let mongoClient: MongoClient | null = null;
+let mongoClient: any = null;
 let isConnecting = false;
 
-export const getMongoClient = async (): Promise<MongoClient> => {
+export const getMongoClient = async (): Promise<any> => {
+  if (!MongoClient) {
+    throw new Error(
+      "MongoDB client is not available. Install 'mongodb' package to use this feature.",
+    );
+  }
+
   const uri = process.env.MONGODB_URI;
 
   if (!uri) {
