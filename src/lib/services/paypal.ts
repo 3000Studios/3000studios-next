@@ -5,7 +5,9 @@
 
 import axios from 'axios';
 
-const PAYPAL_API_BASE = process.env.NODE_ENV === 'production'
+const PAYPAL_ENV = process.env.PAYPAL_ENV || process.env.NODE_ENV;
+
+const PAYPAL_API_BASE = PAYPAL_ENV === 'production'
   ? 'https://api-m.paypal.com'
   : 'https://api-m.sandbox.paypal.com';
 
