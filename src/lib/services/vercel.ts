@@ -11,7 +11,13 @@ const PROJECT_NAME = '3000studios-next'; // Update with actual project name
 const PROJECT_ID = process.env.VERCEL_PROJECT_ID;
 
 // Validation regex for deployment IDs to prevent SSRF
-const DEPLOYMENT_ID_REGEX = /^[a-zA-Z0-9_-]+$/;
+const DEPLOYMENT_ID_REGEX = /^[A-Za-z0-9\-_]{1,64}$/;
+
+function validateDeploymentId(id: string) {
+  if (!id || !DEPLOYMENT_ID_REGEX.test(id)) {
+    throw new Error('Invalid deployment ID format');
+  }
+}
 
 export interface DeploymentResponse {
   id: string;
@@ -63,6 +69,8 @@ export async function getDeploymentStatus(deploymentId: string): Promise<string>
   validateDeploymentId(deploymentId);
   
   try {
+    validateDeploymentId(deploymentId);
+
     const response = await axios.get(
       `${VERCEL_API}/v13/deployments/${deploymentId}`,
       {
@@ -116,6 +124,8 @@ export async function cancelDeployment(deploymentId: string): Promise<void> {
   validateDeploymentId(deploymentId);
 
   try {
+    validateDeploymentId(deploymentId);
+
     await axios.patch(
       `${VERCEL_API}/v12/deployments/${deploymentId}/cancel`,
       {},
