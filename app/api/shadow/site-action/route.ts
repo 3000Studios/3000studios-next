@@ -7,7 +7,7 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
-import { exec } from "child_process";
+import { execFile } from "child_process";
 
 export async function POST(req: Request): Promise<Response> {
   const { action, target, content } = await req.json();
@@ -30,24 +30,66 @@ export async function POST(req: Request): Promise<Response> {
     // Action: Trigger Git Push
     if (action === "push") {
       const repo = process.cwd();
-
-      const commands = [
-        `cd ${repo}`,
-        "git add .",
-        `git commit -m \"Shadow Commit $(date +%s)\"`,
-        "git push origin main",
-      ].join(" && ");
+      const timestamp = Date.now();
+      const commitMessage = `Shadow Commit ${timestamp}`;
 
       return new Promise<Response>((resolve) => {
-        exec(commands, (err, stdout, stderr) => {
-          resolve(
-            NextResponse.json({
-              success: !err,
-              action: "push",
-              stdout,
-              stderr,
-            }),
-          );
+        let combinedStdout = "";
+        let combinedStderr = "";
+
+        const runGitCommand = (
+          args: string[],
+          onDone: (error: Error | null) => void,
+        ) => {
+          execFile("git", args, { cwd: repo }, (err, stdout, stderr) => {
+            if (stdout) {
+              combinedStdout += stdout;
+            }
+            if (stderr) {
+              combinedStderr += stderr;
+            }
+            onDone(err);
+          });
+        };
+
+        runGitCommand(["add", "."], (addErr) => {
+          if (addErr) {
+            return resolve(
+              NextResponse.json({
+                success: false,
+                action: "push",
+                stdout: combinedStdout,
+                stderr: combinedStderr,
+              }),
+            );
+          }
+
+          runGitCommand(["commit", "-m", commitMessage], (commitErr) => {
+            if (commitErr) {
+              return resolve(
+                NextResponse.json({
+                  success: false,
+                  action: "push",
+                  stdout: combinedStdout,
+                  stderr: combinedStderr,
+                }),
+              );
+            }
+
+            runGitCommand(
+              ["push", "origin", "main"],
+              (pushErr) => {
+                resolve(
+                  NextResponse.json({
+                    success: !pushErr,
+                    action: "push",
+                    stdout: combinedStdout,
+                    stderr: combinedStderr,
+                  }),
+                );
+              },
+            );
+          });
         });
       });
     }
