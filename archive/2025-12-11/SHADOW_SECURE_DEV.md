@@ -5,7 +5,10 @@
 Your secrets are now **loaded into memory only**, never written to disk, never committed to GitHub.
 
 ### Architecture:
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```
 Windows Credential Manager (encrypted, system-managed)
         ↓
@@ -51,7 +54,10 @@ C:\3000Studios\shadow\shadow-secrets.ps1 -List
 ```
 
 You should see:
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```
 Stored Shadow Credentials:
 =========================
@@ -64,14 +70,20 @@ Stored Shadow Credentials:
 ### Step 3: Start Development
 
 **Option A: From VS Code (Easiest)**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 1. Open VS Code
 2. Press `Ctrl+Shift+B`
 3. Select "🚀 Shadow: Start Dev Server"
 4. Dev server starts with secrets loaded
 
 **Option B: From Terminal**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 C:\3000Studios\shadow\shadow-dev.ps1
 ```
@@ -81,7 +93,10 @@ C:\3000Studios\shadow\shadow-dev.ps1
 ## 📝 Daily Workflow
 
 ### 1. Start Development
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 # Press Ctrl+Shift+B in VS Code
 # Or run: C:\3000Studios\shadow\shadow-dev.ps1
@@ -91,14 +106,20 @@ C:\3000Studios\shadow\shadow-dev.ps1
 ```
 
 ### 2. Edit Code
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 - Make changes in VS Code
 - File auto-saves
 - Dev server auto-reloads
 - Changes visible at http://localhost:3000
 
 ### 3. Commit & Push
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 git add .
 git commit -m "feat: your change"
@@ -108,7 +129,10 @@ git push origin main
 ```
 
 ### 4. Check Production
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 - GitHub Actions log: https://github.com/3000Studios/3000studios-next/actions
 - Vercel dashboard: https://vercel.com/3000studios
 - Live site: https://3000studios.com
@@ -118,28 +142,40 @@ git push origin main
 ## 🔑 Managing Credentials
 
 ### View Stored Credentials
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 # VS Code task: Ctrl+Shift+B → "Shadow: List Stored Keys"
 # Or: C:\3000Studios\shadow\shadow-secrets.ps1 -List
 ```
 
 ### Add a New Credential
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 # VS Code task: Ctrl+Shift+B → "Shadow: Store API Key"
 # Or: cmdkey /generic:KEY_NAME /user:dev /pass:ACTUAL_KEY
 ```
 
 ### Remove a Credential
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 # VS Code task: Ctrl+Shift+B → "Shadow: Clear API Key"
 # Or: cmdkey /delete:KEY_NAME
 ```
 
 ### Update an Existing Credential
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 # Remove the old one
 cmdkey /delete:OPENAI_API_KEY
@@ -154,6 +190,7 @@ cmdkey /generic:OPENAI_API_KEY /user:dev /pass:NEW_KEY
 
 ### ✅ What's Secure
 
+<<<<<<< HEAD
 | Layer       | Method                                         | Safe?  |
 | ----------- | ---------------------------------------------- | ------ |
 | **Storage** | Windows Credential Manager (encrypted)         | ✅ Yes |
@@ -162,6 +199,16 @@ cmdkey /generic:OPENAI_API_KEY /user:dev /pass:NEW_KEY
 | **Code**    | Environment variables (never hardcoded)        | ✅ Yes |
 | **Git**     | Never committed (in .gitignore)                | ✅ Yes |
 | **Disk**    | Never written to disk                          | ✅ Yes |
+=======
+| Layer | Method | Safe? |
+|-------|--------|-------|
+| **Storage** | Windows Credential Manager (encrypted) | ✅ Yes |
+| **Loading** | PowerShell environment variables (memory only) | ✅ Yes |
+| **Transit** | HTTPS to APIs | ✅ Yes |
+| **Code** | Environment variables (never hardcoded) | ✅ Yes |
+| **Git** | Never committed (in .gitignore) | ✅ Yes |
+| **Disk** | Never written to disk | ✅ Yes |
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 ### ❌ What's NOT Secure
 
@@ -189,6 +236,7 @@ Credentials are:
 
 ### Available Tasks (Ctrl+Shift+B)
 
+<<<<<<< HEAD
 | Task                            | What It Does                   |
 | ------------------------------- | ------------------------------ |
 | **🚀 Shadow: Start Dev Server** | Load secrets + start pnpm dev  |
@@ -196,6 +244,15 @@ Credentials are:
 | **📋 Shadow: List Stored Keys** | Show all stored credentials    |
 | **🗑️ Shadow: Clear API Key**    | Remove a credential            |
 | **✅ Git: Sync & Push**         | Stage, commit, push            |
+=======
+| Task | What It Does |
+|------|-------------|
+| **🚀 Shadow: Start Dev Server** | Load secrets + start pnpm dev |
+| **🔑 Shadow: Store API Key** | Interactive credential storage |
+| **📋 Shadow: List Stored Keys** | Show all stored credentials |
+| **🗑️ Shadow: Clear API Key** | Remove a credential |
+| **✅ Git: Sync & Push** | Stage, commit, push |
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 ### How to Run a Task
 
@@ -212,7 +269,10 @@ Credentials are:
 **Cause:** You haven't stored the API key yet
 
 **Fix:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 # Store the missing key
 cmdkey /generic:OPENAI_API_KEY /user:dev /pass:YOUR_KEY
@@ -226,7 +286,10 @@ cmdkey /generic:OPENAI_API_KEY /user:dev /pass:YOUR_KEY
 **Cause:** Dependencies not installed
 
 **Fix:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 cd "C:\Users\MrJws\OneDrive\WorkSpaces\3000studios-next\3000studios-next"
 pnpm install
@@ -250,7 +313,10 @@ const apiKey = process.env.OPENAI_API_KEY;
 **Cause:** PowerShell doesn't have administrator rights
 
 **Fix:** Run PowerShell as Administrator:
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 1. Right-click PowerShell
 2. "Run as administrator"
 3. Run the shadow scripts
@@ -298,18 +364,28 @@ const apiKey = process.env.OPENAI_API_KEY;
 ## 📊 Credential Manager Locations
 
 ### Windows Credential Manager UI
+<<<<<<< HEAD
 
 - Control Panel → Credential Manager → Windows Credentials
 - Search for credentials starting with "OPENAI*", "GOOGLE*", etc
 
 ### PowerShell Command
 
+=======
+- Control Panel → Credential Manager → Windows Credentials
+- Search for credentials starting with "OPENAI_", "GOOGLE_", etc
+
+### PowerShell Command
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 cmdkey /list
 ```
 
 ### Where They're Stored (on disk, encrypted)
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```
 C:\Users\[YourUsername]\AppData\Local\Microsoft\Credentials
 ```
@@ -321,7 +397,10 @@ C:\Users\[YourUsername]\AppData\Local\Microsoft\Credentials
 ## 🎯 Best Practices
 
 ✅ **Do:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 - Store all API keys in Credential Manager
 - Load them at dev startup
 - Use environment variables in code
@@ -329,7 +408,10 @@ C:\Users\[YourUsername]\AppData\Local\Microsoft\Credentials
 - Log out of VS Code when done (if on shared machine)
 
 ❌ **Don't:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 - Write `.env.local` files
 - Commit credentials to GitHub
 - Hardcode API keys in code
@@ -354,7 +436,10 @@ This keeps production secrets completely separate from your machine.
 ## 📞 Reference
 
 ### Quick Commands
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 ```powershell
 # List all credentials
 cmdkey /list
@@ -370,12 +455,20 @@ cmdkey /delete:OPENAI_API_KEY
 ```
 
 ### Useful Keyboard Shortcuts
+<<<<<<< HEAD
 
 | Shortcut                | Action                              |
 | ----------------------- | ----------------------------------- |
 | `Ctrl+Shift+B`          | Run default task (Start Dev Server) |
 | `Ctrl+Shift+P`          | Open command palette                |
 | `Terminal` → `Run Task` | List all VS Code tasks              |
+=======
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl+Shift+B` | Run default task (Start Dev Server) |
+| `Ctrl+Shift+P` | Open command palette |
+| `Terminal` → `Run Task` | List all VS Code tasks |
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 ---
 

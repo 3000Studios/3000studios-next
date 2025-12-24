@@ -22,6 +22,24 @@ export default function VideoWallpaper({
   return (
     <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
       {/* Animated Gradient Background */}
+<<<<<<< HEAD
+      {fallbackGradient && (
+        <div
+          className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"
+          style={{ opacity: videoLoaded ? 0 : 1 }}
+        >
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold/20 rounded-full filter blur-3xl animate-pulse"></div>
+          <div
+            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-sapphire/20 rounded-full filter blur-3xl animate-pulse"
+            style={{ animationDelay: "1s" }}
+          ></div>
+          <div
+            className="absolute top-1/2 right-1/3 w-64 h-64 bg-platinum/10 rounded-full filter blur-3xl animate-pulse"
+            style={{ animationDelay: "2s" }}
+          ></div>
+        </div>
+      )}
+=======
       <div
         className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"
         style={{ opacity: videoLoaded ? 0 : 1 }}
@@ -30,6 +48,7 @@ export default function VideoWallpaper({
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-sapphire/20 rounded-full filter blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
         <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-platinum/10 rounded-full filter blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
+>>>>>>> origin/copilot/resolve-git-conflicts
 
       {/* Video Background - when provided */}
       {videoSrc && (

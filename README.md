@@ -1,6 +1,19 @@
 # 3000 Studios - Professional Creative Studio Platform
 
-A cutting-edge Next.js 16 website featuring a luxury design theme, comprehensive page structure, and preparation for advanced features like AI avatars, voice-to-code editing, and live streaming.
+A cutting-edge Next.js 16 website featuring a luxury design theme, comprehensive page structure, and advanced features including AI integrations, voice-to-web capabilities, payment processing, and live streaming.
+
+## 🚀 Deployment
+
+**Canonical Vercel Project:** `3000studios-next` (Production)
+
+- **Production URL:** https://3000studios-next.vercel.app (or custom domain)
+- **Deployment:** Automated via GitHub integration
+- **Branch Strategy:** 
+  - `main` → Production deployment
+  - `develop` → Preview deployments
+  - Feature branches → Preview deployments
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for complete deployment instructions and environment setup.
 
 ## 🚀 Features
 
@@ -41,20 +54,39 @@ A cutting-edge Next.js 16 website featuring a luxury design theme, comprehensive
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Create environment variables file
 cp .env.example .env.local
 
 # Run development server
-npm run dev
+pnpm dev
 
 # Build for production
-npm run build
+pnpm build
 
 # Start production server
-npm start
+pnpm start
 ```
+
+### 🔄 Workflow Synchronization
+
+Keep your local workspace, GitHub, and Vercel perfectly synchronized:
+
+- **[SYNC_MASTER_INDEX.md](SYNC_MASTER_INDEX.md)** - Start here! Complete guide index
+- **[WORKFLOW_SYNC_GUIDE.md](WORKFLOW_SYNC_GUIDE.md)** - Comprehensive sync workflow
+- **[VSCODE_INTEGRATION_GUIDE.md](VSCODE_INTEGRATION_GUIDE.md)** - VS Code setup
+- **[ENV_SYNC_GUIDE.md](ENV_SYNC_GUIDE.md)** - Environment variables
+- **[SYNC_QUICK_REFERENCE.md](SYNC_QUICK_REFERENCE.md)** - Command quick reference
+
+**Quick Sync**: Use `.\scripts\secure-sync.ps1` for one-command synchronization.
+
+### 🚀 Release Management
+
+Safe PR merging with automated verification and rollback:
+
+- **[scripts/RELEASE_SCRIPTS_README.md](scripts/RELEASE_SCRIPTS_README.md)** - Release scripts usage guide
+- **Quick Start**: Run `.\scripts\release-merge.ps1 -DryRun` (Windows) or `./scripts/release-merge.sh --dry-run` (Linux/macOS)
 
 ## 🔐 Environment Variables
 
@@ -175,18 +207,49 @@ Example:
 
 ## 🌐 Deployment
 
-### Vercel (Recommended)
+### 🚀 Quick Deploy to Vercel (2 Minutes)
 
-1. Push code to GitHub
-2. Import project in Vercel dashboard
-3. Add environment variables in Vercel settings
-4. Deploy automatically
+**One-Click Deploy:**
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/3000Studios/3000studios-next)
+
+**Or via Dashboard:**
+
+1. Visit https://vercel.com/new
+2. Sign in with GitHub
+3. Import `3000Studios/3000studios-next`
+4. Click "Deploy"
+
+Your site will be live at `https://3000studios-next.vercel.app` in ~2-3 minutes!
+
+### 📚 Deployment Documentation
+
+- **Quick Start**: [QUICK_DEPLOY.md](./QUICK_DEPLOY.md) - 2-minute guide
+- **Complete Guide**: [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) - Comprehensive instructions
+- **Status Report**: [DEPLOYMENT_STATUS_REPORT.md](./DEPLOYMENT_STATUS_REPORT.md) - Current deployment status
+- **General Deployment**: [DEPLOYMENT.md](./DEPLOYMENT.md) - All deployment options
+
+### Vercel CLI
 
 ```bash
-# Or use Vercel CLI
-npm i -g vercel
-vercel
+# Install Vercel CLI
+npm install -g vercel
+
+# Login to Vercel
+vercel login
+
+# Deploy to production
+vercel --prod
 ```
+
+### GitHub Actions (Automated)
+
+Automatic deployment is configured for the `main` branch. See [.github/workflows/deploy.yml](./.github/workflows/deploy.yml).
+
+**Required Secrets:**
+- `VERCEL_TOKEN` - Get from https://vercel.com/account/tokens
+- `VERCEL_ORG_ID` - Found in `.vercel/project.json` after first deploy
+- `VERCEL_PROJECT_ID` - Found in `.vercel/project.json` after first deploy
 
 ### Manual Deployment
 
@@ -213,6 +276,7 @@ npm start
 
 This is a proprietary project for 3000 Studios. For questions or collaboration:
 - Email: contact@3000studios.com
+- Admin: mr.jwswain@gmail.com
 
 ## 📄 License
 

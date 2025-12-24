@@ -16,7 +16,11 @@ export async function POST(request: NextRequest) {
 
     // Get latest stable deployment if no specific ID provided
     const latestDeployment = await getLatestDeployment();
+<<<<<<< HEAD
     const targetDeployment = deploymentId || latestDeployment?.id;
+=======
+    const targetDeployment = deploymentId || latestDeployment?.id || 'main';
+>>>>>>> origin/copilot/update-main-with-all-branches
 
     // Trigger redeployment of the stable version
     // In production, this would redeploy from a known-good commit

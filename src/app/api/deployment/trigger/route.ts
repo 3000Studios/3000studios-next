@@ -3,8 +3,31 @@
  * Triggers Vercel deployment
  */
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+import { NextRequest, NextResponse } from 'next/server';
+import { triggerDeployment, getDeploymentStatus } from '@/lib/services/vercel';
+=======
 import { triggerDeployment } from '@/lib/services/vercel';
 import { NextRequest, NextResponse } from 'next/server';
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+import { NextRequest, NextResponse } from 'next/server';
+import { triggerDeployment, getDeploymentStatus } from '@/lib/services/vercel';
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+import { triggerDeployment } from '@/lib/services/vercel';
+import { NextRequest, NextResponse } from 'next/server';
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import { triggerDeployment } from '@/lib/services/vercel';
+>>>>>>> origin/copilot/fix-repo-architecture-errors
+=======
+import { triggerDeployment } from '@/lib/services/vercel';
+>>>>>>> origin/copilot/update-best-options
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 export async function POST(request: NextRequest) {
   try {

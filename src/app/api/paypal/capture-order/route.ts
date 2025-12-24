@@ -3,9 +3,33 @@
  * Captures approved PayPal orders
  */
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+import { NextRequest, NextResponse } from 'next/server';
+import { captureOrder, trackAffiliateSale } from '@/lib/services/paypal';
+import { getOrders } from '@/lib/services/mongodb';
+=======
 import { prisma } from "@/lib/prisma";
 import { captureOrder } from "@/lib/services/paypal";
 import { NextRequest, NextResponse } from "next/server";
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+import { NextRequest, NextResponse } from 'next/server';
+import { captureOrder, trackAffiliateSale } from '@/lib/services/paypal';
+import { getOrders } from '@/lib/services/mongodb';
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+import { prisma } from "@/lib/prisma";
+import { captureOrder } from "@/lib/services/paypal";
+import { NextRequest, NextResponse } from "next/server";
+=======
+import { NextRequest, NextResponse } from 'next/server';
+import { captureOrder, trackAffiliateSale } from '@/lib/services/paypal';
+import { getOrders } from '@/lib/services/mongodb';
+import { OrderItem } from '@/types/paypal';
+>>>>>>> origin/copilot/fix-repo-architecture-errors
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 export async function POST(request: NextRequest) {
   try {
@@ -26,11 +50,21 @@ export async function POST(request: NextRequest) {
     });
 
     if (order) {
+<<<<<<< HEAD
       // Update order status
       await prisma.order.update({
         where: { id: order.id },
         data: { status: "paid" },
       });
+=======
+      const affiliateProducts = (order.items as OrderItem[])
+        .filter((item): item is OrderItem & { affiliateLink: string } => !!item.affiliateLink)
+        .map((item) => ({
+          productId: item.productId,
+          affiliateLink: item.affiliateLink,
+          commission: item.commission || 0,
+        }));
+>>>>>>> origin/copilot/fix-repo-architecture-errors
 
       // Track affiliate sales logic (simplified migration)
       // Note: Assuming items have affiliateLink/productId is tricky if not stored in DB,
@@ -51,7 +85,18 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("PayPal capture order error:", error);
     return NextResponse.json(
+<<<<<<< HEAD
+<<<<<<< HEAD
+      { error: 'Failed to capture PayPal order' },
+<<<<<<< HEAD
+=======
       { error: "Failed to capture PayPal order" },
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+      { error: "Failed to capture PayPal order" },
+>>>>>>> origin/copilot/update-main-with-all-branches
       { status: 500 }
     );
   }

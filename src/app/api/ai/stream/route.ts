@@ -3,6 +3,11 @@ import { streamText } from 'ai';
 import { z } from 'zod';
 import { logAIEvent } from '@/lib/ai-logger';
 
+<<<<<<< HEAD
+=======
+export const dynamic = 'force-dynamic';
+
+>>>>>>> origin/copilot/update-main-with-all-branches
 const InputSchema = z.object({
   prompt: z.string().min(1).max(4000),
 });

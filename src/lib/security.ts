@@ -195,6 +195,7 @@ export function validateCSRFToken(token: string, sessionId: string): boolean {
  * Sanitize string input (basic XSS prevention)
  */
 export function sanitizeInput(input: string): string {
+<<<<<<< HEAD
   let sanitized = input;
 
   // Remove < and >
@@ -211,6 +212,13 @@ export function sanitizeInput(input: string): string {
   } while (sanitized !== previous);
 
   return sanitized.trim();
+=======
+  return input
+    .replace(/[<>]/g, "") // Remove < and >
+    .replace(/javascript:/gi, "") // Remove javascript: protocol
+    .replace(/on\w+=/gi, "") // Remove inline event handlers
+    .trim();
+>>>>>>> origin/copilot/update-main-with-all-branches
 }
 
 /**

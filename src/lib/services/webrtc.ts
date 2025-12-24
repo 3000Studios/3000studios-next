@@ -168,7 +168,19 @@ export class WebRTCViewer {
       this.remoteStream = new MediaStream();
 
       this.peerConnection.ontrack = (event) => {
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+        event.streams?.[0]?.getTracks()?.forEach((track) => {
+=======
         event.streams[0].getTracks().forEach((track) => {
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+        event.streams[0].getTracks().forEach((track) => {
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+        event.streams[0]?.getTracks().forEach((track) => {
+>>>>>>> origin/copilot/update-main-with-all-branches
           this.remoteStream?.addTrack(track);
         });
       };

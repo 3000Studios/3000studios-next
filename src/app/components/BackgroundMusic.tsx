@@ -6,8 +6,25 @@
 
 'use client';
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+import { useState, useEffect, useRef } from 'react';
+import { Volume2, VolumeX, SkipForward, Play, Pause } from 'lucide-react';
+<<<<<<< HEAD
+=======
 import { Pause, Play, SkipForward, Volume2, VolumeX } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+import { Pause, Play, SkipForward, Volume2, VolumeX } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+=======
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { Volume2, VolumeX, SkipForward, Play, Pause } from 'lucide-react';
+>>>>>>> origin/copilot/prepare-production-readiness
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 interface MusicTrack {
   name: string;
@@ -35,6 +52,12 @@ export default function BackgroundMusic() {
 
   const currentTrack = DEFAULT_TRACKS[currentTrackIndex];
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
   const handleNextTrack = useCallback(() => {
     setCurrentTrackIndex((idx) => {
       const nextIndex = (idx + 1) % DEFAULT_TRACKS.length;
@@ -62,6 +85,84 @@ export default function BackgroundMusic() {
       audio.removeEventListener('ended', handleNextTrack);
     };
   }, [handleNextTrack, volume]);
+=======
+  const handleNextTrack = () => {
+=======
+  const handleNextTrack = useCallback(() => {
+>>>>>>> origin/copilot/prepare-production-readiness
+    const nextIndex = (currentTrackIndex + 1) % DEFAULT_TRACKS.length;
+    setCurrentTrackIndex(nextIndex);
+    
+    if (audioRef.current && isPlaying) {
+      audioRef.current.src = DEFAULT_TRACKS[nextIndex].src;
+      audioRef.current.play().catch(err => console.log('Play error:', err));
+    }
+<<<<<<< HEAD
+  };
+=======
+  }, [currentTrackIndex, isPlaying]);
+>>>>>>> origin/copilot/prepare-production-readiness
+
+>>>>>>> origin/copilot/update-main-with-all-branches
+  useEffect(() => {
+    // Create audio element
+    if (typeof window !== 'undefined') {
+      audioRef.current = new Audio();
+      audioRef.current.volume = volume;
+      audioRef.current.loop = false;
+      
+      // Auto-advance to next track when current ends
+      audioRef.current.addEventListener('ended', handleNextTrack);
+      
+      return () => {
+        if (audioRef.current) {
+          audioRef.current.pause();
+          audioRef.current.removeEventListener('ended', handleNextTrack);
+        }
+      };
+    }
+<<<<<<< HEAD
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  const handleNextTrack = useCallback(() => {
+    setCurrentTrackIndex((idx) => {
+      const nextIndex = (idx + 1) % DEFAULT_TRACKS.length;
+
+      if (audioRef.current && isPlaying) {
+        audioRef.current.src = DEFAULT_TRACKS[nextIndex].src;
+        audioRef.current.play().catch(err => console.log('Play error:', err));
+      }
+
+      return nextIndex;
+    });
+  }, [isPlaying]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const audio = new Audio();
+    audio.volume = volume;
+    audio.loop = false;
+    audio.addEventListener('ended', handleNextTrack);
+    audioRef.current = audio;
+
+    return () => {
+      audio.pause();
+      audio.removeEventListener('ended', handleNextTrack);
+    };
+  }, [handleNextTrack, volume]);
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+>>>>>>> origin/copilot/fix-repo-architecture-errors
+=======
+  }, [handleNextTrack]);
+>>>>>>> origin/copilot/prepare-production-readiness
+>>>>>>> origin/copilot/update-main-with-all-branches
 
   useEffect(() => {
     if (audioRef.current) {
@@ -70,7 +171,7 @@ export default function BackgroundMusic() {
   }, [volume, isMuted]);
 
   const handlePlayPause = () => {
-    if (!audioRef.current) return;
+    if (!audioRef.current || !currentTrack) return;
 
     if (isPlaying) {
       audioRef.current.pause();
@@ -88,6 +189,20 @@ export default function BackgroundMusic() {
     }
   };
 
+<<<<<<< HEAD
+=======
+  const handleNextTrack = () => {
+    const nextIndex = (currentTrackIndex + 1) % DEFAULT_TRACKS.length;
+    setCurrentTrackIndex(nextIndex);
+    
+    const nextTrack = DEFAULT_TRACKS[nextIndex];
+    if (audioRef.current && isPlaying && nextTrack) {
+      audioRef.current.src = nextTrack.src;
+      audioRef.current.play().catch(err => console.log('Play error:', err));
+    }
+  };
+
+>>>>>>> origin/copilot/update-best-options
   const toggleMute = () => {
     setIsMuted(!isMuted);
   };
@@ -118,8 +233,8 @@ export default function BackgroundMusic() {
       >
         {/* Track Info */}
         <div className="mb-4">
-          <p className="text-white font-semibold text-sm">{currentTrack.name}</p>
-          {currentTrack.artist && (
+          <p className="text-white font-semibold text-sm">{currentTrack?.name || 'No Track'}</p>
+          {currentTrack?.artist && (
             <p className="text-gray-400 text-xs">{currentTrack.artist}</p>
           )}
         </div>

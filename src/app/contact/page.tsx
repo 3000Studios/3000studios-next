@@ -98,11 +98,24 @@ export default function ContactPage() {
     }
   };
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+=======
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
+<<<<<<< HEAD
+>>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
 
