@@ -1,5 +1,5 @@
-export const executeCommand = async (cmd: string) => ({
+export const executeCommand = async (_cmd: string) => ({
   output: "",
   exitCode: 0,
 });
-export const runScript = async (script: string) => ({ success: true });
+export const runScript = async (_script: string) => ({ success: true });

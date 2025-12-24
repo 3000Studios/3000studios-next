@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
 }
 
 // Handle GET requests for webhook verification
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   return NextResponse.json({
     status: "ok",
     message: "Deployment webhook endpoint",

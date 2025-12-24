@@ -1,6 +1,6 @@
 export const shadowAuth = {
-  verify: async (token: string) => true,
-  createSession: async (user: any) => ({ sessionId: "session-1" }),
+  verify: async (_token: string) => true,
+  createSession: async (_user: any) => ({ sessionId: "session-1" }),
 };
 
 export const validateShadowSession = async (sessionId: string) => {
@@ -8,10 +8,10 @@ export const validateShadowSession = async (sessionId: string) => {
   return sessionId ? "shadow@example.com" : null;
 };
 
-export const createShadowSession = async (user: any) => {
+export const createShadowSession = async (_user: any) => {
   return { sessionId: "shadow-session-1", expiresAt: Date.now() + 3600000 };
 };
 
-export const terminateShadowSession = async (sessionId: string) => {
+export const terminateShadowSession = async (_sessionId: string) => {
   return { success: true };
 };

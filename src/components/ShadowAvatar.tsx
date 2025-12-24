@@ -8,7 +8,7 @@ import {
   Environment,
   Sparkles,
 } from "@react-three/drei";
-import { useRef, useMemo } from "react";
+import { useRef } from "react";
 import * as THREE from "three";
 
 // The 3D Scene Component

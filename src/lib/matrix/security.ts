@@ -1,2 +1,2 @@
-export const validateAccess = async (user: any) => true;
-export const checkPermissions = async (user: any, action: string) => true;
+export const validateAccess = async (_user: any) => true;
+export const checkPermissions = async (_user: any, _action: string) => true;
