@@ -12,28 +12,29 @@ import PrimeLoop from "@/components/os/PrimeLoop";
 import SelfCheckLoop from "@/components/os/SelfCheckLoop";
 import FusionEventHandler from "@/components/world/FusionEventHandler";
 import MoodMap from "@/components/world/MoodMap";
-import { Italiana, Space_Grotesk, Syne, Manrope } from "next/font/google";
+// Temporarily disabled Google Fonts due to network restrictions in build environment
+// import { Italiana, Space_Grotesk, Syne, Manrope } from "next/font/google";
 
-const italiana = Italiana({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-italiana",
-});
+// const italiana = Italiana({
+//   weight: "400",
+//   subsets: ["latin"],
+//   variable: "--font-italiana",
+// });
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
-});
+// const spaceGrotesk = Space_Grotesk({
+//   subsets: ["latin"],
+//   variable: "--font-space-grotesk",
+// });
 
-const syne = Syne({
-  subsets: ["latin"],
-  variable: "--font-syne",
-});
+// const syne = Syne({
+//   subsets: ["latin"],
+//   variable: "--font-syne",
+// });
 
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-manrope",
-});
+// const manrope = Manrope({
+//   subsets: ["latin"],
+//   variable: "--font-manrope",
+// });
 
 export const metadata = {
   title: "3000 Studios | Platinum Ether",
@@ -48,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${italiana.variable} ${spaceGrotesk.variable} ${syne.variable} ${manrope.variable}`}
+      className="font-sans"
     >
       <body className="antialiased selection:bg-hologram selection:text-white overflow-x-hidden bg-void text-mercury">
         {/* Shadow PRIME OS - Core Systems */}
