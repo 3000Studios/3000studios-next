@@ -14,7 +14,7 @@ export function useVoiceToCode() {
 
   const generateCode = async (
     prompt: string,
-    action: "preview" | "apply" | "deploy",
+    action: "preview" | "apply" | "deploy"
   ) => {
     setLoading(true);
     setError(null);
@@ -45,7 +45,7 @@ export function useVoiceToCode() {
 
   const transcribeAndGenerate = async (
     audioBase64: string,
-    action: "preview" | "apply" | "deploy",
+    action: "preview" | "apply" | "deploy"
   ) => {
     setLoading(true);
     setError(null);
@@ -183,7 +183,7 @@ export function useAnalytics() {
   const [error, setError] = useState<string | null>(null);
 
   const fetchAnalytics = async (
-    timeRange: "day" | "week" | "month" = "day",
+    timeRange: "day" | "week" | "month" = "day"
   ) => {
     setLoading(true);
     setError(null);
@@ -218,7 +218,7 @@ export function useContentGeneration() {
   const generateBlog = async (
     topic: string,
     keywords?: string[],
-    publishToWordPress?: boolean,
+    publishToWordPress?: boolean
   ) => {
     setLoading(true);
     setError(null);
@@ -251,7 +251,7 @@ export function useContentGeneration() {
     productName: string,
     features?: string[],
     productId?: string,
-    autoSave?: boolean,
+    autoSave?: boolean
   ) => {
     setLoading(true);
     setError(null);

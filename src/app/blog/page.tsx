@@ -91,7 +91,7 @@ export default function BlogPage() {
         />
 
         {/* Blog Posts Grid */}
-        {_isLoading ? (
+        {isLoading ? (
           <div className="space-y-8">
             <LoadingSkeleton variant="blog" count={3} />
           </div>
@@ -189,7 +189,7 @@ export default function BlogPage() {
         )}
 
         {/* No Results */}
-        {filteredPosts.length === 0 && !_isLoading && (
+        {filteredPosts.length === 0 && !isLoading && (
           <div className="text-center py-12">
             <div className="text-6xl mb-4 opacity-50">📝</div>
             <p className="text-gray-400 text-lg">

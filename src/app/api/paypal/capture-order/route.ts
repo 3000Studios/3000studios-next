@@ -3,9 +3,9 @@
  * Captures approved PayPal orders
  */
 
-import { prisma } from "@/lib/prisma";
-import { captureOrder, trackAffiliateSale } from "@/lib/services/paypal";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
+import { captureOrder, trackAffiliateSale } from '@/lib/services/paypal';
+import { getOrders } from '@/lib/services/mongodb';
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,33 +13,32 @@ export async function POST(request: NextRequest) {
     const { orderId } = body;
 
     if (!orderId) {
-      return NextResponse.json({ error: "Order ID required" }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Order ID required' },
+        { status: 400 }
+      );
     }
 
     // Capture the PayPal order
     const captureResult = await captureOrder(orderId);
 
-    // Get order details from database using providerOrderId (paypal order id)
-    const order = await prisma.order.findFirst({
-      where: { providerOrderId: orderId },
-      include: { items: true },
-    });
+    // Get order details from database to find affiliate products
+    const orders = await getOrders(1);
+    const order = orders.find(o => o.orderId === orderId);
 
+    // Track affiliate sales if applicable
     if (order) {
-      // Update order status
-      await prisma.order.update({
-        where: { id: order.id },
-        data: { status: "paid" },
-      });
+      const affiliateProducts = order.items
+        .filter((item: any) => item.affiliateLink)
+        .map((item: any) => ({
+          productId: item.productId,
+          affiliateLink: item.affiliateLink,
+          commission: item.commission || 0,
+        }));
 
-      // Track affiliate sales logic (simplified migration)
-      // Note: Assuming items have affiliateLink/productId is tricky if not stored in DB,
-      // but typically OrderItems would link to Product which has affiliate info.
-      // For now, assuming tracking is handled by `trackAffiliateSale`
-      // if we can reconstruct the payload
-
-      // ... (preserving affiliate logic if needed, but legacy code depended on order.items having affiliateLink from memory/mongodb)
-      // With Prisma, we'd query items.
+      if (affiliateProducts.length > 0) {
+        await trackAffiliateSale(orderId, affiliateProducts);
+      }
     }
 
     return NextResponse.json({
@@ -49,10 +48,10 @@ export async function POST(request: NextRequest) {
       payer: captureResult.payer,
     });
   } catch (error) {
-    console.error("PayPal capture order error:", error);
+    console.error('PayPal capture order error:', error);
     return NextResponse.json(
-      { error: "Failed to capture PayPal order" },
-      { status: 500 },
+      { error: 'Failed to capture PayPal order' },
+      { status: 500 }
     );
   }
 }

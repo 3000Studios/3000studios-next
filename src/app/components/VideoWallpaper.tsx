@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 
 interface VideoWallpaperProps {
   videoSrc?: string;
+  fallbackGradient?: boolean;
   opacity?: number;
 }
 

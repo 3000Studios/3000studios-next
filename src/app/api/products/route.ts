@@ -3,20 +3,12 @@
  * Returns products from MongoDB
  */
 
-import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { NextRequest, NextResponse } from 'next/server';
+import { getProducts } from '@/lib/services/mongodb';
 
-export async function GET(_request: NextRequest) {
+export async function GET(request: NextRequest) {
   try {
-    const dbProducts = await prisma.product.findMany();
-
-    // Map Prisma 'id' to 'productId' for frontend compatibility
-    const products = dbProducts.map(
-      (p: { id: string; [key: string]: unknown }) => ({
-        ...p,
-        productId: p.id,
-      }),
-    );
+    const products = await getProducts();
 
     return NextResponse.json({
       success: true,
@@ -24,27 +16,31 @@ export async function GET(_request: NextRequest) {
       count: products.length,
     });
   } catch (error) {
-    console.error("Products API error:", error);
-
-    // Return fallback products if database fails (keeping failover logic as requested for resilience)
+    console.error('Products API error:', error);
+    
+    // Return fallback products if database fails
     return NextResponse.json({
       success: true,
       products: [
         {
-          id: "1", // Corrected from productId to id to match schema
-          name: "Premium Digital Asset Pack",
-          description: "High-quality digital assets for your creative projects",
+          productId: '1',
+          name: 'Premium Digital Asset Pack',
+          description: 'High-quality digital assets for your creative projects',
           price: 99.99,
-          category: "Digital",
+          category: 'Digital',
           inStock: true,
+          rating: 4.8,
+          reviewCount: 124,
         },
         {
-          id: "2",
-          name: "Creative Template Bundle",
-          description: "Professional templates for web and design",
+          productId: '2',
+          name: 'Creative Template Bundle',
+          description: 'Professional templates for web and design',
           price: 49.99,
-          category: "Templates",
+          category: 'Templates',
           inStock: true,
+          rating: 4.9,
+          reviewCount: 256,
         },
       ],
       count: 2,
