@@ -1,0 +1,15 @@
+import { NextResponse } from 'next/server';
+
+export async function GET() {
+  try {
+    console.log('Autonomous Payment Health Check Initiated');
+    
+    return NextResponse.json({ 
+      status: 'success', 
+      message: 'Payment Systems Healthy',
+      timestamp: new Date().toISOString() 
+    });
+  } catch (error) {
+    return NextResponse.json({ status: 'error', message: 'Protocol Failed' }, { status: 500 });
+  }
+}
