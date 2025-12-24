@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { url, metrics } = body;
+    const { url: _url, metrics: _metrics } = body;
 
     // Placeholder for future implementation
     return NextResponse.json({

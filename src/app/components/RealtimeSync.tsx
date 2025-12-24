@@ -8,7 +8,7 @@
 
 import { useRealtimeSync } from "@/hooks/useRealtimeSync";
 import { motion, AnimatePresence } from "framer-motion";
-import { Rocket, CheckCircle, XCircle, Loader2, Zap } from "lucide-react";
+import { CheckCircle, XCircle, Loader2, Zap } from "lucide-react";
 
 export default function RealtimeSync() {
   const { deploymentStatus } = useRealtimeSync();
