@@ -10,10 +10,13 @@
 import { useState } from 'react';
 import { ShoppingCart, Eye, Heart, Star } from 'lucide-react';
 import Image from 'next/image';
+<<<<<<< HEAD
 =======
 import { Eye, Heart, ShoppingCart, Star } from 'lucide-react';
 import { useState } from 'react';
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 
 export interface Product {
   id: string;
@@ -58,12 +61,17 @@ function ProductCard({ product, onAddToCart }: { product: Product; onAddToCart?:
         aria-label="Add to favorites"
       >
 <<<<<<< HEAD
+<<<<<<< HEAD
         <Heart 
           size={16} 
 =======
         <Heart
           size={16}
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+        <Heart 
+          size={16} 
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
           className={isFavorite ? 'text-gold fill-gold' : 'text-gray-400'}
         />
       </button>

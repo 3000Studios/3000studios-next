@@ -4,21 +4,30 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { NextRequest, NextResponse } from 'next/server';
 import { getWebRTCConfig } from '@/lib/services/webrtc';
 =======
 import { getWebRTCConfig } from '@/lib/services/webrtc';
 import { NextRequest, NextResponse } from 'next/server';
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+import { NextRequest, NextResponse } from 'next/server';
+import { getWebRTCConfig } from '@/lib/services/webrtc';
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 <<<<<<< HEAD
+<<<<<<< HEAD
     const { streamTitle, streamDescription } = body;
 =======
     const { streamTitle: _streamTitle, streamDescription: _streamDescription } = body;
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+    const { streamTitle, streamDescription } = body;
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 
     // Generate unique stream ID
     const streamId = `stream_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;

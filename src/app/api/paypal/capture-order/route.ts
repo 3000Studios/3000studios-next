@@ -4,6 +4,7 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { NextRequest, NextResponse } from 'next/server';
 import { captureOrder, trackAffiliateSale } from '@/lib/services/paypal';
 import { getOrders } from '@/lib/services/mongodb';
@@ -12,6 +13,11 @@ import { prisma } from "@/lib/prisma";
 import { captureOrder } from "@/lib/services/paypal";
 import { NextRequest, NextResponse } from "next/server";
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+import { NextRequest, NextResponse } from 'next/server';
+import { captureOrder, trackAffiliateSale } from '@/lib/services/paypal';
+import { getOrders } from '@/lib/services/mongodb';
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 
 export async function POST(request: NextRequest) {
   try {
@@ -58,9 +64,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
 <<<<<<< HEAD
       { error: 'Failed to capture PayPal order' },
+<<<<<<< HEAD
 =======
       { error: "Failed to capture PayPal order" },
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
       { status: 500 }
     );
   }

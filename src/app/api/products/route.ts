@@ -10,6 +10,7 @@ export async function GET(request: NextRequest) {
   try {
 <<<<<<< HEAD
     const products = await getProducts();
+<<<<<<< HEAD
 =======
     const dbProducts = await prisma.product.findMany();
 
@@ -19,6 +20,8 @@ export async function GET(request: NextRequest) {
       productId: p.id,
     }));
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 
     return NextResponse.json({
       success: true,

@@ -10,6 +10,7 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useShadowOS } from '@/lib/shadow/os/state';
+<<<<<<< HEAD
 =======
 // --- Sound Generation Utility ---
 const playElectricSound = () => {
@@ -187,6 +188,8 @@ const ElectricLink = ({
   );
 };
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -239,6 +242,9 @@ export default function Navigation() {
 
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
     <motion.nav 
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}

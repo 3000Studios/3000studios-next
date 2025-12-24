@@ -88,6 +88,9 @@ export default function ContactPage() {
   };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
 =======
   const handleChange = (

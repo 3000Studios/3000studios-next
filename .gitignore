@@ -47,6 +47,7 @@ node_modules/
 # backups
 /backups/
 *.tar.gz
+<<<<<<< HEAD
 =======
 package-lock.json
 .env
@@ -59,3 +60,5 @@ pnpm-debug.log*
 
 /generated/prisma
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy

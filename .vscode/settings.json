@@ -1,5 +1,8 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
   /* ======================================================
      CORE WORKSPACE BEHAVIOR (STABLE + FAST)
   ====================================================== */
@@ -144,6 +147,7 @@
 
   "github-actions.workflows.pinned.refresh.enabled": true,
   "github-actions.workflows.pinned.workflows": []
+<<<<<<< HEAD
 =======
   "ai.experimental.codeActions": true,
   "chat.experimental.promptCaching": true,
@@ -163,4 +167,6 @@
     "source.fixAll": "explicit"
   }
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 }

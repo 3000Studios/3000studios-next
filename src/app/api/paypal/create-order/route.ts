@@ -66,9 +66,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
 <<<<<<< HEAD
       { error: 'Failed to create PayPal order' },
+<<<<<<< HEAD
 =======
       { error: "Failed to create PayPal order" },
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
       { status: 500 }
     );
   }

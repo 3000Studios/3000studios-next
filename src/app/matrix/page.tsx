@@ -1,5 +1,8 @@
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
  * Matrix Admin Dashboard
  * Central command center for site administration  
  * Features: Analytics, site management, voice-to-code editor integration points
@@ -81,6 +84,7 @@ function StatCard({ title, value, change, icon, trend }: StatCardProps) {
     </div>
   );
 }
+<<<<<<< HEAD
 =======
 import { brand } from "@/design/brand";
 import { AnimatePresence, motion } from "framer-motion";
@@ -102,6 +106,8 @@ export default function MatrixCommandCenter() {
     visuals: "none" | "jazz" | "glitter";
   } | null>(null);
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 
   const [isDeploying, setIsDeploying] = useState(false);
   const [deployStatus, setDeployStatus] = useState<string[]>([]);
@@ -148,6 +154,7 @@ export default function MatrixCommandCenter() {
   const handleLogout = () => {
     localStorage.removeItem('auth_token');
     router.push('/login');
+<<<<<<< HEAD
 =======
   // --- API INTERACTION ---
   const processRequest = async (input: {
@@ -181,6 +188,8 @@ export default function MatrixCommandCenter() {
       return null;
     }
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
   };
 
   const handleCommandSubmit = async (e: React.FormEvent) => {
@@ -535,6 +544,41 @@ export default function MatrixCommandCenter() {
         </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <StatCard
+            title="Total Revenue"
+            value="$12,450"
+            change="+23.5%"
+            icon={<DollarSign className="text-black" size={24} />}
+            trend="up"
+          />
+          <StatCard
+            title="Active Users"
+            value="1,284"
+            change="+12.3%"
+            icon={<Users className="text-black" size={24} />}
+            trend="up"
+          />
+          <StatCard
+            title="Store Orders"
+            value="324"
+            change="+8.1%"
+            icon={<ShoppingCart className="text-black" size={24} />}
+            trend="up"
+          />
+          <StatCard
+            title="Live Viewers"
+            value="42"
+            change="-5.2%"
+            icon={<Eye className="text-black" size={24} />}
+            trend="down"
+          />
+        </div>
+
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
         {/* Voice-to-Code Editor - FULL IMPLEMENTATION */}
         <VoiceCodeEditor />
 
@@ -546,6 +590,7 @@ export default function MatrixCommandCenter() {
 
         {/* Real Analytics from MongoDB */}
         <RealAnalytics />
+<<<<<<< HEAD
 =======
         {/* RIGHT COLUMN: Output & Status */}
         <div className="flex flex-col gap-6 h-full">
@@ -598,6 +643,8 @@ export default function MatrixCommandCenter() {
           </div>
         </div>
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
       </div>
     </div>
   );

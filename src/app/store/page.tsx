@@ -1,10 +1,14 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 /**
  * Store Page
  * E-commerce store front with product listings
  * Features: Enhanced product grid, filtering, sorting, search, PayPal checkout
  * Connected to MongoDB for real products and PayPal for payments
  */
+<<<<<<< HEAD
 =======
 import { CartSidebar } from '@/components/CartSidebar';
 import { CountdownTimer } from '@/components/CountdownTimer';
@@ -14,6 +18,8 @@ import { getProducts } from '@/lib/products-data';
 import { Metadata } from 'next';
 import Link from 'next/link';
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 
 export const metadata: Metadata = {
   title: 'Store | 3000 Studios',
@@ -25,11 +31,15 @@ export default function StorePage() {
 
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
     <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black py-8 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+<<<<<<< HEAD
 =======
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950">
       {/* Animated background elements */}
@@ -62,6 +72,8 @@ export default function StorePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex items-center justify-between">
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
             <div>
               <h1 className="text-4xl md:text-5xl font-bold gradient-text mb-2">
                 Premium Store
@@ -130,10 +142,13 @@ export default function StorePage() {
                 {products.length}+
               </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
               <p className="text-purple-300/80 font-semibold">Premium Products</p>
               <p className="text-purple-400/60 text-sm mt-1">Carefully curated for excellence</p>
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
             </div>
             <div className="text-center group">
               <div className="text-5xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-3">

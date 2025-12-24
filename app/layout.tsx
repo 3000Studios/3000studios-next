@@ -13,6 +13,7 @@ import PrimeLoop from "@/components/os/PrimeLoop";
 import SelfCheckLoop from "@/components/os/SelfCheckLoop";
 import FusionEventHandler from "@/components/world/FusionEventHandler";
 import MoodMap from "@/components/world/MoodMap";
+<<<<<<< HEAD
 
 const fontFallbacks = {
   "--font-italiana": "Italiana, serif",
@@ -20,6 +21,31 @@ const fontFallbacks = {
   "--font-syne": "Syne, sans-serif",
   "--font-manrope": "Manrope, sans-serif",
 } as CSSProperties;
+=======
+// Temporarily disabled Google Fonts due to network restrictions in build environment
+// import { Italiana, Space_Grotesk, Syne, Manrope } from "next/font/google";
+
+// const italiana = Italiana({
+//   weight: "400",
+//   subsets: ["latin"],
+//   variable: "--font-italiana",
+// });
+
+// const spaceGrotesk = Space_Grotesk({
+//   subsets: ["latin"],
+//   variable: "--font-space-grotesk",
+// });
+
+// const syne = Syne({
+//   subsets: ["latin"],
+//   variable: "--font-syne",
+// });
+
+// const manrope = Manrope({
+//   subsets: ["latin"],
+//   variable: "--font-manrope",
+// });
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 
 export const metadata = {
   title: "3000 Studios | Platinum Ether",
@@ -32,7 +58,14 @@ export default function RootLayout({
   children: ReactNode;
 }) {
   return (
+<<<<<<< HEAD
     <html lang="en" style={fontFallbacks}>
+=======
+    <html
+      lang="en"
+      className="font-sans"
+    >
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
       <body className="antialiased selection:bg-hologram selection:text-white overflow-x-hidden bg-void text-mercury">
         {/* Shadow PRIME OS - Core Systems */}
         <EventBus />

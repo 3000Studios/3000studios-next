@@ -4,12 +4,17 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { NextRequest, NextResponse } from 'next/server';
 import { triggerDeployment, getDeploymentStatus } from '@/lib/services/vercel';
 =======
 import { triggerDeployment } from '@/lib/services/vercel';
 import { NextRequest, NextResponse } from 'next/server';
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+import { NextRequest, NextResponse } from 'next/server';
+import { triggerDeployment, getDeploymentStatus } from '@/lib/services/vercel';
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 
 export async function POST(request: NextRequest) {
   try {

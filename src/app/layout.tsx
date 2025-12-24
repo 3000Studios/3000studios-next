@@ -173,8 +173,11 @@ export default function RootLayout({
         <Analytics />
 <<<<<<< HEAD
         <SpeedInsights />
+<<<<<<< HEAD
 =======
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
       </body>
     </html>
   );

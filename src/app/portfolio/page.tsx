@@ -129,9 +129,12 @@ export default function PortfolioPage() {
           <p className="text-gray-400 mb-8">Deep dives into our most impactful projects</p>
 <<<<<<< HEAD
           
+<<<<<<< HEAD
 =======
 
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
           <div className="space-y-8">
             {filteredProjects.map((project, index) => (
               <motion.div
@@ -183,6 +186,7 @@ export default function PortfolioPage() {
                       {project.title}
                     </h3>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     
                     <p className="text-gray-400 mb-4 italic">Client: {project.client}</p>
                     
@@ -191,6 +195,11 @@ export default function PortfolioPage() {
                     <p className="text-gray-400 mb-4 italic">Client: {project.client}</p>
 
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+                    
+                    <p className="text-gray-400 mb-4 italic">Client: {project.client}</p>
+                    
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
                     <p className="text-gray-300 mb-6 text-lg">
                       {project.description}
                     </p>
@@ -216,10 +225,13 @@ export default function PortfolioPage() {
 <<<<<<< HEAD
                       <ChevronRight 
                         size={20} 
+<<<<<<< HEAD
 =======
                       <ChevronRight
                         size={20}
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
                         className={`transition-transform ${expandedProject === project.id ? 'rotate-90' : ''}`}
                       />
                     </button>

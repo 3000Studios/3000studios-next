@@ -169,10 +169,14 @@ export class WebRTCViewer {
 
       this.peerConnection.ontrack = (event) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
         event.streams?.[0]?.getTracks()?.forEach((track) => {
 =======
         event.streams[0].getTracks().forEach((track) => {
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+        event.streams[0].getTracks().forEach((track) => {
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
           this.remoteStream?.addTrack(track);
         });
       };

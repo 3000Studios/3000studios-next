@@ -10,12 +10,15 @@ import { useState, useRef, useEffect } from 'react';
 import { Video, VideoOff, Radio, Users, MessageCircle } from 'lucide-react';
 import { useStreaming } from '@/hooks/useAPI';
 import { WebRTCBroadcaster } from '@/lib/services/webrtc';
+<<<<<<< HEAD
 =======
 import { useStreaming } from '@/hooks/useAPI';
 import { WebRTCBroadcaster } from '@/lib/services/webrtc';
 import { Radio, Users, Video, VideoOff } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 
 export default function StreamControl() {
   const [isStreaming, setIsStreaming] = useState(false);
@@ -70,9 +73,12 @@ export default function StreamControl() {
       console.log('WebRTC Offer created:', offer);
 <<<<<<< HEAD
       
+<<<<<<< HEAD
 =======
 
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
       // In production, send offer to signaling server
       // await fetch(streamData.signalServerUrl, { ... })
 

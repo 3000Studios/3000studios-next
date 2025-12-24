@@ -16,9 +16,12 @@ const PAYPAL_API_BASE = process.env.PAYPAL_ENV === 'production'
 const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
 <<<<<<< HEAD
 const PAYPAL_SECRET = process.env.PAYPAL_SECRET;
+<<<<<<< HEAD
 =======
 const PAYPAL_SECRET = process.env.PAYPAL_SECRET || process.env.PAYPAL_CLIENT_SECRET;
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 
 interface PayPalAccessToken {
   access_token: string;
@@ -110,10 +113,13 @@ export async function createOrder(params: CreateOrderParams) {
 <<<<<<< HEAD
         return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/store/success`,
         cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/store/cancel`,
+<<<<<<< HEAD
 =======
         return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/success`,
         cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/cancel`,
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
       },
     };
 

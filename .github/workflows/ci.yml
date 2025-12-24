@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 name: CI — Validate
 =======
 name: ci
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+name: CI — Validate
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 
 on:
   push:
@@ -42,6 +46,7 @@ jobs:
           NEXT_PUBLIC_SITE_URL: https://3000studios.com
           STRIPE_SECRET_KEY: sk_test_placeholder_for_ci
         run: npm run build
+<<<<<<< HEAD
 =======
     branches: [ "main" ]
   pull_request:
@@ -60,3 +65,5 @@ jobs:
       - run: npm run lint
       - run: npm run build
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy

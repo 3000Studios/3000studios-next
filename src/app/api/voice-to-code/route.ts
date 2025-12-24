@@ -78,11 +78,63 @@ export async function POST(request: NextRequest) {
           transcription: audio ? textPrompt : undefined,
         });
 
+<<<<<<< HEAD
     return NextResponse.json({
       success: true,
       ...parsed,
       action: "preview",
     });
+=======
+      case 'apply':
+        // Quick commit without deploying (for batching changes)
+        const filePath = body.filePath || 'src/app/generated.tsx';
+        const commitResult = await quickCommit(
+          filePath,
+          codeResult.code,
+          `Voice command: ${textPrompt.substring(0, 50)}...`
+        );
+
+        return NextResponse.json({
+          success: commitResult.success,
+          commitSha: commitResult.commitSha,
+          code: codeResult.code,
+          explanation: codeResult.explanation,
+          message: commitResult.message,
+        });
+
+      case 'deploy':
+        // INSTANT SYNC - Commit and deploy to LIVE in one flow
+        const deployFilePath = body.filePath || 'src/app/generated.tsx';
+        const events: any[] = [];
+        
+        const syncResult = await instantSync(
+          deployFilePath,
+          codeResult.code,
+          `🎤 Voice deployment: ${textPrompt.substring(0, 50)}...`,
+          (event) => {
+            events.push(event);
+          }
+        );
+
+        return NextResponse.json({
+          success: syncResult.success,
+          commitSha: syncResult.commitSha,
+          deploymentId: syncResult.deploymentId,
+          deploymentUrl: syncResult.deploymentUrl,
+          code: codeResult.code,
+          explanation: codeResult.explanation,
+          message: syncResult.message,
+          events: events, // Include deployment events for tracking
+          timestamp: syncResult.timestamp,
+        });
+
+      default:
+        return NextResponse.json(
+          { error: 'Invalid action. Use: preview, apply, or deploy' },
+          { status: 400 }
+        );
+    }
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
   } catch (error) {
     console.error('Voice-to-code API error:', error);
     return NextResponse.json(
@@ -95,6 +147,7 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 
@@ -149,3 +202,5 @@ async function applyPatches(patches: CodePatch[]) {
   });
 }
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy

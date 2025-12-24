@@ -9,10 +9,13 @@
 <<<<<<< HEAD
 import { useState, useEffect, useRef } from 'react';
 import { Volume2, VolumeX, SkipForward, Play, Pause } from 'lucide-react';
+<<<<<<< HEAD
 =======
 import { Pause, Play, SkipForward, Volume2, VolumeX } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 
 interface MusicTrack {
   name: string;
@@ -41,6 +44,9 @@ export default function BackgroundMusic() {
   const currentTrack = DEFAULT_TRACKS[currentTrackIndex];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
   useEffect(() => {
     // Create audio element
     if (typeof window !== 'undefined') {
@@ -59,6 +65,7 @@ export default function BackgroundMusic() {
       };
     }
   }, []);
+<<<<<<< HEAD
 =======
   const handleNextTrack = useCallback(() => {
     setCurrentTrackIndex((idx) => {
@@ -88,6 +95,8 @@ export default function BackgroundMusic() {
     };
   }, [handleNextTrack, volume]);
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 
   useEffect(() => {
     if (audioRef.current) {

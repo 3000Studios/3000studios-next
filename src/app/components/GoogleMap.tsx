@@ -15,8 +15,11 @@ declare global {
   }
 }
 
+<<<<<<< HEAD
 =======
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 interface GoogleMapProps {
   apiKey: string;
   center?: { lat: number; lng: number };
@@ -73,10 +76,13 @@ export default function GoogleMap({
 <<<<<<< HEAD
           style: window.google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
           position: window.google.maps.ControlPosition.TOP_RIGHT,
+<<<<<<< HEAD
 =======
           style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
           position: google.maps.ControlPosition.TOP_RIGHT,
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
           mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain']
         },
         streetViewControl: true,
@@ -93,6 +99,9 @@ export default function GoogleMap({
         map,
         title: '3000 Studios - Atlanta, Georgia',
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
         animation: window.google.maps.Animation.DROP,
 =======
         animation: google.maps.Animation.DROP,

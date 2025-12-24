@@ -23,6 +23,9 @@ const envSchema = z.object({
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 function optional(name: string, defaultValue: string = ''): string {
   return process.env[name] || defaultValue;
 }

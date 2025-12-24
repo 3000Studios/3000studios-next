@@ -4,12 +4,17 @@
  */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { NextRequest, NextResponse } from 'next/server';
 import { getDashboardStats, getAnalytics } from '@/lib/services/mongodb';
 =======
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+import { NextRequest, NextResponse } from 'next/server';
+import { getDashboardStats, getAnalytics } from '@/lib/services/mongodb';
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 
 export async function GET(request: NextRequest) {
   try {
@@ -22,6 +27,7 @@ export async function GET(request: NextRequest) {
     
     // Get detailed analytics for the time range
     const analytics = await getAnalytics(timeRange);
+<<<<<<< HEAD
 =======
     // Get stats using Prisma
     const [userCount, _orderCount, revenue] = await Promise.all([
@@ -47,6 +53,8 @@ export async function GET(request: NextRequest) {
       sources: [],
     };
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 
     return NextResponse.json({
       success: true,
@@ -59,9 +67,12 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(
 <<<<<<< HEAD
       { error: 'Failed to fetch analytics' },
+<<<<<<< HEAD
 =======
       { error: "Failed to fetch analytics" },
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
       { status: 500 }
     );
   }

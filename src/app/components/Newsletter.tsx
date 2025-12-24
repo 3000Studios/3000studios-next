@@ -151,20 +151,28 @@ export default function Newsletter({
           </p>
         )}
 <<<<<<< HEAD
+<<<<<<< HEAD
         
 =======
 
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+        
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
         {status === 'success' && (
           <p className="mt-2 text-green-400 text-sm flex items-center gap-1">
             <Check size={14} /> {message}
           </p>
         )}
 <<<<<<< HEAD
+<<<<<<< HEAD
         
 =======
 
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+        
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
         {status === 'error' && (
           <p className="mt-2 text-red-400 text-sm flex items-center gap-1">
             <AlertCircle size={14} /> {message}
@@ -246,10 +254,14 @@ export default function Newsletter({
             </p>
           )}
 <<<<<<< HEAD
+<<<<<<< HEAD
           
 =======
 
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+          
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
           {status === 'success' && (
             <div className="mt-4 p-4 bg-green-900/30 border border-green-500/50 rounded-lg">
               <p className="text-green-200 flex items-center justify-center gap-2">
@@ -258,10 +270,14 @@ export default function Newsletter({
             </div>
           )}
 <<<<<<< HEAD
+<<<<<<< HEAD
           
 =======
 
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+          
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
           {status === 'error' && (
             <div className="mt-4 p-4 bg-red-900/30 border border-red-500/50 rounded-lg">
               <p className="text-red-200 flex items-center justify-center gap-2">
@@ -291,6 +307,9 @@ export default function Newsletter({
           </h3>
         </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
         
 =======
 
@@ -355,20 +374,28 @@ export default function Newsletter({
             </p>
           )}
 <<<<<<< HEAD
+<<<<<<< HEAD
           
 =======
 
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+          
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
           {status === 'success' && (
             <p className="text-green-400 text-sm flex items-center justify-center gap-1">
               <Check size={14} /> {message}
             </p>
           )}
 <<<<<<< HEAD
+<<<<<<< HEAD
           
 =======
 
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+          
+>>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
           {status === 'error' && (
             <p className="text-red-400 text-sm flex items-center justify-center gap-1">
               <AlertCircle size={14} /> {message}
