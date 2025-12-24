@@ -35,6 +35,22 @@ export const affiliateProducts: AffiliateProduct[] = [
   // Add more affiliate products here
 ];
 
+// Alias for backward compatibility
+export const AFFILIATES = {
+  // Helper methods for generating affiliate links
+  general: (url: string) => {
+    // Add affiliate tracking parameter
+    const trackingParam = '?ref=3000studios';
+    return url.includes('?') ? `${url}&ref=3000studios` : `${url}${trackingParam}`;
+  },
+  amazon: (asin: string) => {
+    const amazonTag = process.env.NEXT_PUBLIC_AMAZON_TAG || '3000studios-20';
+    return `https://www.amazon.com/dp/${asin}?tag=${amazonTag}`;
+  },
+  // Product array for backward compatibility
+  products: affiliateProducts,
+};
+
 export function getAffiliateProduct(id: string): AffiliateProduct | undefined {
   return affiliateProducts.find(p => p.id === id);
 }
