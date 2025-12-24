@@ -30,6 +30,7 @@ branches_to_delete=(
   "copilot/automationadd-ci-sync-deploy"
   "copilot/bring-repo-to-production-grade"
   "copilot/check-and-deploy-to-production"
+  "copilot/configure-branch-protection"
   "copilot/deploy-all-features"
   "copilot/deploy-yml-changes"
   "copilot/explain-advanced-git-commands"
