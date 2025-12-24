@@ -1,7 +1,14 @@
 "use client";
 
-'use client';
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import type { MouseEvent } from "react";
+import { useEffect, useMemo, useState } from "react";
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 import Link from 'next/link';
 import Image from 'next/image';
@@ -12,6 +19,8 @@ import { motion } from 'framer-motion';
 import { useShadowOS } from '@/lib/shadow/os/state';
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 // --- Sound Generation Utility ---
 const playElectricSound = () => {
   try {
@@ -187,9 +196,12 @@ const ElectricLink = ({
     </div>
   );
 };
+<<<<<<< HEAD
 >>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -197,14 +209,13 @@ export default function Navigation() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 18);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
+<<<<<<< HEAD
 <<<<<<< HEAD
     { href: '/', label: 'Home', hoverColor: 'hover:text-gold' },
     { href: '/store', label: 'Store', hoverColor: 'hover:text-gold' },
@@ -237,10 +248,22 @@ export default function Navigation() {
     { href: "/contact", label: "CONTACT" },
   ];
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+    { href: "/", label: "HOME" },
+    { href: "/store", label: "STORE" },
+    { href: "/vendors-platform", label: "VENDORS" },
+    { href: "/projects", label: "PROJECTS" },
+    { href: "/portfolio", label: "PORTFOLIO" },
+    { href: "/live", label: "LIVE" },
+    { href: "/blog", label: "BLOG" },
+    { href: "/contact", label: "CONTACT" },
+  ];
+>>>>>>> origin/copilot/update-main-with-all-branches
 
   const isActiveLink = (href: string) => pathname === href;
 
   return (
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -255,30 +278,40 @@ export default function Navigation() {
           : 'glass border-b border-gray-800/50'
       } ${moodColors[uiMood]}`}
 =======
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? "bg-black/70 backdrop-blur-md py-2 border-b border-[var(--platinum)]/40"
           : "bg-black/50 backdrop-blur-sm py-4 border-b border-[var(--platinum)]/30"
       }`}
+<<<<<<< HEAD
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
     >
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(0,243,255,0.12),_transparent_45%)]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo with Image */}
-          <Link href="/" className="flex items-center space-x-3 group">
-            <div className="relative w-10 h-10 transition-transform group-hover:scale-110 duration-300">
-              <Image 
-                src="/logo.svg" 
-                alt="3000 Studios Logo" 
-                width={40} 
-                height={40}
-                className="drop-shadow-lg"
+          <Link
+            href="/"
+            className="flex items-center space-x-3 group relative z-10"
+          >
+            <div className="relative w-12 h-12 transition-transform group-hover:scale-110 duration-300">
+              <Image
+                src="/brand-logo.png"
+                alt="3000 Studios"
+                width={48}
+                height={48}
+                className="drop-shadow-[0_0_18px_rgba(0,243,255,0.45)]"
               />
             </div>
-            <div className="text-xl md:text-2xl font-bold gradient-text tracking-tight">
+            <div
+              className="text-2xl font-black tracking-tighter text-white group-hover:text-[var(--electric-blue)] transition-colors duration-300"
+              style={{ textShadow: "0 0 12px rgba(0,243,255,0.25)" }}
+            >
               3000 STUDIOS
             </div>
           </Link>
@@ -289,6 +322,7 @@ export default function Navigation() {
                 <ElectricLink
                   key={link.href}
                   href={link.href}
+<<<<<<< HEAD
 <<<<<<< HEAD
                   className={`relative text-sm lg:text-base font-medium transition-all duration-200 ${
                     isActiveLink(link.href)
@@ -310,6 +344,8 @@ export default function Navigation() {
               </motion.div>
             ))}
 =======
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
                   label={link.label}
                   isActive={isActiveLink(link.href)}
                 />
@@ -327,26 +363,23 @@ export default function Navigation() {
                 LOGIN
               </span>
             </Link>
+<<<<<<< HEAD
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
           </div>
 
-          {/* Mobile Menu Button */}
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden relative p-2 text-gray-300 hover:text-gold transition-colors"
+            onClick={() => setIsMenuOpen((p) => !p)}
+            className="md:hidden relative p-2 text-gray-300 hover:text-[var(--electric-blue)] transition-colors z-50"
             aria-label="Toggle menu"
           >
-            <div className="relative">
-              {isMenuOpen ? (
-                <X size={28} className="transition-transform rotate-90" />
-              ) : (
-                <Menu size={28} className="transition-transform" />
-              )}
-            </div>
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </div>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
       {/* Enhanced Mobile Menu */}
       {isMenuOpen && (
@@ -360,6 +393,8 @@ export default function Navigation() {
           <div className="px-4 pt-3 pb-4 space-y-2 max-h-[80vh] overflow-y-auto">
             {navLinks.map((link) => (
 =======
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -378,23 +413,16 @@ export default function Navigation() {
                   onClick={() => setIsMenuOpen(false)}
                 />
               ))}
+<<<<<<< HEAD
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
               <Link
-                key={link.href}
-                href={link.href}
-                className={`block px-4 py-3 rounded-lg transition-all duration-200 ${
-                  isActiveLink(link.href)
-                    ? 'bg-gold/20 text-gold border-l-4 border-gold font-semibold'
-                    : 'text-gray-300 hover:text-gold hover:bg-gray-800/50'
-                }`}
+                href="/login"
                 onClick={() => setIsMenuOpen(false)}
+                className="mt-6 px-8 py-3 rounded-full bg-[var(--electric-blue)] text-black font-bold text-lg shadow-[0_0_22px_rgba(0,243,255,0.45)]"
               >
-                <div className="flex items-center justify-between">
-                  <span>{link.label}</span>
-                  {isActiveLink(link.href) && (
-                    <ChevronDown size={18} className="text-gold" />
-                  )}
-                </div>
+                LOGIN
               </Link>
             </div>
           </motion.div>

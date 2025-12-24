@@ -2,10 +2,15 @@
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
+<<<<<<< HEAD
 import type { CSSProperties, ReactNode } from "react";
 import "./globals.css";
 import { Background } from "@/components/ui/Background";
 import { GlobalEffects } from "@/components/ui/GlobalEffects";
+=======
+import "./globals.css";
+import { MarbleBG } from "@/components/ui/MarbleBG";
+>>>>>>> origin/copilot/update-main-with-all-branches
 import { AmbientAudio } from "@/components/ui/AmbientAudio";
 import { FramerMotionProvider } from "@/components/ui/MotionProvider";
 import EventBus from "@/components/os/EventBus";
@@ -13,6 +18,7 @@ import PrimeLoop from "@/components/os/PrimeLoop";
 import SelfCheckLoop from "@/components/os/SelfCheckLoop";
 import FusionEventHandler from "@/components/world/FusionEventHandler";
 import MoodMap from "@/components/world/MoodMap";
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 const fontFallbacks = {
@@ -49,12 +55,18 @@ const fontFallbacks = {
 
 export const metadata = {
   title: "3000 Studios | Platinum Ether",
+=======
+
+export const metadata = {
+  title: "3000 Studios",
+>>>>>>> origin/copilot/update-main-with-all-branches
   description: "Elite Visual Experience by 3000 Studios",
 };
 
 export default function RootLayout({
   children,
 }: {
+<<<<<<< HEAD
   children: ReactNode;
 }) {
   return (
@@ -67,16 +79,29 @@ export default function RootLayout({
     >
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
       <body className="antialiased selection:bg-hologram selection:text-white overflow-x-hidden bg-void text-mercury">
+=======
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body className="overflow-hidden bg-black text-white selection:bg-gold/40">
+>>>>>>> origin/copilot/update-main-with-all-branches
         {/* Shadow PRIME OS - Core Systems */}
         <EventBus />
         <PrimeLoop />
         <SelfCheckLoop />
         <FusionEventHandler />
         <MoodMap />
+<<<<<<< HEAD
 
         {/* Visual Layer */}
         <Background />
         <GlobalEffects />
+=======
+        
+        {/* Visual Layer */}
+        <MarbleBG />
+>>>>>>> origin/copilot/update-main-with-all-branches
         <AmbientAudio />
         <FramerMotionProvider>
           <div className="relative z-10">{children}</div>

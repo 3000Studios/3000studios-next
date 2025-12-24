@@ -6,14 +6,19 @@
 import axios from 'axios';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const PAYPAL_API_BASE = process.env.NODE_ENV === 'production'
 =======
 const PAYPAL_API_BASE = process.env.PAYPAL_ENV === 'production'
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+const PAYPAL_API_BASE = process.env.PAYPAL_ENV === 'production'
+>>>>>>> origin/copilot/update-main-with-all-branches
   ? 'https://api-m.paypal.com'
   : 'https://api-m.sandbox.paypal.com';
 
 const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
+<<<<<<< HEAD
 <<<<<<< HEAD
 const PAYPAL_SECRET = process.env.PAYPAL_SECRET;
 <<<<<<< HEAD
@@ -22,6 +27,9 @@ const PAYPAL_SECRET = process.env.PAYPAL_SECRET || process.env.PAYPAL_CLIENT_SEC
 >>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+const PAYPAL_SECRET = process.env.PAYPAL_SECRET || process.env.PAYPAL_CLIENT_SECRET;
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 interface PayPalAccessToken {
   access_token: string;
@@ -38,10 +46,14 @@ async function getAccessToken(): Promise<string> {
   try {
     const auth = Buffer.from(`${PAYPAL_CLIENT_ID}:${PAYPAL_SECRET}`).toString('base64');
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 =======
 
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+
+>>>>>>> origin/copilot/update-main-with-all-branches
     const response = await axios.post<PayPalAccessToken>(
       `${PAYPAL_API_BASE}/v1/oauth2/token`,
       'grant_type=client_credentials',
@@ -111,6 +123,7 @@ export async function createOrder(params: CreateOrderParams) {
         landing_page: 'NO_PREFERENCE',
         user_action: 'PAY_NOW',
 <<<<<<< HEAD
+<<<<<<< HEAD
         return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/store/success`,
         cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/store/cancel`,
 <<<<<<< HEAD
@@ -120,6 +133,10 @@ export async function createOrder(params: CreateOrderParams) {
 >>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+        return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/success`,
+        cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/cancel`,
+>>>>>>> origin/copilot/update-main-with-all-branches
       },
     };
 
@@ -204,7 +221,7 @@ export async function trackAffiliateSale(
 
     // You can implement webhook calls to affiliate networks here
     // For example: ShareASale, CJ Affiliate, Impact, etc.
-    
+
     return {
       success: true,
       trackedProducts: affiliateProducts.length,

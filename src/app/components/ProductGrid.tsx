@@ -7,6 +7,7 @@
 'use client';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useState } from 'react';
 import { ShoppingCart, Eye, Heart, Star } from 'lucide-react';
 import Image from 'next/image';
@@ -17,6 +18,10 @@ import { useState } from 'react';
 >>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+import { Eye, Heart, ShoppingCart, Star } from 'lucide-react';
+import { useState } from 'react';
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 export interface Product {
   id: string;
@@ -39,7 +44,7 @@ function ProductCard({ product, onAddToCart }: { product: Product; onAddToCart?:
   const [isFavorite, setIsFavorite] = useState(false);
 
   return (
-    <div 
+    <div
       className="card group relative overflow-hidden cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -62,6 +67,7 @@ function ProductCard({ product, onAddToCart }: { product: Product; onAddToCart?:
       >
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         <Heart 
           size={16} 
 =======
@@ -72,6 +78,10 @@ function ProductCard({ product, onAddToCart }: { product: Product; onAddToCart?:
         <Heart 
           size={16} 
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+        <Heart
+          size={16}
+>>>>>>> origin/copilot/update-main-with-all-branches
           className={isFavorite ? 'text-gold fill-gold' : 'text-gray-400'}
         />
       </button>
@@ -89,7 +99,7 @@ function ProductCard({ product, onAddToCart }: { product: Product; onAddToCart?:
         </div>
 
         {/* Hover Overlay */}
-        <div 
+        <div
           className={`absolute inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center gap-3 transition-all duration-300 ${
             isHovered ? 'opacity-100' : 'opacity-0'
           }`}
@@ -97,7 +107,7 @@ function ProductCard({ product, onAddToCart }: { product: Product; onAddToCart?:
           <button className="w-10 h-10 rounded-full bg-gold text-black hover:bg-platinum transition-colors flex items-center justify-center">
             <Eye size={18} />
           </button>
-          <button 
+          <button
             onClick={(e) => {
               e.stopPropagation();
               onAddToCart?.(product);
@@ -163,9 +173,9 @@ export default function ProductGrid({ products, onAddToCart }: ProductGridProps)
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {products.map((product) => (
-        <ProductCard 
-          key={product.id} 
-          product={product} 
+        <ProductCard
+          key={product.id}
+          product={product}
           onAddToCart={onAddToCart}
         />
       ))}

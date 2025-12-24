@@ -146,6 +146,7 @@
   ====================================================== */
 
   "github-actions.workflows.pinned.refresh.enabled": true,
+<<<<<<< HEAD
   "github-actions.workflows.pinned.workflows": []
 <<<<<<< HEAD
 =======
@@ -169,4 +170,8 @@
 >>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+"github-actions.workflows.pinned.workflows": [],
+"github-actions.use-enterprise": true
+>>>>>>> origin/copilot/update-main-with-all-branches
 }

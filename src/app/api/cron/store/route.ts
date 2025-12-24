@@ -1,6 +1,17 @@
+<<<<<<< HEAD
 import { getStoreOptimizer } from '@/jobs/storeOptimizer';
 import { getPricingEngine } from '@/lib/pricing';
 import { NextRequest, NextResponse } from 'next/server';
+=======
+import { getPricingEngine } from '@/lib/pricing';
+import { NextRequest, NextResponse } from 'next/server';
+import { optimizeStore } from "@/jobs/storeOptimizer";
+import { logAIEvent } from "@/lib/ai-logger";
+
+export const dynamic = 'force-dynamic';
+
+export async function GET(req: Request) {NextResponse }
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 export async function POST(req: NextRequest) {
   try {

@@ -1,6 +1,11 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
+<<<<<<< HEAD
+=======
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://3000studios.xyz';
+  
+>>>>>>> origin/copilot/update-main-with-all-branches
   return {
     rules: [
       {
@@ -9,6 +14,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/api/',
           '/matrix/',
+<<<<<<< HEAD
           '/login/',
           '/_next/',
           '/private/',
@@ -16,5 +22,13 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: 'https://3000studios.com/sitemap.xml',
+=======
+          '/_next/',
+          '/admin/',
+        ],
+      },
+    ],
+    sitemap: `${baseUrl}/sitemap.xml`,
+>>>>>>> origin/copilot/update-main-with-all-branches
   };
 }

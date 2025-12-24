@@ -50,7 +50,7 @@ export default function VoiceCodeEditor() {
         reader.onloadend = async () => {
           const base64Audio = (reader.result as string).split(',')[1];
           try {
-            const result = await transcribeAndGenerate(base64Audio, 'preview');
+            const result = await transcribeAndGenerate(base64Audio || '', 'preview');
             setPrompt(result.transcription || '');
             setPreview(result.code || '');
             setExplanation(result.explanation || '');

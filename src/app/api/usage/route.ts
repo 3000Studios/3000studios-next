@@ -1,6 +1,11 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
+<<<<<<< HEAD
+=======
+export const dynamic = 'force-dynamic';
+
+>>>>>>> origin/copilot/update-main-with-all-branches
 export async function GET() {
   try {
     const stats = await prisma.aIUsage.groupBy({

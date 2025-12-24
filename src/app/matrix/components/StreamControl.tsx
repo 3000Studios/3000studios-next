@@ -6,6 +6,7 @@
 'use client';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useState, useRef, useEffect } from 'react';
 import { Video, VideoOff, Radio, Users, MessageCircle } from 'lucide-react';
 import { useStreaming } from '@/hooks/useAPI';
@@ -19,6 +20,12 @@ import { useEffect, useRef, useState } from 'react';
 >>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+import { useStreaming } from '@/hooks/useAPI';
+import { WebRTCBroadcaster } from '@/lib/services/webrtc';
+import { Radio, Users, Video, VideoOff } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 export default function StreamControl() {
   const [isStreaming, setIsStreaming] = useState(false);
@@ -44,7 +51,7 @@ export default function StreamControl() {
 
       return () => clearInterval(interval);
     }
-  }, [isStreaming, streamId]);
+  }, [getStreamStatus, isStreaming, streamId]);
 
   const handleStartStream = async () => {
     if (!streamTitle.trim()) {
@@ -63,7 +70,7 @@ export default function StreamControl() {
 
       // Start local media
       const localStream = await broadcaster.startBroadcast();
-      
+
       if (videoRef.current) {
         videoRef.current.srcObject = localStream;
       }
@@ -72,6 +79,7 @@ export default function StreamControl() {
       const offer = await broadcaster.createOffer();
       console.log('WebRTC Offer created:', offer);
 <<<<<<< HEAD
+<<<<<<< HEAD
       
 <<<<<<< HEAD
 =======
@@ -79,6 +87,9 @@ export default function StreamControl() {
 >>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+
+>>>>>>> origin/copilot/update-main-with-all-branches
       // In production, send offer to signaling server
       // await fetch(streamData.signalServerUrl, { ... })
 
@@ -124,7 +135,7 @@ export default function StreamControl() {
           playsInline
           className="w-full h-full object-cover"
         />
-        
+
         {isStreaming && (
           <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
             <div className="px-3 py-2 bg-red-600 rounded-lg flex items-center gap-2">

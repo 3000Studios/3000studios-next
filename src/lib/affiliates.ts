@@ -70,3 +70,11 @@ export function trackAffiliateClick(affiliateId: string): void {
     }).catch(err => console.error('Failed to track affiliate click:', err));
   }
 }
+<<<<<<< HEAD
+=======
+
+export const AFFILIATES = {
+  general: (url: string) => `${url}?ref=3000studios`,
+  amazon: (asin: string) => `https://amazon.com/dp/${asin}?tag=3000studios-20`,
+};
+>>>>>>> origin/copilot/update-main-with-all-branches

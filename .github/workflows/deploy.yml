@@ -18,6 +18,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+<<<<<<< HEAD
+=======
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+
+>>>>>>> origin/copilot/fix-repo-architecture-errors
       - name: Setup Node
         uses: actions/setup-node@v4
         with:

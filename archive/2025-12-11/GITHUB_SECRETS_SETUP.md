@@ -39,6 +39,7 @@ This guide walks you through adding the required secrets to GitHub for automated
 
 Add these one by one:
 
+<<<<<<< HEAD
 | Secret Name         | Value                      | Where to Find                                      |
 | ------------------- | -------------------------- | -------------------------------------------------- |
 | `VERCEL_TOKEN`      | Your Vercel API token      | Vercel Account Settings → Tokens                   |
@@ -51,6 +52,20 @@ Add these one by one:
 | `PAYPAL_CLIENT_ID`  | Your PayPal Client ID      | PayPal Developer Dashboard                         |
 | `PAYPAL_SECRET`     | Your PayPal Secret Key     | PayPal Developer Dashboard                         |
 | `STRIPE_KEY`        | Your Stripe Secret Key     | [Stripe Dashboard](https://dashboard.stripe.com)   |
+=======
+| Secret Name | Value | Where to Find |
+|-------------|-------|---------------|
+| `VERCEL_TOKEN` | Your Vercel API token | Vercel Account Settings → Tokens |
+| `VERCEL_ORG_ID` | Your Vercel Org ID | Vercel Dashboard → Project Settings |
+| `VERCEL_PROJECT_ID` | Your Vercel Project ID | Vercel Dashboard → Project Settings |
+| `GOOGLE_MAPS_API` | Your Google Maps API Key | Google Cloud Console |
+| `OPENAI_API_KEY` | Your OpenAI API Key | [OpenAI Platform](https://platform.openai.com) |
+| `CLAUDE_API_KEY` | Your Anthropic API Key | [Anthropic Console](https://console.anthropic.com) |
+| `GEMINI_API_KEY` | Your Google Gemini API Key | [Google AI Studio](https://aistudio.google.com) |
+| `PAYPAL_CLIENT_ID` | Your PayPal Client ID | PayPal Developer Dashboard |
+| `PAYPAL_SECRET` | Your PayPal Secret Key | PayPal Developer Dashboard |
+| `STRIPE_KEY` | Your Stripe Secret Key | [Stripe Dashboard](https://dashboard.stripe.com) |
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 ### Example: Adding a Secret
 
@@ -70,7 +85,11 @@ The workflow file `.github/workflows/deploy.yml` is already configured with:
 ✅ **Build Step** - Compiles your Next.js app  
 ✅ **Vercel Deployment** - Deploys to production  
 ✅ **Environment Variables** - All secrets injected automatically  
+<<<<<<< HEAD
 ✅ **Production Environment** - Requires proper GitHub environment settings
+=======
+✅ **Production Environment** - Requires proper GitHub environment settings  
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 ---
 
@@ -125,22 +144,34 @@ The workflow will automatically start.
 ## 🚨 Troubleshooting
 
 ### "Unrecognized project format"
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 - Verify `VERCEL_PROJECT_ID` is correct
 - Re-login to Vercel from command line: `vercel login`
 
 ### "No authorization provided"
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 - Check `VERCEL_TOKEN` is valid
 - Generate new token from Vercel Dashboard
 
 ### Build fails with missing env vars
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 - Ensure all required secrets are added
 - Check secret names match exactly (case-sensitive)
 
 ### Deployment successful but site shows errors
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 - Check Vercel deployment logs
 - Verify all API keys are valid
 - Run local build: `pnpm build`
@@ -162,14 +193,20 @@ gh secret set GOOGLE_MAPS_API --body "your_key_here"
 ## 🔒 Security Best Practices
 
 ✅ **Do:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 - Store secrets in GitHub (encrypted at rest)
 - Use separate keys for dev/prod
 - Rotate tokens monthly
 - Use narrowly-scoped API keys
 
 ❌ **Don't:**
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 - Commit secrets to the repo
 - Share tokens in chat/email
 - Reuse tokens across services

@@ -5,6 +5,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { NextRequest, NextResponse } from 'next/server';
 import { getWebRTCConfig } from '@/lib/services/webrtc';
 =======
@@ -15,10 +16,15 @@ import { NextRequest, NextResponse } from 'next/server';
 import { NextRequest, NextResponse } from 'next/server';
 import { getWebRTCConfig } from '@/lib/services/webrtc';
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+import { getWebRTCConfig } from '@/lib/services/webrtc';
+import { NextRequest, NextResponse } from 'next/server';
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     const { streamTitle, streamDescription } = body;
@@ -28,6 +34,15 @@ export async function POST(request: NextRequest) {
 =======
     const { streamTitle, streamDescription } = body;
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+=======
+    // Stream metadata is preserved for future implementation when stored in database
+    // Currently prefixed with underscore as they're part of API contract but not yet persisted
+>>>>>>> origin/copilot/fix-repo-architecture-errors
+=======
+>>>>>>> origin/copilot/update-best-options
+    const { streamTitle: _streamTitle, streamDescription: _streamDescription } = body;
+>>>>>>> origin/copilot/update-main-with-all-branches
 
     // Generate unique stream ID
     const streamId = `stream_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;

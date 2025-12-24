@@ -9,8 +9,13 @@
 **Login Page:** `/login` → Redirects to `/matrix` on success
 
 **Development Credentials (from `.env.example`):**
+<<<<<<< HEAD
 - **Email:** `mr.jwswain@gmail.com`
 - **Password:** `Bossman3000!!!`
+=======
+- **Email:** `your-actual-email@example.com`
+- **Password:** `your-secure-password-here`
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 **⚠️ PRODUCTION WARNING:** Change these credentials immediately for production use! These are example values only.
 

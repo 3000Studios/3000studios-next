@@ -43,47 +43,99 @@ interface CodePatch {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { audio, prompt, action, context, language } = body;
+    const body = (await request.json()) as VoiceInput;
+    const { transcript, audio, prompt, currentContext, action, patches } = body;
 
-    // Step 1: Transcribe audio if provided
-    let textPrompt = prompt;
-    if (audio) {
-      textPrompt = await transcribeAudio(audio);
+    // --- CASE 1: COMMIT (Apply patches) ---
+    if (action === "commit" && patches && patches.length > 0) {
+      return await applyPatches(patches);
     }
 
-    if (!textPrompt) {
-      return NextResponse.json(
-        { error: 'No prompt provided' },
-        { status: 400 }
-      );
+    // --- CASE 2: PREVIEW (Generate patches) ---
+    const userInput = transcript || prompt;
+    let finalTranscript = userInput || "";
+
+    // Transcribe if Audio
+    if (audio && process.env.OPENAI_API_KEY) {
+      try {
+        const audioBuffer = Buffer.from(audio, "base64");
+        const audioFile = new File([audioBuffer], "audio.webm", {
+          type: "audio/webm",
+        });
+        const openai = await getOpenAI();
+        if (openai) {
+          const transcription = await openai.audio.transcriptions.create({
+            file: audioFile,
+            model: "whisper-1",
+          });
+          finalTranscript = transcription.text;
+        }
+      } catch (err) {
+        console.error("Transcription failed", err);
+      }
     }
 
-    // Step 2: Generate code from prompt
-    const codeResult = await generateCode({
-      prompt: textPrompt,
-      language,
-      context,
+    if (!finalTranscript) {
+      return NextResponse.json({ error: "No input detected" }, { status: 400 });
+    }
+
+    // Fallback Demo Response
+    if (!process.env.OPENAI_API_KEY) {
+      return NextResponse.json({
+        success: true,
+        intent: "Demo Mode (No API Key)",
+        description:
+          "This is a simulation. Add OPENAI_API_KEY to .env for real AI code generation.",
+        patches: [
+          {
+            file: "src/app/page.tsx",
+            description: "Mock change: Update homepage title",
+            oldCode: 'const title = "Welcome";',
+            newCode: 'const title = "Welcome to the Future";',
+          },
+        ],
+        action: "preview",
+      });
+    }
+
+    // OpenAI Generation
+    const openai = await getOpenAI();
+    const systemPrompt = `You are an expert Next.js developer. 
+    Convert requests into file patches.
+    - TARGET ONLY files in 'src/'.
+    - RESPOND AS JSON: 
+    {
+      "intent": "summary",
+      "description": "details",
+      "patches": [{ "file": "src/path/to/file.tsx", "description": "...", "oldCode": "exact string to find", "newCode": "string to replace with" }]
+    }`;
+
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        { role: "system", content: systemPrompt },
+        {
+          role: "user",
+          content: `Request: ${finalTranscript}\nContext: ${
+            currentContext || "Next.js App"
+          }`,
+        },
+      ],
+      response_format: { type: "json_object" },
     });
 
-    // Step 3: Handle different actions
-    switch (action) {
-      case 'preview':
-        // Return code for preview only
-        return NextResponse.json({
-          success: true,
-          preview: codeResult.preview,
-          code: codeResult.code,
-          explanation: codeResult.explanation,
-          transcription: audio ? textPrompt : undefined,
-        });
+    const parsed = JSON.parse(completion.choices[0].message.content || "{}");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
     return NextResponse.json({
       success: true,
       ...parsed,
       action: "preview",
     });
+<<<<<<< HEAD
 =======
       case 'apply':
         // Quick commit without deploying (for batching changes)
@@ -135,21 +187,30 @@ export async function POST(request: NextRequest) {
         );
     }
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
   } catch (error) {
-    console.error('Voice-to-code API error:', error);
+    console.error("Voice API Error:", error);
     return NextResponse.json(
+<<<<<<< HEAD
 <<<<<<< HEAD
       { error: 'Failed to process voice command' },
 =======
       { error: "Internal Server Error" },
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+      { error: "Internal Server Error" },
+>>>>>>> origin/copilot/update-main-with-all-branches
       { status: 500 }
     );
   }
 }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 async function applyPatches(patches: CodePatch[]) {
   const results = [];
@@ -201,6 +262,9 @@ async function applyPatches(patches: CodePatch[]) {
     results,
   });
 }
+<<<<<<< HEAD
 >>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches

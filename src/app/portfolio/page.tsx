@@ -7,14 +7,18 @@
 'use client';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useState } from 'react';
 import { Award, Users, TrendingUp, Star, ExternalLink, Filter, ChevronRight } from 'lucide-react';
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 import { motion } from 'framer-motion';
+import { Award, ChevronRight, ExternalLink, Filter, Star, TrendingUp, Users } from 'lucide-react';
 import Link from 'next/link';
-import { portfolioItems, getFeaturedPortfolio, getAllPortfolioCategories } from '../lib/portfolioData';
-import LoadingSkeleton from '../components/LoadingSkeleton';
+import { useState } from 'react';
 import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
 import Newsletter from '../components/Newsletter';
+<<<<<<< HEAD
 =======
 import { motion } from 'framer-motion';
 import { Award, ChevronRight, ExternalLink, Filter, Star, TrendingUp, Users } from 'lucide-react';
@@ -24,6 +28,9 @@ import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
 import Newsletter from '../components/Newsletter';
 import { getAllPortfolioCategories, portfolioItems } from '../lib/portfolioData';
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+import { getAllPortfolioCategories, portfolioItems } from '../lib/portfolioData';
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 export default function PortfolioPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -39,12 +46,17 @@ export default function PortfolioPage() {
   const categories = ['All', ...getAllPortfolioCategories()];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   const filteredProjects = selectedCategory === 'All' 
     ? portfolioItems 
 =======
   const filteredProjects = selectedCategory === 'All'
     ? portfolioItems
 >>>>>>> origin/copilot/resolve-git-conflicts
+=======
+  const filteredProjects = selectedCategory === 'All'
+    ? portfolioItems
+>>>>>>> origin/copilot/update-main-with-all-branches
     : portfolioItems.filter(p => p.category === selectedCategory);
 
   const toggleProject = (id: string) => {
@@ -56,14 +68,14 @@ export default function PortfolioPage() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-16 text-center">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-5xl md:text-6xl font-bold gradient-text mb-4"
           >
             Our Portfolio
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -76,8 +88,8 @@ export default function PortfolioPage() {
         {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
           {stats.map((stat, idx) => (
-            <motion.div 
-              key={idx} 
+            <motion.div
+              key={idx}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: idx * 0.1 }}
@@ -114,8 +126,8 @@ export default function PortfolioPage() {
         </div>
 
         {/* Google Ads Placeholder */}
-        <GoogleAdsPlaceholder 
-          slot="portfolio-top-banner" 
+        <GoogleAdsPlaceholder
+          slot="portfolio-top-banner"
           format="horizontal"
           className="mb-12"
         />
@@ -128,6 +140,7 @@ export default function PortfolioPage() {
           </h2>
           <p className="text-gray-400 mb-8">Deep dives into our most impactful projects</p>
 <<<<<<< HEAD
+<<<<<<< HEAD
           
 <<<<<<< HEAD
 =======
@@ -135,6 +148,9 @@ export default function PortfolioPage() {
 >>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+
+>>>>>>> origin/copilot/update-main-with-all-branches
           <div className="space-y-8">
             {filteredProjects.map((project, index) => (
               <motion.div
@@ -187,6 +203,7 @@ export default function PortfolioPage() {
                     </h3>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                     
                     <p className="text-gray-400 mb-4 italic">Client: {project.client}</p>
                     
@@ -200,6 +217,11 @@ export default function PortfolioPage() {
                     <p className="text-gray-400 mb-4 italic">Client: {project.client}</p>
                     
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+
+                    <p className="text-gray-400 mb-4 italic">Client: {project.client}</p>
+
+>>>>>>> origin/copilot/update-main-with-all-branches
                     <p className="text-gray-300 mb-6 text-lg">
                       {project.description}
                     </p>
@@ -223,6 +245,7 @@ export default function PortfolioPage() {
                     >
                       {expandedProject === project.id ? 'Hide Details' : 'View Full Case Study'}
 <<<<<<< HEAD
+<<<<<<< HEAD
                       <ChevronRight 
                         size={20} 
 <<<<<<< HEAD
@@ -232,6 +255,10 @@ export default function PortfolioPage() {
 >>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+                      <ChevronRight
+                        size={20}
+>>>>>>> origin/copilot/update-main-with-all-branches
                         className={`transition-transform ${expandedProject === project.id ? 'rotate-90' : ''}`}
                       />
                     </button>
@@ -282,7 +309,7 @@ export default function PortfolioPage() {
                           </h4>
                           <div className="flex flex-wrap gap-2">
                             {project.technologies.map((tech, idx) => (
-                              <span 
+                              <span
                                 key={idx}
                                 className="px-3 py-1 bg-sapphire/20 text-sapphire rounded-full text-sm font-medium"
                               >
@@ -346,7 +373,7 @@ export default function PortfolioPage() {
         </div>
 
         {/* Newsletter CTA */}
-        <Newsletter 
+        <Newsletter
           variant="hero"
           title="Want Results Like These?"
           description="Join our newsletter to learn strategies that drive real business outcomes"

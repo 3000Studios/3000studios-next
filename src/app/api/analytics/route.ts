@@ -5,6 +5,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { NextRequest, NextResponse } from 'next/server';
 import { getDashboardStats, getAnalytics } from '@/lib/services/mongodb';
 =======
@@ -15,12 +16,18 @@ import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from 'next/server';
 import { getDashboardStats, getAnalytics } from '@/lib/services/mongodb';
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
-    const timeRange = searchParams.get('timeRange') as 'day' | 'week' | 'month' || 'day';
+    const timeRange =
+      (searchParams.get("timeRange") as "day" | "week" | "month") || "day";
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     // Get dashboard statistics
     const stats = await getDashboardStats();
@@ -29,6 +36,8 @@ export async function GET(request: NextRequest) {
     const analytics = await getAnalytics(timeRange);
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
     // Get stats using Prisma
     const [userCount, _orderCount, revenue] = await Promise.all([
       prisma.user.count(),
@@ -52,9 +61,12 @@ export async function GET(request: NextRequest) {
       events: [],
       sources: [],
     };
+<<<<<<< HEAD
 >>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 
     return NextResponse.json({
       success: true,
@@ -63,8 +75,9 @@ export async function GET(request: NextRequest) {
       timeRange,
     });
   } catch (error) {
-    console.error('Analytics API error:', error);
+    console.error("Analytics API error:", error);
     return NextResponse.json(
+<<<<<<< HEAD
 <<<<<<< HEAD
       { error: 'Failed to fetch analytics' },
 <<<<<<< HEAD
@@ -73,6 +86,9 @@ export async function GET(request: NextRequest) {
 >>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+      { error: "Failed to fetch analytics" },
+>>>>>>> origin/copilot/update-main-with-all-branches
       { status: 500 }
     );
   }

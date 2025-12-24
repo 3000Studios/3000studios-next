@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 /**
@@ -10,6 +11,8 @@
  */
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 import { CartSidebar } from '@/components/CartSidebar';
 import { CountdownTimer } from '@/components/CountdownTimer';
 import { ProductCard } from '@/components/ProductCard';
@@ -17,9 +20,12 @@ import { SocialProof } from '@/components/SocialProof';
 import { getProducts } from '@/lib/products-data';
 import { Metadata } from 'next';
 import Link from 'next/link';
+<<<<<<< HEAD
 >>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
 
 export const metadata: Metadata = {
   title: 'Store | 3000 Studios',
@@ -32,6 +38,7 @@ export default function StorePage() {
   return (
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
     <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black py-8 px-4">
@@ -41,6 +48,8 @@ export default function StorePage() {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950">
       {/* Animated background elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -71,12 +80,15 @@ export default function StorePage() {
       <div className="relative border-b border-purple-500/20 bg-gradient-to-b from-slate-900/80 to-slate-950/50 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex items-center justify-between">
+<<<<<<< HEAD
 >>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+>>>>>>> origin/copilot/update-main-with-all-branches
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold gradient-text mb-2">
-                Premium Store
+              <h1 className="text-5xl sm:text-6xl font-black bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-3">
+                3000 Studios Store
               </h1>
               <p className="text-lg text-purple-300/80">Premium digital products & services</p>
             </div>
@@ -98,13 +110,8 @@ export default function StorePage() {
               href="#all-products"
               className="text-cyan-400 hover:text-cyan-300 font-semibold text-sm flex items-center gap-2 transition-colors"
             >
-              <ShoppingCart className="text-gold" size={24} />
-              {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-gold text-black text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center animate-bounce">
-                  {cartCount}
-                </span>
-              )}
-            </button>
+              View All <span className="text-lg">→</span>
+            </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {products.slice(0, 4).map((product) => (
@@ -133,6 +140,8 @@ export default function StorePage() {
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
+          )}
+        </div>
 
         {/* Stats Section */}
         <div className="mt-20 pt-16 border-t border-purple-500/20">
@@ -143,12 +152,17 @@ export default function StorePage() {
               </div>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
               <p className="text-purple-300/80 font-semibold">Premium Products</p>
               <p className="text-purple-400/60 text-sm mt-1">Carefully curated for excellence</p>
 >>>>>>> origin/copilot/resolve-git-conflicts
 =======
 >>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
+=======
+              <p className="text-purple-300/80 font-semibold">Premium Products</p>
+              <p className="text-purple-400/60 text-sm mt-1">Carefully curated for excellence</p>
+>>>>>>> origin/copilot/update-main-with-all-branches
             </div>
             <div className="text-center group">
               <div className="text-5xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-3">
