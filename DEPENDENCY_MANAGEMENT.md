@@ -175,8 +175,8 @@ If package-lock.json appears corrupted or causes issues:
 
 2. If issues persist:
    ```bash
-   # Delete node_modules and lock file manually
-   rm -rf node_modules package-lock.json
+   # Delete node_modules and lock file (cross-platform)
+   npm run clean:deps
    
    # Clear npm cache
    npm cache clean --force
