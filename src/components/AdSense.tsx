@@ -1,18 +1,12 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 /**
  * Manual AdSense ad unit. Use only if you have a specific data-ad-slot.
  * If you don't have a slot, rely on Auto Ads via the script injected in layout.tsx
  */
-export function AdSenseUnit({
-  slot,
-  style,
-}: {
-  slot: string;
-  style?: React.CSSProperties;
-}) {
+export function AdSenseUnit({ slot, style }: { slot: string; style?: React.CSSProperties }) {
   useEffect(() => {
     try {
       // @ts-expect-error AdSense global may not be available
@@ -23,17 +17,17 @@ export function AdSenseUnit({
   }, []);
 
   // Only render if AdSense ID is configured
-  if (typeof window === "undefined") return null;
+  if (typeof window === 'undefined') return null;
 
   const raw = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
   if (!raw) return null;
 
-  const client = raw.startsWith("ca-pub-") ? raw : `ca-pub-${raw}`;
+  const client = raw.startsWith('ca-pub-') ? raw : `ca-pub-${raw}`;
 
   return (
     <ins
       className="adsbygoogle"
-      style={style || { display: "block" }}
+      style={style || { display: 'block' }}
       data-ad-client={client}
       data-ad-slot={slot}
       data-ad-format="auto"

@@ -4,8 +4,6 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-export const dynamic = "force-dynamic";
-
 export async function POST(req: Request) {
   const body = await req.text();
   const signature = (await headers()).get("Stripe-Signature") as string;
@@ -19,13 +17,13 @@ export async function POST(req: Request) {
     event = stripe.webhooks.constructEvent(
       body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET,
+      process.env.STRIPE_WEBHOOK_SECRET
     );
   } catch (error) {
     console.error(`Webhook Error: ${(error as Error).message}`);
     return NextResponse.json(
       { error: "Webhook signature verification failed" },
-      { status: 400 },
+      { status: 400 }
     );
   }
 
@@ -89,7 +87,7 @@ export async function POST(req: Request) {
     console.error("Error processing webhook:", error);
     return NextResponse.json(
       { error: "Webhook handler failed" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

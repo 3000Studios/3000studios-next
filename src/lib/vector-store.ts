@@ -20,7 +20,7 @@ export async function storeMemory(userId: string, text: string) {
 
 export async function recallMemory(
   userId: string,
-  query: string,
+  query: string
 ): Promise<string> {
   try {
     const embedding = await createEmbedding(query);

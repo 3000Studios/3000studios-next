@@ -170,7 +170,7 @@ export default function StatsPage() {
                     ${h * 100}
                   </div>
                 </motion.div>
-              ),
+              )
             )}
           </div>
           <div className="flex justify-between mt-4 text-xs text-gray-500 border-t border-gray-800 pt-2">
