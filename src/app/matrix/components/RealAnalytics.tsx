@@ -5,7 +5,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { BarChart3, TrendingUp, DollarSign, Users, ShoppingCart, Eye, RefreshCw } from 'lucide-react';
 import { useAnalytics } from '@/hooks/useAPI';
 
@@ -44,14 +44,14 @@ export default function RealAnalytics() {
   const [stats, setStats] = useState<any>(null);
   const { fetchAnalytics, loading, error } = useAnalytics();
 
-  const loadAnalytics = async () => {
+  const loadAnalytics = useCallback(async () => {
     try {
       const data = await fetchAnalytics(timeRange);
       setStats(data.stats);
     } catch (err) {
       console.error('Analytics load error:', err);
     }
-  };
+  }, [fetchAnalytics, timeRange]);
 
   useEffect(() => {
     loadAnalytics();
@@ -59,7 +59,7 @@ export default function RealAnalytics() {
     // Auto-refresh every 30 seconds
     const interval = setInterval(loadAnalytics, 30000);
     return () => clearInterval(interval);
-  }, [timeRange]);
+  }, [loadAnalytics, timeRange]);
 
   if (loading && !stats) {
     return (

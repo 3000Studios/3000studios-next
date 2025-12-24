@@ -155,7 +155,7 @@ async function monitorDeployment(
         return status;
       }
 
-      await new Promise(resolve => setTimeout(resolve, interval));
+      await new Promise<void>((resolve) => setTimeout(resolve, interval));
       attempts++;
     } catch (error) {
       console.error('Error monitoring deployment:', error);
