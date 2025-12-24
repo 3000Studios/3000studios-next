@@ -10,7 +10,7 @@ const PAYPAL_API_BASE = process.env.NODE_ENV === 'production'
   : 'https://api-m.sandbox.paypal.com';
 
 const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
-const PAYPAL_SECRET = process.env.PAYPAL_SECRET;
+const PAYPAL_SECRET = process.env.PAYPAL_SECRET ?? process.env.PAYPAL_CLIENT_SECRET;
 
 interface PayPalAccessToken {
   access_token: string;
