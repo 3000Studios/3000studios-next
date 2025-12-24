@@ -4,20 +4,20 @@
  * FAILSAFE SYSTEM - Critical for business continuity
  */
 
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
 
 interface EndpointStatus {
   endpoint: string;
-  status: "healthy" | "degraded" | "down";
+  status: 'healthy' | 'degraded' | 'down';
   responseTime: number;
   lastChecked: Date;
 }
 
 const REVENUE_ENDPOINTS = [
-  "/api/paypal/create-order",
-  "/api/products",
-  "/api/analytics",
-  "/api/auth/login",
+  '/api/paypal/create-order',
+  '/api/products',
+  '/api/analytics',
+  '/api/auth/login',
 ];
 
 export async function GET(request: NextRequest) {
@@ -28,14 +28,14 @@ export async function GET(request: NextRequest) {
       const start = Date.now();
       try {
         const response = await fetch(`${request.nextUrl.origin}${endpoint}`, {
-          method: "GET",
+          method: 'GET',
           headers: {
-            "User-Agent": "HealthCheck/1.0",
+            'User-Agent': 'HealthCheck/1.0',
           },
         });
 
         const responseTime = Date.now() - start;
-        const status = response.ok ? "healthy" : "degraded";
+        const status = response.ok ? 'healthy' : 'degraded';
 
         results.push({
           endpoint,
@@ -46,42 +46,38 @@ export async function GET(request: NextRequest) {
 
         // Alert if revenue endpoint is down
         if (!response.ok) {
-          console.error(
-            `[ALERT] Revenue endpoint ${endpoint} returned ${response.status}`,
-          );
+          console.error(`[ALERT] Revenue endpoint ${endpoint} returned ${response.status}`);
         }
 
         // Alert if response is too slow
         if (responseTime > 5000) {
-          console.warn(
-            `[ALERT] Revenue endpoint ${endpoint} slow: ${responseTime}ms`,
-          );
+          console.warn(`[ALERT] Revenue endpoint ${endpoint} slow: ${responseTime}ms`);
         }
       } catch (error) {
         console.error(`[CRITICAL] Revenue endpoint ${endpoint} DOWN:`, error);
         results.push({
           endpoint,
-          status: "down",
+          status: 'down',
           responseTime: Date.now() - start,
           lastChecked: new Date(),
         });
       }
     }
 
-    const allHealthy = results.every((r) => r.status === "healthy");
-    const criticalDown = results.filter((r) => r.status === "down");
+    const allHealthy = results.every((r) => r.status === 'healthy');
+    const criticalDown = results.filter((r) => r.status === 'down');
 
     return NextResponse.json({
       success: true,
       healthy: allHealthy,
       endpoints: results,
-      alerts:
-        criticalDown.length > 0
-          ? `${criticalDown.length} critical endpoints down`
-          : null,
+      alerts: criticalDown.length > 0 ? `${criticalDown.length} critical endpoints down` : null,
     });
   } catch (error) {
-    console.error("[HEALTH CHECK] Failed:", error);
-    return NextResponse.json({ error: "Health check failed" }, { status: 500 });
+    console.error('[HEALTH CHECK] Failed:', error);
+    return NextResponse.json(
+      { error: 'Health check failed' },
+      { status: 500 }
+    );
   }
 }

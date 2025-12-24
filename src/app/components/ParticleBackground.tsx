@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 /**
  * Animated Particle Background
@@ -13,7 +13,7 @@ export default function ParticleBackground() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     // Set canvas size
@@ -22,7 +22,7 @@ export default function ParticleBackground() {
       canvas.height = window.innerHeight;
     };
     resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
+    window.addEventListener('resize', resizeCanvas);
 
     // Particle system
     class Particle {
@@ -41,7 +41,7 @@ export default function ParticleBackground() {
         this.vy = (Math.random() - 0.5) * 0.5;
         this.size = Math.random() * 2 + 1;
         // Mix of gold and sapphire particles
-        this.color = Math.random() > 0.5 ? "#FFD700" : "#0F52BA";
+        this.color = Math.random() > 0.5 ? '#FFD700' : '#0F52BA';
         this.alpha = Math.random() * 0.5 + 0.3;
       }
 
@@ -85,11 +85,11 @@ export default function ParticleBackground() {
       mouseY = e.clientY;
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove);
 
     // Animation loop
     const animate = () => {
-      ctx.fillStyle = "rgba(10, 10, 10, 0.1)";
+      ctx.fillStyle = 'rgba(10, 10, 10, 0.1)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((particle, i) => {
@@ -97,7 +97,7 @@ export default function ParticleBackground() {
         particle.draw();
 
         // Draw connections between nearby particles
-        particles.slice(i + 1).forEach((otherParticle) => {
+        particles.slice(i + 1).forEach(otherParticle => {
           const dx = particle.x - otherParticle.x;
           const dy = particle.y - otherParticle.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
@@ -134,8 +134,8 @@ export default function ParticleBackground() {
     animate();
 
     return () => {
-      window.removeEventListener("resize", resizeCanvas);
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 

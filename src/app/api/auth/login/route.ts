@@ -3,8 +3,8 @@
  * Validates credentials and returns session token
  */
 
-import { createSessionToken, verifyAdmin } from "@/lib/auth";
-import { NextRequest, NextResponse } from "next/server";
+import { createSessionToken, verifyAdmin } from '@/lib/auth';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,15 +12,18 @@ export async function POST(request: NextRequest) {
 
     if (!email || !password) {
       return NextResponse.json(
-        { error: "Email and password required" },
-        { status: 400 },
+        { error: 'Email and password required' },
+        { status: 400 }
       );
     }
 
     const result = verifyAdmin(email, password);
 
     if (!result.success) {
-      return NextResponse.json({ error: result.message }, { status: 401 });
+      return NextResponse.json(
+        { error: result.message },
+        { status: 401 }
+      );
     }
 
     const token = createSessionToken(email);
@@ -35,15 +38,15 @@ export async function POST(request: NextRequest) {
       {
         status: 200,
         headers: {
-          "Set-Cookie": `auth_token=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=86400`,
+          'Set-Cookie': `auth_token=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=86400`,
         },
-      },
+      }
     );
   } catch (error) {
-    console.error("Auth error:", error);
+    console.error('Auth error:', error);
     return NextResponse.json(
-      { error: "Authentication failed" },
-      { status: 500 },
+      { error: 'Authentication failed' },
+      { status: 500 }
     );
   }
 }

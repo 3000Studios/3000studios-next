@@ -9,7 +9,7 @@ export interface AuditLogEntry {
   userId: string;
   userEmail: string;
   action: string;
-  category: "content" | "store" | "system" | "admin";
+  category: 'content' | 'store' | 'system' | 'admin';
   target?: string;
   oldValue?: string;
   newValue?: string;
@@ -22,7 +22,7 @@ export interface AuditLogEntry {
 class AuditLogger {
   private logs: AuditLogEntry[] = [];
 
-  async log(entry: Omit<AuditLogEntry, "id" | "timestamp">): Promise<void> {
+  async log(entry: Omit<AuditLogEntry, 'id' | 'timestamp'>): Promise<void> {
     const logEntry: AuditLogEntry = {
       ...entry,
       id: `log_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
@@ -34,20 +34,20 @@ class AuditLogger {
 
     // Persist to backend
     try {
-      await fetch("/api/audit-logs", {
-        method: "POST",
+      await fetch('/api/audit-logs', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(logEntry),
       });
     } catch (error) {
-      console.error("[AuditLogger] Failed to persist log:", error);
+      console.error('[AuditLogger] Failed to persist log:', error);
     }
 
     // Log to console in development
-    if (process.env.NODE_ENV === "development") {
-      console.log("[AuditLog]", logEntry);
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[AuditLog]', logEntry);
     }
   }
 
@@ -60,19 +60,17 @@ class AuditLogger {
   }): Promise<AuditLogEntry[]> {
     try {
       const params = new URLSearchParams();
-      if (filters?.userId) params.append("userId", filters.userId);
-      if (filters?.category) params.append("category", filters.category);
-      if (filters?.startDate)
-        params.append("startDate", filters.startDate.toString());
-      if (filters?.endDate)
-        params.append("endDate", filters.endDate.toString());
-      if (filters?.limit) params.append("limit", filters.limit.toString());
+      if (filters?.userId) params.append('userId', filters.userId);
+      if (filters?.category) params.append('category', filters.category);
+      if (filters?.startDate) params.append('startDate', filters.startDate.toString());
+      if (filters?.endDate) params.append('endDate', filters.endDate.toString());
+      if (filters?.limit) params.append('limit', filters.limit.toString());
 
       const response = await fetch(`/api/audit-logs?${params.toString()}`);
       const data = await response.json();
       return data.logs || [];
     } catch (error) {
-      console.error("[AuditLogger] Failed to fetch logs:", error);
+      console.error('[AuditLogger] Failed to fetch logs:', error);
       return this.logs; // Fallback to local cache
     }
   }

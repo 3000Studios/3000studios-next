@@ -4,33 +4,30 @@
  * Features: Article grid, categories, search functionality, newsletter signup
  */
 
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Calendar, Clock, User, Search, Tag } from "lucide-react";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { blogPosts, getAllCategories, getAllTags } from "../lib/blogData";
-import Newsletter from "../components/Newsletter";
-import LoadingSkeleton from "../components/LoadingSkeleton";
-import GoogleAdsPlaceholder from "../components/GoogleAdsPlaceholder";
+import { motion } from 'framer-motion';
+import { Calendar, Clock, Search, Tag, User } from 'lucide-react';
+import { useState } from 'react';
+import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
+import LoadingSkeleton from '../components/LoadingSkeleton';
+import Newsletter from '../components/Newsletter';
+import { blogPosts, getAllCategories, getAllTags } from '../lib/blogData';
 
 export default function BlogPage() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  // const [email, setEmail] = useState(""); // Reserved for future use
-  const [isLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [_email, _setEmail] = useState('');
+  const [_isLoading, _setIsLoading] = useState(false);
 
-  const categories = ["All", ...getAllCategories()];
+  const categories = ['All', ...getAllCategories()];
 
-  const filteredPosts = blogPosts.filter((post) => {
-    const matchesSearch =
-      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.content.toLowerCase().includes(searchTerm.toLowerCase());
+  const filteredPosts = blogPosts.filter(post => {
+    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         post.content.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const matchesCategory =
-      selectedCategory === "All" || post.category === selectedCategory;
+    const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
 
     return matchesSearch && matchesCategory;
   });
@@ -51,10 +48,7 @@ export default function BlogPage() {
         {/* Search Bar */}
         <div className="mb-8 max-w-2xl mx-auto">
           <div className="relative">
-            <Search
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
-              size={20}
-            />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
             <input
               type="text"
               placeholder="Search articles..."
@@ -74,8 +68,8 @@ export default function BlogPage() {
               onClick={() => setSelectedCategory(category)}
               className={`px-6 py-2 rounded-full font-semibold transition-all hover-lift ${
                 selectedCategory === category
-                  ? "bg-gold text-black"
-                  : "glass border border-gold/30 text-gold hover:bg-gold/10"
+                  ? 'bg-gold text-black'
+                  : 'glass border border-gold/30 text-gold hover:bg-gold/10'
               }`}
             >
               {category}
@@ -115,17 +109,17 @@ export default function BlogPage() {
                         </div>
                       )}
                       <div className="text-6xl opacity-30">
-                        {post.category === "Design" && "🎨"}
-                        {post.category === "Business" && "💼"}
-                        {post.category === "Process" && "⚙️"}
-                        {post.category === "Marketing" && "📢"}
-                        {post.category === "E-Commerce" && "🛍️"}
-                        {post.category === "Technology" && "🚀"}
-                        {post.category === "UX" && "🎯"}
-                        {post.category === "SEO" && "📈"}
-                        {post.category === "Development" && "💻"}
-                        {post.category === "Design Systems" && "🎨"}
-                        {post.category === "Branding" && "✨"}
+                        {post.category === 'Design' && '🎨'}
+                        {post.category === 'Business' && '💼'}
+                        {post.category === 'Process' && '⚙️'}
+                        {post.category === 'Marketing' && '📢'}
+                        {post.category === 'E-Commerce' && '🛍️'}
+                        {post.category === 'Technology' && '🚀'}
+                        {post.category === 'UX' && '🎯'}
+                        {post.category === 'SEO' && '📈'}
+                        {post.category === 'Development' && '💻'}
+                        {post.category === 'Design Systems' && '🎨'}
+                        {post.category === 'Branding' && '✨'}
                       </div>
                     </div>
                   </div>
@@ -136,11 +130,8 @@ export default function BlogPage() {
                       <span className="px-3 py-1 bg-gold/20 text-gold rounded-full text-sm font-semibold">
                         {post.category}
                       </span>
-                      {post.tags.slice(0, 2).map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 bg-sapphire/20 text-sapphire rounded-full text-xs font-semibold"
-                        >
+                      {post.tags.slice(0, 2).map(tag => (
+                        <span key={tag} className="px-3 py-1 bg-sapphire/20 text-sapphire rounded-full text-xs font-semibold">
                           {tag}
                         </span>
                       ))}
@@ -161,13 +152,7 @@ export default function BlogPage() {
                       </div>
                       <div className="flex items-center gap-2">
                         <Calendar size={16} />
-                        <span>
-                          {new Date(post.date).toLocaleDateString("en-US", {
-                            month: "short",
-                            day: "numeric",
-                            year: "numeric",
-                          })}
-                        </span>
+                        <span>{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Clock size={16} />
@@ -175,12 +160,9 @@ export default function BlogPage() {
                       </div>
                     </div>
 
-                    <Link
-                      href={`/blog/${post.id}`}
-                      className="mt-4 text-gold hover:text-platinum transition-colors font-semibold inline-flex items-center gap-2 hover-lift"
-                    >
+                    <button className="mt-4 text-gold hover:text-platinum transition-colors font-semibold inline-flex items-center gap-2 hover-lift">
                       Read Full Article →
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </motion.article>
@@ -192,14 +174,9 @@ export default function BlogPage() {
         {filteredPosts.length === 0 && !_isLoading && (
           <div className="text-center py-12">
             <div className="text-6xl mb-4 opacity-50">📝</div>
-            <p className="text-gray-400 text-lg">
-              No articles found matching your search
-            </p>
+            <p className="text-gray-400 text-lg">No articles found matching your search</p>
             <button
-              onClick={() => {
-                setSearchTerm("");
-                setSelectedCategory("All");
-              }}
+              onClick={() => { setSearchTerm(''); setSelectedCategory('All'); }}
               className="mt-4 px-6 py-2 bg-gold text-black font-semibold rounded-lg hover:bg-platinum transition-all"
             >
               Clear Filters
@@ -238,17 +215,15 @@ export default function BlogPage() {
             Popular Topics
           </h3>
           <div className="flex flex-wrap gap-3">
-            {getAllTags()
-              .slice(0, 15)
-              .map((tag) => (
-                <button
-                  key={tag}
-                  onClick={() => setSearchTerm(tag)}
-                  className="px-4 py-2 glass border border-gray-700 rounded-lg text-gray-300 hover:border-gold hover:text-gold transition-all text-sm"
-                >
-                  {tag}
-                </button>
-              ))}
+            {getAllTags().slice(0, 15).map(tag => (
+              <button
+                key={tag}
+                onClick={() => setSearchTerm(tag)}
+                className="px-4 py-2 glass border border-gray-700 rounded-lg text-gray-300 hover:border-gold hover:text-gold transition-all text-sm"
+              >
+                {tag}
+              </button>
+            ))}
           </div>
         </div>
       </div>

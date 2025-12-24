@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 interface Service {
   title: string;
@@ -18,8 +18,7 @@ export default function ServicesShowcase() {
   const services: Service[] = [
     {
       title: "Web Design & Development",
-      description:
-        "Award-winning websites that convert visitors into customers",
+      description: "Award-winning websites that convert visitors into customers",
       icon: "💎",
       price: "From $5,000",
       features: [
@@ -27,8 +26,8 @@ export default function ServicesShowcase() {
         "Performance optimization",
         "SEO foundation",
         "Analytics integration",
-        "6 months support",
-      ],
+        "6 months support"
+      ]
     },
     {
       title: "Brand Identity",
@@ -40,8 +39,8 @@ export default function ServicesShowcase() {
         "Brand guidelines",
         "Color palette & typography",
         "Marketing materials",
-        "Social media assets",
-      ],
+        "Social media assets"
+      ]
     },
     {
       title: "Digital Marketing",
@@ -53,8 +52,8 @@ export default function ServicesShowcase() {
         "Content creation",
         "Paid advertising",
         "Email marketing",
-        "Monthly reporting",
-      ],
+        "Monthly reporting"
+      ]
     },
     {
       title: "E-Commerce Solutions",
@@ -66,8 +65,8 @@ export default function ServicesShowcase() {
         "Payment integration",
         "Inventory management",
         "Marketing automation",
-        "Conversion optimization",
-      ],
+        "Conversion optimization"
+      ]
     },
     {
       title: "App Development",
@@ -79,8 +78,8 @@ export default function ServicesShowcase() {
         "Backend development",
         "API integration",
         "Push notifications",
-        "App store deployment",
-      ],
+        "App store deployment"
+      ]
     },
     {
       title: "Consulting & Strategy",
@@ -92,9 +91,9 @@ export default function ServicesShowcase() {
         "UX/UI consultation",
         "Technology audit",
         "Growth planning",
-        "Team training",
-      ],
-    },
+        "Team training"
+      ]
+    }
   ];
 
   return (
@@ -126,15 +125,15 @@ export default function ServicesShowcase() {
               className="card hover-lift group"
             >
               <div className="text-5xl mb-4">{service.icon}</div>
-
+              
               <h3 className="text-2xl font-bold mb-2 text-gold group-hover:text-shadow-gold transition-all">
                 {service.title}
               </h3>
-
+              
               <p className="text-platinum opacity-80 mb-4">
                 {service.description}
               </p>
-
+              
               <div className="text-3xl font-bold gradient-text mb-6">
                 {service.price}
               </div>
@@ -142,16 +141,8 @@ export default function ServicesShowcase() {
               <ul className="space-y-3 mb-6">
                 {service.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-2 text-sm">
-                    <svg
-                      className="w-5 h-5 text-gold flex-shrink-0 mt-0.5"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clipRule="evenodd"
-                      />
+                    <svg className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
                     <span className="text-foreground">{feature}</span>
                   </li>

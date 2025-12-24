@@ -7,25 +7,25 @@ export const motion = {
   // Easing Curves
   easing: {
     // Standard easing
-    default: "cubic-bezier(0.4, 0, 0.2, 1)",
-    linear: "linear",
+    default: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    linear: 'linear',
 
     // Entrance animations
-    enter: "cubic-bezier(0, 0, 0.2, 1)",
-    enterSharp: "cubic-bezier(0.4, 0, 1, 1)",
+    enter: 'cubic-bezier(0, 0, 0.2, 1)',
+    enterSharp: 'cubic-bezier(0.4, 0, 1, 1)',
 
     // Exit animations
-    exit: "cubic-bezier(0.4, 0, 1, 1)",
-    exitSharp: "cubic-bezier(0, 0, 0.2, 1)",
+    exit: 'cubic-bezier(0.4, 0, 1, 1)',
+    exitSharp: 'cubic-bezier(0, 0, 0.2, 1)',
 
     // Elastic & bounce (for playful elements)
-    elastic: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
-    bounce: "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+    elastic: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+    bounce: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
 
     // Power curves (for powerful transitions)
-    power1: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-    power2: "cubic-bezier(0.55, 0.085, 0.68, 0.53)",
-    power3: "cubic-bezier(0.895, 0.03, 0.685, 0.22)",
+    power1: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+    power2: 'cubic-bezier(0.55, 0.085, 0.68, 0.53)',
+    power3: 'cubic-bezier(0.895, 0.03, 0.685, 0.22)',
   },
 
   // Duration (milliseconds)
@@ -96,19 +96,19 @@ export const motion = {
       animate: {
         opacity: 1,
         scale: 1,
-        transition: { type: "spring", stiffness: 300, damping: 20 },
+        transition: { type: 'spring', stiffness: 300, damping: 20 }
       },
       exit: { opacity: 0, scale: 0.8 },
     },
 
     // Glow pulse (for CTAs)
     glowPulse: {
-      initial: { boxShadow: "0 0 0px rgba(0, 255, 255, 0)" },
+      initial: { boxShadow: '0 0 0px rgba(0, 255, 255, 0)' },
       animate: {
         boxShadow: [
-          "0 0 0px rgba(0, 255, 255, 0)",
-          "0 0 20px rgba(0, 255, 255, 0.5)",
-          "0 0 0px rgba(0, 255, 255, 0)",
+          '0 0 0px rgba(0, 255, 255, 0)',
+          '0 0 20px rgba(0, 255, 255, 0.5)',
+          '0 0 0px rgba(0, 255, 255, 0)',
         ],
       },
     },
@@ -119,7 +119,7 @@ export const motion = {
       hover: {
         y: -4,
         scale: 1.02,
-        transition: { duration: 0.2 },
+        transition: { duration: 0.2 }
       },
     },
 
@@ -144,12 +144,12 @@ export const motion = {
       animate: {
         opacity: 1,
         x: 0,
-        transition: { duration: 0.3, ease: "easeOut" },
+        transition: { duration: 0.3, ease: 'easeOut' }
       },
       exit: {
         opacity: 0,
         x: 20,
-        transition: { duration: 0.2, ease: "easeIn" },
+        transition: { duration: 0.2, ease: 'easeIn' }
       },
     },
   },
@@ -166,12 +166,12 @@ export const motion = {
     },
     cardHover: {
       y: -8,
-      boxShadow: "0 16px 64px rgba(0, 0, 0, 0.7)",
+      boxShadow: '0 16px 64px rgba(0, 0, 0, 0.7)',
       transition: { duration: 0.3 },
     },
     iconSpin: {
       rotate: 360,
-      transition: { duration: 0.5, ease: "easeInOut" },
+      transition: { duration: 0.5, ease: 'easeInOut' },
     },
   },
 } as const;

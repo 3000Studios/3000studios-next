@@ -3,16 +3,13 @@
  * Checks deployment status
  */
 
-import { NextRequest, NextResponse } from "next/server";
-import {
-  getDeploymentStatus,
-  getLatestDeployment,
-} from "@/lib/services/vercel";
+import { NextRequest, NextResponse } from 'next/server';
+import { getDeploymentStatus, getLatestDeployment } from '@/lib/services/vercel';
 
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
-    const deploymentId = searchParams.get("deploymentId");
+    const deploymentId = searchParams.get('deploymentId');
 
     if (deploymentId) {
       // Get specific deployment status
@@ -31,10 +28,10 @@ export async function GET(request: NextRequest) {
       });
     }
   } catch (error) {
-    console.error("Deployment status API error:", error);
+    console.error('Deployment status API error:', error);
     return NextResponse.json(
-      { error: "Failed to get deployment status" },
-      { status: 500 },
+      { error: 'Failed to get deployment status' },
+      { status: 500 }
     );
   }
 }

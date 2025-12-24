@@ -14,14 +14,14 @@ export async function POST(request: NextRequest) {
     if (!productName) {
       return NextResponse.json(
         { error: "Product name required" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
     // Generate product description using AI
     const description = await generateProductDescription(
       productName,
-      features || [],
+      features || []
     );
 
     // Auto-save to database if requested
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
     console.error("Product description API error:", error);
     return NextResponse.json(
       { error: "Failed to generate product description" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
