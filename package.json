@@ -16,6 +16,10 @@
     "test:ui": "vitest --ui",
     "db:seed": "tsx prisma/seed.ts",
     "clean": "rimraf .next node_modules",
+    "clean:deps": "rm -rf node_modules package-lock.json",
+    "fresh:install": "npm run clean:deps && npm install",
+    "deps:audit": "npm audit fix",
+    "deps:update": "npm update",
     "deploy": "vercel --prod --yes",
     "postinstall": "node -e \"const { execSync } = require('child_process'); const url = process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/postgres'; execSync('npx prisma generate', { stdio: 'inherit', env: { ...process.env, DATABASE_URL: url } });\""
   },
