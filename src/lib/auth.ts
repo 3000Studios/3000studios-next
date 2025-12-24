@@ -8,17 +8,13 @@
 
   email: process.env.MATRIX_ADMIN_EMAIL || '',
   password: process.env.MATRIX_ADMIN_PASSWORD || '',
-=======
   email: 'mr.jwswain@gmail.com',
   password: 'Bossman3000!!!', // TODO: Hash with bcrypt
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
 import jwt from 'jsonwebtoken';
 
 const ADMIN_CREDENTIALS = {
   email: process.env.MATRIX_ADMIN_EMAIL || '',
   password: process.env.MATRIX_ADMIN_PASSWORD || '',
->>>>>>> origin/copilot/update-main-with-all-branches
 };
 
 // Session duration (configurable via env var, default 24 hours)
@@ -34,9 +30,7 @@ export interface AuthResult {
 }
 
 export function verifyAdmin(email: string, password: string): AuthResult {
-=======
   if (email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password) {
->>>>>>> origin/copilot/resolve-git-conflicts
     return {
       success: true,
       message: 'Authentication successful',
@@ -54,15 +48,12 @@ export function verifyAdmin(email: string, password: string): AuthResult {
 }
 
 export function createSessionToken(email: string): string {
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
   // TODO: In production, use proper JWT with crypto.sign()
   // and a secret key from environment variables
   const token = Buffer.from(
     JSON.stringify({ email, timestamp: Date.now() })
   ).toString('base64');
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
   return token;
-=======
   const secret = process.env.SESSION_SECRET || 'dev-secret-key';
   
   // SECURITY: Warn if using insecure default secret in production
@@ -94,12 +85,10 @@ export function verifySessionToken(token: string): AuthResult {
   const secret = process.env.SESSION_SECRET || 'dev-secret-key';
   
   try {
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
     // TODO: In production, use proper JWT verification with secret key
     const decoded = JSON.parse(Buffer.from(token, 'base64').toString());
     const hoursSinceCreation = (Date.now() - decoded.timestamp) / (1000 * 60 * 60);
     
-=======
     const decoded = JSON.parse(Buffer.from(token, 'base64').toString());
     const hoursSinceCreation = (Date.now() - decoded.timestamp) / (1000 * 60 * 60);
 
@@ -111,11 +100,9 @@ export function verifySessionToken(token: string): AuthResult {
       };
     }
 
-=======
     // Try JWT verification first
     const decoded = jwt.verify(token, secret) as { email: string; role: string; exp: number };
     
->>>>>>> origin/copilot/update-main-with-all-branches
     if (decoded.email === ADMIN_CREDENTIALS.email) {
       return {
         success: true,

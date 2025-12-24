@@ -1,5 +1,4 @@
 /**
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
  * Matrix Admin Dashboard
  * Central command center for site administration  
  * Features: Analytics, site management, voice-to-code editor integration points
@@ -12,15 +11,12 @@
  * - Live stream controls
  * - Avatar controller
  * - All admin tools
-=======
  * Matrix Command Center - Voice-Controlled Dashboard
  * THE DIFFERENTIATOR: Speak to control the entire platform
  * Features: Voice commands, live logs, revenue dashboard, system controls
-=======
  * Matrix Command Center - Voice-Controlled Dashboard
  * THE DIFFERENTIATOR: Speak to control the entire platform
  * Features: Voice commands, live logs, revenue dashboard, system controls
->>>>>>> origin/copilot/update-main-with-all-branches
  */
 
 "use client";
@@ -47,7 +43,6 @@ export default function MatrixCommandCenter() {
     Note: Authentication and Navigation are now handled by ./layout.tsx
   */
 
-=======
   const [commandInput, setCommandInput] = useState("");
   const [previewData, setPreviewData] = useState<{
     command: string;
@@ -56,8 +51,6 @@ export default function MatrixCommandCenter() {
     patches?: any[]; // Store valid code patches
     visuals: "none" | "jazz" | "glitter";
   } | null>(null);
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
 
   const [isDeploying, setIsDeploying] = useState(false);
   const [deployStatus, setDeployStatus] = useState<string[]>([]);
@@ -134,10 +127,6 @@ export default function MatrixCommandCenter() {
       alert("Failed to process request. Check console.");
       return null;
     }
-=======
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
->>>>>>> origin/copilot/update-main-with-all-branches
   };
 
   const handleCommandSubmit = async (e: React.FormEvent) => {
@@ -278,7 +267,6 @@ export default function MatrixCommandCenter() {
     }
   };
 
->>>>>>> origin/copilot/update-main-with-all-branches
   return (
     <div className="h-full p-4 md:p-8 flex flex-col">
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 h-full">
@@ -316,7 +304,6 @@ export default function MatrixCommandCenter() {
               <Terminal size={24} />
               Command Interface
             </h2>
-=======
               <Terminal size={24} />
               Command Interface
             </h2>
@@ -510,8 +497,6 @@ export default function MatrixCommandCenter() {
 
         {/* Real Analytics from MongoDB */}
         <RealAnalytics />
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
         {/* RIGHT COLUMN: Output & Status */}
         <div className="flex flex-col gap-6 h-full">
           {/* Deployment Status */}

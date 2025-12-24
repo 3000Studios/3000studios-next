@@ -5,14 +5,10 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-=======
 import { NextRequest, NextResponse } from 'next/server';
 import { getDashboardStats, getAnalytics } from '@/lib/services/mongodb';
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
->>>>>>> origin/copilot/update-main-with-all-branches
 
 export async function GET(request: NextRequest) {
   try {
@@ -20,7 +16,6 @@ export async function GET(request: NextRequest) {
     const timeRange =
       (searchParams.get("timeRange") as "day" | "week" | "month") || "day";
 
-=======
     // Get stats using Prisma
     const [userCount, _orderCount, revenue] = await Promise.all([
       prisma.user.count(),
@@ -44,8 +39,6 @@ export async function GET(request: NextRequest) {
       events: [],
       sources: [],
     };
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
 
     return NextResponse.json({
       success: true,
@@ -57,11 +50,7 @@ export async function GET(request: NextRequest) {
     console.error("Analytics API error:", error);
     return NextResponse.json(
       { error: "Failed to fetch analytics" },
-=======
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
       { error: "Failed to fetch analytics" },
->>>>>>> origin/copilot/update-main-with-all-branches
       { status: 500 }
     );
   }

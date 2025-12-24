@@ -14,12 +14,8 @@ export async function POST(request: NextRequest) {
     if (!productName) {
       return NextResponse.json(
         { error: "Product name required" },
-=======
         { error: 'Product name required' },
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
         { error: "Product name required" },
->>>>>>> origin/copilot/update-main-with-all-branches
         { status: 400 }
       );
     }
@@ -54,11 +50,7 @@ export async function POST(request: NextRequest) {
     console.error("Product description API error:", error);
     return NextResponse.json(
       { error: "Failed to generate product description" },
-=======
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
       { error: "Failed to generate product description" },
->>>>>>> origin/copilot/update-main-with-all-branches
       { status: 500 }
     );
   }

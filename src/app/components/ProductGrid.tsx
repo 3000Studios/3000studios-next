@@ -8,12 +8,8 @@
 
 import { Eye, Heart, ShoppingCart, Star } from 'lucide-react';
 import { useState } from 'react';
-=======
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
 import { Eye, Heart, ShoppingCart, Star } from 'lucide-react';
 import { useState } from 'react';
->>>>>>> origin/copilot/update-main-with-all-branches
 
 export interface Product {
   id: string;
@@ -59,14 +55,10 @@ function ProductCard({ product, onAddToCart }: { product: Product; onAddToCart?:
       >
         <Heart
           size={16}
-=======
         <Heart 
           size={16} 
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
         <Heart
           size={16}
->>>>>>> origin/copilot/update-main-with-all-branches
           className={isFavorite ? 'text-gold fill-gold' : 'text-gray-400'}
         />
       </button>

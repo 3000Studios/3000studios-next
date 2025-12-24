@@ -8,16 +8,10 @@
 
 import { Pause, Play, SkipForward, Volume2, VolumeX } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-=======
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
 import { Pause, Play, SkipForward, Volume2, VolumeX } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-=======
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Volume2, VolumeX, SkipForward, Play, Pause } from 'lucide-react';
->>>>>>> origin/copilot/prepare-production-readiness
->>>>>>> origin/copilot/update-main-with-all-branches
 
 interface MusicTrack {
   name: string;
@@ -45,8 +39,6 @@ export default function BackgroundMusic() {
 
   const currentTrack = DEFAULT_TRACKS[currentTrackIndex];
 
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
   const handleNextTrack = useCallback(() => {
     setCurrentTrackIndex((idx) => {
       const nextIndex = (idx + 1) % DEFAULT_TRACKS.length;
@@ -74,9 +66,7 @@ export default function BackgroundMusic() {
       audio.removeEventListener('ended', handleNextTrack);
     };
   }, [handleNextTrack, volume]);
-=======
   const handleNextTrack = () => {
-=======
   const handleNextTrack = useCallback(() => {
     const nextIndex = (currentTrackIndex + 1) % DEFAULT_TRACKS.length;
     setCurrentTrackIndex(nextIndex);
@@ -87,7 +77,6 @@ export default function BackgroundMusic() {
     }
   }, [currentTrackIndex, isPlaying]);
 
->>>>>>> origin/copilot/update-main-with-all-branches
   useEffect(() => {
     // Create audio element
     if (typeof window !== 'undefined') {
@@ -132,14 +121,7 @@ export default function BackgroundMusic() {
       audio.removeEventListener('ended', handleNextTrack);
     };
   }, [handleNextTrack, volume]);
-=======
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
->>>>>>> origin/copilot/fix-repo-architecture-errors
-=======
   }, [handleNextTrack]);
->>>>>>> origin/copilot/prepare-production-readiness
->>>>>>> origin/copilot/update-main-with-all-branches
 
   useEffect(() => {
     if (audioRef.current) {

@@ -8,7 +8,6 @@ import { usePathname, useRouter } from "next/navigation";
 import type { MouseEvent } from "react";
 import { useEffect, useMemo, useState } from "react";
 
-=======
 // --- Sound Generation Utility ---
 const playElectricSound = () => {
   try {
@@ -184,8 +183,6 @@ const ElectricLink = ({
     </div>
   );
 };
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -208,7 +205,6 @@ export default function Navigation() {
     { href: "/blog", label: "BLOG" },
     { href: "/contact", label: "CONTACT" },
   ];
-=======
     { href: "/", label: "HOME" },
     { href: "/store", label: "STORE" },
     { href: "/vendors-platform", label: "VENDORS" },
@@ -218,12 +214,10 @@ export default function Navigation() {
     { href: "/blog", label: "BLOG" },
     { href: "/contact", label: "CONTACT" },
   ];
->>>>>>> origin/copilot/update-main-with-all-branches
 
   const isActiveLink = (href: string) => pathname === href;
 
   return (
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
     <motion.nav 
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -233,15 +227,12 @@ export default function Navigation() {
           ? 'glass-premium border-b border-gold/30 shadow-2xl' 
           : 'glass border-b border-gray-800/50'
       } ${moodColors[uiMood]}`}
-=======
-=======
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? "bg-black/70 backdrop-blur-md py-2 border-b border-[var(--platinum)]/40"
           : "bg-black/50 backdrop-blur-sm py-4 border-b border-[var(--platinum)]/30"
       }`}
->>>>>>> origin/copilot/update-main-with-all-branches
     >
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(0,243,255,0.12),_transparent_45%)]" />
 
@@ -274,7 +265,6 @@ export default function Navigation() {
                 <ElectricLink
                   key={link.href}
                   href={link.href}
-=======
                   label={link.label}
                   isActive={isActiveLink(link.href)}
                 />
@@ -304,7 +294,6 @@ export default function Navigation() {
         </div>
       </div>
 
-=======
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div

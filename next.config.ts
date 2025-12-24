@@ -3,7 +3,6 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // Incremental Static Regeneration (ISR)
   // Allows pages to be updated without full rebuild
-=======
   /* Production Optimizations */
   reactStrictMode: true,
   
@@ -26,7 +25,6 @@ const nextConfig: NextConfig = {
   },
   
   /* Security Headers */
->>>>>>> origin/copilot/update-main-with-all-branches
   async headers() {
     return [
       {
@@ -115,7 +113,6 @@ const nextConfig: NextConfig = {
       }
     ];
   },
->>>>>>> origin/copilot/update-main-with-all-branches
 };
 
 export default nextConfig;

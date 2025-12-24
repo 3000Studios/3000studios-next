@@ -17,11 +17,9 @@ import { blogPosts, getAllCategories, getAllTags } from '../lib/blogData';
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-=======
   // email and isLoading are placeholders for future newsletter integration
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
->>>>>>> origin/copilot/update-main-with-all-branches
 
   const categories = ['All', ...getAllCategories()];
 

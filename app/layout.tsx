@@ -37,11 +37,9 @@ import MoodMap from "@/components/world/MoodMap";
 
 export const metadata = {
   title: "3000 Studios | Platinum Ether",
-=======
 
 export const metadata = {
   title: "3000 Studios",
->>>>>>> origin/copilot/update-main-with-all-branches
   description: "Elite Visual Experience by 3000 Studios",
 };
 
@@ -53,13 +51,11 @@ export default function RootLayout({
       className="font-sans"
     >
       <body className="antialiased selection:bg-hologram selection:text-white overflow-x-hidden bg-void text-mercury">
-=======
   children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body className="overflow-hidden bg-black text-white selection:bg-gold/40">
->>>>>>> origin/copilot/update-main-with-all-branches
         {/* Shadow PRIME OS - Core Systems */}
         <EventBus />
         <PrimeLoop />

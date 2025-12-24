@@ -12,7 +12,6 @@ const envSchema = z.object({
   MUX_TOKEN_SECRET: z.string().optional(),
 });
 
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 function optional(name: string, defaultValue: string = ''): string {
   return process.env[name] || defaultValue;
 }
@@ -44,7 +43,6 @@ export const ENV = {
   
   // Node environment
   NODE_ENV: process.env.NODE_ENV || 'development',
-=======
 
 const getEnv = (name: string, isOptional: boolean = false) => {
   const value = process.env[name];
@@ -128,7 +126,6 @@ export const ENV = {
   // --- SYSTEM ---
   NODE_ENV: process.env.NODE_ENV || "development",
 };
-=======
 /**
  * Environment Configuration Validator
  * Validates required environment variables at runtime
@@ -257,4 +254,3 @@ export const env = EnvironmentValidator.getInstance();
 if (env.isProduction()) {
   env.validateRequiredVars(['baseUrl']);
 }
->>>>>>> origin/copilot/update-main-with-all-branches

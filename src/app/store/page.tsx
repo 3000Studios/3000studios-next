@@ -1,4 +1,3 @@
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 /**
  * Store Page
  * E-commerce store front with product listings
@@ -12,7 +11,6 @@ import { SocialProof } from '@/components/SocialProof';
 import { getProducts } from '@/lib/products-data';
 import { Metadata } from 'next';
 import Link from 'next/link';
-=======
 
 export const metadata: Metadata = {
   title: 'Store | 3000 Studios',
@@ -23,7 +21,6 @@ export default function StorePage() {
   const products = getProducts();
 
   return (
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
     <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black py-8 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -59,7 +56,6 @@ export default function StorePage() {
       <div className="relative border-b border-purple-500/20 bg-gradient-to-b from-slate-900/80 to-slate-950/50 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex items-center justify-between">
-=======
             <div>
               <h1 className="text-5xl sm:text-6xl font-black bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-3">
                 3000 Studios Store
@@ -126,12 +122,8 @@ export default function StorePage() {
               </div>
               <p className="text-purple-300/80 font-semibold">Premium Products</p>
               <p className="text-purple-400/60 text-sm mt-1">Carefully curated for excellence</p>
-=======
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
               <p className="text-purple-300/80 font-semibold">Premium Products</p>
               <p className="text-purple-400/60 text-sm mt-1">Carefully curated for excellence</p>
->>>>>>> origin/copilot/update-main-with-all-branches
             </div>
             <div className="text-center group">
               <div className="text-5xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-3">

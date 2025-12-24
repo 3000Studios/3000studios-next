@@ -1,5 +1,4 @@
 {
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
   /* ======================================================
      CORE WORKSPACE BEHAVIOR (STABLE + FAST)
   ====================================================== */
@@ -23,7 +22,6 @@
 
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 800,
-=======
   "telemetry.telemetryLevel": "off",
   "workbench.enableExperiments": false,
 
@@ -75,10 +73,6 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit"
   }
-=======
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
 "github-actions.workflows.pinned.workflows": [],
 "github-actions.use-enterprise": true
->>>>>>> origin/copilot/update-main-with-all-branches
 }

@@ -126,24 +126,20 @@ export async function POST(request: NextRequest) {
 
     const parsed = JSON.parse(completion.choices[0].message.content || "{}");
 
->>>>>>> origin/copilot/update-main-with-all-branches
     return NextResponse.json({
       success: true,
       ...parsed,
       action: "preview",
     });
->>>>>>> origin/copilot/update-main-with-all-branches
   } catch (error) {
     console.error("Voice API Error:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
-=======
       { error: "Internal Server Error" },
       { status: 500 }
     );
   }
 }
-=======
 
 async function applyPatches(patches: CodePatch[]) {
   const results = [];
@@ -195,5 +191,3 @@ async function applyPatches(patches: CodePatch[]) {
     results,
   });
 }
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======

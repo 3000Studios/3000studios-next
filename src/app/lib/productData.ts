@@ -568,7 +568,5 @@ export function searchProducts(query: string): Product[] {
     p.name.toLowerCase().includes(lowerQuery) ||
     p.description.toLowerCase().includes(lowerQuery) ||
     p.tags?.some(tag => tag.toLowerCase().includes(lowerQuery))
-=======
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
   );
 }

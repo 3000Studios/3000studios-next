@@ -80,7 +80,6 @@ declare global {
   }
 }
 
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
 interface GoogleMapProps {
   apiKey: string;
   center?: { lat: number; lng: number };
@@ -136,13 +135,8 @@ export default function GoogleMap({
         mapTypeControlOptions: {
           style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
           position: google.maps.ControlPosition.TOP_RIGHT,
-=======
-=======
-=======
           style: ((window as any).google).maps.MapTypeControlStyle.HORIZONTAL_BAR,
           position: ((window as any).google).maps.ControlPosition.TOP_RIGHT,
->>>>>>> origin/copilot/prepare-production-readiness
->>>>>>> origin/copilot/update-main-with-all-branches
           mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain']
         },
         streetViewControl: true,
@@ -153,7 +147,6 @@ export default function GoogleMap({
         animation: google.maps.Animation.DROP,
         icon: {
           path: window.google.maps.SymbolPath.CIRCLE,
-=======
       const map = new ((window as any).google).maps.Map(mapRef.current, mapOptions);
       mapInstanceRef.current = map;
 

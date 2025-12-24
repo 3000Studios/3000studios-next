@@ -612,7 +612,6 @@ export default function HomePage() {
                 </Link>
               </motion.div>
             ))}
-=======
       {/* AdSense Auto Ads Placement Hint - Mid Page */}
       {/* Auto Ads will automatically place ads here once your AdSense account is approved */}
       {/* After approval, create ad units in AdSense dashboard with slot IDs and use AdSenseUnit component */}
@@ -627,7 +626,6 @@ export default function HomePage() {
             }}
           >
             <p className="text-gray-500 text-sm">AdSense Auto Ads will appear here once approved</p>
->>>>>>> origin/copilot/update-main-with-all-branches
           </div>
         </div>
       )}
@@ -649,7 +647,6 @@ export default function HomePage() {
         </Suspense>
       </section>
 
-=======
       {/* Newsletter / Email Capture */}
       <section
         className="py-24 px-4"

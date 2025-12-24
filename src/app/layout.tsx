@@ -45,8 +45,6 @@ const ADSENSE_ACCOUNT = RAW_ADSENSE_ID
   : undefined;
 
 export const metadata: Metadata = {
-=======
-=======
   authors: [{ name: "3000 Studios" }],
   robots: "index, follow",
   openGraph: {
@@ -63,13 +61,11 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: "3000 Studios",
->>>>>>> origin/copilot/update-main-with-all-branches
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-=======
     site: "@3000studios",
     title: "3000 Studios - Award-Winning Creative Studio",
     description:
@@ -78,7 +74,6 @@ export const metadata: Metadata = {
   other: ADSENSE_ACCOUNT
     ? { "google-adsense-account": ADSENSE_ACCOUNT }
     : undefined,
-=======
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://3000studios.com'),
   title: {
     default: "3000 Studios - Award-Winning Creative Studio",
@@ -142,7 +137,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased flex flex-col min-h-screen bg-black">
-=======
         {/* Google AdSense Auto Ads (enabled when NEXT_PUBLIC_ADSENSE_PUBLISHER_ID is set) */}
         {ADSENSE_ACCOUNT ? (
           <Script
@@ -153,7 +147,6 @@ export default function RootLayout({
             crossOrigin="anonymous"
           />
         ) : null}
->>>>>>> origin/copilot/update-main-with-all-branches
         {/* Live Video Wallpaper Background - Blueprint Feature */}
         <VideoWallpaper opacity={0.25} />
 
@@ -169,7 +162,6 @@ export default function RootLayout({
         {/* Main Content */}
         <Navigation />
         <main className="flex-grow pt-20 relative z-10">{children}</main>
-=======
         <main className="flex-grow pt-20 relative z-10">{children}</main>
 
         {/* Gravity Footer - Blueprint Feature */}
@@ -179,10 +171,6 @@ export default function RootLayout({
         <ConsentBanner />
 
         <Analytics />
->>>>>>> origin/copilot/resolve-git-conflicts
-=======
-=======
->>>>>>> origin/copilot/update-main-with-all-branches
       </body>
     </html>
   );

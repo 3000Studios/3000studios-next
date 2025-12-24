@@ -8,7 +8,6 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(_request: NextRequest) {
   try {
-=======
     const dbProducts = await prisma.product.findMany();
 
     // Map Prisma 'id' to 'productId' for frontend compatibility
@@ -16,8 +15,6 @@ export async function GET(_request: NextRequest) {
       ...p,
       productId: p.id,
     }));
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
 
     return NextResponse.json({
       success: true,

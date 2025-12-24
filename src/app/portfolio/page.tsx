@@ -6,7 +6,6 @@
 
 'use client';
 
->>>>>>> origin/copilot/update-main-with-all-branches
 import { motion } from 'framer-motion';
 import { Award, ChevronRight, ExternalLink, Filter, Star, TrendingUp, Users } from 'lucide-react';
 import Link from 'next/link';
@@ -30,10 +29,8 @@ export default function PortfolioPage() {
 
   const filteredProjects = selectedCategory === 'All'
     ? portfolioItems
-=======
   const filteredProjects = selectedCategory === 'All'
     ? portfolioItems
->>>>>>> origin/copilot/update-main-with-all-branches
     : portfolioItems.filter(p => p.category === selectedCategory);
 
   const toggleProject = (id: string) => {
@@ -117,11 +114,7 @@ export default function PortfolioPage() {
           </h2>
           <p className="text-gray-400 mb-8">Deep dives into our most impactful projects</p>
 
-=======
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
 
->>>>>>> origin/copilot/update-main-with-all-branches
           <div className="space-y-8">
             {filteredProjects.map((project, index) => (
               <motion.div
@@ -175,16 +168,12 @@ export default function PortfolioPage() {
 
                     <p className="text-gray-400 mb-4 italic">Client: {project.client}</p>
 
-=======
                     
                     <p className="text-gray-400 mb-4 italic">Client: {project.client}</p>
                     
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
 
                     <p className="text-gray-400 mb-4 italic">Client: {project.client}</p>
 
->>>>>>> origin/copilot/update-main-with-all-branches
                     <p className="text-gray-300 mb-6 text-lg">
                       {project.description}
                     </p>
@@ -209,12 +198,8 @@ export default function PortfolioPage() {
                       {expandedProject === project.id ? 'Hide Details' : 'View Full Case Study'}
                       <ChevronRight
                         size={20}
-=======
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
                       <ChevronRight
                         size={20}
->>>>>>> origin/copilot/update-main-with-all-branches
                         className={`transition-transform ${expandedProject === project.id ? 'rotate-90' : ''}`}
                       />
                     </button>

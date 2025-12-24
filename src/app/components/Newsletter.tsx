@@ -8,10 +8,8 @@
 
 import { AlertCircle, Check, Gift, Loader2, Mail } from 'lucide-react';
 import { useState } from 'react';
-=======
 import { AlertCircle, Check, Gift, Loader2, Mail } from 'lucide-react';
 import { useState } from 'react';
->>>>>>> origin/copilot/update-main-with-all-branches
 
 interface NewsletterProps {
   variant?: 'default' | 'compact' | 'hero';
@@ -69,9 +67,7 @@ export default function Newsletter({
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
     } catch {
-=======
     } catch {
->>>>>>> origin/copilot/update-main-with-all-branches
       setStatus('error');
       setMessage('Something went wrong. Please try again later.');
     } finally {
@@ -133,24 +129,16 @@ export default function Newsletter({
           </p>
         )}
 
-=======
         
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
 
->>>>>>> origin/copilot/update-main-with-all-branches
         {status === 'success' && (
           <p className="mt-2 text-green-400 text-sm flex items-center gap-1">
             <Check size={14} /> {message}
           </p>
         )}
 
-=======
         
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
 
->>>>>>> origin/copilot/update-main-with-all-branches
         {status === 'error' && (
           <p className="mt-2 text-red-400 text-sm flex items-center gap-1">
             <AlertCircle size={14} /> {message}
@@ -232,12 +220,8 @@ export default function Newsletter({
             </p>
           )}
 
-=======
           
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
 
->>>>>>> origin/copilot/update-main-with-all-branches
           {status === 'success' && (
             <div className="mt-4 p-4 bg-green-900/30 border border-green-500/50 rounded-lg">
               <p className="text-green-200 flex items-center justify-center gap-2">
@@ -246,12 +230,8 @@ export default function Newsletter({
             </div>
           )}
 
-=======
           
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
 
->>>>>>> origin/copilot/update-main-with-all-branches
           {status === 'error' && (
             <div className="mt-4 p-4 bg-red-900/30 border border-red-500/50 rounded-lg">
               <p className="text-red-200 flex items-center justify-center gap-2">
@@ -280,13 +260,9 @@ export default function Newsletter({
             {title}
           </h3>
         </div>
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
         
-=======
 
-=======
 
->>>>>>> origin/copilot/update-main-with-all-branches
         <p className="text-gray-400 mb-6">
           {description}
         </p>
@@ -347,24 +323,16 @@ export default function Newsletter({
             </p>
           )}
 
-=======
           
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
 
->>>>>>> origin/copilot/update-main-with-all-branches
           {status === 'success' && (
             <p className="text-green-400 text-sm flex items-center justify-center gap-1">
               <Check size={14} /> {message}
             </p>
           )}
 
-=======
           
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
 
->>>>>>> origin/copilot/update-main-with-all-branches
           {status === 'error' && (
             <p className="text-red-400 text-sm flex items-center justify-center gap-1">
               <AlertCircle size={14} /> {message}

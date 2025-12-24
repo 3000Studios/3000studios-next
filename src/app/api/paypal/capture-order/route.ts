@@ -6,22 +6,16 @@
 import { prisma } from "@/lib/prisma";
 import { captureOrder } from "@/lib/services/paypal";
 import { NextRequest, NextResponse } from "next/server";
-=======
 import { NextRequest, NextResponse } from 'next/server';
 import { captureOrder, trackAffiliateSale } from '@/lib/services/paypal';
 import { getOrders } from '@/lib/services/mongodb';
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
 import { prisma } from "@/lib/prisma";
 import { captureOrder } from "@/lib/services/paypal";
 import { NextRequest, NextResponse } from "next/server";
-=======
 import { NextRequest, NextResponse } from 'next/server';
 import { captureOrder, trackAffiliateSale } from '@/lib/services/paypal';
 import { getOrders } from '@/lib/services/mongodb';
 import { OrderItem } from '@/types/paypal';
->>>>>>> origin/copilot/fix-repo-architecture-errors
->>>>>>> origin/copilot/update-main-with-all-branches
 
 export async function POST(request: NextRequest) {
   try {
@@ -70,11 +64,7 @@ export async function POST(request: NextRequest) {
     console.error("PayPal capture order error:", error);
     return NextResponse.json(
       { error: "Failed to capture PayPal order" },
-=======
->>>>>>> origin/copilot/resolve-merge-conflicts-and-deploy
-=======
       { error: "Failed to capture PayPal order" },
->>>>>>> origin/copilot/update-main-with-all-branches
       { status: 500 }
     );
   }
