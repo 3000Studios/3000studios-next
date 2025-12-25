@@ -35,37 +35,55 @@ export default function BackgroundMusic() {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [showControls, setShowControls] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const isPlayingRef = useRef(isPlaying);
 
   const currentTrack = DEFAULT_TRACKS[currentTrackIndex];
+
+  // Keep ref in sync with state
+  useEffect(() => {
+    isPlayingRef.current = isPlaying;
+  }, [isPlaying]);
 
   const handleNextTrack = useCallback(() => {
     setCurrentTrackIndex((idx) => {
       const nextIndex = (idx + 1) % DEFAULT_TRACKS.length;
 
-      if (audioRef.current && isPlaying) {
+      if (audioRef.current && isPlayingRef.current) {
         audioRef.current.src = DEFAULT_TRACKS[nextIndex].src;
         audioRef.current.play().catch(err => console.log('Play error:', err));
       }
 
       return nextIndex;
     });
-  }, [isPlaying]);
+  }, []);
 
+  // Initialize Audio Engine
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
     const audio = new Audio();
-    audio.volume = volume;
     audio.loop = false;
-    audio.addEventListener('ended', handleNextTrack);
+    // Set initial volume
+    audio.volume = 0.3;
     audioRef.current = audio;
 
     return () => {
       audio.pause();
+    };
+  }, []);
+
+  // Handle Event Listeners
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.addEventListener('ended', handleNextTrack);
+    return () => {
       audio.removeEventListener('ended', handleNextTrack);
     };
-  }, [handleNextTrack, volume]);
+  }, [handleNextTrack]);
 
+  // Handle Volume Changes
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = isMuted ? 0 : volume;
