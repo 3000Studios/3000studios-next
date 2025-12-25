@@ -32,7 +32,7 @@
   "workbench.editor.enablePreview": false,
   "workbench.editor.closeOnFileDelete": true,
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "explicit"
@@ -69,5 +69,7 @@
   "security.workspace.trust.enabled": true,
   "security.workspace.trust.startupPrompt": "never",
   "explorer.confirmDragAndDrop": false,
-  "explorer.confirmDelete": false
+  "explorer.confirmDelete": false,
+  "chatgpt.runCodexInWindowsSubsystemForLinux": true,
+  "chatgpt.openOnStartup": true
 }

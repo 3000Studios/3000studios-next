@@ -1,24 +1,56 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * Interactive Sound Effects System
  * Plays sophisticated click sounds and ambient audio
+ * Includes "Enable Sound" overlay for browser autoplay policies
  */
 export default function SoundEffects() {
   const audioContextRef = useRef<AudioContext | null>(null);
+  const [enabled, setEnabled] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
 
   useEffect(() => {
-    // Initialize Web Audio API
+    // Check localStorage
+    const stored = localStorage.getItem('sound-enabled');
+    if (stored === 'true') {
+      setEnabled(true);
+    } else if (stored === null) {
+      setShowOverlay(true);
+    }
+  }, []);
+
+  const enableSound = () => {
     if (typeof window === 'undefined') return;
-    
     const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
     audioContextRef.current = new AudioContext();
+    audioContextRef.current.resume();
+    
+    setEnabled(true);
+    setShowOverlay(false);
+    localStorage.setItem('sound-enabled', 'true');
+  };
+
+  const disableSound = () => {
+    setEnabled(false);
+    setShowOverlay(false);
+    localStorage.setItem('sound-enabled', 'false');
+  };
+
+  useEffect(() => {
+    if (!enabled) return;
+
+    // Initialize Web Audio API if not already
+    if (!audioContextRef.current) {
+      const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+      audioContextRef.current = new AudioContext();
+    }
 
     // Function to create a sophisticated click sound
     const playClickSound = () => {
-      if (!audioContextRef.current) return;
+      if (!audioContextRef.current || audioContextRef.current.state === 'suspended') return;
 
       const context = audioContextRef.current;
       const oscillator = context.createOscillator();
@@ -43,7 +75,7 @@ export default function SoundEffects() {
 
     // Function to create a hover sound
     const playHoverSound = () => {
-      if (!audioContextRef.current) return;
+      if (!audioContextRef.current || audioContextRef.current.state === 'suspended') return;
 
       const context = audioContextRef.current;
       const oscillator = context.createOscillator();
@@ -93,7 +125,27 @@ export default function SoundEffects() {
         audioContextRef.current.close();
       }
     };
-  }, []);
+  }, [enabled]);
 
-  return null; // This component doesn't render anything
+  if (!showOverlay) return null;
+
+  return (
+    <div className="fixed bottom-4 right-4 z-50 bg-black/80 border border-yellow-500/30 p-4 rounded-lg shadow-lg backdrop-blur-md flex flex-col gap-2 max-w-xs animate-in fade-in slide-in-from-bottom-4">
+      <p className="text-sm text-white font-medium">Enable immersive audio effects?</p>
+      <div className="flex gap-2">
+        <button 
+          onClick={enableSound}
+          className="flex-1 bg-yellow-500/20 hover:bg-yellow-500/40 text-yellow-500 border border-yellow-500/50 rounded px-3 py-1 text-xs transition-colors font-bold"
+        >
+          Enable
+        </button>
+        <button 
+          onClick={disableSound}
+          className="flex-1 bg-white/5 hover:bg-white/10 text-gray-400 border border-white/10 rounded px-3 py-1 text-xs transition-colors"
+        >
+          Dismiss
+        </button>
+      </div>
+    </div>
+  );
 }
