@@ -6,7 +6,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getLatestDeployment } from "@/lib/services/vercel";
 
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     const deployment = await getLatestDeployment();
 

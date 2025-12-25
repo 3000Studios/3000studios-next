@@ -35,6 +35,14 @@ export const affiliateProducts: AffiliateProduct[] = [
   // Add more affiliate products here
 ];
 
+// Affiliate link generators for revenue pages
+export const AFFILIATES = {
+  general: (url: string) => `${url}?ref=3000studios`,
+  amazon: (asin: string) => `https://www.amazon.com/dp/${asin}?tag=3000studios-20`,
+  clickbank: (product: string) => `https://hop.clickbank.net/?affiliate=3000studios&vendor=${product}`,
+  gumroad: (product: string) => `https://gumroad.com/l/${product}?wanted=true&referrer=3000studios`,
+};
+
 export function getAffiliateProduct(id: string): AffiliateProduct | undefined {
   return affiliateProducts.find(p => p.id === id);
 }

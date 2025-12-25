@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     const { prompt, type, tier } = body;
 
     // Sanitize prompt to prevent injection attacks
-    const sanitizedPrompt = prompt.trim().substring(0, 5000);
+    const _sanitizedPrompt = prompt.trim().substring(0, 5000);
 
     // Placeholder response
     return NextResponse.json({

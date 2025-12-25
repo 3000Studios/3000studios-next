@@ -284,8 +284,9 @@ export function useRealtimeSync() {
 
     return () => {
       clearInterval(interval);
-      if (eventSourceRef.current) {
-        eventSourceRef.current.close();
+      const currentEventSource = eventSourceRef.current;
+      if (currentEventSource) {
+        currentEventSource.close();
       }
     };
   }, [fetchStatus]);

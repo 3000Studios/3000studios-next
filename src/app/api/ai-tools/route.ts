@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { tool, params } = body;
+    const { tool, params: _params } = body;
 
     // Placeholder for future AI tool integrations
     return NextResponse.json({
