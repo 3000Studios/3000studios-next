@@ -43,3 +43,18 @@ The VS Code workspace has been audited and optimized for maximum autonomy and pe
 ## Recommendations
 -   Review `docs/VSCODE_EXTENSION_PURGE.md` and uninstall any listed extensions.
 -   Use the "FULL AUTOPILOT" task before pushing to ensure CI success.
+
+## Project Context (Phase 0 Discovery)
+As part of the workspace audit, the following project structure was identified:
+
+### Canonical Root
+-   **Path:** `/workspaces/3000studios-next`
+-   **Frameworks:**
+    -   Next.js: `16.0.10`
+    -   React: `19.2.3`
+    -   Tailwind CSS: `^4`
+    -   Prisma: `^6.19.1`
+
+### Anomalies Detected
+-   **Duplicate/Stale Root:** `/workspaces/3000studios-next/3000studios-next-main` contains an older version (Next 15, React 18). **Recommendation:** Archive or delete.
+-   **Git Hygiene:** Over 20 stale `copilot/*` remote branches detected. **Recommendation:** Prune after merging relevant changes.

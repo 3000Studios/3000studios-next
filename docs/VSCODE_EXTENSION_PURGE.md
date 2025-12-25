@@ -22,3 +22,6 @@ To ensure maximum performance and autonomy for the `3000studios-next` workspace,
 
 ## 7. Bracket Pair Colorizers (Old versions)
 **Reason:** VS Code has this built-in now (`editor.bracketPairColorization.enabled`). External extensions are obsolete and slower.
+
+## 8. ChatGPT / AI Wrappers (other than Copilot)
+**Reason:** We are standardizing on GitHub Copilot. Multiple AI extensions (e.g., `mpociot.bridge`, `genieai.chatgpt-vscode`) compete for resources, keybindings, and screen real estate.
