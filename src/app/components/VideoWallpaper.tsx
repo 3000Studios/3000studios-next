@@ -6,7 +6,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface VideoWallpaperProps {
   videoSrc?: string;
