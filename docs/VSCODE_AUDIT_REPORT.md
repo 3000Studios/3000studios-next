@@ -33,6 +33,13 @@ The VS Code workspace for `3000studios-next` has been audited and optimized for 
 - **Autopilot:**
   - `🤖 Full Autopilot Pipeline`: Chains `lint` -> `type-check` -> `test` -> `build` in sequence.
 
+### 4. Debugging Configuration (`.vscode/launch.json`)
+- **Added:**
+  - `Next.js: Debug Server-Side`: Debugs the Next.js server process.
+  - `Next.js: Debug Client-Side (Chrome)`: Debugs the client-side code in Chrome.
+  - `Next.js: Full Stack Debug`: Launches both server and client debuggers simultaneously.
+
 ## Next Steps
 1.  Review `docs/VSCODE_EXTENSION_PURGE.md` and uninstall recommended extensions.
 2.  Run `🤖 Full Autopilot Pipeline` from the Command Palette (Ctrl+Shift+P -> Tasks: Run Task) to verify the pipeline.
+
