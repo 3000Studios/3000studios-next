@@ -3,19 +3,19 @@
  * Receives deployment status updates from GitHub Actions and Vercel
  */
 
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { status, branch, commit, timestamp, source } = body;
 
-    console.log("📡 Deployment webhook received:", {
+    console.log('📡 Deployment webhook received:', {
       status,
       branch,
       commit: commit?.substring(0, 7),
       timestamp,
-      source: source || "github-actions",
+      source: source || 'github-actions',
     });
 
     // In a production environment, you would:
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     // For now, just acknowledge receipt
     return NextResponse.json({
       success: true,
-      message: "Deployment webhook processed",
+      message: 'Deployment webhook processed',
       received: {
         status,
         branch,
@@ -35,10 +35,10 @@ export async function POST(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error("Webhook processing error:", error);
+    console.error('Webhook processing error:', error);
     return NextResponse.json(
-      { error: "Failed to process webhook" },
-      { status: 500 },
+      { error: 'Failed to process webhook' },
+      { status: 500 }
     );
   }
 }
@@ -46,11 +46,11 @@ export async function POST(request: NextRequest) {
 // Handle GET requests for webhook verification
 export async function GET(_request: NextRequest) {
   return NextResponse.json({
-    status: "ok",
-    message: "Deployment webhook endpoint",
+    status: 'ok',
+    message: 'Deployment webhook endpoint',
     endpoints: {
-      post: "Receive deployment status updates",
-      get: "Webhook health check",
+      post: 'Receive deployment status updates',
+      get: 'Webhook health check',
     },
   });
 }

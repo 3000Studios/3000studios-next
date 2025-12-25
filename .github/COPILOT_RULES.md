@@ -20,4 +20,4 @@ DEFAULT BEHAVIOR:
 Never ask questions. Fix, document, commit, push.
 
 If approval is required:
-- Leave a PR comment: "Approval required — click Approve to proceed."
+- Leave a PR comment: “Approval required — click Approve to proceed.”

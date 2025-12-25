@@ -41,13 +41,8 @@ yarn-error.log*
 next-env.d.ts
 node_modules/
 .next/
-package-lock.json
-.env
-.env.*
-!.env.schema
-.vercel/
-*.log
-pnpm-debug.log*
-.env*.local
+# package-lock.json
 
-/generated/prisma
+# backups
+/backups/
+*.tar.gz

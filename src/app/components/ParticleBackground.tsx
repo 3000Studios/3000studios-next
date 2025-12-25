@@ -70,7 +70,7 @@ export default function ParticleBackground() {
     // Create particles
     const particles: Particle[] = [];
     const particleCount = 100;
-
+    
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
     }

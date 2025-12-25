@@ -16,11 +16,14 @@ interface MusicTrack {
 }
 
 // Default music tracks
-// TODO: Add actual music files to /public/music/ directory
-// Or configure these paths via environment variables
+// Using remote URL for Jazz track as requested since local file upload is restricted
 const DEFAULT_TRACKS: MusicTrack[] = [
+  { 
+    name: 'Jazz Club', 
+    src: 'https://raw.githubusercontent.com/Eaky0/MyProjects/023a2b974af4f6eb3688edd6c22ae8bc93bcf944/SimpleStep/Sound%20Library/Jazz.mp3', 
+    artist: 'Classic Jazz' 
+  },
   { name: 'Ambient Waves', src: '/music/ambient-1.mp3', artist: '3000 Studios' },
-  { name: 'Jazz Corporate', src: '/music/jazz-1.mp3', artist: '3000 Studios' },
   { name: 'Electronic Flow', src: '/music/electronic-1.mp3', artist: '3000 Studios' },
   { name: 'Chill Vibes', src: '/music/chill-1.mp3', artist: '3000 Studios' },
 ];
@@ -32,37 +35,55 @@ export default function BackgroundMusic() {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [showControls, setShowControls] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const isPlayingRef = useRef(isPlaying);
 
   const currentTrack = DEFAULT_TRACKS[currentTrackIndex];
+
+  // Keep ref in sync with state
+  useEffect(() => {
+    isPlayingRef.current = isPlaying;
+  }, [isPlaying]);
 
   const handleNextTrack = useCallback(() => {
     setCurrentTrackIndex((idx) => {
       const nextIndex = (idx + 1) % DEFAULT_TRACKS.length;
 
-      if (audioRef.current && isPlaying) {
+      if (audioRef.current && isPlayingRef.current) {
         audioRef.current.src = DEFAULT_TRACKS[nextIndex].src;
         audioRef.current.play().catch(err => console.log('Play error:', err));
       }
 
       return nextIndex;
     });
-  }, [isPlaying]);
+  }, []);
 
+  // Initialize Audio Engine
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
     const audio = new Audio();
-    audio.volume = volume;
     audio.loop = false;
-    audio.addEventListener('ended', handleNextTrack);
+    // Set initial volume
+    audio.volume = 0.3;
     audioRef.current = audio;
 
     return () => {
       audio.pause();
+    };
+  }, []);
+
+  // Handle Event Listeners
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.addEventListener('ended', handleNextTrack);
+    return () => {
       audio.removeEventListener('ended', handleNextTrack);
     };
-  }, [handleNextTrack, volume]);
+  }, [handleNextTrack]);
 
+  // Handle Volume Changes
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = isMuted ? 0 : volume;
