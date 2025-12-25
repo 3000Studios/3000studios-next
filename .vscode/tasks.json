@@ -117,6 +117,55 @@
       "group": {
         "kind": "test"
       }
+    },
+    {
+      "type": "npm",
+      "script": "lint",
+      "label": "npm: lint",
+      "detail": "eslint \"src/**/*.{ts,tsx}\"",
+      "group": "test",
+      "problemMatcher": ["$eslint-stylish"]
+    },
+    {
+      "type": "npm",
+      "script": "type-check",
+      "label": "npm: type-check",
+      "detail": "tsc --noEmit",
+      "group": "test",
+      "problemMatcher": ["$tsc"]
+    },
+    {
+      "type": "npm",
+      "script": "test",
+      "label": "npm: test",
+      "detail": "vitest",
+      "group": "test"
+    },
+    {
+      "type": "npm",
+      "script": "build",
+      "label": "npm: build",
+      "detail": "next build",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "deploy",
+      "label": "npm: deploy",
+      "detail": "vercel --prod --yes",
+      "group": "none",
+      "problemMatcher": []
+    },
+    {
+      "label": "🤖 Full Autopilot Pipeline",
+      "dependsOn": ["npm: lint", "npm: type-check", "npm: test", "npm: build"],
+      "dependsOrder": "sequence",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "problemMatcher": []
     }
   ]
 }
