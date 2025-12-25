@@ -30,49 +30,83 @@
       }
     },
     {
+      "label": "lint",
+      "type": "npm",
+      "script": "lint",
+      "group": "build",
+      "problemMatcher": [
+        "$eslint-stylish"
+      ],
+      "options": {
+        "env": {
+          "CI": "true"
+        }
+      }
+    },
+    {
+      "label": "typecheck",
+      "type": "npm",
+      "script": "type-check",
+      "group": "build",
+      "problemMatcher": [
+        "$tsc"
+      ],
+      "options": {
+        "env": {
+          "CI": "true"
+        }
+      }
+    },
+    {
+      "label": "test",
+      "type": "npm",
+      "script": "test",
+      "group": "test",
+      "options": {
+        "env": {
+          "CI": "true"
+        }
+      },
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
       "label": "build",
       "type": "npm",
       "script": "build",
       "group": "build",
       "problemMatcher": [
         "$tsc"
-      ]
-    },
-    {
-      "label": "lint",
-      "type": "npm",
-      "script": "lint",
-      "problemMatcher": [
-        "$eslint-stylish"
-      ]
-    },
-    {
-      "label": "type-check",
-      "type": "npm",
-      "script": "type-check",
-      "problemMatcher": [
-        "$tsc"
-      ]
-    },
-    {
-      "label": "test",
-      "type": "npm",
-      "script": "test",
-      "group": "test"
+      ],
+      "options": {
+        "env": {
+          "CI": "true"
+        }
+      }
     },
     {
       "label": "deploy",
       "type": "npm",
       "script": "deploy",
-      "problemMatcher": []
+      "dependsOn": [
+        "build"
+      ],
+      "problemMatcher": [],
+      "options": {
+        "env": {
+          "CI": "true"
+        }
+      }
     },
     {
-      "label": "FULL AUTOPILOT: Check & Build",
+      "label": "FULL AUTOPILOT: lint → typecheck → test → build → deploy",
       "dependsOn": [
         "lint",
-        "type-check",
+        "typecheck",
         "test",
-        "build"
+        "build",
+        "deploy"
       ],
       "dependsOrder": "sequence",
       "group": {
