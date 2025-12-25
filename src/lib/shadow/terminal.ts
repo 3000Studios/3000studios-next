@@ -1,4 +1,4 @@
 export const createTerminal = () => ({
-  write: (data: string) => {},
+  write: (_data: string) => {},
   read: () => "",
 });

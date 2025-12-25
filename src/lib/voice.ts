@@ -554,7 +554,7 @@ export async function recordAudio(duration: number = 5000): Promise<Blob> {
 }
 
 // Export everything
-export default {
+const voiceModule = {
   VoiceRecognition,
   TextToSpeech,
   VoiceActivationDetector,
@@ -565,3 +565,5 @@ export default {
   isSpeechSynthesisSupported,
   getSupportedLanguages,
 };
+
+export default voiceModule;
