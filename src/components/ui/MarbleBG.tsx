@@ -1,25 +1,32 @@
 "use client";
-import React from "react";
-import dynamic from "next/dynamic";
 
-const Video = dynamic(() => import("next-video"), { ssr: false });
+import { useEffect, useRef } from "react";
 
-export function MarbleBG() {
+export default function MarbleBG() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.75;
+    }
+  }, []);
+
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none">
-      {/* Background Video */}
-      <Video
-        src="https://sora.chatgpt.com/p/s_6926f554649c819189288f78300ea72f?psh=HXVzZXItZ0w5WTM4R1NrZjB4WWJxOFUzcnFjRWlk.id2dyVpG-UvJa"
+    <div className="fixed inset-0 -z-10 overflow-hidden">
+      <div className="absolute inset-0 bg-black/40 z-10" />
+      <video
+        ref={videoRef}
         autoPlay
-        muted
         loop
+        muted
         playsInline
-        className="h-full w-full object-cover opacity-60"
-      />
-      {/* Gold overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent mix-blend-screen" />
-      {/* Shine */}
-      <div className="absolute inset-0 marble-shine" />
+        className="w-full h-full object-cover opacity-60"
+      >
+        <source
+          src="https://res.cloudinary.com/dpp23/video/upload/v1706648975/marble-flow_z1x8h2.mp4"
+          type="video/mp4"
+        />
+      </video>
     </div>
   );
 }
