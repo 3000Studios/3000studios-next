@@ -1,5 +1,5 @@
-export const processVoiceCommand = async (audio: any) => ({
+export const processVoiceCommand = async (_audio: any) => ({
   command: "",
   success: true,
 });
-export const synthesizeSpeech = async (text: string) => ({ audio: null });
+export const synthesizeSpeech = async (_text: string) => ({ audio: null });
