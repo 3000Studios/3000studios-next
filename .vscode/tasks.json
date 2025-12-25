@@ -114,6 +114,26 @@
         "isDefault": false
       },
       "problemMatcher": []
+    },
+    {
+      "label": "🚀 AUTOPILOT: Merge & Deploy (Bash)",
+      "type": "shell",
+      "command": "./automerge-deploy.sh",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "🚀 AUTOPILOT: Merge & Deploy (PowerShell)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/automerge-deploy.ps1"
+      ],
+      "group": "build",
+      "problemMatcher": []
     }
   ]
 }
