@@ -4,116 +4,101 @@
  * Features: Enhanced contact form, lead capture, backend integration, validation
  */
 
-"use client";
+'use client';
 
-import {
-  AlertCircle,
-  Check,
-  Loader2,
-  Mail,
-  MapPin,
-  Phone,
-  Send,
-} from "lucide-react";
-import { useState } from "react";
-import GoogleMap from "../components/GoogleMap";
+import { useState } from 'react';
+import { Mail, Phone, MapPin, Send, Check, AlertCircle, Loader2 } from 'lucide-react';
+import GoogleMap from '../components/GoogleMap';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    subject: "",
-    budget: "",
-    message: "",
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    subject: '',
+    budget: '',
+    message: '',
     newsletter: true,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<
-    "idle" | "success" | "error"
-  >("idle");
-  const [submitMessage, setSubmitMessage] = useState("");
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitMessage, setSubmitMessage] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-
-    if (!formData.name.trim()) newErrors.name = "Name is required";
+    
+    if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = 'Email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Invalid email format";
+      newErrors.email = 'Invalid email format';
     }
-    if (!formData.message.trim()) newErrors.message = "Message is required";
-    if (formData.message.length < 20)
-      newErrors.message = "Message must be at least 20 characters";
-
+    if (!formData.message.trim()) newErrors.message = 'Message is required';
+    if (formData.message.length < 20) newErrors.message = 'Message must be at least 20 characters';
+    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    
     if (!validateForm()) {
-      setSubmitStatus("error");
-      setSubmitMessage("Please fix the errors above");
+      setSubmitStatus('error');
+      setSubmitMessage('Please fix the errors above');
       return;
     }
 
     setIsSubmitting(true);
-    setSubmitMessage("");
-    setSubmitStatus("idle");
+    setSubmitMessage('');
+    setSubmitStatus('idle');
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      // TODO: Replace with actual API endpoint
+      // const response = await fetch('/api/contact', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify(formData),
+      // });
 
-      if (!response.ok) {
-        throw new Error("Failed to send message");
-      }
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
 
-      setSubmitStatus("success");
-      setSubmitMessage("Thank you! We'll get back to you within 24 hours.");
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        company: "",
-        subject: "",
-        budget: "",
-        message: "",
+      setSubmitStatus('success');
+      setSubmitMessage('Thank you! We\'ll get back to you within 24 hours.');
+      setFormData({ 
+        name: '', 
+        email: '', 
+        phone: '', 
+        company: '', 
+        subject: '', 
+        budget: '', 
+        message: '',
         newsletter: true,
       });
       setErrors({});
-    } catch {
-      setSubmitStatus("error");
-      setSubmitMessage("Something went wrong. Please try again later.");
+    } catch (error) {
+      setSubmitStatus('error');
+      setSubmitMessage('Something went wrong. Please try again later.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
-
-    setFormData((prev) => ({
+    
+    setFormData(prev => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === 'checkbox' ? checked : value,
     }));
-
+    
     // Clear error when user starts typing
     if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: "" }));
+      setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
@@ -126,8 +111,7 @@ export default function ContactPage() {
             Get in Touch
           </h1>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Have a project in mind? We&apos;d love to hear from you. Let&apos;s
-            create something amazing together!
+            Have a project in mind? We&apos;d love to hear from you. Let&apos;s create something amazing together!
           </p>
         </div>
 
@@ -141,10 +125,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="text-white font-semibold mb-1">Email</h3>
-                  <a
-                    href="mailto:contact@3000studios.com"
-                    className="text-gray-400 hover:text-gold transition-colors"
-                  >
+                  <a href="mailto:contact@3000studios.com" className="text-gray-400 hover:text-gold transition-colors">
                     contact@3000studios.com
                   </a>
                 </div>
@@ -158,10 +139,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="text-white font-semibold mb-1">Phone</h3>
-                  <a
-                    href="tel:+15550003000"
-                    className="text-gray-400 hover:text-gold transition-colors"
-                  >
+                  <a href="tel:+15550003000" className="text-gray-400 hover:text-gold transition-colors">
                     +1 (555) 000-3000
                   </a>
                 </div>
@@ -176,9 +154,7 @@ export default function ContactPage() {
                 <div>
                   <h3 className="text-white font-semibold mb-1">Location</h3>
                   <p className="text-gray-400">United States</p>
-                  <p className="text-gray-500 text-sm">
-                    Serving clients worldwide
-                  </p>
+                  <p className="text-gray-500 text-sm">Serving clients worldwide</p>
                 </div>
               </div>
             </div>
@@ -215,27 +191,20 @@ export default function ContactPage() {
             <div className="card-premium text-center">
               <div className="text-4xl mb-2">⚡</div>
               <h4 className="text-white font-bold mb-1">Quick Response</h4>
-              <p className="text-gray-400 text-sm">
-                We typically respond within 24 hours
-              </p>
+              <p className="text-gray-400 text-sm">We typically respond within 24 hours</p>
             </div>
           </div>
 
           {/* Enhanced Contact Form */}
           <div className="lg:col-span-2">
             <div className="card">
-              <h2 className="text-2xl font-bold text-white mb-6">
-                Send us a Message
-              </h2>
-
+              <h2 className="text-2xl font-bold text-white mb-6">Send us a Message</h2>
+              
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Name */}
                   <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium text-gray-300 mb-2"
-                    >
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
                       Your Name <span className="text-red-400">*</span>
                     </label>
                     <input
@@ -245,18 +214,13 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className={`w-full px-4 py-3 bg-gray-900 border ${
-                        errors.name ? "border-red-500" : "border-gray-700"
-                      } rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all`}
+                      className={`w-full px-4 py-3 bg-gray-900 border ${errors.name ? 'border-red-500' : 'border-gray-700'} rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all`}
                       placeholder="John Doe"
                       aria-invalid={!!errors.name}
-                      aria-describedby={errors.name ? "name-error" : undefined}
+                      aria-describedby={errors.name ? 'name-error' : undefined}
                     />
                     {errors.name && (
-                      <p
-                        id="name-error"
-                        className="mt-1 text-red-400 text-sm flex items-center gap-1"
-                      >
+                      <p id="name-error" className="mt-1 text-red-400 text-sm flex items-center gap-1">
                         <AlertCircle size={14} /> {errors.name}
                       </p>
                     )}
@@ -264,10 +228,7 @@ export default function ContactPage() {
 
                   {/* Email */}
                   <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium text-gray-300 mb-2"
-                    >
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
                       Email Address <span className="text-red-400">*</span>
                     </label>
                     <input
@@ -277,20 +238,13 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className={`w-full px-4 py-3 bg-gray-900 border ${
-                        errors.email ? "border-red-500" : "border-gray-700"
-                      } rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all`}
+                      className={`w-full px-4 py-3 bg-gray-900 border ${errors.email ? 'border-red-500' : 'border-gray-700'} rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all`}
                       placeholder="john@example.com"
                       aria-invalid={!!errors.email}
-                      aria-describedby={
-                        errors.email ? "email-error" : undefined
-                      }
+                      aria-describedby={errors.email ? 'email-error' : undefined}
                     />
                     {errors.email && (
-                      <p
-                        id="email-error"
-                        className="mt-1 text-red-400 text-sm flex items-center gap-1"
-                      >
+                      <p id="email-error" className="mt-1 text-red-400 text-sm flex items-center gap-1">
                         <AlertCircle size={14} /> {errors.email}
                       </p>
                     )}
@@ -300,10 +254,7 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Phone */}
                   <div>
-                    <label
-                      htmlFor="phone"
-                      className="block text-sm font-medium text-gray-300 mb-2"
-                    >
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
                       Phone (Optional)
                     </label>
                     <input
@@ -319,10 +270,7 @@ export default function ContactPage() {
 
                   {/* Company */}
                   <div>
-                    <label
-                      htmlFor="company"
-                      className="block text-sm font-medium text-gray-300 mb-2"
-                    >
+                    <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-2">
                       Company (Optional)
                     </label>
                     <input
@@ -340,10 +288,7 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Subject */}
                   <div>
-                    <label
-                      htmlFor="subject"
-                      className="block text-sm font-medium text-gray-300 mb-2"
-                    >
+                    <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
                       Subject <span className="text-red-400">*</span>
                     </label>
                     <input
@@ -360,10 +305,7 @@ export default function ContactPage() {
 
                   {/* Budget */}
                   <div>
-                    <label
-                      htmlFor="budget"
-                      className="block text-sm font-medium text-gray-300 mb-2"
-                    >
+                    <label htmlFor="budget" className="block text-sm font-medium text-gray-300 mb-2">
                       Project Budget (Optional)
                     </label>
                     <select
@@ -385,10 +327,7 @@ export default function ContactPage() {
 
                 {/* Message */}
                 <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium text-gray-300 mb-2"
-                  >
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
                     Message <span className="text-red-400">*</span>
                   </label>
                   <textarea
@@ -398,26 +337,17 @@ export default function ContactPage() {
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    className={`w-full px-4 py-3 bg-gray-900 border ${
-                      errors.message ? "border-red-500" : "border-gray-700"
-                    } rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all resize-none`}
+                    className={`w-full px-4 py-3 bg-gray-900 border ${errors.message ? 'border-red-500' : 'border-gray-700'} rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all resize-none`}
                     placeholder="Tell us about your project, goals, and how we can help..."
                     aria-invalid={!!errors.message}
-                    aria-describedby={
-                      errors.message ? "message-error" : undefined
-                    }
+                    aria-describedby={errors.message ? 'message-error' : undefined}
                   />
                   {errors.message && (
-                    <p
-                      id="message-error"
-                      className="mt-1 text-red-400 text-sm flex items-center gap-1"
-                    >
+                    <p id="message-error" className="mt-1 text-red-400 text-sm flex items-center gap-1">
                       <AlertCircle size={14} /> {errors.message}
                     </p>
                   )}
-                  <p className="mt-1 text-gray-500 text-xs">
-                    Minimum 20 characters
-                  </p>
+                  <p className="mt-1 text-gray-500 text-xs">Minimum 20 characters</p>
                 </div>
 
                 {/* Newsletter Checkbox */}
@@ -430,12 +360,8 @@ export default function ContactPage() {
                     onChange={handleChange}
                     className="mt-1 w-4 h-4 text-gold bg-gray-900 border-gray-700 rounded focus:ring-2 focus:ring-gold"
                   />
-                  <label
-                    htmlFor="newsletter"
-                    className="text-sm text-gray-400 cursor-pointer"
-                  >
-                    I want to receive updates, news, and special offers from
-                    3000 Studios
+                  <label htmlFor="newsletter" className="text-sm text-gray-400 cursor-pointer">
+                    I want to receive updates, news, and special offers from 3000 Studios
                   </label>
                 </div>
 
@@ -459,13 +385,13 @@ export default function ContactPage() {
                 </button>
 
                 {/* Status Messages */}
-                {submitStatus === "success" && (
+                {submitStatus === 'success' && (
                   <div className="p-4 bg-green-900/30 border border-green-500/50 rounded-lg text-green-200 flex items-center gap-2">
                     <Check size={20} />
                     <span>{submitMessage}</span>
                   </div>
                 )}
-                {submitStatus === "error" && (
+                {submitStatus === 'error' && (
                   <div className="p-4 bg-red-900/30 border border-red-500/50 rounded-lg text-red-200 flex items-center gap-2">
                     <AlertCircle size={20} />
                     <span>{submitMessage}</span>
@@ -475,8 +401,7 @@ export default function ContactPage() {
 
               <div className="mt-6 pt-6 border-t border-gray-800">
                 <p className="text-sm text-gray-500 text-center">
-                  🔒 Your information is secure and will never be shared with
-                  third parties
+                  🔒 Your information is secure and will never be shared with third parties
                 </p>
               </div>
             </div>
@@ -486,12 +411,9 @@ export default function ContactPage() {
         {/* Google Maps Integration */}
         <div className="mt-12 card p-0 overflow-hidden hover-lift">
           <div className="w-full h-96">
-            <GoogleMap
-              apiKey={
-                process.env.NEXT_PUBLIC_MAPS_API ||
-                "YOUR_GOOGLE_MAPS_API_KEY_HERE"
-              }
-              center={{ lat: 33.749, lng: -84.388 }} // Atlanta, Georgia
+            <GoogleMap 
+              apiKey={process.env.NEXT_PUBLIC_MAPS_API || 'YOUR_GOOGLE_MAPS_API_KEY_HERE'}
+              center={{ lat: 33.7490, lng: -84.3880 }} // Atlanta, Georgia
               zoom={13}
               mapType="satellite"
             />

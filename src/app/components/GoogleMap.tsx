@@ -7,6 +7,13 @@
 
 import { useEffect, useRef } from 'react';
 
+// Declare global google types
+declare global {
+  interface Window {
+    google: any;
+  }
+}
+
 interface GoogleMapProps {
   apiKey: string;
   center?: { lat: number; lng: number };
@@ -60,8 +67,8 @@ export default function GoogleMap({
         ],
         mapTypeControl: true,
         mapTypeControlOptions: {
-          style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-          position: google.maps.ControlPosition.TOP_RIGHT,
+          style: window.google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+          position: window.google.maps.ControlPosition.TOP_RIGHT,
           mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain']
         },
         streetViewControl: true,
@@ -77,7 +84,7 @@ export default function GoogleMap({
         position: center,
         map,
         title: '3000 Studios - Atlanta, Georgia',
-        animation: google.maps.Animation.DROP,
+        animation: window.google.maps.Animation.DROP,
         icon: {
           path: google.maps.SymbolPath.CIRCLE,
           scale: 10,

@@ -1,10 +1,9 @@
-import { CartSidebar } from '@/components/CartSidebar';
-import { CountdownTimer } from '@/components/CountdownTimer';
-import { ProductCard } from '@/components/ProductCard';
-import { SocialProof } from '@/components/SocialProof';
-import { getProducts } from '@/lib/products-data';
-import { Metadata } from 'next';
-import Link from 'next/link';
+/**
+ * Store Page
+ * E-commerce store front with product listings
+ * Features: Enhanced product grid, filtering, sorting, search, PayPal checkout
+ * Connected to MongoDB for real products and PayPal for payments
+ */
 
 export const metadata: Metadata = {
   title: 'Store | 3000 Studios',
@@ -15,39 +14,14 @@ export default function StorePage() {
   const products = getProducts();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950">
-      {/* Animated background elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-      </div>
-
-      {/* Urgency Banner */}
-      <div className="relative bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 border-b border-pink-500/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-            <div className="flex items-center gap-3 text-white text-sm md:text-base font-bold">
-              <span className="animate-pulse">🔥</span>
-              <span>FLASH SALE ENDS IN</span>
-            </div>
-            <CountdownTimer />
-            <div className="text-white text-sm md:text-base font-bold">
-              <span>UP TO 70% OFF</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Social Proof Notification */}
-      <SocialProof />
-
-      {/* Header */}
-      <div className="relative border-b border-purple-500/20 bg-gradient-to-b from-slate-900/80 to-slate-950/50 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="flex items-center justify-between">
+    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black py-8 px-4">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="mb-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
             <div>
-              <h1 className="text-5xl sm:text-6xl font-black bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-3">
-                3000 Studios Store
+              <h1 className="text-4xl md:text-5xl font-bold gradient-text mb-2">
+                Premium Store
               </h1>
               <p className="text-lg text-purple-300/80">Premium digital products & services</p>
             </div>
@@ -69,8 +43,13 @@ export default function StorePage() {
               href="#all-products"
               className="text-cyan-400 hover:text-cyan-300 font-semibold text-sm flex items-center gap-2 transition-colors"
             >
-              View All <span className="text-lg">→</span>
-            </Link>
+              <ShoppingCart className="text-gold" size={24} />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-gold text-black text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center animate-bounce">
+                  {cartCount}
+                </span>
+              )}
+            </button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {products.slice(0, 4).map((product) => (
@@ -99,8 +78,6 @@ export default function StorePage() {
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
-          )}
-        </div>
 
         {/* Stats Section */}
         <div className="mt-20 pt-16 border-t border-purple-500/20">
@@ -109,8 +86,6 @@ export default function StorePage() {
               <div className="text-5xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-3">
                 {products.length}+
               </div>
-              <p className="text-purple-300/80 font-semibold">Premium Products</p>
-              <p className="text-purple-400/60 text-sm mt-1">Carefully curated for excellence</p>
             </div>
             <div className="text-center group">
               <div className="text-5xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-3">

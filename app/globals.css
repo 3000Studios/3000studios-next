@@ -1,139 +1,124 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Core */
-body {
-    cursor: none;
-    background-color: #030303;
-    color: #E8E8E8;
-    overflow-x: hidden;
+
+:root {
+  /* Marble Museum Palette */
+  --gold-primary: #D4AF37;
+  --gold-highlight: #F5E08E;
+  --gold-shadow: #8A6E2F;
+  
+  --glass-bg: rgba(10, 10, 10, 0.7);
+  --glass-border: rgba(212, 175, 55, 0.3);
+  --glass-shine: rgba(255, 255, 255, 0.05);
+  
+  --marble-black: #050505;
+  --marble-vein: #1a1a1a;
+  
+  --neon-blue: #00f3ff; /* For the aquarium/tech accents */
 }
 
-/* Refined Custom Cursor */
-.cursor-dot {
-    width: 8px;
-    height: 8px;
-    background: white;
-    border-radius: 50%;
+@layer base {
+  body {
+    @apply bg-black text-white overflow-x-hidden;
+    font-family: 'Inter', 'Helvetica Neue', sans-serif; /* Clean, corporate */
+  }
+
+  /* The Device Bevel Overlay - Fixed on top of everything */
+  body::after {
+    content: "";
     position: fixed;
-    pointer-events: none;
+    inset: 0;
     z-index: 9999;
-    mix-blend-mode: exclusion;
-}
-
-.cursor-ring {
-    width: 40px;
-    height: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    position: fixed;
     pointer-events: none;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+  }
+  
+  /* Corner Vignettes */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
     z-index: 9998;
-    transition: width 0.3s, height 0.3s, background-color 0.3s;
-}
-
-body:hover .cursor-ring.active {
-    width: 80px;
-    height: 80px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: transparent;
-    backdrop-filter: blur(2px);
-}
-
-/* Premium Glass Cards */
-.hyper-glass {
-    background: rgba(255, 255, 255, 0.02);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 
-        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-        0 20px 40px -10px rgba(0,0,0,0.8);
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    transform-style: preserve-3d;
-}
-
-.hyper-glass:hover {
-    border-color: rgba(139, 92, 246, 0.3);
-    box-shadow: 
-        inset 0 0 20px rgba(139, 92, 246, 0.05),
-        0 40px 60px -12px rgba(0,0,0,0.9);
-}
-
-/* 3D Glass Cards (Alternative) */
-.glass-card {
-    background: rgba(20, 20, 20, 0.4);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    border-left: 1px solid rgba(255, 255, 255, 0.15);
-    border-right: 1px solid rgba(0, 0, 0, 0.5);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    transform-style: preserve-3d;
-    transition: transform 0.1s ease-out;
-}
-
-/* Text Reveals */
-.char-reveal {
-    display: inline-block;
-    transform: translateY(120%);
-    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.is-visible .char-reveal {
-    transform: translateY(0%);
-}
-
-.text-reveal-mask {
-    overflow: hidden;
-}
-.text-reveal-content {
-    transform: translateY(110%) rotate(2deg);
-    opacity: 0;
-    transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1), opacity 1s ease;
-}
-.is-visible .text-reveal-content {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-}
-
-/* Video & Noise */
-.video-bg {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    transform: translateX(-50%) translateY(-50%);
-    z-index: -2;
-    opacity: 0.4;
-    filter: contrast(1.1) brightness(0.7) grayscale(1);
-}
-
-.noise-overlay {
-    position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background-image: url('https://grainy-gradients.vercel.app/noise.svg');
-    opacity: 0.07;
     pointer-events: none;
-    z-index: -1;
-    animation: grain 8s steps(10) infinite;
+    background: radial-gradient(circle at center, transparent 60%, rgba(0,0,0,0.8) 100%);
+  }
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-    width: 6px;
+@layer components {
+  /* Glass Panel - The standard container */
+  .glass-panel {
+    @apply relative backdrop-blur-xl bg-black/60 border border-white/10 rounded-xl overflow-hidden;
+    box-shadow: 
+      0 4px 30px rgba(0, 0, 0, 0.5),
+      inset 0 0 0 1px rgba(212, 175, 55, 0.1);
+  }
+
+  .glass-panel::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+  }
+
+  /* Gold Text Gradient */
+  .text-gold-gradient {
+    background: linear-gradient(to bottom, #F5E08E, #D4AF37, #8A6E2F);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 10px rgba(212, 175, 55, 0.2);
+  }
+
+  /* Metallic Button */
+  .btn-gold {
+    @apply px-6 py-3 rounded-lg font-bold uppercase tracking-wider transition-all duration-300 relative overflow-hidden;
+    background: linear-gradient(135deg, #8A6E2F 0%, #D4AF37 50%, #8A6E2F 100%);
+    color: black;
+    border: 1px solid #F5E08E;
+  }
+  
+  .btn-gold:hover {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    transform: translateY(-1px);
+  }
+
+  /* Navigation Link */
+  .nav-link {
+    @apply relative text-gray-300 hover:text-white transition-colors duration-300 uppercase tracking-widest text-xs font-bold;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold-primary);
+    transition: width 0.3s ease;
+  }
+  
+  .nav-link:hover::after {
+    width: 100%;
+  }
 }
-::-webkit-scrollbar-track {
-    background: #030303;
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
-::-webkit-scrollbar-thumb {
-    background: #333;
-    border-radius: 3px;
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.animate-glow {
+  animation: glow 3s ease-in-out infinite;
 }
