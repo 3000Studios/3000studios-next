@@ -6,8 +6,8 @@
 
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { Volume2, VolumeX, SkipForward, Play, Pause } from 'lucide-react';
+import { Pause, Play, SkipForward, Volume2, VolumeX } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface MusicTrack {
   name: string;
@@ -16,11 +16,14 @@ interface MusicTrack {
 }
 
 // Default music tracks
-// TODO: Add actual music files to /public/music/ directory
-// Or configure these paths via environment variables
+// Using remote URL for Jazz track as requested since local file upload is restricted
 const DEFAULT_TRACKS: MusicTrack[] = [
+  { 
+    name: 'Jazz Club', 
+    src: 'https://raw.githubusercontent.com/Eaky0/MyProjects/023a2b974af4f6eb3688edd6c22ae8bc93bcf944/SimpleStep/Sound%20Library/Jazz.mp3', 
+    artist: 'Classic Jazz' 
+  },
   { name: 'Ambient Waves', src: '/music/ambient-1.mp3', artist: '3000 Studios' },
-  { name: 'Jazz Corporate', src: '/music/jazz-1.mp3', artist: '3000 Studios' },
   { name: 'Electronic Flow', src: '/music/electronic-1.mp3', artist: '3000 Studios' },
   { name: 'Chill Vibes', src: '/music/chill-1.mp3', artist: '3000 Studios' },
 ];
@@ -35,24 +38,33 @@ export default function BackgroundMusic() {
 
   const currentTrack = DEFAULT_TRACKS[currentTrackIndex];
 
+  const handleNextTrack = useCallback(() => {
+    setCurrentTrackIndex((idx) => {
+      const nextIndex = (idx + 1) % DEFAULT_TRACKS.length;
+
+      if (audioRef.current && isPlaying) {
+        audioRef.current.src = DEFAULT_TRACKS[nextIndex].src;
+        audioRef.current.play().catch(err => console.log('Play error:', err));
+      }
+
+      return nextIndex;
+    });
+  }, [isPlaying]);
+
   useEffect(() => {
-    // Create audio element
-    if (typeof window !== 'undefined') {
-      audioRef.current = new Audio();
-      audioRef.current.volume = volume;
-      audioRef.current.loop = false;
-      
-      // Auto-advance to next track when current ends
-      audioRef.current.addEventListener('ended', handleNextTrack);
-      
-      return () => {
-        if (audioRef.current) {
-          audioRef.current.pause();
-          audioRef.current.removeEventListener('ended', handleNextTrack);
-        }
-      };
-    }
-  }, []);
+    if (typeof window === 'undefined') return;
+
+    const audio = new Audio();
+    audio.volume = volume;
+    audio.loop = false;
+    audio.addEventListener('ended', handleNextTrack);
+    audioRef.current = audio;
+
+    return () => {
+      audio.pause();
+      audio.removeEventListener('ended', handleNextTrack);
+    };
+  }, [handleNextTrack, volume]);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -79,22 +91,12 @@ export default function BackgroundMusic() {
     }
   };
 
-  const handleNextTrack = () => {
-    const nextIndex = (currentTrackIndex + 1) % DEFAULT_TRACKS.length;
-    setCurrentTrackIndex(nextIndex);
-    
-    if (audioRef.current && isPlaying) {
-      audioRef.current.src = DEFAULT_TRACKS[nextIndex].src;
-      audioRef.current.play().catch(err => console.log('Play error:', err));
-    }
-  };
-
   const toggleMute = () => {
     setIsMuted(!isMuted);
   };
 
   return (
-    <div 
+    <div
       className="fixed bottom-4 right-4 z-50"
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
@@ -111,7 +113,7 @@ export default function BackgroundMusic() {
       </div>
 
       {/* Expanded Controls */}
-      <div 
+      <div
         className={`absolute bottom-16 right-0 glass rounded-lg p-4 border border-gold/20 transition-all duration-300 ${
           showControls ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
         }`}
