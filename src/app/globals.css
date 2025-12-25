@@ -7,38 +7,77 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand Colors (updated to corporate palette) */
-  --gold: #FFC107; /* deep bold yellow */
-  --platinum: #9CA3AF; /* sleek grey */
-  --sapphire: #FFC107; /* replace blue usages with deep yellow */
-  --color-platinum: #E5E4E2; /* legacy alias */
-  --color-sapphire: #0F52BA; /* legacy alias */
-  --dark-bg: #0a0a0a;
-  --light-bg: #ffffff;
-
-  /* Semantic Colors */
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --accent: var(--gold);
-  --secondary: var(--platinum);
-  --highlight: var(--sapphire);
-
-  /* UI Element Colors */
-  --card-bg: rgba(255, 255, 255, 0.05);
-  --card-border: rgba(255, 215, 0, 0.2);
-  --hover-bg: rgba(255, 215, 0, 0.1);
-
+  /* Marble + Gold Luxury System */
+  --marble-black: #0a0a0a;
+  --marble-white: #f5f5f5;
+  --gold-flake: #D4AF37;
+  --gold-highlight: #FFD700;
+  --gloss-highlight: rgba(255, 255, 255, 0.8);
+  
+  /* Base Colors */
+  --background: var(--marble-black);
+  --foreground: var(--marble-white);
+  --accent: var(--gold-flake);
+  
+  /* UI Tokens */
+  --card-bg: rgba(20, 20, 20, 0.6);
+  --card-border: rgba(212, 175, 55, 0.3);
+  --glass-blur: 12px;
+  
   /* Shadows */
-  --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
-  --shadow-md: 0 4px 8px rgba(0,0,0,0.2);
-  --shadow-lg: 0 8px 16px rgba(0,0,0,0.3);
-  --shadow-gold: 0 4px 12px rgba(255, 215, 0, 0.3);
-
-  /* Electric Theme (aligned to new palette) */
-  --electric-blue: #FFC107; /* deep bold yellow for electric accents */
-  --electric-purple: #6B7280; /* sleek corporate grey */
-  --neon-glow: 0 0 10px var(--electric-blue), 0 0 20px var(--electric-blue), 0 0 40px var(--electric-blue);
+  --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.15);
+  --shadow-metallic: 0 2px 4px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1) inset;
 }
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: var(--marble-white);
+    --foreground: var(--marble-black);
+    --card-bg: rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* 3D Metallic Typography */
+.metallic-text {
+  background: linear-gradient(to bottom, #fff 0%, #e0e0e0 50%, #b0b0b0 51%, #f0f0f0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.metallic-text-gold {
+  background: linear-gradient(to bottom, #FFD700 0%, #D4AF37 50%, #B8860B 51%, #FFD700 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+/* Animations */
+.hover-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+  transform: skewX(-25deg);
+  transition: 0.5s;
+}
+
+.hover-shimmer:hover::after {
+  left: 150%;
+  transition: 0.7s ease-in-out;
+}
+
 
 @keyframes electric-flicker {
   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
