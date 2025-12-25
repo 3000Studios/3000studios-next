@@ -23,14 +23,22 @@
   "editor.formatOnSave": true,
   "editor.inlineSuggest.enabled": true,
 
-  "github.copilot.editor.enableAutoCompletions": false,
+  "github.copilot.editor.enableAutoCompletions": true,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": true,
+    "scminput": true
+  },
 
   "chat.tools.terminal.autoApprove": {
     "pnpm": true,
     "npm": true,
     "node": true,
     "git": true,
-    "vercel": true
+    "vercel": true,
+    "gh": true,
+    "npx": true
   },
 
   "ai.experimental.codeActions": true,
@@ -48,6 +56,7 @@
   "security.workspace.trust.startupPrompt": "never",
 
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit"
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
   }
 }
