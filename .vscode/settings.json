@@ -1,30 +1,55 @@
 {
   "telemetry.telemetryLevel": "off",
   "workbench.enableExperiments": false,
-
   "files.watcherExclude": {
     "**/.git/**": true,
     "**/.next/**": true,
     "**/node_modules/**": true,
     "**/.vercel/**": true,
-    "**/.pnpm-store/**": true
+    "**/.pnpm-store/**": true,
+    "**/coverage/**": true,
+    "**/.turbo/**": true
   },
-
-  "git.autorefresh": false,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/.next": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/pnpm-lock.yaml": true,
+    "**/package-lock.json": true
+  },
+  "git.autorefresh": true,
   "git.confirmSync": false,
-  "git.detectSubmodules": false,
-  "git.countBadge": "off",
-
+  "git.autofetch": true,
   "typescript.tsserver.maxTsServerMemory": 8192,
   "typescript.disableAutomaticTypeAcquisition": true,
-
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
   "workbench.editor.enablePreview": false,
   "workbench.editor.closeOnFileDelete": true,
   "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
   "editor.inlineSuggest.enabled": true,
-
-  "github.copilot.editor.enableAutoCompletions": false,
-
+  "github.copilot.editor.enableAutoCompletions": true,
   "chat.tools.terminal.autoApprove": {
     "pnpm": true,
     "npm": true,
@@ -32,22 +57,15 @@
     "git": true,
     "vercel": true
   },
-
   "ai.experimental.codeActions": true,
   "chat.experimental.promptCaching": true,
-
   "terminal.integrated.gpuAcceleration": "on",
   "terminal.integrated.scrollback": 10000,
-
   "task.showDecorations": false,
-  "problems.decorations.enabled": false,
+  "problems.decorations.enabled": true,
   "editor.minimap.enabled": false,
-  "workbench.list.horizontalScrolling": true,
-
   "security.workspace.trust.enabled": true,
   "security.workspace.trust.startupPrompt": "never",
-
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit"
-  }
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false
 }
