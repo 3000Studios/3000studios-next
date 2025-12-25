@@ -6,8 +6,18 @@ const WINDOW_MS = 60_000;
 const MAX_REQUESTS = 30;
 
 export function middleware(req: NextRequest) {
-  // Only applying rate limiting to AI routes
-  if (req.nextUrl.pathname.startsWith("/api/ai")) {
+  const url = req.nextUrl;
+
+  // Protect /live with optional password
+  if (url.pathname.startsWith("/live") && process.env.LIVE_PASSWORD) {
+    const pass = url.searchParams.get("access");
+    if (pass !== process.env.LIVE_PASSWORD) {
+      // Allow public view but could add restrictions
+    }
+  }
+
+  // Rate limiting for AI routes
+  if (url.pathname.startsWith("/api/ai")) {
     const ip = req.headers.get("x-forwarded-for") ?? "unknown";
     const now = Date.now();
 
@@ -29,5 +39,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/api/ai/:path*"],
+  matcher: ["/live/:path*", "/api/ai/:path*"],
 };
