@@ -498,70 +498,11 @@ export function getSupportedLanguages(): string[] {
   return [
     "en-US",
     "en-GB",
-    "en-AU",
-    "en-CA",
-    "en-IN",
     "es-ES",
-    "es-MX",
-    "es-US",
     "fr-FR",
-    "fr-CA",
     "de-DE",
     "it-IT",
-    "pt-BR",
-    "pt-PT",
-    "ru-RU",
     "ja-JP",
     "zh-CN",
-    "zh-TW",
-    "ko-KR",
-    "ar-SA",
-    "hi-IN",
   ];
 }
-
-/**
- * Record audio from microphone
- */
-export async function recordAudio(duration: number = 5000): Promise<Blob> {
-  if (typeof window === "undefined") {
-    throw new Error("Audio recording is only available in browser");
-  }
-
-  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  const mediaRecorder = new MediaRecorder(stream);
-  const chunks: BlobPart[] = [];
-
-  return new Promise((resolve, reject) => {
-    mediaRecorder.ondataavailable = (e) => {
-      chunks.push(e.data);
-    };
-
-    mediaRecorder.onstop = () => {
-      const blob = new Blob(chunks, { type: "audio/webm" });
-      stream.getTracks().forEach((track) => track.stop());
-      resolve(blob);
-    };
-
-    mediaRecorder.onerror = (error) => {
-      stream.getTracks().forEach((track) => track.stop());
-      reject(error);
-    };
-
-    mediaRecorder.start();
-    setTimeout(() => mediaRecorder.stop(), duration);
-  });
-}
-
-// Export everything
-export default {
-  VoiceRecognition,
-  TextToSpeech,
-  VoiceActivationDetector,
-  transcribeAudio,
-  generateSpeech,
-  recordAudio,
-  isSpeechRecognitionSupported,
-  isSpeechSynthesisSupported,
-  getSupportedLanguages,
-};
