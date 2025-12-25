@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=20.0.0"
+    "node": "20.x"
   },
   "scripts": {
     "dev": "next dev",
@@ -22,9 +22,6 @@
     "deps:update": "npm update",
     "deploy": "vercel --prod --yes",
     "postinstall": "node -e \"const { execSync } = require('child_process'); const url = process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/postgres'; execSync('npx prisma generate', { stdio: 'inherit', env: { ...process.env, DATABASE_URL: url } });\""
-  },
-  "prisma": {
-    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.88",
@@ -55,7 +52,7 @@
     "lucide-react": "^0.561.0",
     "next": "^16.0.10",
     "next-auth": "^5.0.0-beta.30",
-    "nodemailer": "^7.0.11",
+    "nodemailer": "^6.9.15",
     "openai": "^6.14.0",
     "pg": "^8.16.3",
     "pgvector": "^0.2.1",
@@ -77,7 +74,7 @@
     "@types/google.maps": "^3.58.1",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.0.1",
-    "@types/nodemailer": "^7.0.4",
+    "@types/nodemailer": "^6.4.16",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^4.7.0",
