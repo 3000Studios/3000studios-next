@@ -2,121 +2,84 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "🚀 Shadow: Start Dev Server",
-      "type": "shell",
-      "command": "pwsh.exe",
-      "args": [
-        "-File",
-        "C:/3000Studios/shadow/shadow-dev.ps1"
-      ],
-      "isBackground": false,
+      "label": "dev",
+      "type": "npm",
+      "script": "dev",
+      "isBackground": true,
       "problemMatcher": {
+        "owner": "custom",
         "pattern": {
-          "regexp": "^ready - started server.*",
-          "line": 1,
-          "column": 1,
-          "message": 1
+          "regexp": "^ready - started server on .+$",
+          "file": 1,
+          "location": 2,
+          "message": 3
         },
         "background": {
           "activeOnStart": true,
-          "beginsPattern": "^.*Local:.*",
-          "endsPattern": "^.*ready.*"
+          "beginsPattern": "Starting...",
+          "endsPattern": "Ready in"
         }
-      },
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "new"
       },
       "group": {
         "kind": "build",
         "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
       }
     },
     {
-      "label": "🔑 Shadow: Store API Key",
-      "type": "shell",
-      "command": "pwsh.exe",
-      "args": [
-        "-File",
-        "C:/3000Studios/shadow/shadow-secrets.ps1",
-        "-Store"
-      ],
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": true,
-        "panel": "new"
-      },
-      "group": {
-        "kind": "test"
-      }
+      "label": "build",
+      "type": "npm",
+      "script": "build",
+      "group": "build",
+      "problemMatcher": [
+        "$tsc"
+      ]
     },
     {
-      "label": "📋 Shadow: List Stored Keys",
-      "type": "shell",
-      "command": "pwsh.exe",
-      "args": [
-        "-File",
-        "C:/3000Studios/shadow/shadow-secrets.ps1",
-        "-List"
-      ],
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "new"
-      },
-      "group": {
-        "kind": "test"
-      }
+      "label": "lint",
+      "type": "npm",
+      "script": "lint",
+      "problemMatcher": [
+        "$eslint-stylish"
+      ]
     },
     {
-      "label": "🗑️  Shadow: Clear API Key",
-      "type": "shell",
-      "command": "pwsh.exe",
-      "args": [
-        "-File",
-        "C:/3000Studios/shadow/shadow-secrets.ps1",
-        "-Clear"
-      ],
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": true,
-        "panel": "new"
-      },
-      "group": {
-        "kind": "test"
-      }
+      "label": "type-check",
+      "type": "npm",
+      "script": "type-check",
+      "problemMatcher": [
+        "$tsc"
+      ]
     },
     {
-      "label": "✅ Git: Sync & Push",
-      "type": "shell",
-      "command": "git",
-      "args": [
-        "add",
-        ".",
-        "&&",
-        "git",
-        "commit",
-        "-m",
-        "update",
-        "&&",
-        "git",
-        "push",
-        "origin",
-        "main"
+      "label": "test",
+      "type": "npm",
+      "script": "test",
+      "group": "test"
+    },
+    {
+      "label": "deploy",
+      "type": "npm",
+      "script": "deploy",
+      "problemMatcher": []
+    },
+    {
+      "label": "FULL AUTOPILOT: Check & Build",
+      "dependsOn": [
+        "lint",
+        "type-check",
+        "test",
+        "build"
       ],
-      "presentation": {
-        "reveal": "always",
-        "focus": false,
-        "panel": "new"
-      },
+      "dependsOrder": "sequence",
       "group": {
-        "kind": "test"
-      }
+        "kind": "build",
+        "isDefault": false
+      },
+      "problemMatcher": []
     }
   ]
 }

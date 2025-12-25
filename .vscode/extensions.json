@@ -5,7 +5,13 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "bradlc.vscode-tailwindcss",
-    "ms-vscode.vscode-typescript-next"
+    "prisma.prisma",
+    "vitest.explorer",
+    "yoavbls.pretty-ts-errors"
   ],
-  "unwantedRecommendations": []
+  "unwantedRecommendations": [
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "hookyqr.beautify",
+    "wix.vscode-import-cost"
+  ]
 }
