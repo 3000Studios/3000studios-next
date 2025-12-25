@@ -29,6 +29,19 @@
     "**/.vercel/**": true,
     "**/.pnpm-store/**": true
   },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/.next": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/.git": true,
+    "**/dist": true,
+    "**/build": true
+  },
 
   /* ======================================================
      EDITOR UX (CONSISTENT + CI-SAFE)
@@ -40,6 +53,10 @@
   "editor.minimap.enabled": false,
   "editor.formatOnSave": true,
   "editor.inlineSuggest.enabled": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
 
   /* ======================================================
      FORMATTERS (MATCH CI + PREVENT DIFF NOISE)
@@ -64,6 +81,9 @@
 
   "typescript.tsserver.maxTsServerMemory": 8192,
   "typescript.disableAutomaticTypeAcquisition": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "eslint.workingDirectories": [{ "mode": "auto" }],
 
   /* ======================================================
      GIT (SILENT, NO POPUPS, NO FREEZES)

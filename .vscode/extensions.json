@@ -5,7 +5,14 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "bradlc.vscode-tailwindcss",
-    "ms-vscode.vscode-typescript-next"
+    "prisma.prisma",
+    "vitest.explorer",
+    "yoavbls.pretty-ts-errors"
   ],
-  "unwantedRecommendations": []
+  "unwantedRecommendations": [
+    "ms-vscode.vscode-typescript-next",
+    "dsznajder.es7-react-js-snippets",
+    "formulahendry.auto-close-tag",
+    "formulahendry.auto-rename-tag"
+  ]
 }
