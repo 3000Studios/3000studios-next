@@ -306,7 +306,49 @@ export const productCatalog: Product[] = [
     reviewCount: 54,
     inStock: true,
     featured: true,
-    tags: ['Real Estate', 'Listings', 'Search'],
+    tags: ["Real Estate", "Listings", "Search"],
+  },
+  {
+    productId: "gear-001",
+    name: "Sony A7 IV Mirrorless Camera",
+    description:
+      "The ultimate hybrid camera for content creators. 33MP Full-Frame sensor, 4K 60p, and incredible autofocus.",
+    price: 2498.0,
+    category: "Gear",
+    rating: 5.0,
+    reviewCount: 3420,
+    inStock: true,
+    featured: true,
+    tags: ["Camera", "Sony", "Video", "Photography"],
+    affiliateLink: "https://amzn.to/3EXAMPLE",
+  },
+  {
+    productId: "gear-002",
+    name: 'MacBook Pro 16" M3 Max',
+    description:
+      "Unstopdable performance for creative pros. 48GB Unified Memory, 1TB SSD, Space Black.",
+    price: 3499.0,
+    category: "Gear",
+    rating: 4.9,
+    reviewCount: 890,
+    inStock: true,
+    featured: true,
+    tags: ["Apple", "MacBook", "Laptop", "Dev"],
+    affiliateLink: "https://amzn.to/3EXAMPLE",
+  },
+  {
+    productId: "gear-003",
+    name: "Shure SM7B Vocal Microphone",
+    description:
+      "The legendary broadcasting microphone. Perfect for podcasting, streaming, and voiceovers.",
+    price: 399.0,
+    category: "Gear",
+    rating: 4.9,
+    reviewCount: 15400,
+    inStock: true,
+    featured: false,
+    tags: ["Audio", "Microphone", "Streaming"],
+    affiliateLink: "https://amzn.to/3EXAMPLE",
   },
 ];
 
@@ -323,14 +365,15 @@ export function getProductById(id: string): Product | undefined {
 }
 
 export function getAllCategories(): string[] {
-  return Array.from(new Set(productCatalog.map(p => p.category)));
+  return Array.from(new Set(productCatalog.map((p) => p.category)));
 }
 
 export function searchProducts(query: string): Product[] {
   const lowerQuery = query.toLowerCase();
-  return productCatalog.filter(p =>
-    p.name.toLowerCase().includes(lowerQuery) ||
-    p.description.toLowerCase().includes(lowerQuery) ||
-    p.tags?.some(tag => tag.toLowerCase().includes(lowerQuery))
+  return productCatalog.filter(
+    (p) =>
+      p.name.toLowerCase().includes(lowerQuery) ||
+      p.description.toLowerCase().includes(lowerQuery) ||
+      p.tags?.some((tag) => tag.toLowerCase().includes(lowerQuery))
   );
 }

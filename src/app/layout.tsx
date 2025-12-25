@@ -11,59 +11,67 @@
  * - Ultra-luxe theme with award-winning graphics
  */
 
-import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
-import Script from "next/script";
-import BackgroundMusic from "./components/BackgroundMusic";
-import GravityFooter from "./components/GravityFooter";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import "./globals.css";
 import Navigation from "./components/Navigation";
+import GravityFooter from "./components/GravityFooter";
+import VideoWallpaper from "./components/VideoWallpaper";
+import BackgroundMusic from "./components/BackgroundMusic";
 import SmoothScroll from "./components/SmoothScroll";
 import SoundEffects from "./components/SoundEffects";
-import VideoWallpaper from "./components/VideoWallpaper";
-import "./globals.css";
-
-const RAW_ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
-const ADSENSE_ACCOUNT = RAW_ADSENSE_ID
-  ? RAW_ADSENSE_ID.startsWith("ca-pub-")
-    ? RAW_ADSENSE_ID
-    : `ca-pub-${RAW_ADSENSE_ID}`
-  : undefined;
+import { ENV } from "@/lib/env";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(ENV.SITE_URL),
   title: "3000 Studios - Award-Winning Creative Studio",
   description:
     "Premium digital experiences, innovative solutions, and transformative projects. 250+ successful clients worldwide with 99% satisfaction rate.",
   keywords:
     "creative studio, digital agency, web development, premium design, innovation, 3D experiences, AI solutions",
-  authors: [{ name: "3000 Studios" }],
-  robots: "index, follow",
+  authors: [{ name: "3000 Studios", url: "https://3000studios.com" }],
+  creator: "3000 Studios",
+  publisher: "3000 Studios",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://3000studios.vercel.app",
+    url: ENV.SITE_URL,
     siteName: "3000 Studios",
     title: "3000 Studios - Award-Winning Creative Studio",
     description:
-      "Premium digital experiences, innovative solutions, and transformative projects.",
+      "Premium digital experiences, innovative solutions, and transformative projects. 250+ successful clients worldwide with 99% satisfaction rate.",
     images: [
       {
-        url: "/brand-logo.png",
+        url: `${ENV.SITE_URL}/logo.svg`,
         width: 1200,
         height: 630,
-        alt: "3000 Studios",
+        alt: "3000 Studios Logo",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    site: "@3000studios",
     title: "3000 Studios - Award-Winning Creative Studio",
     description:
       "Premium digital experiences, innovative solutions, and transformative projects.",
+    images: [`${ENV.SITE_URL}/logo.svg`],
+    creator: "@3000Studios",
   },
-  other: ADSENSE_ACCOUNT
-    ? { "google-adsense-account": ADSENSE_ACCOUNT }
-    : undefined,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  // verification: {
+  //   google: "google-site-verification-code", // Add actual verification code from Google Search Console
+  // },
 };
 
 export default function RootLayout({
@@ -74,16 +82,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased flex flex-col min-h-screen bg-black">
-        {/* Google AdSense Auto Ads (enabled when NEXT_PUBLIC_ADSENSE_PUBLISHER_ID is set) */}
-        {ADSENSE_ACCOUNT ? (
-          <Script
-            id="adsense"
-            strategy="afterInteractive"
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_ACCOUNT}`}
-            crossOrigin="anonymous"
-          />
-        ) : null}
         {/* Live Video Wallpaper Background - Blueprint Feature */}
         <VideoWallpaper opacity={0.25} />
 
@@ -98,12 +96,13 @@ export default function RootLayout({
 
         {/* Main Content */}
         <Navigation />
-        <main className="flex-grow pt-20 relative z-10">{children}</main>
+        <main className="flex-grow pt-16 relative z-10">{children}</main>
 
         {/* Gravity Footer - Blueprint Feature */}
         <GravityFooter />
 
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

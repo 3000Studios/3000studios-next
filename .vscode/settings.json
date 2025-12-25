@@ -1,7 +1,27 @@
 {
+  /* ======================================================
+     CORE WORKSPACE BEHAVIOR (STABLE + FAST)
+  ====================================================== */
+
   "telemetry.telemetryLevel": "off",
   "workbench.enableExperiments": false,
+  "workbench.startupEditor": "none",
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.closeOnFileDelete": true,
 
+  /* ======================================================
+     ANTI-GRAVITY / OPEN-VSX
+  ====================================================== */
+
+  "antigravity.marketplaceGalleryItemURL": "https://open-vsx.org/vscode/item",
+  "antigravity.marketplaceExtensionGalleryServiceURL": "https://open-vsx.org/vscode/gallery",
+
+  /* ======================================================
+     FILE SYSTEM / CPU CONTROL
+  ====================================================== */
+
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 800,
   "files.watcherExclude": {
     "**/.git/**": true,
     "**/.next/**": true,
@@ -10,53 +30,92 @@
     "**/.pnpm-store/**": true
   },
 
+  /* ======================================================
+     EDITOR UX (CONSISTENT + CI-SAFE)
+  ====================================================== */
+
+  "editor.fontSize": 15,
+  "editor.fontFamily": "JetBrains Mono, Consolas, 'Courier New', monospace",
+  "editor.wordWrap": "on",
+  "editor.minimap.enabled": false,
+  "editor.formatOnSave": true,
+  "editor.inlineSuggest.enabled": true,
+
+  /* ======================================================
+     FORMATTERS (MATCH CI + PREVENT DIFF NOISE)
+  ====================================================== */
+
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  /* ======================================================
+     TYPESCRIPT / NEXT.JS PERFORMANCE
+  ====================================================== */
+
+  "typescript.tsserver.maxTsServerMemory": 8192,
+  "typescript.disableAutomaticTypeAcquisition": true,
+
+  /* ======================================================
+     GIT (SILENT, NO POPUPS, NO FREEZES)
+  ====================================================== */
+
   "git.autorefresh": false,
   "git.confirmSync": false,
   "git.detectSubmodules": false,
   "git.countBadge": "off",
 
-  "typescript.tsserver.maxTsServerMemory": 8192,
-  "typescript.disableAutomaticTypeAcquisition": true,
-
-  "workbench.editor.enablePreview": false,
-  "workbench.editor.closeOnFileDelete": true,
-  "editor.formatOnSave": true,
-  "editor.inlineSuggest.enabled": true,
+  /* ======================================================
+     AI / AGENTS (AGGRESSIVE BUT CONTROLLED)
+  ====================================================== */
 
   "github.copilot.editor.enableAutoCompletions": true,
-  "github.copilot.enable": {
-    "*": true,
-    "plaintext": true,
-    "markdown": true,
-    "scminput": true
-  },
 
-  "chat.tools.terminal.autoApprove": {
-    "pnpm": true,
-    "npm": true,
-    "node": true,
-    "git": true,
-    "vercel": true,
-    "gh": true,
-    "npx": true
-  },
+  "geminicodeassist.project": "studios-ai-agent-3k",
+  "geminicodeassist.agentDebugMode": false,
+  "geminicodeassist.agentYoloMode": true,
 
-  "ai.experimental.codeActions": true,
-  "chat.experimental.promptCaching": true,
+  "gitlens.ai.model": "gitkraken",
+  "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
+
+  /* ======================================================
+     TERMINAL (GPU + NO LIMITS)
+  ====================================================== */
 
   "terminal.integrated.gpuAcceleration": "on",
   "terminal.integrated.scrollback": 10000,
 
-  "task.showDecorations": false,
-  "problems.decorations.enabled": false,
-  "editor.minimap.enabled": false,
-  "workbench.list.horizontalScrolling": true,
+  /* ======================================================
+     CHAT / COMMAND AUTO-APPROVAL
+  ====================================================== */
+
+  "chat.tools.terminal.autoApprove": {
+    "npm": true,
+    "node": true,
+    "git": true,
+    "vercel": true
+  },
+
+  /* ======================================================
+     WORKSPACE TRUST (NO INTERRUPTIONS)
+  ====================================================== */
 
   "security.workspace.trust.enabled": true,
   "security.workspace.trust.startupPrompt": "never",
 
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit",
-    "source.organizeImports": "explicit"
-  }
+  /* ======================================================
+     GITHUB ACTIONS VISIBILITY (NOT ENTERPRISE-LOCKED)
+  ====================================================== */
+
+  "github-actions.workflows.pinned.refresh.enabled": true,
+  "github-actions.workflows.pinned.workflows": []
 }
