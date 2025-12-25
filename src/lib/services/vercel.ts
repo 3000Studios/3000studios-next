@@ -8,12 +8,22 @@ import axios from 'axios';
 const VERCEL_TOKEN = process.env.VERCEL_TOKEN;
 const VERCEL_API = 'https://api.vercel.com';
 const PROJECT_NAME = '3000studios-next'; // Update with actual project name
+const PROJECT_ID = process.env.VERCEL_PROJECT_ID;
+
+// Validation regex for deployment IDs to prevent SSRF
+const DEPLOYMENT_ID_REGEX = /^[a-zA-Z0-9_-]+$/;
 
 export interface DeploymentResponse {
   id: string;
   url: string;
   readyState: string;
   createdAt: number;
+}
+
+function validateDeploymentId(id: string) {
+  if (!id || !DEPLOYMENT_ID_REGEX.test(id)) {
+    throw new Error('Invalid deployment ID format');
+  }
 }
 
 export async function triggerDeployment(
@@ -50,6 +60,8 @@ export async function triggerDeployment(
 }
 
 export async function getDeploymentStatus(deploymentId: string): Promise<string> {
+  validateDeploymentId(deploymentId);
+  
   try {
     const response = await axios.get(
       `${VERCEL_API}/v13/deployments/${deploymentId}`,
@@ -69,6 +81,10 @@ export async function getDeploymentStatus(deploymentId: string): Promise<string>
 
 export async function getLatestDeployment(): Promise<DeploymentResponse | null> {
   try {
+    if (!PROJECT_ID) {
+      throw new Error('VERCEL_PROJECT_ID is required to fetch deployments');
+    }
+
     const response = await axios.get(
       `${VERCEL_API}/v6/deployments?projectId=${PROJECT_NAME}&limit=1`,
       {
@@ -97,6 +113,8 @@ export async function getLatestDeployment(): Promise<DeploymentResponse | null> 
 }
 
 export async function cancelDeployment(deploymentId: string): Promise<void> {
+  validateDeploymentId(deploymentId);
+
   try {
     await axios.patch(
       `${VERCEL_API}/v12/deployments/${deploymentId}/cancel`,

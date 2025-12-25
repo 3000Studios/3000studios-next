@@ -5,9 +5,9 @@
 
 'use client';
 
+import { useState, useEffect, useCallback } from 'react';
+import { BarChart3, TrendingUp, DollarSign, Users, ShoppingCart, Eye, RefreshCw } from 'lucide-react';
 import { useAnalytics } from '@/hooks/useAPI';
-import { BarChart3, DollarSign, Eye, RefreshCw, ShoppingCart, TrendingUp, Users } from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
 
 interface StatCardProps {
   title: string;
@@ -55,11 +55,11 @@ export default function RealAnalytics() {
 
   useEffect(() => {
     loadAnalytics();
-
+    
     // Auto-refresh every 30 seconds
     const interval = setInterval(loadAnalytics, 30000);
     return () => clearInterval(interval);
-  }, [loadAnalytics]);
+  }, [loadAnalytics, timeRange]);
 
   if (loading && !stats) {
     return (

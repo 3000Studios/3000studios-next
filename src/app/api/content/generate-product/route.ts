@@ -3,8 +3,9 @@
  * AI-powered product description generation
  */
 
-import { NextRequest, NextResponse } from "next/server";
-import { generateProductDescription } from "@/lib/services/openai";
+import { NextRequest, NextResponse } from 'next/server';
+import { generateProductDescription } from '@/lib/services/openai';
+import { updateProduct } from '@/lib/services/mongodb';
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,7 +14,7 @@ export async function POST(request: NextRequest) {
 
     if (!productName) {
       return NextResponse.json(
-        { error: "Product name required" },
+        { error: 'Product name required' },
         { status: 400 }
       );
     }
@@ -27,13 +28,9 @@ export async function POST(request: NextRequest) {
     // Auto-save to database if requested
     if (autoSave && productId) {
       try {
-        const { prisma } = await import("@/lib/prisma"); // Dynamic import to avoid top-level if preferred, or add top-level
-        await prisma.product.update({
-          where: { id: productId },
-          data: { description },
-        });
+        await updateProduct(productId, { description });
       } catch (dbError) {
-        console.error("Database save error:", dbError);
+        console.error('Database save error:', dbError);
         // Continue even if save fails
       }
     }
@@ -45,9 +42,9 @@ export async function POST(request: NextRequest) {
       saved: autoSave && productId,
     });
   } catch (error) {
-    console.error("Product description API error:", error);
+    console.error('Product description API error:', error);
     return NextResponse.json(
-      { error: "Failed to generate product description" },
+      { error: 'Failed to generate product description' },
       { status: 500 }
     );
   }

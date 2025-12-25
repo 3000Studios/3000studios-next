@@ -5,10 +5,10 @@
 
 'use client';
 
+import { useState, useRef, useEffect } from 'react';
+import { Video, VideoOff, Radio, Users, MessageCircle } from 'lucide-react';
 import { useStreaming } from '@/hooks/useAPI';
 import { WebRTCBroadcaster } from '@/lib/services/webrtc';
-import { Radio, Users, Video, VideoOff } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
 
 export default function StreamControl() {
   const [isStreaming, setIsStreaming] = useState(false);
@@ -34,7 +34,7 @@ export default function StreamControl() {
 
       return () => clearInterval(interval);
     }
-  }, [getStreamStatus, isStreaming, streamId]);
+  }, [isStreaming, streamId]);
 
   const handleStartStream = async () => {
     if (!streamTitle.trim()) {
@@ -53,7 +53,7 @@ export default function StreamControl() {
 
       // Start local media
       const localStream = await broadcaster.startBroadcast();
-
+      
       if (videoRef.current) {
         videoRef.current.srcObject = localStream;
       }
@@ -61,7 +61,7 @@ export default function StreamControl() {
       // Create offer and send to signaling server
       const offer = await broadcaster.createOffer();
       console.log('WebRTC Offer created:', offer);
-
+      
       // In production, send offer to signaling server
       // await fetch(streamData.signalServerUrl, { ... })
 
@@ -107,7 +107,7 @@ export default function StreamControl() {
           playsInline
           className="w-full h-full object-cover"
         />
-
+        
         {isStreaming && (
           <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
             <div className="px-3 py-2 bg-red-600 rounded-lg flex items-center gap-2">
