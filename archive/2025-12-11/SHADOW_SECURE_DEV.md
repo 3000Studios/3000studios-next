@@ -5,10 +5,6 @@
 Your secrets are now **loaded into memory only**, never written to disk, never committed to GitHub.
 
 ### Architecture:
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/copilot/update-main-with-all-branches
 ```
 Windows Credential Manager (encrypted, system-managed)
         ↓
