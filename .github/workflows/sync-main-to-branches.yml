@@ -3,13 +3,9 @@ name: Sync main into branches (create PRs)
 on:
   workflow_dispatch:
 
-<<<<<<< HEAD
-=======
 permissions:
   contents: read
   pull-requests: write
-
->>>>>>> origin/copilot/update-main-with-all-branches
 jobs:
   create-prs:
     runs-on: ubuntu-latest
