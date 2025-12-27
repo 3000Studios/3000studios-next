@@ -1,55 +1,22 @@
-/**
- * Environment Variables Validation
- * 
- * This module validates required environment variables at build time.
- * If any required variable is missing, the build will fail immediately.
- * This prevents silent runtime failures and ensures deployment safety.
- */
-
-function required(name: string): string {
+const getEnv = (name: string, fallback: string = ""): string => {
   const value = process.env[name];
   if (!value) {
-    throw new Error(`Missing required environment variable: ${name}`);
+    return fallback;
   }
   return value;
-}
-
-function optional(name: string, defaultValue: string = ''): string {
-  return process.env[name] || defaultValue;
-}
-
-/**
- * Validated Environment Variables
- * Access these instead of process.env directly to ensure type safety
- */
-export const ENV = {
-  // Public variables (available in browser)
-  SITE_URL: required("NEXT_PUBLIC_SITE_URL"),
-  
-  // Server-only variables (PayPal) - Optional for build
-  PAYPAL_CLIENT_ID: optional("PAYPAL_CLIENT_ID"),
-  PAYPAL_SECRET: optional("PAYPAL_SECRET"),
-  
-  // Server-only variables (AI Services) - Optional but recommended
-  OPENAI_API_KEY: optional("OPENAI_API_KEY"),
-  CLAUDE_API_KEY: optional("CLAUDE_API_KEY"),
-  GEMINI_API_KEY: optional("GEMINI_API_KEY"),
-  
-  // Server-only variables (Google Services)
-  GOOGLE_MAPS_API_KEY: optional("GOOGLE_MAPS_API_KEY"),
-  
-  // Server-only variables (Database)
-  MONGO_PUBLIC_KEY: optional("MONGO_PUBLIC_KEY"),
-  MONGO_PRIVATE_KEY: optional("MONGO_PRIVATE_KEY"),
-  MONGO_IP: optional("MONGO_IP"),
-  
-  // Node environment
-  NODE_ENV: process.env.NODE_ENV || 'development',
 };
 
-// Validate at module load time (build-time check)
-if (typeof window === 'undefined') {
-  console.log('✅ Environment variables validated successfully');
-  console.log(`📍 SITE_URL: ${ENV.SITE_URL}`);
-  console.log(`🔧 NODE_ENV: ${ENV.NODE_ENV}`);
-}
+export const ENV = {
+  SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || "https://3000studios.com",
+  DATABASE_URL: getEnv("DATABASE_URL"),
+  NEXTAUTH_URL: getEnv("NEXTAUTH_URL"),
+  NEXTAUTH_SECRET: getEnv("NEXTAUTH_SECRET"),
+  STRIPE_SECRET_KEY: getEnv("STRIPE_SECRET_KEY"),
+  STRIPE_PUBLISHABLE_KEY:
+    process.env.STRIPE_PUBLISHABLE_KEY || process.env.STRIPE_PUBLIC || "",
+  STRIPE_WEBHOOK_SECRET: getEnv("STRIPE_WEBHOOK_SECRET"),
+  PAYPAL_CLIENT_ID: getEnv("PAYPAL_CLIENT_ID"),
+  PAYPAL_SECRET: process.env.PAYPAL_SECRET || process.env.PAYPAL_CLIENT_SECRET_PROD || "",
+  OPENAI_API_KEY: getEnv("OPENAI_API_KEY"),
+  GOOGLE_MAPS_API_KEY: getEnv("GOOGLE_MAPS_API_KEY"),
+};
