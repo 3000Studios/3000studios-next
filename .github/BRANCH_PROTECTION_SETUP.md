@@ -11,7 +11,47 @@ Protect the `main` branch from:
 - Accidental revenue-impacting modifications
 - Unauthorized access
 
-## 📋 Required Branch Protection Rules
+## 🤖 Automated Configuration (Recommended)
+
+Branch protection can now be configured automatically using our configuration-as-code approach.
+
+### Quick Setup
+
+1. **Review the configuration file**:
+   ```bash
+   cat .github/branch-protection-config.yml
+   ```
+
+2. **Apply configuration automatically**:
+   ```bash
+   # Requires GITHUB_TOKEN with admin access
+   export GITHUB_TOKEN=your_admin_token
+   npm run configure-branch-protection
+   ```
+
+3. **Or trigger via GitHub Actions**:
+   - Go to **Actions** tab → **Configure Branch Protection**
+   - Click **Run workflow**
+   - Choose your options and run
+
+### Configuration File
+
+All protection rules are defined in `.github/branch-protection-config.yml`. To modify rules:
+
+1. Edit `.github/branch-protection-config.yml`
+2. Commit and push to `main` branch (or create PR)
+3. Workflow automatically applies changes
+
+### Benefits of Automated Configuration
+
+- ✅ **Version controlled** - Protection rules are tracked in git
+- ✅ **Consistent** - Same rules applied every time
+- ✅ **Auditable** - Changes are documented in commit history
+- ✅ **Reproducible** - Easy to apply to multiple branches/repos
+
+## 📋 Manual Configuration (Alternative)
+
+If you prefer manual setup or don't have admin API access:
 
 ### Access Through GitHub UI
 
