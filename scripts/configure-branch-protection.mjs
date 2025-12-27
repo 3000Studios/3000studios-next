@@ -94,11 +94,10 @@ async function configureBranchProtection() {
         required_approving_review_count: config.required_pull_request_reviews.required_approving_review_count || 1,
         require_last_push_approval: config.required_pull_request_reviews.require_last_push_approval || false
       } : null,
-      restrictions: config.restrictions && (
-        config.restrictions.users?.length > 0 ||
-        config.restrictions.teams?.length > 0 ||
-        config.restrictions.apps?.length > 0
-      ) ? {
+      restrictions: (config.restrictions && 
+        (config.restrictions.users?.length > 0 ||
+         config.restrictions.teams?.length > 0 ||
+         config.restrictions.apps?.length > 0)) ? {
         users: config.restrictions.users || [],
         teams: config.restrictions.teams || [],
         apps: config.restrictions.apps || []
@@ -188,7 +187,7 @@ async function configureBranchProtection() {
       process.exit(1);
     } else if (error.status === 404) {
       console.error('❌ Error: Branch not found');
-      console.error(`   The branch "${config.branch}" does not exist in the repository`);
+      console.error(`   The branch "${config?.branch || 'main'}" does not exist in the repository`);
       console.error('   Create the branch first, then configure protection\n');
       process.exit(1);
     } else {
