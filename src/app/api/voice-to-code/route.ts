@@ -67,21 +67,14 @@ export async function POST(request: NextRequest) {
     });
 
     // Step 3: Handle different actions
-    switch (action) {
-      case 'preview':
-        // Return code for preview only
-        return NextResponse.json({
-          success: true,
-          preview: codeResult.preview,
-          code: codeResult.code,
-          explanation: codeResult.explanation,
-          transcription: audio ? textPrompt : undefined,
-        });
-
+    // Default to preview action
     return NextResponse.json({
       success: true,
-      ...parsed,
-      action: "preview",
+      preview: codeResult.preview || codeResult.code,
+      code: codeResult.code,
+      explanation: codeResult.explanation,
+      transcription: audio ? textPrompt : undefined,
+      action: action || "preview",
     });
   } catch (error) {
     console.error('Voice-to-code API error:', error);
@@ -90,4 +83,66 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
+}
+
+// Helper function to transcribe audio
+async function transcribeAudio(audioBase64: string): Promise<string> {
+  const openai = await getOpenAI();
+  if (!openai) {
+    throw new Error('OpenAI not configured');
+  }
+  
+  // Convert base64 to buffer
+  const audioBuffer = Buffer.from(audioBase64, 'base64');
+  
+  // Create a file-like object for OpenAI
+  const file = new File([audioBuffer], 'audio.webm', { type: 'audio/webm' });
+  
+  const transcription = await openai.audio.transcriptions.create({
+    file: file,
+    model: 'whisper-1',
+  });
+  
+  return transcription.text;
+}
+
+// Helper function to generate code
+async function generateCode(params: {
+  prompt: string;
+  language?: string;
+  context?: string;
+}): Promise<{
+  code: string;
+  preview?: string;
+  explanation: string;
+}> {
+  const openai = await getOpenAI();
+  if (!openai) {
+    throw new Error('OpenAI not configured');
+  }
+  
+  const systemPrompt = `You are a code generation assistant. Generate clean, production-ready code based on the user's natural language request.
+${params.language ? `Programming language: ${params.language}` : ''}
+${params.context ? `Current context:\n${params.context}` : ''}
+
+Respond with a JSON object containing:
+- code: the generated code
+- explanation: a brief explanation of what the code does`;
+
+  const completion = await openai.chat.completions.create({
+    model: 'gpt-4-turbo-preview',
+    messages: [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: params.prompt }
+    ],
+    response_format: { type: 'json_object' }
+  });
+
+  const result = JSON.parse(completion.choices[0].message.content || '{}');
+  
+  return {
+    code: result.code || '',
+    explanation: result.explanation || 'Code generated successfully',
+    preview: result.code || ''
+  };
 }
