@@ -90,7 +90,7 @@ jobs:
             const status = '${{ steps.check-protection.outputs.protection-status }}';
             const missing = '${{ steps.check-protection.outputs.missing-rules }}';
             
-            let body;
+            let body = '';
             if (status === 'none') {
               body = `## ⚠️ Branch Protection Alert
             

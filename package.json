@@ -12,6 +12,8 @@
     "start": "next start",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "type-check": "tsc --noEmit",
+    "configure-branch-protection": "node scripts/configure-branch-protection.mjs",
+    "verify-branch-protection": "node scripts/verify-branch-protection.mjs",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "db:seed": "tsx prisma/seed.ts",
@@ -63,6 +65,7 @@
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.182.0",
     "uuid": "^13.0.0",
+    "yaml": "^2.8.2",
     "zod": "^4.2.1",
     "zustand": "^4.5.5"
   },
