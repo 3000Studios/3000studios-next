@@ -1,52 +1,39 @@
 /**
  * /api/auth/login
- * Validates credentials and returns session token
+ * Validates credentials and returns session token.
  */
 
-import { createSessionToken, verifyAdmin } from '@/lib/auth';
-import { NextRequest, NextResponse } from 'next/server';
+import { createSessionToken, verifyAdmin } from "@/lib/auth";
+import { NextRequest, NextResponse } from "next/server";
+
+const SESSION_DURATION_SECONDS = 60 * 60 * 24; // 1 day
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, password } = await request.json();
+    const { email, password } = (await request.json()) as { email?: string; password?: string };
 
     if (!email || !password) {
-      return NextResponse.json(
-        { error: 'Email and password required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Email and password are required" }, { status: 400 });
     }
 
-    const result = verifyAdmin(email, password);
+    const isValid = verifyAdmin(email, password);
 
-    if (!result.success) {
-      return NextResponse.json(
-        { error: result.message },
-        { status: 401 }
-      );
+    if (!isValid) {
+      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
 
     const token = createSessionToken(email);
 
-    // Return token to be stored in httpOnly cookie by client
     return NextResponse.json(
+      { success: true },
       {
-        success: true,
-        token,
-        user: result.user,
-      },
-      {
-        status: 200,
         headers: {
-          'Set-Cookie': `auth_token=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=86400`,
+          "Set-Cookie": `auth_token=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=${SESSION_DURATION_SECONDS}`,
         },
-      }
+      },
     );
   } catch (error) {
-    console.error('Auth error:', error);
-    return NextResponse.json(
-      { error: 'Authentication failed' },
-      { status: 500 }
-    );
+    console.error("Auth error:", error);
+    return NextResponse.json({ error: "Authentication failed" }, { status: 500 });
   }
 }
