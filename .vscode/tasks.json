@@ -134,6 +134,15 @@
       ],
       "group": "build",
       "problemMatcher": []
+    },
+    {
+      "label": "auto-commit",
+      "type": "shell",
+      "command": "bash ./.vscode/auto-commit.sh",
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "problemMatcher": []
     }
   ]
 }
