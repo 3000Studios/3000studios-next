@@ -4,6 +4,7 @@
  *   Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
  */
 
+export function isSafeCommand(command: string): boolean {
   if (!command || typeof command !== "string") {
     return false;
   }
