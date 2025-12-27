@@ -25,6 +25,7 @@
   "git.autorefresh": true,
   "git.confirmSync": false,
   "git.autofetch": true,
+  "git.enableSmartCommit": true,
   "typescript.tsserver.maxTsServerMemory": 8192,
   "typescript.disableAutomaticTypeAcquisition": true,
   "typescript.tsdk": "node_modules/typescript/lib",
@@ -71,5 +72,7 @@
   "explorer.confirmDragAndDrop": false,
   "explorer.confirmDelete": false,
   "chatgpt.runCodexInWindowsSubsystemForLinux": true,
-  "chatgpt.openOnStartup": true
+  "chatgpt.openOnStartup": true,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1500
 }
