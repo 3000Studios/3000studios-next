@@ -13,7 +13,7 @@ const PROJECT_ID = process.env.VERCEL_PROJECT_ID;
 // Validation regex for deployment IDs to prevent SSRF
 const DEPLOYMENT_ID_REGEX = /^[A-Za-z0-9\-_]{1,64}$/;
 
-function validateDeploymentId(id: string) {
+function validateDeploymentId(id: string): void {
   if (!id || !DEPLOYMENT_ID_REGEX.test(id)) {
     throw new Error('Invalid deployment ID format');
   }
@@ -24,12 +24,6 @@ export interface DeploymentResponse {
   url: string;
   readyState: string;
   createdAt: number;
-}
-
-function validateDeploymentId(id: string) {
-  if (!id || !DEPLOYMENT_ID_REGEX.test(id)) {
-    throw new Error('Invalid deployment ID format');
-  }
 }
 
 export async function triggerDeployment(
