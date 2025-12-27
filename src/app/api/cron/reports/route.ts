@@ -39,9 +39,17 @@ export async function POST(req: NextRequest) {
   }
 }
 
+interface ReportData {
+  [key: string]: unknown;
+}
+
+interface AlertData {
+  [key: string]: unknown;
+}
+
 async function sendAlertEmail(
-  report: any,
-  alerts: any[]
+  report: ReportData,
+  alerts: AlertData[]
 ): Promise<boolean> {
   // In production, integrate with email service
   console.log('[Reports] Critical alerts:', alerts);

@@ -6,7 +6,7 @@ export interface StatItem {
   value: string;
   change: string;
   trend: "up" | "down";
-  icon: any; // We'll return the name or handle the component instantiation in the UI
+  icon: unknown; // We'll return the name or handle the component instantiation in the UI
   color: string;
   iconName: "DollarSign" | "Users" | "Calendar" | "BarChart2";
 }

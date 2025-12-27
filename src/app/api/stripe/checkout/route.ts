@@ -10,6 +10,15 @@ import Stripe from 'stripe';
 
 export const runtime = 'nodejs';
 
+interface CheckoutItem {
+  name: string;
+  description?: string;
+  image?: string;
+  price: number;
+  quantity: number;
+  requiresShipping?: boolean;
+}
+
 function getStripe(): Stripe | null {
   const key = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET || process.env.STRIPE_3000_SECRET;
   if (!key) return null;
@@ -36,7 +45,7 @@ const postHandler = async (request: NextRequest) => {
     }
 
     // Create line items for Stripe
-    const lineItems = items.map((item: any) => ({
+    const lineItems = (items as CheckoutItem[]).map((item) => ({
       price_data: {
         currency: 'usd',
         product_data: {
@@ -62,7 +71,7 @@ const postHandler = async (request: NextRequest) => {
       },
       customer_email: undefined, // Can be set if user is logged in
       billing_address_collection: 'auto',
-      shipping_address_collection: items.some((i: any) => i.requiresShipping) ? {
+      shipping_address_collection: (items as CheckoutItem[]).some((i) => i.requiresShipping) ? {
         allowed_countries: ['US', 'CA', 'GB', 'AU'],
       } : undefined,
     });

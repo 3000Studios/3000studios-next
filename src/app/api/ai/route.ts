@@ -41,8 +41,8 @@ export async function POST(req: Request) {
     await storeMemory(userId, prompt);
 
     return Response.json({ text: result.text });
-  } catch (error: any) {
-    if (error.message === "AI usage limit exceeded") {
+  } catch (error) {
+    if (error instanceof Error && error.message === "AI usage limit exceeded") {
       return Response.json({ error: "Usage limit exceeded" }, { status: 429 });
     }
     console.error(error);

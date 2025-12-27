@@ -6,7 +6,25 @@ export type VendorAdapter = {
   fetchProducts: (feedUrl: string) => Promise<VendorProduct[]>;
 };
 
-async function fetchJson(feedUrl: string) {
+interface RawVendorItem {
+  advertiserId?: string;
+  id?: string;
+  sku?: string;
+  name?: string;
+  title?: string;
+  description?: string;
+  price?: number;
+  currency?: string;
+  priceCurrency?: string;
+  imageUrl?: string;
+  image?: string;
+  link?: string;
+  url?: string;
+  category?: string;
+  [key: string]: unknown;
+}
+
+async function fetchJson(feedUrl: string): Promise<{ items?: RawVendorItem[]; data?: RawVendorItem[]; [key: string]: unknown }> {
   const res = await fetch(feedUrl, { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to fetch feed ${feedUrl}: ${res.status}`);
   return res.json();
@@ -17,7 +35,7 @@ export const cjAdapter: VendorAdapter = {
   fetchProducts: async (feedUrl: string) => {
     const data = await fetchJson(feedUrl);
     const items = Array.isArray(data?.items) ? data.items : data?.data || [];
-    return items.map((item: any) =>
+    return items.map((item: RawVendorItem) =>
       normalizeVendorProduct("cj", {
         id: item.advertiserId || item.id,
         sku: item.sku,
@@ -39,7 +57,7 @@ export const shareasaleAdapter: VendorAdapter = {
   fetchProducts: async (feedUrl: string) => {
     const data = await fetchJson(feedUrl);
     const items = Array.isArray(data?.products) ? data.products : data?.items || [];
-    return items.map((item: any) =>
+    return items.map((item: RawVendorItem) =>
       normalizeVendorProduct("shareasale", {
         id: item.merchantId || item.id,
         sku: item.sku,
@@ -61,7 +79,7 @@ export const amazonAdapter: VendorAdapter = {
   fetchProducts: async (feedUrl: string) => {
     const data = await fetchJson(feedUrl);
     const items = Array.isArray(data?.products) ? data.products : data?.items || [];
-    return items.map((item: any) =>
+    return items.map((item: RawVendorItem) =>
       normalizeVendorProduct("amazon", {
         id: item.asin || item.id,
         sku: item.sku,
@@ -83,7 +101,7 @@ export const shopifyAdapter: VendorAdapter = {
   fetchProducts: async (feedUrl: string) => {
     const data = await fetchJson(feedUrl);
     const items = Array.isArray(data?.products) ? data.products : [];
-    return items.map((item: any) =>
+    return items.map((item: RawVendorItem) =>
       normalizeVendorProduct("shopify", {
         id: item.id,
         sku: item.handle,

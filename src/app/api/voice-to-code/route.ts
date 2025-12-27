@@ -5,12 +5,10 @@
  * NOW SUPPORTS: File System Writes (fs/promises)
  */
 
-import fs from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
-import path from "path";
 
 // Lazy-load OpenAI dynamically
-let openaiInstance: any = null;
+let openaiInstance: unknown = null;
 
 async function getOpenAI() {
   if (!process.env.OPENAI_API_KEY) return null;
@@ -31,19 +29,45 @@ interface VoiceInput {
   prompt?: string;
   currentContext?: string;
   action?: "preview" | "commit" | "deploy";
-  patches?: CodePatch[]; // For commit action
+  patches?: CodePatch[];
 }
 
 interface CodePatch {
   file: string;
   description: string;
-  oldCode: string; // Used for fuzzy matching verification
+  oldCode: string;
   newCode: string;
+}
+
+interface CodeResult {
+  preview?: string;
+  code?: string;
+  explanation?: string;
+}
+
+// Mock transcribe function (placeholder for future implementation)
+async function transcribeAudio(_audio: string): Promise<string> {
+  // Placeholder: In production, this would use Whisper API or similar
+  return "Transcribed audio content";
+}
+
+// Mock generate code function (placeholder for future implementation)
+async function generateCode(params: {
+  prompt: string;
+  language?: string;
+  context?: string;
+}): Promise<CodeResult> {
+  // Placeholder: In production, this would use OpenAI to generate code
+  return {
+    preview: `Generated code preview for: ${params.prompt}`,
+    code: `// Generated code based on: ${params.prompt}\nconsole.log('Hello from generated code');`,
+    explanation: `This code was generated based on the prompt: ${params.prompt}`,
+  };
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const body = await request.json() as VoiceInput;
     const { audio, prompt, action, context, language } = body;
 
     // Step 1: Transcribe audio if provided
@@ -69,6 +93,7 @@ export async function POST(request: NextRequest) {
     // Step 3: Handle different actions
     switch (action) {
       case 'preview':
+      default:
         // Return code for preview only
         return NextResponse.json({
           success: true,
@@ -76,13 +101,9 @@ export async function POST(request: NextRequest) {
           code: codeResult.code,
           explanation: codeResult.explanation,
           transcription: audio ? textPrompt : undefined,
+          action: action || "preview",
         });
-
-    return NextResponse.json({
-      success: true,
-      ...parsed,
-      action: "preview",
-    });
+    }
   } catch (error) {
     console.error('Voice-to-code API error:', error);
     return NextResponse.json(

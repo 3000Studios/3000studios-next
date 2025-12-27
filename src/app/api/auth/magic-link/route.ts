@@ -17,14 +17,23 @@ const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
 const MAX_REQUESTS_PER_WINDOW = 3; // Max 3 magic link requests per 15 minutes
 
+// Type for global magic tokens
+interface MagicTokenData {
+  email: string;
+  expires: number;
+}
+
+// Extend globalThis to include our magic tokens
+declare global {
+  // eslint-disable-next-line no-var
+  var __magicTokens: Map<string, MagicTokenData> | undefined;
+}
+
 // In-memory store for magic link tokens (in production, use Redis or database)
 // Use global store so it's shared across API routes
 if (typeof globalThis !== "undefined") {
-  if (!(globalThis as any).__magicTokens) {
-    (globalThis as any).__magicTokens = new Map<
-      string,
-      { email: string; expires: number }
-    >();
+  if (!globalThis.__magicTokens) {
+    globalThis.__magicTokens = new Map<string, MagicTokenData>();
 
     // PRODUCTION WARNING: This in-memory storage won't work correctly in:
     // - Multi-instance deployments (Vercel, AWS Lambda, etc.)
@@ -40,7 +49,8 @@ if (typeof globalThis !== "undefined") {
 
     // Clean up expired tokens every 5 minutes
     setInterval(() => {
-      const tokens = (globalThis as any).__magicTokens;
+      const tokens = globalThis.__magicTokens;
+      if (!tokens) return;
       const now = Date.now();
       for (const [token, data] of tokens.entries()) {
         if (data.expires < now) {
@@ -111,7 +121,7 @@ export async function POST(request: NextRequest) {
     const expires = Date.now() + MAGIC_LINK_EXPIRY_MS;
 
     // Store token in global store
-    const tokens = (globalThis as any).__magicTokens || new Map();
+    const tokens = globalThis.__magicTokens || new Map<string, MagicTokenData>();
     tokens.set(token, { email, expires });
 
     // Generate magic link

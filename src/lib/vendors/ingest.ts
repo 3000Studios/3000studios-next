@@ -2,6 +2,16 @@ import { vendorAdapters } from "./adapters";
 import { normalizeVendorProduct } from "./normalize";
 import { VENDORS } from "./registry";
 
+interface RawVendorItem {
+  [key: string]: unknown;
+}
+
+interface FeedData {
+  items?: RawVendorItem[];
+  products?: RawVendorItem[];
+  [key: string]: unknown;
+}
+
 function isSafeFeedUrl(override?: string): boolean {
   if (!override) return false;
 
@@ -64,7 +74,7 @@ export async function ingestVendorFeed(
   // Fallback: assume generic JSON with items
   const res = await fetch(resolvedFeedUrl, { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to fetch feed ${resolvedFeedUrl}`);
-  const data = await res.json();
+  const data = await res.json() as FeedData;
   const items = Array.isArray(data?.items) ? data.items : data?.products || [];
-  return items.map((item: any) => normalizeVendorProduct(vendorId, item));
+  return items.map((item) => normalizeVendorProduct(vendorId, item));
 }

@@ -1,8 +1,25 @@
 import { VendorProduct } from "./types";
 
+interface RawVendorProduct {
+  id?: string;
+  sku?: string;
+  name?: string;
+  title?: string;
+  description?: string;
+  price?: number | string;
+  currency?: string;
+  image?: string;
+  image_url?: string;
+  url?: string;
+  affiliate_link?: string;
+  category?: string;
+  commission?: number;
+  [key: string]: unknown;
+}
+
 export function normalizeVendorProduct(
   vendorId: string,
-  raw: any
+  raw: RawVendorProduct
 ): VendorProduct {
   return {
     vendorId,

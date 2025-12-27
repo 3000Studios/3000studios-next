@@ -21,7 +21,16 @@ export async function POST(req: NextRequest) {
   });
 }
 
-function buildSchema({ name, description, price, image, url, category }: any) {
+interface ProductSchema {
+  name: string;
+  description: string;
+  price: number;
+  image?: string;
+  url?: string;
+  category?: string;
+}
+
+function buildSchema({ name, description, price, image, url, category }: ProductSchema) {
   return {
     "@context": "https://schema.org",
     "@type": "Product",

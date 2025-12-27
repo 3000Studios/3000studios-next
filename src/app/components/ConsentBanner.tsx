@@ -12,8 +12,10 @@ import { useEffect, useState } from "react";
 
 export default function ConsentBanner() {
   const [showBanner, setShowBanner] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     // Only access localStorage on client side
     if (typeof window !== "undefined") {
       const consent = localStorage.getItem("cookie-consent");
@@ -22,6 +24,8 @@ export default function ConsentBanner() {
       }
     }
   }, []);
+
+  if (!mounted) return null;
 
   const handleAccept = () => {
     if (typeof window !== "undefined") {

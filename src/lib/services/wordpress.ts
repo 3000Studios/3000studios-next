@@ -17,6 +17,19 @@ const wpApi = axios.create({
   },
 });
 
+interface WordPressApiPost {
+  id: number;
+  title: { rendered: string };
+  content: { rendered: string };
+  excerpt: { rendered: string };
+  status: string;
+}
+
+interface WordPressApiCategory {
+  id: number;
+  name: string;
+}
+
 export interface WordPressPost {
   id?: number;
   title: string;
@@ -65,7 +78,7 @@ export async function getPosts(limit: number = 10): Promise<WordPressPost[]> {
       },
     });
 
-    return response.data.map((post: any) => ({
+    return response.data.map((post: WordPressApiPost) => ({
       id: post.id,
       title: post.title.rendered,
       content: post.content.rendered,
@@ -92,7 +105,7 @@ export async function deletePost(id: number): Promise<void> {
 export async function getCategories(): Promise<Array<{ id: number; name: string }>> {
   try {
     const response = await wpApi.get('/categories');
-    return response.data.map((cat: any) => ({
+    return response.data.map((cat: WordPressApiCategory) => ({
       id: cat.id,
       name: cat.name,
     }));

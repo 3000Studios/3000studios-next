@@ -13,6 +13,18 @@ const SESSION_DURATION_SECONDS =
 // Share the same token store with magic-link route via globalThis
 // In production, this would be Redis or database
 
+// Type for magic token data
+interface MagicTokenData {
+  email: string;
+  expires: number;
+}
+
+// Extend globalThis to include our magic tokens
+declare global {
+  // eslint-disable-next-line no-var
+  var __magicTokens: Map<string, MagicTokenData> | undefined;
+}
+
 export async function POST(request: NextRequest) {
   try {
     const { token } = await request.json();
@@ -22,7 +34,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Get tokens from global store
-    const tokens = (globalThis as any).__magicTokens || new Map();
+    const tokens = globalThis.__magicTokens || new Map<string, MagicTokenData>();
     const data = tokens.get(token);
 
     if (!data) {

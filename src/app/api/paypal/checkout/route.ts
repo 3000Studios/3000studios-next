@@ -16,6 +16,12 @@ const PAYPAL_API_BASE = process.env.NODE_ENV === 'production'
   ? 'https://api-m.paypal.com'
   : 'https://api-m.sandbox.paypal.com';
 
+interface PayPalItem {
+  name: string;
+  quantity: number;
+  price: number;
+}
+
 async function getPayPalAccessToken(): Promise<string> {
   if (!PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
     throw new Error('PayPal credentials not configured');
@@ -58,7 +64,7 @@ const handler = async (request: NextRequest) => {
               }
             }
           },
-          items: items?.map((item: any) => ({
+          items: items?.map((item: PayPalItem) => ({
             name: item.name,
             quantity: item.quantity.toString(),
             unit_amount: {

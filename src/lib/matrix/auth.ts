@@ -1,4 +1,4 @@
-export const authenticateUser = async (_credentials: any) => ({
+export const authenticateUser = async (_credentials: Record<string, unknown>) => ({
   success: true,
   user: {},
 });

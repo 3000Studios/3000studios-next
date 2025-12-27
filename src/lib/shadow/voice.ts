@@ -1,4 +1,4 @@
-export const processVoiceCommand = async (_audio: any) => ({
+export const processVoiceCommand = async (_audio: ArrayBuffer | Blob) => ({
   command: "",
   success: true,
 });
