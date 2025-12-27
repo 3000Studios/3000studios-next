@@ -8,9 +8,9 @@
 
 import { motion } from 'framer-motion';
 import { Calendar, Clock, Search, Tag, User } from 'lucide-react';
+import Link from 'next/link';
 import { useState } from 'react';
 import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
-import LoadingSkeleton from '../components/LoadingSkeleton';
 import Newsletter from '../components/Newsletter';
 import { blogPosts, getAllCategories, getAllTags } from '../lib/blogData';
 

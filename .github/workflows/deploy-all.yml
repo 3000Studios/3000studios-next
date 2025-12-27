@@ -77,13 +77,6 @@ jobs:
           ls -lah .next/
           du -sh .next/
 
-      - name: 💾 Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: next-build
-          path: .next/
-          retention-days: 1
-
   # Generate revenue pages
   revenue-generation:
     needs: build
@@ -135,12 +128,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
-      - name: 📥 Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: next-build
-          path: .next/
+      - name: 🔧 Install dependencies
+        run: npm ci
 
       - name: 🚀 Deploy to Vercel Production
         env:
@@ -149,9 +140,8 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
           echo "🚀 Deploying to Vercel Production..."
-          npx vercel pull --yes --environment=production --token=$VERCEL_TOKEN
-          npx vercel build --prod --token=$VERCEL_TOKEN
-          DEPLOYMENT_URL=$(npx vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN)
+          npm install -g vercel@latest
+          DEPLOYMENT_URL=$(vercel deploy --prod --yes --token=$VERCEL_TOKEN)
           echo "✅ Deployed to: $DEPLOYMENT_URL"
           echo "DEPLOYMENT_URL=$DEPLOYMENT_URL" >> $GITHUB_ENV
 
