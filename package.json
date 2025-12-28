@@ -4,8 +4,9 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": "20.x"
+    "node": ">=20.19.6 <21"
   },
+  "packageManager": "pnpm@10",
   "overrides": {
     "camera-controls": "3.1.1"
   },
