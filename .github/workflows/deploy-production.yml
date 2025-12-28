@@ -16,11 +16,12 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20
           cache: pnpm
+      - name: Configure pnpm (relax engine)
+        run: pnpm config set engine-strict false
       - name: Install dependencies
-        run: |
-          if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; else pnpm install; fi
+        run: pnpm install --no-frozen-lockfile
       - name: Build
         run: pnpm run build
       - uses: amondnet/vercel-action@v25

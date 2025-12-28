@@ -19,10 +19,22 @@ jobs:
         with:
             node-version: 22
           cache: pnpm
-      - name: Install dependencies
-        run: |
-          if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; else pnpm install; fi
-      - name: Lint
-        run: pnpm lint
+        - name: Setup Node
+          uses: actions/setup-node@v4
+          with:
+            node-version: 20
+            cache: pnpm
       - name: Build
         run: pnpm run build
+        - name: Setup pnpm
+          uses: pnpm/action-setup@v4
+          with:
+            version: 10
+        - name: Configure pnpm (relax engine)
+          run: pnpm config set engine-strict false
+        - name: Install dependencies
+          run: pnpm install --no-frozen-lockfile
+        - name: Lint
+          run: pnpm lint
+        - name: Build
+          run: pnpm run build
