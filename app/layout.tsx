@@ -2,17 +2,18 @@
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
-import type { CSSProperties, ReactNode } from "react";
-import "./globals.css";
-import { Background } from "@/components/ui/Background";
-import { GlobalEffects } from "@/components/ui/GlobalEffects";
-import { AmbientAudio } from "@/components/ui/AmbientAudio";
-import { FramerMotionProvider } from "@/components/ui/MotionProvider";
 import EventBus from "@/components/os/EventBus";
 import PrimeLoop from "@/components/os/PrimeLoop";
 import SelfCheckLoop from "@/components/os/SelfCheckLoop";
+import { AmbientAudio } from "@/components/ui/AmbientAudio";
+import { Background } from "@/components/ui/Background";
+import { GlobalEffects } from "@/components/ui/GlobalEffects";
+import { FramerMotionProvider } from "@/components/ui/MotionProvider";
 import FusionEventHandler from "@/components/world/FusionEventHandler";
 import MoodMap from "@/components/world/MoodMap";
+import type { CSSProperties, ReactNode } from "react";
+import NavBar from "../components/NavBar";
+import "./globals.css";
 
 const fontFallbacks = {
   "--font-italiana": "Italiana, serif",
@@ -34,6 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en" style={fontFallbacks}>
       <body className="antialiased selection:bg-hologram selection:text-white overflow-x-hidden bg-void text-mercury">
+        <NavBar />
         {/* Shadow PRIME OS - Core Systems */}
         <EventBus />
         <PrimeLoop />

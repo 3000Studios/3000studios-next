@@ -15,6 +15,7 @@ export default function NavBar() {
 
   const links = [
     { href: "/", label: "Home" },
+    { href: "/studio", label: "Studio" },
     { href: "/experience", label: "Experience" },
     { href: "/projects", label: "Projects" },
     { href: "/blog", label: "Blog" },
@@ -23,6 +24,7 @@ export default function NavBar() {
     { href: "/shadow/avatar", label: "Avatar" },
     { href: "/dashboard", label: "Dashboard" },
     { href: "/collaborators", label: "Team" },
+    { href: "/contact", label: "Contact" },
     { href: "/login", label: "Login" },
     { href: "/command-center", label: "Command Center" },
     { href: "/shadow", label: "Shadow" },
