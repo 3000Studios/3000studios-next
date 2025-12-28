@@ -9,12 +9,12 @@ import { AmbientAudio } from "@/components/ui/AmbientAudio";
 import { Background } from "@/components/ui/Background";
 import { GlobalEffects } from "@/components/ui/GlobalEffects";
 import { FramerMotionProvider } from "@/components/ui/MotionProvider";
-import SoundToggle from "../components/ui/SoundToggle";
-import ScrollEffects from "../components/ui/ScrollEffects";
 import FusionEventHandler from "@/components/world/FusionEventHandler";
 import MoodMap from "@/components/world/MoodMap";
 import type { CSSProperties, ReactNode } from "react";
 import NavBar from "../components/NavBar";
+import ScrollEffects from "../components/ui/ScrollEffects";
+import SoundToggle from "../components/ui/SoundToggle";
 import "./globals.css";
 
 const fontFallbacks = {
