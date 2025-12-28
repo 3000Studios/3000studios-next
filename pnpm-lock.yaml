@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  camera-controls: 2.9.0
+  camera-controls: 3.1.1
 
 importers:
 
@@ -2121,8 +2121,9 @@ packages:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
 
-  camera-controls@2.9.0:
-    resolution: {integrity: sha512-TpCujnP0vqPppTXXJRYpvIy0xq9Tro6jQf2iYUxlDpPCNxkvE/XGaTuwIxnhINOkVP/ob2CRYXtY3iVYXeMEzA==}
+  camera-controls@3.1.1:
+    resolution: {integrity: sha512-zC3DcoQPJ0CbTZ8WHthzi8nMvVF71cppOTBcH4cMLreMkU3y3fzBPViGvz1BefWPo9+kv9BP41tvIsabsXTz+Q==}
+    engines: {node: '>=24.4.0', npm: '>=11.4.2'}
     peerDependencies:
       three: '>=0.126.1'
 
@@ -5445,7 +5446,7 @@ snapshots:
       '@monogrid/gainmap-js': 3.4.0(three@0.182.0)
       '@react-three/fiber': 9.4.2(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(three@0.182.0)
       '@use-gesture/react': 10.3.1(react@19.2.3)
-      camera-controls: 2.9.0(three@0.182.0)
+      camera-controls: 3.1.1(three@0.182.0)
       cross-env: 7.0.3
       detect-gpu: 5.0.70
       glsl-noise: 0.0.0
@@ -6533,7 +6534,7 @@ snapshots:
 
   callsites@3.1.0: {}
 
-  camera-controls@2.9.0(three@0.182.0):
+  camera-controls@3.1.1(three@0.182.0):
     dependencies:
       three: 0.182.0
 
