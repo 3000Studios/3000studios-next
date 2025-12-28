@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": "20.x"
+    "node": ">=22"
   },
   "overrides": {
     "camera-controls": "2.9.0"
