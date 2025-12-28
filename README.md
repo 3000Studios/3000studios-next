@@ -1,6 +1,6 @@
-# 3000 Studios - Professional Creative Studio Platform
+# 3000 Studios — Professional Creative Studio Platform
 
-A cutting-edge Next.js 16 website featuring a luxury design theme, comprehensive page structure, and preparation for advanced features like AI avatars, voice-to-code editing, and live streaming.
+A modern Next.js 16 application with a luxury design theme, robust page structure, and a roadmap for advanced features like Shadow AI avatars, voice-to-code editing, live streaming, and automated deployments.
 
 ## 🚀 Features
 
@@ -33,64 +33,137 @@ A cutting-edge Next.js 16 website featuring a luxury design theme, comprehensive
 
 - **Framework**: Next.js 16 (App Router)
 - **Language**: TypeScript
-- **Styling**: TailwindCSS 4
-- **Icons**: Lucide React
-- **Deployment**: Vercel
+- **Styling**: TailwindCSS v4, Tailwind Animate
+- **UI/Icons**: Lucide React, Framer Motion, GSAP
+- **Database**: PostgreSQL + Prisma (pgvector enabled)
+- **Auth**: NextAuth
+- **AI**: OpenAI, Anthropic, Google GenAI SDKs
+- **Streaming**: Mux player + server SDK
+- **Payments**: Stripe + PayPal SDKs
+- **Testing**: Vitest (+ UI)
+- **Deployment**: Vercel (CLI + project config)
 
-## 📦 Installation
+## 📦 Prerequisites
+
+- Node.js 20.x (see `engines` in package.json)
+- A Postgres database (local or hosted)
+- Vercel account (for production deployment)
+
+## 🧰 Installation & Setup
+
+Install dependencies:
 
 ```bash
-# Install dependencies
 npm install
+```
 
-# Create environment variables file
+Create environment variables file:
+
+```bash
 cp .env.example .env.local
+```
 
-# Run development server
+Run development server:
+
+```bash
 npm run dev
+```
 
-# Build for production
+Build for production:
+
+```bash
 npm run build
+```
 
-# Start production server
+Start production server:
+
+```bash
 npm start
 ```
 
+### Common Scripts
+
+- `npm run dev`: Start local dev server
+- `npm run build`: Build the app
+- `npm start`: Serve a production build
+- `npm run lint`: Lint `src/**/*.{ts,tsx}`
+- `npm run type-check`: TypeScript type checking
+- `npm run test`: Run tests (Vitest)
+- `npm run test:ui`: Run tests with UI
+- `npm run deploy`: Deploy via Vercel CLI
+- `npm run db:seed`: Seed database (requires `DATABASE_URL`)
+
 ## 🔐 Environment Variables
 
-Create a `.env.local` file in the root directory (see `.env.example` for template):
+Create a `.env.local` file at the repo root. See `.env.example` if present. Common variables:
 
 ```env
-ADMIN_EMAIL=your-admin-email@example.com
-ADMIN_PASSWORD=your-secure-password
+# Database
+DATABASE_URL="postgresql://USER:PASS@HOST:5432/DBNAME?schema=public"
+
+# Auth
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="replace-with-strong-secret"
+
+# Payments (optional)
+STRIPE_SECRET_KEY="sk_live_or_test"
+PAYPAL_CLIENT_ID="..."
+PAYPAL_CLIENT_SECRET="..."
+
+# Streaming (optional)
+MUX_TOKEN_ID="..."
+MUX_TOKEN_SECRET="..."
+
+# Admin bootstrap (optional)
+ADMIN_EMAIL="your-admin-email@example.com"
+ADMIN_PASSWORD="your-secure-password"
 ```
 
-**⚠️ NEVER commit real credentials to version control!**
+Notes:
 
-## 📁 Project Structure
+- The `postinstall` script runs `prisma generate` and respects `DATABASE_URL`.
+- Add production environment variables in Vercel Project Settings.
+- ⚠️ Never commit real credentials.
 
+## 📁 Project Structure (key folders)
+
+```txt
+app/                    # Next.js App Router pages
+  ├─ page.tsx           # Home
+  ├─ store/             # Storefront
+  ├─ projects/          # Projects showcase
+  ├─ blog/              # Blog
+  ├─ live/              # Livestream viewer
+  ├─ login/             # Auth gateway
+  ├─ dashboard/         # Admin / production dashboard
+  ├─ studio/            # Studio tooling
+  ├─ experience/        # Experience pages
+  ├─ shadow-login/      # Shadow auth entry
+  └─ api/               # Route handlers
+
+components/             # Reusable UI components
+brain/                  # LLM fusion, voice, neural core modules
+shadow-engine/          # Shadow system engine
+shadow/                 # Shadow system UI and utilities
+prisma/                 # Prisma schema & seeds
+public/                 # Static assets
+scripts/                # CLI / automation scripts
+src/                    # Additional source modules
+types/                  # Shared TypeScript types
 ```
-src/app/
-├── components/          # Reusable UI components
-│   ├── Navigation.tsx   # Main navigation bar
-│   └── Footer.tsx       # Site footer
-├── lib/                 # Utility functions and helpers
-├── page.tsx            # Home page
-├── login/              # Authentication
-├── matrix/             # Admin dashboard
-├── store/              # E-commerce store
-├── live/               # Live streaming
-├── blog/               # Content blog
-├── projects/           # Project showcase
-├── portfolio/          # Portfolio display
-└── contact/            # Contact form
-```
+
+See also:
+
+- [QUICK_START_DEPLOYMENT.md](QUICK_START_DEPLOYMENT.md)
+- [DEPLOYMENT_INSTRUCTIONS.md](DEPLOYMENT_INSTRUCTIONS.md)
+- [TASK_COMPLETION_SUMMARY.md](TASK_COMPLETION_SUMMARY.md)
+
 
 ## 🎨 Customization Guide
 
 ### Colors and Theme
 
-Edit `src/app/globals.css` to customize the color scheme:
+Edit `app/globals.css` to customize the color scheme:
 
 ```css
 :root {
@@ -102,7 +175,7 @@ Edit `src/app/globals.css` to customize the color scheme:
 
 ### Navigation Links
 
-Update `src/app/components/Navigation.tsx`:
+Update navigation links within the relevant header/nav components under `components/`.
 
 ```typescript
 const navLinks = [
@@ -111,9 +184,10 @@ const navLinks = [
 ];
 ```
 
+
 ### Admin Dashboard Stats
 
-Customize stats in `src/app/matrix/page.tsx`:
+Customize stats in `app/dashboard/` views.
 
 ```typescript
 // Update values in the StatCard components
@@ -122,6 +196,7 @@ Customize stats in `src/app/matrix/page.tsx`:
 ## 🚧 Development Roadmap
 
 ### Phase 1: Foundation ✅ (Completed)
+
 - [x] Project setup and configuration
 - [x] All core pages implemented
 - [x] Navigation and routing
@@ -129,13 +204,15 @@ Customize stats in `src/app/matrix/page.tsx`:
 - [x] Responsive layouts
 
 ### Phase 2: Integration (Next)
+
 - [ ] Backend API routes
-- [ ] Database integration
-- [ ] Authentication system
+- [ ] Database integration (Prisma + Postgres)
+- [ ] Authentication system (NextAuth)
 - [ ] Payment processing (Stripe/PayPal)
 - [ ] Email service integration
 
 ### Phase 3: Advanced Features
+
 - [ ] Shadow AI Avatar (3D model integration)
 - [ ] Voice-to-code editor
 - [ ] Live streaming infrastructure
@@ -143,6 +220,7 @@ Customize stats in `src/app/matrix/page.tsx`:
 - [ ] AI product generation
 
 ### Phase 4: Polish & Scale
+
 - [ ] Performance optimization
 - [ ] SEO improvements
 - [ ] Accessibility enhancements
@@ -152,12 +230,14 @@ Customize stats in `src/app/matrix/page.tsx`:
 ## 📝 File Naming Convention
 
 All files include descriptive header comments explaining:
+
 - Purpose of the file
 - Key features included
 - Customization sections (where applicable)
 - Future enhancement notes
 
 Example:
+
 ```typescript
 /**
  * Navigation Component
@@ -195,6 +275,21 @@ npm run build
 npm start
 ```
 
+### VS Code Tasks
+
+This workspace defines convenient tasks under VS Code:
+
+- "dev" — starts the Next.js development server (background)
+- "lint" — runs ESLint
+- "typecheck" — runs TypeScript checks
+- "test" — runs Vitest
+- "build" — builds the app
+- "deploy" — deploys via Vercel CLI (depends on build)
+- "FULL AUTOPILOT: lint → typecheck → test → build → deploy" — runs all in sequence
+- "🚀 AUTOPILOT: Merge & Deploy" — automated merge + deploy scripts
+
+Run them via Terminal → Run Task.
+
 ## 📊 Performance
 
 - **Build**: Optimized with Next.js Turbopack
@@ -212,8 +307,9 @@ npm start
 ## 💡 Contributing
 
 This is a proprietary project for 3000 Studios. For questions or collaboration:
-- Email: contact@3000studios.com
-- Admin: mr.jwswain@gmail.com
+
+- Email: [contact@3000studios.com](mailto:contact@3000studios.com)
+- Admin: [mr.jwswain@gmail.com](mailto:mr.jwswain@gmail.com)
 
 ## 📄 License
 
@@ -223,12 +319,12 @@ This is a proprietary project for 3000 Studios. For questions or collaboration:
 
 1. Set up environment variables
 2. Configure payment gateways
-3. Integrate database
-4. Implement authentication API
+3. Integrate database (Prisma + Postgres)
+4. Implement authentication API (NextAuth)
 5. Deploy to production
 
 ---
 
-**Built with ❤️ by 3000 Studios**
+### Built with ❤️ by 3000 Studios
 
 <!-- sanity check commit -->
