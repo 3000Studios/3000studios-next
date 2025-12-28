@@ -6,7 +6,6 @@
   "engines": {
     "node": ">=22"
   },
-  "overrides": {},
   "scripts": {
     "dev": "next dev",
     "build": "next build",
