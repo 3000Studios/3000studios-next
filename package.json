@@ -6,7 +6,7 @@
   "engines": {
     "node": ">=20.19.6 <21"
   },
-  "packageManager": "pnpm@10",
+  "packageManager": "pnpm@10.26.0",
   "overrides": {
     "camera-controls": "3.1.1"
   },

@@ -1,7 +1,7 @@
 {
   "framework": "nextjs",
-  "buildCommand": "npm run build",
-  "installCommand": "npm install",
+  "buildCommand": "pnpm run build",
+  "installCommand": "pnpm install",
   "devCommand": "npm run dev",
   "outputDirectory": ".next",
   "crons": [

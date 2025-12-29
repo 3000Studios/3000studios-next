@@ -81,7 +81,7 @@
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.preferences.includePackageJsonAutoImports": "on",
   "files.autoSave": "onWindowChange",
-  
+
   // Lock VS Code to pnpm
   "npm.packageManager": "pnpm",
   "npm.autoDetect": "off"
