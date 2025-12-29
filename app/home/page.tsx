@@ -62,7 +62,7 @@ export default function HomePage() {
           className="fixed inset-0 w-full h-full object-cover -z-10"
         >
           <source
-            src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986144/3D_tunnel_to_purple_d7cofd.mp4"
+            src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986138/3000_studios_back_dop_z4amap.mp4"
             type="video/mp4"
           />
         </video>
@@ -72,7 +72,7 @@ export default function HomePage() {
           title="3000 Studios"
           subtitle="Where Innovation Meets Luxury"
           cta="Home"
-          backgroundVideo="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986144/3D_tunnel_to_purple_d7cofd.mp4"
+          backgroundVideo="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986138/3000_studios_back_dop_z4amap.mp4"
         />
       </div>
 
