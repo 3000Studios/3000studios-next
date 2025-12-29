@@ -198,7 +198,7 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
+  let navLinks = [
     { href: "/", label: "HOME" },
     { href: "/store", label: "STORE" },
     { href: "/vendors-platform", label: "VENDORS" },
@@ -208,6 +208,12 @@ export default function Navigation() {
     { href: "/blog", label: "BLOG" },
     { href: "/contact", label: "CONTACT" },
   ];
+
+  // Remove certain links on Home page per directive
+  if (pathname === "/home") {
+    const forbidden = new Set(["STUDIO", "EXPERIENCE", "AVATAR", "DASHBOARD", "TEAM", "CONTACT"]);
+    navLinks = navLinks.filter((l) => !forbidden.has(l.label));
+  }
 
   const isActiveLink = (href: string) => pathname === href;
 
@@ -222,7 +228,18 @@ export default function Navigation() {
           : "glass border-b border-gray-800/50"
       }`}
     >
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(0,243,255,0.12),_transparent_45%)]" />
+      {/* Header nav background video */}
+      <div className="absolute inset-0 -z-10">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          <source src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986156/digitalliquid_q8jesa.mp4" type="video/mp4" />
+        </video>
+      </div
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -239,12 +256,7 @@ export default function Navigation() {
                 className="drop-shadow-[0_0_18px_rgba(0,243,255,0.45)]"
               />
             </div>
-            <div
-              className="text-2xl font-black tracking-tighter text-white group-hover:text-[var(--electric-blue)] transition-colors duration-300"
-              style={{ textShadow: "0 0 12px rgba(0,243,255,0.25)" }}
-            >
-              3000 STUDIOS
-            </div>
+            {/* Removed text label per directive: logo-only */}
           </Link>
 
           <div className="hidden md:flex items-center justify-center flex-1 ml-10">
