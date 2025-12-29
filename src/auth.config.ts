@@ -1,9 +1,9 @@
 // @ts-nocheck
-import type { NextAuthConfig } from "next-auth";
+import type { NextAuthConfig } from 'next-auth';
 
 export const authConfig = {
   pages: {
-    signIn: "/login",
+    signIn: '/login',
   },
   providers: [
     // Added later in auth.ts
@@ -11,7 +11,7 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
-      const isOnMatrix = nextUrl.pathname.startsWith("/matrix");
+      const isOnMatrix = nextUrl.pathname.startsWith('/matrix');
       if (isOnMatrix) {
         if (isLoggedIn) return true;
         return false; // Redirect unauthenticated users to login page

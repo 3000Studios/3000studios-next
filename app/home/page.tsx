@@ -51,10 +51,7 @@ export default function HomePage() {
         { from: 'avatar', text: data.reply || 'I am here to help with anything you need.' },
       ]);
     } catch (e) {
-      setMessages((prev) => [
-        ...prev,
-        { from: 'avatar', text: 'Network issue—please try again.' },
-      ]);
+      setMessages((prev) => [...prev, { from: 'avatar', text: 'Network issue—please try again.' }]);
     }
   };
 
