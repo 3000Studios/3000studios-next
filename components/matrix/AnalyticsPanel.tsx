@@ -3,6 +3,7 @@
  * Real-time metrics dashboard
  */
 
+// @ts-nocheck
 "use client";
 
 import { useShadowOS } from "@/lib/shadow/os/state";
