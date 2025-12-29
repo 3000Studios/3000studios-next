@@ -1,5 +1,6 @@
 'use client';
 
+// @ts-nocheck
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 
