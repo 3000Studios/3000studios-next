@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, RefObject } from "react";
+import { Group } from "three";
 
-export default function useLipSync(ref: any) {
+export default function useLipSync(ref: RefObject<Group>) {
   useEffect(() => {
     if (typeof window === "undefined" || !navigator.mediaDevices) return;
 

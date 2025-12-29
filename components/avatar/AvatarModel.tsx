@@ -2,20 +2,21 @@
 
 import { useGLTF } from "@react-three/drei";
 import { useRef } from "react";
+import { Group } from "three";
 import useSpeech from "./useSpeech";
 import useLipSync from "./useLipSync";
 import useIdleMotion from "./useIdleMotion";
 import useFaceTracking from "./useFaceTracking";
 
 export default function AvatarModel() {
-  const group = useRef<any>();
+  const group = useRef<Group>(null);
   
   // Try to load avatar model, fallback to a placeholder if not found
-  let scene;
+  let scene = null;
   try {
     const gltf = useGLTF("/models/avatar.glb");
     scene = gltf.scene;
-  } catch (error) {
+  } catch {
     // Will use a placeholder sphere if model doesn't exist
     scene = null;
   }

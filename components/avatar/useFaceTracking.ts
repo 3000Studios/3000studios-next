@@ -1,9 +1,10 @@
 "use client";
 
 import { FaceMesh } from "@mediapipe/face_mesh";
-import { useEffect } from "react";
+import { useEffect, RefObject } from "react";
+import { Group } from "three";
 
-export default function useFaceTracking(ref: any) {
+export default function useFaceTracking(ref: RefObject<Group>) {
   useEffect(() => {
     if (!navigator.mediaDevices?.getUserMedia) return;
 
