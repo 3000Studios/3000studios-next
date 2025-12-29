@@ -39,6 +39,7 @@
     "@anthropic-ai/sdk": "^0.71.2",
     "@auth/prisma-adapter": "^2.11.1",
     "@google/generative-ai": "^0.24.1",
+    "@mediapipe/face_mesh": "^0.4.1633559619",
     "@monaco-editor/react": "^4.7.0",
     "@mux/mux-node": "^12.8.1",
     "@mux/mux-player-react": "^3.10.1",
