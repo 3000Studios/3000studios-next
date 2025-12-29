@@ -1,22 +1,24 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
 const PALETTE = [
-  { name: "gold", color: "#D4AF37" },
-  { name: "blue", color: "#3B82F6" },
-  { name: "green", color: "#22C55E" },
-  { name: "white", color: "#FFFFFF" },
-  { name: "silver", color: "#C0C0C0" },
-  { name: "yellow", color: "#FACC15" },
-  { name: "orange", color: "#FB923C" },
+  { name: 'gold', color: '#D4AF37' },
+  { name: 'blue', color: '#3B82F6' },
+  { name: 'green', color: '#22C55E' },
+  { name: 'white', color: '#FFFFFF' },
+  { name: 'silver', color: '#C0C0C0' },
+  { name: 'yellow', color: '#FACC15' },
+  { name: 'orange', color: '#FB923C' },
 ];
 
 export default function MouseTrails() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [paletteIndex, setPaletteIndex] = useState<number>(() => Math.floor(Math.random() * PALETTE.length));
+  const [paletteIndex, setPaletteIndex] = useState<number>(() =>
+    Math.floor(Math.random() * PALETTE.length)
+  );
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
     let animationId: number;
     let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
@@ -26,7 +28,7 @@ export default function MouseTrails() {
       trails.push({ x: mouse.x, y: mouse.y, alpha: 1 });
       if (trails.length > 60) trails.shift();
     }
-    window.addEventListener("mousemove", onMove);
+    window.addEventListener('mousemove', onMove);
     function draw() {
       if (!canvas || !ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -51,7 +53,7 @@ export default function MouseTrails() {
       setPaletteIndex((idx) => (idx + 1) % PALETTE.length);
     }, 15000);
     return () => {
-      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener('mousemove', onMove);
       cancelAnimationFrame(animationId);
       clearInterval(colorInterval);
     };
