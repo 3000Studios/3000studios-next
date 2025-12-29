@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { cloudinaryImage } from '@/lib/cloudinary';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 interface GalleryImage {
   id: string;
@@ -17,11 +17,22 @@ interface LuxuryGalleryProps {
   title?: string;
 }
 
-export function LuxuryGallery({
-  images,
-  title = 'Our Collection',
-}: LuxuryGalleryProps) {
+export function LuxuryGallery({ images, title = 'Our Collection' }: LuxuryGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const hoverSoundRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    hoverSoundRef.current = new Audio(
+      'data:audio/wav;base64,UklGRhIAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0Ya4AAAA='
+    );
+  }, []);
+
+  const playHoverSound = () => {
+    if (hoverSoundRef.current) {
+      hoverSoundRef.current.currentTime = 0;
+      hoverSoundRef.current.play().catch(() => {});
+    }
+  };
 
   const handlePrev = () => {
     if (selectedIndex !== null && selectedIndex > 0) {
@@ -40,7 +51,7 @@ export function LuxuryGallery({
   };
 
   return (
-    <section className="w-full bg-black py-24 px-4">
+    <section className="w-full py-24 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Section Title */}
         <motion.div
@@ -49,10 +60,8 @@ export function LuxuryGallery({
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-4">
-            {title}
-          </h2>
-          <p className="text-gray-400 text-lg">Discover our curated selection</p>
+          <h2 className="text-6xl md:text-7xl font-bold text-3d mb-6 animate-glow">{title}</h2>
+          <p className="text-xl text-gold-gradient">Discover our curated selection</p>
         </motion.div>
 
         {/* Grid Gallery */}
@@ -64,7 +73,8 @@ export function LuxuryGallery({
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               onClick={() => setSelectedIndex(index)}
-              className="group relative overflow-hidden bg-gray-900 cursor-pointer h-80"
+              onMouseEnter={playHoverSound}
+              className="group relative overflow-hidden glossy-border cursor-pointer h-80 hover-pop"
             >
               <img
                 src={cloudinaryImage(image.publicId, {
@@ -78,13 +88,11 @@ export function LuxuryGallery({
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-all duration-300 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
-                <h3 className="text-white text-2xl font-bold text-center">
-                  {image.title}
-                </h3>
+              {/* Overlay with Glass Morphism */}
+              <div className="absolute inset-0 bg-black/60 backdrop-blur-sm group-hover:backdrop-blur-md transition-all duration-300 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
+                <h3 className="text-3xl font-bold text-3d mb-3">{image.title}</h3>
                 {image.description && (
-                  <p className="text-gray-300 text-center mt-2 px-4">
+                  <p className="text-gold-gradient text-center mt-2 px-4 text-lg">
                     {image.description}
                   </p>
                 )}
@@ -138,13 +146,9 @@ export function LuxuryGallery({
               animate={{ opacity: 1, y: 0 }}
               className="text-center mt-6"
             >
-              <h3 className="text-white text-2xl font-bold mb-2">
-                {images[selectedIndex].title}
-              </h3>
+              <h3 className="text-white text-2xl font-bold mb-2">{images[selectedIndex].title}</h3>
               {images[selectedIndex].description && (
-                <p className="text-gray-300">
-                  {images[selectedIndex].description}
-                </p>
+                <p className="text-gray-300">{images[selectedIndex].description}</p>
               )}
             </motion.div>
 

@@ -1,13 +1,33 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   /* Real-Time Sync Configuration for Boss Man J */
-  
+
+  // Aggressive performance optimizations
+  reactStrictMode: true,
+  poweredByHeader: false,
+
   // Enable experimental features for faster updates
   experimental: {
     // Enable Server Actions for real-time updates
     serverActions: {
       bodySizeLimit: '2mb',
+    },
+    // Optimize package imports
+    optimizePackageImports: [
+      'lucide-react',
+      'framer-motion',
+      '@react-three/fiber',
+      '@react-three/drei',
+    ],
+    // Enable turbo for faster dev
+    turbo: {
+      rules: {
+        '*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js',
+        },
+      },
     },
   },
 
@@ -54,7 +74,7 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // Image optimization
+  // Image optimization - aggressive settings
   images: {
     remotePatterns: [
       {
@@ -62,22 +82,46 @@ const nextConfig: NextConfig = {
         hostname: '3000studios.com',
       },
       {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+      {
         protocol: 'http',
         hostname: 'localhost',
       },
     ],
     formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
   // Enable compression
   compress: true,
 
-  // Production source maps for debugging (can be disabled for faster builds)
+  // Optimize bundle
+  swcMinify: true,
+
+  // Production source maps for debugging (disabled for performance)
   productionBrowserSourceMaps: false,
 
-  // Allow builds to proceed despite TypeScript errors to keep CI green
+  // Strict TypeScript (never ignore errors in autopilot mode)
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
+  },
+
+  // ESLint during builds
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
+
+  // Performance optimizations
+  onDemandEntries: {
+    maxInactiveAge: 60 * 1000,
+    pagesBufferLength: 5,
   },
 };
 
