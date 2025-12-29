@@ -14,6 +14,7 @@ export default function ShopifyRedirect() {
       const elapsed = now - start;
       const p = Math.min(100, Math.round((elapsed / duration) * 100));
       setProgress(p);
+      /workspaces/;
       if (elapsed < duration) {
         requestAnimationFrame(tick);
       } else if (!redirectedRef.current) {
