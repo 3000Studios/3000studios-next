@@ -24,8 +24,16 @@ export const Navigation = () => {
 
   const pathname = usePathname();
 
-  // Restrict to only the requested page(s). Default to Home only per directive.
-  const navLinks = [{ href: '/', label: 'Home' }];
+  const navLinks = [
+    { href: '/home', label: 'Home' },
+    { href: '/studio', label: 'Studio' },
+    { href: '/experience', label: 'Experience' },
+    { href: '/projects', label: 'Projects' },
+    { href: '/store', label: 'Store' },
+    { href: '/live', label: 'Live' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/contact', label: 'Contact' },
+  ];
 
   // Hide navigation entirely on the landing page (/)
   if (pathname === '/') {
