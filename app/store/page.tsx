@@ -1,9 +1,8 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Navigation } from "@/components/ui/Navigation";
-import { Footer } from "@/components/ui/Footer";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { Footer } from '@/components/ui/Footer';
+import { Navigation } from '@/components/ui/Navigation';
+import { PageHeader } from '@/components/ui/PageHeader';
 
 interface Product {
   id: string;
@@ -17,64 +16,63 @@ interface Product {
 export default function StorePage() {
   const products: Product[] = [
     {
-      id: "site-printer-pro",
-      name: "Site Printer Pro",
+      id: 'site-printer-pro',
+      name: 'Site Printer Pro',
       description:
-        "Professional website printing and PDF generation tool. Perfect for archiving, documentation, and offline access.",
+        'Professional website printing and PDF generation tool. Perfect for archiving, documentation, and offline access.',
       price: 49.99,
       features: [
-        "Print any website to high-quality PDF",
-        "Batch processing support",
-        "Custom branding options",
-        "Automatic link preservation",
+        'Print any website to high-quality PDF',
+        'Batch processing support',
+        'Custom branding options',
+        'Automatic link preservation',
       ],
-      image: "🖨️",
+      image: '🖨️',
     },
     {
-      id: "shadow-ai-suite",
-      name: "Shadow AI Suite",
-      description: "Complete AI-powered development and automation toolkit.",
+      id: 'shadow-ai-suite',
+      name: 'Shadow AI Suite',
+      description: 'Complete AI-powered development and automation toolkit.',
       price: 99.99,
       features: [
-        "Voice command interface",
-        "Automated deployments",
-        "AI code generation",
-        "Real-time analytics",
+        'Voice command interface',
+        'Automated deployments',
+        'AI code generation',
+        'Real-time analytics',
       ],
-      image: "🤖",
+      image: '🤖',
     },
     {
-      id: "3d-avatar-pack",
-      name: "3D Avatar Pack",
-      description: "Premium 3D avatars with voice-reactive animations.",
+      id: '3d-avatar-pack',
+      name: '3D Avatar Pack',
+      description: 'Premium 3D avatars with voice-reactive animations.',
       price: 29.99,
       features: [
-        "10+ premium avatars",
-        "Voice-reactive animations",
-        "Customizable expressions",
-        "Multiple mood states",
+        '10+ premium avatars',
+        'Voice-reactive animations',
+        'Customizable expressions',
+        'Multiple mood states',
       ],
-      image: "👤",
+      image: '👤',
     },
     {
-      id: "streaming-pro",
-      name: "Streaming Pro",
-      description:
-        "Professional live streaming platform with advanced features.",
+      id: 'streaming-pro',
+      name: 'Streaming Pro',
+      description: 'Professional live streaming platform with advanced features.',
       price: 79.99,
       features: [
-        "HD streaming support",
-        "Multi-platform broadcast",
-        "Custom branding",
-        "Chat integration",
+        'HD streaming support',
+        'Multi-platform broadcast',
+        'Custom branding',
+        'Chat integration',
       ],
-      image: "📡",
+      image: '📡',
     },
   ];
 
   const handlePurchase = (product: Product) => {
     const paypalUrl = `https://www.paypal.com/paypalme/mrjwswain/${product.price}`;
-    window.open(paypalUrl, "_blank");
+    window.open(paypalUrl, '_blank');
     alert(
       `Opening PayPal for ${product.name} ($${product.price}). After payment, contact mr.jwswain@gmail.com for delivery.`
     );
@@ -114,9 +112,7 @@ export default function StorePage() {
                   {product.image}
                 </div>
                 <div className="text-right">
-                  <span className="font-display text-3xl text-white">
-                    ${product.price}
-                  </span>
+                  <span className="font-display text-3xl text-white">${product.price}</span>
                   <span className="block font-sans text-[10px] text-platinum/50 tracking-widest">
                     USD
                   </span>

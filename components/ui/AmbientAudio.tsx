@@ -42,11 +42,5 @@ export const AmbientAudio = () => {
     };
   }, []);
 
-  return (
-    <audio
-      ref={audioRef}
-      preload="auto"
-      style={{ display: 'none' }}
-    />
-  );
+  return <audio ref={audioRef} preload="auto" style={{ display: 'none' }} />;
 };

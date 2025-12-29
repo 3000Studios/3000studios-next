@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { Navigation } from "@/components/ui/Navigation";
-import { Footer } from "@/components/ui/Footer";
-import { PageHeader } from "@/components/ui/PageHeader";
+import { Footer } from '@/components/ui/Footer';
+import { Navigation } from '@/components/ui/Navigation';
+import { PageHeader } from '@/components/ui/PageHeader';
+import { useEffect, useState } from 'react';
 
 interface BlogPost {
   id: number;
@@ -18,7 +18,7 @@ export default function BlogPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://3000studios.com/wp-json/wp/v2/posts?per_page=6&_embed")
+    fetch('https://3000studios.com/wp-json/wp/v2/posts?per_page=6&_embed')
       .then((res) => res.json())
       .then((data) => {
         setPosts(data);
@@ -52,9 +52,7 @@ export default function BlogPage() {
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 space-y-4">
             <div className="w-12 h-12 border-2 border-hologram border-t-transparent rounded-full animate-spin"></div>
-            <p className="font-sans text-xs tracking-widest text-platinum/50">
-              RECEIVING DATA...
-            </p>
+            <p className="font-sans text-xs tracking-widest text-platinum/50">RECEIVING DATA...</p>
           </div>
         ) : posts.length > 0 ? (
           <div className="space-y-8">
@@ -90,9 +88,7 @@ export default function BlogPage() {
           </div>
         ) : (
           <div className="text-center py-20 hyper-glass rounded-sm">
-            <p className="font-sans text-platinum/50 tracking-widest">
-              NO TRANSMISSIONS FOUND
-            </p>
+            <p className="font-sans text-platinum/50 tracking-widest">NO TRANSMISSIONS FOUND</p>
           </div>
         )}
       </div>
