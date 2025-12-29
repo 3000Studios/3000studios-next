@@ -36,20 +36,23 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" style={fontFallbacks}>
       <body className="antialiased selection:bg-hologram selection:text-white overflow-x-hidden bg-void text-mercury">
-        <Navigation />
-        {/* Shadow PRIME OS - Core Systems */}
-        <EventBus />
-        <PrimeLoop />
-        <SelfCheckLoop />
-        <FusionEventHandler />
-        <MoodMap />
+        <ClientLayoutWrapper>
+          <Navigation />
+          {/* Shadow PRIME OS - Core Systems */}
+          <EventBus />
+          <PrimeLoop />
+          <SelfCheckLoop />
+          <FusionEventHandler />
+          <MoodMap />
 
-        {/* Visual Layer */}
-        <Background />
-        <GlobalEffects />
-        <ScrollEffects />
-        <SoundToggle />
-        <AmbientAudio />
+          {/* Visual Layer */}
+          <Background />
+          <GlobalEffects />
+          <ScrollEffects />
+          <SoundToggle />
+          <AmbientAudio />
+        </ClientLayoutWrapper>
+        
         <FramerMotionProvider>
           <div className="relative z-10">{children}</div>
         </FramerMotionProvider>
