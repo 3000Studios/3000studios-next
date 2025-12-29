@@ -1,9 +1,9 @@
 'use client';
 
+import MediaGrid from '@/components/MediaGrid';
 import { Footer } from '@/components/ui/Footer';
 import { Navigation } from '@/components/ui/Navigation';
 import { PageHeader } from '@/components/ui/PageHeader';
-import MediaGrid from '@/components/MediaGrid';
 import axios from 'axios';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';

@@ -2,13 +2,7 @@ export default function ContactPage() {
   return (
     <main className="relative min-h-screen bg-black text-white overflow-hidden">
       {/* Background video */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="fixed inset-0 w-full h-full object-cover"
-      >
+      <video autoPlay muted loop playsInline className="fixed inset-0 w-full h-full object-cover">
         <source
           src="https://videos.pexels.com/video-files/3535889/3535889-hd_1920_1080_30fps.mp4"
           type="video/mp4"
@@ -25,16 +19,19 @@ export default function ContactPage() {
                 Get In Touch
               </h1>
               <p className="text-xl text-platinum/80 leading-relaxed mb-8">
-                Have an exciting project in mind? Want to collaborate with 3000 Studios? 
-                We'd love to hear from you. Reach out and let's create something extraordinary together.
+                Have an exciting project in mind? Want to collaborate with 3000 Studios? We'd love
+                to hear from you. Reach out and let's create something extraordinary together.
               </p>
-              
+
               <div className="space-y-4 mb-8">
                 <div className="flex items-center gap-4 p-4 bg-white/5 backdrop-blur-lg rounded-lg border border-white/10 hover:border-amber-400/50 transition-colors">
                   <span className="text-3xl">📧</span>
                   <div>
                     <p className="text-sm text-platinum/60">Email</p>
-                    <a href="mailto:contact@3000studios.com" className="font-semibold text-amber-300 hover:text-amber-200">
+                    <a
+                      href="mailto:contact@3000studios.com"
+                      className="font-semibold text-amber-300 hover:text-amber-200"
+                    >
                       contact@3000studios.com
                     </a>
                   </div>
@@ -57,8 +54,8 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <a 
-                href="mailto:contact@3000studios.com" 
+              <a
+                href="mailto:contact@3000studios.com"
                 className="inline-block px-8 py-4 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-bold rounded-lg hover:shadow-lg hover:shadow-amber-400/50 transition-all duration-300 transform hover:scale-105"
               >
                 Send Email
@@ -80,7 +77,7 @@ export default function ContactPage() {
           <div className="relative mb-20">
             <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-lg p-12 max-w-3xl mx-auto">
               <h2 className="text-3xl font-bold mb-10 text-center">Send us a Message</h2>
-              
+
               <form className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
@@ -148,12 +145,25 @@ export default function ContactPage() {
             <div className="grid md:grid-cols-3 gap-6">
               {[
                 { icon: '🎨', title: 'Design', items: ['UI/UX', 'Branding', 'Visual Design'] },
-                { icon: '💻', title: 'Development', items: ['Web Apps', 'E-commerce', 'Platforms'] },
-                { icon: '🎬', title: 'Media', items: ['Video Production', 'Animation', '3D Content'] },
+                {
+                  icon: '💻',
+                  title: 'Development',
+                  items: ['Web Apps', 'E-commerce', 'Platforms'],
+                },
+                {
+                  icon: '🎬',
+                  title: 'Media',
+                  items: ['Video Production', 'Animation', '3D Content'],
+                },
               ].map((service, idx) => (
-                <div key={idx} className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-lg p-8 hover:border-amber-400/50 transition-colors duration-300 group">
+                <div
+                  key={idx}
+                  className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-lg p-8 hover:border-amber-400/50 transition-colors duration-300 group"
+                >
                   <div className="text-4xl mb-4">{service.icon}</div>
-                  <h3 className="text-2xl font-bold mb-4 group-hover:text-amber-400 transition-colors">{service.title}</h3>
+                  <h3 className="text-2xl font-bold mb-4 group-hover:text-amber-400 transition-colors">
+                    {service.title}
+                  </h3>
                   <ul className="space-y-2 text-platinum/70">
                     {service.items.map((item, i) => (
                       <li key={i} className="flex items-center gap-2">
