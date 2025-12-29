@@ -2,7 +2,6 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { AudioBackground } from '@/components/AudioBackground';
 import { Footer } from '@/components/ui/Footer';
-import { Navigation } from '@/components/ui/Navigation';
 
 export default function HomePage() {
   const [messages, setMessages] = useState([
@@ -65,7 +64,6 @@ export default function HomePage() {
   return (
     <main className="relative bg-black min-h-screen">
       <AudioBackground publicId="4d103589a54319c127e26fc4c1945714" autoplay={true} />
-      <Navigation />
 
       <div className="relative min-h-screen flex items-center justify-center px-4">
         <video
