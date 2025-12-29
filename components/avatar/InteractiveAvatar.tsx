@@ -15,11 +15,11 @@ function AvatarModel({ modelPath = '/models/avatar.glb', isListening, isSpeaking
   const modelRef = useRef<THREE.Group>(null);
   
   // Try to load the model, fallback to primitive sphere if not available
-  let scene: any;
+  let scene = null;
   try {
     const gltf = useGLTF(modelPath);
     scene = gltf.scene;
-  } catch (error) {
+  } catch {
     console.log('Model not found, using fallback');
   }
 
