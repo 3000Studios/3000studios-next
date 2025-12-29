@@ -10,7 +10,7 @@ export default function CommandCenter() {
       <h1 className="text-3xl font-bold mb-6">Command Center</h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="bg-slate-900/80 p-6 rounded-xl">
-          <Avatar3D />
+          <Avatar3D isListening={false} isSpeaking={false} />
         </div>
         <div className="space-y-6">
           <VoiceInput />
