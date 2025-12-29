@@ -47,3 +47,6 @@ node_modules/
 /backups/
 *.tar.gz
 .env*.local
+
+# audit artifacts (large, generated)
+_audit/
