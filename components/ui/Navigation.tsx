@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +22,9 @@ export const Navigation = () => {
     }
   };
 
-  const navLinks = [
+  const pathname = usePathname();
+
+  let navLinks = [
     { href: '/', label: 'Home' },
     { href: '/studio', label: 'Studio' },
     { href: '/experience', label: 'Experience' },
@@ -31,6 +34,11 @@ export const Navigation = () => {
     { href: '/live', label: 'Live' },
     { href: '/contact', label: 'Contact' },
   ];
+
+  if (pathname === '/home') {
+    const forbidden = new Set(['Studio', 'Experience', 'Avatar', 'Dashboard', 'Team', 'Contact']);
+    navLinks = navLinks.filter((l) => !forbidden.has(l.label));
+  }
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 overflow-hidden">
@@ -66,7 +74,6 @@ export const Navigation = () => {
               alt="3000 Studios Logo"
               className="w-14 h-14 object-contain animate-glow"
             />
-            <span className="text-2xl font-bold text-3d hidden lg:block">3000 Studios</span>
           </Link>
 
           {/* Desktop Navigation Links */}
