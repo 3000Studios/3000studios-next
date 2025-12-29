@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Navigation } from "@/components/ui/Navigation";
-import { Footer } from "@/components/ui/Footer";
-import Link from "next/link";
+import { Footer } from '@/components/ui/Footer';
+import { Navigation } from '@/components/ui/Navigation';
+import Link from 'next/link';
 
 export default function LoginPage() {
   return (
