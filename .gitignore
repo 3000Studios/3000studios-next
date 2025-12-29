@@ -55,3 +55,7 @@ _audit/
 _audit/env/*.txt
 _audit/env/*.log
 /tmp/env-audit-*
+
+# ❌ Block forbidden package managers
+package-lock.json
+yarn.lock
