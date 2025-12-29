@@ -19,7 +19,7 @@ export default function LoginPage() {
 
     try {
       const result = verifyAdmin(email, password);
-      
+
       if (result.success) {
         const token = createSessionToken(email);
         localStorage.setItem('auth_token', token);
