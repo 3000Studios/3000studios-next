@@ -56,8 +56,8 @@
     "dotenv": "^17.2.3",
     "formidable": "^3.5.4",
     "framer-motion": "^12.23.25",
+    "gsap": "^3.14.2",
     "howler": "^2.2.4",
-    "gsap": "^3.12.5",
     "jsonwebtoken": "^9.0.3",
     "lucide-react": "^0.561.0",
     "next": "^16.0.10",
@@ -90,6 +90,7 @@
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^4.7.0",
     "@vitest/ui": "^4.0.16",
+    "chokidar": "^3.6.0",
     "eslint": "^9",
     "eslint-config-next": "16.0.10",
     "jsdom": "22.1.0",
@@ -99,7 +100,6 @@
     "tsx": "^4.21.0",
     "typescript": "^5",
     "vitest": "^4.0.16",
-    "zx": "^8.1.4",
-    "chokidar": "^3.6.0"
+    "zx": "^8.1.4"
   }
 }
