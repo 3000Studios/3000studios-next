@@ -16,6 +16,7 @@ interface VideoWallpaperProps {
 
 export default function VideoWallpaper({
   videoSrc,
+  fallbackGradient = false,
   opacity = 0.3
 }: VideoWallpaperProps) {
   const [videoLoaded, setVideoLoaded] = useState(false);
