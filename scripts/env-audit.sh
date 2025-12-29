@@ -30,13 +30,14 @@ scan_env_keys() {
   fi
 }
 
-read -r -d '' SED_EXTRACT <<'SED'
+SED_EXTRACT=$(cat <<'SED'
 s/.*process\.env\.([A-Z0-9_]+).*/\1/; t end;
 s/.*process\.env\[[[:space:]]*["']([A-Z0-9_]+)["'][[:space:]]*\].*/\1/; t end;
 s/.*env\([[:space:]]*["']([A-Z0-9_]+)["'][[:space:]]*\).*/\1/; t end;
 s/.*\b(NEXT_PUBLIC_[A-Z0-9_]+)\b.*/\1/; t end;
 :end
 SED
+)
 
 extract_key_from_line() {
   sed -E "$SED_EXTRACT"
