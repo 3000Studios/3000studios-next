@@ -1,0 +1,710 @@
+NEXT_PUBLIC_BASE_URL	.env.example	100	NEXT_PUBLIC_BASE_URL=https://your-domain.com
+NEXT_PUBLIC_SITE_URL	.env.example	102	NEXT_PUBLIC_SITE_URL=https://3000studios.com
+NEXT_PUBLIC_ADSENSE_PUBLISHER_ID	.env.example	106	NEXT_PUBLIC_ADSENSE_PUBLISHER_ID=ca-pub-5800977493749262
+NEXT_PUBLIC_SIGNAL_SERVER	.env.example	112	NEXT_PUBLIC_SIGNAL_SERVER=wss://signal.your-domain.com
+NEXT_PUBLIC_SITE_URL	.env.schema	2	NEXT_PUBLIC_SITE_URL=
+NODE_ENV	_disabled/api/matrix/auth/login/route.ts	36	      secure: process.env.NODE_ENV === "production",
+OPENAI_API_KEY	_disabled/api/matrix/health/route.ts	18	    health.ai_core = process.env.OPENAI_API_KEY ? "ok" : "missing";
+VERCEL_DEPLOY_HOOK	_disabled/api/matrix/health/route.ts	21	    health.vercel_deploy = process.env.VERCEL_DEPLOY_HOOK ? "ok" : "missing";
+NODE_ENV	_disabled/api/shadow/auth/login/route.ts	25	      secure: process.env.NODE_ENV === "production",
+NODE_ENV	_disabled/api/shadow/auth/logout/route.ts	17	      secure: process.env.NODE_ENV === "production",
+OPENAI_KEY	_disabled/api/shadow/dialogue/route.ts	9	      Authorization: `Bearer ${process.env.OPENAI_KEY}`,
+OPENAI_API_KEY	_disabled/api/shadow/exec/route.ts	16	      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+OPENAI_API_KEY	_disabled/api/shadow/llm/route.ts	17	        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+OPENAI_API_KEY	_disabled/api/shadow/stt/route.ts	12	    const apiKey = process.env.OPENAI_API_KEY;
+OPENAI_API_KEY	_disabled/api/shadow/voice/route.ts	10	const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "";
+VERCEL_ACCESS_TOKEN	app/api/analytics/deployments/route.ts	8	    const vercelToken = process.env.VERCEL_ACCESS_TOKEN;
+VERCEL_PROJECT_ID	app/api/analytics/deployments/route.ts	9	    const vercelProjectId = process.env.VERCEL_PROJECT_ID || "3000studios-next";
+NODE_ENV	app/api/analytics/system/route.ts	28	      env: process.env.NODE_ENV || "development",
+NEXT_PUBLIC_SHADOW_USER	app/shadow-login/page.tsx	15	      user === process.env.NEXT_PUBLIC_SHADOW_USER &&
+SHADOW_PASSWORD	app/shadow-login/page.tsx	16	      pass === process.env.SHADOW_PASSWORD
+NODE_ENV	components/os/EventBus.tsx	20	      if (process.env.NODE_ENV === "development") {
+NEXT_PUBLIC_ADSENSE_PUBLISHER_ID	docs/MISSING_SECRETS.md	11	- **`NEXT_PUBLIC_ADSENSE_PUBLISHER_ID`**: Required for AdSense integration.
+NEXT_PUBLIC_MAPS_API	docs/QUICK_START.md	95	- `.env.local` - Local development (add your NEXT_PUBLIC_MAPS_API)
+NEXT_PUBLIC_MAPS_API	docs/QUICK_START.md	254	1. Add `NEXT_PUBLIC_MAPS_API` to GitHub Secrets
+OPENAI_KEY	docs/architecture/3000structure.txt	2343		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/3000structure.txt	2417		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/architecture/3000structure.txt	2559		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+LIVE_PASSWORD	docs/architecture/3000structure.txt	3233		if (pass !== process.env.LIVE_PASSWORD) {
+OPENAI_KEY	docs/architecture/3000structure.txt	3515		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/3000structure.txt	3581		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+STRIPE_KEY	docs/architecture/3000structure.txt	3779		const stripe = new Stripe(process.env.STRIPE_KEY);
+OPENAI_KEY	docs/architecture/3000structure.txt	3899		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/3000structure.txt	6567		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/architecture/3000structure.txt	6721		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+VERCEL_DEPLOY_HOOK	docs/architecture/3000structure.txt	6811		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+OPENAI_KEY	docs/architecture/3000structure.txt	7109		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/3000structure.txt	7243		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/architecture/3000structure.txt	9885		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+VERCEL_DEPLOY_HOOK	docs/architecture/3000structure.txt	10135		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+OPENAI_KEY	docs/architecture/3000structure.txt	10669		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/3000structure.txt	11845		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/3000structure.txt	13007		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/architecture/3000structure.txt	13185		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+NEXT_PUBLIC_PAYPAL_CLIENT_ID	docs/architecture/website_Structure	912	Searched for text `process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID` (`**/components/PayPalButton.tsx`), 1 result
+NEXT_PUBLIC_SITE_URL	docs/architecture/website_Structure	4841	NEXT_PUBLIC_SITE_URL=https://3000studios-next.vercel.app
+NEXT_PUBLIC_VERCEL_ENV	docs/architecture/website_Structure	4842	NEXT_PUBLIC_VERCEL_ENV=production
+NEXT_PUBLIC_SHADOW_USER	docs/architecture/website_Structure	4871	NEXT_PUBLIC_SHADOW_USER=your_email
+OPENAI_KEY	docs/architecture/website_Structure	6801	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/website_Structure	6840	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/architecture/website_Structure	6917	  await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+LIVE_PASSWORD	docs/architecture/website_Structure	7292	    if (pass !== process.env.LIVE_PASSWORD) {
+OPENAI_KEY	docs/architecture/website_Structure	7477	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/website_Structure	7512	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+STRIPE_KEY	docs/architecture/website_Structure	7616	const stripe = new Stripe(process.env.STRIPE_KEY);
+OPENAI_KEY	docs/architecture/website_Structure	7679	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/website_Structure	9297	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/architecture/website_Structure	9378	      await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+VERCEL_DEPLOY_HOOK	docs/architecture/website_Structure	9430	await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+OPENAI_KEY	docs/architecture/website_Structure	9650	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/website_Structure	9726	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/architecture/website_Structure	11323	  await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+VERCEL_DEPLOY_HOOK	docs/architecture/website_Structure	11488	await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+OPENAI_KEY	docs/architecture/website_Structure	11829	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/website_Structure	12634	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/website_Structure	13407	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/architecture/website_Structure	13507	await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+OPENAI_KEY	docs/archive/3000structure.txt	2343		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/3000structure.txt	2417		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/archive/3000structure.txt	2559		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+LIVE_PASSWORD	docs/archive/3000structure.txt	3233		if (pass !== process.env.LIVE_PASSWORD) {
+OPENAI_KEY	docs/archive/3000structure.txt	3515		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/3000structure.txt	3581		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+STRIPE_KEY	docs/archive/3000structure.txt	3779		const stripe = new Stripe(process.env.STRIPE_KEY);
+OPENAI_KEY	docs/archive/3000structure.txt	3899		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/3000structure.txt	6567		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/archive/3000structure.txt	6721		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+VERCEL_DEPLOY_HOOK	docs/archive/3000structure.txt	6811		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+OPENAI_KEY	docs/archive/3000structure.txt	7109		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/3000structure.txt	7243		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/archive/3000structure.txt	9885		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+VERCEL_DEPLOY_HOOK	docs/archive/3000structure.txt	10135		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+OPENAI_KEY	docs/archive/3000structure.txt	10669		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/3000structure.txt	11845		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/3000structure.txt	13007		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/archive/3000structure.txt	13185		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+NEXT_PUBLIC_SITE_URL	docs/archive/DEPLOYMENT.md	81	NEXT_PUBLIC_SITE_URL=https://3000studios.com
+NEXT_PUBLIC_BASE_URL	docs/archive/DEPLOYMENT.md	82	NEXT_PUBLIC_BASE_URL=https://3000studios.com
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY	docs/archive/DEPLOYMENT.md	93	NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=<stripe-public>
+NEXT_PUBLIC_SIGNAL_SERVER	docs/archive/DEPLOYMENT.md	104	NEXT_PUBLIC_SIGNAL_SERVER=wss://signal.3000studios.com
+NEXT_PUBLIC_MAPS_API	docs/archive/DEPLOYMENT.md	113	NEXT_PUBLIC_MAPS_API=<google-maps-key>
+NEXT_PUBLIC_MAPS_API	docs/archive/FINAL_SETUP_SUMMARY.md	101	NEXT_PUBLIC_MAPS_API=AIz...your_maps_key
+NEXT_PUBLIC_MAPS_API	docs/archive/SECURE_WORKFLOW.md	65	NEXT_PUBLIC_MAPS_API=your_maps_key_here
+NEXT_PUBLIC_MAPS_API	docs/archive/SECURE_WORKFLOW.md	155	NEXT_PUBLIC_MAPS_API=AIz...your_maps_key
+OPENAI_API	docs/archive/SHADOW_COMPLETE_SETUP.md	140	│ ├─ const key = process.env.OPENAI_API.. │
+KEY_NAME	docs/archive/SHADOW_COMPLETE_SETUP.md	313	3. Check code uses `process.env.KEY_NAME`
+OPENAI_API_KEY	docs/archive/SHADOW_SECURE_DEV.md	231	const apiKey = process.env.OPENAI_API_KEY;
+NEXT_PUBLIC_PAYPAL_CLIENT_ID	docs/archive/website_Structure	912	Searched for text `process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID` (`**/components/PayPalButton.tsx`), 1 result
+NEXT_PUBLIC_SITE_URL	docs/archive/website_Structure	4841	NEXT_PUBLIC_SITE_URL=https://3000studios-next.vercel.app
+NEXT_PUBLIC_VERCEL_ENV	docs/archive/website_Structure	4842	NEXT_PUBLIC_VERCEL_ENV=production
+NEXT_PUBLIC_SHADOW_USER	docs/archive/website_Structure	4871	NEXT_PUBLIC_SHADOW_USER=your_email
+OPENAI_KEY	docs/archive/website_Structure	6801	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/website_Structure	6840	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/archive/website_Structure	6917	  await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+LIVE_PASSWORD	docs/archive/website_Structure	7292	    if (pass !== process.env.LIVE_PASSWORD) {
+OPENAI_KEY	docs/archive/website_Structure	7477	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/website_Structure	7512	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+STRIPE_KEY	docs/archive/website_Structure	7616	const stripe = new Stripe(process.env.STRIPE_KEY);
+OPENAI_KEY	docs/archive/website_Structure	7679	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/website_Structure	9297	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/archive/website_Structure	9378	      await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+VERCEL_DEPLOY_HOOK	docs/archive/website_Structure	9430	await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+OPENAI_KEY	docs/archive/website_Structure	9650	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/website_Structure	9726	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/archive/website_Structure	11323	  await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+VERCEL_DEPLOY_HOOK	docs/archive/website_Structure	11488	await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+OPENAI_KEY	docs/archive/website_Structure	11829	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/website_Structure	12634	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/website_Structure	13407	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/archive/website_Structure	13507	await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+NEXT_PUBLIC_SITE_URL	docs/vercel_env.txt	4	 NEXT_PUBLIC_SITE_URL       Encrypted           Production, Preview, Development    15h ago    
+OPENAI_API_KEY	lib/aiCommandInterpreter.ts	10	  apiKey: process.env.OPENAI_API_KEY || "",
+WP_USERNAME	lib/auth/wp.ts	12	const USERNAME = process.env.WP_USERNAME || "mr.jwswain@gmail.com";
+WP_PASSWORD	lib/auth/wp.ts	13	const PASSWORD = process.env.WP_PASSWORD || "";
+NODE_ENV	lib/matrix/analytics.ts	39	  if (process.env.NODE_ENV === "development") {
+PAYPAL_ENV	lib/paypal-config.ts	1	export const isProd = process.env.PAYPAL_ENV === "production";
+PAYPAL_CLIENT_ID_PROD	lib/paypal-config.ts	5	    ? process.env.PAYPAL_CLIENT_ID_PROD
+PAYPAL_CLIENT_ID	lib/paypal-config.ts	6	    : process.env.PAYPAL_CLIENT_ID,
+PAYPAL_CLIENT_SECRET_PROD	lib/paypal-config.ts	8	    ? process.env.PAYPAL_CLIENT_SECRET_PROD
+PAYPAL_CLIENT_SECRET	lib/paypal-config.ts	9	    : process.env.PAYPAL_CLIENT_SECRET,
+SHADOW_ADMIN_EMAIL	lib/shadow/auth.ts	4	const SHADOW_EMAIL = process.env.SHADOW_ADMIN_EMAIL || "admin@3000studios.com";
+SHADOW_ADMIN_PASSWORD	lib/shadow/auth.ts	5	const SHADOW_PASSWORD = process.env.SHADOW_ADMIN_PASSWORD || "ShadowPrime2025!";
+OPENAI_API_KEY	lib/shadow/personality.ts	9	  apiKey: process.env.OPENAI_API_KEY 
+DATABASE_URL	package.json	34	    "postinstall": "node -e \"const { execSync } = require('child_process'); const url = process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/postgres'; execSync('npx prisma generate', { stdio: 'inherit', env: { ...process.env, DATABASE_URL: url } });\""
+DATABASE_URL	prisma.config.ts	14	    url: env("DATABASE_URL"),
+DATABASE_URL	prisma/schema.postgres.prisma	10	  url      = env("DATABASE_URL")
+DATABASE_URL	prisma/schema.prisma	10	  url      = env("DATABASE_URL")
+GITHUB_TOKEN	scripts/configure-branch-protection.mjs	30	  const token = process.env.GITHUB_TOKEN;
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	2	# Fixes NEXT_PUBLIC_SITE_URL circular reference issue
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	15	Write-Host "║   Fixing NEXT_PUBLIC_SITE_URL circular reference       ║" -ForegroundColor Cyan
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	68	Write-Host "🗑️  Step 3: Removing NEXT_PUBLIC_SITE_URL from ALL environments..." -ForegroundColor Yellow
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	76	        $output = vercel env rm NEXT_PUBLIC_SITE_URL $env --yes 2>&1
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	89	Write-Host "➕ Step 4: Adding NEXT_PUBLIC_SITE_URL with literal value..." -ForegroundColor Yellow
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	95	Write-Host "   1. What's the value of NEXT_PUBLIC_SITE_URL?" -ForegroundColor Cyan
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	105	    vercel env add NEXT_PUBLIC_SITE_URL production
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	107	    Write-Host "✅ Added NEXT_PUBLIC_SITE_URL" -ForegroundColor Green
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	112	    Write-Host "   vercel env add NEXT_PUBLIC_SITE_URL production" -ForegroundColor Cyan
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	138	Write-Host "║   ✅ NEXT_PUBLIC_SITE_URL fixed                        ║" -ForegroundColor Cyan
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.sh	5	# Fixes NEXT_PUBLIC_SITE_URL circular reference issue
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.sh	20	echo -e "${BLUE}║   Fixing NEXT_PUBLIC_SITE_URL circular reference       ║${NC}"
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.sh	52	echo -e "${YELLOW}🗑️  Step 3: Removing NEXT_PUBLIC_SITE_URL (if exists)...${NC}"
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.sh	53	vercel env rm NEXT_PUBLIC_SITE_URL production --yes 2>&1 || echo -e "${YELLOW}⚠️  Variable may not exist (that's okay)${NC}"
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.sh	58	echo -e "${YELLOW}➕ Step 4: Adding NEXT_PUBLIC_SITE_URL with literal value...${NC}"
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.sh	65	echo "https://3000studios.com" | vercel env add NEXT_PUBLIC_SITE_URL production
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.sh	67	echo -e "${GREEN}✅ Added NEXT_PUBLIC_SITE_URL${NC}"
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.sh	92	echo -e "${BLUE}║   ✅ NEXT_PUBLIC_SITE_URL fixed                        ║${NC}"
+GEMINI_API_KEY	scripts/generate-content.ts	10	const API_KEY = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
+NEXT_PUBLIC_SITE_URL	scripts/sync-secrets-to-vercel.ps1	19	    "NEXT_PUBLIC_SITE_URL"
+VALIDATE_ENV_MODE	scripts/validate-env.js	34	const mode = process.argv[2] || process.env.VALIDATE_ENV_MODE || 'dev';
+NEXT_PUBLIC_BASE_URL	scripts/validate-env.js	51	    'NEXT_PUBLIC_BASE_URL',
+NEXT_PUBLIC_BASE_URL	scripts/validate-env.js	62	    'NEXT_PUBLIC_BASE_URL',
+NEXT_PUBLIC_BASE_URL	scripts/validate-env.js	82	    'NEXT_PUBLIC_BASE_URL',
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY	scripts/validate-env.js	90	    'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY',
+NEXT_PUBLIC_GA_MEASUREMENT_ID	scripts/validate-env.js	96	    'NEXT_PUBLIC_GA_MEASUREMENT_ID',
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY	scripts/validate-env.js	113	    'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY',
+NEXT_PUBLIC_SIGNAL_SERVER	scripts/validate-env.js	155	    'NEXT_PUBLIC_SIGNAL_SERVER',
+NEXT_PUBLIC_GA_MEASUREMENT_ID	scripts/validate-env.js	161	    'NEXT_PUBLIC_GA_MEASUREMENT_ID',
+JWT_SECRET	scripts/validate-env.js	170	      const secret = process.env.JWT_SECRET;
+ADMIN_PASSWORD	scripts/validate-env.js	178	      const pass = process.env.ADMIN_PASSWORD;
+NEXT_PUBLIC_BASE_URL	scripts/validate-env.js	188	      const url = process.env.NEXT_PUBLIC_BASE_URL;
+NEXT_PUBLIC_BASE_URL	scripts/validate-env.js	191	    message: 'NEXT_PUBLIC_BASE_URL should not contain localhost in production',
+STRIPE_SECRET_KEY	scripts/validate-env.js	197	      const key = process.env.STRIPE_SECRET_KEY;
+NEXT_PUBLIC_ADSENSE_PUBLISHER_ID	scripts/validate-revenue-paths.js	80	  const hasPublisherIdRef = layoutContent.includes('NEXT_PUBLIC_ADSENSE_PUBLISHER_ID');
+NEXT_PUBLIC_ADSENSE_PUBLISHER_ID	scripts/validate-revenue-paths.js	87	    info('  Required: Reference to NEXT_PUBLIC_ADSENSE_PUBLISHER_ID');
+NEXT_PUBLIC_SITE_URL	scripts/vercel-reset-and-deploy.ps1	48	    "NEXT_PUBLIC_SITE_URL",
+NEXT_PUBLIC_SITE_URL	scripts/vercel-reset-and-deploy.ps1	69	Write-Host "⚠️  CRITICAL: When prompted for NEXT_PUBLIC_SITE_URL:" -ForegroundColor Yellow
+NEXT_PUBLIC_SITE_URL	scripts/vercel-reset-and-deploy.ps1	79	    vercel env add NEXT_PUBLIC_SITE_URL production
+NEXT_PUBLIC_SITE_URL	scripts/vercel-reset-and-deploy.ps1	80	    Write-Host "✅ Added NEXT_PUBLIC_SITE_URL to production" -ForegroundColor Green
+NEXT_PUBLIC_SITE_URL	scripts/vercel-reset-and-deploy.ps1	82	    Write-Host "❌ Failed to add NEXT_PUBLIC_SITE_URL" -ForegroundColor Red
+NEXT_PUBLIC_SITE_URL	scripts/vercel-reset-and-deploy.ps1	219	Write-Host "║   ✅ NEXT_PUBLIC_SITE_URL fixed (literal value)        ║" -ForegroundColor Cyan
+GITHUB_TOKEN	scripts/verify-branch-protection.mjs	33	  const token = process.env.GITHUB_TOKEN;
+OPENAI_API_KEY	shadow-engine/helpers/llm.ts	10	  apiKey: process.env.OPENAI_API_KEY || "",
+OPENAI_API_KEY	shadow-engine/helpers/llm.ts	15	    if (!process.env.OPENAI_API_KEY) {
+WORDPRESS_API_URL	shadow-engine/helpers/wp.ts	10	  process.env.WORDPRESS_API_URL || "https://3000studios.com/wp-json/wp/v2";
+WORDPRESS_USERNAME	shadow-engine/helpers/wp.ts	11	const WP_USERNAME = process.env.WORDPRESS_USERNAME || "";
+WORDPRESS_PASSWORD	shadow-engine/helpers/wp.ts	12	const WP_PASSWORD = process.env.WORDPRESS_PASSWORD || "";
+OPENAI_API_KEY	shadow/core/avatar.js	12	  apiKey: process.env.OPENAI_API_KEY,
+NODE_ENV	src/app/api/affiliate/route.ts	102	      secure: process.env.NODE_ENV === "production",
+NODE_ENV	src/app/api/affiliate/route.ts	110	      secure: process.env.NODE_ENV === "production",
+NODE_ENV	src/app/api/auth/magic-link/route.ts	33	    if (process.env.NODE_ENV === "production") {
+ADMIN_EMAIL	src/app/api/auth/magic-link/route.ts	73	      process.env.MATRIX_ADMIN_EMAIL || process.env.ADMIN_EMAIL;
+NEXT_PUBLIC_BASE_URL	src/app/api/auth/magic-link/route.ts	118	    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+NODE_ENV	src/app/api/auth/magic-link/route.ts	140	      ...(process.env.NODE_ENV === "development" && { magicLink }),
+SENDGRID_API_KEY	src/app/api/auth/magic-link/route.ts	175	    //     'Authorization': `Bearer ${process.env.SENDGRID_API_KEY}`,
+SESSION_DURATION_HOURS	src/app/api/auth/verify-magic/route.ts	11	  parseInt(process.env.SESSION_DURATION_HOURS || "24", 10) * 3600;
+CRON_SECRET	src/app/api/cron/content/route.ts	8	    if (secret !== process.env.CRON_SECRET) {
+CRON_SECRET	src/app/api/cron/reports/route.ts	9	    if (secret !== process.env.CRON_SECRET) {
+CRON_SECRET	src/app/api/cron/sitemap/route.ts	26	    if (secret !== process.env.CRON_SECRET) {
+CRON_SECRET	src/app/api/cron/store/route.ts	9	    if (secret !== process.env.CRON_SECRET) {
+NEXT_PUBLIC_SITE_URL	src/app/api/env-check/route.ts	10	 * - NEXT_PUBLIC_SITE_URL: The configured site URL (or null if missing)
+NEXT_PUBLIC_SITE_URL	src/app/api/env-check/route.ts	12	 * - ok: Boolean indicating if NEXT_PUBLIC_SITE_URL is set
+NEXT_PUBLIC_SITE_URL	src/app/api/env-check/route.ts	18	  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+NODE_ENV	src/app/api/env-check/route.ts	19	  const nodeEnv = process.env.NODE_ENV;
+NEXT_PUBLIC_SITE_URL	src/app/api/env-check/route.ts	22	    NEXT_PUBLIC_SITE_URL: siteUrl ?? null,
+NEXT_PUBLIC_SITE_URL	src/app/api/env-check/route.ts	28	      : '❌ NEXT_PUBLIC_SITE_URL is missing',
+FULFILLMENT_SIGNING_SECRET	src/app/api/fulfillment/webhook/route.ts	4	  const secret = process.env.FULFILLMENT_SIGNING_SECRET;
+CRON_SECRET	src/app/api/generate-content/route.ts	81	    process.env.CRON_SECRET &&
+CRON_SECRET	src/app/api/generate-content/route.ts	82	    authHeader !== `Bearer ${process.env.CRON_SECRET}`
+PAYPAL_CLIENT_ID	src/app/api/paypal/checkout/route.ts	13	const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
+PAYPAL_CLIENT_SECRET	src/app/api/paypal/checkout/route.ts	14	const PAYPAL_CLIENT_SECRET = process.env.PAYPAL_CLIENT_SECRET;
+NODE_ENV	src/app/api/paypal/checkout/route.ts	15	const PAYPAL_API_BASE = process.env.NODE_ENV === 'production'
+NEXT_PUBLIC_SITE_URL	src/app/api/paypal/checkout/route.ts	74	          return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/success`,
+NEXT_PUBLIC_SITE_URL	src/app/api/paypal/checkout/route.ts	75	          cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/checkout`
+VERCEL_GIT_COMMIT_SHA	src/app/api/status/route.ts	28	    buildId = process.env.VERCEL_GIT_COMMIT_SHA?.substring(0, 7) || 'dev';
+OPENAI_API_KEY	src/app/api/status/route.ts	33	    hasOpenAI: !!process.env.OPENAI_API_KEY,
+CLAUDE_API_KEY	src/app/api/status/route.ts	34	    hasClaude: !!process.env.CLAUDE_API_KEY,
+GEMINI_API_KEY	src/app/api/status/route.ts	35	    hasGemini: !!process.env.GEMINI_API_KEY,
+PAYPAL_CLIENT_ID	src/app/api/status/route.ts	36	    hasPayPal: !!process.env.PAYPAL_CLIENT_ID,
+STRIPE_SECRET_KEY	src/app/api/status/route.ts	37	    hasStripe: !!process.env.STRIPE_SECRET_KEY,
+GOOGLE_MAPS_API_KEY	src/app/api/status/route.ts	38	    hasGoogleMaps: !!process.env.GOOGLE_MAPS_API_KEY,
+NODE_ENV	src/app/api/status/route.ts	39	    nodeEnv: process.env.NODE_ENV || 'development',
+VERCEL_ENV	src/app/api/status/route.ts	40	    vercelEnv: process.env.VERCEL_ENV || 'local',
+VERCEL_GIT_COMMIT_SHA	src/app/api/status/route.ts	66	      commit: process.env.VERCEL_GIT_COMMIT_SHA?.substring(0, 7) || 'local',
+VERCEL_GIT_COMMIT_REF	src/app/api/status/route.ts	67	      branch: process.env.VERCEL_GIT_COMMIT_REF || 'main',
+VERCEL_GIT_COMMIT_AUTHOR_NAME	src/app/api/status/route.ts	68	      author: process.env.VERCEL_GIT_COMMIT_AUTHOR_NAME || 'unknown',
+MUX_TOKEN_ID	src/app/api/streaming/route.ts	6	  tokenId: process.env.MUX_TOKEN_ID,
+MUX_TOKEN_SECRET	src/app/api/streaming/route.ts	7	  tokenSecret: process.env.MUX_TOKEN_SECRET,
+NEXT_PUBLIC_SIGNAL_SERVER	src/app/api/streaming/start/route.ts	30	      signalServerUrl: process.env.NEXT_PUBLIC_SIGNAL_SERVER || 'wss://signal.3000studios.com',
+STRIPE_3000_SECRET	src/app/api/stripe/checkout/route.ts	14	  const key = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET || process.env.STRIPE_3000_SECRET;
+NEXT_PUBLIC_SITE_URL	src/app/api/stripe/checkout/route.ts	57	      success_url: successUrl || `${process.env.NEXT_PUBLIC_SITE_URL}/store/success?session_id={CHECKOUT_SESSION_ID}`,
+NEXT_PUBLIC_SITE_URL	src/app/api/stripe/checkout/route.ts	58	      cancel_url: cancelUrl || `${process.env.NEXT_PUBLIC_SITE_URL}/store/checkout`,
+STRIPE_WEBHOOK_SECRET	src/app/api/stripe/webhook/route.ts	14	    if (!process.env.STRIPE_WEBHOOK_SECRET) {
+STRIPE_WEBHOOK_SECRET	src/app/api/stripe/webhook/route.ts	20	      process.env.STRIPE_WEBHOOK_SECRET
+OPENAI_API_KEY	src/app/api/voice-to-code/route.ts	16	  if (!process.env.OPENAI_API_KEY) return null;
+OPENAI_API_KEY	src/app/api/voice-to-code/route.ts	20	      openaiInstance = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+OPENAI_API_KEY	src/app/api/voice-to-code/route.ts	59	    if (audio && process.env.OPENAI_API_KEY) {
+OPENAI_API_KEY	src/app/api/voice-to-code/route.ts	83	    if (!process.env.OPENAI_API_KEY) {
+NODE_ENV	src/app/components/ErrorBoundary.tsx	65	            {process.env.NODE_ENV === 'development' && this.state.error && (
+NEXT_PUBLIC_MAPS_API	src/app/components/GoogleMap.tsx	200	            Please add your NEXT_PUBLIC_MAPS_API key to .env.local
+NEXT_PUBLIC_MAPS_API	src/app/contact/page.tsx	491	                process.env.NEXT_PUBLIC_MAPS_API ||
+NODE_ENV	src/app/error.tsx	44	        {process.env.NODE_ENV === "development" && (
+NEXT_PUBLIC_ADSENSE_PUBLISHER_ID	src/app/layout.tsx	20	const RAW_ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
+NEXT_PUBLIC_BASE_URL	src/app/layout.tsx	28	  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://3000studios.com"),
+NEXT_PUBLIC_ADSENSE_PUBLISHER_ID	src/app/layout.tsx	95	        {/* Google AdSense Auto Ads (enabled when NEXT_PUBLIC_ADSENSE_PUBLISHER_ID is set) */}
+NEXT_PUBLIC_ADSENSE_PUBLISHER_ID	src/app/page.tsx	174	      {process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID && (
+NEXT_PUBLIC_BASE_URL	src/app/robots.ts	3	const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://3000studios.com";
+NEXT_PUBLIC_SITE_URL	src/app/store/checkout/page.tsx	97	          successUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/store/success?session_id={CHECKOUT_SESSION_ID}`,
+NEXT_PUBLIC_SITE_URL	src/app/store/checkout/page.tsx	98	          cancelUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/store/checkout`,
+EMAIL_SERVER_HOST	src/auth.ts	47	    ...(process.env.EMAIL_SERVER_HOST
+EMAIL_SERVER_HOST	src/auth.ts	51	              host: process.env.EMAIL_SERVER_HOST,
+EMAIL_SERVER_PORT	src/auth.ts	52	              port: Number(process.env.EMAIL_SERVER_PORT || 0),
+EMAIL_SERVER_USER	src/auth.ts	54	                user: process.env.EMAIL_SERVER_USER,
+EMAIL_SERVER_PASSWORD	src/auth.ts	55	                pass: process.env.EMAIL_SERVER_PASSWORD,
+EMAIL_FROM	src/auth.ts	58	            from: process.env.EMAIL_FROM || "admin@3000studios.com",
+NEXT_PUBLIC_ADSENSE_PUBLISHER_ID	src/components/AdSense.tsx	22	  const raw = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
+NEXT_PUBLIC_PAYPAL_CLIENT_ID	src/components/PayPalButton.tsx	15	    clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "test",
+NODE_ENV	src/lib/analytics.ts	51	    if (process.env.NODE_ENV === 'development') {
+STRIPE_SECRET_KEY	src/lib/apiClients.ts	32	    const secretKey = process.env.STRIPE_SECRET_KEY;
+STRIPE_SECRET_KEY	src/lib/apiClients.ts	53	  isConfigured: () => !!process.env.STRIPE_SECRET_KEY,
+PAYPAL_CLIENT_ID	src/lib/apiClients.ts	60	  const clientId = process.env.PAYPAL_CLIENT_ID;
+PAYPAL_SECRET	src/lib/apiClients.ts	61	  const secret = process.env.PAYPAL_SECRET;
+PAYPAL_MODE	src/lib/apiClients.ts	62	  const mode = process.env.PAYPAL_MODE || "sandbox";
+PAYPAL_SECRET	src/lib/apiClients.ts	84	    !!(process.env.PAYPAL_CLIENT_ID && process.env.PAYPAL_SECRET),
+OPENAI_API_KEY	src/lib/apiClients.ts	94	    const apiKey = process.env.OPENAI_API_KEY;
+OPENAI_ORG_ID	src/lib/apiClients.ts	104	      organization: process.env.OPENAI_ORG_ID,
+OPENAI_API_KEY	src/lib/apiClients.ts	115	  isConfigured: () => !!process.env.OPENAI_API_KEY,
+CLAUDE_API_KEY	src/lib/apiClients.ts	125	    const apiKey = process.env.CLAUDE_API_KEY;
+CLAUDE_API_KEY	src/lib/apiClients.ts	145	  isConfigured: () => !!process.env.CLAUDE_API_KEY,
+GEMINI_API_KEY	src/lib/apiClients.ts	155	    const apiKey = process.env.GEMINI_API_KEY;
+GEMINI_API_KEY	src/lib/apiClients.ts	176	  isConfigured: () => !!process.env.GEMINI_API_KEY,
+MONGODB_URI	src/lib/apiClients.ts	192	  const uri = process.env.MONGODB_URI;
+MONGODB_DB_NAME	src/lib/apiClients.ts	231	  const dbName = process.env.MONGODB_DB_NAME || "3000studios";
+MONGODB_URI	src/lib/apiClients.ts	242	  isConfigured: () => !!process.env.MONGODB_URI,
+NEXT_PUBLIC_GA_MEASUREMENT_ID	src/lib/apiClients.ts	257	    measurementId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
+NEXT_PUBLIC_GA_MEASUREMENT_ID	src/lib/apiClients.ts	258	    isConfigured: () => !!process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
+NEXT_PUBLIC_VERCEL_ANALYTICS_ID	src/lib/apiClients.ts	261	    isConfigured: () => !!process.env.NEXT_PUBLIC_VERCEL_ANALYTICS_ID,
+TWILIO_ACCOUNT_SID	src/lib/apiClients.ts	269	  const accountSid = process.env.TWILIO_ACCOUNT_SID;
+TWILIO_AUTH_TOKEN	src/lib/apiClients.ts	270	  const authToken = process.env.TWILIO_AUTH_TOKEN;
+TWILIO_PHONE	src/lib/apiClients.ts	283	    phoneNumber: process.env.TWILIO_PHONE,
+TWILIO_AUTH_TOKEN	src/lib/apiClients.ts	292	    !!(process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN),
+WP_URL	src/lib/apiClients.ts	299	  const url = process.env.WP_URL;
+WP_USER	src/lib/apiClients.ts	300	  const user = process.env.WP_USER;
+WP_PASS	src/lib/apiClients.ts	301	  const pass = process.env.WP_PASS;
+WP_PASS	src/lib/apiClients.ts	323	    !!(process.env.WP_URL && process.env.WP_USER && process.env.WP_PASS),
+WEBRTC_KEY	src/lib/apiClients.ts	331	    apiKey: process.env.WEBRTC_KEY,
+WEBRTC_TURN_URL	src/lib/apiClients.ts	336	      ...(process.env.WEBRTC_TURN_URL
+WEBRTC_TURN_URL	src/lib/apiClients.ts	339	              urls: process.env.WEBRTC_TURN_URL,
+WEBRTC_TURN_USER	src/lib/apiClients.ts	340	              username: process.env.WEBRTC_TURN_USER,
+WEBRTC_TURN_PASS	src/lib/apiClients.ts	341	              credential: process.env.WEBRTC_TURN_PASS,
+NEXT_PUBLIC_SIGNAL_SERVER	src/lib/apiClients.ts	347	  signalServer: process.env.NEXT_PUBLIC_SIGNAL_SERVER,
+WEBRTC_KEY	src/lib/apiClients.ts	348	  isConfigured: () => !!process.env.WEBRTC_KEY,
+GITHUB_PAT	src/lib/apiClients.ts	355	  pat: process.env.GITHUB_PAT,
+GITHUB_PAT	src/lib/apiClients.ts	356	  isConfigured: () => !!process.env.GITHUB_PAT,
+AFFILIATE_SECRET	src/lib/apiClients.ts	363	  secret: process.env.AFFILIATE_SECRET,
+AFFILIATE_COOKIE_DURATION	src/lib/apiClients.ts	364	  cookieDuration: parseInt(process.env.AFFILIATE_COOKIE_DURATION || "30", 10),
+AFFILIATE_COMMISSION_RATE	src/lib/apiClients.ts	365	  commissionRate: parseFloat(process.env.AFFILIATE_COMMISSION_RATE || "10"),
+AFFILIATE_SECRET	src/lib/apiClients.ts	366	  isConfigured: () => !!process.env.AFFILIATE_SECRET,
+NODE_ENV	src/lib/auditLog.ts	49	    if (process.env.NODE_ENV === 'development') {
+MATRIX_ADMIN_EMAIL	src/lib/auth.ts	9	  email: process.env.MATRIX_ADMIN_EMAIL || "mr.jwswain@gmail.com",
+MATRIX_ADMIN_PASSWORD	src/lib/auth.ts	10	  password: process.env.MATRIX_ADMIN_PASSWORD || "Bossman3000!!!",
+SESSION_DURATION_HOURS	src/lib/auth.ts	14	  parseInt(process.env.SESSION_DURATION_HOURS || "24", 10) * 3600;
+SESSION_SECRET	src/lib/auth.ts	30	  const secret = process.env.SESSION_SECRET || "dev-secret-key";
+SESSION_SECRET	src/lib/auth.ts	47	  const secret = process.env.SESSION_SECRET || "dev-secret-key";
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME	src/lib/cloudinary.ts	6	const CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 'dj92eb97f';
+NEXT_PUBLIC_SITE_URL	src/lib/env.ts	10	  SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || "https://3000studios.com",
+STRIPE_PUBLIC	src/lib/env.ts	16	    process.env.STRIPE_PUBLISHABLE_KEY || process.env.STRIPE_PUBLIC || "",
+PAYPAL_CLIENT_SECRET_PROD	src/lib/env.ts	19	  PAYPAL_SECRET: process.env.PAYPAL_SECRET || process.env.PAYPAL_CLIENT_SECRET_PROD || "",
+OPENAI_API_KEY	src/lib/openai.ts	4	  apiKey: process.env.OPENAI_API_KEY,
+PAYPAL_CLIENT_ID	src/lib/paypal-config.ts	2	  clientId: process.env.PAYPAL_CLIENT_ID!,
+PAYPAL_CLIENT_SECRET	src/lib/paypal-config.ts	3	  secret: process.env.PAYPAL_CLIENT_SECRET!,
+PAYPAL_ENV	src/lib/paypal-config.ts	4	  baseUrl: process.env.PAYPAL_ENV === "production"
+PAYPAL_ENV	src/lib/paypal-config.ts	7	  environment: process.env.PAYPAL_ENV === "production" ? "paypal" : "sandbox",
+PAYPAL_ENV	src/lib/paypal.ts	3	    env: process.env.PAYPAL_ENV || "sandbox",
+NODE_ENV	src/lib/prisma.ts	11	if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+NEXT_PUBLIC_SITE_URL	src/lib/security.ts	15	    process.env.NEXT_PUBLIC_SITE_URL || "",
+NODE_ENV	src/lib/security.ts	16	    ...(process.env.NODE_ENV === "development"
+NODE_ENV	src/lib/security.ts	120	  if (process.env.NODE_ENV === "production") {
+CSRF_SECRET	src/lib/security.ts	154	const CSRF_SECRET = process.env.CSRF_SECRET || "change-me-in-production";
+CLAUDE_API_KEY	src/lib/services/anthropic.ts	11	if (process.env.CLAUDE_API_KEY) {
+CLAUDE_API_KEY	src/lib/services/anthropic.ts	13	    apiKey: process.env.CLAUDE_API_KEY,
+GEMINI_API_KEY	src/lib/services/gemini.ts	11	if (process.env.GEMINI_API_KEY) {
+GEMINI_API_KEY	src/lib/services/gemini.ts	12	  genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+GITHUB_PAT	src/lib/services/github.ts	9	  auth: process.env.GITHUB_PAT,
+MONGODB_URI	src/lib/services/mongodb.ts	21	  const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
+MONGODB_URI	src/lib/services/mongodb.ts	184	  const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
+MONGODB_URI	src/lib/services/mongodb.ts	204	  const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
+OPENAI_API_KEY	src/lib/services/openai.ts	11	if (process.env.OPENAI_API_KEY) {
+OPENAI_API_KEY	src/lib/services/openai.ts	13	    apiKey: process.env.OPENAI_API_KEY,
+NODE_ENV	src/lib/services/paypal.ts	8	const PAYPAL_ENV = process.env.PAYPAL_ENV || process.env.NODE_ENV;
+PAYPAL_CLIENT_ID	src/lib/services/paypal.ts	14	const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
+PAYPAL_CLIENT_SECRET	src/lib/services/paypal.ts	15	const PAYPAL_SECRET = process.env.PAYPAL_SECRET ?? process.env.PAYPAL_CLIENT_SECRET;
+NEXT_PUBLIC_BASE_URL	src/lib/services/paypal.ts	100	        return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/store/success`,
+NEXT_PUBLIC_BASE_URL	src/lib/services/paypal.ts	101	        cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/store/cancel`,
+STRIPE_SECRET_KEY	src/lib/services/stripe.ts	3	// if (!process.env.STRIPE_SECRET_KEY) {
+STRIPE_SECRET_KEY	src/lib/services/stripe.ts	8	  process.env.STRIPE_SECRET_KEY || "sk_test_mock_key",
+NEXT_PUBLIC_BASE_URL	src/lib/services/stripe.ts	23	    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+NEXT_PUBLIC_BASE_URL	src/lib/services/stripe.ts	24	    cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cart`,
+TWILIO_ACCOUNT_SID	src/lib/services/twilio.ts	8	const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
+TWILIO_AUTH_TOKEN	src/lib/services/twilio.ts	9	const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
+TWILIO_PHONE	src/lib/services/twilio.ts	10	const TWILIO_PHONE = process.env.TWILIO_PHONE;
+VERCEL_TOKEN	src/lib/services/vercel.ts	8	const VERCEL_TOKEN = process.env.VERCEL_TOKEN;
+VERCEL_PROJECT_ID	src/lib/services/vercel.ts	11	const PROJECT_ID = process.env.VERCEL_PROJECT_ID;
+WEBRTC_TURN_URL	src/lib/services/webrtc.ts	15	  const WEBRTC_TURN_URL = process.env.WEBRTC_TURN_URL;
+WEBRTC_TURN_USER	src/lib/services/webrtc.ts	16	  const WEBRTC_TURN_USER = process.env.WEBRTC_TURN_USER;
+WEBRTC_TURN_PASS	src/lib/services/webrtc.ts	17	  const WEBRTC_TURN_PASS = process.env.WEBRTC_TURN_PASS;
+WP_URL	src/lib/services/wordpress.ts	8	const WP_URL = process.env.WP_URL;
+WP_USER	src/lib/services/wordpress.ts	9	const WP_USER = process.env.WP_USER;
+WP_PASS	src/lib/services/wordpress.ts	10	const WP_PASS = process.env.WP_PASS;
+STRIPE_SECRET_KEY	src/lib/stripe.ts	3	if (!process.env.STRIPE_SECRET_KEY) {
+STRIPE_SECRET_KEY	src/lib/stripe.ts	9	export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+STRIPE_PRO_PRICE_ID	src/lib/subscription-tiers.ts	44	    stripe_price_id: process.env.STRIPE_PRO_PRICE_ID,
+STRIPE_BUSINESS_PRICE_ID	src/lib/subscription-tiers.ts	66	    stripe_price_id: process.env.STRIPE_BUSINESS_PRICE_ID,
+VOICE_LANGUAGE	src/lib/voice.ts	118	      language: config.language || process.env.VOICE_LANGUAGE || "en-US",
+VOICE_CONTINUOUS	src/lib/voice.ts	119	      continuous: config.continuous ?? process.env.VOICE_CONTINUOUS === "true",
+LIVE_PASSWORD	src/middleware.ts	12	  if (url.pathname.startsWith("/live") && process.env.LIVE_PASSWORD) {
+LIVE_PASSWORD	src/middleware.ts	14	    if (pass !== process.env.LIVE_PASSWORD) {
+NEXT_PUBLIC_BASE_URL	.env.example	100	NEXT_PUBLIC_BASE_URL=https://your-domain.com
+NEXT_PUBLIC_SITE_URL	.env.example	102	NEXT_PUBLIC_SITE_URL=https://3000studios.com
+NEXT_PUBLIC_ADSENSE_PUBLISHER_ID	.env.example	106	NEXT_PUBLIC_ADSENSE_PUBLISHER_ID=ca-pub-5800977493749262
+NEXT_PUBLIC_SIGNAL_SERVER	.env.example	112	NEXT_PUBLIC_SIGNAL_SERVER=wss://signal.your-domain.com
+NEXT_PUBLIC_SITE_URL	.env.schema	2	NEXT_PUBLIC_SITE_URL=
+NODE_ENV	_disabled/api/matrix/auth/login/route.ts	36	      secure: process.env.NODE_ENV === "production",
+OPENAI_API_KEY	_disabled/api/matrix/health/route.ts	18	    health.ai_core = process.env.OPENAI_API_KEY ? "ok" : "missing";
+VERCEL_DEPLOY_HOOK	_disabled/api/matrix/health/route.ts	21	    health.vercel_deploy = process.env.VERCEL_DEPLOY_HOOK ? "ok" : "missing";
+NODE_ENV	_disabled/api/shadow/auth/login/route.ts	25	      secure: process.env.NODE_ENV === "production",
+NODE_ENV	_disabled/api/shadow/auth/logout/route.ts	17	      secure: process.env.NODE_ENV === "production",
+OPENAI_KEY	_disabled/api/shadow/dialogue/route.ts	9	      Authorization: `Bearer ${process.env.OPENAI_KEY}`,
+OPENAI_API_KEY	_disabled/api/shadow/exec/route.ts	16	      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+OPENAI_API_KEY	_disabled/api/shadow/llm/route.ts	17	        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+OPENAI_API_KEY	_disabled/api/shadow/stt/route.ts	12	    const apiKey = process.env.OPENAI_API_KEY;
+OPENAI_API_KEY	_disabled/api/shadow/voice/route.ts	10	const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "";
+VERCEL_ACCESS_TOKEN	app/api/analytics/deployments/route.ts	8	    const vercelToken = process.env.VERCEL_ACCESS_TOKEN;
+VERCEL_PROJECT_ID	app/api/analytics/deployments/route.ts	9	    const vercelProjectId = process.env.VERCEL_PROJECT_ID || "3000studios-next";
+NODE_ENV	app/api/analytics/system/route.ts	28	      env: process.env.NODE_ENV || "development",
+NEXT_PUBLIC_SHADOW_USER	app/shadow-login/page.tsx	15	      user === process.env.NEXT_PUBLIC_SHADOW_USER &&
+SHADOW_PASSWORD	app/shadow-login/page.tsx	16	      pass === process.env.SHADOW_PASSWORD
+NODE_ENV	components/os/EventBus.tsx	20	      if (process.env.NODE_ENV === "development") {
+NEXT_PUBLIC_ADSENSE_PUBLISHER_ID	docs/MISSING_SECRETS.md	11	- **`NEXT_PUBLIC_ADSENSE_PUBLISHER_ID`**: Required for AdSense integration.
+NEXT_PUBLIC_MAPS_API	docs/QUICK_START.md	95	- `.env.local` - Local development (add your NEXT_PUBLIC_MAPS_API)
+NEXT_PUBLIC_MAPS_API	docs/QUICK_START.md	254	1. Add `NEXT_PUBLIC_MAPS_API` to GitHub Secrets
+OPENAI_KEY	docs/architecture/3000structure.txt	2343		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/3000structure.txt	2417		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/architecture/3000structure.txt	2559		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+LIVE_PASSWORD	docs/architecture/3000structure.txt	3233		if (pass !== process.env.LIVE_PASSWORD) {
+OPENAI_KEY	docs/architecture/3000structure.txt	3515		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/3000structure.txt	3581		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+STRIPE_KEY	docs/architecture/3000structure.txt	3779		const stripe = new Stripe(process.env.STRIPE_KEY);
+OPENAI_KEY	docs/architecture/3000structure.txt	3899		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/3000structure.txt	6567		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/architecture/3000structure.txt	6721		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+VERCEL_DEPLOY_HOOK	docs/architecture/3000structure.txt	6811		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+OPENAI_KEY	docs/architecture/3000structure.txt	7109		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/3000structure.txt	7243		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/architecture/3000structure.txt	9885		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+VERCEL_DEPLOY_HOOK	docs/architecture/3000structure.txt	10135		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+OPENAI_KEY	docs/architecture/3000structure.txt	10669		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/3000structure.txt	11845		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/3000structure.txt	13007		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/architecture/3000structure.txt	13185		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+NEXT_PUBLIC_PAYPAL_CLIENT_ID	docs/architecture/website_Structure	912	Searched for text `process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID` (`**/components/PayPalButton.tsx`), 1 result
+NEXT_PUBLIC_SITE_URL	docs/architecture/website_Structure	4841	NEXT_PUBLIC_SITE_URL=https://3000studios-next.vercel.app
+NEXT_PUBLIC_VERCEL_ENV	docs/architecture/website_Structure	4842	NEXT_PUBLIC_VERCEL_ENV=production
+NEXT_PUBLIC_SHADOW_USER	docs/architecture/website_Structure	4871	NEXT_PUBLIC_SHADOW_USER=your_email
+OPENAI_KEY	docs/architecture/website_Structure	6801	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/website_Structure	6840	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/architecture/website_Structure	6917	  await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+LIVE_PASSWORD	docs/architecture/website_Structure	7292	    if (pass !== process.env.LIVE_PASSWORD) {
+OPENAI_KEY	docs/architecture/website_Structure	7477	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/website_Structure	7512	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+STRIPE_KEY	docs/architecture/website_Structure	7616	const stripe = new Stripe(process.env.STRIPE_KEY);
+OPENAI_KEY	docs/architecture/website_Structure	7679	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/website_Structure	9297	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/architecture/website_Structure	9378	      await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+VERCEL_DEPLOY_HOOK	docs/architecture/website_Structure	9430	await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+OPENAI_KEY	docs/architecture/website_Structure	9650	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/website_Structure	9726	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/architecture/website_Structure	11323	  await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+VERCEL_DEPLOY_HOOK	docs/architecture/website_Structure	11488	await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+OPENAI_KEY	docs/architecture/website_Structure	11829	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/website_Structure	12634	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/architecture/website_Structure	13407	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/architecture/website_Structure	13507	await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+OPENAI_KEY	docs/archive/3000structure.txt	2343		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/3000structure.txt	2417		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/archive/3000structure.txt	2559		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+LIVE_PASSWORD	docs/archive/3000structure.txt	3233		if (pass !== process.env.LIVE_PASSWORD) {
+OPENAI_KEY	docs/archive/3000structure.txt	3515		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/3000structure.txt	3581		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+STRIPE_KEY	docs/archive/3000structure.txt	3779		const stripe = new Stripe(process.env.STRIPE_KEY);
+OPENAI_KEY	docs/archive/3000structure.txt	3899		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/3000structure.txt	6567		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/archive/3000structure.txt	6721		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+VERCEL_DEPLOY_HOOK	docs/archive/3000structure.txt	6811		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+OPENAI_KEY	docs/archive/3000structure.txt	7109		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/3000structure.txt	7243		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/archive/3000structure.txt	9885		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+VERCEL_DEPLOY_HOOK	docs/archive/3000structure.txt	10135		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+OPENAI_KEY	docs/archive/3000structure.txt	10669		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/3000structure.txt	11845		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/3000structure.txt	13007		const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/archive/3000structure.txt	13185		await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: &quot;POST&quot; });
+NEXT_PUBLIC_SITE_URL	docs/archive/DEPLOYMENT.md	81	NEXT_PUBLIC_SITE_URL=https://3000studios.com
+NEXT_PUBLIC_BASE_URL	docs/archive/DEPLOYMENT.md	82	NEXT_PUBLIC_BASE_URL=https://3000studios.com
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY	docs/archive/DEPLOYMENT.md	93	NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=<stripe-public>
+NEXT_PUBLIC_SIGNAL_SERVER	docs/archive/DEPLOYMENT.md	104	NEXT_PUBLIC_SIGNAL_SERVER=wss://signal.3000studios.com
+NEXT_PUBLIC_MAPS_API	docs/archive/DEPLOYMENT.md	113	NEXT_PUBLIC_MAPS_API=<google-maps-key>
+NEXT_PUBLIC_MAPS_API	docs/archive/FINAL_SETUP_SUMMARY.md	101	NEXT_PUBLIC_MAPS_API=AIz...your_maps_key
+NEXT_PUBLIC_MAPS_API	docs/archive/SECURE_WORKFLOW.md	65	NEXT_PUBLIC_MAPS_API=your_maps_key_here
+NEXT_PUBLIC_MAPS_API	docs/archive/SECURE_WORKFLOW.md	155	NEXT_PUBLIC_MAPS_API=AIz...your_maps_key
+OPENAI_API	docs/archive/SHADOW_COMPLETE_SETUP.md	140	│ ├─ const key = process.env.OPENAI_API.. │
+KEY_NAME	docs/archive/SHADOW_COMPLETE_SETUP.md	313	3. Check code uses `process.env.KEY_NAME`
+OPENAI_API_KEY	docs/archive/SHADOW_SECURE_DEV.md	231	const apiKey = process.env.OPENAI_API_KEY;
+NEXT_PUBLIC_PAYPAL_CLIENT_ID	docs/archive/website_Structure	912	Searched for text `process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID` (`**/components/PayPalButton.tsx`), 1 result
+NEXT_PUBLIC_SITE_URL	docs/archive/website_Structure	4841	NEXT_PUBLIC_SITE_URL=https://3000studios-next.vercel.app
+NEXT_PUBLIC_VERCEL_ENV	docs/archive/website_Structure	4842	NEXT_PUBLIC_VERCEL_ENV=production
+NEXT_PUBLIC_SHADOW_USER	docs/archive/website_Structure	4871	NEXT_PUBLIC_SHADOW_USER=your_email
+OPENAI_KEY	docs/archive/website_Structure	6801	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/website_Structure	6840	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/archive/website_Structure	6917	  await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+LIVE_PASSWORD	docs/archive/website_Structure	7292	    if (pass !== process.env.LIVE_PASSWORD) {
+OPENAI_KEY	docs/archive/website_Structure	7477	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/website_Structure	7512	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+STRIPE_KEY	docs/archive/website_Structure	7616	const stripe = new Stripe(process.env.STRIPE_KEY);
+OPENAI_KEY	docs/archive/website_Structure	7679	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/website_Structure	9297	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/archive/website_Structure	9378	      await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+VERCEL_DEPLOY_HOOK	docs/archive/website_Structure	9430	await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+OPENAI_KEY	docs/archive/website_Structure	9650	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/website_Structure	9726	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/archive/website_Structure	11323	  await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+VERCEL_DEPLOY_HOOK	docs/archive/website_Structure	11488	await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+OPENAI_KEY	docs/archive/website_Structure	11829	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/website_Structure	12634	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+OPENAI_KEY	docs/archive/website_Structure	13407	const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+VERCEL_DEPLOY_HOOK	docs/archive/website_Structure	13507	await fetch(process.env.VERCEL_DEPLOY_HOOK!, { method: "POST" });
+NEXT_PUBLIC_SITE_URL	docs/vercel_env.txt	4	 NEXT_PUBLIC_SITE_URL       Encrypted           Production, Preview, Development    15h ago    
+OPENAI_API_KEY	lib/aiCommandInterpreter.ts	10	  apiKey: process.env.OPENAI_API_KEY || "",
+WP_USERNAME	lib/auth/wp.ts	12	const USERNAME = process.env.WP_USERNAME || "mr.jwswain@gmail.com";
+WP_PASSWORD	lib/auth/wp.ts	13	const PASSWORD = process.env.WP_PASSWORD || "";
+NODE_ENV	lib/matrix/analytics.ts	39	  if (process.env.NODE_ENV === "development") {
+PAYPAL_ENV	lib/paypal-config.ts	1	export const isProd = process.env.PAYPAL_ENV === "production";
+PAYPAL_CLIENT_ID_PROD	lib/paypal-config.ts	5	    ? process.env.PAYPAL_CLIENT_ID_PROD
+PAYPAL_CLIENT_ID	lib/paypal-config.ts	6	    : process.env.PAYPAL_CLIENT_ID,
+PAYPAL_CLIENT_SECRET_PROD	lib/paypal-config.ts	8	    ? process.env.PAYPAL_CLIENT_SECRET_PROD
+PAYPAL_CLIENT_SECRET	lib/paypal-config.ts	9	    : process.env.PAYPAL_CLIENT_SECRET,
+SHADOW_ADMIN_EMAIL	lib/shadow/auth.ts	4	const SHADOW_EMAIL = process.env.SHADOW_ADMIN_EMAIL || "admin@3000studios.com";
+SHADOW_ADMIN_PASSWORD	lib/shadow/auth.ts	5	const SHADOW_PASSWORD = process.env.SHADOW_ADMIN_PASSWORD || "ShadowPrime2025!";
+OPENAI_API_KEY	lib/shadow/personality.ts	9	  apiKey: process.env.OPENAI_API_KEY 
+DATABASE_URL	package.json	34	    "postinstall": "node -e \"const { execSync } = require('child_process'); const url = process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/postgres'; execSync('npx prisma generate', { stdio: 'inherit', env: { ...process.env, DATABASE_URL: url } });\""
+DATABASE_URL	prisma.config.ts	14	    url: env("DATABASE_URL"),
+DATABASE_URL	prisma/schema.postgres.prisma	10	  url      = env("DATABASE_URL")
+DATABASE_URL	prisma/schema.prisma	10	  url      = env("DATABASE_URL")
+GITHUB_TOKEN	scripts/configure-branch-protection.mjs	30	  const token = process.env.GITHUB_TOKEN;
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	2	# Fixes NEXT_PUBLIC_SITE_URL circular reference issue
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	15	Write-Host "║   Fixing NEXT_PUBLIC_SITE_URL circular reference       ║" -ForegroundColor Cyan
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	68	Write-Host "🗑️  Step 3: Removing NEXT_PUBLIC_SITE_URL from ALL environments..." -ForegroundColor Yellow
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	76	        $output = vercel env rm NEXT_PUBLIC_SITE_URL $env --yes 2>&1
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	89	Write-Host "➕ Step 4: Adding NEXT_PUBLIC_SITE_URL with literal value..." -ForegroundColor Yellow
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	95	Write-Host "   1. What's the value of NEXT_PUBLIC_SITE_URL?" -ForegroundColor Cyan
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	105	    vercel env add NEXT_PUBLIC_SITE_URL production
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	107	    Write-Host "✅ Added NEXT_PUBLIC_SITE_URL" -ForegroundColor Green
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	112	    Write-Host "   vercel env add NEXT_PUBLIC_SITE_URL production" -ForegroundColor Cyan
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.ps1	138	Write-Host "║   ✅ NEXT_PUBLIC_SITE_URL fixed                        ║" -ForegroundColor Cyan
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.sh	5	# Fixes NEXT_PUBLIC_SITE_URL circular reference issue
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.sh	20	echo -e "${BLUE}║   Fixing NEXT_PUBLIC_SITE_URL circular reference       ║${NC}"
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.sh	52	echo -e "${YELLOW}🗑️  Step 3: Removing NEXT_PUBLIC_SITE_URL (if exists)...${NC}"
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.sh	53	vercel env rm NEXT_PUBLIC_SITE_URL production --yes 2>&1 || echo -e "${YELLOW}⚠️  Variable may not exist (that's okay)${NC}"
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.sh	58	echo -e "${YELLOW}➕ Step 4: Adding NEXT_PUBLIC_SITE_URL with literal value...${NC}"
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.sh	65	echo "https://3000studios.com" | vercel env add NEXT_PUBLIC_SITE_URL production
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.sh	67	echo -e "${GREEN}✅ Added NEXT_PUBLIC_SITE_URL${NC}"
+NEXT_PUBLIC_SITE_URL	scripts/fix-vercel-env.sh	92	echo -e "${BLUE}║   ✅ NEXT_PUBLIC_SITE_URL fixed                        ║${NC}"
+GEMINI_API_KEY	scripts/generate-content.ts	10	const API_KEY = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
+NEXT_PUBLIC_SITE_URL	scripts/sync-secrets-to-vercel.ps1	19	    "NEXT_PUBLIC_SITE_URL"
+VALIDATE_ENV_MODE	scripts/validate-env.js	34	const mode = process.argv[2] || process.env.VALIDATE_ENV_MODE || 'dev';
+NEXT_PUBLIC_BASE_URL	scripts/validate-env.js	51	    'NEXT_PUBLIC_BASE_URL',
+NEXT_PUBLIC_BASE_URL	scripts/validate-env.js	62	    'NEXT_PUBLIC_BASE_URL',
+NEXT_PUBLIC_BASE_URL	scripts/validate-env.js	82	    'NEXT_PUBLIC_BASE_URL',
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY	scripts/validate-env.js	90	    'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY',
+NEXT_PUBLIC_GA_MEASUREMENT_ID	scripts/validate-env.js	96	    'NEXT_PUBLIC_GA_MEASUREMENT_ID',
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY	scripts/validate-env.js	113	    'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY',
+NEXT_PUBLIC_SIGNAL_SERVER	scripts/validate-env.js	155	    'NEXT_PUBLIC_SIGNAL_SERVER',
+NEXT_PUBLIC_GA_MEASUREMENT_ID	scripts/validate-env.js	161	    'NEXT_PUBLIC_GA_MEASUREMENT_ID',
+JWT_SECRET	scripts/validate-env.js	170	      const secret = process.env.JWT_SECRET;
+ADMIN_PASSWORD	scripts/validate-env.js	178	      const pass = process.env.ADMIN_PASSWORD;
+NEXT_PUBLIC_BASE_URL	scripts/validate-env.js	188	      const url = process.env.NEXT_PUBLIC_BASE_URL;
+NEXT_PUBLIC_BASE_URL	scripts/validate-env.js	191	    message: 'NEXT_PUBLIC_BASE_URL should not contain localhost in production',
+STRIPE_SECRET_KEY	scripts/validate-env.js	197	      const key = process.env.STRIPE_SECRET_KEY;
+NEXT_PUBLIC_ADSENSE_PUBLISHER_ID	scripts/validate-revenue-paths.js	80	  const hasPublisherIdRef = layoutContent.includes('NEXT_PUBLIC_ADSENSE_PUBLISHER_ID');
+NEXT_PUBLIC_ADSENSE_PUBLISHER_ID	scripts/validate-revenue-paths.js	87	    info('  Required: Reference to NEXT_PUBLIC_ADSENSE_PUBLISHER_ID');
+NEXT_PUBLIC_SITE_URL	scripts/vercel-reset-and-deploy.ps1	48	    "NEXT_PUBLIC_SITE_URL",
+NEXT_PUBLIC_SITE_URL	scripts/vercel-reset-and-deploy.ps1	69	Write-Host "⚠️  CRITICAL: When prompted for NEXT_PUBLIC_SITE_URL:" -ForegroundColor Yellow
+NEXT_PUBLIC_SITE_URL	scripts/vercel-reset-and-deploy.ps1	79	    vercel env add NEXT_PUBLIC_SITE_URL production
+NEXT_PUBLIC_SITE_URL	scripts/vercel-reset-and-deploy.ps1	80	    Write-Host "✅ Added NEXT_PUBLIC_SITE_URL to production" -ForegroundColor Green
+NEXT_PUBLIC_SITE_URL	scripts/vercel-reset-and-deploy.ps1	82	    Write-Host "❌ Failed to add NEXT_PUBLIC_SITE_URL" -ForegroundColor Red
+NEXT_PUBLIC_SITE_URL	scripts/vercel-reset-and-deploy.ps1	219	Write-Host "║   ✅ NEXT_PUBLIC_SITE_URL fixed (literal value)        ║" -ForegroundColor Cyan
+GITHUB_TOKEN	scripts/verify-branch-protection.mjs	33	  const token = process.env.GITHUB_TOKEN;
+OPENAI_API_KEY	shadow-engine/helpers/llm.ts	10	  apiKey: process.env.OPENAI_API_KEY || "",
+OPENAI_API_KEY	shadow-engine/helpers/llm.ts	15	    if (!process.env.OPENAI_API_KEY) {
+WORDPRESS_API_URL	shadow-engine/helpers/wp.ts	10	  process.env.WORDPRESS_API_URL || "https://3000studios.com/wp-json/wp/v2";
+WORDPRESS_USERNAME	shadow-engine/helpers/wp.ts	11	const WP_USERNAME = process.env.WORDPRESS_USERNAME || "";
+WORDPRESS_PASSWORD	shadow-engine/helpers/wp.ts	12	const WP_PASSWORD = process.env.WORDPRESS_PASSWORD || "";
+OPENAI_API_KEY	shadow/core/avatar.js	12	  apiKey: process.env.OPENAI_API_KEY,
+NODE_ENV	src/app/api/affiliate/route.ts	102	      secure: process.env.NODE_ENV === "production",
+NODE_ENV	src/app/api/affiliate/route.ts	110	      secure: process.env.NODE_ENV === "production",
+NODE_ENV	src/app/api/auth/magic-link/route.ts	33	    if (process.env.NODE_ENV === "production") {
+ADMIN_EMAIL	src/app/api/auth/magic-link/route.ts	73	      process.env.MATRIX_ADMIN_EMAIL || process.env.ADMIN_EMAIL;
+NEXT_PUBLIC_BASE_URL	src/app/api/auth/magic-link/route.ts	118	    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+NODE_ENV	src/app/api/auth/magic-link/route.ts	140	      ...(process.env.NODE_ENV === "development" && { magicLink }),
+SENDGRID_API_KEY	src/app/api/auth/magic-link/route.ts	175	    //     'Authorization': `Bearer ${process.env.SENDGRID_API_KEY}`,
+SESSION_DURATION_HOURS	src/app/api/auth/verify-magic/route.ts	11	  parseInt(process.env.SESSION_DURATION_HOURS || "24", 10) * 3600;
+CRON_SECRET	src/app/api/cron/content/route.ts	8	    if (secret !== process.env.CRON_SECRET) {
+CRON_SECRET	src/app/api/cron/reports/route.ts	9	    if (secret !== process.env.CRON_SECRET) {
+CRON_SECRET	src/app/api/cron/sitemap/route.ts	26	    if (secret !== process.env.CRON_SECRET) {
+CRON_SECRET	src/app/api/cron/store/route.ts	9	    if (secret !== process.env.CRON_SECRET) {
+NEXT_PUBLIC_SITE_URL	src/app/api/env-check/route.ts	10	 * - NEXT_PUBLIC_SITE_URL: The configured site URL (or null if missing)
+NEXT_PUBLIC_SITE_URL	src/app/api/env-check/route.ts	12	 * - ok: Boolean indicating if NEXT_PUBLIC_SITE_URL is set
+NEXT_PUBLIC_SITE_URL	src/app/api/env-check/route.ts	18	  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+NODE_ENV	src/app/api/env-check/route.ts	19	  const nodeEnv = process.env.NODE_ENV;
+NEXT_PUBLIC_SITE_URL	src/app/api/env-check/route.ts	22	    NEXT_PUBLIC_SITE_URL: siteUrl ?? null,
+NEXT_PUBLIC_SITE_URL	src/app/api/env-check/route.ts	28	      : '❌ NEXT_PUBLIC_SITE_URL is missing',
+FULFILLMENT_SIGNING_SECRET	src/app/api/fulfillment/webhook/route.ts	4	  const secret = process.env.FULFILLMENT_SIGNING_SECRET;
+CRON_SECRET	src/app/api/generate-content/route.ts	81	    process.env.CRON_SECRET &&
+CRON_SECRET	src/app/api/generate-content/route.ts	82	    authHeader !== `Bearer ${process.env.CRON_SECRET}`
+PAYPAL_CLIENT_ID	src/app/api/paypal/checkout/route.ts	13	const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
+PAYPAL_CLIENT_SECRET	src/app/api/paypal/checkout/route.ts	14	const PAYPAL_CLIENT_SECRET = process.env.PAYPAL_CLIENT_SECRET;
+NODE_ENV	src/app/api/paypal/checkout/route.ts	15	const PAYPAL_API_BASE = process.env.NODE_ENV === 'production'
+NEXT_PUBLIC_SITE_URL	src/app/api/paypal/checkout/route.ts	74	          return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/success`,
+NEXT_PUBLIC_SITE_URL	src/app/api/paypal/checkout/route.ts	75	          cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/checkout`
+VERCEL_GIT_COMMIT_SHA	src/app/api/status/route.ts	28	    buildId = process.env.VERCEL_GIT_COMMIT_SHA?.substring(0, 7) || 'dev';
+OPENAI_API_KEY	src/app/api/status/route.ts	33	    hasOpenAI: !!process.env.OPENAI_API_KEY,
+CLAUDE_API_KEY	src/app/api/status/route.ts	34	    hasClaude: !!process.env.CLAUDE_API_KEY,
+GEMINI_API_KEY	src/app/api/status/route.ts	35	    hasGemini: !!process.env.GEMINI_API_KEY,
+PAYPAL_CLIENT_ID	src/app/api/status/route.ts	36	    hasPayPal: !!process.env.PAYPAL_CLIENT_ID,
+STRIPE_SECRET_KEY	src/app/api/status/route.ts	37	    hasStripe: !!process.env.STRIPE_SECRET_KEY,
+GOOGLE_MAPS_API_KEY	src/app/api/status/route.ts	38	    hasGoogleMaps: !!process.env.GOOGLE_MAPS_API_KEY,
+NODE_ENV	src/app/api/status/route.ts	39	    nodeEnv: process.env.NODE_ENV || 'development',
+VERCEL_ENV	src/app/api/status/route.ts	40	    vercelEnv: process.env.VERCEL_ENV || 'local',
+VERCEL_GIT_COMMIT_SHA	src/app/api/status/route.ts	66	      commit: process.env.VERCEL_GIT_COMMIT_SHA?.substring(0, 7) || 'local',
+VERCEL_GIT_COMMIT_REF	src/app/api/status/route.ts	67	      branch: process.env.VERCEL_GIT_COMMIT_REF || 'main',
+VERCEL_GIT_COMMIT_AUTHOR_NAME	src/app/api/status/route.ts	68	      author: process.env.VERCEL_GIT_COMMIT_AUTHOR_NAME || 'unknown',
+MUX_TOKEN_ID	src/app/api/streaming/route.ts	6	  tokenId: process.env.MUX_TOKEN_ID,
+MUX_TOKEN_SECRET	src/app/api/streaming/route.ts	7	  tokenSecret: process.env.MUX_TOKEN_SECRET,
+NEXT_PUBLIC_SIGNAL_SERVER	src/app/api/streaming/start/route.ts	30	      signalServerUrl: process.env.NEXT_PUBLIC_SIGNAL_SERVER || 'wss://signal.3000studios.com',
+STRIPE_3000_SECRET	src/app/api/stripe/checkout/route.ts	14	  const key = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET || process.env.STRIPE_3000_SECRET;
+NEXT_PUBLIC_SITE_URL	src/app/api/stripe/checkout/route.ts	57	      success_url: successUrl || `${process.env.NEXT_PUBLIC_SITE_URL}/store/success?session_id={CHECKOUT_SESSION_ID}`,
+NEXT_PUBLIC_SITE_URL	src/app/api/stripe/checkout/route.ts	58	      cancel_url: cancelUrl || `${process.env.NEXT_PUBLIC_SITE_URL}/store/checkout`,
+STRIPE_WEBHOOK_SECRET	src/app/api/stripe/webhook/route.ts	14	    if (!process.env.STRIPE_WEBHOOK_SECRET) {
+STRIPE_WEBHOOK_SECRET	src/app/api/stripe/webhook/route.ts	20	      process.env.STRIPE_WEBHOOK_SECRET
+OPENAI_API_KEY	src/app/api/voice-to-code/route.ts	16	  if (!process.env.OPENAI_API_KEY) return null;
+OPENAI_API_KEY	src/app/api/voice-to-code/route.ts	20	      openaiInstance = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+OPENAI_API_KEY	src/app/api/voice-to-code/route.ts	59	    if (audio && process.env.OPENAI_API_KEY) {
+OPENAI_API_KEY	src/app/api/voice-to-code/route.ts	83	    if (!process.env.OPENAI_API_KEY) {
+NODE_ENV	src/app/components/ErrorBoundary.tsx	65	            {process.env.NODE_ENV === 'development' && this.state.error && (
+NEXT_PUBLIC_MAPS_API	src/app/components/GoogleMap.tsx	200	            Please add your NEXT_PUBLIC_MAPS_API key to .env.local
+NEXT_PUBLIC_MAPS_API	src/app/contact/page.tsx	491	                process.env.NEXT_PUBLIC_MAPS_API ||
+NODE_ENV	src/app/error.tsx	44	        {process.env.NODE_ENV === "development" && (
+NEXT_PUBLIC_ADSENSE_PUBLISHER_ID	src/app/layout.tsx	20	const RAW_ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
+NEXT_PUBLIC_BASE_URL	src/app/layout.tsx	28	  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://3000studios.com"),
+NEXT_PUBLIC_ADSENSE_PUBLISHER_ID	src/app/layout.tsx	95	        {/* Google AdSense Auto Ads (enabled when NEXT_PUBLIC_ADSENSE_PUBLISHER_ID is set) */}
+NEXT_PUBLIC_ADSENSE_PUBLISHER_ID	src/app/page.tsx	174	      {process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID && (
+NEXT_PUBLIC_BASE_URL	src/app/robots.ts	3	const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://3000studios.com";
+NEXT_PUBLIC_SITE_URL	src/app/store/checkout/page.tsx	97	          successUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/store/success?session_id={CHECKOUT_SESSION_ID}`,
+NEXT_PUBLIC_SITE_URL	src/app/store/checkout/page.tsx	98	          cancelUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/store/checkout`,
+EMAIL_SERVER_HOST	src/auth.ts	47	    ...(process.env.EMAIL_SERVER_HOST
+EMAIL_SERVER_HOST	src/auth.ts	51	              host: process.env.EMAIL_SERVER_HOST,
+EMAIL_SERVER_PORT	src/auth.ts	52	              port: Number(process.env.EMAIL_SERVER_PORT || 0),
+EMAIL_SERVER_USER	src/auth.ts	54	                user: process.env.EMAIL_SERVER_USER,
+EMAIL_SERVER_PASSWORD	src/auth.ts	55	                pass: process.env.EMAIL_SERVER_PASSWORD,
+EMAIL_FROM	src/auth.ts	58	            from: process.env.EMAIL_FROM || "admin@3000studios.com",
+NEXT_PUBLIC_ADSENSE_PUBLISHER_ID	src/components/AdSense.tsx	22	  const raw = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
+NEXT_PUBLIC_PAYPAL_CLIENT_ID	src/components/PayPalButton.tsx	15	    clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "test",
+NODE_ENV	src/lib/analytics.ts	51	    if (process.env.NODE_ENV === 'development') {
+STRIPE_SECRET_KEY	src/lib/apiClients.ts	32	    const secretKey = process.env.STRIPE_SECRET_KEY;
+STRIPE_SECRET_KEY	src/lib/apiClients.ts	53	  isConfigured: () => !!process.env.STRIPE_SECRET_KEY,
+PAYPAL_CLIENT_ID	src/lib/apiClients.ts	60	  const clientId = process.env.PAYPAL_CLIENT_ID;
+PAYPAL_SECRET	src/lib/apiClients.ts	61	  const secret = process.env.PAYPAL_SECRET;
+PAYPAL_MODE	src/lib/apiClients.ts	62	  const mode = process.env.PAYPAL_MODE || "sandbox";
+PAYPAL_SECRET	src/lib/apiClients.ts	84	    !!(process.env.PAYPAL_CLIENT_ID && process.env.PAYPAL_SECRET),
+OPENAI_API_KEY	src/lib/apiClients.ts	94	    const apiKey = process.env.OPENAI_API_KEY;
+OPENAI_ORG_ID	src/lib/apiClients.ts	104	      organization: process.env.OPENAI_ORG_ID,
+OPENAI_API_KEY	src/lib/apiClients.ts	115	  isConfigured: () => !!process.env.OPENAI_API_KEY,
+CLAUDE_API_KEY	src/lib/apiClients.ts	125	    const apiKey = process.env.CLAUDE_API_KEY;
+CLAUDE_API_KEY	src/lib/apiClients.ts	145	  isConfigured: () => !!process.env.CLAUDE_API_KEY,
+GEMINI_API_KEY	src/lib/apiClients.ts	155	    const apiKey = process.env.GEMINI_API_KEY;
+GEMINI_API_KEY	src/lib/apiClients.ts	176	  isConfigured: () => !!process.env.GEMINI_API_KEY,
+MONGODB_URI	src/lib/apiClients.ts	192	  const uri = process.env.MONGODB_URI;
+MONGODB_DB_NAME	src/lib/apiClients.ts	231	  const dbName = process.env.MONGODB_DB_NAME || "3000studios";
+MONGODB_URI	src/lib/apiClients.ts	242	  isConfigured: () => !!process.env.MONGODB_URI,
+NEXT_PUBLIC_GA_MEASUREMENT_ID	src/lib/apiClients.ts	257	    measurementId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
+NEXT_PUBLIC_GA_MEASUREMENT_ID	src/lib/apiClients.ts	258	    isConfigured: () => !!process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
+NEXT_PUBLIC_VERCEL_ANALYTICS_ID	src/lib/apiClients.ts	261	    isConfigured: () => !!process.env.NEXT_PUBLIC_VERCEL_ANALYTICS_ID,
+TWILIO_ACCOUNT_SID	src/lib/apiClients.ts	269	  const accountSid = process.env.TWILIO_ACCOUNT_SID;
+TWILIO_AUTH_TOKEN	src/lib/apiClients.ts	270	  const authToken = process.env.TWILIO_AUTH_TOKEN;
+TWILIO_PHONE	src/lib/apiClients.ts	283	    phoneNumber: process.env.TWILIO_PHONE,
+TWILIO_AUTH_TOKEN	src/lib/apiClients.ts	292	    !!(process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN),
+WP_URL	src/lib/apiClients.ts	299	  const url = process.env.WP_URL;
+WP_USER	src/lib/apiClients.ts	300	  const user = process.env.WP_USER;
+WP_PASS	src/lib/apiClients.ts	301	  const pass = process.env.WP_PASS;
+WP_PASS	src/lib/apiClients.ts	323	    !!(process.env.WP_URL && process.env.WP_USER && process.env.WP_PASS),
+WEBRTC_KEY	src/lib/apiClients.ts	331	    apiKey: process.env.WEBRTC_KEY,
+WEBRTC_TURN_URL	src/lib/apiClients.ts	336	      ...(process.env.WEBRTC_TURN_URL
+WEBRTC_TURN_URL	src/lib/apiClients.ts	339	              urls: process.env.WEBRTC_TURN_URL,
+WEBRTC_TURN_USER	src/lib/apiClients.ts	340	              username: process.env.WEBRTC_TURN_USER,
+WEBRTC_TURN_PASS	src/lib/apiClients.ts	341	              credential: process.env.WEBRTC_TURN_PASS,
+NEXT_PUBLIC_SIGNAL_SERVER	src/lib/apiClients.ts	347	  signalServer: process.env.NEXT_PUBLIC_SIGNAL_SERVER,
+WEBRTC_KEY	src/lib/apiClients.ts	348	  isConfigured: () => !!process.env.WEBRTC_KEY,
+GITHUB_PAT	src/lib/apiClients.ts	355	  pat: process.env.GITHUB_PAT,
+GITHUB_PAT	src/lib/apiClients.ts	356	  isConfigured: () => !!process.env.GITHUB_PAT,
+AFFILIATE_SECRET	src/lib/apiClients.ts	363	  secret: process.env.AFFILIATE_SECRET,
+AFFILIATE_COOKIE_DURATION	src/lib/apiClients.ts	364	  cookieDuration: parseInt(process.env.AFFILIATE_COOKIE_DURATION || "30", 10),
+AFFILIATE_COMMISSION_RATE	src/lib/apiClients.ts	365	  commissionRate: parseFloat(process.env.AFFILIATE_COMMISSION_RATE || "10"),
+AFFILIATE_SECRET	src/lib/apiClients.ts	366	  isConfigured: () => !!process.env.AFFILIATE_SECRET,
+NODE_ENV	src/lib/auditLog.ts	49	    if (process.env.NODE_ENV === 'development') {
+MATRIX_ADMIN_EMAIL	src/lib/auth.ts	9	  email: process.env.MATRIX_ADMIN_EMAIL || "mr.jwswain@gmail.com",
+MATRIX_ADMIN_PASSWORD	src/lib/auth.ts	10	  password: process.env.MATRIX_ADMIN_PASSWORD || "Bossman3000!!!",
+SESSION_DURATION_HOURS	src/lib/auth.ts	14	  parseInt(process.env.SESSION_DURATION_HOURS || "24", 10) * 3600;
+SESSION_SECRET	src/lib/auth.ts	30	  const secret = process.env.SESSION_SECRET || "dev-secret-key";
+SESSION_SECRET	src/lib/auth.ts	47	  const secret = process.env.SESSION_SECRET || "dev-secret-key";
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME	src/lib/cloudinary.ts	6	const CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 'dj92eb97f';
+NEXT_PUBLIC_SITE_URL	src/lib/env.ts	10	  SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || "https://3000studios.com",
+STRIPE_PUBLIC	src/lib/env.ts	16	    process.env.STRIPE_PUBLISHABLE_KEY || process.env.STRIPE_PUBLIC || "",
+PAYPAL_CLIENT_SECRET_PROD	src/lib/env.ts	19	  PAYPAL_SECRET: process.env.PAYPAL_SECRET || process.env.PAYPAL_CLIENT_SECRET_PROD || "",
+OPENAI_API_KEY	src/lib/openai.ts	4	  apiKey: process.env.OPENAI_API_KEY,
+PAYPAL_CLIENT_ID	src/lib/paypal-config.ts	2	  clientId: process.env.PAYPAL_CLIENT_ID!,
+PAYPAL_CLIENT_SECRET	src/lib/paypal-config.ts	3	  secret: process.env.PAYPAL_CLIENT_SECRET!,
+PAYPAL_ENV	src/lib/paypal-config.ts	4	  baseUrl: process.env.PAYPAL_ENV === "production"
+PAYPAL_ENV	src/lib/paypal-config.ts	7	  environment: process.env.PAYPAL_ENV === "production" ? "paypal" : "sandbox",
+PAYPAL_ENV	src/lib/paypal.ts	3	    env: process.env.PAYPAL_ENV || "sandbox",
+NODE_ENV	src/lib/prisma.ts	11	if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+NEXT_PUBLIC_SITE_URL	src/lib/security.ts	15	    process.env.NEXT_PUBLIC_SITE_URL || "",
+NODE_ENV	src/lib/security.ts	16	    ...(process.env.NODE_ENV === "development"
+NODE_ENV	src/lib/security.ts	120	  if (process.env.NODE_ENV === "production") {
+CSRF_SECRET	src/lib/security.ts	154	const CSRF_SECRET = process.env.CSRF_SECRET || "change-me-in-production";
+CLAUDE_API_KEY	src/lib/services/anthropic.ts	11	if (process.env.CLAUDE_API_KEY) {
+CLAUDE_API_KEY	src/lib/services/anthropic.ts	13	    apiKey: process.env.CLAUDE_API_KEY,
+GEMINI_API_KEY	src/lib/services/gemini.ts	11	if (process.env.GEMINI_API_KEY) {
+GEMINI_API_KEY	src/lib/services/gemini.ts	12	  genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+GITHUB_PAT	src/lib/services/github.ts	9	  auth: process.env.GITHUB_PAT,
+MONGODB_URI	src/lib/services/mongodb.ts	21	  const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
+MONGODB_URI	src/lib/services/mongodb.ts	184	  const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
+MONGODB_URI	src/lib/services/mongodb.ts	204	  const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
+OPENAI_API_KEY	src/lib/services/openai.ts	11	if (process.env.OPENAI_API_KEY) {
+OPENAI_API_KEY	src/lib/services/openai.ts	13	    apiKey: process.env.OPENAI_API_KEY,
+NODE_ENV	src/lib/services/paypal.ts	8	const PAYPAL_ENV = process.env.PAYPAL_ENV || process.env.NODE_ENV;
+PAYPAL_CLIENT_ID	src/lib/services/paypal.ts	14	const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
+PAYPAL_CLIENT_SECRET	src/lib/services/paypal.ts	15	const PAYPAL_SECRET = process.env.PAYPAL_SECRET ?? process.env.PAYPAL_CLIENT_SECRET;
+NEXT_PUBLIC_BASE_URL	src/lib/services/paypal.ts	100	        return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/store/success`,
+NEXT_PUBLIC_BASE_URL	src/lib/services/paypal.ts	101	        cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/store/cancel`,
+STRIPE_SECRET_KEY	src/lib/services/stripe.ts	3	// if (!process.env.STRIPE_SECRET_KEY) {
+STRIPE_SECRET_KEY	src/lib/services/stripe.ts	8	  process.env.STRIPE_SECRET_KEY || "sk_test_mock_key",
+NEXT_PUBLIC_BASE_URL	src/lib/services/stripe.ts	23	    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+NEXT_PUBLIC_BASE_URL	src/lib/services/stripe.ts	24	    cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cart`,
+TWILIO_ACCOUNT_SID	src/lib/services/twilio.ts	8	const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
+TWILIO_AUTH_TOKEN	src/lib/services/twilio.ts	9	const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
+TWILIO_PHONE	src/lib/services/twilio.ts	10	const TWILIO_PHONE = process.env.TWILIO_PHONE;
+VERCEL_TOKEN	src/lib/services/vercel.ts	8	const VERCEL_TOKEN = process.env.VERCEL_TOKEN;
+VERCEL_PROJECT_ID	src/lib/services/vercel.ts	11	const PROJECT_ID = process.env.VERCEL_PROJECT_ID;
+WEBRTC_TURN_URL	src/lib/services/webrtc.ts	15	  const WEBRTC_TURN_URL = process.env.WEBRTC_TURN_URL;
+WEBRTC_TURN_USER	src/lib/services/webrtc.ts	16	  const WEBRTC_TURN_USER = process.env.WEBRTC_TURN_USER;
+WEBRTC_TURN_PASS	src/lib/services/webrtc.ts	17	  const WEBRTC_TURN_PASS = process.env.WEBRTC_TURN_PASS;
+WP_URL	src/lib/services/wordpress.ts	8	const WP_URL = process.env.WP_URL;
+WP_USER	src/lib/services/wordpress.ts	9	const WP_USER = process.env.WP_USER;
+WP_PASS	src/lib/services/wordpress.ts	10	const WP_PASS = process.env.WP_PASS;
+STRIPE_SECRET_KEY	src/lib/stripe.ts	3	if (!process.env.STRIPE_SECRET_KEY) {
+STRIPE_SECRET_KEY	src/lib/stripe.ts	9	export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+STRIPE_PRO_PRICE_ID	src/lib/subscription-tiers.ts	44	    stripe_price_id: process.env.STRIPE_PRO_PRICE_ID,
+STRIPE_BUSINESS_PRICE_ID	src/lib/subscription-tiers.ts	66	    stripe_price_id: process.env.STRIPE_BUSINESS_PRICE_ID,
+VOICE_LANGUAGE	src/lib/voice.ts	118	      language: config.language || process.env.VOICE_LANGUAGE || "en-US",
+VOICE_CONTINUOUS	src/lib/voice.ts	119	      continuous: config.continuous ?? process.env.VOICE_CONTINUOUS === "true",
+LIVE_PASSWORD	src/middleware.ts	12	  if (url.pathname.startsWith("/live") && process.env.LIVE_PASSWORD) {
+LIVE_PASSWORD	src/middleware.ts	14	    if (pass !== process.env.LIVE_PASSWORD) {
