@@ -8,8 +8,12 @@
     "**/.vercel/**": true,
     "**/.pnpm-store/**": true,
     "**/coverage/**": true,
-    "**/.turbo/**": true
+    "**/.turbo/**": true,
+    "**/.cache/**": true,
+    "**/dist/**": true,
+    "**/build/**": true
   },
+  "files.watcherInclude": ["**/*.{ts,tsx,js,jsx,css,scss,json}"],
   "files.exclude": {
     "**/.git": true,
     "**/.DS_Store": true,
@@ -26,25 +30,21 @@
   "git.confirmSync": false,
   "git.autofetch": true,
   "git.enableSmartCommit": true,
-  "typescript.tsserver.maxTsServerMemory": 8192,
+  "typescript.tsserver.maxTsServerMemory": 12288,
   "typescript.disableAutomaticTypeAcquisition": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": false,
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
   "workbench.editor.enablePreview": true,
   "workbench.editor.closeOnFileDelete": true,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.fixAll.eslint": true,
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit",
     "source.organizeImports": "explicit"
   },
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "eslint.workingDirectories": [
     {
       "directory": ".",
@@ -65,6 +65,8 @@
   "chat.experimental.promptCaching": true,
   "terminal.integrated.gpuAcceleration": "on",
   "terminal.integrated.scrollback": 10000,
+  "terminal.integrated.persistentSessionReviveProcess": "never",
+  "terminal.integrated.enablePersistentSessions": false,
   "task.showDecorations": false,
   "problems.decorations.enabled": true,
   "editor.minimap.enabled": false,

@@ -1,9 +1,9 @@
-import { AudioBackground } from "@/components/AudioBackground";
-import { FeaturesSection } from "@/components/FeaturesSection";
-import { LuxuryGallery } from "@/components/LuxuryGallery";
-import { ModernHero } from "@/components/ModernHero";
-import { Footer } from "@/components/ui/Footer";
-import { Navigation } from "@/components/ui/Navigation";
+import { AudioBackground } from '@/components/AudioBackground';
+import { FeaturesSection } from '@/components/FeaturesSection';
+import { LuxuryGallery } from '@/components/LuxuryGallery';
+import { ModernHero } from '@/components/ModernHero';
+import { Footer } from '@/components/ui/Footer';
+import { Navigation } from '@/components/ui/Navigation';
 
 const galleryImages = [
   {
@@ -47,20 +47,26 @@ const galleryImages = [
 export default function Home() {
   return (
     <main className="relative bg-black">
-      <AudioBackground publicId="4d103589a54319c127e26fc4c1945714" />
+      {/* Auto-play Music */}
+      <AudioBackground publicId="4d103589a54319c127e26fc4c1945714" autoplay={true} />
+
       <Navigation />
+
       <ModernHero
         title="3000 Studios"
         subtitle="Where Innovation Meets Luxury"
-        cta="Book Now"
-        backgroundVideo="b9ed367db5fcec95f16e6b105e5dec6f"
+        cta="Home"
+        backgroundVideo="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986144/3D_tunnel_to_purple_d7cofd.mp4"
       />
+
       <div id="gallery">
         <LuxuryGallery images={galleryImages} title="Experience Excellence" />
       </div>
+
       <div id="features">
         <FeaturesSection />
       </div>
+
       <Footer />
     </main>
   );

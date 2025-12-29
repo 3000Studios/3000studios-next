@@ -1,8 +1,8 @@
 'use client';
 
-import { cloudinaryImage, cloudinaryVideo } from '@/lib/cloudinary';
 import { motion } from 'framer-motion';
-import { BookOpen, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 
 interface ModernHeroProps {
   title?: string;
@@ -15,38 +15,42 @@ interface ModernHeroProps {
 export function ModernHero({
   title = '3000 Studios',
   subtitle = 'Experience Excellence',
-  cta = 'Explore Now',
+  cta = 'Enter',
   backgroundImage = 'sample/luxury-hotel',
   backgroundVideo,
 }: ModernHeroProps) {
+  const hoverSoundRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    // Create hover sound effect
+    hoverSoundRef.current = new Audio(
+      'data:audio/wav;base64,UklGRhIAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0Ya4AAAA='
+    );
+  }, []);
+
+  const playHoverSound = () => {
+    if (hoverSoundRef.current) {
+      hoverSoundRef.current.currentTime = 0;
+      hoverSoundRef.current.play().catch(() => {});
+    }
+  };
+
   return (
     <div className="relative w-full min-h-screen overflow-hidden bg-black pt-20">
-      {/* Background Video or Image */}
+      {/* Background Video */}
       {backgroundVideo ? (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1.2, ease: 'easeOut' }}
+          transition={{ duration: 1.5, ease: 'easeOut' }}
           className="absolute inset-0"
         >
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-          >
-            <source
-              src={cloudinaryVideo(backgroundVideo, {
-                width: 1920,
-                height: 1080,
-              })}
-              type="video/mp4"
-            />
+          <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+            <source src={backgroundVideo} type="video/mp4" />
           </video>
 
           {/* Dark gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70" />
+          <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/40 to-black/70" />
         </motion.div>
       ) : (
         <motion.div
@@ -58,17 +62,11 @@ export function ModernHero({
           <div
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: `url('${cloudinaryImage(backgroundImage, {
-                width: 1920,
-                height: 1080,
-                crop: 'fill',
-                quality: 'auto',
-                format: 'auto',
-              })}')`,
+              backgroundImage: `url('${backgroundImage}')`,
             }}
           >
             {/* Dark gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70" />
+            <div className="absolute inset-0 bg-linear-to-b from-black/40 via-black/50 to-black/70" />
           </div>
         </motion.div>
       )}
@@ -79,40 +77,37 @@ export function ModernHero({
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-center"
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="text-center mb-16"
         >
-          <h1 className="font-display text-7xl md:text-8xl font-bold text-white mb-6 drop-shadow-lg">
-            {title}
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-200 font-light tracking-wide mb-12">
+          <h1 className="text-7xl md:text-9xl font-bold text-3d mb-8 animate-glow">{title}</h1>
+          <p className="text-2xl md:text-3xl text-gold-gradient font-light tracking-wide">
             {subtitle}
           </p>
         </motion.div>
 
-        {/* CTA Button */}
+        {/* Single CTA Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex gap-6 mb-20"
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mb-20"
         >
-          <button className="px-8 py-4 bg-white text-black font-semibold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-2xl">
+          <button
+            className="btn-gold hover-pop text-xl md:text-2xl px-12 py-6 animate-float"
+            onMouseEnter={playHoverSound}
+          >
             {cta}
-          </button>
-          <button className="px-8 py-4 border-2 border-white text-white font-semibold text-lg hover:bg-white hover:text-black transition-all duration-300 flex items-center gap-2">
-            <BookOpen size={20} />
-            Learn More
           </button>
         </motion.div>
 
         {/* Scroll Indicator */}
         <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          animate={{ y: [0, 15, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
         >
-          <ChevronDown className="text-white opacity-70" size={32} />
+          <ChevronDown className="text-gold-primary opacity-80 animate-glow" size={40} />
         </motion.div>
       </div>
     </div>
