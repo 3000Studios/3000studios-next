@@ -1,53 +1,35 @@
 import NextAuth from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import bcrypt from 'bcryptjs';
+import Credentials from 'next-auth/providers/credentials';
+import { cookies } from 'next/headers';
 
 const handler = NextAuth({
   providers: [
-    CredentialsProvider({
-      name: 'Credentials',
-      credentials: {
-        email: { label: 'Email', type: 'email' },
-        password: { label: 'Password', type: 'password' },
-      },
+    Credentials({
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          return null;
-        }
+        const email = credentials?.email as string | undefined;
+        const password = credentials?.password as string | undefined;
+
+        if (!email || !password) return null;
 
         const adminEmail = process.env.ADMIN_EMAIL;
-        const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
+        const adminPassword = process.env.ADMIN_PASSWORD;
 
-        if (!adminEmail || !adminPasswordHash) {
+        if (!adminEmail || !adminPassword) {
           console.error('Admin credentials not configured');
           return null;
         }
 
-        if (credentials.email !== adminEmail) {
-          return null;
-        }
-
-        const isValid = await bcrypt.compare(credentials.password, adminPasswordHash);
-
-        if (isValid) {
-          return {
-            id: '1',
-            email: adminEmail,
-            name: 'Admin',
-          };
+        if (email === adminEmail && password === adminPassword) {
+          // Set simple auth cookie for middleware-based admin lock
+          cookies().set('admin-auth', 'true');
+          return { id: 'admin' } as any;
         }
 
         return null;
       },
     }),
   ],
-  pages: {
-    signIn: '/admin',
-  },
-  session: {
-    strategy: 'jwt',
-  },
-  secret: process.env.AUTH_SECRET,
+  session: { strategy: 'jwt' },
 });
 
 export { handler as GET, handler as POST };
