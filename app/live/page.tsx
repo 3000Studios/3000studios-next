@@ -46,13 +46,7 @@ export default function LivePage() {
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Animated background video */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="fixed inset-0 w-full h-full object-cover"
-      >
+      <video autoPlay muted loop playsInline className="fixed inset-0 w-full h-full object-cover">
         <source
           src="https://videos.pexels.com/video-files/2369960/2369960-hd_1920_1080_30fps.mp4"
           type="video/mp4"
@@ -125,7 +119,9 @@ export default function LivePage() {
                 <div className="space-y-4">
                   <div>
                     <p className="text-slate-400 text-sm mb-2">Current Viewers</p>
-                    <p className="text-4xl font-bold text-amber-300">{status.viewers.toLocaleString()}</p>
+                    <p className="text-4xl font-bold text-amber-300">
+                      {status.viewers.toLocaleString()}
+                    </p>
                   </div>
                   <div className="pt-4 border-t border-slate-700">
                     <p className="text-slate-400 text-sm mb-2">Status</p>
@@ -193,7 +189,8 @@ export default function LivePage() {
             <div>
               <h2 className="text-4xl font-bold mb-4 text-white">Stream Offline</h2>
               <p className="text-xl text-slate-400 mb-8 max-w-2xl mx-auto">
-                We're not currently broadcasting, but you can subscribe to be notified when we go live.
+                We're not currently broadcasting, but you can subscribe to be notified when we go
+                live.
               </p>
             </div>
 
@@ -211,7 +208,10 @@ export default function LivePage() {
               <h3 className="text-2xl font-bold mb-6 text-amber-400">Upcoming Streams</h3>
               <div className="space-y-4">
                 {['Tomorrow 8:00 PM', 'Friday 6:00 PM', 'Sunday 10:00 AM'].map((time, idx) => (
-                  <div key={idx} className="flex items-center gap-4 p-4 bg-slate-800/50 rounded-lg hover:bg-slate-800 transition-colors">
+                  <div
+                    key={idx}
+                    className="flex items-center gap-4 p-4 bg-slate-800/50 rounded-lg hover:bg-slate-800 transition-colors"
+                  >
                     <span className="text-2xl">📅</span>
                     <span className="text-white font-semibold">{time}</span>
                   </div>
@@ -224,4 +224,3 @@ export default function LivePage() {
     </div>
   );
 }
-

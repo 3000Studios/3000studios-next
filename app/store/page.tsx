@@ -135,7 +135,9 @@ export default function StorePage() {
         <div className="mb-20">
           <div className="text-center mb-12">
             <h2 className="font-display text-4xl mb-4">Featured Categories</h2>
-            <p className="font-sans text-platinum/60">Explore our curated collections of premium digital assets</p>
+            <p className="font-sans text-platinum/60">
+              Explore our curated collections of premium digital assets
+            </p>
           </div>
           <MediaGrid items={categoryFeatures} columns={3} gap="lg" />
         </div>
@@ -144,7 +146,9 @@ export default function StorePage() {
         <div className="mb-20">
           <div className="text-center mb-12">
             <h2 className="font-display text-4xl mb-4">All Products</h2>
-            <p className="font-sans text-platinum/60">Professional tools and assets for creators and developers</p>
+            <p className="font-sans text-platinum/60">
+              Professional tools and assets for creators and developers
+            </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
@@ -159,7 +163,9 @@ export default function StorePage() {
                     {product.image}
                   </div>
                   <div className="text-right">
-                    <span className="font-display text-4xl text-hologram group-hover:text-white transition-colors">${product.price}</span>
+                    <span className="font-display text-4xl text-hologram group-hover:text-white transition-colors">
+                      ${product.price}
+                    </span>
                     <span className="block font-sans text-[10px] text-platinum/50 tracking-widest mt-2">
                       USD
                     </span>
@@ -215,9 +221,21 @@ export default function StorePage() {
             <h2 className="font-display text-4xl text-center mb-12">Why Choose Our Store?</h2>
             <div className="grid md:grid-cols-3 gap-8">
               {[
-                { icon: '⚡', title: 'Fast Delivery', desc: 'Instant access to all digital products after purchase' },
-                { icon: '🔒', title: 'Secure', desc: 'Industry-leading security and privacy protection' },
-                { icon: '🎯', title: 'Premium Quality', desc: 'Hand-crafted assets and tools tested by experts' },
+                {
+                  icon: '⚡',
+                  title: 'Fast Delivery',
+                  desc: 'Instant access to all digital products after purchase',
+                },
+                {
+                  icon: '🔒',
+                  title: 'Secure',
+                  desc: 'Industry-leading security and privacy protection',
+                },
+                {
+                  icon: '🎯',
+                  title: 'Premium Quality',
+                  desc: 'Hand-crafted assets and tools tested by experts',
+                },
               ].map((item, idx) => (
                 <div key={idx} className="text-center">
                   <div className="text-5xl mb-4">{item.icon}</div>
@@ -233,7 +251,8 @@ export default function StorePage() {
         <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-sm p-12 text-center">
           <h3 className="font-display text-3xl mb-6">Need Assistance?</h3>
           <p className="text-platinum/70 mb-8 max-w-2xl mx-auto">
-            Our support team is here to help. Contact us for product recommendations, technical assistance, or custom solutions.
+            Our support team is here to help. Contact us for product recommendations, technical
+            assistance, or custom solutions.
           </p>
           <a
             href="mailto:support@3000studios.com"
@@ -248,4 +267,3 @@ export default function StorePage() {
     </main>
   );
 }
-

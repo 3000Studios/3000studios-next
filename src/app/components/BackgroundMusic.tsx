@@ -3,10 +3,10 @@
  * Rotates through background music tracks with volume and playback controls.
  */
 
-"use client";
+'use client';
 
-import { Pause, Play, SkipForward, Volume2, VolumeX } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Pause, Play, SkipForward, Volume2, VolumeX } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface MusicTrack {
   name: string;
@@ -17,34 +17,34 @@ interface MusicTrack {
 // Production-safe royalty-free tracks (Cloudinary-hosted)
 const DEFAULT_TRACKS: MusicTrack[] = [
   {
-    name: "Golden Whisper (Jazz)",
-    src: "https://res.cloudinary.com/dj92eb97f/video/upload/v1767038691/background-jazz-golden-whisper-358520_wmtbyx.mp3",
-    artist: "Royalty-Free",
+    name: 'Golden Whisper (Jazz)',
+    src: 'https://res.cloudinary.com/dj92eb97f/video/upload/v1767038691/background-jazz-golden-whisper-358520_wmtbyx.mp3',
+    artist: 'Royalty-Free',
   },
   {
-    name: "High Novelty Tech",
-    src: "https://res.cloudinary.com/dj92eb97f/video/upload/v1767038693/high-novelty-tech-solution-191634_he6uhx.mp3",
-    artist: "Royalty-Free",
+    name: 'High Novelty Tech',
+    src: 'https://res.cloudinary.com/dj92eb97f/video/upload/v1767038693/high-novelty-tech-solution-191634_he6uhx.mp3',
+    artist: 'Royalty-Free',
   },
   {
-    name: "Lift Me Up (Abstract Tech)",
-    src: "https://res.cloudinary.com/dj92eb97f/video/upload/v1767038692/digital-abstract-technology-lift-me-up-131534_tktfna.mp3",
-    artist: "Royalty-Free",
+    name: 'Lift Me Up (Abstract Tech)',
+    src: 'https://res.cloudinary.com/dj92eb97f/video/upload/v1767038692/digital-abstract-technology-lift-me-up-131534_tktfna.mp3',
+    artist: 'Royalty-Free',
   },
   {
-    name: "I Got Your Mind",
-    src: "https://res.cloudinary.com/dj92eb97f/video/upload/v1767038693/i-got-your-mind-342855_iq27b2.mp3",
-    artist: "Royalty-Free",
+    name: 'I Got Your Mind',
+    src: 'https://res.cloudinary.com/dj92eb97f/video/upload/v1767038693/i-got-your-mind-342855_iq27b2.mp3',
+    artist: 'Royalty-Free',
   },
   {
-    name: "Lounge House",
-    src: "https://res.cloudinary.com/dj92eb97f/video/upload/v1767038694/lounge-house-music-348882_fbmwtq.mp3",
-    artist: "Royalty-Free",
+    name: 'Lounge House',
+    src: 'https://res.cloudinary.com/dj92eb97f/video/upload/v1767038694/lounge-house-music-348882_fbmwtq.mp3',
+    artist: 'Royalty-Free',
   },
   {
-    name: "Electricity",
-    src: "https://res.cloudinary.com/dj92eb97f/video/upload/v1767038696/electricity-315581_ngtb0j.mp3",
-    artist: "Royalty-Free",
+    name: 'Electricity',
+    src: 'https://res.cloudinary.com/dj92eb97f/video/upload/v1767038696/electricity-315581_ngtb0j.mp3',
+    artist: 'Royalty-Free',
   },
 ];
 
@@ -71,16 +71,16 @@ export default function BackgroundMusic() {
     audio.loop = false;
     audio.volume = volume;
     audio.muted = isMuted;
-    audio.addEventListener("ended", handleNextTrack);
+    audio.addEventListener('ended', handleNextTrack);
     audioRef.current = audio;
 
     if (isPlaying) {
-      audio.play().catch((err) => console.error("Play error:", err));
+      audio.play().catch((err) => console.error('Play error:', err));
     }
 
     return () => {
       audio.pause();
-      audio.removeEventListener("ended", handleNextTrack);
+      audio.removeEventListener('ended', handleNextTrack);
     };
   }, [currentTrack, handleNextTrack, isMuted, isPlaying, volume]);
 
@@ -103,7 +103,7 @@ export default function BackgroundMusic() {
       audio
         .play()
         .then(() => setIsPlaying(true))
-        .catch((err) => console.error("Play error:", err));
+        .catch((err) => console.error('Play error:', err));
     }
   };
 
@@ -136,7 +136,7 @@ export default function BackgroundMusic() {
             <button
               onClick={toggleMute}
               className="rounded-full bg-gray-900 p-2 text-white hover:bg-gray-800 transition"
-              aria-label={isMuted ? "Unmute" : "Mute"}
+              aria-label={isMuted ? 'Unmute' : 'Mute'}
             >
               {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
             </button>
@@ -147,7 +147,7 @@ export default function BackgroundMusic() {
               onClick={togglePlay}
               className="flex flex-1 items-center justify-center rounded-lg bg-gold px-4 py-2 font-semibold text-black hover:bg-amber-400 transition"
             >
-              {isPlaying ? "Pause" : "Play"}
+              {isPlaying ? 'Pause' : 'Play'}
             </button>
             <button
               onClick={skipTrack}
@@ -175,7 +175,7 @@ export default function BackgroundMusic() {
               <div
                 key={index}
                 className={`h-1 flex-1 rounded-full transition-all ${
-                  index === currentTrackIndex ? "bg-gold" : "bg-gray-700"
+                  index === currentTrackIndex ? 'bg-gold' : 'bg-gray-700'
                 }`}
               />
             ))}
