@@ -14,18 +14,48 @@ interface MusicTrack {
   artist?: string;
 }
 
+// Production-safe royalty-free tracks (Cloudinary-hosted)
 const DEFAULT_TRACKS: MusicTrack[] = [
-  { name: "Ambient Waves", src: "/music/ambient-1.mp3", artist: "3000 Studios" },
-  { name: "Jazz Corporate", src: "/music/jazz-1.mp3", artist: "3000 Studios" },
-  { name: "Electronic Flow", src: "/music/electronic-1.mp3", artist: "3000 Studios" },
-  { name: "Chill Vibes", src: "/music/chill-1.mp3", artist: "3000 Studios" },
+  {
+    name: "Golden Whisper (Jazz)",
+    src: "https://res.cloudinary.com/dj92eb97f/video/upload/v1767038691/background-jazz-golden-whisper-358520_wmtbyx.mp3",
+    artist: "Royalty-Free",
+  },
+  {
+    name: "High Novelty Tech",
+    src: "https://res.cloudinary.com/dj92eb97f/video/upload/v1767038693/high-novelty-tech-solution-191634_he6uhx.mp3",
+    artist: "Royalty-Free",
+  },
+  {
+    name: "Lift Me Up (Abstract Tech)",
+    src: "https://res.cloudinary.com/dj92eb97f/video/upload/v1767038692/digital-abstract-technology-lift-me-up-131534_tktfna.mp3",
+    artist: "Royalty-Free",
+  },
+  {
+    name: "I Got Your Mind",
+    src: "https://res.cloudinary.com/dj92eb97f/video/upload/v1767038693/i-got-your-mind-342855_iq27b2.mp3",
+    artist: "Royalty-Free",
+  },
+  {
+    name: "Lounge House",
+    src: "https://res.cloudinary.com/dj92eb97f/video/upload/v1767038694/lounge-house-music-348882_fbmwtq.mp3",
+    artist: "Royalty-Free",
+  },
+  {
+    name: "Electricity",
+    src: "https://res.cloudinary.com/dj92eb97f/video/upload/v1767038696/electricity-315581_ngtb0j.mp3",
+    artist: "Royalty-Free",
+  },
 ];
 
 export default function BackgroundMusic() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
+  // Autoplay muted per browser policies
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
   const [volume, setVolume] = useState(0.3);
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(() =>
+    Math.floor(Math.random() * DEFAULT_TRACKS.length)
+  );
   const [showControls, setShowControls] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
