@@ -1,6 +1,6 @@
-import { ModernHero } from "@/components/ModernHero";
-import { LuxuryGallery } from "@/components/LuxuryGallery";
 import { FeaturesSection } from "@/components/FeaturesSection";
+import { LuxuryGallery } from "@/components/LuxuryGallery";
+import { ModernHero } from "@/components/ModernHero";
 import { Footer } from "@/components/ui/Footer";
 
 const galleryImages = [
@@ -49,7 +49,7 @@ export default function Home() {
         title="3000 Studios"
         subtitle="Where Innovation Meets Luxury"
         cta="Book Now"
-        backgroundImage="sample/luxury-hotel"
+        backgroundVideo="b9ed367db5fcec95f16e6b105e5dec6f"
       />
       <LuxuryGallery images={galleryImages} title="Experience Excellence" />
       <FeaturesSection />

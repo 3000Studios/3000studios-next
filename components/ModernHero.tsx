@@ -2,13 +2,14 @@
 
 import { motion } from 'framer-motion';
 import { ChevronDown, BookOpen } from 'lucide-react';
-import { cloudinaryImage } from '@/lib/cloudinary';
+import { cloudinaryImage, cloudinaryVideo } from '@/lib/cloudinary';
 
 interface ModernHeroProps {
   title?: string;
   subtitle?: string;
   cta?: string;
   backgroundImage?: string;
+  backgroundVideo?: string;
 }
 
 export function ModernHero({
@@ -16,32 +17,61 @@ export function ModernHero({
   subtitle = 'Experience Excellence',
   cta = 'Explore Now',
   backgroundImage = 'sample/luxury-hotel',
+  backgroundVideo,
 }: ModernHeroProps) {
   return (
     <div className="relative w-full min-h-screen overflow-hidden bg-black">
-      {/* Background Image with overlay */}
-      <motion.div
-        initial={{ scale: 1.1, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1.2, ease: 'easeOut' }}
-        className="absolute inset-0"
-      >
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url('${cloudinaryImage(backgroundImage, {
-              width: 1920,
-              height: 1080,
-              crop: 'fill',
-              quality: 'auto',
-              format: 'auto',
-            })}')`,
-          }}
+      {/* Background Video or Image */}
+      {backgroundVideo ? (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.2, ease: 'easeOut' }}
+          className="absolute inset-0"
         >
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source
+              src={cloudinaryVideo(backgroundVideo, {
+                width: 1920,
+                height: 1080,
+              })}
+              type="video/mp4"
+            />
+          </video>
+
           {/* Dark gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70" />
-        </div>
-      </motion.div>
+        </motion.div>
+      ) : (
+        <motion.div
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.2, ease: 'easeOut' }}
+          className="absolute inset-0"
+        >
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url('${cloudinaryImage(backgroundImage, {
+                width: 1920,
+                height: 1080,
+                crop: 'fill',
+                quality: 'auto',
+                format: 'auto',
+              })}')`,
+            }}
+          >
+            {/* Dark gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70" />
+          </div>
+        </motion.div>
+      )}
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4">
