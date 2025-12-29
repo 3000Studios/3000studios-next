@@ -1,9 +1,9 @@
 'use client';
 
+import MediaGrid from '@/components/MediaGrid';
 import { Footer } from '@/components/ui/Footer';
 import { Navigation } from '@/components/ui/Navigation';
 import { PageHeader } from '@/components/ui/PageHeader';
-import MediaGrid from '@/components/MediaGrid';
 
 export default function ExperiencePage() {
   const caseStudies = [
@@ -108,7 +108,9 @@ export default function ExperiencePage() {
         <div className="mb-20">
           <div className="text-center mb-12">
             <h2 className="font-display text-4xl mb-4">Design Principles</h2>
-            <p className="font-sans text-platinum/60">The philosophy behind every experience we create</p>
+            <p className="font-sans text-platinum/60">
+              The philosophy behind every experience we create
+            </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -147,7 +149,9 @@ export default function ExperiencePage() {
         <div className="mb-20">
           <div className="text-center mb-12">
             <h2 className="font-display text-4xl mb-4">Featured Experiences</h2>
-            <p className="font-sans text-platinum/60">Cutting-edge projects showcasing our capabilities</p>
+            <p className="font-sans text-platinum/60">
+              Cutting-edge projects showcasing our capabilities
+            </p>
           </div>
 
           <MediaGrid items={caseStudies} columns={3} gap="lg" />
@@ -172,7 +176,10 @@ export default function ExperiencePage() {
             <h3 className="font-display text-3xl mb-8 text-center">Our Technology Stack</h3>
             <div className="grid md:grid-cols-4 gap-6">
               {['React', 'Three.js', 'WebGL', 'Tailwind'].map((tech, idx) => (
-                <div key={idx} className="text-center py-6 border border-hologram/20 rounded-sm hover:border-hologram/50 transition-colors duration-300">
+                <div
+                  key={idx}
+                  className="text-center py-6 border border-hologram/20 rounded-sm hover:border-hologram/50 transition-colors duration-300"
+                >
                   <p className="font-mono text-sm text-hologram">{tech}</p>
                 </div>
               ))}
