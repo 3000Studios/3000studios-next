@@ -67,9 +67,7 @@ export default function AdminDashboard() {
           <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-500">
             3000 Studios Dashboard
           </h1>
-          <div className="text-slate-400">
-            Logged in as: {session.user?.email}
-          </div>
+          <div className="text-slate-400">Logged in as: {session.user?.email}</div>
         </div>
 
         {/* Stats Grid */}
@@ -87,12 +85,20 @@ export default function AdminDashboard() {
           <StatCard
             title="Live Stream"
             value={stats.liveStatus.toUpperCase()}
-            color={stats.liveStatus === 'online' ? 'from-green-500 to-emerald-500' : 'from-slate-500 to-slate-600'}
+            color={
+              stats.liveStatus === 'online'
+                ? 'from-green-500 to-emerald-500'
+                : 'from-slate-500 to-slate-600'
+            }
           />
           <StatCard
             title="Deployment"
             value={stats.deploymentStatus.toUpperCase()}
-            color={stats.deploymentStatus === 'deployed' ? 'from-green-500 to-emerald-500' : 'from-amber-500 to-orange-500'}
+            color={
+              stats.deploymentStatus === 'deployed'
+                ? 'from-green-500 to-emerald-500'
+                : 'from-amber-500 to-orange-500'
+            }
           />
           <StatCard
             title="Errors"
@@ -161,7 +167,17 @@ function StatCard({ title, value, color }: { title: string; value: string; color
   );
 }
 
-function ActionCard({ title, description, href, icon }: { title: string; description: string; href: string; icon: string }) {
+function ActionCard({
+  title,
+  description,
+  href,
+  icon,
+}: {
+  title: string;
+  description: string;
+  href: string;
+  icon: string;
+}) {
   return (
     <Link
       href={href}
