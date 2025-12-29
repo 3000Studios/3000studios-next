@@ -17,6 +17,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { CSSProperties, ReactNode } from 'react';
 import ScrollEffects from '../components/ui/ScrollEffects';
 import SoundToggle from '../components/ui/SoundToggle';
+import ClientLayoutWrapper from './ClientLayoutWrapper';
 import './globals.css';
 
 const fontFallbacks = {
