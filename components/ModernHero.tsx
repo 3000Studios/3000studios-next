@@ -20,7 +20,7 @@ export function ModernHero({
   backgroundVideo,
 }: ModernHeroProps) {
   return (
-    <div className="relative w-full min-h-screen overflow-hidden bg-black">
+    <div className="relative w-full min-h-screen overflow-hidden bg-black pt-20">
       {/* Background Video or Image */}
       {backgroundVideo ? (
         <motion.div

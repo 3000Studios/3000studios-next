@@ -1,6 +1,7 @@
 import { FeaturesSection } from "@/components/FeaturesSection";
 import { LuxuryGallery } from "@/components/LuxuryGallery";
 import { ModernHero } from "@/components/ModernHero";
+import { Navigation } from "@/components/ui/Navigation";
 import { Footer } from "@/components/ui/Footer";
 
 const galleryImages = [
@@ -45,14 +46,19 @@ const galleryImages = [
 export default function Home() {
   return (
     <main className="relative bg-black">
+      <Navigation />
       <ModernHero
         title="3000 Studios"
         subtitle="Where Innovation Meets Luxury"
         cta="Book Now"
         backgroundVideo="b9ed367db5fcec95f16e6b105e5dec6f"
       />
-      <LuxuryGallery images={galleryImages} title="Experience Excellence" />
-      <FeaturesSection />
+      <div id="gallery">
+        <LuxuryGallery images={galleryImages} title="Experience Excellence" />
+      </div>
+      <div id="features">
+        <FeaturesSection />
+      </div>
       <Footer />
     </main>
   );
