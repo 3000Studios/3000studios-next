@@ -75,8 +75,8 @@
     "uuid": "^13.0.0",
     "zod": "^4.2.1",
     "zustand": "^4.5.5",
-    "@tailwindcss/postcss": "^4",
-    "autoprefixer": "^10.4.19"
+    "@tailwindcss/postcss": "4.1.18",
+    "autoprefixer": "10.4.23"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",
@@ -97,7 +97,7 @@
     "jsdom": "22.1.0",
     "prisma": "^6.19.1",
     "rimraf": "^6.0.1",
-    "tailwindcss": "^4",
+    "tailwindcss": "4.1.18",
     "tsx": "^4.21.0",
     "typescript": "^5",
     "vitest": "^4.0.16",
