@@ -1,8 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ChevronDown, BookOpen } from 'lucide-react';
 import { cloudinaryImage, cloudinaryVideo } from '@/lib/cloudinary';
+import { motion } from 'framer-motion';
+import { BookOpen, ChevronDown } from 'lucide-react';
 
 interface ModernHeroProps {
   title?: string;
