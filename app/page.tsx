@@ -1,9 +1,9 @@
+import { AudioBackground } from "@/components/AudioBackground";
 import { FeaturesSection } from "@/components/FeaturesSection";
 import { LuxuryGallery } from "@/components/LuxuryGallery";
 import { ModernHero } from "@/components/ModernHero";
-import { Navigation } from "@/components/ui/Navigation";
-import { AudioBackground } from "@/components/AudioBackground";
 import { Footer } from "@/components/ui/Footer";
+import { Navigation } from "@/components/ui/Navigation";
 
 const galleryImages = [
   {

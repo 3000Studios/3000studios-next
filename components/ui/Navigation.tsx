@@ -1,7 +1,7 @@
 'use client';
 
-import Link from 'next/link';
 import { cloudinaryImage } from '@/lib/cloudinary';
+import Link from 'next/link';
 
 export const Navigation = () => (
   <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur text-white px-6 py-4 border-b border-gray-800">
