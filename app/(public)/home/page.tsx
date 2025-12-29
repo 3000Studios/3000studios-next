@@ -1,7 +1,7 @@
-import NavPublic from '@/components/NavPublic'
-import { Footer } from '@/components/ui/Footer'
-import MediaGrid from '@/components/MediaGrid'
-import SectionMedia from '@/components/SectionMedia'
+import MediaGrid from '@/components/MediaGrid';
+import NavPublic from '@/components/NavPublic';
+import SectionMedia from '@/components/SectionMedia';
+import { Footer } from '@/components/ui/Footer';
 
 export default function HomePage() {
   const portfolioItems = [
@@ -59,7 +59,7 @@ export default function HomePage() {
       description: 'Engaging multimedia stories',
       ratio: 'landscape' as const,
     },
-  ]
+  ];
 
   return (
     <main className="relative min-h-screen bg-black text-white">
@@ -89,7 +89,8 @@ export default function HomePage() {
             Where Innovation Meets Luxury
           </p>
           <p className="text-lg text-platinum/70 max-w-2xl mx-auto leading-relaxed font-light">
-            Crafting immersive digital experiences that push the boundaries of design and technology.
+            Crafting immersive digital experiences that push the boundaries of design and
+            technology.
           </p>
         </div>
       </div>
@@ -114,7 +115,9 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-4 text-white">Our Services</h2>
-            <p className="text-xl text-platinum/60">Comprehensive solutions for your digital needs</p>
+            <p className="text-xl text-platinum/60">
+              Comprehensive solutions for your digital needs
+            </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-16">
@@ -123,22 +126,28 @@ export default function HomePage() {
                 title: 'Web Design & Development',
                 description: 'Responsive, high-performance websites that engage and convert',
                 icon: '🎨',
-                image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop',
+                image:
+                  'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop',
               },
               {
                 title: 'Brand & Identity',
                 description: 'Compelling brand strategies and visual identities that stand out',
                 icon: '✨',
-                image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=300&fit=crop',
+                image:
+                  'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=300&fit=crop',
               },
               {
                 title: 'Motion & Animation',
                 description: 'Captivating animations and interactive experiences',
                 icon: '🎬',
-                image: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=300&fit=crop',
+                image:
+                  'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=300&fit=crop',
               },
             ].map((service, idx) => (
-              <div key={idx} className="group relative overflow-hidden rounded-lg hyper-glass p-8 hover:-translate-y-2 transition-all duration-500">
+              <div
+                key={idx}
+                className="group relative overflow-hidden rounded-lg hyper-glass p-8 hover:-translate-y-2 transition-all duration-500"
+              >
                 <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-500">
                   <img
                     src={service.image}
@@ -148,7 +157,9 @@ export default function HomePage() {
                 </div>
                 <div className="relative z-10">
                   <div className="text-4xl mb-4">{service.icon}</div>
-                  <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-amber-400 transition-colors">{service.title}</h3>
+                  <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-amber-400 transition-colors">
+                    {service.title}
+                  </h3>
                   <p className="text-platinum/70 leading-relaxed">{service.description}</p>
                 </div>
               </div>
@@ -162,7 +173,9 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-4 text-white">Featured Work</h2>
-            <p className="text-xl text-platinum/60">A selection of our latest projects and collaborations</p>
+            <p className="text-xl text-platinum/60">
+              A selection of our latest projects and collaborations
+            </p>
           </div>
 
           <MediaGrid items={portfolioItems} columns={3} gap="lg" />
@@ -198,5 +211,5 @@ export default function HomePage() {
 
       <Footer />
     </main>
-  )
+  );
 }

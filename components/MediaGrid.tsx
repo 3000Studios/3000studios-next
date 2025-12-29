@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import Image from 'next/image';
 
 interface MediaItem {
@@ -80,12 +79,8 @@ export default function MediaGrid({
           {/* Text overlay */}
           {(item.title || item.description) && (
             <div className="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              {item.title && (
-                <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
-              )}
-              {item.description && (
-                <p className="text-sm text-platinum/80">{item.description}</p>
-              )}
+              {item.title && <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>}
+              {item.description && <p className="text-sm text-platinum/80">{item.description}</p>}
             </div>
           )}
         </div>

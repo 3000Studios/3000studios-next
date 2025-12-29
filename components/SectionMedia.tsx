@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import Image from 'next/image';
 
 interface SectionMediaProps {
@@ -49,14 +48,7 @@ export default function SectionMedia({
           sizes="(max-width: 768px) 100vw, 50vw"
         />
       ) : (
-        <video
-          src={src}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover"
-        />
+        <video src={src} autoPlay muted loop playsInline className="w-full h-full object-cover" />
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
     </div>
@@ -79,21 +71,15 @@ export default function SectionMedia({
   }
 
   return (
-    <div
-      className={`grid md:grid-cols-2 gap-12 items-center ${className}`}
-    >
+    <div className={`grid md:grid-cols-2 gap-12 items-center ${className}`}>
       {/* Text content */}
       <div className={position === 'right' ? '' : 'md:order-2'}>
         {title && <h2 className="text-3xl font-bold mb-4">{title}</h2>}
-        {description && (
-          <p className="text-lg text-platinum/70 leading-relaxed">{description}</p>
-        )}
+        {description && <p className="text-lg text-platinum/70 leading-relaxed">{description}</p>}
       </div>
 
       {/* Media */}
-      <div className={position === 'right' ? 'md:order-2' : ''}>
-        {mediaContent}
-      </div>
+      <div className={position === 'right' ? 'md:order-2' : ''}>{mediaContent}</div>
     </div>
   );
 }
