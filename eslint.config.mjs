@@ -23,5 +23,14 @@ export default defineConfig([
       "@next/next/no-html-link-for-pages": "error",
     },
   },
-  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", "node_modules/**"]),
+  globalIgnores([
+    ".next/**",
+    "out/**",
+    "build/**",
+    "next-env.d.ts",
+    "node_modules/**",
+    "_disabled/**",
+    "_audit/**",
+    ".shadow/**",
+  ]),
 ]);
