@@ -9,7 +9,7 @@ const git = simpleGit();
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession();
-  
+
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Generate commit message
-    const commitMessage = `feat(command-center): ${changes.map(c => c.description).join(', ')}`;
+    const commitMessage = `feat(command-center): ${changes.map((c) => c.description).join(', ')}`;
 
     // Git operations
     await git.add('./*');
@@ -57,9 +57,9 @@ interface FileChange {
 function parsePreviewChanges(preview: string): FileChange[] {
   // Parse the preview string to extract file changes
   // This is a placeholder - implement proper parsing
-  
+
   const changes: FileChange[] = [];
-  
+
   // Example: extract file path and content from preview
   const filePathMatch = preview.match(/\/\/\s*(.+\.tsx?)/);
   if (filePathMatch) {
@@ -83,7 +83,7 @@ async function applyFileChange(change: FileChange) {
       await fs.mkdir(path.dirname(fullPath), { recursive: true });
       await fs.writeFile(fullPath, change.content, 'utf-8');
       break;
-    
+
     case 'delete':
       await fs.unlink(fullPath);
       break;
