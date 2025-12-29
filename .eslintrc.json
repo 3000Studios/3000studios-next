@@ -1,0 +1,18 @@
+{
+  "root": true,
+  "extends": ["next/core-web-vitals", "eslint:recommended"],
+  "rules": {
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": ["**/_disabled/**"]
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
+  },
+  "ignorePatterns": [
+    "_disabled/**",
+    ".next/**",
+    "node_modules/**"
+  ]
+}
