@@ -12,7 +12,6 @@ key,reason
 "EMAIL_SERVER_USER","not set in .env.local"
 "FULFILLMENT_SIGNING_SECRET","not set in .env.local"
 "GITHUB_TOKEN","not set in .env.local"
-"GOOGLE_MAPS_API_KEY","not set in .env.local"
 "JWT_SECRET","not set in .env.local"
 "KEY_NAME","not set in .env.local"
 "LIVE_PASSWORD","not set in .env.local"
