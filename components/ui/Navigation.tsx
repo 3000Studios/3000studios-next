@@ -24,15 +24,14 @@ export const Navigation = () => {
 
   const pathname = usePathname();
 
+  // Required navigation structure per MASTER DIRECTIVE
   const navLinks = [
-    { href: '/home', label: 'Home' },
-    { href: '/studio', label: 'Studio' },
-    { href: '/experience', label: 'Experience' },
-    { href: '/projects', label: 'Projects' },
-    { href: '/store', label: 'Store' },
-    { href: '/live', label: 'Live' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/contact', label: 'Contact' },
+    { href: '/home', label: 'HOME' },
+    { href: '/store/3000-store', label: 'STORE' },
+    { href: '/projects', label: 'PROJECTS' },
+    { href: '/live', label: 'LIVE' },
+    { href: '/posts', label: 'POSTS' },
+    { href: '/admin', label: 'ADMIN' },
   ];
 
   // Hide navigation entirely on the landing page (/)
