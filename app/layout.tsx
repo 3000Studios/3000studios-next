@@ -50,6 +50,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <FramerMotionProvider>
           <div className="relative z-10">{children}</div>
         </FramerMotionProvider>
+        
+        {/* Vercel Analytics & Speed Insights */}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
