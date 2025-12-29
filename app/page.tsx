@@ -8,27 +8,41 @@ export default function LandingPage() {
   const [showTransition, setShowTransition] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const handleClickMe = () => {
-    setShowTransition(true);
+  const handleLandingClick = () => {
+    if (!showTransition) {
+      setShowTransition(true);
+    }
   };
 
   useEffect(() => {
     if (showTransition && videoRef.current) {
-      videoRef.current.play().catch(() => {});
+      const transitionVideo = videoRef.current;
+      transitionVideo.currentTime = 0;
+      transitionVideo.play().catch(() => {});
 
-      const handleVideoEnd = () => {
+      let didNavigate = false;
+      const goHome = () => {
+        if (didNavigate) return;
+        didNavigate = true;
         router.push('/home');
       };
 
-      videoRef.current.addEventListener('ended', handleVideoEnd);
+      const timeoutId = setTimeout(goHome, 4000);
+      transitionVideo.addEventListener('ended', goHome);
+
       return () => {
-        videoRef.current?.removeEventListener('ended', handleVideoEnd);
+        clearTimeout(timeoutId);
+        transitionVideo.removeEventListener('ended', goHome);
       };
     }
   }, [showTransition, router]);
 
   return (
-    <div className="fixed inset-0 bg-black overflow-hidden">
+    <div
+      className="fixed inset-0 bg-black overflow-hidden"
+      onClick={handleLandingClick}
+      role="presentation"
+    >
       {/* Main Landing Video Background */}
       {!showTransition && (
         <div className="absolute inset-0">
@@ -39,20 +53,6 @@ export default function LandingPage() {
             />
           </video>
           <div className="absolute inset-0 bg-black/30"></div>
-        </div>
-      )}
-
-      {/* CLICK ME Button - Only visible when not in transition */}
-      {!showTransition && (
-        <div className="absolute inset-0 flex items-center justify-center z-50">
-          <button
-            onClick={handleClickMe}
-            className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-2xl font-bold rounded-lg
-              hover:from-purple-600 hover:to-pink-600 transition-all duration-300
-              shadow-lg hover:shadow-2xl transform hover:scale-105"
-          >
-            CLICK ME
-          </button>
         </div>
       )}
 
