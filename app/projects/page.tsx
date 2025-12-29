@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Navigation } from "@/components/ui/Navigation";
-import { Footer } from "@/components/ui/Footer";
-import { PageHeader } from "@/components/ui/PageHeader";
-import Link from "next/link";
+import { Footer } from '@/components/ui/Footer';
+import { Navigation } from '@/components/ui/Navigation';
+import { PageHeader } from '@/components/ui/PageHeader';
+import axios from 'axios';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 interface WordPressPost {
   id: number;
@@ -15,7 +15,7 @@ interface WordPressPost {
   link: string;
   date: string;
   _embedded?: {
-    "wp:featuredmedia"?: Array<{
+    'wp:featuredmedia'?: Array<{
       source_url: string;
     }>;
   };
@@ -27,9 +27,7 @@ export default function ProjectsPage() {
 
   useEffect(() => {
     axios
-      .get<WordPressPost[]>(
-        "https://3000studios.com/wp-json/wp/v2/posts?per_page=10&_embed"
-      )
+      .get<WordPressPost[]>('https://3000studios.com/wp-json/wp/v2/posts?per_page=10&_embed')
       .then((res) => {
         setPosts(res.data);
         setLoading(false);
@@ -65,9 +63,7 @@ export default function ProjectsPage() {
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 space-y-4">
             <div className="w-12 h-12 border-2 border-hologram border-t-transparent rounded-full animate-spin"></div>
-            <p className="font-sans text-xs tracking-widest text-platinum/50">
-              LOADING DATA...
-            </p>
+            <p className="font-sans text-xs tracking-widest text-platinum/50">LOADING DATA...</p>
           </div>
         ) : posts.length > 0 ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -79,10 +75,10 @@ export default function ProjectsPage() {
               >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-hologram/10 blur-[50px] rounded-full group-hover:bg-hologram/20 transition-all duration-700"></div>
 
-                {post._embedded?.["wp:featuredmedia"]?.[0]?.source_url && (
+                {post._embedded?.['wp:featuredmedia']?.[0]?.source_url && (
                   <div className="relative h-48 mb-6 overflow-hidden rounded-sm">
                     <img
-                      src={post._embedded["wp:featuredmedia"][0].source_url}
+                      src={post._embedded['wp:featuredmedia'][0].source_url}
                       alt={post.title.rendered}
                       className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 grayscale group-hover:grayscale-0"
                     />
@@ -119,9 +115,7 @@ export default function ProjectsPage() {
           </div>
         ) : (
           <div className="text-center py-20 hyper-glass rounded-sm">
-            <p className="font-sans text-platinum/50 tracking-widest">
-              NO PROJECTS FOUND
-            </p>
+            <p className="font-sans text-platinum/50 tracking-widest">NO PROJECTS FOUND</p>
           </div>
         )}
       </div>

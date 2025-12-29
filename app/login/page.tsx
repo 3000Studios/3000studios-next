@@ -7,6 +7,21 @@ import Link from "next/link";
 export default function LoginPage() {
   return (
     <main className="relative min-h-screen flex flex-col">
+      {/* Full-screen background video */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="fixed inset-0 w-full h-full object-cover -z-10"
+      >
+        <source
+          src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986144/3D_tunnel_to_purple_d7cofd.mp4"
+          type="video/mp4"
+        />
+      </video>
+      <div className="fixed inset-0 bg-black/50 -z-5"></div>
+
       <Navigation />
 
       <div className="flex-grow flex items-center justify-center px-6 relative z-10">
