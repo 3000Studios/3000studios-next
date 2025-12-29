@@ -54,7 +54,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <AmbientAudio />
           <MouseTrails />
         </ClientLayoutWrapper>
-        
+
         <FramerMotionProvider>
           <div className="relative z-10">{children}</div>
         </FramerMotionProvider>
