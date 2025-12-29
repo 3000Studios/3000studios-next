@@ -36,5 +36,14 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules", ".next", "dist", "build", "coverage"]
+  "exclude": [
+    "node_modules",
+    ".next",
+    "dist",
+    "build",
+    "coverage",
+    "_disabled/**",
+    "_audit/**",
+    ".shadow/**"
+  ]
 }
