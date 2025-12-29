@@ -24,14 +24,12 @@ export const Navigation = () => {
 
   const pathname = usePathname();
 
-  const pathname = usePathname();
-
   // Restrict to only the requested page(s). Default to Home only per directive.
   const navLinks = [{ href: '/', label: 'Home' }];
 
-  if (pathname === '/home') {
-    const forbidden = new Set(['Studio', 'Experience', 'Avatar', 'Dashboard', 'Team', 'Contact']);
-    navLinks = navLinks.filter((l) => !forbidden.has(l.label));
+  // Hide navigation entirely on the landing page (/)
+  if (pathname === '/') {
+    return null;
   }
 
   return (
@@ -47,7 +45,7 @@ export const Navigation = () => {
           style={{ opacity: 0.45 }}
         >
           <source
-            src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766972500/3000_studios_back_dop_nldai9.mp4"
+            src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986142/3dweb_azplaj.mp4"
             type="video/mp4"
           />
         </video>
@@ -78,7 +76,8 @@ export const Navigation = () => {
               <Link
                 key={index}
                 href={link.href}
-                className="px-3 py-2 text-slate-200 hover:text-yellow-300 border-b-2 border-transparent hover:border-yellow-300 transition-colors duration-200 hover-pop"
+                className="px-3 py-2 font-extrabold tracking-wide text-slate-200 hover:text-yellow-300 border-b-2 border-transparent hover:border-yellow-300 transition-all duration-200 hover-pop"
+                style={{ textShadow: '0 2px 4px rgba(0,0,0,0.6), 0 0 8px rgba(255,215,0,0.20)' }}
                 onMouseEnter={playHoverSound}
               >
                 {link.label}
@@ -103,7 +102,8 @@ export const Navigation = () => {
               <Link
                 key={index}
                 href={link.href}
-                className="block px-3 py-2 text-center text-slate-200 hover:text-yellow-300 border-b-2 border-transparent hover:border-yellow-300 transition-colors duration-200"
+                className="block px-3 py-2 text-center font-extrabold tracking-wide text-slate-200 hover:text-yellow-300 border-b-2 border-transparent hover:border-yellow-300 transition-all duration-200"
+                style={{ textShadow: '0 2px 4px rgba(0,0,0,0.6), 0 0 8px rgba(255,215,0,0.20)' }}
                 onClick={() => setIsOpen(false)}
                 onMouseEnter={playHoverSound}
               >

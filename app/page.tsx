@@ -34,7 +34,7 @@ export default function LandingPage() {
         <div className="absolute inset-0">
           <video autoPlay muted loop playsInline className="w-full h-full object-cover">
             <source
-              src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986144/3D_tunnel_to_purple_d7cofd.mp4"
+              src="https://res.cloudinary.com/dj92eb97f/video/upload/v1767018521/Click_me_video_b34knz.mp4"
               type="video/mp4"
             />
           </video>
@@ -61,7 +61,7 @@ export default function LandingPage() {
         <div className="absolute inset-0 z-50">
           <video ref={videoRef} playsInline className="w-full h-full object-cover">
             <source
-              src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986144/3D_tunnel_to_purple_d7cofd.mp4"
+              src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986203/slow_tunnel_v0hpc8.mp4"
               type="video/mp4"
             />
           </video>
