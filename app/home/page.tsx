@@ -82,22 +82,18 @@ export default function HomePage() {
         </video>
         <div className="fixed inset-0 bg-gradient-to-b from-black/60 via-black/70 to-black -z-5" />
 
-        <div className="relative z-10 w-full max-w-4xl mx-auto text-center space-y-8 py-16">
+        {/* 3D Interactive Avatar */}
+        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 w-full max-w-2xl h-[500px] z-20">
+          <PublicAvatar />
+        </div>
+
+        <div className="relative z-10 w-full max-w-4xl mx-auto text-center space-y-8 py-16 mt-[420px]">
           <div className="flex flex-col items-center gap-4">
-            <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden ring-4 ring-amber-400/70 shadow-[0_0_45px_rgba(255,191,0,0.45)]">
-              <Image
-                src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&h=600&fit=crop"
-                alt="AI Avatar host"
-                fill
-                className="object-cover"
-                sizes="200px"
-              />
-            </div>
             <h1 className="text-4xl md:text-5xl font-black text-white drop-shadow-[0_8px_30px_rgba(0,0,0,0.6)]">
               Welcome to 3000 Studios
             </h1>
             <p className="text-lg text-platinum/80 max-w-2xl">
-              Ask our AI concierge anything—projects, services, pricing, or a custom demo.
+              Speak or type - Our AI avatar is listening and ready to help.
             </p>
           </div>
 
