@@ -1,0 +1,50 @@
+name: Deploy to Vercel (Production)
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install dependencies (clean)
+        run: |
+          npm ci
+
+      - name: Type check
+        run: npm run type-check --silent
+
+      - name: Lint
+        run: npm run lint --silent || true
+
+      - name: Build
+        run: npm run build --silent
+
+      - name: Install Vercel CLI
+        run: npm i -g vercel@latest
+
+      - name: Pull Vercel env
+        # Requires VERCEL_TOKEN, and ideally VERCEL_ORG_ID/VERCEL_PROJECT_ID secrets
+        run: vercel pull --yes --environment=production --token "$VERCEL_TOKEN"
+
+      - name: Deploy (prebuilt)
+        # Uploads the locally built artifacts to Vercel and promotes to production
+        run: vercel deploy --prebuilt --prod --yes --token "$VERCEL_TOKEN"
