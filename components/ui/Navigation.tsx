@@ -41,30 +41,30 @@ export const Navigation = () => {
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 overflow-hidden">
-      {/* Video Background */}
-      <div className="absolute inset-0 -z-10">
+    <nav className="fixed top-0 left-0 right-0 z-[100] h-20 border-b-2 border-amber-400/30 shadow-2xl">
+      {/* Contained Video Background - stays within nav boundaries */}
+      <div className="absolute inset-0 overflow-hidden">
         <video
           autoPlay
           muted
           loop
           playsInline
           className="w-full h-full object-cover"
-          style={{ opacity: 0.45 }}
+          style={{ opacity: 0.3 }}
         >
           <source
             src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986142/3dweb_azplaj.mp4"
             type="video/mp4"
           />
         </video>
-        {/* Gold/Silver overlay for premium aesthetic */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-gray-800/60 to-slate-900/70 mix-blend-overlay"></div>
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-lg"></div>
+        {/* Silver/Gold glassmorphic overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/85 via-amber-900/20 to-slate-900/85 backdrop-blur-xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/40"></div>
       </div>
 
       {/* Navigation Content */}
-      <div className="relative px-6 py-4 border border-slate-500/30 rounded-xl bg-gradient-to-r from-gray-900/70 via-slate-800/60 to-gray-900/70 shadow-lg">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="relative h-full px-6">
+        <div className="h-full max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <Link
             href="/"
