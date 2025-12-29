@@ -22,6 +22,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "type-check": "tsc --noEmit",
+    "prune:types": "ts-prune --error",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "db:seed": "tsx prisma/seed.ts",

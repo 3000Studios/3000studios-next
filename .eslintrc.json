@@ -10,9 +10,5 @@
     ],
     "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
   },
-  "ignorePatterns": [
-    "_disabled/**",
-    ".next/**",
-    "node_modules/**"
-  ]
+  "ignorePatterns": ["_disabled/**", ".next/**", "node_modules/**"]
 }

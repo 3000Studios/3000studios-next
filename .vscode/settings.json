@@ -18,13 +18,15 @@
     "**/.git": true,
     "**/.DS_Store": true,
     "**/node_modules": true,
-    "**/.next": true
+    "**/.next": true,
+    "**/_disabled": true
   },
   "search.exclude": {
     "**/node_modules": true,
     "**/.next": true,
     "**/pnpm-lock.yaml": true,
-    "**/package-lock.json": true
+    "**/package-lock.json": true,
+    "**/_disabled": true
   },
   "git.autorefresh": true,
   "git.confirmSync": false,
