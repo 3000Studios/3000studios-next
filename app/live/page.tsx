@@ -224,23 +224,4 @@ export default function LivePage() {
     </div>
   );
 }
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="aspect-video bg-gradient-to-b from-slate-900/90 to-slate-950/90 backdrop-blur-xl rounded-xl border-2 border-amber-400/20 flex items-center justify-center">
-            <div className="text-center">
-              <div className="text-6xl mb-6">📹</div>
-              <h2 className="text-3xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-500">
-                Stream Offline
-              </h2>
-              <p className="text-slate-400 text-lg">
-                No live stream at the moment. Check back soon!
-              </p>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
+
