@@ -33,7 +33,7 @@ export default function StoreManagerPage() {
           Shopify Store Manager
         </h1>
       </div>
-      
+
       <div className="h-[calc(100vh-5rem)]">
         <iframe
           src="https://admin.shopify.com/store/3000-studios/themes?appLoadId=9624f85b-f325-4596-926e-9c87db6a0b2f"
