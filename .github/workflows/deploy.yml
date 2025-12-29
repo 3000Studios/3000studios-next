@@ -1,12 +1,19 @@
-name: Deploy to Vercel (Production)
+name: Deploy to Vercel (Auto)
 
 on:
   push:
-    branches: ["main"]
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
   workflow_dispatch: {}
 
 permissions:
   contents: read
+  pull-requests: write
+
+concurrency:
+  group: vercel-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build-and-deploy:
@@ -19,6 +26,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Determine environment
+        id: vars
+        shell: bash
+        run: |
+          if [ "${GITHUB_REF}" = "refs/heads/main" ]; then
+            echo "env=production" >> $GITHUB_OUTPUT
+            echo "is_production=true" >> $GITHUB_OUTPUT
+          else
+            echo "env=preview" >> $GITHUB_OUTPUT
+            echo "is_production=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
@@ -26,8 +45,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies (clean)
-        run: |
-          npm ci
+        run: npm ci
 
       - name: Type check
         run: npm run type-check --silent
@@ -41,10 +59,33 @@ jobs:
       - name: Install Vercel CLI
         run: npm i -g vercel@latest
 
-      - name: Pull Vercel env
-        # Requires VERCEL_TOKEN, and ideally VERCEL_ORG_ID/VERCEL_PROJECT_ID secrets
-        run: vercel pull --yes --environment=production --token "$VERCEL_TOKEN"
+      - name: Pull Vercel env (${{ steps.vars.outputs.env }})
+        run: vercel pull --yes --environment=${{ steps.vars.outputs.env }} --token "$VERCEL_TOKEN"
 
       - name: Deploy (prebuilt)
-        # Uploads the locally built artifacts to Vercel and promotes to production
-        run: vercel deploy --prebuilt --prod --yes --token "$VERCEL_TOKEN"
+        id: vercel
+        shell: bash
+        run: |
+          if [ "${{ steps.vars.outputs.is_production }}" = "true" ]; then
+            url=$(vercel deploy --prebuilt --prod --yes --token "$VERCEL_TOKEN")
+          else
+            url=$(vercel deploy --prebuilt --yes --token "$VERCEL_TOKEN")
+          fi
+          echo "url=$url" >> $GITHUB_OUTPUT
+
+      - name: Comment preview URL on PR
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = core.getInput('url');
+            const body = `🚀 Vercel ${${{ steps.vars.outputs.is_production }} ? 'Production' : 'Preview'} Deployment:\n\n${url}`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
+          result-encoding: string
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          url: ${{ steps.vercel.outputs.url }}
