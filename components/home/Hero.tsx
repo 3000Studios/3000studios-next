@@ -1,0 +1,1 @@
+export const Hero = () => <section className="h-96 bg-gradient-to-b from-slate-900 to-black flex items-center justify-center"><h1 className="text-5xl font-bold">Welcome to 3000 Studios</h1></section>;
