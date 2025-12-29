@@ -8,8 +8,6 @@
 
 import { AlertCircle, Check, Gift, Loader2, Mail } from 'lucide-react';
 import { useState } from 'react';
-import { AlertCircle, Check, Gift, Loader2, Mail } from 'lucide-react';
-import { useState } from 'react';
 
 interface NewsletterProps {
   variant?: "default" | "compact" | "hero";
