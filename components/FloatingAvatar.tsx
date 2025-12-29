@@ -8,12 +8,13 @@
 "use client";
 
 import { useRef } from "react";
+import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Sphere, MeshDistortMaterial } from "@react-three/drei";
 import styles from "./FloatingAvatar.module.css";
 
 function AnimatedSphere() {
-  const meshRef = useRef(null);
+  const meshRef = useRef<THREE.Mesh | null>(null);
 
   useFrame((state) => {
     if (meshRef.current) {
