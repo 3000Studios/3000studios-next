@@ -20,7 +20,7 @@ function FemaleAvatar({ isListening, isSpeaking }: { isListening: boolean; isSpe
         headRef.current.rotation.y = Math.sin(time * 0.5) * 0.1;
         headRef.current.rotation.x = Math.sin(time * 0.3) * 0.05;
       }
-      
+
       // Listening animation - attentive head tilt
       if (isListening) {
         headRef.current.rotation.y = Math.sin(time * 2) * 0.2;
@@ -130,7 +130,13 @@ function FemaleAvatar({ isListening, isSpeaking }: { isListening: boolean; isSpe
   );
 }
 
-export default function Avatar3D({ isListening, isSpeaking }: { isListening: boolean; isSpeaking: boolean }) {
+export default function Avatar3D({
+  isListening,
+  isSpeaking,
+}: {
+  isListening: boolean;
+  isSpeaking: boolean;
+}) {
   return (
     <div className="w-full h-full">
       <Canvas>
@@ -141,7 +147,7 @@ export default function Avatar3D({ isListening, isSpeaking }: { isListening: boo
           minPolarAngle={Math.PI / 4}
           maxPolarAngle={Math.PI / 1.5}
         />
-        
+
         {/* Lighting */}
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} intensity={1} castShadow />

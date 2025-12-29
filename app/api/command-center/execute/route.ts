@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession();
-  
+
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
 
 function parseIntent(command: string) {
   const lowerCommand = command.toLowerCase();
-  
+
   // Simple keyword matching - replace with proper NLP
   if (lowerCommand.includes('change') || lowerCommand.includes('update')) {
     return {
@@ -35,7 +35,7 @@ function parseIntent(command: string) {
       details: command,
     };
   }
-  
+
   if (lowerCommand.includes('add') || lowerCommand.includes('create')) {
     return {
       action: 'create',
@@ -43,7 +43,7 @@ function parseIntent(command: string) {
       details: command,
     };
   }
-  
+
   if (lowerCommand.includes('remove') || lowerCommand.includes('delete')) {
     return {
       action: 'delete',
@@ -80,11 +80,11 @@ function extractTarget(command: string): string | null {
 function generatePreview(intent: any): string {
   // Generate code preview based on intent
   // This is a placeholder - implement actual code generation
-  
+
   if (intent.action === 'modify' && intent.target) {
     return `// Proposed changes to ${intent.target}\n// ${intent.details}\n\n// Code changes will appear here...`;
   }
-  
+
   if (intent.action === 'create') {
     return `// New file/component to be created\n// ${intent.details}\n\n// Generated code will appear here...`;
   }
