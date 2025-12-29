@@ -5,6 +5,10 @@ import { cookies } from 'next/headers';
 const handler = NextAuth({
   providers: [
     Credentials({
+      credentials: {
+        email: { label: 'Email', type: 'text' },
+        password: { label: 'Password', type: 'password' },
+      },
       async authorize(credentials) {
         const email = credentials?.email as string | undefined;
         const password = credentials?.password as string | undefined;
@@ -20,9 +24,7 @@ const handler = NextAuth({
         }
 
         if (email === adminEmail && password === adminPassword) {
-          // Set simple auth cookie for middleware-based admin lock
-          cookies().set('admin-auth', 'true');
-          return { id: 'admin' } as any;
+          return { id: 'admin', email } as any;
         }
 
         return null;
