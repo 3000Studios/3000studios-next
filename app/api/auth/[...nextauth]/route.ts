@@ -7,8 +7,8 @@ const handler = NextAuth({
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
+        email: { label: 'Email', type: 'email' },
+        password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
@@ -38,8 +38,8 @@ const handler = NextAuth({
         }
 
         return null;
-      }
-    })
+      },
+    }),
   ],
   pages: {
     signIn: '/admin',
