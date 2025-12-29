@@ -12,6 +12,8 @@ import { FramerMotionProvider } from '@/components/ui/MotionProvider';
 import { Navigation } from '@/components/ui/Navigation';
 import FusionEventHandler from '@/components/world/FusionEventHandler';
 import MoodMap from '@/components/world/MoodMap';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { CSSProperties, ReactNode } from 'react';
 import ScrollEffects from '../components/ui/ScrollEffects';
 import SoundToggle from '../components/ui/SoundToggle';
