@@ -1,43 +1,24 @@
-/**
- * Avatar Scene - R3F 3D Scene
- * Renders the 3D avatar with physics and animations
- */
-
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
-import AvatarMesh from "./AvatarMesh";
+import { Suspense } from "react";
+import { OrbitControls } from "@react-three/drei";
+import AvatarModel from "./AvatarModel";
 
 export default function AvatarScene() {
   return (
-    <Canvas
-      shadows
-      gl={{ antialias: true, alpha: true }}
-      className="bg-transparent"
+    <Canvas 
+      camera={{ position: [0, 1.5, 2.5], fov: 40 }}
+      dpr={[1, 1.5]}
+      gl={{ powerPreference: "high-performance", antialias: false }}
     >
-      <PerspectiveCamera makeDefault position={[0, 1.5, 3]} fov={45} />
-      
-      <ambientLight intensity={0.5} />
-      <spotLight
-        position={[10, 10, 10]}
-        angle={0.3}
-        penumbra={1}
-        intensity={2}
-        castShadow
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
-      />
-      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#00d4ff" />
-      
-      <AvatarMesh />
-      
-      <OrbitControls
-        enableZoom={false}
-        enablePan={false}
-        minPolarAngle={Math.PI / 3}
-        maxPolarAngle={Math.PI / 1.5}
-      />
+      <ambientLight intensity={1.2} />
+      <directionalLight position={[3, 5, 2]} intensity={2} />
+      <spotLight position={[-3, 5, -2]} intensity={1.5} angle={0.3} penumbra={1} />
+      <Suspense fallback={null}>
+        <AvatarModel />
+      </Suspense>
+      <OrbitControls enableZoom={false} enablePan={false} />
     </Canvas>
   );
 }
