@@ -1,9 +1,9 @@
 // @ts-nocheck
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 // import * as tf from "@tensorflow/tfjs"; // Not used directly
-import * as blazeface from "@tensorflow-models/blazeface";
+import * as blazeface from '@tensorflow-models/blazeface';
 
 export default function EmotionMirror() {
   const videoRef = useRef(null);
@@ -30,11 +30,11 @@ export default function EmotionMirror() {
     if (!model) return;
 
     const EMOTION_MAP = {
-      happy: "cheer",
-      sad: "silent",
-      angry: "boo",
-      surprised: "ovation",
-      neutral: "idle",
+      happy: 'cheer',
+      sad: 'silent',
+      angry: 'boo',
+      surprised: 'ovation',
+      neutral: 'idle',
     };
 
     const loop = async () => {
@@ -49,18 +49,18 @@ export default function EmotionMirror() {
         // Simple emotion estimator based on face openness & eyebrows
         const emotionGuess =
           w / h > 0.9
-            ? "happy"
+            ? 'happy'
             : h / w > 1.4
-              ? "surprised"
+              ? 'surprised'
               : h / w > 1.1
-                ? "sad"
+                ? 'sad'
                 : w / h > 1.2
-                  ? "angry"
-                  : "neutral";
+                  ? 'angry'
+                  : 'neutral';
 
         // Broadcast to entire system
-        window.postMessage(`emotion:${emotionGuess}`, "*");
-        window.postMessage(`crowd:${EMOTION_MAP[emotionGuess]}`, "*");
+        window.postMessage(`emotion:${emotionGuess}`, '*');
+        window.postMessage(`crowd:${EMOTION_MAP[emotionGuess]}`, '*');
       }
 
       requestAnimationFrame(loop);
@@ -69,10 +69,5 @@ export default function EmotionMirror() {
     loop();
   }, [model]);
 
-  return (
-    <video
-      ref={videoRef}
-      className="absolute w-px h-px opacity-0 pointer-events-none"
-    />
-  );
+  return <video ref={videoRef} className="absolute w-px h-px opacity-0 pointer-events-none" />;
 }

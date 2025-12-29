@@ -1,12 +1,10 @@
 // @ts-nocheck
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 export default function AvatarSpeech({ text, avatar }) {
-  const synthRef = useRef(
-    typeof window !== "undefined" ? window.speechSynthesis : null,
-  );
+  const synthRef = useRef(typeof window !== 'undefined' ? window.speechSynthesis : null);
 
   useEffect(() => {
     if (!text || !avatar || !synthRef.current) return;

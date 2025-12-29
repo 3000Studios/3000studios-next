@@ -1,34 +1,34 @@
-"use client";
+'use client';
 
-"use client";
+'use client';
 // @ts-nocheck
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export default function DialogueBrain({ onDialogue }) {
-  const [emotion, setEmotion] = useState("neutral");
-  const [lastLine, setLastLine] = useState("");
+  const [emotion, setEmotion] = useState('neutral');
+  const [lastLine, setLastLine] = useState('');
 
   const EMO_TONES = {
-    happy: "energetic, charismatic, uplifting, playful",
-    angry: "intense, gritty, aggressive, dominant",
-    sad: "soft, slow, reflective, warm",
-    surprised: "sharp, excited, shocked, high-pitch",
-    neutral: "calm, composed, smooth, balanced",
+    happy: 'energetic, charismatic, uplifting, playful',
+    angry: 'intense, gritty, aggressive, dominant',
+    sad: 'soft, slow, reflective, warm',
+    surprised: 'sharp, excited, shocked, high-pitch',
+    neutral: 'calm, composed, smooth, balanced',
   };
 
   useEffect(() => {
     const handler = (e: MessageEvent) => {
-      if (!String(e.data).startsWith("emotion:")) return;
-      const mood = e.data.replace("emotion:", "");
+      if (!String(e.data).startsWith('emotion:')) return;
+      const mood = e.data.replace('emotion:', '');
       setEmotion(mood);
     };
 
-    window.addEventListener("message", handler);
-    return () => window.removeEventListener("message", handler);
+    window.addEventListener('message', handler);
+    return () => window.removeEventListener('message', handler);
   }, []);
 
-  async function generateLine(context = "") {
+  async function generateLine(context = '') {
     const tone = EMO_TONES[emotion];
 
     const prompt = `
@@ -50,21 +50,21 @@ Now produce the next line:
     `;
 
     try {
-      const res = await fetch("/api/shadow/dialogue", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/api/shadow/dialogue', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt }),
       });
 
       const data = await res.json();
-      const line = data?.text ?? "…";
+      const line = data?.text ?? '…';
 
       if (line !== lastLine) {
         setLastLine(line);
         onDialogue(line);
       }
     } catch (e) {
-      console.error("Dialogue generation error", e);
+      console.error('Dialogue generation error', e);
     }
   }
 

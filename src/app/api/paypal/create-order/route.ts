@@ -13,15 +13,12 @@ export async function POST(request: NextRequest) {
     const { items, userId } = body;
 
     if (!items || items.length === 0) {
-      return NextResponse.json(
-        { error: 'No items in cart' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'No items in cart' }, { status: 400 });
     }
 
     // Calculate total
     const total = items.reduce((sum: number, item: any) => {
-      return sum + (item.price * item.quantity);
+      return sum + item.price * item.quantity;
     }, 0);
 
     // Create PayPal order
@@ -63,9 +60,6 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('PayPal create order error:', error);
-    return NextResponse.json(
-      { error: 'Failed to create PayPal order' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to create PayPal order' }, { status: 500 });
   }
 }
