@@ -37,22 +37,6 @@ export async function POST(request: NextRequest) {
       currency: 'USD',
     });
 
-    // Save order to database
-    await saveOrder({
-      orderId: paypalOrder.id,
-      userId,
-      items: items.map((item: any) => ({
-        productId: item.id,
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity,
-      })),
-      total,
-      status: 'pending',
-      paymentMethod: 'paypal',
-      createdAt: new Date(),
-    });
-
     return NextResponse.json({
       success: true,
       orderId: paypalOrder.id,
