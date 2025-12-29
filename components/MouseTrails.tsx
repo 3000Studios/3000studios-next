@@ -1,7 +1,18 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
+const PALETTE = [
+  { name: "gold", color: "#D4AF37" },
+  { name: "blue", color: "#3B82F6" },
+  { name: "green", color: "#22C55E" },
+  { name: "white", color: "#FFFFFF" },
+  { name: "silver", color: "#C0C0C0" },
+  { name: "yellow", color: "#FACC15" },
+  { name: "orange", color: "#FB923C" },
+];
 
 export default function MouseTrails() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [paletteIndex, setPaletteIndex] = useState<number>(() => Math.floor(Math.random() * PALETTE.length));
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -24,10 +35,11 @@ export default function MouseTrails() {
         ctx.save();
         ctx.globalAlpha = t.alpha;
         ctx.beginPath();
-        ctx.arc(t.x, t.y, 16, 0, 2 * Math.PI);
-        ctx.fillStyle = `hsl(${220 + i * 2}, 100%, 60%)`;
-        ctx.shadowBlur = 16;
-        ctx.shadowColor = ctx.fillStyle;
+        ctx.arc(t.x, t.y, 10, 0, 2 * Math.PI);
+        const base = PALETTE[paletteIndex].color;
+        ctx.fillStyle = base;
+        ctx.shadowBlur = 20;
+        ctx.shadowColor = base;
         ctx.fill();
         ctx.restore();
         t.alpha *= 0.96;
@@ -35,11 +47,15 @@ export default function MouseTrails() {
       animationId = requestAnimationFrame(draw);
     }
     draw();
+    const colorInterval = setInterval(() => {
+      setPaletteIndex((idx) => (idx + 1) % PALETTE.length);
+    }, 15000);
     return () => {
       window.removeEventListener("mousemove", onMove);
       cancelAnimationFrame(animationId);
+      clearInterval(colorInterval);
     };
-  }, []);
+  }, [paletteIndex]);
   return (
     <canvas
       ref={canvasRef}
