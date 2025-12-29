@@ -17,10 +17,13 @@ interface Product {
  * Note: This is a placeholder implementation
  * Real implementation requires MongoDB connection string in environment
  */
-export async function updateProduct(productId: string, updates: Partial<Product>): Promise<Product | null> {
+export async function updateProduct(
+  productId: string,
+  updates: Partial<Product>
+): Promise<Product | null> {
   // Check if MongoDB is configured
   const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
-  
+
   if (!mongoUri) {
     console.warn('MongoDB not configured - product update skipped');
     return null;
@@ -29,12 +32,12 @@ export async function updateProduct(productId: string, updates: Partial<Product>
   try {
     client = new MongoClient(uri);
     await client.connect();
-    db = client.db("3000studios");
-    console.log("Connected to MongoDB");
+    db = client.db('3000studios');
+    console.log('Connected to MongoDB');
     return db;
   } catch (error) {
-    console.error("MongoDB connection error:", error);
-    throw new Error("Failed to connect to database");
+    console.error('MongoDB connection error:', error);
+    throw new Error('Failed to connect to database');
   }
 }
 
@@ -69,8 +72,8 @@ export interface User {
   userId: string;
   email: string;
   passwordHash: string;
-  role: "user" | "admin" | "elite";
-  subscriptionStatus: "free" | "pro" | "elite";
+  role: 'user' | 'admin' | 'elite';
+  subscriptionStatus: 'free' | 'pro' | 'elite';
   stripeCustomerId?: string;
   createdAt: Date;
   lastLogin: Date;
@@ -79,21 +82,18 @@ export interface User {
 // User Management
 export async function createUser(user: User): Promise<void> {
   const database = await connectToDatabase();
-  await database.collection("users").insertOne(user);
+  await database.collection('users').insertOne(user);
 }
 
 export async function getUserByEmail(email: string): Promise<User | null> {
   const database = await connectToDatabase();
-  const user = await database.collection("users").findOne({ email });
+  const user = await database.collection('users').findOne({ email });
   return user as User | null;
 }
 
-export async function updateUser(
-  userId: string,
-  updates: Partial<User>
-): Promise<void> {
+export async function updateUser(userId: string, updates: Partial<User>): Promise<void> {
   const database = await connectToDatabase();
-  await database.collection("users").updateOne({ userId }, { $set: updates });
+  await database.collection('users').updateOne({ userId }, { $set: updates });
 }
 
 export interface Order {
@@ -106,8 +106,8 @@ export interface Order {
     quantity: number;
   }>;
   total: number;
-  status: "pending" | "completed" | "failed" | "refunded";
-  paymentMethod: "paypal" | "stripe";
+  status: 'pending' | 'completed' | 'failed' | 'refunded';
+  paymentMethod: 'paypal' | 'stripe';
   createdAt: Date;
   completedAt?: Date;
 }
@@ -129,23 +129,23 @@ export interface Product {
 
 // Analytics Functions
 export async function getAnalytics(
-  timeRange: "day" | "week" | "month" = "day"
+  timeRange: 'day' | 'week' | 'month' = 'day'
 ): Promise<AnalyticsData> {
   try {
     const database = await connectToDatabase();
-    const analytics = database.collection("analytics");
+    const analytics = database.collection('analytics');
 
     const now = new Date();
     const startDate = new Date();
 
     switch (timeRange) {
-      case "day":
+      case 'day':
         startDate.setDate(now.getDate() - 1);
         break;
-      case "week":
+      case 'week':
         startDate.setDate(now.getDate() - 7);
         break;
-      case "month":
+      case 'month':
         startDate.setMonth(now.getMonth() - 1);
         break;
     }
@@ -183,7 +183,7 @@ export async function getAnalytics(
  */
 export async function getProduct(productId: string): Promise<Product | null> {
   const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
-  
+
   if (!mongoUri) {
     console.warn('MongoDB not configured - product retrieval skipped');
     return null;
@@ -203,7 +203,7 @@ export async function getProduct(productId: string): Promise<Product | null> {
  */
 export async function listProducts(limit = 10): Promise<Product[]> {
   const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
-  
+
   if (!mongoUri) {
     console.warn('MongoDB not configured - product list skipped');
     return [];
@@ -213,21 +213,17 @@ export async function listProducts(limit = 10): Promise<Product[]> {
     console.log(`MongoDB list requested with limit ${limit}`);
     return [];
   } catch (error) {
-    console.error("Save order error:", error);
-    throw new Error("Failed to save order");
+    console.error('Save order error:', error);
+    throw new Error('Failed to save order');
   }
 }
 
 export async function getOrders(limit: number = 10): Promise<Order[]> {
   try {
     const database = await connectToDatabase();
-    const orders = database.collection("orders");
+    const orders = database.collection('orders');
 
-    const results = await orders
-      .find({})
-      .sort({ createdAt: -1 })
-      .limit(limit)
-      .toArray();
+    const results = await orders.find({}).sort({ createdAt: -1 }).limit(limit).toArray();
 
     return results.map((doc) => ({
       orderId: doc.orderId as string,
@@ -239,21 +235,21 @@ export async function getOrders(limit: number = 10): Promise<Order[]> {
         quantity: number;
       }>,
       total: doc.total as number,
-      status: doc.status as "pending" | "completed" | "failed" | "refunded",
-      paymentMethod: doc.paymentMethod as "paypal" | "stripe",
+      status: doc.status as 'pending' | 'completed' | 'failed' | 'refunded',
+      paymentMethod: doc.paymentMethod as 'paypal' | 'stripe',
       createdAt: doc.createdAt as Date,
       completedAt: doc.completedAt as Date | undefined,
     }));
   } catch (error) {
-    console.error("Get orders error:", error);
-    throw new Error("Failed to fetch orders");
+    console.error('Get orders error:', error);
+    throw new Error('Failed to fetch orders');
   }
 }
 
 export async function getProducts(): Promise<Product[]> {
   try {
     const database = await connectToDatabase();
-    const products = database.collection("products");
+    const products = database.collection('products');
 
     const results = await products.find({ inStock: true }).toArray();
     return results.map((doc) => ({
@@ -271,26 +267,20 @@ export async function getProducts(): Promise<Product[]> {
       updatedAt: doc.updatedAt as Date,
     }));
   } catch (error) {
-    console.error("Get products error:", error);
-    throw new Error("Failed to fetch products");
+    console.error('Get products error:', error);
+    throw new Error('Failed to fetch products');
   }
 }
 
-export async function updateProduct(
-  productId: string,
-  updates: Partial<Product>
-): Promise<void> {
+export async function updateProduct(productId: string, updates: Partial<Product>): Promise<void> {
   try {
     const database = await connectToDatabase();
-    const products = database.collection("products");
+    const products = database.collection('products');
 
-    await products.updateOne(
-      { productId },
-      { $set: { ...updates, updatedAt: new Date() } }
-    );
+    await products.updateOne({ productId }, { $set: { ...updates, updatedAt: new Date() } });
   } catch (error) {
-    console.error("Update product error:", error);
-    throw new Error("Failed to update product");
+    console.error('Update product error:', error);
+    throw new Error('Failed to update product');
   }
 }
 
@@ -304,14 +294,14 @@ export async function getDashboardStats() {
 
     // Get current month stats
     const currentStats = await database
-      .collection("analytics")
+      .collection('analytics')
       .findOne({ timestamp: { $gte: lastMonth } }, { sort: { timestamp: -1 } });
 
     // Get order stats
-    const ordersCollection = database.collection("orders");
+    const ordersCollection = database.collection('orders');
     const totalOrders = await ordersCollection.countDocuments({
       createdAt: { $gte: lastMonth },
-      status: "completed",
+      status: 'completed',
     });
 
     const revenueAgg = await ordersCollection
@@ -319,13 +309,13 @@ export async function getDashboardStats() {
         {
           $match: {
             createdAt: { $gte: lastMonth },
-            status: "completed",
+            status: 'completed',
           },
         },
         {
           $group: {
             _id: null,
-            total: { $sum: "$total" },
+            total: { $sum: '$total' },
           },
         },
       ])
@@ -342,7 +332,7 @@ export async function getDashboardStats() {
       conversionRate: currentStats?.conversionRate || 0,
     };
   } catch (error) {
-    console.error("Get dashboard stats error:", error);
-    throw new Error("Failed to fetch dashboard stats");
+    console.error('Get dashboard stats error:', error);
+    throw new Error('Failed to fetch dashboard stats');
   }
 }

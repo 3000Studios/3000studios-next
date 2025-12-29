@@ -50,12 +50,8 @@ export default function LoginPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gold rounded-full mb-4">
               <Lock className="text-black" size={32} />
             </div>
-            <h1 className="text-3xl font-bold gradient-text mb-2">
-              THE MATRIX
-            </h1>
-            <p className="text-gray-400">
-              Admin Access Portal
-            </p>
+            <h1 className="text-3xl font-bold gradient-text mb-2">THE MATRIX</h1>
+            <p className="text-gray-400">Admin Access Portal</p>
           </div>
 
           {/* Login Form */}
@@ -74,7 +70,10 @@ export default function LoginPage() {
                 Email Address
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <Mail
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
                 <input
                   id="email"
                   type="email"
@@ -94,7 +93,10 @@ export default function LoginPage() {
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <Lock
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
                 <input
                   id="password"
                   type="password"

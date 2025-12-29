@@ -1,12 +1,12 @@
 // @ts-nocheck
-import { prisma } from "@/lib/prisma";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import bcrypt from "bcryptjs";
-import NextAuth from "next-auth";
-import Credentials from "next-auth/providers/credentials";
-import Nodemailer from "next-auth/providers/nodemailer";
-import { z } from "zod"; // We'll need zod for validation
-import { authConfig } from "./auth.config";
+import { prisma } from '@/lib/prisma';
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import bcrypt from 'bcryptjs';
+import NextAuth from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
+import Nodemailer from 'next-auth/providers/nodemailer';
+import { z } from 'zod'; // We'll need zod for validation
+import { authConfig } from './auth.config';
 
 // Mock explicit user for now or real DB check
 async function getUser(email: string) {
@@ -14,15 +14,15 @@ async function getUser(email: string) {
     const user = await prisma.user.findUnique({ where: { email } });
     return user;
   } catch (error) {
-    console.error("Failed to fetch user:", error);
-    throw new Error("Failed to fetch user.");
+    console.error('Failed to fetch user:', error);
+    throw new Error('Failed to fetch user.');
   }
 }
 
 export const { auth, signIn, signOut, handlers } = NextAuth({
   ...authConfig,
   adapter: PrismaAdapter(prisma),
-  session: { strategy: "jwt" },
+  session: { strategy: 'jwt' },
   providers: [
     Credentials({
       async authorize(credentials) {
@@ -41,7 +41,7 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
           return null;
         }
 
-        console.log("Invalid credentials");
+        console.log('Invalid credentials');
         return null;
       },
     }),
@@ -56,7 +56,7 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
                 pass: process.env.EMAIL_SERVER_PASSWORD,
               },
             },
-            from: process.env.EMAIL_FROM || "admin@3000studios.com",
+            from: process.env.EMAIL_FROM || 'admin@3000studios.com',
           }),
         ]
       : []),
