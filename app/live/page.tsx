@@ -1,7 +1,14 @@
 'use client';
-import { Footer } from '@/components/ui/Footer';
-import { Navigation } from '@/components/ui/Navigation';
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
+
+interface StreamStatus {
+  isLive: boolean;
+  title: string;
+  description: string;
+  viewers: number;
+  streamUrl: string;
+}
 
 export default function LiveStreamPage() {
   const [isAuth] = useState(false);
