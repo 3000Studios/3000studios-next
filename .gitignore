@@ -46,3 +46,4 @@ node_modules/
 # backups
 /backups/
 *.tar.gz
+.env*.local
