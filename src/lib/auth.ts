@@ -22,8 +22,11 @@ export interface AuthResult {
   };
 }
 
-export function verifyAdmin(email: string, password: string): boolean {
-  return email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password;
+export function verifyAdmin(email: string, password: string): AuthResult {
+  const success = email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password;
+  return success
+    ? { success: true, message: "Authenticated", user: { email, role: "admin" } }
+    : { success: false, message: "Invalid credentials" };
 }
 
 export function createSessionToken(email: string): string {
