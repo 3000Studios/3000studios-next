@@ -11,6 +11,7 @@ import { GlobalEffects } from '@/components/ui/GlobalEffects';
 import { FramerMotionProvider } from '@/components/ui/MotionProvider';
 import { Navigation } from '@/components/ui/Navigation';
 import FusionEventHandler from '@/components/world/FusionEventHandler';
+import MouseTrails from '@/components/MouseTrails';
 import MoodMap from '@/components/world/MoodMap';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <ScrollEffects />
           <SoundToggle />
           <AmbientAudio />
+          <MouseTrails />
         </ClientLayoutWrapper>
         
         <FramerMotionProvider>
