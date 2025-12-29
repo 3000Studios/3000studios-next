@@ -1,10 +1,10 @@
 // @ts-nocheck
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 export default function ConfettiEffect({ show }: { show: boolean }) {
   useEffect(() => {
     if (!show) return;
-    import("canvas-confetti").then((confetti) => {
+    import('canvas-confetti').then((confetti) => {
       confetti.default({
         particleCount: 200,
         spread: 120,

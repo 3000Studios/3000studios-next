@@ -4,10 +4,10 @@
  */
 
 // @ts-nocheck
-"use client";
+'use client';
 
-import { useShadowOS } from "@/lib/shadow/os/state";
-import { useEffect, useState } from "react";
+import { useShadowOS } from '@/lib/shadow/os/state';
+import { useEffect, useState } from 'react';
 
 export default function AnalyticsPanel() {
   const { liveVisitors, totalRevenue, aiCost } = useShadowOS();
@@ -16,11 +16,11 @@ export default function AnalyticsPanel() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch("/api/matrix/events");
+        const res = await fetch('/api/matrix/events');
         const data = await res.json();
         setEvents(data.events || []);
       } catch (error) {
-        console.error("Failed to fetch events:", error);
+        console.error('Failed to fetch events:', error);
       }
     };
 
@@ -29,8 +29,8 @@ export default function AnalyticsPanel() {
     return () => clearInterval(interval);
   }, []);
 
-  const traffic = events.filter((e) => e.type === "visit").length;
-  const sales = events.filter((e) => e.type === "sale").length;
+  const traffic = events.filter((e) => e.type === 'visit').length;
+  const sales = events.filter((e) => e.type === 'sale').length;
   const revenue = totalRevenue.toFixed(2);
   const cost = aiCost.toFixed(4);
 
