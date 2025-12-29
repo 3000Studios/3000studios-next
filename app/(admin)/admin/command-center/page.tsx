@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import VoiceInput from '@/components/VoiceInput'
-import PreviewFrame from '@/components/PreviewFrame'
-import Avatar3D from '@/components/Avatar3D'
+import VoiceInput from '@/components/VoiceInput';
+import PreviewFrame from '@/components/PreviewFrame';
+import Avatar3D from '@/components/Avatar3D';
 
 export default function CommandCenter() {
   return (
@@ -21,5 +21,5 @@ export default function CommandCenter() {
         </div>
       </div>
     </div>
-  )
+  );
 }
