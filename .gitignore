@@ -50,3 +50,8 @@ node_modules/
 
 # audit artifacts (large, generated)
 _audit/
+
+# --- audit artifacts (never commit) ---
+_audit/env/*.txt
+_audit/env/*.log
+/tmp/env-audit-*
