@@ -103,7 +103,7 @@ export function LuxuryGallery({ images, title = 'Our Collection' }: LuxuryGaller
       </div>
 
       {/* Modal/Lightbox */}
-      {selectedIndex !== null && (
+      {selectedIndex !== null && images[selectedIndex] && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
