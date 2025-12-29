@@ -239,8 +239,7 @@ export default function Navigation() {
         >
           <source src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986156/digitalliquid_q8jesa.mp4" type="video/mp4" />
         </video>
-      </div
-      >
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
