@@ -1,8 +1,10 @@
 "use client";
 
 import { useFrame } from "@react-three/fiber";
+import { RefObject } from "react";
+import { Group } from "three";
 
-export default function useIdleMotion(ref: any) {
+export default function useIdleMotion(ref: RefObject<Group>) {
   useFrame(({ clock }) => {
     if (!ref.current) return;
     ref.current.position.y =
