@@ -1,17 +1,17 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface ButtonConfig {
-  label: string
-  nextVideo: string
-  redirect: string
+  label: string;
+  nextVideo: string;
+  redirect: string;
 }
 
 export default function FullscreenVideo({ src, button }: { src: string; button?: ButtonConfig }) {
-  const router = useRouter()
-  const [transition, setTransition] = useState(false)
+  const router = useRouter();
+  const [transition, setTransition] = useState(false);
 
   return (
     <div className="fullscreen">
@@ -27,13 +27,13 @@ export default function FullscreenVideo({ src, button }: { src: string; button?:
         <button
           className="fullscreen-button"
           onClick={() => {
-            setTransition(true)
-            setTimeout(() => router.push(button.redirect), 4000)
+            setTransition(true);
+            setTimeout(() => router.push(button.redirect), 4000);
           }}
         >
           {button.label}
         </button>
       )}
     </div>
-  )
+  );
 }
