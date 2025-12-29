@@ -1,18 +1,17 @@
-"use client";
+'use client';
 
-import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import type { MouseEvent } from "react";
-import { useEffect, useMemo, useState } from "react";
+import { AnimatePresence, motion } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import type { MouseEvent } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 // --- Sound Generation Utility ---
 const playElectricSound = () => {
   try {
-    const AudioContext =
-      window.AudioContext || (window as any).webkitAudioContext;
+    const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
     if (!AudioContext) return;
 
     const ctx = new AudioContext();
@@ -30,7 +29,7 @@ const playElectricSound = () => {
     gainNode.gain.value = 0.05;
 
     const filter = ctx.createBiquadFilter();
-    filter.type = "highpass";
+    filter.type = 'highpass';
     filter.frequency.value = 1200;
 
     whiteNoise.connect(filter);
@@ -58,12 +57,7 @@ type ElectricLinkProps = {
   onClick?: () => void;
 };
 
-const ElectricLink = ({
-  href,
-  label,
-  isActive,
-  onClick,
-}: ElectricLinkProps) => {
+const ElectricLink = ({ href, label, isActive, onClick }: ElectricLinkProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isZapping, setIsZapping] = useState(false);
   const [isExploding, setIsExploding] = useState(false);
@@ -71,11 +65,11 @@ const ElectricLink = ({
 
   const arcPaths = useMemo(
     () => [
-      "M0,20 Q25,12 50,20 T100,20",
-      "M0,20 Q25,28 50,20 T100,20",
-      "M0,20 Q25,16 50,20 T100,20",
+      'M0,20 Q25,12 50,20 T100,20',
+      'M0,20 Q25,28 50,20 T100,20',
+      'M0,20 Q25,16 50,20 T100,20',
     ],
-    [],
+    []
   );
 
   useEffect(() => {
@@ -86,7 +80,7 @@ const ElectricLink = ({
           setTimeout(() => setIsZapping(false), 220);
         }
       },
-      Math.random() * 3500 + 1800,
+      Math.random() * 3500 + 1800
     );
 
     return () => clearInterval(timer);
@@ -117,13 +111,13 @@ const ElectricLink = ({
         onMouseEnter={handleHover}
         onMouseLeave={() => setIsHovered(false)}
         className={`relative block px-4 py-2 text-lg font-bold tracking-wider transition-all duration-300 ${
-          isActive ? "text-[var(--electric-blue)]" : "text-gray-200"
-        } ${isExploding ? "opacity-0 scale-150" : "opacity-100"}`}
+          isActive ? 'text-[var(--electric-blue)]' : 'text-gray-200'
+        } ${isExploding ? 'opacity-0 scale-150' : 'opacity-100'}`}
         style={{
           textShadow:
             isHovered || isZapping || isActive
-              ? "0 0 6px #fff, 0 0 12px #00f3ff, 0 0 28px #00f3ff"
-              : "none",
+              ? '0 0 6px #fff, 0 0 12px #00f3ff, 0 0 28px #00f3ff'
+              : 'none',
         }}
       >
         {label}
@@ -172,7 +166,7 @@ const ElectricLink = ({
                 y: (Math.random() - 0.5) * 120,
                 opacity: [1, 0],
               }}
-              transition={{ duration: 0.55, ease: "easeOut" }}
+              transition={{ duration: 0.55, ease: 'easeOut' }}
             />
           ))}
           <motion.div
@@ -194,24 +188,24 @@ export default function Navigation() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 18);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   let navLinks = [
-    { href: "/", label: "HOME" },
-    { href: "/store", label: "STORE" },
-    { href: "/vendors-platform", label: "VENDORS" },
-    { href: "/projects", label: "PROJECTS" },
-    { href: "/portfolio", label: "PORTFOLIO" },
-    { href: "/live", label: "LIVE" },
-    { href: "/blog", label: "BLOG" },
-    { href: "/contact", label: "CONTACT" },
+    { href: '/', label: 'HOME' },
+    { href: '/store', label: 'STORE' },
+    { href: '/vendors-platform', label: 'VENDORS' },
+    { href: '/projects', label: 'PROJECTS' },
+    { href: '/portfolio', label: 'PORTFOLIO' },
+    { href: '/live', label: 'LIVE' },
+    { href: '/blog', label: 'BLOG' },
+    { href: '/contact', label: 'CONTACT' },
   ];
 
   // Remove certain links on Home page per directive
-  if (pathname === "/home") {
-    const forbidden = new Set(["STUDIO", "EXPERIENCE", "AVATAR", "DASHBOARD", "TEAM", "CONTACT"]);
+  if (pathname === '/home') {
+    const forbidden = new Set(['STUDIO', 'EXPERIENCE', 'AVATAR', 'DASHBOARD', 'TEAM', 'CONTACT']);
     navLinks = navLinks.filter((l) => !forbidden.has(l.label));
   }
 
@@ -221,32 +215,26 @@ export default function Navigation() {
     <motion.nav
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 1.2, ease: "easeOut" }}
+      transition={{ duration: 1.2, ease: 'easeOut' }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "glass-premium border-b border-gold/30 shadow-2xl"
-          : "glass border-b border-gray-800/50"
+          ? 'glass-premium border-b border-gold/30 shadow-2xl'
+          : 'glass border-b border-gray-800/50'
       }`}
     >
       {/* Header nav background video */}
       <div className="absolute inset-0 -z-10">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover"
-        >
-          <source src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986156/digitalliquid_q8jesa.mp4" type="video/mp4" />
+        <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+          <source
+            src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986156/digitalliquid_q8jesa.mp4"
+            type="video/mp4"
+          />
         </video>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link
-            href="/"
-            className="flex items-center space-x-3 group relative z-10"
-          >
+          <Link href="/" className="flex items-center space-x-3 group relative z-10">
             <div className="relative w-12 h-12 transition-transform group-hover:scale-110 duration-300">
               <Image
                 src="/brand-logo.png"
