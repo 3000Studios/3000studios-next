@@ -35,7 +35,8 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
+    "source.fixAll": true,
+    "source.fixAll.eslint": true,
     "source.organizeImports": "explicit"
   },
   "eslint.validate": [
@@ -73,6 +74,7 @@
   "explorer.confirmDelete": false,
   "chatgpt.runCodexInWindowsSubsystemForLinux": true,
   "chatgpt.openOnStartup": true,
-  "files.autoSave": "afterDelay",
-  "files.autoSaveDelay": 1500
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.includePackageJsonAutoImports": "on",
+  "files.autoSave": "onWindowChange"
 }

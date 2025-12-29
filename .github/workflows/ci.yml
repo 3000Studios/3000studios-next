@@ -25,8 +25,10 @@ jobs:
       - name: Configure pnpm (relax engine)
         run: pnpm config set engine-strict false
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
-      - name: Lint
-        run: pnpm lint
+        run: pnpm install --frozen-lockfile
+      - name: Lint (no warnings allowed)
+        run: pnpm run lint --max-warnings=0
+      - name: Typecheck
+        run: pnpm run type-check
       - name: Build
         run: pnpm run build
