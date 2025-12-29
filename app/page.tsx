@@ -2,6 +2,7 @@ import { FeaturesSection } from "@/components/FeaturesSection";
 import { LuxuryGallery } from "@/components/LuxuryGallery";
 import { ModernHero } from "@/components/ModernHero";
 import { Navigation } from "@/components/ui/Navigation";
+import { AudioBackground } from "@/components/AudioBackground";
 import { Footer } from "@/components/ui/Footer";
 
 const galleryImages = [
@@ -46,6 +47,7 @@ const galleryImages = [
 export default function Home() {
   return (
     <main className="relative bg-black">
+      <AudioBackground publicId="4d103589a54319c127e26fc4c1945714" />
       <Navigation />
       <ModernHero
         title="3000 Studios"
