@@ -1,7 +1,9 @@
-import Image from 'next/image';
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
 import { AudioBackground } from '@/components/AudioBackground';
 import { Footer } from '@/components/ui/Footer';
+import PublicAvatar from '@/components/avatar/PublicAvatar';
 
 export default function HomePage() {
   const [messages, setMessages] = useState([
