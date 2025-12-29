@@ -27,9 +27,7 @@ export const Navigation = () => {
   const pathname = usePathname();
 
   // Restrict to only the requested page(s). Default to Home only per directive.
-  const navLinks = [
-    { href: '/', label: 'Home' },
-  ];
+  const navLinks = [{ href: '/', label: 'Home' }];
 
   if (pathname === '/home') {
     const forbidden = new Set(['Studio', 'Experience', 'Avatar', 'Dashboard', 'Team', 'Contact']);
