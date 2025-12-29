@@ -24,15 +24,11 @@ export const Navigation = () => {
 
   const pathname = usePathname();
 
-  let navLinks = [
+  const pathname = usePathname();
+
+  // Restrict to only the requested page(s). Default to Home only per directive.
+  const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/studio', label: 'Studio' },
-    { href: '/experience', label: 'Experience' },
-    { href: '/projects', label: 'Projects' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/store', label: 'Store' },
-    { href: '/live', label: 'Live' },
-    { href: '/contact', label: 'Contact' },
   ];
 
   if (pathname === '/home') {
@@ -50,18 +46,20 @@ export const Navigation = () => {
           loop
           playsInline
           className="w-full h-full object-cover"
-          style={{ opacity: 0.4 }}
+          style={{ opacity: 0.45 }}
         >
           <source
             src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766972500/3000_studios_back_dop_nldai9.mp4"
             type="video/mp4"
           />
         </video>
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-md"></div>
+        {/* Gold/Silver overlay for premium aesthetic */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-gray-800/60 to-slate-900/70 mix-blend-overlay"></div>
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-lg"></div>
       </div>
 
       {/* Navigation Content */}
-      <div className="relative px-6 py-4 glossy-border">
+      <div className="relative px-6 py-4 border border-slate-500/30 rounded-xl bg-gradient-to-r from-gray-900/70 via-slate-800/60 to-gray-900/70 shadow-lg">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <Link
@@ -82,7 +80,7 @@ export const Navigation = () => {
               <Link
                 key={index}
                 href={link.href}
-                className="nav-link hover-pop"
+                className="px-3 py-2 text-slate-200 hover:text-yellow-300 border-b-2 border-transparent hover:border-yellow-300 transition-colors duration-200 hover-pop"
                 onMouseEnter={playHoverSound}
               >
                 {link.label}
@@ -102,12 +100,12 @@ export const Navigation = () => {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 glass-panel mt-2 mx-4 p-6 space-y-4">
+          <div className="md:hidden absolute top-full left-0 right-0 mt-2 mx-4 p-6 space-y-4 border border-slate-500/30 rounded-xl bg-gradient-to-b from-gray-900/80 via-slate-800/70 to-gray-900/80 shadow-xl">
             {navLinks.map((link, index) => (
               <Link
                 key={index}
                 href={link.href}
-                className="block nav-link text-center"
+                className="block px-3 py-2 text-center text-slate-200 hover:text-yellow-300 border-b-2 border-transparent hover:border-yellow-300 transition-colors duration-200"
                 onClick={() => setIsOpen(false)}
                 onMouseEnter={playHoverSound}
               >
