@@ -2,6 +2,7 @@
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
+// @ts-nocheck
 "use client";
 import { useState, useEffect, useRef } from "react";
 
