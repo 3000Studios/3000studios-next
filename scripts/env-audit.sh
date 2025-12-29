@@ -15,26 +15,26 @@ if command -v rg >/dev/null 2>&1; then HAVE_RG=1; fi
 scan_env_keys() {
   if [ "$HAVE_RG" -eq 1 ]; then
     rg -n --no-heading --hidden --glob '!.git/**' --glob '!node_modules/**' \
-      -e 'process\\.env\\.[A-Z0-9_]+' \
-      -e 'process\\.env\\[\\s*["'"''][A-Z0-9_]+["'"'']\\s*\\]' \
-      -e 'env\\(\\s*["'"''][A-Z0-9_]+["'"''][\\s*]\\)' \
+      -e 'process\.env\.[A-Z0-9_]+' \
+      -e 'process\.env\[\s*["\'"'][A-Z0-9_]+["\'"']\s*\]' \
+      -e 'env\(\s*["\'"'][A-Z0-9_]+["\'"']\s*\)' \
       -e 'NEXT_PUBLIC_[A-Z0-9_]+' \
       "$REPO_ROOT" || true
   else
     git grep -n --cached --no-color -I -E \
-      'process\\.env\\.[A-Z0-9_]+|process\\.env\\[[[:space:]]*["'"''][A-Z0-9_]+["'"''][[:space:]]*\\]|env\\([[:space:]]*["'"''][A-Z0-9_]+["'"''][[:space:]]*\\)|NEXT_PUBLIC_[A-Z0-9_]+' \
+      'process\.env\.[A-Z0-9_]+|process\.env\[[[:space:]]*["\'"'][A-Z0-9_]+["\'"'][[:space:]]*\]|env\([[:space:]]*["\'"'][A-Z0-9_]+["\'"'][[:space:]]*\)|NEXT_PUBLIC_[A-Z0-9_]+' \
       -- . || true
     git grep -n --no-color -I -E \
-      'process\\.env\\.[A-Z0-9_]+|process\\.env\\[[[:space:]]*["'"''][A-Z0-9_]+["'"''][[:space:]]*\\]|env\\([[:space:]]*["'"''][A-Z0-9_]+["'"''][[:space:]]*\\)|NEXT_PUBLIC_[A-Z0-9_]+' \
+      'process\.env\.[A-Z0-9_]+|process\.env\[[[:space:]]*["\'"'][A-Z0-9_]+["\'"'][[:space:]]*\]|env\([[:space:]]*["\'"'][A-Z0-9_]+["\'"'][[:space:]]*\)|NEXT_PUBLIC_[A-Z0-9_]+' \
       -- . || true
   fi
 }
 
 extract_key_from_line() {
   sed -E '
-    s/.*process\\.env\\.([A-Z0-9_]+).*/\1/; t end;
-    s/.*process\\.env\\[[[:space:]]*["'"']([A-Z0-9_]+)["'"'][[:space:]]*\\].*/\1/; t end;
-    s/.*env\\([[:space:]]*["'"']([A-Z0-9_]+)["'"'][[:space:]]*\\).*/\1/; t end;
+    s/.*process\.env\.([A-Z0-9_]+).*/\1/; t end;
+    s/.*process\.env\[[[:space:]]*["\']([A-Z0-9_]+)["\'][[:space:]]*\].*/\1/; t end;
+    s/.*env\([[:space:]]*["\']([A-Z0-9_]+)["\'][[:space:]]*\).*/\1/; t end;
     s/.*\b(NEXT_PUBLIC_[A-Z0-9_]+)\b.*/\1/; t end;
     :end
   '
@@ -75,7 +75,7 @@ while IFS= read -r key; do
   fi
 
   echo "\"$key\",\"$scope\",\"$likely\",\"$files\",\"$example\"" >> "$REQ"
-.done < "$KEYS"
+done < "$KEYS"
 
 ENV_LOCAL_KEYS="$OUT_DIR/env_local_keys.txt"
 if [ -f "$REPO_ROOT/.env.local" ]; then
@@ -92,7 +92,7 @@ while IFS= read -r key; do
   if ! grep -qx "$key" "$ENV_LOCAL_KEYS"; then
     echo "\"$key\",\"not set in .env.local\"" >> "$MISSING_LOCAL"
   fi
-.done < "$KEYS"
+done < "$KEYS"
 
 GH_SECRETS="$OUT_DIR/github_secrets_names.txt"
 GH_MISSING="$OUT_DIR/missing_in_github_secrets.csv"
