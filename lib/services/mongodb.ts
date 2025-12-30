@@ -12,43 +12,6 @@ interface Product {
   [key: string]: unknown;
 }
 
-/**
- * Update product in MongoDB
- * Note: This is a placeholder implementation
- * Real implementation requires MongoDB connection string in environment
- */
-export async function updateProduct(
-  productId: string,
-  updates: Partial<Product>
-): Promise<Product | null> {
-  // Check if MongoDB is configured
-  const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
-
-  if (!mongoUri) {
-    console.warn('MongoDB not configured - product update skipped');
-    return null;
-  }
-
-  try {
-    client = new MongoClient(uri);
-    await client.connect();
-    db = client.db('3000studios');
-    console.log('Connected to MongoDB');
-    return db;
-  } catch (error) {
-    console.error('MongoDB connection error:', error);
-    throw new Error('Failed to connect to database');
-  }
-}
-
-export async function closeDatabaseConnection() {
-  if (client) {
-    await client.close();
-    client = null;
-    db = null;
-  }
-}
-
 // Analytics Data Models
 export interface AnalyticsData {
   totalRevenue: number;
