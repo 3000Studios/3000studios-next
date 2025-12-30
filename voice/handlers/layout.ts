@@ -66,40 +66,6 @@ Published: ${date}`;
     throw error;
   }
 }
-  const { page, layout, columns } = command.payload;
-  const targetFile = `src/app/${page}/page.tsx`;
-
-  try {
-    let content = await fs.readFile(targetFile, 'utf-8');
-
-    const layoutClass =
-      layout === 'grid'
-        ? `grid grid-cols-1 md:grid-cols-${columns || 3} gap-8`
-        : layout === 'flex'
-          ? 'flex flex-wrap gap-8'
-          : layout === 'columns'
-            ? `columns-${columns || 3}`
-            : 'grid grid-cols-1 gap-8';
-
-    content = content.replace(
-      /className="([^"]*)(grid|flex|columns)[^"]*"/g,
-      `className="$1${layoutClass}"`
-    );
-
-    await fs.writeFile(targetFile, content, 'utf-8');
-
-    return {
-      success: true,
-      files_changed: [targetFile],
-    };
-  } catch (error) {
-    return {
-      success: false,
-      files_changed: [],
-      error: error instanceof Error ? error.message : 'Unknown error',
-    };
-  }
-}
 
 export async function handleUpdateNav(
   command: Extract<VoiceCommand, { type: 'UPDATE_NAV' }>
