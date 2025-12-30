@@ -85,5 +85,6 @@
   // Lock VS Code to pnpm
   "npm.packageManager": "pnpm",
   "npm.autoDetect": "off",
-  "prisma.pinToPrisma6": true
+  "prisma.pinToPrisma6": true,
+  "git.ignoreLimitWarning": true
 }
