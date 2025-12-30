@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
 /**
  * 404 Not Found Page
  * Custom error page for missing routes
  */
 
-"use client";
+'use client';
 
-import Link from "next/link";
-import { Home, ArrowLeft } from "lucide-react";
+import Link from 'next/link';
+import { Home, ArrowLeft } from 'lucide-react';
 
 export default function NotFound() {
   return (
@@ -22,8 +22,7 @@ export default function NotFound() {
         {/* Error Message */}
         <h2 className="text-3xl font-bold text-white mb-4">Page Not Found</h2>
         <p className="text-gray-400 mb-8 max-w-md mx-auto">
-          The page you're looking for doesn't exist or has been moved. Let's get
-          you back on track.
+          The page you're looking for doesn't exist or has been moved. Let's get you back on track.
         </p>
 
         {/* Action Buttons */}
