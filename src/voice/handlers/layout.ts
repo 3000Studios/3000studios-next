@@ -4,9 +4,11 @@
  */
 
 import { promises as fs } from 'fs';
-import type { VoiceCommand, CommandResult } from '../commands';
+import type { CommandResult, VoiceCommand } from '../commands';
 
-export async function handleAddSection(command: Extract<VoiceCommand, { type: 'ADD_SECTION' }>): Promise<CommandResult> {
+export async function handleAddSection(
+  command: Extract<VoiceCommand, { type: 'ADD_SECTION' }>
+): Promise<CommandResult> {
   const { page, section, content } = command.payload;
   const targetFile = `src/app/${page}/page.tsx`;
 
@@ -26,10 +28,7 @@ export async function handleAddSection(command: Extract<VoiceCommand, { type: 'A
       </section>
     `;
 
-    fileContent = fileContent.replace(
-      /(<\/main>)/,
-      `${sectionComponent}\n$1`
-    );
+    fileContent = fileContent.replace(/(<\/main>)/, `${sectionComponent}\n$1`);
 
     await fs.writeFile(targetFile, fileContent, 'utf-8');
 
@@ -46,18 +45,23 @@ export async function handleAddSection(command: Extract<VoiceCommand, { type: 'A
   }
 }
 
-export async function handleUpdateLayout(command: Extract<VoiceCommand, { type: 'UPDATE_LAYOUT' }>): Promise<CommandResult> {
+export async function handleUpdateLayout(
+  command: Extract<VoiceCommand, { type: 'UPDATE_LAYOUT' }>
+): Promise<CommandResult> {
   const { page, layout, columns } = command.payload;
   const targetFile = `src/app/${page}/page.tsx`;
 
   try {
     let content = await fs.readFile(targetFile, 'utf-8');
 
-    const layoutClass = 
-      layout === 'grid' ? `grid grid-cols-1 md:grid-cols-${columns || 3} gap-8` :
-      layout === 'flex' ? 'flex flex-wrap gap-8' :
-      layout === 'columns' ? `columns-${columns || 3}` :
-      'grid grid-cols-1 gap-8';
+    const layoutClass =
+      layout === 'grid'
+        ? `grid grid-cols-1 md:grid-cols-${columns || 3} gap-8`
+        : layout === 'flex'
+          ? 'flex flex-wrap gap-8'
+          : layout === 'columns'
+            ? `columns-${columns || 3}`
+            : 'grid grid-cols-1 gap-8';
 
     content = content.replace(
       /className="([^"]*)(grid|flex|columns)[^"]*"/g,
@@ -79,7 +83,9 @@ export async function handleUpdateLayout(command: Extract<VoiceCommand, { type: 
   }
 }
 
-export async function handleUpdateNav(command: Extract<VoiceCommand, { type: 'UPDATE_NAV' }>): Promise<CommandResult> {
+export async function handleUpdateNav(
+  command: Extract<VoiceCommand, { type: 'UPDATE_NAV' }>
+): Promise<CommandResult> {
   const { action, links } = command.payload;
   const targetFile = 'src/app/components/Navigation.tsx';
 
@@ -87,13 +93,12 @@ export async function handleUpdateNav(command: Extract<VoiceCommand, { type: 'UP
     let content = await fs.readFile(targetFile, 'utf-8');
 
     if (action === 'add') {
-      const navLinks = links.map(link => `  { name: '${link}', href: '/${link.toLowerCase()}' }`).join(',\n');
-      content = content.replace(
-        /(const navLinks = \[)/,
-        `$1\n${navLinks},`
-      );
+      const navLinks = links
+        .map((link) => `  { name: '${link}', href: '/${link.toLowerCase()}' }`)
+        .join(',\n');
+      content = content.replace(/(const navLinks = \[)/, `$1\n${navLinks},`);
     } else if (action === 'remove') {
-      links.forEach(link => {
+      links.forEach((link) => {
         const regex = new RegExp(`\\s*{[^}]*name:\\s*['"]${link}['"][^}]*}[,]?`, 'g');
         content = content.replace(regex, '');
       });

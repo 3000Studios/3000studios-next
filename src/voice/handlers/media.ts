@@ -4,10 +4,11 @@
  */
 
 import { promises as fs } from 'fs';
-import path from 'path';
-import type { VoiceCommand, CommandResult } from '../commands';
+import type { CommandResult, VoiceCommand } from '../commands';
 
-export async function handleAddVideo(command: Extract<VoiceCommand, { type: 'ADD_VIDEO' }>): Promise<CommandResult> {
+export async function handleAddVideo(
+  command: Extract<VoiceCommand, { type: 'ADD_VIDEO' }>
+): Promise<CommandResult> {
   const { page, url, position } = command.payload;
   const targetFile = `src/app/${page}/page.tsx`;
 
@@ -29,10 +30,7 @@ export async function handleAddVideo(command: Extract<VoiceCommand, { type: 'ADD
     `;
 
     if (position === 'hero') {
-      content = content.replace(
-        /(<main[^>]*>)/,
-        `$1\n${videoComponent}`
-      );
+      content = content.replace(/(<main[^>]*>)/, `$1\n${videoComponent}`);
     } else if (position === 'background') {
       content = content.replace(
         /(<div[^>]*className="[^"]*hero[^"]*"[^>]*>)/,
@@ -55,7 +53,9 @@ export async function handleAddVideo(command: Extract<VoiceCommand, { type: 'ADD
   }
 }
 
-export async function handleAddAudio(command: Extract<VoiceCommand, { type: 'ADD_AUDIO' }>): Promise<CommandResult> {
+export async function handleAddAudio(
+  command: Extract<VoiceCommand, { type: 'ADD_AUDIO' }>
+): Promise<CommandResult> {
   const { url, autoplay, loop } = command.payload;
   const targetFile = 'app/layout.tsx';
 
@@ -68,10 +68,7 @@ export async function handleAddAudio(command: Extract<VoiceCommand, { type: 'ADD
       </audio>
     `;
 
-    content = content.replace(
-      /(<body[^>]*>)/,
-      `$1\n${audioComponent}`
-    );
+    content = content.replace(/(<body[^>]*>)/, `$1\n${audioComponent}`);
 
     await fs.writeFile(targetFile, content, 'utf-8');
 
@@ -88,7 +85,9 @@ export async function handleAddAudio(command: Extract<VoiceCommand, { type: 'ADD
   }
 }
 
-export async function handleAddImage(command: Extract<VoiceCommand, { type: 'ADD_IMAGE' }>): Promise<CommandResult> {
+export async function handleAddImage(
+  command: Extract<VoiceCommand, { type: 'ADD_IMAGE' }>
+): Promise<CommandResult> {
   const { page, url, alt } = command.payload;
   const targetFile = `src/app/${page}/page.tsx`;
 
@@ -106,10 +105,7 @@ export async function handleAddImage(command: Extract<VoiceCommand, { type: 'ADD
       />
     `;
 
-    content = content.replace(
-      /(<section[^>]*>)/,
-      `$1\n${imageComponent}`
-    );
+    content = content.replace(/(<section[^>]*>)/, `$1\n${imageComponent}`);
 
     await fs.writeFile(targetFile, content, 'utf-8');
 
