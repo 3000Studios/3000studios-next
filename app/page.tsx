@@ -57,6 +57,14 @@ export default function HomePage() {
         <VideoHero mp4Src="/media/bg.mp4" opacity={0.2} />
 
         <div className="relative z-10 max-w-5xl mx-auto text-center">
+          {/* DEPLOYMENT TEST MARKER — DO NOT REMOVE */}
+          <div className="mb-6 p-4 bg-red-500/20 border-2 border-red-500 rounded-lg text-center">
+            <p className="text-red-400 font-bold text-lg">
+              ✅ DEPLOYMENT VERIFIED: {new Date().toLocaleString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'UTC' })} UTC
+            </p>
+            <p className="text-red-300 text-sm mt-1">This timestamp proves the deployment pipeline works.</p>
+          </div>
+
           {/* Main Value Proposition */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -78,10 +86,6 @@ export default function HomePage() {
                 }}
               >
                 AI-Powered Tools, Content, and Automations
-                <br />
-                <span className="text-sm md:text-base opacity-60">
-                  [Deployed Dec 30 — Voice System Live]
-                </span>
               </span>
               <br />
               That Make Money While You Sleep
