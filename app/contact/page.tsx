@@ -144,14 +144,12 @@ export default function ContactPage() {
             <h2 className="text-4xl font-bold text-center mb-12">What We Can Help With</h2>
             <div className="grid md:grid-cols-3 gap-6">
               {[
-                { icon: '🎨', title: 'Design', items: ['UI/UX', 'Branding', 'Visual Design'] },
+                { title: 'Design', items: ['UI/UX', 'Branding', 'Visual Design'] },
                 {
-                  icon: '💻',
                   title: 'Development',
                   items: ['Web Apps', 'E-commerce', 'Platforms'],
                 },
                 {
-                  icon: '🎬',
                   title: 'Media',
                   items: ['Video Production', 'Animation', '3D Content'],
                 },
