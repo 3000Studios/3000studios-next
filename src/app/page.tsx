@@ -5,22 +5,22 @@
  * Every element designed for monetization
  */
 
-"use client";
+'use client';
 
-import { brand } from "@/design/brand";
-import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle, Play, Sparkles, Zap } from "lucide-react";
-import Link from "next/link";
-import { Suspense, lazy, useEffect, useState } from "react";
-import dynamic from "next/dynamic";
-import VideoHero from "./components/VideoHero";
-import ConsentBanner from "./components/ConsentBanner";
-import AffiliateToolCards from "./components/AffiliateToolCards";
-import StickyUpgradeButton from "./components/StickyUpgradeButton";
+import { brand } from '@/design/brand';
+import { motion } from 'framer-motion';
+import { ArrowRight, CheckCircle, Play, Sparkles, Zap } from 'lucide-react';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import { Suspense, lazy, useEffect, useState } from 'react';
+import AffiliateToolCards from './components/AffiliateToolCards';
+import ConsentBanner from './components/ConsentBanner';
+import StickyUpgradeButton from './components/StickyUpgradeButton';
+import VideoHero from './components/VideoHero';
 
-const InteractiveAvatar = lazy(() => import("./components/InteractiveAvatar"));
-const Avatar3DHome = dynamic(() => import("@/components/Avatar3DHome"), { ssr: false });
-const SectionDivider3D = dynamic(() => import("@/components/SectionDivider3D"), { ssr: false });
+const InteractiveAvatar = lazy(() => import('./components/InteractiveAvatar'));
+const Avatar3DHome = dynamic(() => import('@/components/Avatar3DHome'), { ssr: false });
+const SectionDivider3D = dynamic(() => import('@/components/SectionDivider3D'), { ssr: false });
 
 export default function HomePage() {
   const [showExitIntent, setShowExitIntent] = useState(false);
@@ -28,24 +28,21 @@ export default function HomePage() {
   // Exit intent detection
   useEffect(() => {
     const handleMouseLeave = (e: MouseEvent) => {
-      if (typeof window !== "undefined" && e.clientY <= 0) {
-        const shown = localStorage.getItem("exit-intent-shown");
+      if (typeof window !== 'undefined' && e.clientY <= 0) {
+        const shown = localStorage.getItem('exit-intent-shown');
         if (!shown) {
           setShowExitIntent(true);
-          localStorage.setItem("exit-intent-shown", "true");
+          localStorage.setItem('exit-intent-shown', 'true');
         }
       }
     };
 
-    document.addEventListener("mouseleave", handleMouseLeave);
-    return () => document.removeEventListener("mouseleave", handleMouseLeave);
+    document.addEventListener('mouseleave', handleMouseLeave);
+    return () => document.removeEventListener('mouseleave', handleMouseLeave);
   }, []);
 
   return (
-    <div
-      className="min-h-screen relative"
-      style={{ background: brand.colors.bg.primary }}
-    >
+    <div className="min-h-screen relative" style={{ background: brand.colors.bg.primary }}>
       {/* Sticky Upgrade Button */}
       <StickyUpgradeButton />
 
@@ -62,7 +59,7 @@ export default function HomePage() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
           >
             <h1
               className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
@@ -74,8 +71,8 @@ export default function HomePage() {
               <span
                 style={{
                   background: brand.colors.gradient.primary,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
                 }}
               >
                 AI-Powered Tools, Content, and Automations
@@ -93,8 +90,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            From zero to revenue in 10 seconds • No code required • Scale
-            automatically
+            From zero to revenue in 10 seconds • No code required • Scale automatically
           </motion.p>
 
           {/* Primary CTA */}
@@ -111,7 +107,7 @@ export default function HomePage() {
                 style={{
                   background: brand.colors.gradient.primary,
                   color: brand.colors.text.inverse,
-                  boxShadow: "0 0 40px rgba(0, 245, 212, 0.6)",
+                  boxShadow: '0 0 40px rgba(0, 245, 212, 0.6)',
                 }}
               >
                 <Zap size={24} fill="currentColor" />
@@ -126,10 +122,10 @@ export default function HomePage() {
                 href="#how-it-works"
                 className="px-10 py-5 font-bold rounded-lg flex items-center gap-3 text-lg"
                 style={{
-                  background: "rgba(0, 0, 0, 0.5)",
+                  background: 'rgba(0, 0, 0, 0.5)',
                   color: brand.colors.text.primary,
                   border: `2px solid ${brand.colors.action.secondary}`,
-                  backdropFilter: "blur(10px)",
+                  backdropFilter: 'blur(10px)',
                 }}
               >
                 <Play size={24} />
@@ -147,24 +143,15 @@ export default function HomePage() {
             style={{ color: brand.colors.text.secondary }}
           >
             <div className="flex items-center gap-2">
-              <CheckCircle
-                size={18}
-                style={{ color: brand.colors.revenue.positive }}
-              />
+              <CheckCircle size={18} style={{ color: brand.colors.revenue.positive }} />
               <span>No Credit Card Required</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle
-                size={18}
-                style={{ color: brand.colors.revenue.positive }}
-              />
+              <CheckCircle size={18} style={{ color: brand.colors.revenue.positive }} />
               <span>Setup in 60 Seconds</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle
-                size={18}
-                style={{ color: brand.colors.revenue.positive }}
-              />
+              <CheckCircle size={18} style={{ color: brand.colors.revenue.positive }} />
               <span>Cancel Anytime</span>
             </div>
           </motion.div>
@@ -179,14 +166,12 @@ export default function HomePage() {
           <div
             className="min-h-[90px] flex items-center justify-center"
             style={{
-              background: "rgba(0, 245, 212, 0.05)",
-              border: "1px dashed rgba(0, 245, 212, 0.2)",
-              borderRadius: "8px",
+              background: 'rgba(0, 245, 212, 0.05)',
+              border: '1px dashed rgba(0, 245, 212, 0.2)',
+              borderRadius: '8px',
             }}
           >
-            <p className="text-gray-500 text-sm">
-              AdSense Auto Ads will appear here once approved
-            </p>
+            <p className="text-gray-500 text-sm">AdSense Auto Ads will appear here once approved</p>
           </div>
         </div>
       )}
@@ -203,14 +188,17 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-8"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: brand.colors.text.primary }}>
+            <h2
+              className="text-4xl md:text-5xl font-bold mb-4"
+              style={{ color: brand.colors.text.primary }}
+            >
               Meet Your AI Assistant
             </h2>
             <p className="text-xl" style={{ color: brand.colors.text.secondary }}>
               Voice-activated website control • Always learning • Always evolving
             </p>
           </motion.div>
-          
+
           <Avatar3DHome />
         </div>
       </section>
@@ -246,24 +234,24 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                step: "01",
-                title: "Choose Your Tools",
+                step: '01',
+                title: 'Choose Your Tools',
                 description:
-                  "Select from AI-powered tools, templates, and automations designed to generate revenue",
+                  'Select from AI-powered tools, templates, and automations designed to generate revenue',
                 icon: <Sparkles size={40} />,
               },
               {
-                step: "02",
-                title: "Set & Forget",
+                step: '02',
+                title: 'Set & Forget',
                 description:
-                  "Configure once and let AI automation handle content, marketing, and sales 24/7",
+                  'Configure once and let AI automation handle content, marketing, and sales 24/7',
                 icon: <Zap size={40} />,
               },
               {
-                step: "03",
-                title: "Watch It Grow",
+                step: '03',
+                title: 'Watch It Grow',
                 description:
-                  "Monitor real-time analytics as your automated empire generates passive income",
+                  'Monitor real-time analytics as your automated empire generates passive income',
                 icon: <CheckCircle size={40} />,
               },
             ].map((item, idx) => (
@@ -300,9 +288,7 @@ export default function HomePage() {
                     boxShadow: brand.colors.shadow.glow,
                   }}
                 >
-                  <div style={{ color: brand.colors.text.inverse }}>
-                    {item.icon}
-                  </div>
+                  <div style={{ color: brand.colors.text.inverse }}>{item.icon}</div>
                 </div>
 
                 {/* Title */}
@@ -314,9 +300,7 @@ export default function HomePage() {
                 </h3>
 
                 {/* Description */}
-                <p style={{ color: brand.colors.text.secondary }}>
-                  {item.description}
-                </p>
+                <p style={{ color: brand.colors.text.secondary }}>{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -346,26 +330,18 @@ export default function HomePage() {
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="absolute -top-8 left-1/2 -translate-x-1/2 transform text-6xl">
-              🎁
-            </div>
+            <div className="absolute -top-8 left-1/2 -translate-x-1/2 transform text-6xl">🎁</div>
             <h3
               className="mb-4 text-center text-3xl font-bold"
               style={{ color: brand.colors.text.primary }}
             >
               Wait! Special Offer
             </h3>
-            <p
-              className="mb-6 text-center text-lg"
-              style={{ color: brand.colors.text.secondary }}
-            >
-              Get{" "}
-              <span
-                className="text-2xl font-bold"
-                style={{ color: brand.colors.revenue.positive }}
-              >
+            <p className="mb-6 text-center text-lg" style={{ color: brand.colors.text.secondary }}>
+              Get{' '}
+              <span className="text-2xl font-bold" style={{ color: brand.colors.revenue.positive }}>
                 50% OFF
-              </span>{" "}
+              </span>{' '}
               your first month + exclusive AI automation templates
             </p>
             <div className="space-y-3">
