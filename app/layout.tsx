@@ -16,7 +16,6 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { CSSProperties, ReactNode } from 'react';
 import ScrollEffects from '../components/ui/ScrollEffects';
-import SoundToggle from '../components/ui/SoundToggle';
 import ClientLayoutWrapper from './ClientLayoutWrapper';
 import './globals.css';
 
@@ -48,7 +47,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Background />
           <GlobalEffects />
           <ScrollEffects />
-          <SoundToggle />
           <AmbientAudio />
           <MouseTrails />
         </ClientLayoutWrapper>
