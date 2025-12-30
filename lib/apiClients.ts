@@ -12,16 +12,6 @@ import OpenAI from "openai";
 import Anthropic from "@anthropic-ai/sdk";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// MongoDB is optional - only import if available
-let MongoClient: any = null;
-try {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const mongodb = require("mongodb");
-  MongoClient = mongodb.MongoClient;
-} catch (_e) {
-  // MongoDB not installed - that's okay
-}
-
 // ==========================================
 // STRIPE CLIENT
 // ==========================================
