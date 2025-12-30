@@ -1,35 +1,55 @@
+/**
+ * 404 Not Found Page
+ * Custom error page for missing routes
+ */
+
+"use client";
+
 import Link from "next/link";
-import { Navigation } from "@/components/ui/Navigation";
-import { Footer } from "@/components/ui/Footer";
+import { Home, ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <main className="relative min-h-screen flex flex-col">
-      <Navigation />
+    <div className="min-h-screen bg-black flex items-center justify-center px-4">
+      <div className="text-center">
+        {/* Error Code */}
+        <h1 className="text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] via-[#E5E4E2] to-[#0F52BA] mb-4">
+          404
+        </h1>
 
-      <div className="flex-grow flex items-center justify-center px-6 relative z-10">
-        <div className="text-center">
-          <h1 className="font-display text-[15vw] leading-none text-white/5 select-none">
-            404
-          </h1>
-          <div className="relative -mt-12 md:-mt-20">
-            <h2 className="font-display text-4xl md:text-6xl text-white mb-6">
-              Lost in the Void
-            </h2>
-            <p className="font-sans text-sm text-platinum/50 tracking-widest mb-10 max-w-md mx-auto">
-              THE COORDINATES YOU SEEK DO NOT EXIST IN THIS REALITY.
-            </p>
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 font-sans text-xs tracking-[0.2em] text-hologram hover:text-white transition-colors uppercase border-b border-hologram/30 pb-1 hover:border-white"
-            >
-              Return to Base
-            </Link>
-          </div>
+        {/* Error Message */}
+        <h2 className="text-3xl font-bold text-white mb-4">Page Not Found</h2>
+        <p className="text-gray-400 mb-8 max-w-md mx-auto">
+          The page you're looking for doesn't exist or has been moved. Let's get
+          you back on track.
+        </p>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FFD700] to-[#0F52BA] text-black font-semibold rounded-lg hover:scale-105 transition-transform"
+          >
+            <Home className="w-5 h-5" />
+            Go Home
+          </Link>
+
+          <button
+            onClick={() => window.history.back()}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-white font-semibold rounded-lg hover:bg-white/20 transition-colors backdrop-blur-sm"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            Go Back
+          </button>
+        </div>
+
+        {/* Decorative Elements */}
+        <div className="mt-12 flex justify-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-[#FFD700] animate-pulse"></div>
+          <div className="w-2 h-2 rounded-full bg-[#E5E4E2] animate-pulse delay-75"></div>
+          <div className="w-2 h-2 rounded-full bg-[#0F52BA] animate-pulse delay-150"></div>
         </div>
       </div>
-
-      <Footer />
-    </main>
+    </div>
   );
 }
