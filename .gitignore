@@ -35,18 +35,30 @@ yarn-error.log*
 
 # vercel
 .vercel
+.vercel/
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# dependencies (redundant but explicit)
 node_modules/
+
+# next.js build outputs
 .next/
-# package-lock.json
+/out/
+dist/
+
+# env files
+.env
+.env.local
+.env*.local
 
 # backups
 /backups/
 *.tar.gz
-.env*.local
+
+# package-lock.json
 
 # audit artifacts (large, generated)
 _audit/
