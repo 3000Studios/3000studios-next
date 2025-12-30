@@ -38,10 +38,7 @@ async function getFileFromGithub(filePath: string): Promise<string> {
       throw new Error('Path is a directory');
     }
 
-    const content = Buffer.from(
-      response.data.content,
-      'base64'
-    ).toString('utf-8');
+    const content = Buffer.from(response.data.content, 'base64').toString('utf-8');
     return content;
   } catch (error) {
     throw new Error(`Failed to get file from GitHub: ${error}`);
