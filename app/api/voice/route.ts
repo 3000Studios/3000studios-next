@@ -1,5 +1,13 @@
-import { NextRequest, NextResponse } from "next/server";
+/**
+ * VOICE API ENDPOINT
+ * Receives voice commands → routes → commits → deploys
+ */
 
+import { NextRequest, NextResponse } from 'next/server';
+import { routeCommand, validateCommand } from '@/voice/handlers/router';
+import type { VoiceCommand } from '@/voice/commands';
+
+// Legacy transcript parsing (for backward compatibility)
 const colorMap: Record<string, string> = {
   blue: "#2563eb",
   purple: "#8b5cf6",
