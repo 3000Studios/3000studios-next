@@ -4,7 +4,6 @@ import { PrismaAdapter } from '@auth/prisma-adapter';
 import bcrypt from 'bcryptjs';
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import Nodemailer from 'next-auth/providers/nodemailer';
 import { z } from 'zod'; // We'll need zod for validation
 import { authConfig } from './auth.config';
 
