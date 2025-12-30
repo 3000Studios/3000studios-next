@@ -1,3 +1,7 @@
+"use client";
+
+"use client";
+
 /**
  * Sticky Upgrade Button
  * Always visible CTA for subscription conversion

@@ -1,3 +1,7 @@
+"use client";
+
+"use client";
+
 /**
  * GDPR Consent Banner
  * Required for AdSense compliance

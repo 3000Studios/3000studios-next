@@ -1,3 +1,7 @@
+"use client";
+
+"use client";
+
 /**
  * 404 Not Found Page
  * Custom error page for missing routes

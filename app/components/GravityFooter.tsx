@@ -1,3 +1,7 @@
+"use client";
+
+"use client";
+
 /**
  * Gravity Footer Component
  * Physics-based footer with motion effects as specified in the blueprint
