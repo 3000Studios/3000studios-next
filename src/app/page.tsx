@@ -191,6 +191,33 @@ export default function HomePage() {
         </div>
       )}
 
+      {/* 3D Section Divider */}
+      <SectionDivider3D />
+
+      {/* 3D Avatar Section */}
+      <section className="py-16 px-4" style={{ background: brand.colors.bg.primary }}>
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-8"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: brand.colors.text.primary }}>
+              Meet Your AI Assistant
+            </h2>
+            <p className="text-xl" style={{ color: brand.colors.text.secondary }}>
+              Voice-activated website control • Always learning • Always evolving
+            </p>
+          </motion.div>
+          
+          <Avatar3DHome />
+        </div>
+      </section>
+
+      {/* 3D Section Divider */}
+      <SectionDivider3D />
+
       {/* How It Works Section */}
       <section
         id="how-it-works"
