@@ -41,10 +41,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    return NextResponse.json(
-      { status: 'error', message: 'Unknown action' },
-      { status: 400 }
-    );
+    return NextResponse.json({ status: 'error', message: 'Unknown action' }, { status: 400 });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json({ status: 'error', message }, { status: 400 });

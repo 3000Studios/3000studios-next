@@ -30,12 +30,7 @@ export async function POST(req: NextRequest) {
     const message = error instanceof Error ? error.message : 'Unknown error';
 
     // Log the error
-    await logVoiceCommand(
-      'UNKNOWN',
-      {},
-      { status: 'error', message },
-      duration
-    );
+    await logVoiceCommand('UNKNOWN', {}, { status: 'error', message }, duration);
 
     return NextResponse.json({ status: 'error', message }, { status: 400 });
   }

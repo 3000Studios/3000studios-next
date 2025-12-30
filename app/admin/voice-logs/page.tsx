@@ -117,7 +117,9 @@ export default function VoiceLogsPage() {
                 <div className="grid grid-cols-2 gap-6 text-sm">
                   <div>
                     <p className="text-gray-400 text-xs uppercase mb-2">Timestamp</p>
-                    <p className="text-white font-mono">{new Date(log.timestamp).toLocaleString()}</p>
+                    <p className="text-white font-mono">
+                      {new Date(log.timestamp).toLocaleString()}
+                    </p>
                   </div>
                   <div>
                     <p className="text-gray-400 text-xs uppercase mb-2">Duration</p>
