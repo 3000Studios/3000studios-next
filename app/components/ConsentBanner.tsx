@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 /**
  * GDPR Consent Banner
@@ -7,18 +7,18 @@
  * Removing this component risks AdSense approval and compliance
  */
 
-"use client";
+'use client';
 
-import { X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export default function ConsentBanner() {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
     // Only access localStorage on client side
-    if (typeof window !== "undefined") {
-      const consent = localStorage.getItem("cookie-consent");
+    if (typeof window !== 'undefined') {
+      const consent = localStorage.getItem('cookie-consent');
       if (!consent) {
         setShowBanner(true);
       }
@@ -26,15 +26,15 @@ export default function ConsentBanner() {
   }, []);
 
   const handleAccept = () => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("cookie-consent", "true");
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('cookie-consent', 'true');
     }
     setShowBanner(false);
   };
 
   const handleDecline = () => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("cookie-consent", "false");
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('cookie-consent', 'false');
     }
     setShowBanner(false);
   };
@@ -45,13 +45,10 @@ export default function ConsentBanner() {
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-black/95 backdrop-blur-lg border-t border-cyan-500/30">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex-1 text-sm text-gray-300">
-          <p className="font-semibold text-white mb-1">
-            Cookie & Privacy Notice
-          </p>
+          <p className="font-semibold text-white mb-1">Cookie & Privacy Notice</p>
           <p>
-            We use cookies and similar technologies to enhance your experience,
-            serve personalized ads, and analyze traffic. By clicking "Accept",
-            you consent to our use of cookies.
+            We use cookies and similar technologies to enhance your experience, serve personalized
+            ads, and analyze traffic. By clicking "Accept", you consent to our use of cookies.
           </p>
         </div>
         <div className="flex items-center gap-3">
