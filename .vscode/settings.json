@@ -79,11 +79,14 @@
   "security.workspace.trust.startupPrompt": "never",
   "explorer.confirmDragAndDrop": false,
   "explorer.confirmDelete": false,
+  "editor.largeFileOptimizations": true,
+  "editor.semanticHighlighting.enabled": true,
   "chatgpt.runCodexInWindowsSubsystemForLinux": true,
   "chatgpt.openOnStartup": true,
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.preferences.includePackageJsonAutoImports": "on",
-  "files.autoSave": "onWindowChange",
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 750,
 
   // Lock VS Code to pnpm
   "npm.packageManager": "pnpm",
