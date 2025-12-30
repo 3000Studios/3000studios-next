@@ -1,9 +1,9 @@
-import NavAdmin from '@/components/NavAdmin'
+import Navigation from '@/src/app/components/Navigation'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <NavAdmin />
+      <Navigation />
       {children}
     </>
   )

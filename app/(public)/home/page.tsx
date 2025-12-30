@@ -1,5 +1,5 @@
 import MediaGrid from '@/components/MediaGrid';
-import NavPublic from '@/components/NavPublic';
+import Navigation from '@/src/app/components/Navigation';
 import SectionMedia from '@/components/SectionMedia';
 import { Footer } from '@/components/ui/Footer';
 
