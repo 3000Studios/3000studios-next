@@ -1,3 +1,7 @@
+"use client";
+
+"use client";
+
 /**
  * Voice-to-Code Editor Component
  * AI-powered voice command interface for code generation

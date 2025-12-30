@@ -1,3 +1,7 @@
+"use client";
+
+"use client";
+
 /**
  * Shadow AI Avatar Component (Home Page Version)
  * This is the conversational, animated avatar that greets visitors

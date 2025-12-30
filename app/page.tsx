@@ -1,3 +1,7 @@
+"use client";
+
+"use client";
+
 /**
  * Homepage - Conversion Optimized
  * 10-second cold traffic → revenue conversion
