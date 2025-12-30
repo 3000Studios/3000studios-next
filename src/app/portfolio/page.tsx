@@ -321,7 +321,6 @@ export default function PortfolioPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center hover-lift">
-              <div className="text-5xl mb-4">💻</div>
               <h3 className="text-xl font-bold text-white mb-2">
                 Web Development
               </h3>
@@ -331,14 +330,12 @@ export default function PortfolioPage() {
               </p>
             </div>
             <div className="text-center hover-lift">
-              <div className="text-5xl mb-4">📱</div>
               <h3 className="text-xl font-bold text-white mb-2">Mobile Apps</h3>
               <p className="text-gray-400">
                 Native and cross-platform applications that users love
               </p>
             </div>
             <div className="text-center hover-lift">
-              <div className="text-5xl mb-4">🎨</div>
               <h3 className="text-xl font-bold text-white mb-2">
                 UI/UX Design
               </h3>
