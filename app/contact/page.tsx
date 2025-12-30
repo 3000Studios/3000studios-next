@@ -158,7 +158,6 @@ export default function ContactPage() {
                   key={idx}
                   className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-lg p-8 hover:border-amber-400/50 transition-colors duration-300 group"
                 >
-                  <div className="text-4xl mb-4">{service.icon}</div>
                   <h3 className="text-2xl font-bold mb-4 group-hover:text-amber-400 transition-colors">
                     {service.title}
                   </h3>
