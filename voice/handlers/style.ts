@@ -12,13 +12,13 @@ import path from 'path';
  */
 export async function handleChangeStyle(cmd: any): Promise<void> {
   const { target, value } = cmd.payload;
-  
+
   // Two cases: CSS variable or CSS class
   if (target.startsWith('--')) {
     // Update CSS variable in globals.css
     const filePath = path.join(process.cwd(), 'app/globals.css');
     let content = await fs.readFile(filePath, 'utf-8');
-    
+
     // Replace or add CSS variable
     if (content.includes(`${target}:`)) {
       content = content.replace(
@@ -31,19 +31,19 @@ export async function handleChangeStyle(cmd: any): Promise<void> {
         `$1\n  ${target}: ${value};`
       );
     }
-    
+
     await fs.writeFile(filePath, content, 'utf-8');
   } else {
     // Update Tailwind config or component style
     const filePath = path.join(process.cwd(), 'tailwind.config.ts');
     let content = await fs.readFile(filePath, 'utf-8');
-    
+
     // Simple replacement in config (flexible for various style updates)
     content = content.replace(
       new RegExp(`${target}[^,}]*`),
       `${target}: "${value}"`
     );
-    
+
     await fs.writeFile(filePath, content, 'utf-8');
   }
 }

@@ -16,7 +16,7 @@ export async function handleUpdateText(cmd: any): Promise<void> {
 
   try {
     let content = await fs.readFile(filePath, 'utf-8');
-    
+
     if (!content.includes(search)) {
       throw new Error(`Search string not found in ${file}`);
     }
@@ -40,7 +40,7 @@ export async function handleAddMedia(cmd: any): Promise<void> {
     let content = await fs.readFile(filePath, 'utf-8');
 
     let mediaElement = '';
-    
+
     if (kind === 'video') {
       mediaElement = `
 <video
