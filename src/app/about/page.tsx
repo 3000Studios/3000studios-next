@@ -39,7 +39,6 @@ export default function About() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
               <div className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-lg border-2 border-[#D4AF37] glossy-overlay text-center hover:scale-105 transition-all duration-300">
-                <div className="text-5xl mb-4">🎨</div>
                 <h3 className="text-2xl font-bold text-[#D4AF37] mb-2">
                   Creative
                 </h3>
@@ -48,7 +47,6 @@ export default function About() {
                 </p>
               </div>
               <div className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-lg border-2 border-[#D4AF37] glossy-overlay text-center hover:scale-105 transition-all duration-300">
-                <div className="text-5xl mb-4">💻</div>
                 <h3 className="text-2xl font-bold text-[#D4AF37] mb-2">
                   Technical
                 </h3>
@@ -57,7 +55,6 @@ export default function About() {
                 </p>
               </div>
               <div className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-lg border-2 border-[#D4AF37] glossy-overlay text-center hover:scale-105 transition-all duration-300">
-                <div className="text-5xl mb-4">✨</div>
                 <h3 className="text-2xl font-bold text-[#D4AF37] mb-2">
                   Premium
                 </h3>
