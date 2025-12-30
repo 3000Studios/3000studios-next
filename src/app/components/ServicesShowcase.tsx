@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { motion } from 'framer-motion';
 
@@ -16,77 +16,77 @@ interface Service {
 export default function ServicesShowcase() {
   const services: Service[] = [
     {
-      title: "Web Design & Development",
-      description: "Award-winning websites that convert visitors into customers",
-      price: "From $5,000",
+      title: 'Web Design & Development',
+      description: 'Award-winning websites that convert visitors into customers',
+      price: 'From $5,000',
       features: [
-        "Custom responsive design",
-        "Performance optimization",
-        "SEO foundation",
-        "Analytics integration",
-        "6 months support"
-      ]
+        'Custom responsive design',
+        'Performance optimization',
+        'SEO foundation',
+        'Analytics integration',
+        '6 months support',
+      ],
     },
     {
-      title: "Brand Identity",
-      description: "Complete brand systems that make you unforgettable",
-      price: "From $3,000",
+      title: 'Brand Identity',
+      description: 'Complete brand systems that make you unforgettable',
+      price: 'From $3,000',
       features: [
-        "Logo design & variants",
-        "Brand guidelines",
-        "Color palette & typography",
-        "Marketing materials",
-        "Social media assets"
-      ]
+        'Logo design & variants',
+        'Brand guidelines',
+        'Color palette & typography',
+        'Marketing materials',
+        'Social media assets',
+      ],
     },
     {
-      title: "Digital Marketing",
-      description: "Data-driven campaigns that drive real ROI",
-      price: "From $2,500/mo",
+      title: 'Digital Marketing',
+      description: 'Data-driven campaigns that drive real ROI',
+      price: 'From $2,500/mo',
       features: [
-        "Social media management",
-        "Content creation",
-        "Paid advertising",
-        "Email marketing",
-        "Monthly reporting"
-      ]
+        'Social media management',
+        'Content creation',
+        'Paid advertising',
+        'Email marketing',
+        'Monthly reporting',
+      ],
     },
     {
-      title: "E-Commerce Solutions",
-      description: "Complete online stores that maximize revenue",
-      price: "From $8,000",
+      title: 'E-Commerce Solutions',
+      description: 'Complete online stores that maximize revenue',
+      price: 'From $8,000',
       features: [
-        "Full store setup",
-        "Payment integration",
-        "Inventory management",
-        "Marketing automation",
-        "Conversion optimization"
-      ]
+        'Full store setup',
+        'Payment integration',
+        'Inventory management',
+        'Marketing automation',
+        'Conversion optimization',
+      ],
     },
     {
-      title: "App Development",
-      description: "Native and web apps that users love",
-      price: "From $15,000",
+      title: 'App Development',
+      description: 'Native and web apps that users love',
+      price: 'From $15,000',
       features: [
-        "iOS & Android apps",
-        "Backend development",
-        "API integration",
-        "Push notifications",
-        "App store deployment"
-      ]
+        'iOS & Android apps',
+        'Backend development',
+        'API integration',
+        'Push notifications',
+        'App store deployment',
+      ],
     },
     {
-      title: "Consulting & Strategy",
-      description: "Expert guidance to accelerate your digital growth",
-      price: "From $250/hr",
+      title: 'Consulting & Strategy',
+      description: 'Expert guidance to accelerate your digital growth',
+      price: 'From $250/hr',
       features: [
-        "Digital strategy",
-        "UX/UI consultation",
-        "Technology audit",
-        "Growth planning",
-        "Team training"
-      ]
-    }
+        'Digital strategy',
+        'UX/UI consultation',
+        'Technology audit',
+        'Growth planning',
+        'Team training',
+      ],
+    },
   ];
 
   return (
@@ -99,9 +99,7 @@ export default function ServicesShowcase() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
-            Premium Services
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">Premium Services</h2>
           <p className="text-xl text-platinum max-w-3xl mx-auto">
             Comprehensive solutions tailored to elevate your business
           </p>
@@ -120,20 +118,24 @@ export default function ServicesShowcase() {
               <h3 className="text-2xl font-bold mb-2 text-gold group-hover:text-shadow-gold transition-all">
                 {service.title}
               </h3>
-              
-              <p className="text-platinum opacity-80 mb-4">
-                {service.description}
-              </p>
-              
-              <div className="text-3xl font-bold gradient-text mb-6">
-                {service.price}
-              </div>
+
+              <p className="text-platinum opacity-80 mb-4">{service.description}</p>
+
+              <div className="text-3xl font-bold gradient-text mb-6">{service.price}</div>
 
               <ul className="space-y-3 mb-6">
                 {service.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-2 text-sm">
-                    <svg className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    <svg
+                      className="w-5 h-5 text-gold flex-shrink-0 mt-0.5"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                     <span className="text-foreground">{feature}</span>
                   </li>

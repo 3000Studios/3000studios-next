@@ -4,20 +4,20 @@
  * Features: Article grid, categories, search functionality, newsletter signup
  */
 
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { Calendar, Clock, Search, Tag, User } from "lucide-react";
-import { useState } from "react";
-import GoogleAdsPlaceholder from "../components/GoogleAdsPlaceholder";
-import Newsletter from "../components/Newsletter";
-import { blogPosts, getAllCategories, getAllTags } from "../lib/blogData";
+import { motion } from 'framer-motion';
+import { Calendar, Clock, Search, Tag, User } from 'lucide-react';
+import { useState } from 'react';
+import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
+import Newsletter from '../components/Newsletter';
+import { blogPosts, getAllCategories, getAllTags } from '../lib/blogData';
 
 export default function BlogPage() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
-  const categories = ["All", ...getAllCategories()];
+  const categories = ['All', ...getAllCategories()];
 
   const filteredPosts = blogPosts.filter((post) => {
     const matchesSearch =
@@ -25,8 +25,7 @@ export default function BlogPage() {
       post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.content.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const matchesCategory =
-      selectedCategory === "All" || post.category === selectedCategory;
+    const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
 
     return matchesSearch && matchesCategory;
   });
@@ -70,8 +69,8 @@ export default function BlogPage() {
               onClick={() => setSelectedCategory(category)}
               className={`px-6 py-2 rounded-full font-semibold transition-all hover-lift ${
                 selectedCategory === category
-                  ? "bg-gold text-black"
-                  : "glass border border-gold/30 text-gold hover:bg-gold/10"
+                  ? 'bg-gold text-black'
+                  : 'glass border border-gold/30 text-gold hover:bg-gold/10'
               }`}
             >
               {category}
@@ -80,99 +79,91 @@ export default function BlogPage() {
         </div>
 
         {/* Google Ads Placeholder - Revenue Generation */}
-        <GoogleAdsPlaceholder
-          slot="blog-top-banner"
-          format="horizontal"
-          className="mb-8"
-        />
+        <GoogleAdsPlaceholder slot="blog-top-banner" format="horizontal" className="mb-8" />
 
         {/* Blog Posts Grid */}
         <div className="space-y-8">
           {filteredPosts.map((post, index) => (
-              <motion.article
-                key={post.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="card group hover:border-gold transition-all hover-lift"
-              >
-                <div className="flex flex-col md:flex-row gap-6">
-                  {/* Featured Image Placeholder */}
-                  <div className="md:w-1/3">
-                    <div className="w-full h-48 bg-gradient-to-br from-gold/20 to-sapphire/20 rounded-lg flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-300">
-                      {post.featured && (
-                        <div className="absolute top-3 right-3 bg-gold text-black px-3 py-1 rounded-full text-xs font-bold">
-                          FEATURED
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="md:w-2/3">
-                    <div className="flex items-center gap-2 mb-3 flex-wrap">
-                      <span className="px-3 py-1 bg-gold/20 text-gold rounded-full text-sm font-semibold">
-                        {post.category}
-                      </span>
-                      {post.tags.slice(0, 2).map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 bg-sapphire/20 text-sapphire rounded-full text-xs font-semibold"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 group-hover:text-gold transition-colors">
-                      {post.title}
-                    </h2>
-
-                    <p className="text-gray-400 mb-4 line-clamp-3">
-                      {post.excerpt}
-                    </p>
-
-                    <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
-                      <div className="flex items-center gap-2">
-                        <User size={16} />
-                        <span>{post.author}</span>
+            <motion.article
+              key={post.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="card group hover:border-gold transition-all hover-lift"
+            >
+              <div className="flex flex-col md:flex-row gap-6">
+                {/* Featured Image Placeholder */}
+                <div className="md:w-1/3">
+                  <div className="w-full h-48 bg-gradient-to-br from-gold/20 to-sapphire/20 rounded-lg flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                    {post.featured && (
+                      <div className="absolute top-3 right-3 bg-gold text-black px-3 py-1 rounded-full text-xs font-bold">
+                        FEATURED
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Calendar size={16} />
-                        <span>
-                          {new Date(post.date).toLocaleDateString("en-US", {
-                            month: "short",
-                            day: "numeric",
-                            year: "numeric",
-                          })}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Clock size={16} />
-                        <span>{post.readTime}</span>
-                      </div>
-                    </div>
-
-                    <button className="mt-4 text-gold hover:text-platinum transition-colors font-semibold inline-flex items-center gap-2 hover-lift">
-                      Read Full Article →
-                    </button>
+                    )}
                   </div>
                 </div>
-              </motion.article>
-            ))}
-          </div>
+
+                {/* Content */}
+                <div className="md:w-2/3">
+                  <div className="flex items-center gap-2 mb-3 flex-wrap">
+                    <span className="px-3 py-1 bg-gold/20 text-gold rounded-full text-sm font-semibold">
+                      {post.category}
+                    </span>
+                    {post.tags.slice(0, 2).map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 bg-sapphire/20 text-sapphire rounded-full text-xs font-semibold"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 group-hover:text-gold transition-colors">
+                    {post.title}
+                  </h2>
+
+                  <p className="text-gray-400 mb-4 line-clamp-3">{post.excerpt}</p>
+
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+                    <div className="flex items-center gap-2">
+                      <User size={16} />
+                      <span>{post.author}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Calendar size={16} />
+                      <span>
+                        {new Date(post.date).toLocaleDateString('en-US', {
+                          month: 'short',
+                          day: 'numeric',
+                          year: 'numeric',
+                        })}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock size={16} />
+                      <span>{post.readTime}</span>
+                    </div>
+                  </div>
+
+                  <button className="mt-4 text-gold hover:text-platinum transition-colors font-semibold inline-flex items-center gap-2 hover-lift">
+                    Read Full Article →
+                  </button>
+                </div>
+              </div>
+            </motion.article>
+          ))}
+        </div>
 
         {/* No Results */}
         {filteredPosts.length === 0 && (
           <div className="text-center py-12">
             <div className="text-6xl mb-4 opacity-50">📝</div>
-            <p className="text-gray-400 text-lg">
-              No articles found matching your search
-            </p>
+            <p className="text-gray-400 text-lg">No articles found matching your search</p>
             <button
               onClick={() => {
-                setSearchTerm("");
-                setSelectedCategory("All");
+                setSearchTerm('');
+                setSelectedCategory('All');
               }}
               className="mt-4 px-6 py-2 bg-gold text-black font-semibold rounded-lg hover:bg-platinum transition-all"
             >
@@ -183,11 +174,7 @@ export default function BlogPage() {
 
         {/* Mid-Content Ad */}
         {filteredPosts.length > 5 && (
-          <GoogleAdsPlaceholder
-            slot="blog-mid-content"
-            format="rectangle"
-            className="my-12"
-          />
+          <GoogleAdsPlaceholder slot="blog-mid-content" format="rectangle" className="my-12" />
         )}
 
         {/* Newsletter Signup - Revenue Generation */}
