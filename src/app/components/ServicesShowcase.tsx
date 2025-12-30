@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 interface Service {
   title: string;
   description: string;
-  icon: string;
   price: string;
   features: string[];
 }
@@ -19,7 +18,6 @@ export default function ServicesShowcase() {
     {
       title: "Web Design & Development",
       description: "Award-winning websites that convert visitors into customers",
-      icon: "💎",
       price: "From $5,000",
       features: [
         "Custom responsive design",
@@ -32,7 +30,6 @@ export default function ServicesShowcase() {
     {
       title: "Brand Identity",
       description: "Complete brand systems that make you unforgettable",
-      icon: "✨",
       price: "From $3,000",
       features: [
         "Logo design & variants",
@@ -45,7 +42,6 @@ export default function ServicesShowcase() {
     {
       title: "Digital Marketing",
       description: "Data-driven campaigns that drive real ROI",
-      icon: "🚀",
       price: "From $2,500/mo",
       features: [
         "Social media management",
@@ -58,7 +54,6 @@ export default function ServicesShowcase() {
     {
       title: "E-Commerce Solutions",
       description: "Complete online stores that maximize revenue",
-      icon: "🛍️",
       price: "From $8,000",
       features: [
         "Full store setup",
@@ -71,7 +66,6 @@ export default function ServicesShowcase() {
     {
       title: "App Development",
       description: "Native and web apps that users love",
-      icon: "📱",
       price: "From $15,000",
       features: [
         "iOS & Android apps",
@@ -84,7 +78,6 @@ export default function ServicesShowcase() {
     {
       title: "Consulting & Strategy",
       description: "Expert guidance to accelerate your digital growth",
-      icon: "🎯",
       price: "From $250/hr",
       features: [
         "Digital strategy",

@@ -105,19 +105,6 @@ export default function BlogPage() {
                           FEATURED
                         </div>
                       )}
-                      <div className="text-6xl opacity-30">
-                        {post.category === "Design" && "🎨"}
-                        {post.category === "Business" && "💼"}
-                        {post.category === "Process" && "⚙️"}
-                        {post.category === "Marketing" && "📢"}
-                        {post.category === "E-Commerce" && "🛍️"}
-                        {post.category === "Technology" && "🚀"}
-                        {post.category === "UX" && "🎯"}
-                        {post.category === "SEO" && "📈"}
-                        {post.category === "Development" && "💻"}
-                        {post.category === "Design Systems" && "🎨"}
-                        {post.category === "Branding" && "✨"}
-                      </div>
                     </div>
                   </div>
 
