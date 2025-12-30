@@ -65,12 +65,6 @@ export async function handleAddMedia(cmd: any): Promise<void> {
     throw error;
   }
 }
-      success: false,
-      files_changed: [],
-      error: error instanceof Error ? error.message : 'Unknown error',
-    };
-  }
-}
 
 export async function handleAddImage(
   command: Extract<VoiceCommand, { type: 'ADD_IMAGE' }>
