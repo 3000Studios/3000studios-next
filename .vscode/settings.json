@@ -85,8 +85,7 @@
   "chatgpt.openOnStartup": true,
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.preferences.includePackageJsonAutoImports": "on",
-  "files.autoSave": "afterDelay",
-  "files.autoSaveDelay": 750,
+  "files.autoSave": "onWindowChange",
 
   // Lock VS Code to pnpm
   "npm.packageManager": "pnpm",
