@@ -1,7 +1,7 @@
 # 🔌 VOICE API SPECIFICATION
 
-**Endpoint:** `POST /api/voice`  
-**Base URL:** http://localhost:3001 (dev) | https://3000studios.com (prod)  
+**Endpoint:** `POST /api/voice`
+**Base URL:** http://localhost:3001 (dev) | https://3000studios.com (prod)
 **Content-Type:** application/json
 
 ---
@@ -171,7 +171,7 @@ curl -X POST http://localhost:3001/api/voice \
   }
 }
 ```
-**File Modified:** `app/globals.css`  
+**File Modified:** `app/globals.css`
 **Result:** Updates or creates `--primary-color: #FF6B35;` in `:root` block
 
 #### B. Tailwind Config (target without `--`)
@@ -184,7 +184,7 @@ curl -X POST http://localhost:3001/api/voice \
   }
 }
 ```
-**File Modified:** `tailwind.config.ts`  
+**File Modified:** `tailwind.config.ts`
 **Result:** Updates Tailwind config entry
 
 **Example:**
@@ -249,7 +249,7 @@ curl -X POST http://localhost:3001/api/voice \
   }'
 ```
 
-**Auto-Generated Filename:** Slugified topic name with `.md` extension  
+**Auto-Generated Filename:** Slugified topic name with `.md` extension
 **Auto-Generated Location:** `/app/blog/`
 
 ---
@@ -339,7 +339,7 @@ async function listenAndExecute() {
     method: 'POST',
     body: JSON.stringify(command)
   });
-  
+
   if (response.ok) {
     announce("Done! Website updated."); // Voice feedback
   } else {
