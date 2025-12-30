@@ -77,33 +77,8 @@
 }
 
 @layer components {
-  /* Hyper Glass Morphism — 3D beveled square card */
-  .hyper-glass {
-    @apply relative backdrop-blur-2xl overflow-hidden;
-    background: var(--glass-bg);
-    border: 2px solid var(--glass-border);
-    border-radius: 8px; /* sharp square beveled */
-    box-shadow:
-      0 10px 30px rgba(0, 0, 0, 0.6),
-      inset 0 0 0 2px rgba(212, 175, 55, 0.12),
-      0 2px 0 rgba(255, 255, 255, 0.06);
-  }
-
-  .hyper-glass::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.05) 40%, transparent 60%);
-  }
-
-  .hyper-glass:hover {
-    transform: translateY(-4px) scale(1.03);
-    transition: transform 0.3s ease;
-  }
-
   /* 3D card block utility (alias) */
-  .card-3d-glass { @apply hyper-glass; }
+  .card-3d-glass { @apply backdrop-blur-2xl overflow-hidden; background: var(--glass-bg); border: 2px solid var(--glass-border); border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 0 2px rgba(212, 175, 55, 0.12), 0 2px 0 rgba(255, 255, 255, 0.06); }
   /* Glass Morphism Panel */
   .glass-panel {
     @apply relative backdrop-blur-2xl overflow-hidden;

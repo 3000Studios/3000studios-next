@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * World Engine Component
  * Controls global UI mood and atmosphere

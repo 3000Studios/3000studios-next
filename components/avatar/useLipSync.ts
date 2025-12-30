@@ -1,35 +1,38 @@
-"use client";
+'use client';
 
-import { useEffect, RefObject } from "react";
-import { Group } from "three";
+import { RefObject, useEffect } from 'react';
+import { Group } from 'three';
 
 export default function useLipSync(ref: RefObject<Group>) {
   useEffect(() => {
-    if (typeof window === "undefined" || !navigator.mediaDevices) return;
+    if (typeof window === 'undefined' || !navigator.mediaDevices) return;
 
-    navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-      const ctx = new AudioContext();
-      const analyser = ctx.createAnalyser();
-      const src = ctx.createMediaStreamSource(stream);
-      src.connect(analyser);
+    navigator.mediaDevices
+      .getUserMedia({ audio: true })
+      .then((stream) => {
+        const ctx = new AudioContext();
+        const analyser = ctx.createAnalyser();
+        const src = ctx.createMediaStreamSource(stream);
+        src.connect(analyser);
 
-      analyser.fftSize = 256;
-      const data = new Uint8Array(analyser.frequencyBinCount);
+        analyser.fftSize = 256;
+        const data = new Uint8Array(analyser.frequencyBinCount);
 
-      const loop = () => {
-        analyser.getByteFrequencyData(data);
-        const volume = data.reduce((a, b) => a + b) / data.length;
+        const loop = () => {
+          analyser.getByteFrequencyData(data);
+          const volume = data.reduce((a, b) => a + b) / data.length;
 
-        if (ref.current) {
-          ref.current.rotation.x = volume / 800;
-        }
+          if (ref.current) {
+            ref.current.rotation.x = volume / 800;
+          }
 
-        requestAnimationFrame(loop);
-      };
+          requestAnimationFrame(loop);
+        };
 
-      loop();
-    }).catch(err => {
-      console.log("Microphone access denied:", err);
-    });
+        loop();
+      })
+      .catch((err) => {
+        console.log('Microphone access denied:', err);
+      });
   }, [ref]);
 }

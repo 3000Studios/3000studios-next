@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { useGLTF } from "@react-three/drei";
-import { useRef } from "react";
-import { Group } from "three";
-import useSpeech from "./useSpeech";
-import useLipSync from "./useLipSync";
-import useIdleMotion from "./useIdleMotion";
-import useFaceTracking from "./useFaceTracking";
+import { useGLTF } from '@react-three/drei';
+import { useRef } from 'react';
+import { Group } from 'three';
+import useFaceTracking from './useFaceTracking';
+import useIdleMotion from './useIdleMotion';
+import useLipSync from './useLipSync';
+import useSpeech from './useSpeech';
 
 export default function AvatarModel() {
   const group = useRef<Group>(null);
-  
+
   // Try to load avatar model, fallback to a placeholder if not found
   let scene = null;
   try {
-    const gltf = useGLTF("/models/avatar.glb");
+    const gltf = useGLTF('/models/avatar.glb');
     scene = gltf.scene;
   } catch {
     // Will use a placeholder sphere if model doesn't exist

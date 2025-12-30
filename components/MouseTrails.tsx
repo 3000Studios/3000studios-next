@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
 
 const PALETTE = [
@@ -58,11 +60,12 @@ export default function MouseTrails() {
       clearInterval(colorInterval);
     };
   }, [paletteIndex]);
+
   return (
     <canvas
       ref={canvasRef}
-      width={window.innerWidth}
-      height={window.innerHeight}
+      width={typeof window !== 'undefined' ? window.innerWidth : 1920}
+      height={typeof window !== 'undefined' ? window.innerHeight : 1080}
       className="fixed inset-0 pointer-events-none z-40"
     />
   );

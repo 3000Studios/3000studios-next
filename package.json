@@ -16,6 +16,8 @@
     }
   },
   "scripts": {
+    "harden": "bash scripts/harden-repo.sh",
+    "prebuild": "node scripts/validate-app-structure.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
