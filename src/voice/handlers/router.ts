@@ -3,12 +3,12 @@
  * Main orchestrator - routes commands to handlers
  */
 
-import type { VoiceCommand, CommandResult } from '../commands';
-import { handleAddVideo, handleAddAudio, handleAddImage } from './media';
-import { handleAddSection, handleUpdateLayout, handleUpdateNav } from './layout';
-import { handleChangeTheme, handleUpdateCursor, handleAddAnimation } from './style';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import type { CommandResult, VoiceCommand } from '../commands';
+import { handleAddSection, handleUpdateLayout, handleUpdateNav } from './layout';
+import { handleAddAudio, handleAddImage, handleAddVideo } from './media';
+import { handleAddAnimation, handleChangeTheme, handleUpdateCursor } from './style';
 
 const execAsync = promisify(exec);
 
@@ -80,14 +80,14 @@ async function gitCommitAndPush(files: string[], commandType: string): Promise<v
   try {
     // Stage specific files
     await execAsync(`git add ${files.join(' ')}`);
-    
+
     // Commit with descriptive message
     const message = `chore(voice): ${commandType.toLowerCase().replace('_', ' ')}`;
     await execAsync(`git commit -m "${message}"`);
-    
+
     // Push to trigger deploy
     await execAsync('git push origin main');
-    
+
     console.log(`✅ Voice command committed and pushed: ${commandType}`);
   } catch (error) {
     console.error('Git operation failed:', error);
