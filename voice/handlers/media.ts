@@ -1,83 +1,70 @@
 /**
  * MEDIA HANDLERS
- * Add/replace videos, music, images
+ * Handle: UPDATE_TEXT, ADD_MEDIA
  */
 
 import { promises as fs } from 'fs';
-import type { CommandResult, VoiceCommand } from '../commands';
+import path from 'path';
 
-export async function handleAddVideo(
-  command: Extract<VoiceCommand, { type: 'ADD_VIDEO' }>
-): Promise<CommandResult> {
-  const { page, url, position } = command.payload;
-  const targetFile = `src/app/${page}/page.tsx`;
+/**
+ * UPDATE_TEXT: Search and replace in a file
+ * Deterministic: file path, search string, replacement string
+ */
+export async function handleUpdateText(cmd: any): Promise<void> {
+  const { file, search, replace } = cmd.payload;
+  const filePath = path.join(process.cwd(), file);
 
   try {
-    let content = await fs.readFile(targetFile, 'utf-8');
-
-    const videoComponent = `
-      <div className="relative w-full h-screen overflow-hidden">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="${url}" type="video/mp4" />
-        </video>
-      </div>
-    `;
-
-    if (position === 'hero') {
-      content = content.replace(/(<main[^>]*>)/, `$1\n${videoComponent}`);
-    } else if (position === 'background') {
-      content = content.replace(
-        /(<div[^>]*className="[^"]*hero[^"]*"[^>]*>)/,
-        `<div className="relative">\n${videoComponent}\n$1`
-      );
+    let content = await fs.readFile(filePath, 'utf-8');
+    
+    if (!content.includes(search)) {
+      throw new Error(`Search string not found in ${file}`);
     }
 
-    await fs.writeFile(targetFile, content, 'utf-8');
-
-    return {
-      success: true,
-      files_changed: [targetFile],
-    };
+    content = content.replace(search, replace);
+    await fs.writeFile(filePath, content, 'utf-8');
   } catch (error) {
-    return {
-      success: false,
-      files_changed: [],
-      error: error instanceof Error ? error.message : 'Unknown error',
-    };
+    throw error;
   }
 }
 
-export async function handleAddAudio(
-  command: Extract<VoiceCommand, { type: 'ADD_AUDIO' }>
-): Promise<CommandResult> {
-  const { url, autoplay, loop } = command.payload;
-  const targetFile = 'app/layout.tsx';
+/**
+ * ADD_MEDIA: Add video, image, or audio to a page
+ * Deterministic: page, URL, kind (video|image|audio)
+ */
+export async function handleAddMedia(cmd: any): Promise<void> {
+  const { page, url, kind } = cmd.payload;
+  const filePath = path.join(process.cwd(), `app/${page}/page.tsx`);
 
   try {
-    let content = await fs.readFile(targetFile, 'utf-8');
+    let content = await fs.readFile(filePath, 'utf-8');
 
-    const audioComponent = `
-      <audio ${autoplay ? 'autoPlay' : ''} ${loop ? 'loop' : ''} className="hidden">
-        <source src="${url}" type="audio/mpeg" />
-      </audio>
-    `;
+    let mediaElement = '';
+    
+    if (kind === 'video') {
+      mediaElement = `
+<video
+  autoPlay
+  loop
+  muted
+  playsInline
+  className="w-full h-auto"
+>
+  <source src="${url}" type="video/mp4" />
+</video>`;
+    } else if (kind === 'image') {
+      mediaElement = `<img src="${url}" alt="Added media" className="w-full h-auto" />`;
+    } else if (kind === 'audio') {
+      mediaElement = `<audio autoPlay loop className="w-full"><source src="${url}" type="audio/mpeg" /></audio>`;
+    }
 
-    content = content.replace(/(<body[^>]*>)/, `$1\n${audioComponent}`);
-
-    await fs.writeFile(targetFile, content, 'utf-8');
-
-    return {
-      success: true,
-      files_changed: [targetFile],
-    };
+    // Insert before the last closing tag
+    content = content.replace(/([\s\S]*?)<\/main>/, `$1${mediaElement}\n</main>`);
+    await fs.writeFile(filePath, content, 'utf-8');
   } catch (error) {
-    return {
+    throw error;
+  }
+}
       success: false,
       files_changed: [],
       error: error instanceof Error ? error.message : 'Unknown error',
