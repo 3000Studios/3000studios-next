@@ -117,8 +117,6 @@ export default function ServicesShowcase() {
               viewport={{ once: true }}
               className="card hover-lift group"
             >
-              <div className="text-5xl mb-4">{service.icon}</div>
-              
               <h3 className="text-2xl font-bold mb-2 text-gold group-hover:text-shadow-gold transition-all">
                 {service.title}
               </h3>
