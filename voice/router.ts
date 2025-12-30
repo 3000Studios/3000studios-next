@@ -9,7 +9,7 @@ import { handlers } from './handlers';
 
 export async function routeVoiceCommand(cmd: VoiceCommand): Promise<{ status: string }> {
   const handler = handlers[cmd.type];
-  
+
   if (!handler) {
     throw new Error(`No handler registered for command type: ${cmd.type}`);
   }
