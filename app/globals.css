@@ -32,12 +32,9 @@
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
   }
 
-  /* Import Gugi for titles */
-  @import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
-
   /* Apply Gugi + metallic 3D shine to headings */
   h1, h2, h3, .font-title {
-    font-family: 'Gugi', cursive;
+    font-family: var(--font-gugi), cursive;
     background: linear-gradient(to bottom, var(--gold-shine), var(--gold-highlight), var(--gold-primary), var(--gold-shadow));
     -webkit-background-clip: text;
     background-clip: text;
