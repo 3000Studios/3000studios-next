@@ -12,12 +12,15 @@ import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle, Play, Sparkles, Zap } from "lucide-react";
 import Link from "next/link";
 import { Suspense, lazy, useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import VideoHero from "./components/VideoHero";
 import ConsentBanner from "./components/ConsentBanner";
 import AffiliateToolCards from "./components/AffiliateToolCards";
 import StickyUpgradeButton from "./components/StickyUpgradeButton";
 
 const InteractiveAvatar = lazy(() => import("./components/InteractiveAvatar"));
+const Avatar3DHome = dynamic(() => import("@/components/Avatar3DHome"), { ssr: false });
+const SectionDivider3D = dynamic(() => import("@/components/SectionDivider3D"), { ssr: false });
 
 export default function HomePage() {
   const [showExitIntent, setShowExitIntent] = useState(false);
