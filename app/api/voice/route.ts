@@ -63,22 +63,55 @@ function parseActions(transcript: string): VoiceResponse {
 }
 
 export async function POST(request: NextRequest) {
-  const body = await request.json().catch(() => null);
-  const transcript = typeof body?.transcript === "string" ? body.transcript : "";
+  try {
+    const body = await request.json().catch(() => null);
+    
+    // NEW: Structured command API
+    if (body && 'type' in body && 'payload' in body) {
+      const command = body as VoiceCommand;
 
-  if (!transcript.trim()) {
-    return NextResponse.json(
-      { error: "Transcript is required" },
-      { status: 400 },
-    );
-  }
+      // Validate command
+      if (!validateCommand(command)) {
+        return NextResponse.json(
+          { error: 'Invalid command structure' },
+          { status: 400 }
+        );
+      }
 
-  if (transcript.length > 800) {
-    return NextResponse.json(
-      { error: "Transcript too long" },
-      { status: 413 },
-    );
-  }
+      // Route and execute
+      const result = await routeCommand(command);
+
+      if (!result.success) {
+        return NextResponse.json(
+          { error: result.error, files_changed: result.files_changed },
+          { status: 500 }
+        );
+      }
+
+      return NextResponse.json({
+        success: true,
+        files_changed: result.files_changed,
+        commit_sha: result.commit_sha,
+        message: `Command executed: ${command.type}`,
+      });
+    }
+
+    // LEGACY: Transcript parsing (backward compatibility)
+    const transcript = typeof body?.transcript === "string" ? body.transcript : "";
+
+    if (!transcript.trim()) {
+      return NextResponse.json(
+        { error: "Transcript is required" },
+        { status: 400 },
+      );
+    }
+
+    if (transcript.length > 800) {
+      return NextResponse.json(
+        { error: "Transcript too long" },
+        { status: 413 },
+      );
+    }
 
   const response = parseActions(transcript);
   return NextResponse.json(response, { status: 200 });
