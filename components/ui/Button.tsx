@@ -2,7 +2,7 @@
  * AUTHORITATIVE BUTTON SYSTEM
  * Single source of truth for all button styling
  * Import this component - do not create custom buttons
- * 
+ *
  * Usage:
  *   <Button variant="primary">Click Me</Button>
  *   <Button variant="secondary" size="lg">Action</Button>
@@ -38,9 +38,10 @@ const sizeStyles: Record<ButtonSize, string> = {
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className = '', variant = 'primary', size = 'base', ...props }, ref) => {
-    const baseStyles = 'inline-flex items-center justify-center gap-2 rounded-lg tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:opacity-50 disabled:cursor-not-allowed';
+    const baseStyles =
+      'inline-flex items-center justify-center gap-2 rounded-lg tracking-wider transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:opacity-50 disabled:cursor-not-allowed';
     const combinedClass = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
-    
+
     return <button ref={ref} className={combinedClass} {...props} />;
   }
 );
