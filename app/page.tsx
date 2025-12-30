@@ -78,6 +78,10 @@ export default function HomePage() {
                 }}
               >
                 AI-Powered Tools, Content, and Automations
+                <br />
+                <span className="text-sm md:text-base opacity-60">
+                  [Deployed Dec 30 — Voice System Live]
+                </span>
               </span>
               <br />
               That Make Money While You Sleep
