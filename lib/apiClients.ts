@@ -7,10 +7,10 @@
  * Import these clients instead of initializing them in individual files.
  */
 
-import Stripe from "stripe";
-import OpenAI from "openai";
-import Anthropic from "@anthropic-ai/sdk";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import Stripe from 'stripe';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // ==========================================
 // STRIPE CLIENT
@@ -22,13 +22,11 @@ export const getStripeClient = (): Stripe => {
     const secretKey = process.env.STRIPE_SECRET_KEY;
 
     if (!secretKey) {
-      throw new Error(
-        "STRIPE_SECRET_KEY is not configured. Set it in your environment variables.",
-      );
+      throw new Error('STRIPE_SECRET_KEY is not configured. Set it in your environment variables.');
     }
 
     stripeClient = new Stripe(secretKey, {
-      apiVersion: "2025-12-15.clover",
+      apiVersion: '2025-12-15.clover',
       typescript: true,
     });
   }
@@ -49,12 +47,10 @@ export const stripe = {
 export const getPayPalClient = () => {
   const clientId = process.env.PAYPAL_CLIENT_ID;
   const secret = process.env.PAYPAL_SECRET;
-  const mode = process.env.PAYPAL_MODE || "sandbox";
+  const mode = process.env.PAYPAL_MODE || 'sandbox';
 
   if (!clientId || !secret) {
-    throw new Error(
-      "PayPal credentials not configured. Set PAYPAL_CLIENT_ID and PAYPAL_SECRET.",
-    );
+    throw new Error('PayPal credentials not configured. Set PAYPAL_CLIENT_ID and PAYPAL_SECRET.');
   }
 
   // PayPal SDK is imported dynamically in API routes
@@ -70,8 +66,7 @@ export const paypal = {
   get config() {
     return getPayPalClient();
   },
-  isConfigured: () =>
-    !!(process.env.PAYPAL_CLIENT_ID && process.env.PAYPAL_SECRET),
+  isConfigured: () => !!(process.env.PAYPAL_CLIENT_ID && process.env.PAYPAL_SECRET),
 };
 
 // ==========================================
@@ -84,9 +79,7 @@ export const getOpenAIClient = (): OpenAI => {
     const apiKey = process.env.OPENAI_API_KEY;
 
     if (!apiKey) {
-      throw new Error(
-        "OPENAI_API_KEY is not configured. Set it in your environment variables.",
-      );
+      throw new Error('OPENAI_API_KEY is not configured. Set it in your environment variables.');
     }
 
     openAIClient = new OpenAI({
@@ -115,9 +108,7 @@ export const getAnthropicClient = (): Anthropic => {
     const apiKey = process.env.CLAUDE_API_KEY;
 
     if (!apiKey) {
-      throw new Error(
-        "CLAUDE_API_KEY is not configured. Set it in your environment variables.",
-      );
+      throw new Error('CLAUDE_API_KEY is not configured. Set it in your environment variables.');
     }
 
     anthropicClient = new Anthropic({
@@ -145,9 +136,7 @@ export const getGeminiClient = (): GoogleGenerativeAI => {
     const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
-      throw new Error(
-        "GEMINI_API_KEY is not configured. Set it in your environment variables.",
-      );
+      throw new Error('GEMINI_API_KEY is not configured. Set it in your environment variables.');
     }
 
     geminiClient = new GoogleGenerativeAI(apiKey);
@@ -160,7 +149,7 @@ export const gemini = {
   get client() {
     return getGeminiClient();
   },
-  getModel: (model: string = "gemini-pro") => {
+  getModel: (model: string = 'gemini-pro') => {
     return getGeminiClient().getGenerativeModel({ model });
   },
   isConfigured: () => !!process.env.GEMINI_API_KEY,
@@ -175,16 +164,14 @@ let isConnecting = false;
 export const getMongoClient = async (): Promise<any> => {
   if (!MongoClient) {
     throw new Error(
-      "MongoDB client is not available. Install 'mongodb' package to use this feature.",
+      "MongoDB client is not available. Install 'mongodb' package to use this feature."
     );
   }
 
   const uri = process.env.MONGODB_URI;
 
   if (!uri) {
-    throw new Error(
-      "MONGODB_URI is not configured. Set it in your environment variables.",
-    );
+    throw new Error('MONGODB_URI is not configured. Set it in your environment variables.');
   }
 
   if (!mongoClient) {
@@ -204,9 +191,9 @@ export const getMongoClient = async (): Promise<any> => {
         maxIdleTimeMS: 30000,
       });
       await mongoClient.connect();
-      console.log("✅ MongoDB connected successfully");
+      console.log('✅ MongoDB connected successfully');
     } catch (error) {
-      console.error("❌ MongoDB connection failed:", error);
+      console.error('❌ MongoDB connection failed:', error);
       throw error;
     } finally {
       isConnecting = false;
@@ -218,7 +205,7 @@ export const getMongoClient = async (): Promise<any> => {
 
 export const getMongoDb = async () => {
   const client = await getMongoClient();
-  const dbName = process.env.MONGODB_DB_NAME || "3000studios";
+  const dbName = process.env.MONGODB_DB_NAME || '3000studios';
   return client.db(dbName);
 };
 
@@ -234,7 +221,7 @@ export const mongodb = {
     if (mongoClient) {
       await mongoClient.close();
       mongoClient = null;
-      console.log("MongoDB disconnected");
+      console.log('MongoDB disconnected');
     }
   },
 };
@@ -261,7 +248,7 @@ export const getTwilioClient = () => {
 
   if (!accountSid || !authToken) {
     throw new Error(
-      "Twilio credentials not configured. Set TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN.",
+      'Twilio credentials not configured. Set TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN.'
     );
   }
 
@@ -278,8 +265,7 @@ export const twilio = {
   get config() {
     return getTwilioClient();
   },
-  isConfigured: () =>
-    !!(process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN),
+  isConfigured: () => !!(process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN),
 };
 
 // ==========================================
@@ -291,9 +277,7 @@ export const getWordPressClient = () => {
   const pass = process.env.WP_PASS;
 
   if (!url || !user || !pass) {
-    throw new Error(
-      "WordPress credentials not configured. Set WP_URL, WP_USER, and WP_PASS.",
-    );
+    throw new Error('WordPress credentials not configured. Set WP_URL, WP_USER, and WP_PASS.');
   }
 
   return {
@@ -309,8 +293,7 @@ export const wordpress = {
   get config() {
     return getWordPressClient();
   },
-  isConfigured: () =>
-    !!(process.env.WP_URL && process.env.WP_USER && process.env.WP_PASS),
+  isConfigured: () => !!(process.env.WP_URL && process.env.WP_USER && process.env.WP_PASS),
 };
 
 // ==========================================
@@ -321,7 +304,7 @@ export const webrtc = {
     apiKey: process.env.WEBRTC_KEY,
     iceServers: [
       {
-        urls: "stun:stun.l.google.com:19302",
+        urls: 'stun:stun.l.google.com:19302',
       },
       ...(process.env.WEBRTC_TURN_URL
         ? [
@@ -351,8 +334,8 @@ export const github = {
 // ==========================================
 export const affiliate = {
   secret: process.env.AFFILIATE_SECRET,
-  cookieDuration: parseInt(process.env.AFFILIATE_COOKIE_DURATION || "30", 10),
-  commissionRate: parseFloat(process.env.AFFILIATE_COMMISSION_RATE || "10"),
+  cookieDuration: parseInt(process.env.AFFILIATE_COOKIE_DURATION || '30', 10),
+  commissionRate: parseFloat(process.env.AFFILIATE_COMMISSION_RATE || '10'),
   isConfigured: () => !!process.env.AFFILIATE_SECRET,
 };
 
@@ -371,8 +354,7 @@ export const checkFeatureAvailability = (feature: string): boolean => {
     ai_claude: anthropic.isConfigured,
     ai_gemini: gemini.isConfigured,
     database: mongodb.isConfigured,
-    analytics: () =>
-      analytics.google.isConfigured() || analytics.vercel.isConfigured(),
+    analytics: () => analytics.google.isConfigured() || analytics.vercel.isConfigured(),
     communications: twilio.isConfigured,
     cms: wordpress.isConfigured,
     streaming: webrtc.isConfigured,
