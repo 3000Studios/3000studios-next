@@ -1,52 +1,30 @@
 /**
  * VOICE API ENDPOINT
- * Receives voice commands → routes → commits → deploys
+ * POST /api/voice
+ * Accepts: VoiceCommand
+ * Returns: { status: 'ok' }
  */
 
-import type { VoiceCommand } from '@/voice/commands';
-import { routeCommand, validateCommand } from '@/voice/handlers/router';
 import { NextRequest, NextResponse } from 'next/server';
+import { routeVoiceCommand } from '@/voice/router';
+import type { VoiceCommand } from '@/voice/commands';
 
-// Legacy transcript parsing (for backward compatibility)
-const colorMap: Record<string, string> = {
-  blue: '#2563eb',
-  purple: '#8b5cf6',
-  pink: '#ec4899',
-  green: '#22c55e',
-  orange: '#f97316',
-  red: '#ef4444',
-};
+export async function POST(req: NextRequest) {
+  try {
+    const cmd: VoiceCommand = await req.json();
 
-type VoiceAction =
-  | { type: 'setTheme'; value: 'dark' | 'light' }
-  | { type: 'setAccent'; value: string }
-  | { type: 'message'; value: string };
+    // Route the command to its handler
+    const result = await routeVoiceCommand(cmd);
 
-type VoiceResponse = {
-  summary: string;
-  actions: VoiceAction[];
-};
-
-function parseActions(transcript: string): VoiceResponse {
-  const normalized = transcript.toLowerCase();
-  const actions: VoiceAction[] = [];
-
-  if (normalized.includes('dark mode') || normalized.includes('dark theme')) {
-    actions.push({ type: 'setTheme', value: 'dark' });
+    return NextResponse.json(result);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    return NextResponse.json(
+      { error: message },
+      { status: 400 }
+    );
   }
-  if (normalized.includes('light mode') || normalized.includes('light theme')) {
-    actions.push({ type: 'setTheme', value: 'light' });
-  }
-
-  const colorMatch = normalized.match(/(blue|purple|pink|green|orange|red)(?![a-z])/);
-  if (colorMatch) {
-    const color = colorMatch[1];
-    actions.push({ type: 'setAccent', value: colorMap[color] ?? color });
-  }
-
-  if (actions.length === 0) {
-    actions.push({ type: 'message', value: 'No actionable change found' });
-  }
+}
 
   const summaryParts = actions.map((action) => {
     if (action.type === 'setTheme') return `Theme → ${action.value}`;
