@@ -7,13 +7,19 @@
 export type VoiceCommand =
   | { type: 'ADD_SECTION'; payload: { page: string; section: string; content: string } }
   | { type: 'UPDATE_TEXT'; payload: { page: string; selector: string; text: string } }
-  | { type: 'ADD_VIDEO'; payload: { page: string; url: string; position: 'hero' | 'section' | 'background' } }
+  | {
+      type: 'ADD_VIDEO';
+      payload: { page: string; url: string; position: 'hero' | 'section' | 'background' };
+    }
   | { type: 'ADD_IMAGE'; payload: { page: string; url: string; alt: string } }
   | { type: 'ADD_AUDIO'; payload: { url: string; autoplay: boolean; loop: boolean } }
   | { type: 'CHANGE_THEME'; payload: { colors: string[]; variant: 'dark' | 'light' | 'custom' } }
   | { type: 'UPDATE_NAV'; payload: { action: 'add' | 'remove' | 'reorder'; links: string[] } }
   | { type: 'PUBLISH_BLOG'; payload: { title: string; content: string; tags: string[] } }
-  | { type: 'UPDATE_LAYOUT'; payload: { page: string; layout: 'grid' | 'flex' | 'columns'; columns?: number } }
+  | {
+      type: 'UPDATE_LAYOUT';
+      payload: { page: string; layout: 'grid' | 'flex' | 'columns'; columns?: number };
+    }
   | { type: 'ADD_CTA'; payload: { text: string; link: string; style: 'primary' | 'secondary' } }
   | { type: 'UPDATE_CURSOR'; payload: { default: string; hover: string } }
   | { type: 'ADD_ANIMATION'; payload: { target: string; animation: string } }
