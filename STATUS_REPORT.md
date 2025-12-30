@@ -74,7 +74,7 @@ curl -X POST http://localhost:3000/api/auth/login \
 
 ## 🎙️ PHASE 3: VOICE → WEBSITE EDIT PIPELINE (DEPLOYED)
 
-**Status:** 🟢 **LIVE — READY FOR VOICE COMMANDS**  
+**Status:** 🟢 **LIVE — READY FOR VOICE COMMANDS**
 **Dev Server:** http://localhost:3001
 
 ### Deployed Components
