@@ -248,16 +248,6 @@ export default function Navigation() {
           </Link>
 
           <div className="hidden md:flex items-center justify-center flex-1 ml-10">
-            <div className="flex items-center gap-10">
-              {navLinks.map((link) => (
-                <ElectricLink
-                  key={link.href}
-                  href={link.href}
-                  label={link.label}
-                  isActive={isActiveLink(link.href)}
-                />
-              ))}
-            </div>
           </div>
 
           <div className="hidden md:block ml-4">
