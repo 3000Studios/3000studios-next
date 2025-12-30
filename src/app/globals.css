@@ -22,17 +22,17 @@ a:hover, button:hover, [role="button"]:hover {
   --gold-flake: #D4AF37;
   --gold-highlight: #FFD700;
   --gloss-highlight: rgba(255, 255, 255, 0.8);
-  
+
   /* Base Colors */
   --background: var(--marble-black);
   --foreground: var(--marble-white);
   --accent: var(--gold-flake);
-  
+
   /* UI Tokens */
   --card-bg: rgba(20, 20, 20, 0.6);
   --card-border: rgba(212, 175, 55, 0.3);
   --glass-blur: 12px;
-  
+
   /* Shadows */
   --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.15);
   --shadow-metallic: 0 2px 4px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1) inset;
