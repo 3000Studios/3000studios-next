@@ -125,21 +125,18 @@ export default function HomePage() {
               {
                 title: 'Web Design & Development',
                 description: 'Responsive, high-performance websites that engage and convert',
-                icon: '🎨',
                 image:
                   'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop',
               },
               {
                 title: 'Brand & Identity',
                 description: 'Compelling brand strategies and visual identities that stand out',
-                icon: '✨',
                 image:
                   'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=300&fit=crop',
               },
               {
                 title: 'Motion & Animation',
                 description: 'Captivating animations and interactive experiences',
-                icon: '🎬',
                 image:
                   'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=300&fit=crop',
               },
@@ -156,7 +153,6 @@ export default function HomePage() {
                   />
                 </div>
                 <div className="relative z-10">
-                  <div className="text-4xl mb-4">{service.icon}</div>
                   <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-amber-400 transition-colors">
                     {service.title}
                   </h3>
