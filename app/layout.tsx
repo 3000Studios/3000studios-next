@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Background />
           <GlobalEffects />
           <ScrollEffects />
-          <AmbientAudio />
+          <AmbientAudio autoPlay unmuted />
           <MouseTrails />
         </ClientLayoutWrapper>
 

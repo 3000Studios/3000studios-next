@@ -200,14 +200,9 @@ export default function Navigation() {
     { href: '/portfolio', label: 'PORTFOLIO' },
     { href: '/live', label: 'LIVE' },
     { href: '/blog', label: 'BLOG' },
-    { href: '/contact', label: 'CONTACT' },
   ];
 
-  // Remove certain links on Home page per directive
-  if (pathname === '/home') {
-    const forbidden = new Set(['STUDIO', 'EXPERIENCE', 'AVATAR', 'DASHBOARD', 'TEAM', 'CONTACT']);
-    navLinks = navLinks.filter((l) => !forbidden.has(l.label));
-  }
+  // Removed: studio, experience, avatar, dashboard, team, contact per directive
 
   const isActiveLink = (href: string) => pathname === href;
 
