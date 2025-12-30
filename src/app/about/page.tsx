@@ -1,9 +1,6 @@
-import Navbar from '../components/Navbar';
-
 export default function About() {
   return (
     <>
-      <Navbar />
       <div className="relative min-h-screen pt-16">
         <div
           className="fixed inset-0 pointer-events-none z-40 border-4 border-[#D4AF37]"
