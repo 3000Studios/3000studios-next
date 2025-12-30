@@ -4,11 +4,7 @@
  * Triggers git auto-commit → Vercel auto-deploy
  */
 
-import {
-  getFileFromGithub,
-  updateFileOnGithub,
-  createFileOnGithub,
-} from '@/voice/github-client';
+import { getFileFromGithub, updateFileOnGithub, createFileOnGithub } from '@/voice/github-client';
 
 interface MutationResult {
   success: boolean;
@@ -22,9 +18,7 @@ interface MutationResult {
 /**
  * UPDATE_TEXT: Change homepage headline via GitHub API
  */
-export async function handleUpdateText(
-  newText: string
-): Promise<MutationResult> {
+export async function handleUpdateText(newText: string): Promise<MutationResult> {
   try {
     let content = await getFileFromGithub('app/page.tsx');
 
@@ -133,11 +127,7 @@ export async function handleAddMedia(
     if (content.includes('</main>')) {
       content = content.replace('</main>', `${mediaSection}\n      </main>`);
 
-      const result = await updateFileOnGithub(
-        'app/page.tsx',
-        content,
-        `voice: add ${type} media`
-      );
+      const result = await updateFileOnGithub('app/page.tsx', content, `voice: add ${type} media`);
 
       return {
         ...result,
