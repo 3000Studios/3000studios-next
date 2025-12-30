@@ -247,8 +247,7 @@ export default function Navigation() {
             {/* Removed text label per directive: logo-only */}
           </Link>
 
-          <div className="hidden md:flex items-center justify-center flex-1 ml-10">
-          </div>
+          <div className="hidden md:flex items-center justify-center flex-1 ml-10"></div>
 
           <div className="hidden md:block ml-4">
             <Link
