@@ -1,53 +1,71 @@
 /**
  * LAYOUT HANDLERS
- * Sections, grids, nav, spacing
+ * Handle: ADD_SECTION, PUBLISH_BLOG
  */
 
 import { promises as fs } from 'fs';
-import type { CommandResult, VoiceCommand } from '../commands';
+import path from 'path';
 
-export async function handleAddSection(
-  command: Extract<VoiceCommand, { type: 'ADD_SECTION' }>
-): Promise<CommandResult> {
-  const { page, section, content } = command.payload;
-  const targetFile = `src/app/${page}/page.tsx`;
+/**
+ * ADD_SECTION: Add a new section to a page
+ * Deterministic: page, component (section name)
+ */
+export async function handleAddSection(cmd: any): Promise<void> {
+  const { page, component } = cmd.payload;
+  const filePath = path.join(process.cwd(), `app/${page}/page.tsx`);
 
   try {
-    let fileContent = await fs.readFile(targetFile, 'utf-8');
+    let content = await fs.readFile(filePath, 'utf-8');
 
-    const sectionComponent = `
-      <section className="py-24 px-4 bg-black">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 mb-12">
-            ${section}
-          </h2>
-          <div className="prose prose-invert max-w-none">
-            ${content}
-          </div>
-        </div>
-      </section>
-    `;
+    const sectionHTML = `
+<section className="py-24 px-4 bg-black">
+  <div className="max-w-7xl mx-auto">
+    <h2 className="text-4xl md:text-6xl font-bold text-white mb-12">${component}</h2>
+    <div className="text-lg text-gray-300">[Content for ${component}]</div>
+  </div>
+</section>`;
 
-    fileContent = fileContent.replace(/(<\/main>)/, `${sectionComponent}\n$1`);
-
-    await fs.writeFile(targetFile, fileContent, 'utf-8');
-
-    return {
-      success: true,
-      files_changed: [targetFile],
-    };
+    // Insert before closing main tag
+    content = content.replace(/(<\/main>)/, `${sectionHTML}\n$1`);
+    await fs.writeFile(filePath, content, 'utf-8');
   } catch (error) {
-    return {
-      success: false,
-      files_changed: [],
-      error: error instanceof Error ? error.message : 'Unknown error',
-    };
+    throw error;
   }
 }
 
-export async function handleUpdateLayout(
-  command: Extract<VoiceCommand, { type: 'UPDATE_LAYOUT' }>
-): Promise<CommandResult> {
+/**
+ * PUBLISH_BLOG: Create and publish a blog post
+ * Deterministic: topic (generates file + frontmatter)
+ */
+export async function handlePublishBlog(cmd: any): Promise<void> {
+  const { topic } = cmd.payload;
+  const date = new Date().toISOString().split('T')[0];
+  const slug = topic.toLowerCase().replace(/\s+/g, '-');
+  const filePath = path.join(process.cwd(), `app/blog/${slug}.md`);
+
+  try {
+    const frontmatter = `---
+title: "${topic}"
+date: "${date}"
+author: "Admin"
+published: true
+---
+
+# ${topic}
+
+This is a blog post about ${topic}.
+
+## Summary
+[Add your content here]
+
+---
+Published: ${date}`;
+
+    await fs.writeFile(filePath, frontmatter, 'utf-8');
+  } catch (error) {
+    throw error;
+  }
+}
   const { page, layout, columns } = command.payload;
   const targetFile = `src/app/${page}/page.tsx`;
 
