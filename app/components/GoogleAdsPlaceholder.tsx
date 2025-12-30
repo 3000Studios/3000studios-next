@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 /**
  * Google Ads Placeholder Component
@@ -16,10 +16,10 @@ interface GoogleAdsProps {
   className?: string;
 }
 
-export default function GoogleAdsPlaceholder({ 
-  slot, 
+export default function GoogleAdsPlaceholder({
+  slot,
   format = 'auto',
-  className = '' 
+  className = '',
 }: GoogleAdsProps) {
   const [isClient, setIsClient] = useState(false);
 
@@ -43,12 +43,7 @@ export default function GoogleAdsPlaceholder({
       {/* Ad Placeholder */}
       <div className="glass-premium border border-gold/20 rounded-lg p-6 text-center min-h-[250px] flex flex-col items-center justify-center">
         <div className="text-gold/50 mb-2">
-          <svg
-            className="w-16 h-16 mx-auto"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
+          <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -59,11 +54,9 @@ export default function GoogleAdsPlaceholder({
         </div>
         <p className="text-gray-400 text-sm font-medium">Advertisement</p>
         <p className="text-gray-600 text-xs mt-1">Google AdSense Slot: {slot}</p>
-        <div className="mt-3 text-xs text-gray-700">
-          Format: {format} | Ready for monetization
-        </div>
+        <div className="mt-3 text-xs text-gray-700">Format: {format} | Ready for monetization</div>
       </div>
-      
+
       {/* Shimmer Effect */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="shimmer opacity-20"></div>

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 /**
  * Shadow AI Avatar Component (Home Page Version)
@@ -27,40 +27,46 @@ export default function ShadowAvatar() {
   const [audioEnabled, setAudioEnabled] = useState(true);
   const recognitionRef = useRef<any>(null);
 
-  const handleUserInput = useCallback(async (_input: string) => {
-    // Simulate AI response (in production, this would call an AI API)
-    const responses = [
-      "That's interesting! Want to check out our store?",
-      "I like the way you think! Have you seen our projects?",
-      "Great question! I'm here to help you navigate 3000 Studios.",
-      "Fascinating! You should definitely explore our portfolio.",
-      "I hear you! Let me know if you want to see what we're working on.",
-      "Cool! Check out our live streams for more content.",
-    ];
+  const handleUserInput = useCallback(
+    async (_input: string) => {
+      // Simulate AI response (in production, this would call an AI API)
+      const responses = [
+        "That's interesting! Want to check out our store?",
+        'I like the way you think! Have you seen our projects?',
+        "Great question! I'm here to help you navigate 3000 Studios.",
+        'Fascinating! You should definitely explore our portfolio.',
+        "I hear you! Let me know if you want to see what we're working on.",
+        'Cool! Check out our live streams for more content.',
+      ];
 
-    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-    setAvatarText(randomResponse);
+      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+      setAvatarText(randomResponse);
 
-    // Text-to-speech if enabled
-    if (audioEnabled && 'speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance(randomResponse);
-      utterance.rate = 1.1;
-      utterance.pitch = 1.0;
-      utterance.onstart = () => setIsSpeaking(true);
-      utterance.onend = () => setIsSpeaking(false);
-      window.speechSynthesis.speak(utterance);
-    }
-  }, [audioEnabled]);
+      // Text-to-speech if enabled
+      if (audioEnabled && 'speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(randomResponse);
+        utterance.rate = 1.1;
+        utterance.pitch = 1.0;
+        utterance.onstart = () => setIsSpeaking(true);
+        utterance.onend = () => setIsSpeaking(false);
+        window.speechSynthesis.speak(utterance);
+      }
+    },
+    [audioEnabled]
+  );
 
   // Initialize speech recognition
   useEffect(() => {
     if (typeof window !== 'undefined') {
       // Check for standard API first, then webkit
-      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      const SpeechRecognition =
+        (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
       if (!SpeechRecognition) {
         console.warn('Speech recognition not supported in this browser');
-        setAvatarText("Hey! Speech recognition isn't supported in your browser, but I can still chat via text!");
+        setAvatarText(
+          "Hey! Speech recognition isn't supported in your browser, but I can still chat via text!"
+        );
         return;
       }
 
@@ -101,7 +107,6 @@ export default function ShadowAvatar() {
     }
   };
 
-
   return (
     <div className="fixed bottom-8 right-8 z-50 max-w-sm">
       {/* Avatar Container */}
@@ -109,7 +114,9 @@ export default function ShadowAvatar() {
         {/* Avatar Visual (Placeholder for 3D model) */}
         <div className="relative mb-4">
           <div className="w-32 h-32 mx-auto bg-gradient-to-br from-gold via-sapphire to-platinum rounded-full flex items-center justify-center animate-pulse">
-            <div className={`w-24 h-24 bg-black rounded-full flex items-center justify-center ${isSpeaking ? 'animate-ping' : ''}`}>
+            <div
+              className={`w-24 h-24 bg-black rounded-full flex items-center justify-center ${isSpeaking ? 'animate-ping' : ''}`}
+            >
               <span className="text-4xl">👤</span>
             </div>
           </div>
@@ -132,23 +139,17 @@ export default function ShadowAvatar() {
         </div>
 
         {/* Avatar Name */}
-        <h3 className="text-center text-gold font-bold text-xl mb-2">
-          Shadow AI
-        </h3>
+        <h3 className="text-center text-gold font-bold text-xl mb-2">Shadow AI</h3>
 
         {/* Avatar Speech Bubble */}
         <div className="bg-gray-900 rounded-lg p-4 mb-4 min-h-[80px] border border-gold/30">
-          <p className="text-white text-sm italic">
-            "{avatarText}"
-          </p>
+          <p className="text-white text-sm italic">"{avatarText}"</p>
         </div>
 
         {/* User Input Display */}
         {userText && (
           <div className="bg-sapphire/20 rounded-lg p-3 mb-4 border border-sapphire/30">
-            <p className="text-gray-300 text-xs">
-              You: "{userText}"
-            </p>
+            <p className="text-gray-300 text-xs">You: "{userText}"</p>
           </div>
         )}
 
@@ -163,7 +164,11 @@ export default function ShadowAvatar() {
             }`}
             title={isListening ? 'Stop listening' : 'Start listening'}
           >
-            {isListening ? <MicOff className="text-white" size={20} /> : <Mic className="text-black" size={20} />}
+            {isListening ? (
+              <MicOff className="text-white" size={20} />
+            ) : (
+              <Mic className="text-black" size={20} />
+            )}
           </button>
 
           <button
@@ -173,7 +178,11 @@ export default function ShadowAvatar() {
             }`}
             title={audioEnabled ? 'Mute audio' : 'Enable audio'}
           >
-            {audioEnabled ? <Volume2 className="text-white" size={20} /> : <VolumeX className="text-white" size={20} />}
+            {audioEnabled ? (
+              <Volume2 className="text-white" size={20} />
+            ) : (
+              <VolumeX className="text-white" size={20} />
+            )}
           </button>
         </div>
 

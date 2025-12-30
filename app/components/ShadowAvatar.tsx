@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 /**
  * Shadow AI Avatar Component (Home Page Version)
@@ -14,18 +14,16 @@
  * This is a foundational structure that can be enhanced with 3D models
  */
 
-"use client";
+'use client';
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { Mic, MicOff, Volume2, VolumeX } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
 
 export default function ShadowAvatar() {
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [userText, setUserText] = useState("");
-  const [avatarText, setAvatarText] = useState(
-    "Hey there! I'm Shadow. Ask me anything!",
-  );
+  const [userText, setUserText] = useState('');
+  const [avatarText, setAvatarText] = useState("Hey there! I'm Shadow. Ask me anything!");
   const [audioEnabled, setAudioEnabled] = useState(true);
   const recognitionRef = useRef<any>(null);
 
@@ -34,18 +32,17 @@ export default function ShadowAvatar() {
       // Simulate AI response (in production, this would call an AI API)
       const responses = [
         "That's interesting! Want to check out our store?",
-        "I like the way you think! Have you seen our projects?",
+        'I like the way you think! Have you seen our projects?',
         "Great question! I'm here to help you navigate 3000 Studios.",
-        "Fascinating! You should definitely explore our portfolio.",
+        'Fascinating! You should definitely explore our portfolio.',
         "I hear you! Let me know if you want to see what we're working on.",
-        "Cool! Check out our live streams for more content.",
+        'Cool! Check out our live streams for more content.',
       ];
 
-      const randomResponse =
-        responses[Math.floor(Math.random() * responses.length)];
+      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
       setAvatarText(randomResponse);
 
-      if (audioEnabled && "speechSynthesis" in window) {
+      if (audioEnabled && 'speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance(randomResponse);
         utterance.rate = 1.1;
         utterance.pitch = 1.0;
@@ -54,20 +51,19 @@ export default function ShadowAvatar() {
         window.speechSynthesis.speak(utterance);
       }
     },
-    [audioEnabled],
+    [audioEnabled]
   );
 
   // Initialize speech recognition
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       const SpeechRecognition =
-        (window as any).SpeechRecognition ||
-        (window as any).webkitSpeechRecognition;
+        (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
       if (!SpeechRecognition) {
-        console.warn("Speech recognition not supported in this browser");
+        console.warn('Speech recognition not supported in this browser');
         setAvatarText(
-          "Hey! Speech recognition isn't supported in your browser, but I can still chat via text!",
+          "Hey! Speech recognition isn't supported in your browser, but I can still chat via text!"
         );
         return;
       }
@@ -75,7 +71,7 @@ export default function ShadowAvatar() {
       recognitionRef.current = new SpeechRecognition();
       recognitionRef.current.continuous = false;
       recognitionRef.current.interimResults = false;
-      recognitionRef.current.lang = "en-US";
+      recognitionRef.current.lang = 'en-US';
 
       recognitionRef.current.onresult = (event: any) => {
         const transcript = event.results[0][0].transcript;
@@ -84,7 +80,7 @@ export default function ShadowAvatar() {
       };
 
       recognitionRef.current.onerror = (event: any) => {
-        console.error("Speech recognition error:", event.error);
+        console.error('Speech recognition error:', event.error);
         setIsListening(false);
       };
 
@@ -96,9 +92,7 @@ export default function ShadowAvatar() {
 
   const toggleListening = () => {
     if (!recognitionRef.current) {
-      alert(
-        "Speech recognition is not supported in your browser. Please use Chrome or Edge.",
-      );
+      alert('Speech recognition is not supported in your browser. Please use Chrome or Edge.');
       return;
     }
 
@@ -119,7 +113,7 @@ export default function ShadowAvatar() {
         <div className="relative mb-4">
           <div className="w-32 h-32 mx-auto bg-gradient-to-br from-gold via-sapphire to-platinum rounded-full flex items-center justify-center animate-pulse">
             <div
-              className={`w-24 h-24 bg-black rounded-full flex items-center justify-center ${isSpeaking ? "animate-ping" : ""}`}
+              className={`w-24 h-24 bg-black rounded-full flex items-center justify-center ${isSpeaking ? 'animate-ping' : ''}`}
             >
               <span className="text-4xl">👤</span>
             </div>
@@ -132,7 +126,7 @@ export default function ShadowAvatar() {
                     key={i}
                     className="w-1 bg-gold rounded-full animate-pulse"
                     style={{
-                      height: Math.random() * 20 + 10 + "px",
+                      height: Math.random() * 20 + 10 + 'px',
                       animationDelay: `${i * 0.1}s`,
                     }}
                   />
@@ -143,9 +137,7 @@ export default function ShadowAvatar() {
         </div>
 
         {/* Avatar Name */}
-        <h3 className="text-center text-gold font-bold text-xl mb-2">
-          Shadow AI
-        </h3>
+        <h3 className="text-center text-gold font-bold text-xl mb-2">Shadow AI</h3>
 
         {/* Avatar Speech Bubble */}
         <div className="bg-gray-900 rounded-lg p-4 mb-4 min-h-[80px] border border-gold/30">
@@ -165,10 +157,10 @@ export default function ShadowAvatar() {
             onClick={toggleListening}
             className={`p-3 rounded-full transition-all ${
               isListening
-                ? "bg-red-500 hover:bg-red-600 animate-pulse"
-                : "bg-gold hover:bg-platinum"
+                ? 'bg-red-500 hover:bg-red-600 animate-pulse'
+                : 'bg-gold hover:bg-platinum'
             }`}
-            title={isListening ? "Stop listening" : "Start listening"}
+            title={isListening ? 'Stop listening' : 'Start listening'}
           >
             {isListening ? (
               <MicOff className="text-white" size={20} />
@@ -180,11 +172,9 @@ export default function ShadowAvatar() {
           <button
             onClick={() => setAudioEnabled(!audioEnabled)}
             className={`p-3 rounded-full transition-all ${
-              audioEnabled
-                ? "bg-sapphire hover:bg-blue-600"
-                : "bg-gray-600 hover:bg-gray-700"
+              audioEnabled ? 'bg-sapphire hover:bg-blue-600' : 'bg-gray-600 hover:bg-gray-700'
             }`}
-            title={audioEnabled ? "Mute audio" : "Enable audio"}
+            title={audioEnabled ? 'Mute audio' : 'Enable audio'}
           >
             {audioEnabled ? (
               <Volume2 className="text-white" size={20} />
@@ -196,8 +186,7 @@ export default function ShadowAvatar() {
 
         {/* Info Note */}
         <p className="text-xs text-gray-500 text-center mt-4">
-          I'm here to chat and help! (I don't edit the site - that's in THE
-          MATRIX)
+          I'm here to chat and help! (I don't edit the site - that's in THE MATRIX)
         </p>
       </div>
     </div>

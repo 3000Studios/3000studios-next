@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
 /**
  * Google Maps Component
  * Interactive map showing business location in Atlanta, Georgia
  */
 
-"use client";
+'use client';
 
 /* eslint-disable @typescript-eslint/no-namespace */
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 // Type declaration for Google Maps API
 declare global {
@@ -20,7 +20,7 @@ declare global {
       enum MapTypeControlStyle {
         DEFAULT,
         HORIZONTAL_BAR,
-        DROPDOWN_MENU
+        DROPDOWN_MENU,
       }
       enum ControlPosition {
         TOP_LEFT,
@@ -34,18 +34,18 @@ declare global {
         RIGHT_BOTTOM,
         BOTTOM_LEFT,
         BOTTOM_CENTER,
-        BOTTOM_RIGHT
+        BOTTOM_RIGHT,
       }
       enum Animation {
         BOUNCE = 1,
-        DROP = 2
+        DROP = 2,
       }
       enum SymbolPath {
         CIRCLE,
         FORWARD_CLOSED_ARROW,
         FORWARD_OPEN_ARROW,
         BACKWARD_CLOSED_ARROW,
-        BACKWARD_OPEN_ARROW
+        BACKWARD_OPEN_ARROW,
       }
       interface MapOptions {
         center: { lat: number; lng: number };
@@ -87,36 +87,36 @@ interface GoogleMapProps {
   apiKey: string;
   center?: { lat: number; lng: number };
   zoom?: number;
-  mapType?: "roadmap" | "satellite" | "hybrid" | "terrain";
+  mapType?: 'roadmap' | 'satellite' | 'hybrid' | 'terrain';
 }
 
 export default function GoogleMap({
   apiKey,
   center = { lat: 33.749, lng: -84.388 }, // Atlanta, Georgia
   zoom = 12,
-  mapType = "satellite",
+  mapType = 'satellite',
 }: GoogleMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<google.maps.Map | null>(null);
 
   useEffect(() => {
-    if (!apiKey || apiKey === "YOUR_GOOGLE_MAPS_API_KEY_HERE") {
-      console.error("Google Maps API key not configured");
+    if (!apiKey || apiKey === 'YOUR_GOOGLE_MAPS_API_KEY_HERE') {
+      console.error('Google Maps API key not configured');
       return;
     }
 
     const loadGoogleMaps = () => {
-      if (typeof window !== "undefined" && window.google) {
+      if (typeof window !== 'undefined' && window.google) {
         initializeMap();
         return;
       }
 
-      const script = document.createElement("script");
+      const script = document.createElement('script');
       script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
       script.async = true;
       script.defer = true;
       script.onload = () => initializeMap();
-      script.onerror = () => console.error("Failed to load Google Maps");
+      script.onerror = () => console.error('Failed to load Google Maps');
       document.head.appendChild(script);
     };
 
@@ -129,27 +129,27 @@ export default function GoogleMap({
         mapTypeId: mapType,
         styles: [
           {
-            featureType: "all",
-            elementType: "labels",
-            stylers: [{ visibility: "on" }],
+            featureType: 'all',
+            elementType: 'labels',
+            stylers: [{ visibility: 'on' }],
           },
         ],
         mapTypeControl: true,
         mapTypeControlOptions: {
           style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
           position: google.maps.ControlPosition.TOP_RIGHT,
-          mapTypeIds: ["roadmap", "satellite", "hybrid", "terrain"],
+          mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain'],
         },
         streetViewControl: true,
         fullscreenControl: true,
         zoomControl: true,
       };
 
-      const map = new ((window as any).google).maps.Map(mapRef.current, mapOptions);
+      const map = new (window as any).google.maps.Map(mapRef.current, mapOptions);
       mapInstanceRef.current = map;
 
       // Add info window
-      const infoWindow = new ((window as any).google).maps.InfoWindow({
+      const infoWindow = new (window as any).google.maps.InfoWindow({
         content: `
           <div style="padding: 10px; color: #000;">
             <h3 style="margin: 0 0 8px 0; font-weight: bold; color: #000;">3000 Studios</h3>
@@ -159,22 +159,22 @@ export default function GoogleMap({
         `,
       });
 
-      const marker = new ((window as any).google).maps.Marker({
+      const marker = new (window as any).google.maps.Marker({
         position: center,
         map,
-        title: "3000 Studios - Atlanta, Georgia",
-        animation: ((window as any).google).maps.Animation.DROP,
+        title: '3000 Studios - Atlanta, Georgia',
+        animation: (window as any).google.maps.Animation.DROP,
         icon: {
-          path: ((window as any).google).maps.SymbolPath.CIRCLE,
+          path: (window as any).google.maps.SymbolPath.CIRCLE,
           scale: 10,
-          fillColor: "#FFD700",
+          fillColor: '#FFD700',
           fillOpacity: 1,
           strokeWeight: 2,
-          strokeColor: "#FFFFFF",
+          strokeColor: '#FFFFFF',
         },
       });
 
-      marker.addListener("click", () => {
+      marker.addListener('click', () => {
         infoWindow.open(map, marker);
       });
     };
@@ -184,36 +184,26 @@ export default function GoogleMap({
     return () => {
       // Cleanup
       if (mapInstanceRef.current) {
-        ((window as any).google).maps.event.clearInstanceListeners(mapInstanceRef.current);
+        (window as any).google.maps.event.clearInstanceListeners(mapInstanceRef.current);
       }
     };
   }, [apiKey, center, zoom, mapType]);
 
-  if (!apiKey || apiKey === "YOUR_GOOGLE_MAPS_API_KEY_HERE") {
+  if (!apiKey || apiKey === 'YOUR_GOOGLE_MAPS_API_KEY_HERE') {
     return (
       <div className="w-full h-full bg-gradient-to-br from-gray-900 to-black flex items-center justify-center relative">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(255,215,0,0.1)_0%,_transparent_50%)]"></div>
         <div className="text-center relative z-10 p-8">
           <div className="text-gold text-6xl mb-4">🗺️</div>
-          <p className="text-gray-400 font-semibold text-lg mb-2">
-            Google Maps API Key Required
-          </p>
+          <p className="text-gray-400 font-semibold text-lg mb-2">Google Maps API Key Required</p>
           <p className="text-gray-600 text-sm">
             Please add your NEXT_PUBLIC_MAPS_API key to .env.local
           </p>
-          <p className="text-gray-700 text-xs mt-4">
-            Location: Atlanta, Georgia
-          </p>
+          <p className="text-gray-700 text-xs mt-4">Location: Atlanta, Georgia</p>
         </div>
       </div>
     );
   }
 
-  return (
-    <div
-      ref={mapRef}
-      className="w-full h-full"
-      style={{ minHeight: "400px" }}
-    />
-  );
+  return <div ref={mapRef} className="w-full h-full" style={{ minHeight: '400px' }} />;
 }
