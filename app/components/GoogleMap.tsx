@@ -1,7 +1,5 @@
 "use client";
 
-"use client";
-
 /**
  * Google Maps Component
  * Interactive map showing business location in Atlanta, Georgia
