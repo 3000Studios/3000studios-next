@@ -88,6 +88,10 @@
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 500,
 
+  // MCP (GitHub MCP Server) - Best practice
+  "mcp.autoStart": "onDemand",
+  "mcp.idleTimeout": 300,
+
   // Lock VS Code to pnpm
   "npm.packageManager": "pnpm",
   "npm.autoDetect": "off",
