@@ -1,36 +1,72 @@
-# Dependencies
-node_modules/
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Next.js
-.next/
-out/
-dist/
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
-# Vercel
-.vercel/
+# testing
+/coverage
 
-# Logs
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
 npm-debug.log*
-pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
-# Environment variables (NEVER COMMIT)
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+.vercel/
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# dependencies (redundant but explicit)
+node_modules/
+
+# next.js build outputs
+.next/
+/out/
+dist/
+
+# env files
 .env
 .env.local
-.env.*.local
+.env*.local
 
-# OS / Editor junk
-.DS_Store
-Thumbs.db
+# backups
+/backups/
+*.tar.gz
 
-# Prisma
-prisma/dev.db
-prisma/*.db
-prisma/*.db-journal
+# package-lock.json
 
-# Cache
-.cache/
+# audit artifacts (large, generated)
+_audit/
+
+# --- audit artifacts (never commit) ---
+_audit/env/*.txt
+_audit/env/*.log
+/tmp/env-audit-*
 
 # ❌ Block forbidden package managers
 package-lock.json
