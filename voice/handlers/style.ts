@@ -47,10 +47,6 @@ export async function handleChangeStyle(cmd: any): Promise<void> {
     await fs.writeFile(filePath, content, 'utf-8');
   }
 }
-      error: error instanceof Error ? error.message : 'Unknown error',
-    };
-  }
-}
 
 export async function handleUpdateCursor(
   command: Extract<VoiceCommand, { type: 'UPDATE_CURSOR' }>
