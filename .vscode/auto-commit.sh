@@ -14,10 +14,10 @@ while true; do
   sleep 45
 
   git add -A
-  if git diff --cached --quiet; then 
+  if git diff --cached --quiet; then
     continue
   fi
-  
+
   git commit -m "chore: auto-save progress" || true
   git push origin main || true
 done
