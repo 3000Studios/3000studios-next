@@ -281,15 +281,6 @@ export default function Navigation() {
             className="absolute top-0 left-0 right-0 min-h-screen bg-black/95 backdrop-blur-xl md:hidden pt-24 px-4"
           >
             <div className="flex flex-col items-center space-y-8">
-              {navLinks.map((link) => (
-                <ElectricLink
-                  key={link.href}
-                  href={link.href}
-                  label={link.label}
-                  isActive={isActiveLink(link.href)}
-                  onClick={() => setIsMenuOpen(false)}
-                />
-              ))}
               <Link
                 href="/login"
                 onClick={() => setIsMenuOpen(false)}
