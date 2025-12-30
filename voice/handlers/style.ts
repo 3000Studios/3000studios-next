@@ -21,15 +21,9 @@ export async function handleChangeStyle(cmd: any): Promise<void> {
 
     // Replace or add CSS variable
     if (content.includes(`${target}:`)) {
-      content = content.replace(
-        new RegExp(`${target}[^;]*;`),
-        `${target}: ${value};`
-      );
+      content = content.replace(new RegExp(`${target}[^;]*;`), `${target}: ${value};`);
     } else {
-      content = content.replace(
-        /(:root\s*{)/,
-        `$1\n  ${target}: ${value};`
-      );
+      content = content.replace(/(:root\s*{)/, `$1\n  ${target}: ${value};`);
     }
 
     await fs.writeFile(filePath, content, 'utf-8');
@@ -39,10 +33,7 @@ export async function handleChangeStyle(cmd: any): Promise<void> {
     let content = await fs.readFile(filePath, 'utf-8');
 
     // Simple replacement in config (flexible for various style updates)
-    content = content.replace(
-      new RegExp(`${target}[^,}]*`),
-      `${target}: "${value}"`
-    );
+    content = content.replace(new RegExp(`${target}[^,}]*`), `${target}: "${value}"`);
 
     await fs.writeFile(filePath, content, 'utf-8');
   }
