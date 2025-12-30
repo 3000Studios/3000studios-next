@@ -1,11 +1,7 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { auth } from '@/auth';
+import { NextResponse } from 'next/server';
 
-const RATE_LIMIT = new Map<string, { count: number; ts: number }>();
-const WINDOW_MS = 60_000;
-const MAX_REQUESTS = 30;
-
-export function middleware(req: NextRequest) {
+export default auth((req) => {
   const url = req.nextUrl;
 
   // Protect /live with optional password
@@ -18,6 +14,10 @@ export function middleware(req: NextRequest) {
 
   // Rate limiting for AI routes
   if (url.pathname.startsWith("/api/ai")) {
+    const RATE_LIMIT = new Map<string, { count: number; ts: number }>();
+    const WINDOW_MS = 60_000;
+    const MAX_REQUESTS = 30;
+    
     const ip = req.headers.get("x-forwarded-for") ?? "unknown";
     const now = Date.now();
 
@@ -36,8 +36,8 @@ export function middleware(req: NextRequest) {
   }
 
   return NextResponse.next();
-}
+});
 
 export const config = {
-  matcher: ["/live/:path*", "/api/ai/:path*"],
+  matcher: ["/live/:path*", "/api/ai/:path*", "/matrix/:path*"],
 };
