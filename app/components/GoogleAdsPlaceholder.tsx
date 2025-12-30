@@ -1,7 +1,5 @@
 "use client";
 
-"use client";
-
 /**
  * Google Ads Placeholder Component
  * Revenue Generation - Placeholder for Google Ads integration
