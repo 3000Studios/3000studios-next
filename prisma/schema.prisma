@@ -124,7 +124,7 @@ model AIMemory {
   id        String   @id @default(cuid())
   userId    String   @map("user_id")
   content   String
-  embedding Unsupported("vector(1536)")?
+  // embedding Unsupported("vector(1536)")?  // Disabled for now - requires pgvector extension
   createdAt DateTime @default(now()) @map("created_at")
   accessCount Int    @default(0) @map("access_count")
 
