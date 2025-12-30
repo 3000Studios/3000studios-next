@@ -63,7 +63,7 @@ export default function HomePage() {
 
   return (
     <main className="relative min-h-screen bg-black text-white">
-      <NavPublic />
+      <Navigation />
 
       {/* Hero Section with Background Video */}
       <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
