@@ -31,3 +31,6 @@ prisma/*.db-journal
 
 # Cache
 .cache/
+
+.vercel
+.env*.local
