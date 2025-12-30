@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 /**
  * Voice-to-Code Editor Component
@@ -48,7 +48,7 @@ export default function VoiceCodeEditor() {
       mediaRecorderRef.current.onstop = async () => {
         const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
         const reader = new FileReader();
-        
+
         reader.onloadend = async () => {
           const base64Audio = (reader.result as string).split(',')[1];
           try {
@@ -60,7 +60,7 @@ export default function VoiceCodeEditor() {
             console.error('Transcription error:', err);
           }
         };
-        
+
         reader.readAsDataURL(audioBlob);
       };
     }
@@ -112,7 +112,7 @@ export default function VoiceCodeEditor() {
           <Mic className="text-gold" size={24} />
           Voice Command Interface
         </h3>
-        
+
         <div className="flex gap-4 mb-4">
           <button
             onClick={isRecording ? stopRecording : startRecording}
@@ -181,7 +181,7 @@ export default function VoiceCodeEditor() {
             <Code className="text-gold" size={24} />
             Generated Code Preview
           </h3>
-          
+
           {explanation && (
             <div className="mb-4 p-4 bg-gray-900 rounded-lg border border-gray-700">
               <p className="text-sm font-semibold text-gold mb-2">AI Explanation:</p>
