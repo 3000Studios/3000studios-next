@@ -4,36 +4,39 @@
  */
 
 import { promises as fs } from 'fs';
-import type { VoiceCommand, CommandResult } from '../commands';
+import type { CommandResult, VoiceCommand } from '../commands';
 
-export async function handleChangeTheme(command: Extract<VoiceCommand, { type: 'CHANGE_THEME' }>): Promise<CommandResult> {
+export async function handleChangeTheme(
+  command: Extract<VoiceCommand, { type: 'CHANGE_THEME' }>
+): Promise<CommandResult> {
   const { colors, variant } = command.payload;
   const targetFile = 'src/app/globals.css';
 
   try {
     let content = await fs.readFile(targetFile, 'utf-8');
 
-    const cssVariables = colors.map((color, index) => 
-      `--color-primary-${index + 1}: ${color};`
-    ).join('\n    ');
+    const cssVariables = colors
+      .map((color, index) => `--color-primary-${index + 1}: ${color};`)
+      .join('\n    ');
 
     const themeBlock = `
   :root {
     ${cssVariables}
   }
 
-  ${variant === 'dark' ? `
+  ${
+    variant === 'dark'
+      ? `
   body {
     background-color: #000000;
     color: #ffffff;
   }
-  ` : ''}
+  `
+      : ''
+  }
 `;
 
-    content = content.replace(
-      /(:root\s*{[^}]*})/s,
-      themeBlock
-    );
+    content = content.replace(/(:root\s*{[^}]*})/s, themeBlock);
 
     await fs.writeFile(targetFile, content, 'utf-8');
 
@@ -50,7 +53,9 @@ export async function handleChangeTheme(command: Extract<VoiceCommand, { type: '
   }
 }
 
-export async function handleUpdateCursor(command: Extract<VoiceCommand, { type: 'UPDATE_CURSOR' }>): Promise<CommandResult> {
+export async function handleUpdateCursor(
+  command: Extract<VoiceCommand, { type: 'UPDATE_CURSOR' }>
+): Promise<CommandResult> {
   const { default: defaultCursor, hover: hoverCursor } = command.payload;
   const targetFile = 'src/app/globals.css';
 
@@ -89,7 +94,9 @@ button:hover,
   }
 }
 
-export async function handleAddAnimation(command: Extract<VoiceCommand, { type: 'ADD_ANIMATION' }>): Promise<CommandResult> {
+export async function handleAddAnimation(
+  command: Extract<VoiceCommand, { type: 'ADD_ANIMATION' }>
+): Promise<CommandResult> {
   const { target, animation } = command.payload;
   const targetFile = 'src/app/globals.css';
 
