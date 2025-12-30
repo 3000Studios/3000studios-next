@@ -1,7 +1,7 @@
 /**
  * VOICE COMMAND ROUTER
- * Maps VoiceCommand → Handler execution → File mutations
- * Single route, deterministic behavior, triggers auto-commit → deploy
+ * Maps VoiceCommand → Mutation queue → Auto-commit sync
+ * Serverless-safe: queues changes for next sync cycle
  */
 
 import { VoiceCommand } from './commands';
@@ -15,7 +15,7 @@ import {
 
 export async function routeVoiceCommand(
   cmd: VoiceCommand
-): Promise<{ status: string; message?: string; file?: string }> {
+): Promise<{ status: string; message?: string; mutationId?: string }> {
   try {
     // Route to appropriate handler based on command type
     switch (cmd.type) {
@@ -45,7 +45,10 @@ export async function routeVoiceCommand(
         );
 
       default:
-        throw new Error(`No handler for command type: ${cmd.type}`);
+        return {
+          status: 'error',
+          message: `No handler for command type: ${cmd.type}`,
+        };
     }
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
