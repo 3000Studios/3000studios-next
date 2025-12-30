@@ -2,7 +2,9 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import * as jose from 'jose';
 
-const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET || 'shadow-jwt-secret-key-128-bit-production');
+const JWT_SECRET = new TextEncoder().encode(
+  process.env.JWT_SECRET || 'shadow-jwt-secret-key-128-bit-production'
+);
 
 export async function middleware(req: NextRequest) {
   const url = req.nextUrl;
