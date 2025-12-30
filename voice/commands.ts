@@ -6,18 +6,38 @@
  */
 
 export type VoiceCommand =
-  | { type: 'UPDATE_TEXT'; payload: { file: string; search: string; replace: string } }
-  | { type: 'ADD_SECTION'; payload: { page: string; component: string } }
-  | { type: 'ADD_MEDIA'; payload: { page: string; url: string; kind: 'video' | 'image' | 'audio' } }
-  | { type: 'CHANGE_STYLE'; payload: { target: string; value: string } }
-  | { type: 'PUBLISH_BLOG'; payload: { topic: string } };
-  UPDATE_NAV: ['src/app/components/Navigation.tsx'],
-  PUBLISH_BLOG: ['app/blog/posts/', 'data/blog/'],
-  UPDATE_LAYOUT: ['src/app/[page]/page.tsx'],
-  ADD_CTA: ['components/CTA.tsx', 'src/app/[page]/page.tsx'],
-  UPDATE_CURSOR: ['src/app/globals.css'],
-  ADD_ANIMATION: ['src/app/globals.css', 'components/animations/'],
-  TOGGLE_FEATURE: ['src/app/[page]/page.tsx', 'lib/features.ts'],
+  | {
+      type: 'UPDATE_TEXT';
+      text?: string;
+      file?: string;
+      search?: string;
+      replace?: string;
+    }
+  | {
+      type: 'ADD_SECTION';
+      title?: string;
+      content?: string;
+      page?: string;
+    }
+  | {
+      type: 'ADD_MEDIA';
+      url?: string;
+      mediaType?: 'video' | 'image' | 'audio';
+      page?: string;
+    }
+  | {
+      type: 'CHANGE_STYLE';
+      property?: string;
+      value?: string;
+      target?: string;
+    }
+  | {
+      type: 'PUBLISH_BLOG';
+      title?: string;
+      body?: string;
+      slug?: string;
+      topic?: string;
+    };
 };
 
 /**
