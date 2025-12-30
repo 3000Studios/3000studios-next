@@ -1,6 +1,6 @@
 'use client';
 
-import Navigation from '@/src/app/components/Navigation';
+import Navigation from '@/app/components/Navigation'
 
 export default function ReadyAppsPage() {
   return (
