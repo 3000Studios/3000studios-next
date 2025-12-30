@@ -72,23 +72,35 @@ curl -X POST http://localhost:3000/api/auth/login \
 
 ---
 
-## 🎙️ PHASE 3: VOICE → WEBSITE EDIT PIPELINE (ACTIVELY BUILDING)
+## 🎙️ PHASE 3: VOICE → WEBSITE EDIT PIPELINE (DEPLOYED)
 
-**Status:** 🔵 **IN PROGRESS — ARCHITECTURE DEPLOYING NOW**
+**Status:** 🟢 **LIVE — READY FOR VOICE COMMANDS**  
+**Dev Server:** http://localhost:3001
 
-### What's Ready
-- ✅ Voice command types defined (`/voice/commands.ts`)
-- ✅ Media handlers implemented (`/voice/handlers/media.ts`)
-- ✅ Layout handlers implemented (`/voice/handlers/layout.ts`)
-- ✅ Style handlers implemented (`/voice/handlers/style.ts`)
-- ✅ Router with git integration (`/voice/handlers/router.ts`)
-- ✅ API endpoint ready (`/app/api/voice/route.ts`)
-- ✅ Health check endpoint ready (`/app/api/health/route.ts`)
+### Deployed Components
+- ✅ Command types (5 deterministic commands): `/voice/commands.ts`
+  - `UPDATE_TEXT`: Search and replace in files
+  - `ADD_SECTION`: Inject HTML sections
+  - `ADD_MEDIA`: Embed videos/images/audio
+  - `CHANGE_STYLE`: Update CSS variables
+  - `PUBLISH_BLOG`: Auto-generate blog posts
+- ✅ Router (single route function): `/voice/router.ts`
+- ✅ Handler registry (maps types → functions): `/voice/handlers/index.ts`
+- ✅ Media handlers (UPDATE_TEXT, ADD_MEDIA): `/voice/handlers/media.ts`
+- ✅ Layout handlers (ADD_SECTION, PUBLISH_BLOG): `/voice/handlers/layout.ts`
+- ✅ Style handler (CHANGE_STYLE): `/voice/handlers/style.ts`
+- ✅ API endpoint (POST /api/voice): `/app/api/voice/route.ts`
+- ✅ Auto-commit system (git add/commit/push on file changes)
 
-### Unblocks When
-- Phase 2 complete (auth verified)
-- Database connection confirmed
-- Git credentials ready
+### How to Test
+```bash
+# Test voice command endpoint
+curl -X POST http://localhost:3001/api/voice \
+  -H "Content-Type: application/json" \
+  -d '{"type":"UPDATE_TEXT","payload":{"file":"app/page.tsx","search":"...","replace":"..."}}'
+```
+
+See [PHASE3_DEPLOYMENT.md](PHASE3_DEPLOYMENT.md) for full documentation and examples.
 
 ---
 
