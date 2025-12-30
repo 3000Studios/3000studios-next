@@ -1,7 +1,7 @@
 'use client';
 
+import { Html, OrbitControls, useGLTF } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, useGLTF, Html } from '@react-three/drei';
 import { Suspense, useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
@@ -11,9 +11,13 @@ interface AvatarModelProps {
   isSpeaking?: boolean;
 }
 
-function AvatarModel({ modelPath = '/models/avatar.glb', isListening, isSpeaking }: AvatarModelProps) {
+function AvatarModel({
+  modelPath = '/models/avatar.glb',
+  isListening,
+  isSpeaking,
+}: AvatarModelProps) {
   const modelRef = useRef<THREE.Group>(null);
-  
+
   // Try to load the model, fallback to primitive sphere if not available
   let scene = null;
   try {
@@ -48,14 +52,7 @@ function AvatarModel({ modelPath = '/models/avatar.glb', isListening, isSpeaking
   }, [isListening, isSpeaking]);
 
   if (scene) {
-    return (
-      <primitive
-        ref={modelRef}
-        object={scene}
-        scale={2}
-        position={[0, -1, 0]}
-      />
-    );
+    return <primitive ref={modelRef} object={scene} scale={2} position={[0, -1, 0]} />;
   }
 
   // Fallback: Stylized avatar sphere
@@ -71,7 +68,7 @@ function AvatarModel({ modelPath = '/models/avatar.glb', isListening, isSpeaking
           roughness={0.2}
         />
       </mesh>
-      
+
       {/* Eyes */}
       <mesh position={[-0.3, 0.2, 0.8]}>
         <sphereGeometry args={[0.1, 16, 16]} />
@@ -106,27 +103,22 @@ export default function InteractiveAvatar({
 }: InteractiveAvatarProps) {
   return (
     <div className={`w-full h-full ${className}`}>
-      <Canvas
-        camera={{ position: [0, 0, 4], fov: 50 }}
-        style={{ background: 'transparent' }}
-      >
+      <Canvas camera={{ position: [0, 0, 4], fov: 50 }} style={{ background: 'transparent' }}>
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.3} penumbra={1} intensity={1} castShadow />
         <spotLight position={[-10, -10, -10]} angle={0.3} penumbra={1} intensity={0.4} />
         <pointLight position={[0, 0, 5]} intensity={0.5} color="#fbbf24" />
-        
-        <Suspense fallback={
-          <Html center>
-            <div className="text-white text-sm">Loading avatar...</div>
-          </Html>
-        }>
-          <AvatarModel
-            modelPath={modelPath}
-            isListening={isListening}
-            isSpeaking={isSpeaking}
-          />
+
+        <Suspense
+          fallback={
+            <Html center>
+              <div className="text-white text-sm">Loading avatar...</div>
+            </Html>
+          }
+        >
+          <AvatarModel modelPath={modelPath} isListening={isListening} isSpeaking={isSpeaking} />
         </Suspense>
-        
+
         <OrbitControls
           enablePan={false}
           enableZoom={false}

@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import { FaceMesh } from "@mediapipe/face_mesh";
-import { useEffect, RefObject } from "react";
-import { Group } from "three";
+import { FaceMesh } from '@mediapipe/face_mesh';
+import { RefObject, useEffect } from 'react';
+import { Group } from 'three';
 
 export default function useFaceTracking(ref: RefObject<Group>) {
   useEffect(() => {
     if (!navigator.mediaDevices?.getUserMedia) return;
 
     const faceMesh = new FaceMesh({
-      locateFile: f => `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${f}`
+      locateFile: (f) => `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${f}`,
     });
 
     faceMesh.setOptions({
       maxNumFaces: 1,
-      refineLandmarks: true
+      refineLandmarks: true,
     });
 
-    faceMesh.onResults(results => {
+    faceMesh.onResults((results) => {
       if (!results.multiFaceLandmarks?.length) return;
       const face = results.multiFaceLandmarks[0][1];
 
@@ -27,8 +27,8 @@ export default function useFaceTracking(ref: RefObject<Group>) {
       }
     });
 
-    navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-      const video = document.createElement("video");
+    navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+      const video = document.createElement('video');
       video.srcObject = stream;
       video.play();
 

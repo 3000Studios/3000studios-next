@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Particle Field Component
  * Ambient floating particles for visual atmosphere

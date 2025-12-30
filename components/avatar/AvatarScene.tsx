@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { Canvas } from "@react-three/fiber";
-import { Suspense } from "react";
-import { OrbitControls } from "@react-three/drei";
-import AvatarModel from "./AvatarModel";
+import { OrbitControls } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import { Suspense } from 'react';
+import AvatarModel from './AvatarModel';
 
 export default function AvatarScene() {
   return (
-    <Canvas 
+    <Canvas
       camera={{ position: [0, 1.5, 2.5], fov: 40 }}
       dpr={[1, 1.5]}
-      gl={{ powerPreference: "high-performance", antialias: false }}
+      gl={{ powerPreference: 'high-performance', antialias: false }}
     >
       <ambientLight intensity={1.2} />
       <directionalLight position={[3, 5, 2]} intensity={2} />

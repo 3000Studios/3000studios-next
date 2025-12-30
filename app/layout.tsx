@@ -2,6 +2,7 @@
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
+import MouseTrails from '@/components/MouseTrails';
 import EventBus from '@/components/os/EventBus';
 import PrimeLoop from '@/components/os/PrimeLoop';
 import SelfCheckLoop from '@/components/os/SelfCheckLoop';
@@ -9,9 +10,7 @@ import { AmbientAudio } from '@/components/ui/AmbientAudio';
 import { Background } from '@/components/ui/Background';
 import { GlobalEffects } from '@/components/ui/GlobalEffects';
 import { FramerMotionProvider } from '@/components/ui/MotionProvider';
-import { Navigation } from '@/components/ui/Navigation';
 import FusionEventHandler from '@/components/world/FusionEventHandler';
-import MouseTrails from '@/components/MouseTrails';
 import MoodMap from '@/components/world/MoodMap';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -38,7 +37,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" style={fontFallbacks}>
       <body className="antialiased selection:bg-hologram selection:text-white overflow-x-hidden bg-void text-mercury">
         <ClientLayoutWrapper>
-          <Navigation />
           {/* Shadow PRIME OS - Core Systems */}
           <EventBus />
           <PrimeLoop />

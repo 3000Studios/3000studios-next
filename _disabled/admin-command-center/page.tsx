@@ -1,8 +1,10 @@
 'use client';
 
-import VoiceInput from '@/components/VoiceInput';
-import PreviewFrame from '@/components/PreviewFrame';
-import Avatar3D from '@/components/Avatar3D';
+import dynamic from 'next/dynamic';
+
+const VoiceInput = dynamic(() => import('@/components/VoiceInput'), { ssr: false });
+const PreviewFrame = dynamic(() => import('@/components/PreviewFrame'), { ssr: false });
+const Avatar3D = dynamic(() => import('@/components/Avatar3D'), { ssr: false });
 
 export default function CommandCenter() {
   return (

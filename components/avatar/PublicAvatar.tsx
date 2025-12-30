@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
-const AvatarScene = dynamic(() => import("./AvatarScene"), {
-  ssr: false
+const AvatarScene = dynamic(() => import('./AvatarScene'), {
+  ssr: false,
 });
 
 export default function PublicAvatar() {
