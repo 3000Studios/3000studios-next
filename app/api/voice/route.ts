@@ -113,10 +113,36 @@ export async function POST(request: NextRequest) {
       );
     }
 
-  const response = parseActions(transcript);
-  return NextResponse.json(response, { status: 200 });
+    const response = parseActions(transcript);
+    return NextResponse.json(response, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : 'Unknown error' },
+      { status: 500 }
+    );
+  }
 }
 
 export function GET() {
-  return NextResponse.json({ status: "ok" }, { status: 200 });
+  return NextResponse.json({
+    status: 'operational',
+    endpoints: {
+      POST: '/api/voice',
+    },
+    commands: [
+      'ADD_SECTION',
+      'UPDATE_TEXT',
+      'ADD_VIDEO',
+      'ADD_IMAGE',
+      'ADD_AUDIO',
+      'CHANGE_THEME',
+      'UPDATE_NAV',
+      'PUBLISH_BLOG',
+      'UPDATE_LAYOUT',
+      'ADD_CTA',
+      'UPDATE_CURSOR',
+      'ADD_ANIMATION',
+      'TOGGLE_FEATURE',
+    ],
+  });
 }
