@@ -60,9 +60,21 @@ export default function HomePage() {
           {/* DEPLOYMENT TEST MARKER — DO NOT REMOVE */}
           <div className="mb-6 p-4 bg-red-500/20 border-2 border-red-500 rounded-lg text-center">
             <p className="text-red-400 font-bold text-lg">
-              ✅ DEPLOYMENT VERIFIED: {new Date().toLocaleString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'UTC' })} UTC
+              ✅ DEPLOYMENT VERIFIED:{' '}
+              {new Date().toLocaleString('en-US', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                timeZone: 'UTC',
+              })}{' '}
+              UTC
             </p>
-            <p className="text-red-300 text-sm mt-1">This timestamp proves the deployment pipeline works.</p>
+            <p className="text-red-300 text-sm mt-1">
+              This timestamp proves the deployment pipeline works.
+            </p>
           </div>
 
           {/* Main Value Proposition */}
