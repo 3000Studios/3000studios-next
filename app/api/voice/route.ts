@@ -1,13 +1,16 @@
 import { NextResponse } from 'next/server';
+import fs from 'fs';
+import path from 'path';
 
-let lastCommand: any = null;
+const STORE = path.join(process.cwd(), 'voice-state.json');
 
 export async function POST(req: Request) {
   const body = await req.json();
-  lastCommand = body;
+  fs.writeFileSync(STORE, JSON.stringify(body, null, 2));
   return NextResponse.json({ ok: true });
 }
 
 export async function GET() {
-  return NextResponse.json(lastCommand);
+  if (!fs.existsSync(STORE)) return NextResponse.json(null);
+  return NextResponse.json(JSON.parse(fs.readFileSync(STORE, 'utf-8')));
 }
