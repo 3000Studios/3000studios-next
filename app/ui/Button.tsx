@@ -1,10 +1,10 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
-import { motion } from "framer-motion";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   variant?: "primary" | "secondary" | "ghost";
   size?: "sm" | "md" | "lg";
+  className?: string;
 }
 
 export default function Button({
@@ -29,13 +29,11 @@ export default function Button({
   };
 
   return (
-    <motion.button
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
+    <button
+      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className} hover:scale-105 active:scale-95 transform`}
       {...props}
     >
       {children}
-    </motion.button>
+    </button>
   );
 }

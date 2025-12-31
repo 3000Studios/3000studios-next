@@ -68,6 +68,7 @@ export default function Nav() {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden p-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
             <svg
               className="w-6 h-6"
