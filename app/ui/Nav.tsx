@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { playSound } from "@/lib/sound/sfx";
 
 const PUBLIC_NAV_ITEMS = [
   { label: "Home", href: "/" },
@@ -44,7 +45,6 @@ export default function Nav() {
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
             {PUBLIC_NAV_ITEMS.map((item) => {
               const isActive = pathname === item.href;
@@ -52,7 +52,9 @@ export default function Nav() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                  onMouseEnter={() => playSound('hover')}
+                  onClick={() => playSound('nav')}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 ${
                     isActive
                       ? "bg-gradient-to-r from-yellow-600 to-yellow-400 text-black"
                       : "text-gray-300 hover:text-white hover:bg-white/10"
