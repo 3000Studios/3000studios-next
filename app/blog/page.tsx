@@ -12,6 +12,7 @@ import { useState } from 'react';
 import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
 import Newsletter from '../components/Newsletter';
 import { blogPosts, getAllCategories, getAllTags } from '../lib/blogData';
+import VideoBackground from "@/components/VideoBackground";
 
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -31,8 +32,9 @@ export default function BlogPage() {
   });
 
   return (
-    <div className="min-h-screen py-8 px-4" style={{ background: 'var(--marble-black)' }}>
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen py-8 px-4 relative" style={{ background: 'var(--marble-black)' }}>
+      <VideoBackground />
+      <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
         <div className="mb-12 text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-4 neon-glow" style={{ color: 'var(--marble-white)' }}>
