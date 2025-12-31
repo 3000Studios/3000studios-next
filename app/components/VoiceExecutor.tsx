@@ -41,6 +41,15 @@ export default function VoiceExecutor() {
             el.style.setProperty(k, v);
           });
         }
+
+        if (cmd.action === 'deploy') {
+          await fetch('/api/git', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: 'voice deploy' })
+          });
+          alert('Deploying to production...');
+        }
       } catch (e) {
         // Silent fail
       }
