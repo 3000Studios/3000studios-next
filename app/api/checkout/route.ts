@@ -1,36 +1,31 @@
-import { NextRequest, NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
+import { NextResponse } from 'next/server';
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   try {
     const { priceId } = await req.json();
 
-    if (!priceId) {
-      return NextResponse.json(
-        { error: "Price ID is required" },
-        { status: 400 }
-      );
-    }
+    // Mock Stripe checkout (replace with real Stripe key)
+    // const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-04-10' });
+    
+    // For now, return mock session
+    const mockSession = {
+      url: '/success?session=mock_' + Date.now(),
+      id: 'mock_session_id'
+    };
 
-    const session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      payment_method_types: ["card"],
-      line_items: [
-        {
-          price: priceId,
-          quantity: 1,
-        },
-      ],
-      success_url: `${req.nextUrl.origin}/store?success=true`,
-      cancel_url: `${req.nextUrl.origin}/store?canceled=true`,
-    });
+    // Real Stripe implementation:
+    // const session = await stripe.checkout.sessions.create({
+    //   mode: 'payment',
+    //   line_items: [{ price: priceId, quantity: 1 }],
+    //   success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success`,
+    //   cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cancel`
+    // });
 
-    return NextResponse.json({ url: session.url });
+    return NextResponse.json({ url: mockSession.url, id: mockSession.id });
   } catch (error: any) {
-    console.error("Stripe Checkout Error:", error);
-    return NextResponse.json(
-      { error: error.message || "Internal Server Error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ 
+      ok: false, 
+      error: error.message 
+    }, { status: 500 });
   }
 }
