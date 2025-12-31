@@ -1,7 +1,10 @@
+import VideoBackground from "@/components/VideoBackground";
+
 export default function About() {
   return (
     <>
       <div className="relative min-h-screen pt-16 bg-[var(--marble-black)]">
+        <VideoBackground />
         <div
           className="fixed inset-0 pointer-events-none z-40 border-4 border-[var(--gold-flake)]"
           style={{ boxShadow: 'inset 0 0 30px rgba(212, 175, 55, 0.3)' }}
