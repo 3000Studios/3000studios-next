@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import GoogleMap from "../components/GoogleMap";
+import VideoBackground from "@/components/VideoBackground";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -118,8 +119,9 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black py-8 px-4">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black py-8 px-4 relative">
+      <VideoBackground />
+      <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
         <div className="mb-12 text-center">
           <h1 className="text-5xl md:text-6xl font-bold gradient-text mb-4">
