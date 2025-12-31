@@ -38,11 +38,12 @@ export type VoiceCommand =
       slug?: string;
       topic?: string;
     };
-};
 
 /**
  * Rule: If handler is missing, generate it
  */
+const COMMAND_TARGETS: Record<string, unknown> = {};
+
 export function ensureHandler(commandType: string): void {
   if (!COMMAND_TARGETS[commandType]) {
     throw new Error(`Handler missing for ${commandType} - generating...`);

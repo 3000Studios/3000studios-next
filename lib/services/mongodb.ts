@@ -1,4 +1,3 @@
-// @ts-nocheck
 /**
  * MongoDB Service
  * Handles database operations for products, orders, and analytics

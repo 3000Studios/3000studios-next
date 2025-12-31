@@ -19,7 +19,7 @@ try {
   const manifestPath = path.join(dir, "manifest.json");
   fs.writeFileSync(manifestPath, JSON.stringify(files, null, 2));
   console.log(`Avatar sound manifest generated (${files.length} files).`);
-} catch (err) {
+} catch {
   console.log(
     "Avatar sound manifest generation failed, continuing without manifest.",
   );

@@ -3,15 +3,21 @@
  * Real-time metrics dashboard
  */
 
-// @ts-nocheck
 'use client';
 
 import { useShadowOS } from '@/lib/shadow/os/state';
 import { useEffect, useState } from 'react';
 
+interface EventData {
+  id: string;
+  type: string;
+  timestamp: string;
+  data: Record<string, unknown>;
+}
+
 export default function AnalyticsPanel() {
   const { liveVisitors, totalRevenue, aiCost } = useShadowOS();
-  const [events, setEvents] = useState<any[]>([]);
+  const [events, setEvents] = useState<EventData[]>([]);
 
   useEffect(() => {
     const fetchEvents = async () => {

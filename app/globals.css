@@ -88,15 +88,135 @@ a:hover, button:hover, [role="button"]:hover {
 }
 
 
-@keyframes electric-flicker {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-    opacity: 1;
-    text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 20px var(--electric-blue), 0 0 35px var(--electric-blue), 0 0 40px var(--electric-blue), 0 0 50px var(--electric-blue), 0 0 75px var(--electric-blue);
+/* Text Animations from CSS Holy Grail */
+
+/* Neon Glow */
+.neon-glow {
+  color: #fff;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 15px #fff,
+    0 0 20px #00ffff;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 15px #fff,
+      0 0 20px #00ffff;
   }
-  20%, 24%, 55% {
-    opacity: 0.5;
-    text-shadow: none;
+  to {
+    text-shadow:
+      0 0 10px #fff,
+      0 0 20px #fff,
+      0 0 30px #fff,
+      0 0 40px #00ffff,
+      0 0 70px #00ffff,
+      0 0 80px #00ffff;
   }
+}
+
+/* Dancing Shadow */
+.dancing-shadow {
+  color: #fff;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 15px #fff,
+    0 0 20px #ff00ff;
+  animation: shadow-dance 3s ease-in-out infinite;
+}
+
+@keyframes shadow-dance {
+  0%, 100% {
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 15px #fff,
+      0 0 20px #ff00ff;
+  }
+  25% {
+    text-shadow:
+      2px 2px 5px #fff,
+      4px 4px 10px #fff,
+      6px 6px 15px #fff,
+      8px 8px 20px #ff00ff;
+  }
+  50% {
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 15px #fff,
+      0 0 20px #ff00ff;
+  }
+  75% {
+    text-shadow:
+      -2px -2px 5px #fff,
+      -4px -4px 10px #fff,
+      -6px -6px 15px #fff,
+      -8px -8px 20px #ff00ff;
+  }
+}
+
+/* Wavy Text */
+.wavy-text {
+  display: inline-block;
+  animation: wave 2s ease-in-out infinite;
+}
+
+.wavy-text:nth-child(1) { animation-delay: 0s; }
+.wavy-text:nth-child(2) { animation-delay: 0.1s; }
+.wavy-text:nth-child(3) { animation-delay: 0.2s; }
+.wavy-text:nth-child(4) { animation-delay: 0.3s; }
+.wavy-text:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes wave {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Matrix Effect */
+.matrix-text {
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 10px #00ff00;
+  animation: glitch 2s linear infinite;
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+/* 3D Spin */
+.spin-3d {
+  color: #fff;
+  text-shadow:
+    0 1px 0 #ccc,
+    0 2px 0 #c9c9c9,
+    0 3px 0 #bbb,
+    0 4px 0 #b9b9b9,
+    0 5px 0 #aaa,
+    0 6px 1px rgba(0,0,0,.1),
+    0 0 5px rgba(0,0,0,.1),
+    0 1px 3px rgba(0,0,0,.3),
+    0 3px 5px rgba(0,0,0,.2),
+    0 5px 10px rgba(0,0,0,.25),
+    0 10px 10px rgba(0,0,0,.2),
+    0 20px 20px rgba(0,0,0,.15);
+  animation: spin-3d 4s ease-in-out infinite;
+}
+
+@keyframes spin-3d {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
 }
 
 @keyframes shock-wave {

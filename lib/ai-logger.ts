@@ -1,6 +1,6 @@
 export function logAIEvent(event: {
   model: string;
-  tokens?: any;
+  tokens?: number;
   latencyMs: number;
   error?: string;
 }) {

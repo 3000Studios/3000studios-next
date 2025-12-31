@@ -24,7 +24,7 @@ export interface WordPressPost {
   sticky: boolean;
   template: string;
   format: string;
-  meta: any[];
+  meta: Record<string, unknown>[];
   categories: number[];
   tags: number[];
   _embedded?: {
@@ -33,8 +33,8 @@ export interface WordPressPost {
       source_url: string;
       alt_text: string;
     }>;
-    "wp:term"?: any[];
-    author?: any[];
+    "wp:term"?: unknown[];
+    author?: unknown[];
   };
 }
 

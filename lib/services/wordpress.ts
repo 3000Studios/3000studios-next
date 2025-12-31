@@ -65,11 +65,11 @@ export async function getPosts(limit: number = 10): Promise<WordPressPost[]> {
       },
     });
 
-    return response.data.map((post: any) => ({
+    return response.data.map((post: Record<string, unknown>) => ({
       id: post.id,
-      title: post.title.rendered,
-      content: post.content.rendered,
-      excerpt: post.excerpt.rendered,
+      title: post.title?.rendered,
+      content: post.content?.rendered,
+      excerpt: post.excerpt?.rendered,
       status: post.status,
     }));
   } catch (error) {
@@ -92,7 +92,7 @@ export async function deletePost(id: number): Promise<void> {
 export async function getCategories(): Promise<Array<{ id: number; name: string }>> {
   try {
     const response = await wpApi.get('/categories');
-    return response.data.map((cat: any) => ({
+    return response.data.map((cat: Record<string, unknown>) => ({
       id: cat.id,
       name: cat.name,
     }));

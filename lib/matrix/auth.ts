@@ -1,5 +1,5 @@
-import bcrypt from "bcryptjs";
 import { kv } from "@vercel/kv";
+import bcrypt from "bcryptjs";
 
 const MASTER_EMAIL = "mr.jwswain@gmail.com";
 const MASTER_PASSWORD = "Bossman3000!!!";
@@ -48,7 +48,7 @@ export async function validateSession(sessionId: string): Promise<string | null>
   try {
     const email = await kv.get(`session:${sessionId}`);
     return email as string | null;
-  } catch (error) {
+  } catch {
     return null;
   }
 }

@@ -60,27 +60,20 @@ export default function VoiceCodeEditor() {
 
       const recognition = new SpeechRecognition();
       recognitionRef.current = recognition;
-      recognition.continuous = true;
-      recognition.interimResults = true;
+      recognition.continuous = false; // Changed to false to prevent repetition
+      recognition.interimResults = false; // Only final results
       recognition.language = 'en-US';
 
       recognition.onstart = () => {
         setIsListening(true);
         setTranscript('');
+        setStatus('🎤 Listening... Speak your command and it will process automatically.');
       };
 
       recognition.onresult = (event: any) => {
-        let interimTranscript = '';
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-          const transcript_part = event.results[i][0].transcript;
-          if (event.results[i].isFinal) {
-            setTranscript((prev) => prev + transcript_part + ' ');
-          } else {
-            interimTranscript += transcript_part;
-          }
-        }
-        if (interimTranscript) {
-          setTranscript((prev) => prev.split(' ').slice(0, -1).join(' ') + ' ' + interimTranscript);
+        const transcript_part = event.results[0][0].transcript;
+        if (event.results[0].isFinal) {
+          setTranscript(transcript_part);
         }
       };
 

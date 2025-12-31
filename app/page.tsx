@@ -44,7 +44,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="min-h-screen relative" style={{ background: brand.colors.bg.primary }}>
+    <div className="min-h-screen relative" style={{ background: 'var(--marble-black)' }}>
       {/* Sticky Upgrade Button */}
       <StickyUpgradeButton />
 
@@ -84,15 +84,15 @@ export default function HomePage() {
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
             <h1
-              className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+              className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight neon-glow"
               style={{
-                color: brand.colors.text.primary,
-                textShadow: brand.colors.shadow.glow,
+                color: 'var(--marble-white)',
+                textShadow: '0 0 20px var(--gold-flake)',
               }}
             >
               <span
                 style={{
-                  background: brand.colors.gradient.primary,
+                  background: 'linear-gradient(135deg, var(--gold-flake) 0%, var(--gold-highlight) 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                 }}
@@ -107,7 +107,7 @@ export default function HomePage() {
           {/* Supporting Copy */}
           <motion.p
             className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto"
-            style={{ color: brand.colors.text.secondary }}
+            style={{ color: 'var(--marble-white)' }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -125,11 +125,11 @@ export default function HomePage() {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/store"
-                className="px-10 py-5 font-bold rounded-lg flex items-center gap-3 text-lg shadow-2xl"
+                className="px-10 py-5 font-bold rounded-lg flex items-center gap-3 text-lg shadow-2xl hover-shimmer"
                 style={{
-                  background: brand.colors.gradient.primary,
-                  color: brand.colors.text.inverse,
-                  boxShadow: '0 0 40px rgba(0, 245, 212, 0.6)',
+                  background: 'linear-gradient(135deg, var(--gold-flake) 0%, var(--gold-highlight) 100%)',
+                  color: 'var(--marble-black)',
+                  boxShadow: '0 0 40px rgba(212, 175, 55, 0.6)',
                 }}
               >
                 <Zap size={24} fill="currentColor" />
@@ -142,12 +142,11 @@ export default function HomePage() {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="#how-it-works"
-                className="px-10 py-5 font-bold rounded-lg flex items-center gap-3 text-lg"
+                className="px-10 py-5 font-bold rounded-lg flex items-center gap-3 text-lg backdrop-blur-md"
                 style={{
-                  background: 'rgba(0, 0, 0, 0.5)',
-                  color: brand.colors.text.primary,
-                  border: `2px solid ${brand.colors.action.secondary}`,
-                  backdropFilter: 'blur(10px)',
+                  background: 'var(--card-bg)',
+                  color: 'var(--marble-white)',
+                  border: '2px solid var(--gold-flake)',
                 }}
               >
                 <Play size={24} />
@@ -162,18 +161,18 @@ export default function HomePage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.6 }}
             className="flex flex-wrap justify-center gap-8 text-sm"
-            style={{ color: brand.colors.text.secondary }}
+            style={{ color: 'var(--marble-white)' }}
           >
             <div className="flex items-center gap-2">
-              <CheckCircle size={18} style={{ color: brand.colors.revenue.positive }} />
+              <CheckCircle size={18} style={{ color: 'var(--gold-flake)' }} />
               <span>No Credit Card Required</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle size={18} style={{ color: brand.colors.revenue.positive }} />
+              <CheckCircle size={18} style={{ color: 'var(--gold-flake)' }} />
               <span>Setup in 60 Seconds</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle size={18} style={{ color: brand.colors.revenue.positive }} />
+              <CheckCircle size={18} style={{ color: 'var(--gold-flake)' }} />
               <span>Cancel Anytime</span>
             </div>
           </motion.div>
@@ -202,7 +201,7 @@ export default function HomePage() {
       <SectionDivider3D />
 
       {/* 3D Avatar Section */}
-      <section className="py-16 px-4" style={{ background: brand.colors.bg.primary }}>
+      <section className="py-16 px-4" style={{ background: 'var(--marble-black)' }}>
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -211,12 +210,12 @@ export default function HomePage() {
             className="text-center mb-8"
           >
             <h2
-              className="text-4xl md:text-5xl font-bold mb-4"
-              style={{ color: brand.colors.text.primary }}
+              className="text-4xl md:text-5xl font-bold mb-4 dancing-shadow"
+              style={{ color: 'var(--marble-white)' }}
             >
               Meet Your AI Assistant
             </h2>
-            <p className="text-xl" style={{ color: brand.colors.text.secondary }}>
+            <p className="text-xl" style={{ color: 'var(--marble-white)' }}>
               Voice-activated website control • Always learning • Always evolving
             </p>
           </motion.div>
@@ -232,7 +231,7 @@ export default function HomePage() {
       <section
         id="how-it-works"
         className="py-24 px-4"
-        style={{ background: brand.colors.bg.secondary }}
+        style={{ background: 'var(--marble-black)' }}
       >
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -243,12 +242,12 @@ export default function HomePage() {
             className="text-center mb-16"
           >
             <h2
-              className="text-4xl md:text-5xl font-bold mb-4"
-              style={{ color: brand.colors.text.primary }}
+              className="text-4xl md:text-5xl font-bold mb-4 neon-glow"
+              style={{ color: 'var(--marble-white)' }}
             >
               Revenue in 3 Simple Steps
             </h2>
-            <p style={{ color: brand.colors.text.secondary }}>
+            <p style={{ color: 'var(--marble-white)' }}>
               Start earning while you focus on what matters
             </p>
           </motion.div>
@@ -279,10 +278,10 @@ export default function HomePage() {
             ].map((item, idx) => (
               <motion.div
                 key={idx}
-                className="p-8 rounded-lg text-center relative"
+                className="p-8 rounded-lg text-center relative backdrop-blur-md"
                 style={{
-                  background: brand.colors.bg.elevated,
-                  border: `1px solid ${brand.colors.border.default}`,
+                  background: 'var(--card-bg)',
+                  border: '1px solid var(--card-border)',
                 }}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -290,14 +289,14 @@ export default function HomePage() {
                 transition={{ duration: 0.6, delay: idx * 0.2 }}
                 whileHover={{
                   y: -8,
-                  borderColor: brand.colors.action.primary,
+                  borderColor: 'var(--gold-flake)',
                   transition: { duration: 0.3 },
                 }}
               >
                 {/* Step Number */}
                 <div
                   className="text-6xl font-bold mb-4 opacity-20"
-                  style={{ color: brand.colors.action.primary }}
+                  style={{ color: 'var(--gold-flake)' }}
                 >
                   {item.step}
                 </div>

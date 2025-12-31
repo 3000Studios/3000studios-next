@@ -10,7 +10,7 @@ import path from 'path';
  * UPDATE_TEXT: Search and replace in a file
  * Deterministic: file path, search string, replacement string
  */
-export async function handleUpdateText(cmd: any): Promise<void> {
+export async function handleUpdateText(cmd: unknown): Promise<void> {
   const { file, search, replace } = cmd.payload;
   const filePath = path.join(process.cwd(), file);
 
@@ -32,7 +32,7 @@ export async function handleUpdateText(cmd: any): Promise<void> {
  * ADD_MEDIA: Add video, image, or audio to a page
  * Deterministic: page, URL, kind (video|image|audio)
  */
-export async function handleAddMedia(cmd: any): Promise<void> {
+export async function handleAddMedia(cmd: unknown): Promise<void> {
   const { page, url, kind } = cmd.payload;
   const filePath = path.join(process.cwd(), `app/${page}/page.tsx`);
 

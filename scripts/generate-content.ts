@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
-import dotenv from "dotenv";
 
 // Load environment variables
 dotenv.config({ path: ".env.local" });
@@ -83,7 +83,7 @@ async function generatePost() {
     };
 
     appendToBlogData(newPost);
-  } catch (error) {
+  } catch {
     console.error("API Generation failed, switching to Mock Fallback...");
     generateMockPost();
   }
@@ -125,9 +125,9 @@ Key takeaways for 2025 involve focusing on performance, accessibility, and genui
   appendToBlogData(mockPost);
 }
 
-function appendToBlogData(post: any) {
+function appendToBlogData(post: unknown) {
   try {
-    let fileContent = fs.readFileSync(TARGET_FILE, "utf-8");
+    const fileContent = fs.readFileSync(TARGET_FILE, "utf-8");
 
     // Find the end of the array
     const arrayEndIndex = fileContent.lastIndexOf("];");

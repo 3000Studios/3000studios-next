@@ -9,7 +9,7 @@ interface QueuedMutation {
   type: 'UPDATE_TEXT' | 'ADD_SECTION' | 'ADD_MEDIA' | 'CHANGE_STYLE' | 'PUBLISH_BLOG';
   timestamp: string;
   status: 'pending' | 'applied' | 'failed';
-  payload: Record<string, any>;
+  payload: Record<string, unknown>;
   result?: {
     success: boolean;
     message: string;
@@ -18,7 +18,7 @@ interface QueuedMutation {
 
 // In production, this would be a Redis queue or database
 // For now, we log to a JSON file that the auto-commit script can read
-const QUEUE_FILE = '/tmp/voice-mutations.json';
+const _QUEUE_FILE = '/tmp/voice-mutations.json';
 
 export async function queueMutation(
   mutation: Omit<QueuedMutation, 'id' | 'timestamp' | 'status'>
@@ -49,7 +49,7 @@ export async function queueMutation(
 /**
  * Get mutation status from queue
  */
-export function getMutationStatus(id: string): QueuedMutation | null {
+export function getMutationStatus(_id: string): QueuedMutation | null {
   // In production, this would query the database
   return null;
 }

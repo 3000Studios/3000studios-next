@@ -17,7 +17,7 @@ export const cjAdapter: VendorAdapter = {
   fetchProducts: async (feedUrl: string) => {
     const data = await fetchJson(feedUrl);
     const items = Array.isArray(data?.items) ? data.items : data?.data || [];
-    return items.map((item: any) =>
+    return items.map((item: Record<string, unknown>) =>
       normalizeVendorProduct("cj", {
         id: item.advertiserId || item.id,
         sku: item.sku,
@@ -39,7 +39,7 @@ export const shareasaleAdapter: VendorAdapter = {
   fetchProducts: async (feedUrl: string) => {
     const data = await fetchJson(feedUrl);
     const items = Array.isArray(data?.products) ? data.products : data?.items || [];
-    return items.map((item: any) =>
+    return items.map((item: Record<string, unknown>) =>
       normalizeVendorProduct("shareasale", {
         id: item.merchantId || item.id,
         sku: item.sku,
@@ -61,7 +61,7 @@ export const amazonAdapter: VendorAdapter = {
   fetchProducts: async (feedUrl: string) => {
     const data = await fetchJson(feedUrl);
     const items = Array.isArray(data?.products) ? data.products : data?.items || [];
-    return items.map((item: any) =>
+    return items.map((item: Record<string, unknown>) =>
       normalizeVendorProduct("amazon", {
         id: item.asin || item.id,
         sku: item.sku,
@@ -83,7 +83,7 @@ export const shopifyAdapter: VendorAdapter = {
   fetchProducts: async (feedUrl: string) => {
     const data = await fetchJson(feedUrl);
     const items = Array.isArray(data?.products) ? data.products : [];
-    return items.map((item: any) =>
+    return items.map((item: Record<string, unknown>) =>
       normalizeVendorProduct("shopify", {
         id: item.id,
         sku: item.handle,

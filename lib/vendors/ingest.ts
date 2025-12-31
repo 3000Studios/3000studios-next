@@ -66,5 +66,5 @@ export async function ingestVendorFeed(
   if (!res.ok) throw new Error(`Failed to fetch feed ${resolvedFeedUrl}`);
   const data = await res.json();
   const items = Array.isArray(data?.items) ? data.items : data?.products || [];
-  return items.map((item: any) => normalizeVendorProduct(vendorId, item));
+  return items.map((item: Record<string, unknown>) => normalizeVendorProduct(vendorId, item));
 }

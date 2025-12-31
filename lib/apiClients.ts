@@ -7,10 +7,11 @@
  * Import these clients instead of initializing them in individual files.
  */
 
-import Stripe from 'stripe';
-import OpenAI from 'openai';
 import Anthropic from '@anthropic-ai/sdk';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { MongoClient } from 'mongodb';
+import OpenAI from 'openai';
+import Stripe from 'stripe';
 
 // ==========================================
 // STRIPE CLIENT
@@ -158,10 +159,10 @@ export const gemini = {
 // ==========================================
 // MONGODB CLIENT
 // ==========================================
-let mongoClient: any = null;
+let mongoClient: MongoClient | null = null;
 let isConnecting = false;
 
-export const getMongoClient = async (): Promise<any> => {
+export const getMongoClient = async (): Promise<MongoClient> => {
   if (!MongoClient) {
     throw new Error(
       "MongoDB client is not available. Install 'mongodb' package to use this feature."

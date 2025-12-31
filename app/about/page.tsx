@@ -1,31 +1,31 @@
 export default function About() {
   return (
     <>
-      <div className="relative min-h-screen pt-16">
+      <div className="relative min-h-screen pt-16 bg-[var(--marble-black)]">
         <div
-          className="fixed inset-0 pointer-events-none z-40 border-4 border-[#D4AF37]"
+          className="fixed inset-0 pointer-events-none z-40 border-4 border-[var(--gold-flake)]"
           style={{ boxShadow: 'inset 0 0 30px rgba(212, 175, 55, 0.3)' }}
         ></div>
 
         <main className="relative z-10 container mx-auto px-4 py-12">
           <section className="text-center py-12">
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
-              <span className="text-[#D4AF37]">About</span> Us
+            <h1 className="text-5xl md:text-7xl font-bold text-[var(--marble-white)] mb-4">
+              <span className="neon-glow">About</span> Us
             </h1>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            <p className="text-xl text-[var(--marble-white)] opacity-80 max-w-2xl mx-auto">
               Where creativity meets innovation
             </p>
           </section>
 
           <section className="max-w-4xl mx-auto py-8">
-            <div className="bg-gradient-to-br from-gray-900/50 to-black/50 p-12 rounded-lg border-2 border-[#D4AF37] glossy-overlay mb-12">
-              <h2 className="text-4xl font-bold text-white mb-6">Our Story</h2>
-              <p className="text-lg text-gray-300 mb-4 leading-relaxed">
+            <div className="backdrop-blur-md bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-12 mb-12 shadow-2xl">
+              <h2 className="text-4xl font-bold metallic-text-gold mb-6">Our Story</h2>
+              <p className="text-lg text-[var(--marble-white)] opacity-90 mb-4 leading-relaxed">
                 3000 Studios is a creative powerhouse dedicated to pushing the boundaries of digital
                 art, development, and design. We specialize in creating stunning visual experiences,
                 innovative code solutions, and premium digital products.
               </p>
-              <p className="text-lg text-gray-300 leading-relaxed">
+              <p className="text-lg text-[var(--marble-white)] opacity-90 leading-relaxed">
                 Our team combines technical expertise with artistic vision to deliver exceptional
                 results that inspire and engage. From live wallpapers to custom code snippets, every
                 project is crafted with attention to detail and a commitment to excellence.
@@ -33,21 +33,21 @@ export default function About() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-              <div className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-lg border-2 border-[#D4AF37] glossy-overlay text-center hover:scale-105 transition-all duration-300">
-                <h3 className="text-2xl font-bold text-[#D4AF37] mb-2">Creative</h3>
-                <p className="text-gray-300">Innovative designs and artistic excellence</p>
+              <div className="backdrop-blur-md bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-8 text-center hover:shadow-[var(--shadow-gold)] transition-all duration-500 hover-shimmer">
+                <h3 className="text-2xl font-bold metallic-text-gold mb-2">Creative</h3>
+                <p className="text-[var(--marble-white)] opacity-80">Innovative designs and artistic excellence</p>
               </div>
-              <div className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-lg border-2 border-[#D4AF37] glossy-overlay text-center hover:scale-105 transition-all duration-300">
-                <h3 className="text-2xl font-bold text-[#D4AF37] mb-2">Technical</h3>
-                <p className="text-gray-300">Cutting-edge development solutions</p>
+              <div className="backdrop-blur-md bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-8 text-center hover:shadow-[var(--shadow-gold)] transition-all duration-500 hover-shimmer">
+                <h3 className="text-2xl font-bold metallic-text-gold mb-2">Technical</h3>
+                <p className="text-[var(--marble-white)] opacity-80">Cutting-edge development solutions</p>
               </div>
-              <div className="bg-gradient-to-br from-gray-900 to-black p-8 rounded-lg border-2 border-[#D4AF37] glossy-overlay text-center hover:scale-105 transition-all duration-300">
-                <h3 className="text-2xl font-bold text-[#D4AF37] mb-2">Premium</h3>
-                <p className="text-gray-300">High-quality digital products</p>
+              <div className="backdrop-blur-md bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-8 text-center hover:shadow-[var(--shadow-gold)] transition-all duration-500 hover-shimmer">
+                <h3 className="text-2xl font-bold metallic-text-gold mb-2">Premium</h3>
+                <p className="text-[var(--marble-white)] opacity-80">High-quality digital products</p>
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-gray-900/50 to-black/50 p-12 rounded-lg border-2 border-[#D4AF37] glossy-overlay">
+            <div className="backdrop-blur-md bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-12 shadow-2xl">
               <h2 className="text-4xl font-bold text-white mb-6">What We Do</h2>
               <ul className="space-y-4 text-lg text-gray-300">
                 <li className="flex items-start">

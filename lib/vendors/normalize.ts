@@ -2,7 +2,7 @@ import { VendorProduct } from "./types";
 
 export function normalizeVendorProduct(
   vendorId: string,
-  raw: any
+  raw: Record<string, unknown>
 ): VendorProduct {
   return {
     vendorId,
