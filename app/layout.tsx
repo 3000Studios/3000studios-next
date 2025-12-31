@@ -16,6 +16,8 @@ import SmoothScroll from './components/SmoothScroll';
 import SoundEffects from './components/SoundEffects';
 import VideoWallpaper from './components/VideoWallpaper';
 import MouseTrails from '@/components/MouseTrails';
+import { AppProviders } from '@/providers/AppProviders';
+import { LiveAvatarDock } from '@/components/avatar/LiveAvatarDock';
 import './globals.css';
 
 const RAW_ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
@@ -104,18 +106,22 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           />
         ) : null}
 
-        <VideoWallpaper opacity={0.25} />
-        <BackgroundMusic />
-        <SmoothScroll />
-        <SoundEffects />
-        <MouseTrails />
+        <AppProviders>
+          <VideoWallpaper opacity={0.25} />
+          <BackgroundMusic />
+          <SmoothScroll />
+          <SoundEffects />
+          <MouseTrails />
 
-        <Nav />
-        <main className="relative z-10 flex-grow pt-20">{children}</main>
+          <Nav />
+          <main className="relative z-10 flex-grow pt-20">{children}</main>
 
-        <GravityFooter />
-        <ConsentBanner />
-        <Analytics />
+          <GravityFooter />
+          <ConsentBanner />
+          <Analytics />
+          
+          <LiveAvatarDock />
+        </AppProviders>
       </body>
     </html>
   );
