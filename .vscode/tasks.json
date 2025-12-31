@@ -2,146 +2,35 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "dev",
-      "type": "npm",
-      "script": "dev",
-      "isBackground": true,
-      "problemMatcher": {
-        "owner": "custom",
-        "pattern": {
-          "regexp": "^ready - started server on .+$",
-          "file": 1,
-          "location": 2,
-          "message": 3
-        },
-        "background": {
-          "activeOnStart": true,
-          "beginsPattern": "Starting...",
-          "endsPattern": "Ready in"
-        }
-      },
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated"
-      }
-    },
-    {
-      "label": "lint",
-      "type": "npm",
-      "script": "lint",
-      "group": "build",
-      "problemMatcher": [
-        "$eslint-stylish"
-      ],
-      "options": {
-        "env": {
-          "CI": "true"
-        }
-      }
-    },
-    {
-      "label": "typecheck",
-      "type": "npm",
-      "script": "type-check",
-      "group": "build",
-      "problemMatcher": [
-        "$tsc"
-      ],
-      "options": {
-        "env": {
-          "CI": "true"
-        }
-      }
-    },
-    {
-      "label": "test",
-      "type": "npm",
-      "script": "test",
-      "group": "test",
-      "options": {
-        "env": {
-          "CI": "true"
-        }
-      },
-      "presentation": {
-        "reveal": "always"
-      }
-    },
-    {
-      "label": "build",
-      "type": "npm",
-      "script": "build",
-      "group": "build",
-      "problemMatcher": [
-        "$tsc"
-      ],
-      "options": {
-        "env": {
-          "CI": "true"
-        }
-      }
-    },
-    {
-      "label": "deploy",
-      "type": "npm",
-      "script": "deploy",
-      "dependsOn": [
-        "build"
-      ],
-      "problemMatcher": [],
-      "options": {
-        "env": {
-          "CI": "true"
-        }
-      }
-    },
-    {
-      "label": "FULL AUTOPILOT: lint → typecheck → test → build → deploy",
-      "dependsOn": [
-        "lint",
-        "typecheck",
-        "test",
-        "build",
-        "deploy"
-      ],
-      "dependsOrder": "sequence",
-      "group": {
-        "kind": "build",
-        "isDefault": false
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "🚀 AUTOPILOT: Merge & Deploy (Bash)",
-      "type": "shell",
-      "command": "./automerge-deploy.sh",
-      "group": "build",
-      "problemMatcher": []
-    },
-    {
-      "label": "🚀 AUTOPILOT: Merge & Deploy (PowerShell)",
+      "label": "Auto Commit (PowerShell)",
       "type": "shell",
       "command": "pwsh",
       "args": [
         "-ExecutionPolicy",
         "Bypass",
         "-File",
-        "${workspaceFolder}/automerge-deploy.ps1"
+        "${workspaceFolder}\\.vscode\\auto-commit.ps1"
       ],
       "group": "build",
       "problemMatcher": []
     },
     {
-      "label": "auto-commit",
+      "label": "Build",
       "type": "shell",
-      "command": "bash ./.vscode/auto-commit.sh",
-      "runOptions": {
-        "runOn": "folderOpen"
+      "command": "pnpm",
+      "args": ["build"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
       },
+      "problemMatcher": []
+    },
+    {
+      "label": "Dev Server",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["dev"],
+      "group": "test",
       "problemMatcher": []
     }
   ]
