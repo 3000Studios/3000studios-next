@@ -4,6 +4,8 @@
  * REVENUE LOCK — Contains AdSense, consent, and monetization infrastructure.
  */
 
+import './globals.css';
+import '../styles/elite.css';
 import ConsentBanner from '@/components/ConsentBanner';
 import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
