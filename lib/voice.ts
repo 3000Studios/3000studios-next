@@ -159,15 +159,15 @@ export class VoiceRecognition {
       this.callbacks.onEnd?.();
     };
 
-    this.recognition.onresult = (event: any) => {
-      const result = event.results[event.results.length - 1];
+    this.recognition.onresult = (event: unknown) => {
+      const result = (event as any).results[(event as any).results.length - 1];
       const transcript = result[0].transcript;
       const confidence = result[0].confidence;
       const isFinal = result.isFinal;
 
       const alternatives = Array.from(result)
         .slice(1)
-        .map((alt: any) => alt.transcript);
+        .map((alt: unknown) => (alt as any).transcript);
 
       this.callbacks.onResult?.({
         transcript,
@@ -177,9 +177,9 @@ export class VoiceRecognition {
       });
     };
 
-    this.recognition.onerror = (event: any) => {
+    this.recognition.onerror = (event: unknown) => {
       this.callbacks.onError?.(
-        new Error(`Speech recognition error: ${event.error}`),
+        new Error(`Speech recognition error: ${(event as any).error}`),
       );
     };
   }
@@ -325,7 +325,7 @@ export async function transcribeAudio(
 
     const client = openai.client;
     const response = await client.audio.transcriptions.create({
-      file: audioFile as any,
+      file: audioFile,
       model: options.model || "whisper-1",
       language: options.language,
       prompt: options.prompt,
@@ -479,7 +479,8 @@ export class VoiceActivationDetector {
 export function isSpeechRecognitionSupported(): boolean {
   if (typeof window === "undefined") return false;
   return !!(
-    (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
+    (window as unknown as { SpeechRecognition?: unknown }).SpeechRecognition ||
+    (window as unknown as { webkitSpeechRecognition?: unknown }).webkitSpeechRecognition
   );
 }
 

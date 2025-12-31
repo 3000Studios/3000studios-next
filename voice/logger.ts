@@ -11,7 +11,7 @@ export interface VoiceLogEntry {
   id: string;
   timestamp: string;
   command: string;
-  input: Record<string, any>;
+  input: Record<string, unknown>;
   output: {
     status: string;
     message: string;
@@ -27,7 +27,7 @@ const LOG_FILE = path.join(process.cwd(), '.voice-commands.jsonl');
  */
 export async function logVoiceCommand(
   command: string,
-  input: Record<string, any>,
+  input: Record<string, unknown>,
   output: {
     status: string;
     message: string;

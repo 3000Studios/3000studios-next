@@ -3,7 +3,7 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface DashboardStats {
   // Visitors
@@ -37,16 +37,42 @@ interface DashboardStats {
   } | null;
 }
 
+interface StatCardProps {
+  title: string;
+  value: string | number;
+  unit?: string;
+  trend?: string;
+  icon?: string;
+}
+
+const StatCard = ({
+  title,
+  value,
+  unit,
+  trend,
+  icon,
+}: StatCardProps) => (
+  <div className="bg-corporate-navy border border-corporate-steel rounded-lg p-4 hover:border-corporate-gold transition">
+    <div className="flex items-start justify-between mb-2">
+      <h4 className="text-corporate-silver text-xs font-medium uppercase tracking-wide">
+        {title}
+      </h4>
+      {icon && <span className="text-lg">{icon}</span>}
+    </div>
+    <div className="flex items-baseline gap-1">
+      <span className="text-3xl font-heading font-bold text-white">
+        {value}
+      </span>
+      {unit && <span className="text-corporate-silver text-sm">{unit}</span>}
+    </div>
+    {trend && <p className="text-xs text-corporate-gold mt-1">{trend}</p>}
+  </div>
+);
+
 export default function ProductionDashboard() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetchDashboardData();
-    const interval = setInterval(fetchDashboardData, 30000); // Refresh every 30s
-    return () => clearInterval(interval);
-  }, []);
 
   const fetchDashboardData = async () => {
     try {
@@ -103,6 +129,12 @@ export default function ProductionDashboard() {
     }
   };
 
+  useEffect(() => {
+    fetchDashboardData();
+    const interval = setInterval(fetchDashboardData, 30000); // Refresh every 30s
+    return () => clearInterval(interval);
+  }, []);
+
   if (loading && !stats) {
     return (
       <div className="flex items-center justify-center py-12">
@@ -130,36 +162,6 @@ export default function ProductionDashboard() {
   }
 
   if (!stats) return null;
-
-  const StatCard = ({
-    title,
-    value,
-    unit,
-    trend,
-    icon,
-  }: {
-    title: string;
-    value: string | number;
-    unit?: string;
-    trend?: string;
-    icon?: string;
-  }) => (
-    <div className="bg-corporate-navy border border-corporate-steel rounded-lg p-4 hover:border-corporate-gold transition">
-      <div className="flex items-start justify-between mb-2">
-        <h4 className="text-corporate-silver text-xs font-medium uppercase tracking-wide">
-          {title}
-        </h4>
-        {icon && <span className="text-lg">{icon}</span>}
-      </div>
-      <div className="flex items-baseline gap-1">
-        <span className="text-3xl font-heading font-bold text-white">
-          {value}
-        </span>
-        {unit && <span className="text-corporate-silver text-sm">{unit}</span>}
-      </div>
-      {trend && <p className="text-xs text-corporate-gold mt-1">{trend}</p>}
-    </div>
-  );
 
   return (
     <div className="space-y-6">

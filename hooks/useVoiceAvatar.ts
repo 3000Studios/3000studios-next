@@ -6,7 +6,7 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function useVoiceAvatar() {
   const [state, setState] = useState({
@@ -25,7 +25,6 @@ export default function useVoiceAvatar() {
     let audioContext: AudioContext;
     let analyser: AnalyserNode;
     let microphone: MediaStreamAudioSourceNode;
-    let dataArray: Uint8Array;
     let animationFrame: number;
 
 

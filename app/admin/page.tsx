@@ -1,5 +1,5 @@
 /**
- * Matrix Admin Dashboard
+ * Admin Dashboard
  * Central command center for site administration.
  * Features: voice/text commands, analytics, store controls, and content tools.
  */
@@ -7,23 +7,23 @@
 "use client";
 
 import { brand } from "@/design/brand";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+    Activity,
+    CheckCircle,
+    DollarSign,
+    Eye,
+    Mic,
+    MicOff,
+    ShoppingCart,
+    Terminal,
+    Users,
+} from "lucide-react";
+import { ReactNode, useCallback, useMemo, useState } from "react";
 import ContentGenerator from "./components/ContentGenerator";
 import RealAnalytics from "./components/RealAnalytics";
 import StreamControl from "./components/StreamControl";
 import VoiceCodeEditor from "./components/VoiceCodeEditorNew";
-import { AnimatePresence, motion } from "framer-motion";
-import {
-  Activity,
-  CheckCircle,
-  DollarSign,
-  Eye,
-  Mic,
-  MicOff,
-  ShoppingCart,
-  Terminal,
-  Users,
-} from "lucide-react";
-import { ReactNode, useCallback, useMemo, useState } from "react";
 
 type PreviewData = {
   command: string;
@@ -185,7 +185,7 @@ export default function MatrixCommandCenter() {
   }, []);
 
   return (
-    <div className="flex h-full flex-col p-4 md:p-8">
+    <div className="flex h-full flex-col p-4 md:p-8 pt-24 md:pt-32">
       <div className="grid h-full flex-1 grid-cols-1 gap-8 lg:grid-cols-2">
         {/* LEFT COLUMN: Input & Preview */}
         <div className="space-y-6">

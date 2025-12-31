@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-let sockets: Set<any> = new Set();
+const sockets: Set<any> = new Set();
 
 export async function GET(req: NextRequest) {
   // WebSocket upgrade handling for Next.js

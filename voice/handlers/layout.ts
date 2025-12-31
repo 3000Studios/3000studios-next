@@ -10,7 +10,7 @@ import path from 'path';
  * ADD_SECTION: Add a new section to a page
  * Deterministic: page, component (section name)
  */
-export async function handleAddSection(cmd: any): Promise<void> {
+export async function handleAddSection(cmd: unknown): Promise<void> {
   const { page, component } = cmd.payload;
   const filePath = path.join(process.cwd(), `app/${page}/page.tsx`);
 
@@ -37,7 +37,7 @@ export async function handleAddSection(cmd: any): Promise<void> {
  * PUBLISH_BLOG: Create and publish a blog post
  * Deterministic: topic (generates file + frontmatter)
  */
-export async function handlePublishBlog(cmd: any): Promise<void> {
+export async function handlePublishBlog(cmd: unknown): Promise<void> {
   const { topic } = cmd.payload;
   const date = new Date().toISOString().split('T')[0];
   const slug = topic.toLowerCase().replace(/\s+/g, '-');

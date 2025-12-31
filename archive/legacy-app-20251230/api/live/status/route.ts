@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 // In-memory stream state (use Redis or database in production)
-let streamState = {
+const streamState = {
   config: {
     status: 'offline',
     title: '3000 Studios Live',

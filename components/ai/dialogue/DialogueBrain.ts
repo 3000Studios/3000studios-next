@@ -1,9 +1,12 @@
-// @ts-nocheck
 'use client';
 
 import { useEffect, useState } from 'react';
 
-export default function DialogueBrain({ onDialogue }) {
+interface DialogueBrainProps {
+  onDialogue: (line: string) => void;
+}
+
+export default function DialogueBrain({ onDialogue }: DialogueBrainProps) {
   const [emotion, setEmotion] = useState('neutral');
   const [lastLine, setLastLine] = useState('');
 
@@ -27,7 +30,7 @@ export default function DialogueBrain({ onDialogue }) {
   }, []);
 
   async function generateLine(context = '') {
-    const tone = EMO_TONES[emotion];
+    const tone = EMO_TONES[emotion as keyof typeof EMO_TONES];
 
     const prompt = `
 You are the AI speaking avatar for 3000Studios.

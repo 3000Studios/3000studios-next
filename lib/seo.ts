@@ -35,8 +35,8 @@ export function generateInternalLinks(content: string, existingPages: string[]):
     'portfolio': '/portfolio',
     'projects': '/projects',
     'live stream': '/live',
-    'command center': '/matrix',
-    'voice control': '/matrix',
+    'command center': '/admin',
+    'voice control': '/admin',
   };
 
   for (const [keyword, url] of Object.entries(keywordMap)) {

@@ -72,7 +72,7 @@ export default function MusicPlayer() {
         audio.play().catch(() => setIsPlaying(false));
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [currentIndex, isPlaying]);
 
   useEffect(() => {
@@ -95,7 +95,7 @@ export default function MusicPlayer() {
       audio.removeEventListener("loadedmetadata", updateDuration);
       audio.removeEventListener("ended", handleEnded);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [nextSong]);
 
   const formatTime = (time: number) => {

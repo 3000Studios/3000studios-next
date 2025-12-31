@@ -31,14 +31,14 @@ export default function BlogPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black py-8 px-4">
+    <div className="min-h-screen py-8 px-4" style={{ background: 'var(--marble-black)' }}>
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-12 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold gradient-text mb-4 fade-in-up">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 neon-glow" style={{ color: 'var(--marble-white)' }}>
             Blog & Insights
           </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto scale-in">
+          <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--marble-white)' }}>
             Stories, insights, and updates from the 3000 Studios team
           </p>
         </div>
@@ -55,7 +55,11 @@ export default function BlogPage() {
               placeholder="Search articles..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all"
+              className="w-full pl-12 pr-4 py-4 backdrop-blur-md rounded-lg text-[var(--marble-white)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--gold-flake)] focus:border-transparent transition-all hover-shimmer"
+              style={{
+                background: 'var(--card-bg)',
+                border: '1px solid var(--card-border)',
+              }}
               aria-label="Search blog articles"
             />
           </div>

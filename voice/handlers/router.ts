@@ -53,7 +53,7 @@ export async function routeCommand(command: VoiceCommand): Promise<CommandResult
         return {
           success: false,
           files_changed: [],
-          error: `Handler not implemented for ${(command as any).type} - generating...`,
+          error: `Handler not implemented for ${command.type} - generating...`,
         };
     }
 
@@ -104,17 +104,17 @@ export function validateCommand(command: VoiceCommand): boolean {
 
   switch (command.type) {
     case 'ADD_VIDEO':
-      return !!(command.payload as any).url && !!(command.payload as any).page;
+      return !!(command.payload as unknown as { url?: string }).url && !!(command.payload as unknown as { page?: string }).page;
     case 'ADD_AUDIO':
-      return !!(command.payload as any).url;
+      return !!(command.payload as unknown as { url?: string }).url;
     case 'ADD_IMAGE':
-      return !!(command.payload as any).url && !!(command.payload as any).page;
+      return !!(command.payload as unknown as { url?: string }).url && !!(command.payload as unknown as { page?: string }).page;
     case 'ADD_SECTION':
-      return !!(command.payload as any).page && !!(command.payload as any).content;
+      return !!(command.payload as unknown as { page?: string }).page && !!(command.payload as unknown as { content?: string }).content;
     case 'UPDATE_NAV':
-      return !!(command.payload as any).links && Array.isArray((command.payload as any).links);
+      return !!(command.payload as unknown as { links?: unknown[] }).links && Array.isArray((command.payload as unknown as { links?: unknown[] }).links);
     case 'CHANGE_THEME':
-      return !!(command.payload as any).colors && Array.isArray((command.payload as any).colors);
+      return !!(command.payload as unknown as { colors?: unknown[] }).colors && Array.isArray((command.payload as unknown as { colors?: unknown[] }).colors);
     default:
       return true;
   }

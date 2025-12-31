@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import tailwindcssAnimate from 'tailwindcss-animate';
 
 const config: Config = {
   content: [
@@ -58,8 +59,8 @@ const config: Config = {
     },
   },
   plugins: [
-    require('tailwindcss-animate'),
-    function ({ addUtilities }: { addUtilities: Function }) {
+    tailwindcssAnimate,
+    function ({ addUtilities }: { addUtilities: unknown }) {
       addUtilities({
         '.hyper-glass': {
           'backdrop-filter': 'blur(20px)',

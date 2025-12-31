@@ -192,7 +192,7 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  let navLinks = [
+  const navLinks = [
     { href: '/', label: 'HOME' },
     { href: '/store', label: 'STORE' },
     { href: '/vendors-platform', label: 'VENDORS' },

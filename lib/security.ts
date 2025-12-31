@@ -132,7 +132,7 @@ export function applySecurityHeaders(response: NextResponse): NextResponse {
  * Simple validation - for production use Zod or similar
  */
 export function validateRequestBody(
-  body: any,
+  body: Record<string, unknown>,
   requiredFields: string[]
 ): string | null {
   if (!body || typeof body !== "object") {

@@ -21,65 +21,89 @@ export default function LoginPage() {
     if (result?.error) {
       setError('Invalid credentials');
     } else {
-      window.location.href = '/matrix';
+      window.location.href = '/admin';
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900">
-      <div className="max-w-md w-full space-y-8 p-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
-            Sign in to your account
-          </h2>
+    <div className="min-h-screen flex items-center justify-center bg-[var(--marble-black)] relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[var(--marble-black)] via-gray-900 to-[var(--marble-black)] opacity-90"></div>
+      <div className="absolute inset-0 bg-[url('/assets/textures/marble-dark.jpg')] bg-cover bg-center opacity-20"></div>
+
+      {/* Animated Background Elements */}
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-[var(--gold-flake)] to-[var(--gold-highlight)] rounded-full blur-3xl opacity-10 animate-pulse"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-gradient-to-r from-[var(--gold-highlight)] to-[var(--gold-flake)] rounded-full blur-3xl opacity-10 animate-pulse delay-1000"></div>
+
+      <div className="relative z-10 max-w-md w-full space-y-8 p-8">
+        {/* Glass-morphism Card */}
+        <div className="backdrop-blur-md bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl shadow-2xl p-8 hover:shadow-[var(--shadow-gold)] transition-all duration-500">
+          <div className="text-center">
+            <h2 className="text-4xl font-bold metallic-text-gold mb-2 animate-pulse">
+              Welcome Back
+            </h2>
+            <p className="text-[var(--marble-white)] opacity-80 text-sm">
+              Access your premium dashboard
+            </p>
+          </div>
+
+          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-[var(--marble-white)] mb-2">
+                  Email Address
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  className="w-full px-4 py-3 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-lg text-[var(--marble-white)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--gold-flake)] focus:border-transparent transition-all duration-300 hover-shimmer"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="password" className="block text-sm font-medium text-[var(--marble-white)] mb-2">
+                  Password
+                </label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  className="w-full px-4 py-3 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-lg text-[var(--marble-white)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--gold-flake)] focus:border-transparent transition-all duration-300 hover-shimmer"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+            </div>
+
+            {error && (
+              <div className="text-red-400 text-sm text-center bg-red-900/20 border border-red-800 rounded-lg p-3 animate-pulse">
+                {error}
+              </div>
+            )}
+
+            <div>
+              <button
+                type="submit"
+                className="w-full py-3 px-4 bg-gradient-to-r from-[var(--gold-flake)] to-[var(--gold-highlight)] text-[var(--marble-black)] font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 hover-shimmer relative overflow-hidden"
+              >
+                <span className="relative z-10">Sign In</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full hover:translate-x-full transition-transform duration-700"></div>
+              </button>
+            </div>
+          </form>
+
+          <div className="mt-6 text-center">
+            <p className="text-[var(--marble-white)] opacity-60 text-xs">
+              Secured by 3000 Studios
+            </p>
+          </div>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="email" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-          </div>
-
-          {error && (
-            <div className="text-red-500 text-sm text-center">{error}</div>
-          )}
-
-          <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Sign in
-            </button>
-          </div>
-        </form>
       </div>
     </div>
   );

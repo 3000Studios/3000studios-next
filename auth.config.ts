@@ -1,5 +1,3 @@
-// @ts-nocheck
-import type { NextAuthConfig } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 export const authConfig = {
@@ -13,10 +11,10 @@ export const authConfig = {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials) {
+      async authorize(credentials: Record<string, string> | undefined) {
         const adminEmail = process.env.MATRIX_ADMIN_EMAIL || process.env.ADMIN_EMAIL || 'mr.jwswain@gmail.com';
         const adminPassword = process.env.MATRIX_ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || 'Bossman3000!!!';
-        
+
         if (
           credentials?.email === adminEmail &&
           credentials?.password === adminPassword
@@ -34,10 +32,10 @@ export const authConfig = {
   session: { strategy: 'jwt' },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
+    authorized({ auth, request: { nextUrl } }: { auth: any; request: { nextUrl: URL } }) {
       const isLoggedIn = !!auth?.user;
-      const isOnMatrix = nextUrl.pathname.startsWith('/matrix');
-      if (isOnMatrix) {
+      const isOnAdmin = nextUrl.pathname.startsWith('/admin');
+      if (isOnAdmin) {
         if (isLoggedIn) return true;
         return false;
       }

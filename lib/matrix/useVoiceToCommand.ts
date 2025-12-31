@@ -1,13 +1,12 @@
-// @ts-nocheck
 'use client';
 
 import { useEffect, useRef } from 'react';
 
 const useVoiceToCommand = (onCommand: (command: string) => void) => {
   const onCommandHandler = useRef(onCommand);
-  onCommandHandler.current = onCommand;
 
   useEffect(() => {
+    onCommandHandler.current = onCommand;
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
       console.warn('Speech recognition not supported in this browser.');
@@ -40,7 +39,7 @@ const useVoiceToCommand = (onCommand: (command: string) => void) => {
       console.log('Stopping voice recognition...');
       recognition.stop();
     };
-  }, []);
+  }, [onCommand]);
 };
 
 export default useVoiceToCommand;

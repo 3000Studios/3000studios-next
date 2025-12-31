@@ -10,7 +10,7 @@ import path from 'path';
  * CHANGE_STYLE: Update CSS or design tokens
  * Deterministic: target (selector/variable), value (new value)
  */
-export async function handleChangeStyle(cmd: any): Promise<void> {
+export async function handleChangeStyle(cmd: unknown): Promise<void> {
   const { target, value } = cmd.payload;
 
   // Two cases: CSS variable or CSS class
@@ -83,7 +83,7 @@ button:hover,
 export async function handleAddAnimation(
   command: Extract<VoiceCommand, { type: 'ADD_ANIMATION' }>
 ): Promise<CommandResult> {
-  const { target, animation } = command.payload;
+  const { animation } = command.payload;
   const targetFile = 'src/app/globals.css';
 
   try {
