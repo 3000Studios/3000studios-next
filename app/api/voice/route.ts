@@ -1,16 +1,30 @@
-import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-
-const STORE = path.join(process.cwd(), 'voice-state.json');
+import { NextResponse } from "next/server";
+import { uiRegistry, updateRegistry } from "@/lib/uiRegistry";
 
 export async function POST(req: Request) {
-  const body = await req.json();
-  fs.writeFileSync(STORE, JSON.stringify(body, null, 2));
-  return NextResponse.json({ ok: true });
+  try {
+    const data = await req.json();
+
+    if (!data.target || !data.action) {
+      return NextResponse.json({ error: "Invalid command" }, { status: 400 });
+    }
+
+    // 🔥 Live site mutation
+    if (data.action === "update") {
+      updateRegistry(data.target as keyof typeof uiRegistry, data.payload);
+    }
+
+    return NextResponse.json({ 
+      success: true, 
+      registry: uiRegistry 
+    });
+  } catch (error: any) {
+    return NextResponse.json({ 
+      error: error.message 
+    }, { status: 500 });
+  }
 }
 
 export async function GET() {
-  if (!fs.existsSync(STORE)) return NextResponse.json(null);
-  return NextResponse.json(JSON.parse(fs.readFileSync(STORE, 'utf-8')));
+  return NextResponse.json({ registry: uiRegistry });
 }
