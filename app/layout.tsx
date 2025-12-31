@@ -17,8 +17,11 @@ import SoundEffects from './components/SoundEffects';
 import VideoWallpaper from './components/VideoWallpaper';
 import MouseTrails from '@/components/MouseTrails';
 import { AppProviders } from '@/providers/AppProviders';
-import { LiveAvatarDock } from '@/components/avatar/LiveAvatarDock';
+import VideoSplash from './ui/VideoSplash';
+import dynamic from 'next/dynamic';
 import './globals.css';
+
+const FemaleAvatar = dynamic(() => import('./admin/components/FemaleAvatar'), { ssr: false });
 
 const RAW_ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
 const ADSENSE_ACCOUNT = RAW_ADSENSE_ID
@@ -107,6 +110,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         ) : null}
 
         <AppProviders>
+          <VideoSplash />
           <VideoWallpaper opacity={0.25} />
           <BackgroundMusic />
           <SmoothScroll />
@@ -120,7 +124,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <ConsentBanner />
           <Analytics />
           
-          <LiveAvatarDock />
+          {/* Full 3D Female Avatar - Bottom Right */}
+          <div className="fixed bottom-4 right-4 z-50 w-80 h-96">
+            <FemaleAvatar />
+          </div>
         </AppProviders>
       </body>
     </html>
