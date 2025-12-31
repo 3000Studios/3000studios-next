@@ -1,399 +1,234 @@
-'use client';
+"use client";
 
-/**
- * Homepage - Conversion Optimized
- * 10-second cold traffic → revenue conversion
- * REVENUE LOCK — DO NOT MODIFY
- * Every element designed for monetization
- */
-
-'use client';
-
-import { brand } from '@/design/brand';
-import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle, Play, Sparkles, Zap } from 'lucide-react';
-import dynamic from 'next/dynamic';
-import Link from 'next/link';
-import { Suspense, lazy, useEffect, useState } from 'react';
-import AffiliateToolCards from './components/AffiliateToolCards';
-import ConsentBanner from './components/ConsentBanner';
-import StickyUpgradeButton from './components/StickyUpgradeButton';
-import VideoHero from './components/VideoHero';
-
-const InteractiveAvatar = lazy(() => import('./components/InteractiveAvatar'));
-const Avatar3DHome = dynamic(() => import('@/components/Avatar3DHome'), { ssr: false });
-const SectionDivider3D = dynamic(() => import('@/components/SectionDivider3D'), { ssr: false });
+import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import VideoSplash from "./ui/VideoSplash";
+import Button from "./ui/Button";
+import Card from "./ui/Card";
+import Section from "./ui/Section";
 
 export default function HomePage() {
-  const [showExitIntent, setShowExitIntent] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
 
-  // Exit intent detection
   useEffect(() => {
-    const handleMouseLeave = (e: MouseEvent) => {
-      if (typeof window !== 'undefined' && e.clientY <= 0) {
-        const shown = localStorage.getItem('exit-intent-shown');
-        if (!shown) {
-          setShowExitIntent(true);
-          localStorage.setItem('exit-intent-shown', 'true');
-        }
+    // 3D Scroll zoom effect
+    const handleScroll = () => {
+      if (heroRef.current) {
+        const scrolled = window.scrollY;
+        const scale = 1 + scrolled * 0.0005;
+        heroRef.current.style.transform = `scale(${scale})`;
       }
     };
 
-    document.addEventListener('mouseleave', handleMouseLeave);
-    return () => document.removeEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <div className="min-h-screen relative" style={{ background: 'var(--marble-black)' }}>
-      {/* Sticky Upgrade Button */}
-      <StickyUpgradeButton />
-
-      {/* Consent Banner for GDPR/AdSense Compliance */}
-      <ConsentBanner />
-
-      {/* Hero Section - Above the Fold */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
-        {/* Video Hero Background */}
-        <VideoHero mp4Src="/media/bg.mp4" opacity={0.2} />
-
-        <div className="relative z-10 max-w-5xl mx-auto text-center">
-          {/* DEPLOYMENT TEST MARKER — DO NOT REMOVE */}
-          <div className="mb-6 p-4 bg-red-500/20 border-2 border-red-500 rounded-lg text-center">
-            <p className="text-red-400 font-bold text-lg">
-              ✅ DEPLOYMENT VERIFIED:{' '}
-              {new Date().toLocaleString('en-US', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                timeZone: 'UTC',
-              })}{' '}
-              UTC
-            </p>
-            <p className="text-red-300 text-sm mt-1">
-              This timestamp proves the deployment pipeline works.
-            </p>
-          </div>
-
-          {/* Main Value Proposition */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
+    <>
+      <VideoSplash />
+      
+      {/* Hero Section */}
+      <Section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-b from-black via-gray-900 to-black">
+        <div
+          ref={heroRef}
+          className="text-center transition-transform duration-100 ease-out"
+        >
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="text-6xl md:text-8xl lg:text-9xl font-bold mb-6 bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-400 bg-clip-text text-transparent"
+            style={{
+              textShadow: "0 0 80px rgba(250, 204, 21, 0.3)",
+            }}
           >
-            <h1
-              className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight neon-glow"
-              style={{
-                color: 'var(--marble-white)',
-                textShadow: '0 0 20px var(--gold-flake)',
-              }}
-            >
-              <span
-                style={{
-                  background: 'linear-gradient(135deg, var(--gold-flake) 0%, var(--gold-highlight) 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
-              >
-                AI-Powered Tools, Content, and Automations
-              </span>
-              <br />
-              That Make Money While You Sleep
-            </h1>
-          </motion.div>
-
-          {/* Supporting Copy */}
+            3000 Studios
+          </motion.h1>
+          
           <motion.p
-            className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto"
-            style={{ color: 'var(--marble-white)' }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            From zero to revenue in 10 seconds • No code required • Scale automatically
-          </motion.p>
-
-          {/* Primary CTA */}
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link
-                href="/store"
-                className="px-10 py-5 font-bold rounded-lg flex items-center gap-3 text-lg shadow-2xl hover-shimmer"
-                style={{
-                  background: 'linear-gradient(135deg, var(--gold-flake) 0%, var(--gold-highlight) 100%)',
-                  color: 'var(--marble-black)',
-                  boxShadow: '0 0 40px rgba(212, 175, 55, 0.6)',
-                }}
-              >
-                <Zap size={24} fill="currentColor" />
-                Start Free
-                <ArrowRight size={24} />
-              </Link>
-            </motion.div>
-
-            {/* Secondary CTA */}
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link
-                href="#how-it-works"
-                className="px-10 py-5 font-bold rounded-lg flex items-center gap-3 text-lg backdrop-blur-md"
-                style={{
-                  background: 'var(--card-bg)',
-                  color: 'var(--marble-white)',
-                  border: '2px solid var(--gold-flake)',
-                }}
-              >
-                <Play size={24} />
-                See How It Works
-              </Link>
-            </motion.div>
-          </motion.div>
-
-          {/* Trust Indicators */}
-          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.6 }}
-            className="flex flex-wrap justify-center gap-8 text-sm"
-            style={{ color: 'var(--marble-white)' }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto"
           >
-            <div className="flex items-center gap-2">
-              <CheckCircle size={18} style={{ color: 'var(--gold-flake)' }} />
-              <span>No Credit Card Required</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle size={18} style={{ color: 'var(--gold-flake)' }} />
-              <span>Setup in 60 Seconds</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle size={18} style={{ color: 'var(--gold-flake)' }} />
-              <span>Cancel Anytime</span>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+            Premium Homepage Experience
+          </motion.p>
 
-      {/* AdSense Auto Ads Placement Hint - Below Hero */}
-      {/* Auto Ads will automatically place ads here once your AdSense account is approved */}
-      {/* After approval, you can create manual ad units in AdSense dashboard and replace this section */}
-      {process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID && (
-        <div className="max-w-6xl mx-auto px-4 py-8">
-          <div
-            className="min-h-[90px] flex items-center justify-center"
-            style={{
-              background: 'rgba(0, 245, 212, 0.05)',
-              border: '1px dashed rgba(0, 245, 212, 0.2)',
-              borderRadius: '8px',
-            }}
-          >
-            <p className="text-gray-500 text-sm">AdSense Auto Ads will appear here once approved</p>
-          </div>
-        </div>
-      )}
-
-      {/* 3D Section Divider */}
-      <SectionDivider3D />
-
-      {/* 3D Avatar Section */}
-      <section className="py-16 px-4" style={{ background: 'var(--marble-black)' }}>
-        <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-8"
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <h2
-              className="text-4xl md:text-5xl font-bold mb-4 dancing-shadow"
-              style={{ color: 'var(--marble-white)' }}
-            >
-              Meet Your AI Assistant
-            </h2>
-            <p className="text-xl" style={{ color: 'var(--marble-white)' }}>
-              Voice-activated website control • Always learning • Always evolving
-            </p>
+            <Button variant="primary" size="lg">
+              Explore Our Work
+            </Button>
+            <Button variant="secondary" size="lg">
+              Get Started
+            </Button>
           </motion.div>
-
-          <Avatar3DHome />
         </div>
-      </section>
 
-      {/* 3D Section Divider */}
-      <SectionDivider3D />
-
-      {/* How It Works Section */}
-      <section
-        id="how-it-works"
-        className="py-24 px-4"
-        style={{ background: 'var(--marble-black)' }}
-      >
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2
-              className="text-4xl md:text-5xl font-bold mb-4 neon-glow"
-              style={{ color: 'var(--marble-white)' }}
-            >
-              Revenue in 3 Simple Steps
-            </h2>
-            <p style={{ color: 'var(--marble-white)' }}>
-              Start earning while you focus on what matters
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                step: '01',
-                title: 'Choose Your Tools',
-                description:
-                  'Select from AI-powered tools, templates, and automations designed to generate revenue',
-                icon: <Sparkles size={40} />,
-              },
-              {
-                step: '02',
-                title: 'Set & Forget',
-                description:
-                  'Configure once and let AI automation handle content, marketing, and sales 24/7',
-                icon: <Zap size={40} />,
-              },
-              {
-                step: '03',
-                title: 'Watch It Grow',
-                description:
-                  'Monitor real-time analytics as your automated empire generates passive income',
-                icon: <CheckCircle size={40} />,
-              },
-            ].map((item, idx) => (
-              <motion.div
-                key={idx}
-                className="p-8 rounded-lg text-center relative backdrop-blur-md"
-                style={{
-                  background: 'var(--card-bg)',
-                  border: '1px solid var(--card-border)',
-                }}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.2 }}
-                whileHover={{
-                  y: -8,
-                  borderColor: 'var(--gold-flake)',
-                  transition: { duration: 0.3 },
-                }}
-              >
-                {/* Step Number */}
-                <div
-                  className="text-6xl font-bold mb-4 opacity-20"
-                  style={{ color: 'var(--gold-flake)' }}
-                >
-                  {item.step}
-                </div>
-
-                {/* Icon */}
-                <div
-                  className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
-                  style={{
-                    background: brand.colors.gradient.primary,
-                    boxShadow: brand.colors.shadow.glow,
-                  }}
-                >
-                  <div style={{ color: brand.colors.text.inverse }}>{item.icon}</div>
-                </div>
-
-                {/* Title */}
-                <h3
-                  className="text-2xl font-bold mb-3"
-                  style={{ color: brand.colors.text.primary }}
-                >
-                  {item.title}
-                </h3>
-
-                {/* Description */}
-                <p style={{ color: brand.colors.text.secondary }}>{item.description}</p>
-              </motion.div>
-            ))}
-          </div>
+        {/* Marble Background Pattern */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-300 to-white mix-blend-overlay" />
         </div>
-      </section>
+      </Section>
 
-      {/* Affiliate Tool Stack */}
-      <AffiliateToolCards />
-
-      {/* Exit Intent Modal */}
-      {showExitIntent && (
-        <motion.div
+      {/* Features Grid */}
+      <Section className="bg-black">
+        <motion.h2
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ background: brand.colors.bg.overlay }}
-          onClick={() => setShowExitIntent(false)}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent"
         >
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="relative max-w-md rounded-lg p-8"
-            style={{
-              background: brand.colors.bg.elevated,
-              border: `2px solid ${brand.colors.action.primary}`,
-              boxShadow: brand.colors.shadow.xl,
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="absolute -top-8 left-1/2 -translate-x-1/2 transform text-6xl">🎁</div>
-            <h3
-              className="mb-4 text-center text-3xl font-bold"
-              style={{ color: brand.colors.text.primary }}
-            >
-              Wait! Special Offer
-            </h3>
-            <p className="mb-6 text-center text-lg" style={{ color: brand.colors.text.secondary }}>
-              Get{' '}
-              <span className="text-2xl font-bold" style={{ color: brand.colors.revenue.positive }}>
-                50% OFF
-              </span>{' '}
-              your first month + exclusive AI automation templates
-            </p>
-            <div className="space-y-3">
-              <Link
-                href="/store"
-                className="block w-full rounded-lg px-6 py-4 text-center text-lg font-bold"
-                style={{
-                  background: brand.colors.gradient.primary,
-                  color: brand.colors.text.inverse,
-                  boxShadow: brand.colors.shadow.glow,
-                }}
-                onClick={() => setShowExitIntent(false)}
-              >
-                Claim Offer Now
-              </Link>
-              <button
-                onClick={() => setShowExitIntent(false)}
-                className="w-full text-sm"
-                style={{ color: brand.colors.text.secondary }}
-              >
-                No thanks, I'll pay full price
-              </button>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
+          Our Services
+        </motion.h2>
 
-      {/* Shadow AI Avatar - Always present on Home */}
-      <Suspense fallback={null}>
-        <InteractiveAvatar />
-      </Suspense>
-    </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[
+            {
+              title: "AI-Powered Solutions",
+              desc: "Cutting-edge artificial intelligence implementation for your business needs",
+            },
+            {
+              title: "Live Streaming",
+              desc: "Professional broadcasting and streaming infrastructure",
+            },
+            {
+              title: "Web Development",
+              desc: "Premium custom websites and web applications",
+            },
+            {
+              title: "3D Experiences",
+              desc: "Immersive 3D visualizations and interactive experiences",
+            },
+            {
+              title: "E-Commerce",
+              desc: "Scalable online stores with seamless payment integration",
+            },
+            {
+              title: "Brand Strategy",
+              desc: "Comprehensive branding and digital marketing solutions",
+            },
+          ].map((feature, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+            >
+              <Card gradient className="h-full hover:scale-105 transition-transform duration-300">
+                <h3 className="text-2xl font-bold text-yellow-400 mb-4">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-300">{feature.desc}</p>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </Section>
+
+      {/* Stats Section */}
+      <Section className="bg-gradient-to-b from-black via-yellow-950/10 to-black">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          {[
+            { number: "250+", label: "Successful Projects" },
+            { number: "99%", label: "Client Satisfaction" },
+            { number: "15+", label: "Years Experience" },
+            { number: "24/7", label: "Support Available" },
+          ].map((stat, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+            >
+              <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent mb-2">
+                {stat.number}
+              </div>
+              <div className="text-gray-400 text-sm md:text-base">{stat.label}</div>
+            </motion.div>
+          ))}
+        </div>
+      </Section>
+
+      {/* Testimonials */}
+      <Section className="bg-black">
+        <motion.h2
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent"
+        >
+          What Clients Say
+        </motion.h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[
+            {
+              quote: "3000 Studios transformed our digital presence completely. Outstanding work!",
+              author: "Sarah Johnson",
+              role: "CEO, TechCorp",
+            },
+            {
+              quote: "Professional, innovative, and exceeded all expectations. Highly recommended!",
+              author: "Michael Chen",
+              role: "Founder, StartupX",
+            },
+            {
+              quote: "The best creative studio we've ever worked with. Simply amazing results.",
+              author: "Emily Rodriguez",
+              role: "Marketing Director",
+            },
+          ].map((testimonial, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15 }}
+            >
+              <Card className="h-full">
+                <p className="text-gray-300 italic mb-6">"{testimonial.quote}"</p>
+                <div className="border-t border-yellow-500/20 pt-4">
+                  <p className="font-bold text-yellow-400">{testimonial.author}</p>
+                  <p className="text-sm text-gray-500">{testimonial.role}</p>
+                </div>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </Section>
+
+      {/* CTA Section */}
+      <Section className="bg-gradient-to-b from-black to-yellow-950/20">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="text-center max-w-4xl mx-auto"
+        >
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+            Ready to Start Your Project?
+          </h2>
+          <p className="text-xl text-gray-300 mb-8">
+            Let's create something extraordinary together
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button variant="primary" size="lg">
+              Contact Us
+            </Button>
+            <Button variant="secondary" size="lg">
+              View Portfolio
+            </Button>
+          </div>
+        </motion.div>
+      </Section>
+    </>
   );
 }

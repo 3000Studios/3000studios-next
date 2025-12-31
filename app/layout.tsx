@@ -11,7 +11,7 @@ import Script from 'next/script';
 import type { ReactNode } from 'react';
 import BackgroundMusic from './components/BackgroundMusic';
 import GravityFooter from './components/GravityFooter';
-import Navigation from './components/Navigation';
+import Nav from './ui/Nav';
 import SmoothScroll from './components/SmoothScroll';
 import SoundEffects from './components/SoundEffects';
 import VideoWallpaper from './components/VideoWallpaper';
@@ -110,7 +110,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <SoundEffects />
         <MouseTrails />
 
-        <Navigation />
+        <Nav />
         <main className="relative z-10 flex-grow pt-20">{children}</main>
 
         <GravityFooter />
