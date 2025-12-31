@@ -20,15 +20,6 @@ const nextConfig: NextConfig = {
       '@react-three/fiber',
       '@react-three/drei',
     ],
-    // Enable turbo for faster dev
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
-    },
   },
 
   // Security and Performance Headers
@@ -109,9 +100,6 @@ const nextConfig: NextConfig = {
 
   // Enable compression
   compress: true,
-
-  // Optimize bundle
-  swcMinify: true,
 
   // Production source maps for debugging (disabled for performance)
   productionBrowserSourceMaps: false,
