@@ -2,6 +2,7 @@
 
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
+import VideoBackground from "@/components/VideoBackground";
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -27,6 +28,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[var(--marble-black)] relative overflow-hidden">
+      <VideoBackground opacity={0.2} />
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-[var(--marble-black)] via-gray-900 to-[var(--marble-black)] opacity-90"></div>
       <div className="absolute inset-0 bg-[url('/assets/textures/marble-dark.jpg')] bg-cover bg-center opacity-20"></div>
