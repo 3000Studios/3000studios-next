@@ -307,7 +307,7 @@ export function VoiceCommandCenter() {
     return (
       <button
         onClick={() => setIsMinimized(false)}
-        className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-gradient-to-br from-[#D4AF37] to-amber-600 shadow-lg shadow-yellow-500/30 flex items-center justify-center hover:scale-110 transition-transform"
+        className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-linear-to-br from-[#D4AF37] to-amber-600 shadow-lg shadow-yellow-500/30 flex items-center justify-center hover:scale-110 transition-transform"
         title="Open Voice Command Center"
       >
         <span className="text-2xl">🎤</span>
@@ -316,9 +316,9 @@ export function VoiceCommandCenter() {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 w-[420px] max-h-[85vh] overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50 flex flex-col">
+    <div className="fixed bottom-6 right-6 z-40 w-[420px] max-h-[85vh] overflow-hidden rounded-2xl bg-linear-to-br from-gray-900/95 to-black/95 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50 flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-white/10 bg-gradient-to-r from-[#D4AF37]/10 to-transparent">
+      <div className="flex items-center justify-between p-4 border-b border-white/10 bg-linear-to-r from-[#D4AF37]/10 to-transparent">
         <div className="flex items-center gap-3">
           <div
             className={`w-3 h-3 rounded-full ${listening ? 'bg-red-500 animate-pulse' : 'bg-green-500'}`}
@@ -435,49 +435,56 @@ export function VoiceCommandCenter() {
 
           {/* Media Items Grid */}
           <div className="grid grid-cols-4 gap-2">
-            {currentLibrary.categories[selectedCategory]?.items.map((item: any, idx: number) => (
-              <button
-                key={idx}
-                onClick={() => {
-                  const copyValue = item.url || item.emoji || '';
-                  copyToClipboard(copyValue, item.label);
-                }}
-                className="group relative aspect-square rounded-lg overflow-hidden bg-white/5 border border-white/10 hover:border-[#D4AF37]/50 transition-all hover:scale-105"
-                title={`Click to copy: ${item.label}`}
-              >
-                {item.url && !item.type && (
-                  <Image
-                    src={item.url}
-                    alt={item.label}
-                    fill
-                    className="object-cover"
-                    unoptimized
-                  />
-                )}
-                {item.emoji && (
-                  <span className="text-2xl absolute inset-0 flex items-center justify-center">
-                    {item.emoji}
-                  </span>
-                )}
-                {item.type === 'link' && (
+            {currentLibrary.categories[selectedCategory]?.items.map((item: any, idx: number) => {
+              // Handle link items separately to avoid nested interactive controls
+              if (item.type === 'link') {
+                return (
                   <a
+                    key={idx}
                     href={item.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="absolute inset-0 flex flex-col items-center justify-center p-1 text-center"
+                    className="group relative aspect-square rounded-lg overflow-hidden bg-white/5 border border-white/10 hover:border-[#D4AF37]/50 transition-all hover:scale-105 flex flex-col items-center justify-center p-1 text-center"
+                    title={item.label}
                   >
                     <span className="text-lg">🔗</span>
                     <span className="text-[8px] text-gray-400 leading-tight">{item.label}</span>
                   </a>
-                )}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <span className="text-[10px] text-white font-medium px-1 text-center">
-                    {item.label}
-                  </span>
-                </div>
-              </button>
-            ))}
+                );
+              }
+
+              return (
+                <button
+                  key={idx}
+                  onClick={() => {
+                    const copyValue = item.url || item.emoji || '';
+                    copyToClipboard(copyValue, item.label);
+                  }}
+                  className="group relative aspect-square rounded-lg overflow-hidden bg-white/5 border border-white/10 hover:border-[#D4AF37]/50 transition-all hover:scale-105"
+                  title={`Click to copy: ${item.label}`}
+                >
+                  {item.url && (
+                    <Image
+                      src={item.url}
+                      alt={item.label}
+                      fill
+                      className="object-cover"
+                      unoptimized
+                    />
+                  )}
+                  {item.emoji && (
+                    <span className="text-2xl absolute inset-0 flex items-center justify-center">
+                      {item.emoji}
+                    </span>
+                  )}
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span className="text-[10px] text-white font-medium px-1 text-center">
+                      {item.label}
+                    </span>
+                  </div>
+                </button>
+              );
+            })}
           </div>
         </div>
 

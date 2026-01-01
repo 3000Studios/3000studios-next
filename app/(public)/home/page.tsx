@@ -1,7 +1,8 @@
-import MediaGrid from '@/components/MediaGrid';
 import Navigation from '@/app/components/Navigation';
+import MediaGrid from '@/components/MediaGrid';
 import SectionMedia from '@/components/SectionMedia';
 import { Footer } from '@/components/ui/Footer';
+import Image from 'next/image';
 
 export default function HomePage() {
   const portfolioItems = [
@@ -79,10 +80,10 @@ export default function HomePage() {
             type="video/mp4"
           />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/40 via-black/50 to-black/70" />
 
         <div className="relative z-10 text-center px-6 max-w-4xl">
-          <h1 className="text-6xl md:text-7xl font-black mb-6 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent animate-fade-in">
+          <h1 className="text-6xl md:text-7xl font-black mb-6 bg-linear-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-transparent animate-fade-in">
             3000 Studios
           </h1>
           <p className="text-2xl md:text-3xl text-platinum/90 mb-8 font-light">
@@ -111,7 +112,7 @@ export default function HomePage() {
       </section>
 
       {/* Services Grid Section */}
-      <section className="relative py-20 px-6 bg-gradient-to-b from-black to-slate-950">
+      <section className="relative py-20 px-6 bg-linear-to-b from-black to-slate-950">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-4 text-white">Our Services</h2>
@@ -146,10 +147,11 @@ export default function HomePage() {
                 className="group relative overflow-hidden rounded-lg hyper-glass p-8 hover:-translate-y-2 transition-all duration-500"
               >
                 <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-500">
-                  <img
+                  <Image
                     src={service.image}
                     alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                 </div>
                 <div className="relative z-10">
@@ -197,9 +199,9 @@ export default function HomePage() {
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <h2 className="text-5xl font-bold mb-6 text-white">Ready to Transform Your Vision?</h2>
           <p className="text-2xl text-platinum/80 mb-8">
-            Let's collaborate to create something extraordinary.
+            Let&apos;s collaborate to create something extraordinary.
           </p>
-          <button className="px-8 py-4 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-bold rounded-lg hover:shadow-lg hover:shadow-amber-400/50 transition-all duration-300 transform hover:scale-105">
+          <button className="px-8 py-4 bg-linear-to-r from-amber-400 to-yellow-500 text-black font-bold rounded-lg hover:shadow-lg hover:shadow-amber-400/50 transition-all duration-300 transform hover:scale-105">
             Start a Project
           </button>
         </div>

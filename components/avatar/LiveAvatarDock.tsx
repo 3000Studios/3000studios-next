@@ -1,12 +1,14 @@
-"use client";
+'use client';
 
-import { useAvatar } from "@/providers/AvatarProvider";
-import { useVoiceBridge } from "@/providers/VoiceBridgeProvider";
-import { Mic, MicOff, MessageSquare, X } from "lucide-react";
-import { useState } from "react";
-import dynamic from "next/dynamic";
+import { useAvatar } from '@/providers/AvatarProvider';
+import { useVoiceBridge } from '@/providers/VoiceBridgeProvider';
+import { MessageSquare, Mic, MicOff, X } from 'lucide-react';
+import dynamic from 'next/dynamic';
+import { useState } from 'react';
 
-const InteractiveAvatar = dynamic(() => import("@/app/components/InteractiveAvatar"), { ssr: false });
+const InteractiveAvatar = dynamic(() => import('@/app/components/InteractiveAvatar'), {
+  ssr: false,
+});
 
 export function LiveAvatarDock() {
   const { avatar, hideAvatar, showAvatar, speak } = useAvatar();
@@ -17,7 +19,7 @@ export function LiveAvatarDock() {
     return (
       <button
         onClick={showAvatar}
-        className="fixed bottom-4 right-4 z-50 w-16 h-16 rounded-full bg-gradient-to-r from-yellow-600 to-yellow-400 flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+        className="fixed bottom-4 right-4 z-50 w-16 h-16 rounded-full bg-linear-to-r from-yellow-600 to-yellow-400 flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
         aria-label="Show Avatar"
       >
         <MessageSquare className="text-black" size={28} />
@@ -29,7 +31,7 @@ export function LiveAvatarDock() {
     return (
       <button
         onClick={() => setIsMinimized(false)}
-        className="fixed bottom-4 right-4 z-50 w-20 h-20 rounded-full bg-gradient-to-r from-yellow-600 to-yellow-400 flex items-center justify-center shadow-2xl hover:scale-110 transition-transform border-4 border-black"
+        className="fixed bottom-4 right-4 z-50 w-20 h-20 rounded-full bg-linear-to-r from-yellow-600 to-yellow-400 flex items-center justify-center shadow-2xl hover:scale-110 transition-transform border-4 border-black"
         aria-label="Expand Avatar"
       >
         <div className="w-full h-full rounded-full bg-black/20 flex items-center justify-center">
@@ -67,12 +69,12 @@ export function LiveAvatarDock() {
           onClick={isListening ? stopListening : startListening}
           className={`px-4 py-2 rounded-lg font-bold text-sm transition-all flex items-center justify-center gap-2 ${
             isListening
-              ? "bg-red-600 hover:bg-red-700 text-white animate-pulse"
-              : "bg-gradient-to-r from-yellow-600 to-yellow-400 hover:from-yellow-500 hover:to-yellow-300 text-black"
+              ? 'bg-red-600 hover:bg-red-700 text-white animate-pulse'
+              : 'bg-linear-to-r from-yellow-600 to-yellow-400 hover:from-yellow-500 hover:to-yellow-300 text-black'
           }`}
         >
           {isListening ? <MicOff size={16} /> : <Mic size={16} />}
-          {isListening ? "LISTENING..." : "VOICE COMMAND"}
+          {isListening ? 'LISTENING...' : 'VOICE COMMAND'}
         </button>
 
         {lastCommand && (
@@ -82,7 +84,7 @@ export function LiveAvatarDock() {
         )}
 
         <button
-          onClick={() => speak("3000 Studios systems online and ready")}
+          onClick={() => speak('3000 Studios systems online and ready')}
           className="px-3 py-1 bg-black/50 hover:bg-black/70 text-yellow-400 text-xs rounded transition-colors"
         >
           Test Speech
@@ -97,7 +99,7 @@ export function LiveAvatarDock() {
       {/* Emotion Indicator */}
       <div className="bg-black/90 backdrop-blur-md border border-yellow-500/30 rounded-lg px-3 py-1">
         <span className="text-yellow-400 text-xs">
-          {avatar.isSpeaking && "🗣️ "} 
+          {avatar.isSpeaking && '🗣️ '}
           {avatar.currentEmotion.toUpperCase()}
         </span>
       </div>

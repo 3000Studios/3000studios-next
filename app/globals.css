@@ -8,9 +8,10 @@
 
 @import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap");
 
 @font-face {
-  font-family: "Dusseldot";
+  font-family: "ww";
   src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/108082/Dusseldot-variable-web.woff2")
       format("woff2 supports variations"),
     url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/108082/Dusseldot-variable-web.woff2")
@@ -718,5 +719,93 @@ a:focus-visible {
 @media (min-width: 769px) {
   .show-mobile {
     display: none;
+  }
+}
+
+/* ============================================
+   PLAYFAIR DISPLAY - Global Font
+   ============================================ */
+html, body {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+/* ============================================
+   3D PERSPECTIVE NAV LINKS
+   ============================================ */
+.nav-3d-link {
+  display: block;
+  text-decoration: none;
+}
+
+.nav-3d-box {
+  display: flex;
+}
+
+.nav-3d-inner {
+  width: 80px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 0.75em;
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+}
+
+.nav-3d-left {
+  background: linear-gradient(135deg, #1e3a5f 0%, #0a1929 100%);
+  color: #D4AF37;
+  transform-origin: right;
+  transform: perspective(100px) rotateY(-15deg);
+  border-radius: 4px 0 0 4px;
+}
+
+.nav-3d-right {
+  background: linear-gradient(135deg, #0a1929 0%, #1e3a5f 100%);
+  color: #FFD700;
+  transform-origin: left;
+  transform: perspective(100px) rotateY(15deg);
+  border-radius: 0 4px 4px 0;
+}
+
+.nav-3d-inner span {
+  display: inline-block;
+  animation: none;
+}
+
+.nav-3d-link:hover .nav-3d-left {
+  background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
+  color: #000;
+}
+
+.nav-3d-link:hover .nav-3d-right {
+  background: linear-gradient(135deg, #B8860B 0%, #D4AF37 100%);
+  color: #000;
+}
+
+.nav-3d-inner.active {
+  background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%) !important;
+  color: #000 !important;
+}
+
+/* Marquee animation for hover */
+.nav-3d-link:hover .nav-3d-inner span {
+  animation: nav-marquee 2s linear infinite;
+}
+
+@keyframes nav-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
   }
 }

@@ -4,7 +4,7 @@ export default function Avatar() {
   return (
     <div className="fixed bottom-20 right-6 z-50 group">
       <div className="w-32 h-32 rounded-full border-4 border-yellow-400 overflow-hidden shadow-2xl hover:scale-110 transition-transform">
-        <div className="w-full h-full bg-gradient-to-br from-yellow-600 via-yellow-400 to-yellow-300 flex items-center justify-center">
+        <div className="w-full h-full bg-linear-to-br from-yellow-600 via-yellow-400 to-yellow-300 flex items-center justify-center">
           <span className="text-5xl">🤖</span>
         </div>
       </div>
