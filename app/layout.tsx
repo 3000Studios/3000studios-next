@@ -131,11 +131,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className="flex min-h-screen w-full flex-col bg-black antialiased"
         data-accent={styleRegistry.accent}
       >
-        {/* Google AdSense Auto Ads - Load after content */}
+        {/* Google AdSense Auto Ads - Load after initial hydration for best revenue */}
         {ADSENSE_ACCOUNT ? (
           <Script
             id="adsense"
-            strategy="lazyOnload"
+            strategy="afterInteractive"
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_ACCOUNT}`}
             crossOrigin="anonymous"
           />
