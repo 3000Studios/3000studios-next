@@ -8,7 +8,7 @@ import { useState } from 'react';
 const UnifiedAvatar = dynamic(() => import('@/components/avatar/UnifiedAvatar'), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-cyan-900/20 to-black rounded-2xl animate-pulse">
+    <div className="w-full h-full flex items-center justify-center bg-linear-to-br from-cyan-900/20 to-black rounded-2xl animate-pulse">
       <span className="text-cyan-400 text-sm font-mono">Loading Avatar...</span>
     </div>
   ),
@@ -46,9 +46,9 @@ export default function CommandCenter() {
   };
 
   return (
-    <section className="min-h-screen p-8 pt-24 bg-gradient-to-br from-black via-[#0a0a0a] to-black text-white">
+    <section className="min-h-screen p-8 pt-24 bg-linear-to-br from-black via-[#0a0a0a] to-black text-white">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+        <h1 className="text-4xl font-bold mb-2 bg-linear-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
           Live Command Center
         </h1>
         <p className="text-gray-400 mb-8">Phase 33: Real-time System Control (No Rebuilds)</p>
@@ -61,19 +61,19 @@ export default function CommandCenter() {
               <div className="grid grid-cols-3 gap-4">
                 <button
                   onClick={() => triggerUpdate('gold')}
-                  className="p-4 rounded-lg bg-gradient-to-br from-yellow-600 to-yellow-800 hover:scale-105 transition-all border border-yellow-400/50"
+                  className="p-4 rounded-lg bg-linear-to-br from-yellow-600 to-yellow-800 hover:scale-105 transition-all border border-yellow-400/50"
                 >
                   GOLD
                 </button>
                 <button
                   onClick={() => triggerUpdate('platinum')}
-                  className="p-4 rounded-lg bg-gradient-to-br from-gray-400 to-gray-600 hover:scale-105 transition-all border border-white/50"
+                  className="p-4 rounded-lg bg-linear-to-br from-gray-400 to-gray-600 hover:scale-105 transition-all border border-white/50"
                 >
                   PLATINUM
                 </button>
                 <button
                   onClick={() => triggerUpdate('sapphire')}
-                  className="p-4 rounded-lg bg-gradient-to-br from-blue-600 to-blue-800 hover:scale-105 transition-all border border-blue-400/50"
+                  className="p-4 rounded-lg bg-linear-to-br from-blue-600 to-blue-800 hover:scale-105 transition-all border border-blue-400/50"
                 >
                   SAPPHIRE
                 </button>
@@ -90,7 +90,7 @@ export default function CommandCenter() {
                 onClick={() =>
                   handleVoicePayload({ target: 'monetization', path: 'inject', value: 'prod_001' })
                 }
-                className="w-full p-4 rounded-lg bg-gradient-to-r from-green-600 to-green-800 hover:scale-105 transition-all border border-green-400/50 flex justify-between items-center"
+                className="w-full p-4 rounded-lg bg-linear-to-r from-green-600 to-green-800 hover:scale-105 transition-all border border-green-400/50 flex justify-between items-center"
               >
                 <span>🚀 INJECT: AI Toolkit ($97)</span>
                 <span className="text-xs bg-black/30 px-2 py-1 rounded">PROD_001</span>
@@ -100,7 +100,7 @@ export default function CommandCenter() {
                 onClick={() =>
                   handleVoicePayload({ target: 'monetization', path: 'inject', value: 'prod_002' })
                 }
-                className="w-full p-4 rounded-lg bg-gradient-to-r from-purple-600 to-purple-800 hover:scale-105 transition-all border border-purple-400/50 flex justify-between items-center"
+                className="w-full p-4 rounded-lg bg-linear-to-r from-purple-600 to-purple-800 hover:scale-105 transition-all border border-purple-400/50 flex justify-between items-center"
               >
                 <span>🎓 INJECT: Masterclass ($297)</span>
                 <span className="text-xs bg-black/30 px-2 py-1 rounded">PROD_002</span>
@@ -134,7 +134,7 @@ export default function CommandCenter() {
         {/* Avatar Section - Full Width */}
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Avatar Display */}
-          <div className="lg:col-span-2 h-[500px] rounded-2xl overflow-hidden border border-cyan-500/30 bg-gradient-to-br from-black/80 to-cyan-900/20 backdrop-blur-xl">
+          <div className="lg:col-span-2 h-[500px] rounded-2xl overflow-hidden border border-cyan-500/30 bg-linear-to-br from-black/80 to-cyan-900/20 backdrop-blur-xl">
             <UnifiedAvatar variant="full" className="w-full h-full" showHUD={true} />
           </div>
 
@@ -144,7 +144,7 @@ export default function CommandCenter() {
             <div className="space-y-4">
               <button
                 onClick={triggerAvatarSpeak}
-                className="w-full p-4 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 hover:scale-105 transition-all border border-cyan-400/50 flex items-center justify-center gap-2"
+                className="w-full p-4 rounded-lg bg-linear-to-r from-cyan-600 to-blue-600 hover:scale-105 transition-all border border-cyan-400/50 flex items-center justify-center gap-2"
               >
                 <span>🎤</span>
                 <span>Make Avatar Speak</span>
