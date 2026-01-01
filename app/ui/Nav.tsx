@@ -14,9 +14,8 @@ const PUBLIC_NAV_ITEMS = [
   { label: 'Live', href: '/live' },
   { label: 'Store', href: '/store' },
   { label: 'Apps', href: '/apps' },
-  { label: 'Revenue', href: '/revenue' },
-  { label: 'Login', href: '/login' },
   { label: 'Info', href: '/info' },
+  { label: 'Admin', href: '/admin' },
 ];
 
 export default function Nav() {
