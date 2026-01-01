@@ -1,7 +1,7 @@
 // 3000 Studios - Monetization Engine (Phase 34-60)
 // Autonomous revenue loops: Product injection, Affiliate links, Scarcity triggers.
 
-import { uiRegistry } from './uiRegistry';
+import { uiRegistry } from '../uiRegistry';
 
 type Product = {
   id: string;
