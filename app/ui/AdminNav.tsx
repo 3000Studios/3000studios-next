@@ -5,8 +5,16 @@ import { usePathname } from 'next/navigation';
 
 const ADMIN_NAV_ITEMS = [
   { label: 'Dashboard', href: '/admin/dashboard' },
+  { label: 'Command Center', href: '/admin/command-center' },
   { label: 'Revenue', href: '/admin/revenue' },
+  { label: 'Builder', href: '/admin/builder' },
+  { label: 'Editor', href: '/admin/editor' },
   { label: 'Content', href: '/admin/content' },
+  { label: 'Stats', href: '/admin/stats' },
+  { label: 'Stream', href: '/admin/stream' },
+  { label: 'Voice Logs', href: '/admin/voice-logs' },
+  { label: 'Voice Remote', href: '/admin/voice-remote' },
+  { label: 'Control', href: '/admin/control' },
   { label: 'Settings', href: '/admin/settings' },
 ];
 
