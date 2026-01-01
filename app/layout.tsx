@@ -2,35 +2,96 @@
  * Root Layout Component
  * Main layout wrapper for the entire application.
  * REVENUE LOCK — Contains AdSense, consent, and monetization infrastructure.
+ * PERFORMANCE OPTIMIZED — Lazy loads heavy components
  */
 
-import BackgroundMusicPlayer from '@/components/BackgroundMusic';
 import ConsentBanner from '@/components/ConsentBanner';
-import CustomCursor from '@/components/CustomCursor';
-import IntroVideoGate from '@/components/IntroVideoGate';
-import MouseTrails from '@/components/MouseTrails';
-import VideoBackground from '@/components/VideoBackground';
 import { AppProviders } from '@/providers/AppProviders';
 import { Analytics } from '@vercel/analytics/next';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import type { ReactNode } from 'react';
+import { Suspense } from 'react';
 import '../styles/elite.css';
-import AvatarWrapper from './components/AvatarWrapper';
 import GravityFooter from './components/GravityFooter';
-import SmoothScroll from './components/SmoothScroll';
-import SoundEffects from './components/SoundEffects';
-import VideoWallpaper from './components/VideoWallpaper';
 import './globals.css';
 import Nav from './ui/Nav';
-import VideoSplash from './ui/VideoSplash';
 
+// ============================================
+// LAZY LOADED COMPONENTS (Non-Critical Path)
+// ============================================
+import dynamic from 'next/dynamic';
+
+// Heavy visual effects - load after initial paint
+const BackgroundMusicPlayer = dynamic(() => import('@/components/BackgroundMusic'), {
+  ssr: false,
+  loading: () => null,
+});
+
+const CustomCursor = dynamic(() => import('@/components/CustomCursor'), {
+  ssr: false,
+  loading: () => null,
+});
+
+const IntroVideoGate = dynamic(() => import('@/components/IntroVideoGate'), {
+  ssr: false,
+  loading: () => null,
+});
+
+const MouseTrails = dynamic(() => import('@/components/MouseTrails'), {
+  ssr: false,
+  loading: () => null,
+});
+
+const VideoBackground = dynamic(() => import('@/components/VideoBackground'), {
+  ssr: false,
+  loading: () => null,
+});
+
+const AvatarWrapper = dynamic(() => import('./components/AvatarWrapper'), {
+  ssr: false,
+  loading: () => null,
+});
+
+const SmoothScroll = dynamic(() => import('./components/SmoothScroll'), {
+  ssr: false,
+  loading: () => null,
+});
+
+const SoundEffects = dynamic(() => import('./components/SoundEffects'), {
+  ssr: false,
+  loading: () => null,
+});
+
+const VideoWallpaper = dynamic(() => import('./components/VideoWallpaper'), {
+  ssr: false,
+  loading: () => null,
+});
+
+const VideoSplash = dynamic(() => import('./ui/VideoSplash'), {
+  ssr: false,
+  loading: () => null,
+});
+
+// ============================================
+// METADATA & SEO
+// ============================================
 const RAW_ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
 const ADSENSE_ACCOUNT = RAW_ADSENSE_ID
   ? RAW_ADSENSE_ID.startsWith('ca-pub-')
     ? RAW_ADSENSE_ID
     : `ca-pub-${RAW_ADSENSE_ID}`
   : undefined;
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)', color: '#000000' },
+    { media: '(prefers-color-scheme: light)', color: '#000000' },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://3000studios.com'),
@@ -55,6 +116,11 @@ export const metadata: Metadata = {
   authors: [{ name: '3000 Studios' }],
   creator: '3000 Studios',
   publisher: '3000 Studios',
+  formatDetection: {
+    email: false,
+    telephone: false,
+    address: false,
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -75,6 +141,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@3000studios',
+    creator: '@3000studios',
     title: '3000 Studios - Award-Winning Creative Studio',
     description: 'Premium digital experiences and innovative solutions.',
     images: ['/og-image.jpg'],
@@ -90,8 +157,11 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  alternates: {
+    canonical: 'https://3000studios.com',
+  },
   verification: {
-    google: 'google-verification-code',
+    google: process.env.GOOGLE_SITE_VERIFICATION || 'google-verification-code',
   },
   other: ADSENSE_ACCOUNT ? { 'google-adsense-account': ADSENSE_ACCOUNT } : undefined,
 };
@@ -100,44 +170,68 @@ import { styleRegistry } from '@/lib/styleRegistry';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Preconnect to external resources for faster loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://cdn.pixabay.com" />
+        <link rel="preconnect" href="https://res.cloudinary.com" />
+
+        {/* DNS prefetch for third-party scripts */}
+        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+      </head>
       <body
         className="flex min-h-screen flex-col bg-black antialiased"
         data-accent={styleRegistry.accent}
       >
-        {/* Google AdSense Auto Ads (enabled when NEXT_PUBLIC_ADSENSE_PUBLISHER_ID is set) */}
+        {/* Google AdSense Auto Ads - Load after content */}
         {ADSENSE_ACCOUNT ? (
           <Script
             id="adsense"
-            strategy="afterInteractive"
-            async
+            strategy="lazyOnload"
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_ACCOUNT}`}
             crossOrigin="anonymous"
           />
         ) : null}
 
         <AppProviders>
-          <IntroVideoGate>
-            <VideoSplash />
-            <VideoWallpaper opacity={0.25} />
-            <BackgroundMusicPlayer />
-            <SmoothScroll />
-            <SoundEffects />
-            <MouseTrails />
-            <CustomCursor />
+          {/* Navigation - Critical, loads immediately */}
+          <Nav />
 
-            <Nav />
-            <main className="relative z-10 grow pt-20">{children}</main>
+          {/* Main content - Critical path */}
+          <main className="relative z-10 grow pt-20">{children}</main>
 
-            <GravityFooter />
-            <ConsentBanner />
+          {/* Footer - Critical for SEO */}
+          <GravityFooter />
+
+          {/* Consent Banner - Important for compliance */}
+          <ConsentBanner />
+
+          {/* Analytics - Load after content */}
+          <Suspense fallback={null}>
             <Analytics />
+          </Suspense>
 
-            <VideoBackground src={styleRegistry.backgroundVideo} />
-
-            {/* Full 3D Female Avatar - Ultimate Edition */}
-            <AvatarWrapper />
-          </IntroVideoGate>
+          {/* ============================================
+              NON-CRITICAL VISUAL EFFECTS
+              Load after main content is visible
+              ============================================ */}
+          <Suspense fallback={null}>
+            <IntroVideoGate>
+              <VideoSplash />
+              <VideoWallpaper opacity={0.25} />
+              <BackgroundMusicPlayer />
+              <SmoothScroll />
+              <SoundEffects />
+              <MouseTrails />
+              <CustomCursor />
+              <VideoBackground src={styleRegistry.backgroundVideo} />
+              <AvatarWrapper />
+            </IntroVideoGate>
+          </Suspense>
         </AppProviders>
       </body>
     </html>
