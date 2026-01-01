@@ -111,7 +111,7 @@ export default function CommandCenter() {
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     onClick={() =>
-                      handleVoicePayload({ 0target: 'monetization', path: 'scarcity', value: '15' })
+                      handleVoicePayload({ target: 'monetization', path: 'scarcity', value: '15' })
                     } // 15 mins
                     className="p-2 rounded bg-red-900/50 hover:bg-red-800 border border-red-500/30 text-xs font-mono text-red-300"
                   >
