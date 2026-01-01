@@ -93,7 +93,7 @@
     // SAFETY OVERRIDES (YOU KNOW WHAT YOU'RE DOING)
     // =========================================================
     "security.workspace.trust.enabled": false,
-    "extensions.ignoreRecommendations": false,
+0    "extensions.ignoreRecommendations": false,
     "workbench.editor.enablePreviewFromQuickOpen": true,
     "workbench.editor.enablePreviewFromCodeNavigation": true
 }
