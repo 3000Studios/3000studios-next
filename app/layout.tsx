@@ -21,12 +21,9 @@ import VideoWallpaper from './components/VideoWallpaper';
 import MouseTrails from '@/components/MouseTrails';
 import { AppProviders } from '@/providers/AppProviders';
 import VideoSplash from './ui/VideoSplash';
-import dynamic from 'next/dynamic';
+import AvatarWrapper from './components/AvatarWrapper';
 import Nav from './ui/Nav';
 import VideoBackground from '@/components/VideoBackground';
-import './globals.css';
-
-const FemaleAvatar = dynamic(() => import('./admin/components/FemaleAvatar'), { ssr: false });
 
 const RAW_ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
 const ADSENSE_ACCOUNT = RAW_ADSENSE_ID
@@ -104,7 +101,7 @@ import { styleRegistry } from '@/lib/styleRegistry';
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body 
+      <body
         className="flex min-h-screen flex-col bg-black antialiased"
         data-accent={styleRegistry.accent}
       >
@@ -133,14 +130,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <GravityFooter />
           <ConsentBanner />
           <Analytics />
-          
-          
-          <VideoBackground src={styleRegistry.backgroundVideo} /> 
-          
+
+          <VideoBackground src={styleRegistry.backgroundVideo} />
+
           {/* Full 3D Female Avatar - Ultimate Edition */}
-          <div className="fixed bottom-0 left-0 z-[9999] pointer-events-none" style={{ width: '15vw', height: '40vh' }}>
-            <FemaleAvatar />
-          </div>
+          <AvatarWrapper />
         </AppProviders>
       </body>
     </html>
