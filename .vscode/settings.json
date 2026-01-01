@@ -76,7 +76,7 @@
     "editor.minimap.enabled": false,
     "editor.renderWhitespace": "none",
     "editor.renderControlCharacters": false,
-    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreview": true,
     "workbench.startupEditor": "none",
     // =========================================================
     // UI / VISUAL CONTROL — CREATOR MODE
@@ -93,5 +93,7 @@
     // SAFETY OVERRIDES (YOU KNOW WHAT YOU'RE DOING)
     // =========================================================
     "security.workspace.trust.enabled": false,
-    "extensions.ignoreRecommendations": false
+    "extensions.ignoreRecommendations": false,
+    "workbench.editor.enablePreviewFromQuickOpen": true,
+    "workbench.editor.enablePreviewFromCodeNavigation": true
 }
