@@ -1,34 +1,71 @@
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://3000studios.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://3000studios.com';
-  
-  // Static pages
-  const staticPages = [
-    '',
-    '/store',
-    '/projects',
-    '/portfolio',
-    '/blog',
-    '/live',
-    '/contact',
+  const currentDate = new Date().toISOString();
+
+  // Core pages with high priority
+  const corePages: MetadataRoute.Sitemap = [
+    {
+      url: BASE_URL,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 1.0,
+    },
+    {
+      url: `${BASE_URL}/info`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/about`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/contact`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/vendors`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/revenue`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
   ];
 
-  // Revenue pages
-  const revenuePages = [
-    '/revenue/best-gaming-laptops-2025',
-    '/revenue/best-passive-income-tools',
-    '/revenue/ultimate-developer-setup',
-    '/revenue/web-design-trends-2025',
-    '/revenue/best-ai-tools-for-creators',
+  // Service pages
+  const servicePages: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE_URL}/services`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/portfolio`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/blog`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 0.7,
+    },
   ];
 
-  const allPages = [...staticPages, ...revenuePages];
-
-  return allPages.map((page) => ({
-    url: `${baseUrl}${page}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: page === '' ? 1.0 : page.startsWith('/revenue') ? 0.8 : 0.9,
-  }));
+  return [...corePages, ...servicePages];
 }

@@ -2,20 +2,11 @@
 
 import HomeBackground from '@/components/HomeBackground';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRef } from 'react';
 import Button from './ui/Button';
 import Card from './ui/Card';
 import Section from './ui/Section';
-
-// Dynamic imports for 3D components (no SSR)
-const UnifiedAvatar = dynamic(() => import('../components/avatar/UnifiedAvatar'), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full animate-pulse bg-linear-to-br from-cyan-900/20 to-black rounded-2xl" />
-  ),
-});
 
 // ============================================
 // COPYRIGHT-FREE MEDIA SOURCES
@@ -66,7 +57,7 @@ export default function HomePage() {
           HERO SECTION - Video Background + Avatar
           ============================================ */}
       <section className="relative min-h-screen overflow-hidden">
-        {/* Video Background */}
+        {/* Video Background - Lazy loaded */}
         <motion.div
           style={{ scale: heroScale, opacity: heroOpacity }}
           className="absolute inset-0 z-0"
@@ -76,6 +67,8 @@ export default function HomePage() {
             muted
             loop
             playsInline
+            preload="none"
+            poster="/images/hero-poster.jpg"
             className="absolute inset-0 w-full h-full object-cover opacity-40"
           >
             <source src={STOCK_VIDEOS.heroBackground} type="video/mp4" />
@@ -189,14 +182,33 @@ export default function HomePage() {
               </motion.div>
             </motion.div>
 
-            {/* Right: 3D Avatar */}
+            {/* Right: Hero Image (Avatar loads separately in layout) */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.5 }}
-              className="relative w-full h-[600px] lg:h-[700px]"
+              className="relative w-full h-[600px] lg:h-[700px] flex items-center justify-center"
             >
-              <UnifiedAvatar variant="full" className="w-full h-full" showHUD={true} />
+              {/* Premium visual placeholder - Avatar loads from layout */}
+              <div className="relative w-full h-full rounded-3xl overflow-hidden bg-gradient-to-br from-cyan-900/30 via-black/50 to-purple-900/30 border border-white/10">
+                <Image
+                  src={STOCK_IMAGES.ai}
+                  alt="AI Technology"
+                  fill
+                  className="object-cover opacity-60"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+
+                {/* Tech overlay animation */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div
+                    className="w-40 h-40 rounded-full border-2 border-cyan-400/30 animate-ping"
+                    style={{ animationDuration: '3s' }}
+                  />
+                  <div className="absolute w-32 h-32 rounded-full border border-yellow-400/20 animate-pulse" />
+                </div>
+              </div>
 
               {/* Floating badges */}
               <motion.div
@@ -351,7 +363,14 @@ export default function HomePage() {
           ============================================ */}
       <Section className="bg-black relative overflow-hidden">
         <div className="absolute inset-0">
-          <video autoPlay muted loop playsInline className="w-full h-full object-cover opacity-20">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="none"
+            className="w-full h-full object-cover opacity-20"
+          >
             <source src={STOCK_VIDEOS.techGrid} type="video/mp4" />
           </video>
         </div>
