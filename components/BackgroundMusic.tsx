@@ -17,39 +17,115 @@ const MUSIC_TRACKS = [
   'https://res.cloudinary.com/dj92eb97f/video/upload/v1766973391/sweet-life-luxury-chill-438146_mwxuot.mp3',
 ];
 
-export default function BackgroundMusic() {
+export default function BackgroundMusicPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [currentTrack, setCurrentTrack] = useState('');
+  const [showIndicator, setShowIndicator] = useState(true);
 
   useEffect(() => {
-    // Select random track
+    // Select random track on mount
     const randomTrack = MUSIC_TRACKS[Math.floor(Math.random() * MUSIC_TRACKS.length)];
+    setCurrentTrack(randomTrack);
+  }, []);
 
-    if (audioRef.current) {
-      audioRef.current.src = randomTrack;
-    }
+  useEffect(() => {
+    if (!currentTrack || !audioRef.current) return;
 
-    // Handle user interaction to enable audio (browser policy)
-    const handleInteraction = () => {
-      if (!hasInteracted && audioRef.current) {
-        audioRef.current.play().catch(() => {
-          // Autoplay blocked - will retry on next interaction
-        });
+    audioRef.current.src = currentTrack;
+    audioRef.current.volume = 0.3; // Set volume to 30%
+
+    // Try to autoplay immediately
+    const tryPlay = async () => {
+      try {
+        await audioRef.current?.play();
+        setIsPlaying(true);
         setHasInteracted(true);
+        setShowIndicator(false);
+      } catch {
+        // Autoplay blocked - wait for user interaction
+        console.log('Autoplay blocked, waiting for user interaction');
       }
     };
 
-    // Listen for any user interaction
-    document.addEventListener('click', handleInteraction);
-    document.addEventListener('keydown', handleInteraction);
-    document.addEventListener('touchstart', handleInteraction);
+    tryPlay();
+  }, [currentTrack]);
+
+  useEffect(() => {
+    if (hasInteracted) return;
+
+    // Handle any user interaction to start music
+    const startMusic = async () => {
+      if (audioRef.current && !isPlaying) {
+        try {
+          await audioRef.current.play();
+          setIsPlaying(true);
+          setHasInteracted(true);
+          setShowIndicator(false);
+        } catch (err) {
+          console.log('Still cannot play:', err);
+        }
+      }
+    };
+
+    // Listen for many types of interactions
+    const events = ['click', 'keydown', 'touchstart', 'scroll', 'mousemove'];
+    events.forEach((event) => {
+      document.addEventListener(event, startMusic, { once: true, passive: true });
+    });
 
     return () => {
-      document.removeEventListener('click', handleInteraction);
-      document.removeEventListener('keydown', handleInteraction);
-      document.removeEventListener('touchstart', handleInteraction);
+      events.forEach((event) => {
+        document.removeEventListener(event, startMusic);
+      });
     };
-  }, [hasInteracted]);
+  }, [hasInteracted, isPlaying]);
 
-  return <audio ref={audioRef} loop className="hidden" preload="auto" />;
+  const toggleMusic = () => {
+    if (!audioRef.current) return;
+
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current.play().catch(console.error);
+      setIsPlaying(true);
+    }
+  };
+
+  return (
+    <>
+      <audio ref={audioRef} loop preload="auto" />
+
+      {/* Music Control Button */}
+      <button
+        onClick={toggleMusic}
+        className="fixed bottom-4 right-4 z-50 p-3 bg-black/80 border border-[#D4AF37]/50 rounded-full hover:bg-[#D4AF37]/20 transition-all group"
+        title={isPlaying ? 'Pause Music' : 'Play Music'}
+      >
+        {isPlaying ? (
+          <svg className="w-5 h-5 text-[#D4AF37]" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
+          </svg>
+        ) : (
+          <svg className="w-5 h-5 text-[#D4AF37]" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        )}
+
+        {/* Pulse animation when playing */}
+        {isPlaying && (
+          <span className="absolute inset-0 rounded-full border-2 border-[#D4AF37] animate-ping opacity-30" />
+        )}
+      </button>
+
+      {/* Click to enable music indicator */}
+      {showIndicator && !hasInteracted && (
+        <div className="fixed bottom-16 right-4 z-50 px-3 py-2 bg-black/90 border border-[#D4AF37]/30 rounded-lg text-xs text-[#D4AF37] animate-pulse">
+          🎵 Click anywhere to enable music
+        </div>
+      )}
+    </>
+  );
 }
