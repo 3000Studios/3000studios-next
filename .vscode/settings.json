@@ -1,1 +1,97 @@
-{ "files.autoSave": "afterDelay", "files.autoSaveDelay": 1000 }
+{
+    // =========================================================
+    // CORE BEHAVIOR — FULL AUTONOMY
+    // =========================================================
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 500,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "always",
+        "source.organizeImports": "always"
+    },
+    // =========================================================
+    // AI / ANTIGRAVITY — MAX POWER
+    // =========================================================
+    "antigravity.searchMaxWorkspaceFileCount": 0,
+    "antigravity.enableCursorImportCursor": true,
+    "antigravity.marketplaceExtensionGalleryServiceURL": "https://open-vsx.org/vscode/gallery",
+    "antigravity.marketplaceGalleryItemURL": "https://open-vsx.org/vscode/item",
+    // Allow AI to reason across entire repo
+    "editor.largeFileOptimizations": false,
+    // =========================================================
+    // VOICE → WEB → CODE PIPELINE
+    // =========================================================
+    "speech.timeout": 0,
+    "speech.continuousRecognition": true,
+    // Reduce friction for rapid site edits
+    "editor.inlineSuggest.enabled": true,
+    "editor.suggest.preview": true,
+    // =========================================================
+    // NEXT.JS / TAILWIND / UI-UX OPTIMIZATION
+    // =========================================================
+    "css.validate": false,
+    "scss.validate": false,
+    "tailwindCSS.emmetCompletions": true,
+    "tailwindCSS.classAttributes": [
+        "class",
+        "className"
+    ],
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact",
+        "typescript": "typescriptreact"
+    },
+    "emmet.showExpandedAbbreviation": "always",
+    // =========================================================
+    // GIT — AUTO COMMIT, AUTO PUSH, ZERO PROMPTS
+    // =========================================================
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "git.smartCommitChanges": "all",
+    "git.suggestSmartCommit": false,
+    "git.supportCancellation": false,
+    "git.useEditorAsCommitInput": false,
+    "git.useForcePushWithLease": true,
+    "git.useForcePushIfIncludes": true,
+    "git.terminalAuthentication": true,
+    // GitHub integration
+    "github.gitAuthentication": true,
+    "github.branchProtection": true,
+    "github.showAvatar": true,
+    // =========================================================
+    // DEPLOYMENT + CI/CD AWARENESS
+    // =========================================================
+    "terminal.integrated.confirmOnExit": "never",
+    "terminal.integrated.scrollback": 100000,
+    "terminal.integrated.enablePersistentSessions": true,
+    // Designed to pair with Vercel + GitHub Actions
+    "update.mode": "default",
+    // =========================================================
+    // PERFORMANCE — BIG REPO, ZERO LAG
+    // =========================================================
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "none",
+    "editor.renderControlCharacters": false,
+    "workbench.editor.enablePreview": false,
+    "workbench.startupEditor": "none",
+    // =========================================================
+    // UI / VISUAL CONTROL — CREATOR MODE
+    // =========================================================
+    "window.commandCenter": true,
+    "window.menuBarVisibility": "compact",
+    "workbench.activityBar.location": "default",
+    "workbench.statusBar.visible": true,
+    // =========================================================
+    // TELEMETRY — ENABLED FOR SELF-IMPROVING SYSTEM
+    // =========================================================
+    "telemetry.telemetryLevel": "all",
+    // =========================================================
+    // SAFETY OVERRIDES (YOU KNOW WHAT YOU'RE DOING)
+    // =========================================================
+    "security.workspace.trust.enabled": false,
+    "extensions.ignoreRecommendations": false
+}
