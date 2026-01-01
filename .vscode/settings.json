@@ -96,5 +96,5 @@
     "extensions.ignoreRecommendations": false,
     "workbench.editor.enablePreviewFromQuickOpen": true,
     "workbench.editor.enablePreviewFromCodeNavigation": true,
-    "editor.codeActions.triggerOnFocusChange": true
+    "editor.codeActions.triggerOnFocusChange": false
 }
