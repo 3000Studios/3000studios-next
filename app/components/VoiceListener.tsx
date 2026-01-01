@@ -2,6 +2,8 @@
 
 import { useEffect } from 'react';
 
+import { handleVoicePayload } from '@/lib/voice/payloadHandler';
+
 export default function VoiceListener() {
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -9,6 +11,19 @@ export default function VoiceListener() {
         const res = await fetch('/api/voice');
         const cmd = await res.json();
         if (!cmd || !cmd.action) return;
+
+        // Phase 63 & 32: Route to Payload Handler
+        // Phase 34: Monetization Engine
+        if (cmd.target === 'ui' || cmd.target === 'style' || cmd.target === 'monetization') {
+            handleVoicePayload(cmd);
+            return; 
+        }
+
+        // Phase 63: Avatar Voice Control
+        if (cmd.target === 'avatar') {
+            window.dispatchEvent(new CustomEvent('voice-command', { detail: cmd }));
+            return;
+        }
 
         if (cmd.action === 'addText') {
           const el = document.createElement('div');
@@ -34,7 +49,8 @@ export default function VoiceListener() {
         }
 
         if (cmd.action === 'changeTheme') {
-          document.documentElement.style.setProperty('--accent', cmd.color);
+            // Legacy support, but payloadHandler handles this better now
+             handleVoicePayload({ target: 'style', path: 'accent', value: cmd.color });
         }
       } catch (e) {
         // Silent fail on API errors
