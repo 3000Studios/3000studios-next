@@ -379,7 +379,7 @@ export default function HomePage() {
                 className="absolute inset-0 flex items-center justify-center group"
               >
                 <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center group-hover:scale-110 group-hover:bg-[#D4AF37]/30 transition-all duration-300">
-                  <div className="w-0 h-0 border-t-[12px] border-b-[12px] border-l-[20px] border-transparent border-l-white ml-1" />
+                  <div className="w-0 h-0 border-t-12 border-b-12 border-l-20 border-transparent border-l-white ml-1" />
                 </div>
               </button>
             </div>

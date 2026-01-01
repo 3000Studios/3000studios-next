@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 export default function VideoSplash() {
   const [showSplash, setShowSplash] = useState(false);
@@ -9,7 +9,7 @@ export default function VideoSplash() {
 
   useEffect(() => {
     // Check if user has seen splash in this session
-    const seen = sessionStorage.getItem("splash-seen");
+    const seen = sessionStorage.getItem('splash-seen');
     if (!seen) {
       setShowSplash(true);
     } else {
@@ -18,7 +18,7 @@ export default function VideoSplash() {
   }, []);
 
   const handleSplashEnd = () => {
-    sessionStorage.setItem("splash-seen", "true");
+    sessionStorage.setItem('splash-seen', 'true');
     setShowSplash(false);
     setHasSeenSplash(true);
   };
@@ -31,8 +31,8 @@ export default function VideoSplash() {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.1 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black cursor-pointer"
+          transition={{ duration: 1, ease: 'easeInOut' }}
+          className="fixed inset-0 z-9999 flex items-center justify-center bg-black cursor-pointer"
           onClick={handleSplashEnd}
         >
           <video

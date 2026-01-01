@@ -43,7 +43,7 @@ export default function Nav() {
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
 
       {/* Border */}
-      <div className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-[2px] bg-linear-to-r from-transparent via-[#D4AF37] to-transparent" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
         <div className="flex items-center justify-between h-full">
