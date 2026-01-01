@@ -81,13 +81,13 @@ export default function CustomCursor() {
       {/* Main cursor dot */}
       <div
         ref={cursorRef}
-        className="fixed w-3 h-3 bg-[#D4AF37] rounded-full pointer-events-none z-[99999] -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 mix-blend-difference"
+        className="fixed w-3 h-3 bg-[#D4AF37] rounded-full pointer-events-none z-99999 -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 mix-blend-difference"
         style={{ left: '-100px', top: '-100px' }}
       />
       {/* Follower ring */}
       <div
         ref={followerRef}
-        className="fixed w-10 h-10 border-2 border-white/50 rounded-full pointer-events-none z-[99998] -translate-x-1/2 -translate-y-1/2 transition-all duration-300"
+        className="fixed w-10 h-10 border-2 border-white/50 rounded-full pointer-events-none z-99998 -translate-x-1/2 -translate-y-1/2 transition-all duration-300"
         style={{ left: '-100px', top: '-100px' }}
       />
       <style jsx global>{`

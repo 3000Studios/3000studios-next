@@ -20,7 +20,7 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
 
   if (!done) {
     return (
-      <div className="fixed inset-0 z-[9999] bg-black">
+      <div className="fixed inset-0 z-9999 bg-black">
         <video
           autoPlay
           muted

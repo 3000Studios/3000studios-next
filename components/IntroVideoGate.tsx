@@ -26,7 +26,7 @@ export default function IntroVideoGate({ children }: { children: React.ReactNode
     return (
       <div
         onClick={handleDismiss}
-        className="fixed inset-0 z-[99999] bg-black cursor-pointer flex items-center justify-center"
+        className="fixed inset-0 z-99999 bg-black cursor-pointer flex items-center justify-center"
         role="button"
         tabIndex={0}
         onKeyDown={(e) => e.key === 'Enter' && handleDismiss()}

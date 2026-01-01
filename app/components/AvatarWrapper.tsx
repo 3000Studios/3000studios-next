@@ -14,7 +14,7 @@ const FemaleAvatar = dynamic(() => import('../admin/components/FemaleAvatar'), {
 export default function AvatarWrapper() {
   return (
     <div
-      className="fixed bottom-0 left-0 z-[9999] pointer-events-none"
+      className="fixed bottom-0 left-0 z-9999 pointer-events-none"
       style={{ width: '15vw', height: '40vh' }}
     >
       <FemaleAvatar />

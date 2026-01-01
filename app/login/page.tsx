@@ -27,24 +27,24 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[var(--marble-black)] relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-(--marble-black) relative overflow-hidden">
       <VideoBackground opacity={0.2} />
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-linear-to-br from-[var(--marble-black)] via-gray-900 to-[var(--marble-black)] opacity-90"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-(--marble-black) via-gray-900 to-(--marble-black) opacity-90"></div>
       <div className="absolute inset-0 bg-[url('/assets/textures/marble-dark.jpg')] bg-cover bg-center opacity-20"></div>
 
       {/* Animated Background Elements */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-linear-to-r from-[var(--gold-flake)] to-[var(--gold-highlight)] rounded-full blur-3xl opacity-10 animate-pulse"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-linear-to-r from-[var(--gold-highlight)] to-[var(--gold-flake)] rounded-full blur-3xl opacity-10 animate-pulse delay-1000"></div>
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-linear-to-r from-(--gold-flake) to-(--gold-highlight) rounded-full blur-3xl opacity-10 animate-pulse"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-linear-to-r from-(--gold-highlight) to-(--gold-flake) rounded-full blur-3xl opacity-10 animate-pulse delay-1000"></div>
 
       <div className="relative z-10 max-w-md w-full space-y-8 p-8">
         {/* Glass-morphism Card */}
-        <div className="backdrop-blur-md bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl shadow-2xl p-8 hover:shadow-[var(--shadow-gold)] transition-all duration-500">
+        <div className="backdrop-blur-md bg-(--card-bg) border border-(--card-border) rounded-2xl shadow-2xl p-8 hover:shadow-(--shadow-gold) transition-all duration-500">
           <div className="text-center">
             <h2 className="text-4xl font-bold metallic-text-gold mb-2 animate-pulse">
               Welcome Back
             </h2>
-            <p className="text-[var(--marble-white)] opacity-80 text-sm">
+            <p className="text-(--marble-white) opacity-80 text-sm">
               Access your premium dashboard
             </p>
           </div>
@@ -54,7 +54,7 @@ export default function LoginPage() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-[var(--marble-white)] mb-2"
+                  className="block text-sm font-medium text-(--marble-white) mb-2"
                 >
                   Email Address
                 </label>
@@ -63,7 +63,7 @@ export default function LoginPage() {
                   name="email"
                   type="email"
                   required
-                  className="w-full px-4 py-3 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-lg text-[var(--marble-white)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--gold-flake)] focus:border-transparent transition-all duration-300 hover-shimmer"
+                  className="w-full px-4 py-3 bg-(--card-bg) border border-(--card-border) rounded-lg text-(--marble-white) placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-(--gold-flake) focus:border-transparent transition-all duration-300 hover-shimmer"
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -72,7 +72,7 @@ export default function LoginPage() {
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-[var(--marble-white)] mb-2"
+                  className="block text-sm font-medium text-(--marble-white) mb-2"
                 >
                   Password
                 </label>
@@ -81,7 +81,7 @@ export default function LoginPage() {
                   name="password"
                   type="password"
                   required
-                  className="w-full px-4 py-3 bg-[var(--card-bg)] border border-[var(--card-border)] rounded-lg text-[var(--marble-white)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--gold-flake)] focus:border-transparent transition-all duration-300 hover-shimmer"
+                  className="w-full px-4 py-3 bg-(--card-bg) border border-(--card-border) rounded-lg text-(--marble-white) placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-(--gold-flake) focus:border-transparent transition-all duration-300 hover-shimmer"
                   placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -98,7 +98,7 @@ export default function LoginPage() {
             <div>
               <button
                 type="submit"
-                className="w-full py-3 px-4 bg-linear-to-r from-[var(--gold-flake)] to-[var(--gold-highlight)] text-[var(--marble-black)] font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 hover-shimmer relative overflow-hidden"
+                className="w-full py-3 px-4 bg-linear-to-r from-(--gold-flake) to-(--gold-highlight) text-(--marble-black) font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 hover-shimmer relative overflow-hidden"
               >
                 <span className="relative z-10">Sign In</span>
                 <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full hover:translate-x-full transition-transform duration-700"></div>
@@ -107,7 +107,7 @@ export default function LoginPage() {
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-[var(--marble-white)] opacity-60 text-xs">Secured by 3000 Studios</p>
+            <p className="text-(--marble-white) opacity-60 text-xs">Secured by 3000 Studios</p>
           </div>
         </div>
       </div>

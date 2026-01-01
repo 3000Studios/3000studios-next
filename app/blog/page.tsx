@@ -60,7 +60,7 @@ export default function BlogPage() {
               placeholder="Search articles..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 backdrop-blur-md rounded-lg text-[var(--marble-white)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--gold-flake)] focus:border-transparent transition-all hover-shimmer"
+              className="w-full pl-12 pr-4 py-4 backdrop-blur-md rounded-lg text-(--marble-white) placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-(--gold-flake) focus:border-transparent transition-all hover-shimmer bg-(--card-bg) border border-(--card-border)"
               style={{
                 background: 'var(--card-bg)',
                 border: '1px solid var(--card-border)',

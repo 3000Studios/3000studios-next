@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-const BRANDING_TEXTS = ["3000 STUDIOS", "WELCOME", "COME ON IN", "HELLO"];
+const BRANDING_TEXTS = ['3000 STUDIOS', 'WELCOME', 'COME ON IN', 'HELLO'];
 
 export default function ScrollZoom3D() {
   useEffect(() => {
     const texts = document.querySelectorAll('.branding-text-3d');
-    
+
     // Initial trigger
     setTimeout(() => {
       texts.forEach((text) => {
@@ -18,7 +18,7 @@ export default function ScrollZoom3D() {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const scrollLayer = document.getElementById('scrollLayer');
-      
+
       if (scrollY > window.innerHeight * 1.5 && scrollLayer) {
         scrollLayer.style.opacity = '0';
         scrollLayer.style.pointerEvents = 'none';
@@ -30,12 +30,12 @@ export default function ScrollZoom3D() {
   }, []);
 
   return (
-    <div 
+    <div
       id="scrollLayer"
-      className="fixed top-0 left-0 w-full h-screen flex items-center justify-center z-[100] pointer-events-none"
-      style={{ 
+      className="fixed top-0 left-0 w-full h-screen flex items-center justify-center z-100 pointer-events-none"
+      style={{
         transformStyle: 'preserve-3d',
-        perspective: '1200px'
+        perspective: '1200px',
       }}
     >
       {BRANDING_TEXTS.map((text, i) => (
@@ -57,7 +57,7 @@ export default function ScrollZoom3D() {
             filter: 'drop-shadow(0 20px 40px rgba(212, 175, 55, 0.5))',
             whiteSpace: 'nowrap',
             willChange: 'transform, opacity',
-            animationDelay: `${i * 1.3}s`
+            animationDelay: `${i * 1.3}s`,
           }}
         >
           {text}
