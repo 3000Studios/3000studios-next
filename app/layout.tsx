@@ -2,10 +2,11 @@
  * Root Layout Component
  * Main layout wrapper for the entire application.
  * REVENUE LOCK — Contains AdSense, consent, and monetization infrastructure.
- * PERFORMANCE OPTIMIZED — Lazy loads heavy components
+ * PERFORMANCE OPTIMIZED — Lazy loads heavy components via ClientEffects
  */
 
 import ConsentBanner from '@/components/ConsentBanner';
+import { styleRegistry } from '@/lib/styleRegistry';
 import { AppProviders } from '@/providers/AppProviders';
 import { Analytics } from '@vercel/analytics/next';
 import type { Metadata, Viewport } from 'next';
@@ -13,65 +14,10 @@ import Script from 'next/script';
 import type { ReactNode } from 'react';
 import { Suspense } from 'react';
 import '../styles/elite.css';
+import ClientEffects from './components/ClientEffects';
 import GravityFooter from './components/GravityFooter';
 import './globals.css';
 import Nav from './ui/Nav';
-
-// ============================================
-// LAZY LOADED COMPONENTS (Non-Critical Path)
-// ============================================
-import dynamic from 'next/dynamic';
-
-// Heavy visual effects - load after initial paint
-const BackgroundMusicPlayer = dynamic(() => import('@/components/BackgroundMusic'), {
-  ssr: false,
-  loading: () => null,
-});
-
-const CustomCursor = dynamic(() => import('@/components/CustomCursor'), {
-  ssr: false,
-  loading: () => null,
-});
-
-const IntroVideoGate = dynamic(() => import('@/components/IntroVideoGate'), {
-  ssr: false,
-  loading: () => null,
-});
-
-const MouseTrails = dynamic(() => import('@/components/MouseTrails'), {
-  ssr: false,
-  loading: () => null,
-});
-
-const VideoBackground = dynamic(() => import('@/components/VideoBackground'), {
-  ssr: false,
-  loading: () => null,
-});
-
-const AvatarWrapper = dynamic(() => import('./components/AvatarWrapper'), {
-  ssr: false,
-  loading: () => null,
-});
-
-const SmoothScroll = dynamic(() => import('./components/SmoothScroll'), {
-  ssr: false,
-  loading: () => null,
-});
-
-const SoundEffects = dynamic(() => import('./components/SoundEffects'), {
-  ssr: false,
-  loading: () => null,
-});
-
-const VideoWallpaper = dynamic(() => import('./components/VideoWallpaper'), {
-  ssr: false,
-  loading: () => null,
-});
-
-const VideoSplash = dynamic(() => import('./ui/VideoSplash'), {
-  ssr: false,
-  loading: () => null,
-});
 
 // ============================================
 // METADATA & SEO
@@ -166,8 +112,6 @@ export const metadata: Metadata = {
   other: ADSENSE_ACCOUNT ? { 'google-adsense-account': ADSENSE_ACCOUNT } : undefined,
 };
 
-import { styleRegistry } from '@/lib/styleRegistry';
-
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -184,7 +128,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
       </head>
       <body
-        className="flex min-h-screen flex-col bg-black antialiased"
+        className="flex min-h-screen w-full flex-col bg-black antialiased"
         data-accent={styleRegistry.accent}
       >
         {/* Google AdSense Auto Ads - Load after content */}
@@ -201,8 +145,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           {/* Navigation - Critical, loads immediately */}
           <Nav />
 
-          {/* Main content - Critical path */}
-          <main className="relative z-10 grow pt-20">{children}</main>
+          {/* Main content - Critical path, auto-sizes to viewport */}
+          <main className="relative z-10 flex-1 w-full pt-20">{children}</main>
 
           {/* Footer - Critical for SEO */}
           <GravityFooter />
@@ -215,23 +159,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <Analytics />
           </Suspense>
 
-          {/* ============================================
-              NON-CRITICAL VISUAL EFFECTS
-              Load after main content is visible
-              ============================================ */}
-          <Suspense fallback={null}>
-            <IntroVideoGate>
-              <VideoSplash />
-              <VideoWallpaper opacity={0.25} />
-              <BackgroundMusicPlayer />
-              <SmoothScroll />
-              <SoundEffects />
-              <MouseTrails />
-              <CustomCursor />
-              <VideoBackground src={styleRegistry.backgroundVideo} />
-              <AvatarWrapper />
-            </IntroVideoGate>
-          </Suspense>
+          {/* Non-critical visual effects - lazy loaded via Client Component */}
+          <ClientEffects />
         </AppProviders>
       </body>
     </html>
