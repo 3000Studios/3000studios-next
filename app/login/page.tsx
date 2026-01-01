@@ -1,8 +1,8 @@
 'use client';
 
+import VideoBackground from '@/components/VideoBackground';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
-import VideoBackground from "@/components/VideoBackground";
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -30,12 +30,12 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-[var(--marble-black)] relative overflow-hidden">
       <VideoBackground opacity={0.2} />
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--marble-black)] via-gray-900 to-[var(--marble-black)] opacity-90"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-[var(--marble-black)] via-gray-900 to-[var(--marble-black)] opacity-90"></div>
       <div className="absolute inset-0 bg-[url('/assets/textures/marble-dark.jpg')] bg-cover bg-center opacity-20"></div>
 
       {/* Animated Background Elements */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-[var(--gold-flake)] to-[var(--gold-highlight)] rounded-full blur-3xl opacity-10 animate-pulse"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-gradient-to-r from-[var(--gold-highlight)] to-[var(--gold-flake)] rounded-full blur-3xl opacity-10 animate-pulse delay-1000"></div>
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-linear-to-r from-[var(--gold-flake)] to-[var(--gold-highlight)] rounded-full blur-3xl opacity-10 animate-pulse"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-linear-to-r from-[var(--gold-highlight)] to-[var(--gold-flake)] rounded-full blur-3xl opacity-10 animate-pulse delay-1000"></div>
 
       <div className="relative z-10 max-w-md w-full space-y-8 p-8">
         {/* Glass-morphism Card */}
@@ -52,7 +52,10 @@ export default function LoginPage() {
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-4">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-[var(--marble-white)] mb-2">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-[var(--marble-white)] mb-2"
+                >
                   Email Address
                 </label>
                 <input
@@ -67,7 +70,10 @@ export default function LoginPage() {
                 />
               </div>
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-[var(--marble-white)] mb-2">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-[var(--marble-white)] mb-2"
+                >
                   Password
                 </label>
                 <input
@@ -92,18 +98,16 @@ export default function LoginPage() {
             <div>
               <button
                 type="submit"
-                className="w-full py-3 px-4 bg-gradient-to-r from-[var(--gold-flake)] to-[var(--gold-highlight)] text-[var(--marble-black)] font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 hover-shimmer relative overflow-hidden"
+                className="w-full py-3 px-4 bg-linear-to-r from-[var(--gold-flake)] to-[var(--gold-highlight)] text-[var(--marble-black)] font-semibold rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300 hover-shimmer relative overflow-hidden"
               >
                 <span className="relative z-10">Sign In</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full hover:translate-x-full transition-transform duration-700"></div>
+                <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full hover:translate-x-full transition-transform duration-700"></div>
               </button>
             </div>
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-[var(--marble-white)] opacity-60 text-xs">
-              Secured by 3000 Studios
-            </p>
+            <p className="text-[var(--marble-white)] opacity-60 text-xs">Secured by 3000 Studios</p>
           </div>
         </div>
       </div>

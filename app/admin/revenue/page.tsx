@@ -1,22 +1,22 @@
 export default function AdminRevenue() {
   return (
-    <section className="p-10 min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
+    <section className="p-10 min-h-screen bg-linear-to-br from-black via-gray-900 to-black">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-5xl font-bold gradient-text mb-8">Revenue Control Center</h1>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="card-premium border-green-500">
             <h3 className="text-2xl font-bold text-green-400 mb-4">Stripe</h3>
             <p className="text-white text-3xl font-bold mb-2">ACTIVE</p>
             <p className="text-gray-400">Payment processing ready</p>
           </div>
-          
+
           <div className="card-premium border-blue-500">
             <h3 className="text-2xl font-bold text-blue-400 mb-4">PayPal</h3>
             <p className="text-white text-3xl font-bold mb-2">ACTIVE</p>
             <p className="text-gray-400">Alternative payment ready</p>
           </div>
-          
+
           <div className="card-premium border-yellow-500">
             <h3 className="text-2xl font-bold text-yellow-400 mb-4">Ads</h3>
             <p className="text-white text-3xl font-bold mb-2">ACTIVE</p>

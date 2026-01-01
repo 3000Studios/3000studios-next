@@ -36,7 +36,7 @@ a:hover, button:hover, [role="button"]:hover {
 
   --marble-black: #0a0a0a;
   --marble-white: rgb(var(--fg-base));
-  
+
   --gold-flake: rgb(var(--accent-base));
   --gold-highlight: #FFD700;
   --gloss-highlight: rgba(255, 255, 255, 0.8);
@@ -45,7 +45,7 @@ a:hover, button:hover, [role="button"]:hover {
   --theme-teal: rgb(var(--bg-base));
 
   /* Base Colors */
-  --background: var(--theme-teal); 
+  --background: var(--theme-teal);
   --foreground: var(--marble-white);
   --accent: var(--gold-flake);
 
@@ -325,6 +325,7 @@ html {
   border: 1px solid var(--card-border);
   border-radius: 1rem;
   padding: 1.5rem;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
 }
@@ -372,6 +373,7 @@ a:hover {
 /* Glass Morphism */
 .glass {
   background: rgba(255, 255, 255, 0.05);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -689,6 +691,7 @@ a:focus-visible {
   border: 2px solid rgba(255, 215, 0, 0.3);
   border-radius: 1rem;
   padding: 2rem;
+  -webkit-backdrop-filter: blur(15px);
   backdrop-filter: blur(15px);
   box-shadow:
     0 10px 40px rgba(0, 0, 0, 0.3),

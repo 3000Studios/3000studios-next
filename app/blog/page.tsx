@@ -6,13 +6,13 @@
 
 'use client';
 
+import VideoBackground from '@/components/VideoBackground';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, Search, Tag, User } from 'lucide-react';
 import { useState } from 'react';
 import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
 import Newsletter from '../components/Newsletter';
 import { blogPosts, getAllCategories, getAllTags } from '../lib/blogData';
-import VideoBackground from "@/components/VideoBackground";
 
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -37,7 +37,10 @@ export default function BlogPage() {
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
         <div className="mb-12 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 neon-glow" style={{ color: 'var(--marble-white)' }}>
+          <h1
+            className="text-5xl md:text-6xl font-bold mb-4 neon-glow"
+            style={{ color: 'var(--marble-white)' }}
+          >
             Blog & Insights
           </h1>
           <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--marble-white)' }}>
@@ -100,7 +103,7 @@ export default function BlogPage() {
               <div className="flex flex-col md:flex-row gap-6">
                 {/* Featured Image Placeholder */}
                 <div className="md:w-1/3">
-                  <div className="w-full h-48 bg-gradient-to-br from-gold/20 to-sapphire/20 rounded-lg flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                  <div className="w-full h-48 bg-linear-to-br from-gold/20 to-sapphire/20 rounded-lg flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-300">
                     {post.featured && (
                       <div className="absolute top-3 right-3 bg-gold text-black px-3 py-1 rounded-full text-xs font-bold">
                         FEATURED

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function IntroGate({ children }: { children: React.ReactNode }) {
   const [done, setDone] = useState(false);
@@ -27,8 +27,12 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
           playsInline
           onEnded={handleDone}
           onClick={handleDone}
-          className="w-full h-full object-cover cursor-pointer"        >
-          <source src="https://res.cloudinary.com/dj92eb97f/video/upload/v1767186687/1230_ptjsbp.mp4" type="video/mp4" />
+          className="w-full h-full object-cover cursor-pointer"
+        >
+          <source
+            src="https://res.cloudinary.com/dj92eb97f/video/upload/v1767186687/1230_ptjsbp.mp4"
+            type="video/mp4"
+          />
         </video>
       </div>
     );

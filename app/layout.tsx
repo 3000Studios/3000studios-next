@@ -4,26 +4,24 @@
  * REVENUE LOCK — Contains AdSense, consent, and monetization infrastructure.
  */
 
-import './globals.css';
-import '../styles/elite.css';
 import ConsentBanner from '@/components/ConsentBanner';
+import MouseTrails from '@/components/MouseTrails';
+import VideoBackground from '@/components/VideoBackground';
+import { AppProviders } from '@/providers/AppProviders';
 import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import type { ReactNode } from 'react';
+import '../styles/elite.css';
+import AvatarWrapper from './components/AvatarWrapper';
 import BackgroundMusic from './components/BackgroundMusic';
 import GravityFooter from './components/GravityFooter';
-import Link from 'next/link';
-import NavGate from '@/components/NavGate';
 import SmoothScroll from './components/SmoothScroll';
 import SoundEffects from './components/SoundEffects';
 import VideoWallpaper from './components/VideoWallpaper';
-import MouseTrails from '@/components/MouseTrails';
-import { AppProviders } from '@/providers/AppProviders';
-import VideoSplash from './ui/VideoSplash';
-import AvatarWrapper from './components/AvatarWrapper';
+import './globals.css';
 import Nav from './ui/Nav';
-import VideoBackground from '@/components/VideoBackground';
+import VideoSplash from './ui/VideoSplash';
 
 const RAW_ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
 const ADSENSE_ACCOUNT = RAW_ADSENSE_ID
@@ -125,7 +123,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <MouseTrails />
 
           <Nav />
-          <main className="relative z-10 flex-grow pt-20">{children}</main>
+          <main className="relative z-10 grow pt-20">{children}</main>
 
           <GravityFooter />
           <ConsentBanner />
