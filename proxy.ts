@@ -6,6 +6,15 @@ const WINDOW_MS = 60_000;
 const MAX_REQUESTS = 30;
 
 export function proxy(req: NextRequest) {
+  // 1. Auth Check (formerly middleware.ts)
+  if (req.nextUrl.pathname.startsWith('/admin')) {
+    const auth = req.cookies.get('auth');
+    if (!auth) {
+      return NextResponse.redirect(new URL('/login', req.url));
+    }
+  }
+
+  // 2. Rate Limiting (formerly proxy.ts)
   // Only applying rate limiting to AI routes
   if (req.nextUrl.pathname.startsWith('/api/ai')) {
     const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
@@ -29,5 +38,6 @@ export function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/api/ai/:path*'],
+  // Combine matchers from both files
+  matcher: ['/admin/:path*', '/api/ai/:path*'],
 };

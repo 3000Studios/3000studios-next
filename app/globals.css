@@ -6,6 +6,19 @@
 
 @import "tailwindcss";
 
+@import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap");
+
+@font-face {
+  font-family: "Dusseldot";
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/108082/Dusseldot-variable-web.woff2")
+      format("woff2 supports variations"),
+    url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/108082/Dusseldot-variable-web.woff2")
+      format("woff2-variations");
+  font-display: swap;
+  font-weight: 50 250;
+}
+
 /* Custom Cursor - Gold default, Ruby Blue on hover */
 * {
   cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="%23D4AF37" stroke="%23FFD700" stroke-width="2"/></svg>'), auto;
@@ -23,8 +36,11 @@ a:hover, button:hover, [role="button"]:hover {
   --gold-highlight: #FFD700;
   --gloss-highlight: rgba(255, 255, 255, 0.8);
 
+  /* New Theme Colors */
+  --theme-teal: #004e58;
+
   /* Base Colors */
-  --background: var(--marble-black);
+  --background: var(--theme-teal); /* Updated background */
   --foreground: var(--marble-white);
   --accent: var(--gold-flake);
 
@@ -40,8 +56,8 @@ a:hover, button:hover, [role="button"]:hover {
 
 @media (prefers-color-scheme: light) {
   :root {
-    --background: var(--marble-white);
-    --foreground: var(--marble-black);
+    --background: var(--theme-teal); /* Force Teal even in light mode for now to match request */
+    --foreground: var(--marble-white);
     --card-bg: rgba(255, 255, 255, 0.8);
   }
 }
@@ -232,8 +248,8 @@ a:hover, button:hover, [role="button"]:hover {
 
 .glass-morphism {
   background: rgba(10, 10, 10, 0.7);
-  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
@@ -528,8 +544,8 @@ a:hover {
     rgba(255, 255, 255, 0.08) 0%,
     rgba(255, 255, 255, 0.03) 100%
   );
-  backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 215, 0, 0.2);
 }
 

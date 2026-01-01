@@ -34,7 +34,8 @@
     "deps:audit": "npm audit fix",
     "deps:update": "npm update",
     "deploy": "vercel --prod --yes",
-    "postinstall": "node -e \"const { execSync } = require('child_process'); const url = process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/postgres'; execSync('npx prisma generate', { stdio: 'inherit', env: { ...process.env, DATABASE_URL: url } });\""
+    "postinstall": "node -e \"const { execSync } = require('child_process'); const url = process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/postgres'; execSync('npx prisma generate', { stdio: 'inherit', env: { ...process.env, DATABASE_URL: url } });\"",
+    "slicemachine": "start-slicemachine"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.88",
@@ -49,6 +50,9 @@
     "@paypal/paypal-server-sdk": "^2.1.0",
     "@paypal/react-paypal-js": "^8.9.2",
     "@prisma/client": "^6.19.1",
+    "@prismicio/client": "^7.21.2",
+    "@prismicio/next": "^2.0.2",
+    "@prismicio/react": "^3.2.2",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.4.2",
     "@stripe/stripe-js": "^8.5.3",
@@ -91,6 +95,7 @@
     "zustand": "^4.5.5"
   },
   "devDependencies": {
+    "@slicemachine/adapter-next": "^0.3.92",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.1",
     "@types/bcryptjs": "^3.0.0",
@@ -117,6 +122,7 @@
     "prettier": "^3.7.4",
     "prisma": "^6.19.1",
     "rimraf": "^6.0.1",
+    "slice-machine-ui": "^2.20.5",
     "tailwindcss": "4.1.18",
     "tsx": "^4.21.0",
     "typescript": "^5",
