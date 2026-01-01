@@ -95,5 +95,6 @@
     "security.workspace.trust.enabled": false,
     "extensions.ignoreRecommendations": false,
     "workbench.editor.enablePreviewFromQuickOpen": true,
-    "workbench.editor.enablePreviewFromCodeNavigation": true
+    "workbench.editor.enablePreviewFromCodeNavigation": true,
+    "editor.codeActions.triggerOnFocusChange": true
 }
