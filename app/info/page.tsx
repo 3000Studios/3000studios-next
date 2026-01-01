@@ -1,8 +1,8 @@
+'use client';
+
 /**
  * Info Page - Combined About, Contact, JWS, and Vendors content
  */
-
-'use client';
 
 import { AlertCircle, Check, Loader2, Lock, Mail, MapPin, Phone, Send } from 'lucide-react';
 import Link from 'next/link';
