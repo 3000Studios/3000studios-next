@@ -1,0 +1,26 @@
+npm warn Unknown project config "enable-pre-post-scripts". This will stop working in the next major version of npm.
+npm warn Unknown project config "auto-install-peers". This will stop working in the next major version of npm.
+npm warn Unknown project config "strict-peer-dependencies". This will stop working in the next major version of npm.
+npm warn Unknown project config "shamefully-hoist". This will stop working in the next major version of npm.
+npm warn Unknown project config "side-effects-cache". This will stop working in the next major version of npm.
+npm warn Unknown project config "side-effects-cache-readonly". This will stop working in the next major version of npm.
+npm warn Unknown project config "child-concurrency". This will stop working in the next major version of npm.
+npm warn Unknown project config "network-concurrency". This will stop working in the next major version of npm.
+npm warn Unknown project config "prefer-frozen-lockfile". This will stop working in the next major version of npm.
+
+> 3000studios-next@1.0.1 prebuild
+> node scripts/validate-app-structure.mjs
+
+Γ£à App structure validated. Safe to build.
+
+> 3000studios-next@1.0.1 build
+> next build --webpack
+
+Γû▓ Next.js 16.1.1 (webpack)
+- Experiments (use with caution):
+  ┬╖ serverActions
+
+
+> Build error occurred
+Error: Both middleware file "./middleware.ts" and proxy file "./proxy.ts" are detected. Please use "./proxy.ts" only. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+    at ignore-listed frames

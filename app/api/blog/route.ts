@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-let posts: any[] = [];
+const posts: any[] = [];
 
 export async function POST(req: Request) {
   const body = await req.json();

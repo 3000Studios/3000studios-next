@@ -3,10 +3,13 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import VideoSplash from "./ui/VideoSplash";
-import ScrollZoom3D from "./ui/ScrollZoom3D";
 import Button from "./ui/Button";
 import Card from "./ui/Card";
 import Section from "./ui/Section";
+
+import Image from "next/image";
+import AuroraHero from "../components/AuroraHero";
+import AvatarSystem from "../components/AvatarSystem";
 
 export default function HomePage() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -27,85 +30,74 @@ export default function HomePage() {
 
   return (
     <>
-      <VideoSplash />
-      <ScrollZoom3D />
+      <VideoSplash /> 
+      {/* Kept VideoSplash but note it might cover content initially. 
+          The user wanted a redesign, assuming they scroll down or it fades out. */}
       
-      {/* Hero Section with Video Background */}
-      <Section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-b from-[#0f0f0f] via-[#1a1a1a] to-black mt-20">
-        {/* Video Background */}
-        <div className="absolute inset-0 z-0">
-          <video 
-            autoPlay 
-            muted 
-            loop 
-            playsInline
-            className="w-full h-full object-cover opacity-30"
-          >
-            <source src="https://videos.pexels.com/video-files/3571898/3571898-uhd_1440_2560_30fps.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-[#1a1a1a]/80 to-black/85" />
-        </div>
-
-        {/* Marble Pattern Overlay */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-300 to-white mix-blend-overlay" />
-        </div>
-
-        <div
-          ref={heroRef}
-          className="relative z-10 text-center transition-transform duration-100 ease-out px-4"
-        >
-          <motion.h1
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="text-6xl md:text-8xl lg:text-9xl font-bold mb-6"
-            style={{
-              background: 'linear-gradient(135deg, #fafafa, #e8e8e8)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              textShadow: '3px 3px 0 rgba(212, 175, 55, 0.3), 6px 6px 0 rgba(212, 175, 55, 0.2)',
-              filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5))',
-              animation: 'titleFloat 3s ease-in-out infinite'
-            }}
-          >
-            LUXURY DIGITAL SOLUTIONS
-          </motion.h1>
+      {/* Hero Section Redesigned */}
+      <Section className="min-h-screen pt-24 relative overflow-hidden">
+        
+        {/* Main Grid Layout */}
+        <div className="container mx-auto h-full min-h-[80vh] grid grid-cols-1 lg:grid-cols-12 gap-8 px-4 relative z-20">
           
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto"
-            style={{
-              color: 'rgba(232, 232, 232, 0.9)',
-              letterSpacing: '2px',
-              fontWeight: 300,
-              lineHeight: 1.6
-            }}
-          >
-            Elevate Your Digital Presence With Premium AI-Powered Technology
-          </motion.p>
+          {/* Logo Area (Top Left) */}
+          <div className="lg:col-span-12 flex justify-start items-start pt-8 pl-4 lg:absolute lg:top-0 lg:left-0 z-30">
+             <div className="h-[120px] w-[300px] relative animate-float hover-lift">
+               <Image 
+                   src="/logo.png" 
+                   alt="3000 Studios Logo" 
+                   fill 
+                   className="object-contain drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]"
+                   priority
+                 />
+             </div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Button 
-              variant="primary" 
-              size="lg"
-              className="shadow-lg shadow-yellow-500/50"
+          {/* Right/Center Content: Aurora Text + CTA */}
+          <div className="lg:col-span-12 flex flex-col justify-center items-center relative z-20 mt-20 lg:mt-0">
+            
+            <div className="w-full max-w-4xl mx-auto mb-12 transform hover:scale-105 transition-transform duration-700">
+               <AuroraHero />
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.8 }}
+              className="flex flex-col sm:flex-row gap-6 justify-center w-full z-30"
             >
-              Explore Solutions
-            </Button>
-            <Button variant="secondary" size="lg">
-              Learn More
-            </Button>
-          </motion.div>
+              <Button 
+                variant="primary" 
+                size="lg"
+                className="shadow-lg shadow-yellow-500/50 hover:shadow-yellow-500/80 min-w-[200px]"
+              >
+                Explore Solutions
+              </Button>
+              <Button 
+                variant="secondary" 
+                size="lg"
+                className="backdrop-blur-md bg-white/10 hover:bg-white/20 min-w-[200px]"
+              >
+                Learn More
+              </Button>
+            </motion.div>
+
+          </div>
         </div>
+
+        {/* Avatars Bottom Left */}
+        <div className="absolute bottom-0 left-0 w-[400px] h-[500px] z-30 hidden lg:block">
+           <AvatarSystem />
+        </div>
+        {/* Mobile Avatar Fallback (optional, keeping hidden on small screens or adjusting layout as needed) */}
+
+
+        {/* Background Elements */}
+         <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#05777f] rounded-full filter blur-[100px] opacity-30 animate-pulse" />
+          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#33f777] rounded-full filter blur-[120px] opacity-20" />
+        </div>
+
       </Section>
 
       {/* Features Section */}
