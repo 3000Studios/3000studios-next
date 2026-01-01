@@ -1,0 +1,40 @@
+npm warn Unknown project config "enable-pre-post-scripts". This will stop working in the next major version of npm.
+npm warn Unknown project config "auto-install-peers". This will stop working in the next major version of npm.
+npm warn Unknown project config "strict-peer-dependencies". This will stop working in the next major version of npm.
+npm warn Unknown project config "shamefully-hoist". This will stop working in the next major version of npm.
+npm warn Unknown project config "side-effects-cache". This will stop working in the next major version of npm.
+npm warn Unknown project config "side-effects-cache-readonly". This will stop working in the next major version of npm.
+npm warn Unknown project config "child-concurrency". This will stop working in the next major version of npm.
+npm warn Unknown project config "network-concurrency". This will stop working in the next major version of npm.
+npm warn Unknown project config "prefer-frozen-lockfile". This will stop working in the next major version of npm.
+
+> 3000studios-next@1.0.1 prebuild
+> node scripts/validate-app-structure.mjs
+
+Γ£à App structure validated. Safe to build.
+
+> 3000studios-next@1.0.1 build
+> next build --webpack
+
+Γû▓ Next.js 16.1.1 (webpack)
+- Experiments (use with caution):
+  ┬╖ serverActions
+
+  Creating an optimized production build ...
+Failed to compile.
+
+./components/AuroraHero/styles.module.css
+Error: It looks like you're trying to use `tailwindcss` directly as a PostCSS plugin. The PostCSS plugin has moved to a separate package, so to continue using Tailwind CSS with PostCSS you'll need to install `@tailwindcss/postcss` and update your PostCSS configuration.
+    at lt (C:\3000Studos-Production\3000studios-next-main\3000studios-next\node_modules\.pnpm\tailwindcss@4.1.18\node_modules\tailwindcss\dist\lib.js:38:1643)
+    at LazyResult.runOnRoot (C:\3000Studos-Production\3000studios-next-main\3000studios-next\node_modules\.pnpm\postcss@8.4.31\node_modules\postcss\lib\lazy-result.js:329:16)
+    at LazyResult.runAsync (C:\3000Studos-Production\3000studios-next-main\3000studios-next\node_modules\.pnpm\postcss@8.4.31\node_modules\postcss\lib\lazy-result.js:258:26)
+    at LazyResult.async (C:\3000Studos-Production\3000studios-next-main\3000studios-next\node_modules\.pnpm\postcss@8.4.31\node_modules\postcss\lib\lazy-result.js:160:30)
+    at LazyResult.then (C:\3000Studos-Production\3000studios-next-main\3000studios-next\node_modules\.pnpm\postcss@8.4.31\node_modules\postcss\lib\lazy-result.js:404:17)
+
+Import trace for requested module:
+./components/AuroraHero/styles.module.css
+./components/AuroraHero/index.tsx
+./app/page.tsx
+
+
+> Build failed because of webpack errors

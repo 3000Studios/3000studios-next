@@ -22,6 +22,8 @@ import MouseTrails from '@/components/MouseTrails';
 import { AppProviders } from '@/providers/AppProviders';
 import VideoSplash from './ui/VideoSplash';
 import dynamic from 'next/dynamic';
+import Nav from './ui/Nav';
+import VideoBackground from '@/components/VideoBackground';
 import './globals.css';
 
 const FemaleAvatar = dynamic(() => import('./admin/components/FemaleAvatar'), { ssr: false });
@@ -97,10 +99,15 @@ export const metadata: Metadata = {
   other: ADSENSE_ACCOUNT ? { 'google-adsense-account': ADSENSE_ACCOUNT } : undefined,
 };
 
+import { styleRegistry } from '@/lib/styleRegistry';
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className="flex min-h-screen flex-col bg-black antialiased">
+      <body 
+        className="flex min-h-screen flex-col bg-black antialiased"
+        data-accent={styleRegistry.accent}
+      >
         {/* Google AdSense Auto Ads (enabled when NEXT_PUBLIC_ADSENSE_PUBLISHER_ID is set) */}
         {ADSENSE_ACCOUNT ? (
           <Script
@@ -127,8 +134,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <ConsentBanner />
           <Analytics />
           
-          {/* Full 3D Female Avatar - Bottom Right */}
-          <div className="fixed bottom-4 right-4 z-50 w-80 h-96">
+          
+          <VideoBackground src={styleRegistry.backgroundVideo} /> 
+          
+          {/* Full 3D Female Avatar - Ultimate Edition */}
+          <div className="fixed bottom-0 left-0 z-[9999] pointer-events-none" style={{ width: '15vw', height: '40vh' }}>
             <FemaleAvatar />
           </div>
         </AppProviders>
