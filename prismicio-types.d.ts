@@ -57,7 +57,24 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>['id']];
 
-type HomeDocumentDataSlicesSlice = never;
+interface GDocumentData {}
+
+/**
+ * g document from Prismic
+ *
+ * - **API ID**: `g`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type GDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<
+  Simplify<GDocumentData>,
+  'g',
+  Lang
+>;
+
+type HomeDocumentDataSlicesSlice = FeaturedBadgeSlice;
 
 /**
  * Content for Home  documents
@@ -121,7 +138,69 @@ export type HomeDocument<Lang extends string = string> = prismic.PrismicDocument
   Lang
 >;
 
-export type AllDocumentTypes = HomeDocument;
+export type AllDocumentTypes = GDocument | HomeDocument;
+
+/**
+ * Primary content in *FeaturedBadge → Default → Primary*
+ */
+export interface FeaturedBadgeSliceDefaultPrimary {
+  /**
+   * Badge Graphic field in *FeaturedBadge → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_badge.default.primary.badge_graphic
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  badge_graphic: prismic.ImageField<never>;
+
+  /**
+   * Primary Text field in *FeaturedBadge → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_badge.default.primary.primary_text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  primary_text: prismic.RichTextField;
+
+  /**
+   * Secondary Text field in *FeaturedBadge → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: featured_badge.default.primary.secondary_text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  secondary_text: prismic.RichTextField;
+}
+
+/**
+ * Default variation for FeaturedBadge Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default variation with an image (for the badge graphic) and two main structured text fields (for upper and lower lines of bold text).
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type FeaturedBadgeSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<FeaturedBadgeSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *FeaturedBadge*
+ */
+type FeaturedBadgeSliceVariation = FeaturedBadgeSliceDefault;
+
+/**
+ * FeaturedBadge Shared Slice
+ *
+ * - **API ID**: `featured_badge`
+ * - **Description**: *None*
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type FeaturedBadgeSlice = prismic.SharedSlice<'featured_badge', FeaturedBadgeSliceVariation>;
 
 declare module '@prismicio/client' {
   interface CreateClient {
@@ -143,6 +222,17 @@ declare module '@prismicio/client' {
   }
 
   namespace Content {
-    export type { HomeDocument, HomeDocumentData, HomeDocumentDataSlicesSlice, AllDocumentTypes };
+    export type {
+      GDocument,
+      GDocumentData,
+      HomeDocument,
+      HomeDocumentData,
+      HomeDocumentDataSlicesSlice,
+      AllDocumentTypes,
+      FeaturedBadgeSlice,
+      FeaturedBadgeSliceDefaultPrimary,
+      FeaturedBadgeSliceVariation,
+      FeaturedBadgeSliceDefault,
+    };
   }
 }

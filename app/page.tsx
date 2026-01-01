@@ -1,5 +1,6 @@
 'use client';
 
+import HomeBackground from '@/components/HomeBackground';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
@@ -12,7 +13,7 @@ import Section from './ui/Section';
 const UnifiedAvatar = dynamic(() => import('../components/avatar/UnifiedAvatar'), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-full animate-pulse bg-gradient-to-br from-cyan-900/20 to-black rounded-2xl" />
+    <div className="w-full h-full animate-pulse bg-linear-to-br from-cyan-900/20 to-black rounded-2xl" />
   ),
 });
 
@@ -58,6 +59,9 @@ export default function HomePage() {
 
   return (
     <div ref={containerRef} className="relative">
+      {/* 3D Animated "3000 STUDIOS" Background */}
+      <HomeBackground />
+
       {/* ============================================
           HERO SECTION - Video Background + Avatar
           ============================================ */}
@@ -76,7 +80,7 @@ export default function HomePage() {
           >
             <source src={STOCK_VIDEOS.heroBackground} type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-[#004e58]/40 to-black" />
+          <div className="absolute inset-0 bg-linear-to-b from-black/60 via-[#004e58]/40 to-black" />
         </motion.div>
 
         {/* Animated gradient overlay */}
@@ -121,11 +125,11 @@ export default function HomePage() {
                 transition={{ delay: 0.4 }}
                 className="text-5xl md:text-7xl font-bold leading-tight"
               >
-                <span className="bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
                   The Future of
                 </span>
                 <br />
-                <span className="bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] bg-clip-text text-transparent animate-pulse">
+                <span className="bg-linear-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] bg-clip-text text-transparent animate-pulse">
                   Digital Excellence
                 </span>
               </motion.h1>
@@ -154,7 +158,7 @@ export default function HomePage() {
                   className="group relative overflow-hidden shadow-lg shadow-yellow-500/30 hover:shadow-yellow-500/50 transition-all"
                 >
                   <span className="relative z-10">Get Started</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-linear-to-r from-yellow-400 to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Button>
                 <Button
                   variant="secondary"
@@ -198,14 +202,14 @@ export default function HomePage() {
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 3, repeat: Infinity }}
-                className="absolute top-10 right-10 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500/20 to-blue-500/20 backdrop-blur-xl border border-cyan-500/30"
+                className="absolute top-10 right-10 px-4 py-2 rounded-full bg-linear-to-r from-cyan-500/20 to-blue-500/20 backdrop-blur-xl border border-cyan-500/30"
               >
                 <span className="text-cyan-400 text-sm font-medium">AI Powered</span>
               </motion.div>
               <motion.div
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
-                className="absolute bottom-20 left-5 px-4 py-2 rounded-full bg-gradient-to-r from-yellow-500/20 to-amber-500/20 backdrop-blur-xl border border-yellow-500/30"
+                className="absolute bottom-20 left-5 px-4 py-2 rounded-full bg-linear-to-r from-yellow-500/20 to-amber-500/20 backdrop-blur-xl border border-yellow-500/30"
               >
                 <span className="text-yellow-400 text-sm font-medium">Voice Control</span>
               </motion.div>
@@ -233,7 +237,7 @@ export default function HomePage() {
       {/* ============================================
           SERVICES SECTION
           ============================================ */}
-      <Section className="bg-gradient-to-b from-black via-[#0a0a0a] to-black relative overflow-hidden">
+      <Section className="bg-linear-to-b from-black via-[#0a0a0a] to-black relative overflow-hidden">
         {/* Background decoration */}
         <div className="absolute inset-0 opacity-20">
           <Image src="/images/geometric-shapes.png" alt="" fill className="object-cover" />
@@ -248,7 +252,7 @@ export default function HomePage() {
           <span className="text-[#D4AF37] text-sm font-semibold tracking-[0.3em] uppercase mb-4 block">
             What We Offer
           </span>
-          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white via-gray-200 to-[#D4AF37] bg-clip-text text-transparent">
+          <h2 className="text-5xl md:text-6xl font-bold bg-linear-to-r from-white via-gray-200 to-[#D4AF37] bg-clip-text text-transparent">
             Premium Services
           </h2>
         </motion.div>
@@ -301,7 +305,7 @@ export default function HomePage() {
             >
               <Card
                 gradient
-                className="group h-full hover:scale-[1.02] transition-all duration-500 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 hover:border-[#D4AF37]/50 overflow-hidden"
+                className="group h-full hover:scale-[1.02] transition-all duration-500 bg-linear-to-br from-white/5 to-white/2 border border-white/10 hover:border-[#D4AF37]/50 overflow-hidden"
               >
                 {/* Image header */}
                 <div className="relative h-48 -mx-6 -mt-6 mb-6 overflow-hidden">
@@ -311,11 +315,11 @@ export default function HomePage() {
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black via-black/50 to-transparent" />
 
                   {/* Icon badge */}
                   <div
-                    className={`absolute bottom-4 left-4 w-14 h-14 rounded-2xl bg-gradient-to-br ${service.icon.gradient} flex items-center justify-center text-2xl shadow-lg`}
+                    className={`absolute bottom-4 left-4 w-14 h-14 rounded-2xl bg-linear-to-br ${service.icon.gradient} flex items-center justify-center text-2xl shadow-lg`}
                   >
                     {service.icon.icon}
                   </div>
@@ -358,7 +362,7 @@ export default function HomePage() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-white to-purple-400 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-linear-to-r from-cyan-400 via-white to-purple-400 bg-clip-text text-transparent">
               See It In Action
             </h2>
             <p className="text-gray-400 text-lg mb-12 max-w-2xl mx-auto">
@@ -386,7 +390,7 @@ export default function HomePage() {
       {/* ============================================
           TESTIMONIALS SECTION
           ============================================ */}
-      <Section className="bg-gradient-to-b from-black via-[#0f0f0f] to-black">
+      <Section className="bg-linear-to-b from-black via-[#0f0f0f] to-black">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -430,7 +434,7 @@ export default function HomePage() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.15 }}
             >
-              <Card className="h-full bg-gradient-to-br from-white/5 to-transparent border border-white/10 hover:border-[#D4AF37]/30 transition-all duration-300">
+              <Card className="h-full bg-linear-to-br from-white/5 to-transparent border border-white/10 hover:border-[#D4AF37]/30 transition-all duration-300">
                 {/* Stars */}
                 <div className="flex gap-1 mb-6">
                   {[...Array(5)].map((_, j) => (
@@ -467,7 +471,7 @@ export default function HomePage() {
       {/* ============================================
           BLOG/INSIGHTS SECTION
           ============================================ */}
-      <Section className="bg-gradient-to-b from-black to-[#0a0a0a]">
+      <Section className="bg-linear-to-b from-black to-[#0a0a0a]">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -514,7 +518,7 @@ export default function HomePage() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
             >
-              <Card className="group h-full overflow-hidden bg-gradient-to-br from-white/5 to-transparent border border-white/10 hover:border-[#D4AF37]/30 transition-all duration-500">
+              <Card className="group h-full overflow-hidden bg-linear-to-br from-white/5 to-transparent border border-white/10 hover:border-[#D4AF37]/30 transition-all duration-500">
                 {/* Image */}
                 <div className="relative h-52 -mx-6 -mt-6 mb-6 overflow-hidden">
                   <Image
@@ -523,7 +527,7 @@ export default function HomePage() {
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black to-transparent opacity-60" />
 
                   {/* Category badge */}
                   <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#D4AF37]/20 backdrop-blur-sm border border-[#D4AF37]/30">
@@ -558,7 +562,7 @@ export default function HomePage() {
           ============================================ */}
       <Section className="relative overflow-hidden">
         {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#D4AF37]/10 via-transparent to-cyan-500/10" />
+        <div className="absolute inset-0 bg-linear-to-r from-[#D4AF37]/10 via-transparent to-cyan-500/10" />
         <div className="absolute inset-0">
           <Image src="/images/hero-bg.png" alt="" fill className="object-cover opacity-30" />
         </div>
@@ -569,7 +573,7 @@ export default function HomePage() {
           viewport={{ once: true }}
           className="relative z-10 text-center max-w-4xl mx-auto py-12"
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-[#D4AF37] via-white to-[#D4AF37] bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-linear-to-r from-[#D4AF37] via-white to-[#D4AF37] bg-clip-text text-transparent">
             Ready to Transform Your Digital Presence?
           </h2>
           <p className="text-xl text-gray-300 mb-10 leading-relaxed">

@@ -227,7 +227,7 @@ export default function ContactPage() {
                         errors.name ? 'border-red-500' : 'border-gray-700'
                       } rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all`}
                       placeholder="John Doe"
-                      aria-invalid={errors.name ? true : undefined}
+                      aria-invalid={errors.name ? 'true' : undefined}
                       aria-describedby={errors.name ? 'name-error' : undefined}
                     />
                     {errors.name && (
@@ -256,7 +256,7 @@ export default function ContactPage() {
                         errors.email ? 'border-red-500' : 'border-gray-700'
                       } rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all`}
                       placeholder="john@example.com"
-                      aria-invalid={errors.email ? true : undefined}
+                      aria-invalid={errors.email ? 'true' : undefined}
                       aria-describedby={errors.email ? 'email-error' : undefined}
                     />
                     {errors.email && (
@@ -369,7 +369,7 @@ export default function ContactPage() {
                       errors.message ? 'border-red-500' : 'border-gray-700'
                     } rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all resize-none`}
                     placeholder="Tell us about your project, goals, and how we can help..."
-                    aria-invalid={errors.message ? true : undefined}
+                    aria-invalid={errors.message ? 'true' : undefined}
                     aria-describedby={errors.message ? 'message-error' : undefined}
                   />
                   {errors.message && (

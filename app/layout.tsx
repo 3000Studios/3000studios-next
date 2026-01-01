@@ -4,7 +4,10 @@
  * REVENUE LOCK — Contains AdSense, consent, and monetization infrastructure.
  */
 
+import BackgroundMusicPlayer from '@/components/BackgroundMusic';
 import ConsentBanner from '@/components/ConsentBanner';
+import CustomCursor from '@/components/CustomCursor';
+import IntroVideoGate from '@/components/IntroVideoGate';
 import MouseTrails from '@/components/MouseTrails';
 import VideoBackground from '@/components/VideoBackground';
 import { AppProviders } from '@/providers/AppProviders';
@@ -14,7 +17,6 @@ import Script from 'next/script';
 import type { ReactNode } from 'react';
 import '../styles/elite.css';
 import AvatarWrapper from './components/AvatarWrapper';
-import BackgroundMusic from './components/BackgroundMusic';
 import GravityFooter from './components/GravityFooter';
 import SmoothScroll from './components/SmoothScroll';
 import SoundEffects from './components/SoundEffects';
@@ -115,24 +117,27 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         ) : null}
 
         <AppProviders>
-          <VideoSplash />
-          <VideoWallpaper opacity={0.25} />
-          <BackgroundMusic />
-          <SmoothScroll />
-          <SoundEffects />
-          <MouseTrails />
+          <IntroVideoGate>
+            <VideoSplash />
+            <VideoWallpaper opacity={0.25} />
+            <BackgroundMusicPlayer />
+            <SmoothScroll />
+            <SoundEffects />
+            <MouseTrails />
+            <CustomCursor />
 
-          <Nav />
-          <main className="relative z-10 grow pt-20">{children}</main>
+            <Nav />
+            <main className="relative z-10 grow pt-20">{children}</main>
 
-          <GravityFooter />
-          <ConsentBanner />
-          <Analytics />
+            <GravityFooter />
+            <ConsentBanner />
+            <Analytics />
 
-          <VideoBackground src={styleRegistry.backgroundVideo} />
+            <VideoBackground src={styleRegistry.backgroundVideo} />
 
-          {/* Full 3D Female Avatar - Ultimate Edition */}
-          <AvatarWrapper />
+            {/* Full 3D Female Avatar - Ultimate Edition */}
+            <AvatarWrapper />
+          </IntroVideoGate>
         </AppProviders>
       </body>
     </html>

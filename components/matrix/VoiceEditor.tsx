@@ -46,11 +46,11 @@ export default function VoiceEditor() {
   };
 
   return (
-    <div className="relative bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-xl border border-[#D4AF37]/30 p-6 rounded-2xl shadow-2xl shadow-black/50">
+    <div className="relative bg-linear-to-br from-gray-900/90 to-black/90 backdrop-blur-xl border border-[#D4AF37]/30 p-6 rounded-2xl shadow-2xl shadow-black/50">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-[#D4AF37] to-amber-400 bg-clip-text text-transparent">
+          <h2 className="text-2xl font-bold bg-linear-to-r from-[#D4AF37] to-amber-400 bg-clip-text text-transparent">
             Voice Editor
           </h2>
           <p className="text-gray-400 text-sm mt-1">Speak to edit the UI in real-time</p>
@@ -117,7 +117,7 @@ export default function VoiceEditor() {
           disabled={!diff || isApplying}
           className={`flex-1 px-6 py-3 rounded-xl font-bold text-black transition-all ${
             diff && !isApplying
-              ? 'bg-gradient-to-r from-[#D4AF37] to-amber-500 hover:shadow-lg hover:shadow-yellow-500/30 hover:scale-[1.02]'
+              ? 'bg-linear-to-r from-[#D4AF37] to-amber-500 hover:shadow-lg hover:shadow-yellow-500/30 hover:scale-[1.02]'
               : 'bg-gray-700 text-gray-400 cursor-not-allowed'
           }`}
         >

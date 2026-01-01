@@ -5,7 +5,7 @@ import { styleRegistry } from '@/lib/styleRegistry';
 import { uiRegistry } from '@/lib/uiRegistry';
 
 type VoicePayload = {
-  target: 'ui' | 'style' | 'nav';
+  target: 'ui' | 'style' | 'nav' | 'monetization';
   path: string;
   value: any;
 };
@@ -16,7 +16,7 @@ export function handleVoicePayload(payload: VoicePayload) {
   if (payload.target === 'style') {
     // Phase 63: Style Control
     const { path, value } = payload;
-    
+
     // Update Registry (Mutable)
     // @ts-ignore
     if (styleRegistry[path] !== undefined) {
@@ -27,7 +27,7 @@ export function handleVoicePayload(payload: VoicePayload) {
     // Direct DOM Injection for Instant Feedback (No React Render Cycle needed for basic styles)
     if (path === 'accent') {
       document.body.setAttribute('data-accent', value);
-      
+
       // Also force CSS variable update if needed
       if (value === 'gold') document.documentElement.style.setProperty('--accent-base', '212 175 55');
       if (value === 'platinum') document.documentElement.style.setProperty('--accent-base', '229 228 226');
@@ -39,7 +39,7 @@ export function handleVoicePayload(payload: VoicePayload) {
     // Phase 31: UI Registry Update
     const { path, value } = payload;
     const parts = path.split('.');
-    
+
     // Traverse and update Mutable Registry
     let current: any = uiRegistry;
     for (let i = 0; i < parts.length - 1; i++) {
