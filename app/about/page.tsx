@@ -1,4 +1,4 @@
-import VideoBackground from "@/components/VideoBackground";
+import VideoBackground from '@/components/VideoBackground';
 
 export default function About() {
   return (
@@ -38,15 +38,21 @@ export default function About() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
               <div className="backdrop-blur-md bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-8 text-center hover:shadow-[var(--shadow-gold)] transition-all duration-500 hover-shimmer">
                 <h3 className="text-2xl font-bold metallic-text-gold mb-2">Creative</h3>
-                <p className="text-[var(--marble-white)] opacity-80">Innovative designs and artistic excellence</p>
+                <p className="text-[var(--marble-white)] opacity-80">
+                  Innovative designs and artistic excellence
+                </p>
               </div>
               <div className="backdrop-blur-md bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-8 text-center hover:shadow-[var(--shadow-gold)] transition-all duration-500 hover-shimmer">
                 <h3 className="text-2xl font-bold metallic-text-gold mb-2">Technical</h3>
-                <p className="text-[var(--marble-white)] opacity-80">Cutting-edge development solutions</p>
+                <p className="text-[var(--marble-white)] opacity-80">
+                  Cutting-edge development solutions
+                </p>
               </div>
               <div className="backdrop-blur-md bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-8 text-center hover:shadow-[var(--shadow-gold)] transition-all duration-500 hover-shimmer">
                 <h3 className="text-2xl font-bold metallic-text-gold mb-2">Premium</h3>
-                <p className="text-[var(--marble-white)] opacity-80">High-quality digital products</p>
+                <p className="text-[var(--marble-white)] opacity-80">
+                  High-quality digital products
+                </p>
               </div>
             </div>
 
@@ -78,7 +84,7 @@ export default function About() {
           </section>
 
           <section className="py-12 text-center">
-            <div className="max-w-3xl mx-auto bg-gradient-to-br from-gray-900/50 to-black/50 p-8 rounded-lg border-2 border-[#D4AF37] glossy-overlay">
+            <div className="max-w-3xl mx-auto bg-linear-to-br from-gray-900/50 to-black/50 p-8 rounded-lg border-2 border-[#D4AF37] glossy-overlay">
               <h2 className="text-3xl font-bold text-white mb-4">Ready to Work Together?</h2>
               <p className="text-lg text-gray-300 mb-6">
                 Let&apos;s create something amazing together.

@@ -369,7 +369,11 @@ export default function HomePage() {
             <div className="relative max-w-4xl mx-auto aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-cyan-500/10">
               <Image src={STOCK_IMAGES.ai} alt="Demo Video" fill className="object-cover" />
               {/* Play button */}
-              <button className="absolute inset-0 flex items-center justify-center group">
+              <button
+                title="Play demo video"
+                aria-label="Play demo video"
+                className="absolute inset-0 flex items-center justify-center group"
+              >
                 <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center group-hover:scale-110 group-hover:bg-[#D4AF37]/30 transition-all duration-300">
                   <div className="w-0 h-0 border-t-[12px] border-b-[12px] border-l-[20px] border-transparent border-l-white ml-1" />
                 </div>

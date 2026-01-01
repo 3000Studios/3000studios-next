@@ -9,7 +9,7 @@ const links = [
   { href: '/apps', label: 'Apps' },
   { href: '/blog', label: 'Blog' },
   { href: '/live', label: 'Live' },
-  { href: '/store', label: 'Store' }
+  { href: '/store', label: 'Store' },
 ];
 
 export default function Navigation() {
@@ -20,13 +20,13 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto flex gap-8 p-4 text-sm">
         <Link
           href="/"
-          onMouse Enter={hover}
-          className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-600 font-bold"
+          onMouseEnter={hover}
+          className="text-transparent bg-clip-text bg-linear-to-r from-yellow-300 via-yellow-400 to-yellow-600 font-bold"
         >
           3000 STUDIOS
         </Link>
 
-        {links.map(l => (
+        {links.map((l) => (
           <Link
             key={l.href}
             href={l.href}
