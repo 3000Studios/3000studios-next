@@ -1,14 +1,14 @@
 'use client';
 
 import {
-    AlertCircle,
-    CheckCircle,
-    FileImage,
-    FileText,
-    Folder,
-    Trash2,
-    Upload,
-    Video,
+  AlertCircle,
+  CheckCircle,
+  FileImage,
+  FileText,
+  Folder,
+  Trash2,
+  Upload,
+  Video,
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -161,6 +161,7 @@ export default function ContentUploadPage() {
         <select
           value={destination}
           onChange={(e) => setDestination(e.target.value)}
+          aria-label="Default upload destination"
           className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
         >
           {DESTINATION_OPTIONS.map((opt) => (
@@ -186,6 +187,8 @@ export default function ContentUploadPage() {
           type="file"
           multiple
           onChange={handleFileSelect}
+          aria-label="Select files to upload"
+          title="Select files to upload"
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
         />
         <Upload className="mx-auto text-[#D4AF37] mb-4" size={48} />
@@ -244,6 +247,7 @@ export default function ContentUploadPage() {
                   value={file.destination}
                   onChange={(e) => updateFileDestination(file.id, e.target.value)}
                   disabled={file.status === 'uploading' || file.status === 'complete'}
+                  aria-label={`Destination for ${file.name}`}
                   className="px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#D4AF37] disabled:opacity-50"
                 >
                   {DESTINATION_OPTIONS.map((opt) => (
@@ -270,6 +274,8 @@ export default function ContentUploadPage() {
                 <button
                   onClick={() => removeFile(file.id)}
                   disabled={file.status === 'uploading'}
+                  aria-label={`Remove ${file.name}`}
+                  title={`Remove ${file.name}`}
                   className="p-2 text-gray-500 hover:text-red-400 transition-colors disabled:opacity-50"
                 >
                   <Trash2 size={18} />
