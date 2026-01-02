@@ -153,8 +153,8 @@ function Run-ScriptIfExists([string]$Mgr, [string]$AppRoot, [string]$ScriptName)
         finally { Pop-Location }
     }
     else {
-        Write-Log "Skipping: no script `$"$ScriptName`""
-  }
+        Write-Log "Skipping: no script '$ScriptName'"
+    }
 }
 
 function Install-Deps([string]$Mgr, [string]$AppRoot) {
@@ -326,7 +326,13 @@ function Write-FinalReport([string]$RepoRoot, [string]$AppRoot, [string]$Mgr, [s
   $content += ""
   $content += "## Git status"
   $content += ""
-  if ($status) { $content += "```"; $content += $status; $content += "```" } else { $content += "Clean." }
+  if ($status) {
+    $content += '```'
+    $content += $status
+    $content += '```'
+  } else {
+    $content += "Clean."
+  }
 
   Set-Content -Path $reportPath -Value ($content -join "`n") -Encoding UTF8
 
@@ -394,4 +400,4 @@ if (Any-RemoteBranch-AheadOfMain) {
   Write-Log "No leftover branches ahead of main."
 }
 
-Write-Log "DONE."
+Write-Log "DONE. Autopilot complete."
