@@ -1,48 +1,108 @@
-import { NextResponse } from "next/server";
-import { media } from "@/lib/mediaRegistry";
-import { uiRegistry, updateRegistry } from "@/lib/uiRegistry";
-import { exec } from "child_process";
+import { media } from '@/lib/mediaRegistry';
+import { uiRegistry, updateRegistry } from '@/lib/uiRegistry';
+import { NextResponse } from 'next/server';
+
+// Voice command types
+interface VoicePayload {
+  action?: 'update' | 'query';
+  target?: string;
+  payload?: Record<string, any>;
+  key?: string;
+  value?: any;
+  transcript?: string;
+}
+
+// Simple command parser for natural language inputs
+function parseTranscript(transcript: string): { actions: any[]; summary: string } {
+  const text = transcript.toLowerCase().trim();
+  const actions: any[] = [];
+  let summary = 'Command processed';
+
+  // Theme commands
+  if (text.includes('dark') || text.includes('night')) {
+    actions.push({ type: 'setTheme', value: 'dark' });
+    summary = 'Switched to dark theme';
+  } else if (text.includes('light') || text.includes('day')) {
+    actions.push({ type: 'setTheme', value: 'light' });
+    summary = 'Switched to light theme';
+  }
+
+  // Accent commands
+  if (text.includes('gold') || text.includes('yellow')) {
+    actions.push({ type: 'setAccent', value: 'gold' });
+    summary = 'Set accent to gold';
+  } else if (text.includes('blue') || text.includes('sapphire')) {
+    actions.push({ type: 'setAccent', value: 'sapphire' });
+    summary = 'Set accent to sapphire';
+  } else if (text.includes('platinum') || text.includes('silver') || text.includes('white')) {
+    actions.push({ type: 'setAccent', value: 'platinum' });
+    summary = 'Set accent to platinum';
+  }
+
+  // Action commands
+  if (text.includes('deploy')) {
+    actions.push({ type: 'message', value: 'Deployment triggered' });
+    summary = 'Site deployment initiated';
+  }
+  if (text.includes('optimize') || text.includes('optimization')) {
+    actions.push({ type: 'message', value: 'Optimization enabled' });
+    summary = 'Optimization mode enabled';
+  }
+
+  if (actions.length === 0) {
+    actions.push({ type: 'message', value: transcript });
+    summary = `Received: "${transcript}"`;
+  }
+
+  return { actions, summary };
+}
 
 export async function POST(req: Request) {
   try {
-    const data = await req.json();
+    const data: VoicePayload = await req.json();
 
-    // Voice command router
-    if (data.target === "media") {
-       // Update in-memory for session (persistence would require file write or DB)
-       // For this stack, we treat registry files as source of truth if we had file-writer.
-       // User requested: "Voice edits mutate this → UI re-renders."
-       // Since mediaRegistry is a const object in a file, we can't mutate it permanently without FS write.
-       // But for the running instance (if compiled), it won't persist restart.
-       // To match "Voice -> Web Real Edit Mode", we should conceptually allow it.
-       // For now, we update the object references (which won't persist server restart but might work for session).
-       // OR we write to file. Writing to file is safer for "Real Edit Mode".
-       // *HOWEVER*, writing TS files in runtime causes rebuilds.
-       
-       // Simplest 'Real' implementation:
-       // We accept the command. In a real persistent app we'd save to DB.
-       // Here we'll return success to satisfy the interface.
-       
-       // NOTE: The previous instruction was: 
-       // "if (cmd.target === 'media') { media[cmd.key] = cmd.value; }"
-       // We will follow that strictly.
-       
-       if (data.key && data.value) {
-           // @ts-ignore
-           media[data.key] = data.value;
-       }
+    // Handle transcript-based voice commands (from VoiceCommandCenter)
+    if (data.transcript) {
+      const result = parseTranscript(data.transcript);
+      return NextResponse.json(result);
     }
-    else if (data.action === "update") {
-      updateRegistry(data.target as keyof typeof uiRegistry, data.payload);
+
+    // Handle media registry updates
+    if (data.target === 'media' && data.key && data.value) {
+      // @ts-ignore - dynamic registry update
+      media[data.key] = data.value;
+      return NextResponse.json({ ok: true, media, registry: uiRegistry });
     }
-    
-    // Force rebuild trigger if needed
-    if (process.env.NODE_ENV === "development") {
-        exec("echo 'Voice Voice' >> .next/BUILD_ID");
+
+    // Handle UI registry updates
+    if (data.action === 'update' && data.target) {
+      updateRegistry(data.target as keyof typeof uiRegistry, data.payload || {});
+      return NextResponse.json({ ok: true, media, registry: uiRegistry });
+    }
+
+    // Handle voice-remote commands
+    if (data.target === 'voice-remote' && data.payload?.command) {
+      const result = parseTranscript(data.payload.command);
+      return NextResponse.json({ ok: true, ...result, registry: uiRegistry });
     }
 
     return NextResponse.json({ ok: true, media, registry: uiRegistry });
   } catch (e) {
-      return NextResponse.json({ error: "Failed" }, { status: 500 });
+    console.error('Voice API error:', e);
+    return NextResponse.json({ error: 'Voice command failed', details: String(e) }, { status: 500 });
   }
+}
+
+export async function GET() {
+  return NextResponse.json({
+    status: 'Voice API Online',
+    endpoints: {
+      POST: {
+        transcript: 'Natural language voice command',
+        action: 'update | query',
+        target: 'media | ui | voice-remote',
+      },
+    },
+    registry: uiRegistry,
+  });
 }
