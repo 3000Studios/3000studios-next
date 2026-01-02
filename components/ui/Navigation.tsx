@@ -40,7 +40,7 @@ export const Navigation = () => {
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-[100] h-20 border-b-2 border-amber-400/30 shadow-2xl">
+    <nav className="fixed top-0 left-0 right-0 z-[100] h-20">
       {/* Contained Video Background - stays within nav boundaries */}
       <div className="absolute inset-0 overflow-hidden">
         <video
@@ -60,6 +60,9 @@ export const Navigation = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-slate-900/85 via-amber-900/20 to-slate-900/85 backdrop-blur-xl"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/40"></div>
       </div>
+
+      {/* Bottom fade gradient - blends smoothly into content below */}
+      <div className="absolute -bottom-8 left-0 right-0 h-12 bg-gradient-to-b from-black/80 via-black/40 to-transparent pointer-events-none"></div>
 
       {/* Navigation Content */}
       <div className="relative h-full px-6">
