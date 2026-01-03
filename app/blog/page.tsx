@@ -7,10 +7,10 @@
 'use client';
 
 import VideoBackground from '@/components/VideoBackground';
+import AdUnit from '@/components/monetization/AdUnit';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, Search, Tag, User } from 'lucide-react';
 import { useState } from 'react';
-import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
 import Newsletter from '../components/Newsletter';
 import { blogPosts, getAllCategories, getAllTags } from '../lib/blogData';
 
@@ -88,7 +88,7 @@ export default function BlogPage() {
         </div>
 
         {/* Google Ads Placeholder - Revenue Generation */}
-        <GoogleAdsPlaceholder slot="blog-top-banner" format="horizontal" className="mb-8" />
+        <AdUnit slotId="blog-top-banner" format="horizontal" className="mb-8" />
 
         {/* Blog Posts Grid */}
         <div className="space-y-8">
@@ -183,7 +183,7 @@ export default function BlogPage() {
 
         {/* Mid-Content Ad */}
         {filteredPosts.length > 5 && (
-          <GoogleAdsPlaceholder slot="blog-mid-content" format="rectangle" className="my-12" />
+          <AdUnit slotId="blog-mid-content" format="rectangle" className="my-12" />
         )}
 
         {/* Newsletter Signup - Revenue Generation */}
