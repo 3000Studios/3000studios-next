@@ -37,38 +37,37 @@ const PRODUCT_CATALOG: Product[] = [
 ];
 
 export const amortizationEngine = {
-  
+
   // Phase 34: Live Stream Product Sync
   injectLiveProduct: (productId: string) => {
     const product = PRODUCT_CATALOG.find(p => p.id === productId);
     if (!product) return;
-    
-    // Inject into UI Registry directly
-    // @ts-ignore
-    uiRegistry.liveStream = {
-        ...uiRegistry.liveStream,
-        activeProduct: product,
-        showCta: true
+
+    // Inject into UI Registry directly with type assertion
+    (uiRegistry as Record<string, unknown>).liveStream = {
+      ...(typeof uiRegistry.liveStream === 'object' ? uiRegistry.liveStream : {}),
+      activeProduct: product,
+      showCta: true
     };
-    
+
     // Trigger update event
-    window.dispatchEvent(new CustomEvent('monetization-update', { 
-        detail: { type: 'live-product', product } 
+    window.dispatchEvent(new CustomEvent('monetization-update', {
+      detail: { type: 'live-product', product }
     }));
   },
 
   // Phase 35: Continuous Sales Loop (Countdown/Urgency)
   triggerScarcity: (minutes: number) => {
-     window.dispatchEvent(new CustomEvent('monetization-update', {
-         detail: { type: 'scarcity', duration: minutes * 60 }
-     }));
+    window.dispatchEvent(new CustomEvent('monetization-update', {
+      detail: { type: 'scarcity', duration: minutes * 60 }
+    }));
   },
 
   // Phase 37: AI Sales Agent Upsell
   getUpsellRecommendation: (currentContext: string): Product | null => {
-      // Simple logic for now, can be replaced with AI model call
-      if (currentContext.includes('code')) return PRODUCT_CATALOG[2]; // Code Review
-      if (currentContext.includes('design')) return PRODUCT_CATALOG[1]; // Design Course
-      return PRODUCT_CATALOG[0]; // Default Toolkit
+    // Simple logic for now, can be replaced with AI model call
+    if (currentContext.includes('code')) return PRODUCT_CATALOG[2]; // Code Review
+    if (currentContext.includes('design')) return PRODUCT_CATALOG[1]; // Design Course
+    return PRODUCT_CATALOG[0]; // Default Toolkit
   }
 };

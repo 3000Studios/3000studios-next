@@ -79,7 +79,7 @@ export async function POST(req: Request) {
         });
       }
 
-      console.log(`Payment processed for session: ${session.id}`);
+      // Payment processed
     }
 
     return NextResponse.json({ received: true });

@@ -67,7 +67,7 @@ const postHandler = async (request: NextRequest) => {
       } : undefined,
     });
 
-    console.log('✅ Stripe session created:', session.id);
+    // Stripe session created
 
     return NextResponse.json({
       sessionId: session.id,

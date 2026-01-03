@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: "Name and email required" }, { status: 400 });
   }
 
-  console.log("🧩 Vendor signup", { name, email, feedUrl, model });
+  // Vendor signup logged
 
   // Placeholder: push to CRM/DB/queue here
 

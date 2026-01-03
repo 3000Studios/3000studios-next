@@ -7,25 +7,25 @@ import { uiRegistry } from '@/lib/uiRegistry';
 type VoicePayload = {
   target: 'ui' | 'style' | 'nav' | 'monetization';
   path: string;
-  value: any;
+  value: unknown;
 };
 
 export function handleVoicePayload(payload: VoicePayload) {
-  console.log('🎤 Voice Command Received:', payload);
+  if (process.env.NODE_ENV === 'development') {
+    console.log('🎤 Voice Command Received:', payload);
+  }
 
   if (payload.target === 'style') {
     // Phase 63: Style Control
     const { path, value } = payload;
 
-    // Update Registry (Mutable)
-    // @ts-ignore
-    if (styleRegistry[path] !== undefined) {
-       // @ts-ignore
-       styleRegistry[path] = value;
+    // Update Registry (Mutable) with type safety
+    if (path in styleRegistry && typeof value === 'string') {
+      (styleRegistry as Record<string, string>)[path] = value;
     }
 
     // Direct DOM Injection for Instant Feedback (No React Render Cycle needed for basic styles)
-    if (path === 'accent') {
+    if (path === 'accent' && typeof value === 'string') {
       document.body.setAttribute('data-accent', value);
 
       // Also force CSS variable update if needed
@@ -41,9 +41,9 @@ export function handleVoicePayload(payload: VoicePayload) {
     const parts = path.split('.');
 
     // Traverse and update Mutable Registry
-    let current: any = uiRegistry;
+    let current: Record<string, unknown> = uiRegistry as Record<string, unknown>;
     for (let i = 0; i < parts.length - 1; i++) {
-        current = current[parts[i]];
+      current = current[parts[i]] as Record<string, unknown>;
     }
     current[parts[parts.length - 1]] = value;
 
@@ -54,12 +54,12 @@ export function handleVoicePayload(payload: VoicePayload) {
   if (payload.target === 'monetization') {
     // Phase 34-60: Monetization Automation
     import('@/lib/monetization/engine').then(({ amortizationEngine }) => {
-        if (payload.path === 'inject') {
-            amortizationEngine.injectLiveProduct(payload.value);
-        }
-        if (payload.path === 'scarcity') {
-            amortizationEngine.triggerScarcity(Number(payload.value));
-        }
+      if (payload.path === 'inject') {
+        amortizationEngine.injectLiveProduct(String(payload.value));
+      }
+      if (payload.path === 'scarcity') {
+        amortizationEngine.triggerScarcity(Number(payload.value));
+      }
     });
   }
 }

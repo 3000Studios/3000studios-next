@@ -15,8 +15,12 @@ export default function AdUnit({
 }) {
   useEffect(() => {
     try {
-      // @ts-ignore
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
+      // Extend window interface for AdSense
+      interface WindowWithAdSense extends Window {
+        adsbygoogle?: unknown[];
+      }
+      const win = window as WindowWithAdSense;
+      (win.adsbygoogle = win.adsbygoogle || []).push({});
     } catch (err) {
       console.error('AdSense error:', err);
     }

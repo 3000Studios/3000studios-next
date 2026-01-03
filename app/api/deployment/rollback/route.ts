@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { deploymentId, reason } = body;
 
-    console.log(`[ROLLBACK] Initiated: ${reason || 'Manual rollback'}`);
+    // Rollback initiated
 
     // Get latest stable deployment if no specific ID provided
     const latestDeployment = await getLatestDeployment();
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     // In production, this would redeploy from a known-good commit
     const rollback = await triggerDeployment('main');
 
-    console.log(`[ROLLBACK] Success: Rolled back to deployment ${targetDeployment}`);
+    // Rollback successful
 
     return NextResponse.json({
       success: true,
