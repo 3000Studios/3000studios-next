@@ -2,23 +2,43 @@
 
 import { useEffect, useRef } from 'react';
 
+// Extend Window interface for Speech Recognition
+declare global {
+  interface Window {
+    SpeechRecognition: typeof SpeechRecognition;
+    webkitSpeechRecognition: typeof SpeechRecognition;
+  }
+}
+
+interface SpeechRecognitionEvent extends Event {
+  resultIndex: number;
+  results: SpeechRecognitionResultList;
+}
+
+interface SpeechRecognitionErrorEvent extends Event {
+  error: string;
+}
+
 const useVoiceToCommand = (onCommand: (command: string) => void) => {
   const onCommandHandler = useRef(onCommand);
 
   useEffect(() => {
     onCommandHandler.current = onCommand;
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) {
+
+    if (typeof window === 'undefined') return;
+
+    const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognitionAPI) {
       console.warn('Speech recognition not supported in this browser.');
       return;
     }
 
-    const recognition = new SpeechRecognition();
+    const recognition = new SpeechRecognitionAPI();
     recognition.continuous = true;
     recognition.interimResults = false;
     recognition.lang = 'en-US';
 
-    recognition.onresult = (event) => {
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
       for (let i = event.resultIndex; i < event.results.length; ++i) {
         if (event.results[i].isFinal) {
           const transcript = event.results[i][0].transcript.trim();
@@ -28,7 +48,7 @@ const useVoiceToCommand = (onCommand: (command: string) => void) => {
       }
     };
 
-    recognition.onerror = (event) => {
+    recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
       console.error('Speech recognition error', event.error);
     };
 

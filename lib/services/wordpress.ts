@@ -65,13 +65,19 @@ export async function getPosts(limit: number = 10): Promise<WordPressPost[]> {
       },
     });
 
-    return response.data.map((post: Record<string, unknown>) => ({
-      id: post.id,
-      title: post.title?.rendered,
-      content: post.content?.rendered,
-      excerpt: post.excerpt?.rendered,
-      status: post.status,
-    }));
+    return response.data.map((post: Record<string, unknown>) => {
+      const title = post.title as Record<string, unknown> | undefined;
+      const content = post.content as Record<string, unknown> | undefined;
+      const excerpt = post.excerpt as Record<string, unknown> | undefined;
+
+      return {
+        id: post.id as number,
+        title: title?.rendered as string,
+        content: content?.rendered as string,
+        excerpt: excerpt?.rendered as string,
+        status: post.status as 'publish' | 'draft' | 'pending',
+      };
+    });
   } catch (error) {
     console.error('WordPress get posts error:', error);
     throw new Error('Failed to fetch WordPress posts');

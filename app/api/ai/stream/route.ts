@@ -1,7 +1,7 @@
+import { logAIEvent } from '@/lib/ai-logger';
 import { openai } from '@/lib/openai';
 import { streamText } from 'ai';
 import { z } from 'zod';
-import { logAIEvent } from '@/lib/ai-logger';
 
 const InputSchema = z.object({
   prompt: z.string().min(1).max(4000),
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
       onFinish({ usage }) {
         logAIEvent({
           model,
-          tokens: usage,
+          tokens: usage.totalTokens,
           latencyMs: Date.now() - start,
         });
       },

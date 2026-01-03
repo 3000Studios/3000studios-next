@@ -3,12 +3,33 @@
  * Handles database operations for products, orders, and analytics
  */
 
-interface Product {
-  id?: string;
-  title?: string;
-  description?: string;
-  price?: number;
-  [key: string]: unknown;
+import { Db, MongoClient } from 'mongodb';
+
+let cachedClient: MongoClient | null = null;
+let cachedDb: Db | null = null;
+
+/**
+ * Connect to MongoDB
+ */
+async function connectToDatabase(): Promise<Db> {
+  if (cachedDb) {
+    return cachedDb;
+  }
+
+  const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
+
+  if (!mongoUri) {
+    throw new Error('MongoDB URI not configured');
+  }
+
+  const client = new MongoClient(mongoUri);
+  await client.connect();
+  const db = client.db();
+
+  cachedClient = client;
+  cachedDb = db;
+
+  return db;
 }
 
 // Analytics Data Models
@@ -41,23 +62,6 @@ export interface User {
   lastLogin: Date;
 }
 
-// User Management
-export async function createUser(user: User): Promise<void> {
-  const database = await connectToDatabase();
-  await database.collection('users').insertOne(user);
-}
-
-export async function getUserByEmail(email: string): Promise<User | null> {
-  const database = await connectToDatabase();
-  const user = await database.collection('users').findOne({ email });
-  return user as User | null;
-}
-
-export async function updateUser(userId: string, updates: Partial<User>): Promise<void> {
-  const database = await connectToDatabase();
-  await database.collection('users').updateOne({ userId }, { $set: updates });
-}
-
 export interface Order {
   orderId: string;
   userId?: string;
@@ -87,6 +91,23 @@ export interface Product {
   commission?: number;
   createdAt: Date;
   updatedAt: Date;
+}
+
+// User Management
+export async function createUser(user: User): Promise<void> {
+  const database = await connectToDatabase();
+  await database.collection('users').insertOne(user);
+}
+
+export async function getUserByEmail(email: string): Promise<User | null> {
+  const database = await connectToDatabase();
+  const user = await database.collection('users').findOne({ email });
+  return user as User | null;
+}
+
+export async function updateUser(userId: string, updates: Partial<User>): Promise<void> {
+  const database = await connectToDatabase();
+  await database.collection('users').updateOne({ userId }, { $set: updates });
 }
 
 // Analytics Functions
@@ -131,12 +152,25 @@ export async function getAnalytics(
     }
 
     return {
-      id: productId,
-      ...updates,
+      totalRevenue: data.totalRevenue as number,
+      activeUsers: data.activeUsers as number,
+      storeOrders: data.storeOrders as number,
+      liveViewers: data.liveViewers as number,
+      pageViews: data.pageViews as number,
+      conversionRate: data.conversionRate as number,
+      timestamp: data.timestamp as Date,
     };
   } catch (error) {
-    console.error('MongoDB update error:', error);
-    return null;
+    console.error('MongoDB analytics error:', error);
+    return {
+      totalRevenue: 0,
+      activeUsers: 0,
+      storeOrders: 0,
+      liveViewers: 0,
+      pageViews: 0,
+      conversionRate: 0,
+      timestamp: new Date(),
+    };
   }
 }
 
@@ -152,8 +186,9 @@ export async function getProduct(productId: string): Promise<Product | null> {
   }
 
   try {
-    console.log(`MongoDB get requested for product ${productId}`);
-    return null;
+    const database = await connectToDatabase();
+    const product = await database.collection('products').findOne({ productId });
+    return product as Product | null;
   } catch (error) {
     console.error('MongoDB get error:', error);
     return null;
@@ -172,11 +207,12 @@ export async function listProducts(limit = 10): Promise<Product[]> {
   }
 
   try {
-    console.log(`MongoDB list requested with limit ${limit}`);
-    return [];
+    const database = await connectToDatabase();
+    const products = await database.collection('products').find({}).limit(limit).toArray();
+    return products as Product[];
   } catch (error) {
-    console.error('Save order error:', error);
-    throw new Error('Failed to save order');
+    console.error('MongoDB list error:', error);
+    return [];
   }
 }
 
@@ -205,6 +241,16 @@ export async function getOrders(limit: number = 10): Promise<Order[]> {
   } catch (error) {
     console.error('Get orders error:', error);
     throw new Error('Failed to fetch orders');
+  }
+}
+
+export async function saveOrder(order: Order): Promise<void> {
+  try {
+    const database = await connectToDatabase();
+    await database.collection('orders').insertOne(order);
+  } catch (error) {
+    console.error('Save order error:', error);
+    throw new Error('Failed to save order');
   }
 }
 
