@@ -15,6 +15,7 @@ import Script from 'next/script';
 import type { ReactNode } from 'react';
 import { Suspense } from 'react';
 import '../styles/elite.css';
+import '../styles/user-animations.css';
 import ClientEffects from './components/ClientEffects';
 import GravityFooter from './components/GravityFooter';
 import './globals.css';

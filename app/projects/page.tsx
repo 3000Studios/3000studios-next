@@ -7,6 +7,7 @@
 'use client';
 
 import VideoBackground from '@/components/VideoBackground';
+import AdUnit from '@/components/monetization/AdUnit';
 import { Code, ExternalLink, Github } from 'lucide-react';
 import { useState } from 'react';
 
@@ -78,7 +79,7 @@ export default function ProjectsPage() {
   return (
     <div className="min-h-screen relative py-8 px-4">
       <VideoBackground
-        src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986149/code_ycx5gk.mp4"
+        src="https://cdn.pixabay.com/video/2020/11/22/57523-484196884_large.mp4"
         opacity={0.3}
       />
       <div className="max-w-7xl mx-auto">
@@ -89,6 +90,9 @@ export default function ProjectsPage() {
             Showcasing our finest work across web, mobile, and interactive experiences
           </p>
         </div>
+
+        {/* AdSense Placeholder */}
+        <AdUnit slotId="projects-top-banner" format="horizontal" className="mb-8" />
 
         {/* Category Filter */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">

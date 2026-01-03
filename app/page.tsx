@@ -28,18 +28,38 @@ const STOCK_IMAGES = {
 };
 
 const STOCK_VIDEOS = {
-  heroBackground: 'https://cdn.pixabay.com/video/2020/05/25/40130-424930032_large.mp4', // Abstract particles
-  techGrid: 'https://cdn.pixabay.com/video/2021/02/22/66316-517578498_large.mp4', // Tech grid
+  heroBackground:
+    'https://res.cloudinary.com/dj92eb97f/video/upload/v1766986138/3000_studios_back_dop_z4amap.mp4', // Deep Space 3000 Studios
+  techGrid: 'https://cdn.pixabay.com/video/2021/02/22/66316-517578498_large.mp4',
 };
 
 // Service icons with gradients
-const SERVICE_ICONS = [
-  { icon: '🤖', gradient: 'from-cyan-400 to-blue-600' },
-  { icon: '🎤', gradient: 'from-purple-400 to-pink-600' },
-  { icon: '⚡', gradient: 'from-yellow-400 to-orange-600' },
-  { icon: '💎', gradient: 'from-amber-400 to-yellow-600' },
-  { icon: '🛡️', gradient: 'from-green-400 to-emerald-600' },
-  { icon: '🌐', gradient: 'from-blue-400 to-indigo-600' },
+// Service images
+const SERVICE_IMAGES = [
+  {
+    img: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&q=80',
+    gradient: 'from-cyan-400 to-blue-600',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1589903308904-1010c2294adc?w=400&q=80',
+    gradient: 'from-purple-400 to-pink-600',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80',
+    gradient: 'from-yellow-400 to-orange-600',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&q=80',
+    gradient: 'from-amber-400 to-yellow-600',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&q=80',
+    gradient: 'from-green-400 to-emerald-600',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&q=80',
+    gradient: 'from-blue-400 to-indigo-600',
+  },
 ];
 
 export default function HomePage() {
@@ -182,49 +202,60 @@ export default function HomePage() {
               </motion.div>
             </motion.div>
 
-            {/* Right: Hero Image (Avatar loads separately in layout) */}
+            {/* Right: Widgets & Live Info (Replaces AI Box) */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.5 }}
-              className="relative w-full h-[600px] lg:h-[700px] flex items-center justify-center"
+              className="relative w-full h-[600px] flex flex-col gap-6 justify-center"
             >
-              {/* Premium visual placeholder - Avatar loads from layout */}
-              <div className="relative w-full h-full rounded-3xl overflow-hidden bg-gradient-to-br from-cyan-900/30 via-black/50 to-purple-900/30 border border-white/10">
-                <Image
-                  src={STOCK_IMAGES.ai}
-                  alt="AI Technology"
-                  fill
-                  className="object-cover opacity-60"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-
-                {/* Tech overlay animation */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div
-                    className="w-40 h-40 rounded-full border-2 border-cyan-400/30 animate-ping"
-                    style={{ animationDuration: '3s' }}
-                  />
-                  <div className="absolute w-32 h-32 rounded-full border border-yellow-400/20 animate-pulse" />
+              {/* Weather Widget */}
+              <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-yellow-500/50 transition-colors">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-playfair text-white">Live Operations</h3>
+                  <span className="animate-pulse w-2 h-2 rounded-full bg-green-500"></span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="text-4xl">🌤️</div>
+                  <div>
+                    <div className="text-2xl font-bold text-white">72°F</div>
+                    <div className="text-sm text-gray-400">San Francisco, CA</div>
+                  </div>
                 </div>
               </div>
 
-              {/* Floating badges */}
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="absolute top-10 right-10 px-4 py-2 rounded-full bg-linear-to-r from-cyan-500/20 to-blue-500/20 backdrop-blur-xl border border-cyan-500/30"
-              >
-                <span className="text-cyan-400 text-sm font-medium">AI Powered</span>
-              </motion.div>
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
-                className="absolute bottom-20 left-5 px-4 py-2 rounded-full bg-linear-to-r from-yellow-500/20 to-amber-500/20 backdrop-blur-xl border border-yellow-500/30"
-              >
-                <span className="text-yellow-400 text-sm font-medium">Voice Control</span>
-              </motion.div>
+              {/* News Widget */}
+              <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex-1 hover:border-blue-500/50 transition-colors overflow-hidden relative group">
+                <h3 className="text-xl font-playfair text-white mb-4">Latest Updates</h3>
+                <div className="space-y-4">
+                  {[1, 2, 3].map((_, i) => (
+                    <div
+                      key={i}
+                      className="flex gap-4 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"
+                    >
+                      <div className="w-16 h-16 bg-gray-700 rounded-md shrink-0 overflow-hidden relative">
+                        <Image
+                          src={`https://images.unsplash.com/photo-${i === 0 ? '1677442136019-21780ecad995' : i === 1 ? '1639762681485-074b7f938ba0' : '1558494949-ef010cbdcc31'}?w=200&q=80`}
+                          alt="News"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div>
+                        <div className="text-xs text-yellow-500 mb-1">BREAKING NEWS</div>
+                        <div className="text-sm text-gray-200 line-clamp-2">
+                          New AI Integration Protocols Released for Enterprise Clients
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* AdSense Placeholder - Explicit */}
+                <div className="mt-4 w-full h-24 bg-gray-800/50 flex items-center justify-center border border-dashed border-gray-600 text-xs text-gray-500">
+                  GOOGLE ADSENSE SLOT [news-feed]
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -275,37 +306,39 @@ export default function HomePage() {
               title: 'AI Automation',
               desc: 'Advanced artificial intelligence systems that automate your workflow and maximize efficiency across all platforms.',
               image: STOCK_IMAGES.automation,
-              icon: SERVICE_ICONS[0],
+
+              img: SERVICE_IMAGES[0],
             },
             {
               title: 'Voice Command',
               desc: 'Intelligent voice-driven interface allowing you to control systems naturally and intuitively.',
               image: STOCK_IMAGES.voice,
-              icon: SERVICE_ICONS[1],
+              img: SERVICE_IMAGES[1],
             },
             {
               title: 'Real-Time Sync',
               desc: 'Seamless synchronization across all devices with millisecond latency and perfect data integrity.',
               image: STOCK_IMAGES.sync,
-              icon: SERVICE_ICONS[2],
+              img: SERVICE_IMAGES[2],
             },
             {
               title: 'Premium Design',
               desc: 'Museum-quality aesthetic with luxury textures and gold accents throughout your digital presence.',
               image: STOCK_IMAGES.design,
-              icon: SERVICE_ICONS[3],
+              img: SERVICE_IMAGES[3],
             },
             {
               title: 'Secure Protocol',
               desc: 'Enterprise-grade encryption and security protocols protecting all your sensitive data.',
               image: STOCK_IMAGES.security,
-              icon: SERVICE_ICONS[4],
+              img: SERVICE_IMAGES[4],
             },
             {
               title: '24/7 Support',
               desc: 'Dedicated support team available around the clock to assist with any technical needs.',
               image: STOCK_IMAGES.support,
-              icon: SERVICE_ICONS[5],
+
+              img: SERVICE_IMAGES[5],
             },
           ].map((service, i) => (
             <motion.div
@@ -319,38 +352,23 @@ export default function HomePage() {
                 gradient
                 className="group h-full hover:scale-[1.02] transition-all duration-500 bg-linear-to-br from-white/5 to-white/2 border border-white/10 hover:border-[#D4AF37]/50 overflow-hidden"
               >
-                {/* Image header */}
-                <div className="relative h-48 -mx-6 -mt-6 mb-6 overflow-hidden">
+                {/* Image header - FULL BOX REAL IMAGE */}
+                <div className="relative h-64 -mx-6 -mt-6 mb-6 overflow-hidden">
                   <Image
-                    src={service.image}
+                    src={service.img.img}
                     alt={service.title}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-black via-black/50 to-transparent" />
-
-                  {/* Icon badge */}
-                  <div
-                    className={`absolute bottom-4 left-4 w-14 h-14 rounded-2xl bg-linear-to-br ${service.icon.gradient} flex items-center justify-center text-2xl shadow-lg`}
-                  >
-                    {service.icon.icon}
-                  </div>
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
                 </div>
 
                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#D4AF37] transition-colors">
                   {service.title}
                 </h3>
                 <p className="text-gray-400 leading-relaxed text-sm">{service.desc}</p>
-
-                {/* Learn more link */}
-                <div className="mt-6 pt-4 border-t border-white/5">
-                  <a
-                    href="#"
-                    className="text-sm text-[#D4AF37] font-medium hover:text-white transition-colors flex items-center gap-2"
-                  >
-                    Learn More
-                    <span className="group-hover:translate-x-1 transition-transform">→</span>
-                  </a>
+                <div className="mt-4 text-[#D4AF37] text-xs uppercase tracking-widest font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+                  Explore Solution →
                 </div>
               </Card>
             </motion.div>

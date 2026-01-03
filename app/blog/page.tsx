@@ -34,7 +34,7 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen py-8 px-4 relative overflow-x-hidden">
       <VideoBackground
-        src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986152/Coding_travel_bgtycj.mp4"
+        src="https://cdn.pixabay.com/video/2023/10/22/186175-877083431_large.mp4"
         opacity={0.3}
       />
       <div className="max-w-6xl mx-auto relative z-10">
