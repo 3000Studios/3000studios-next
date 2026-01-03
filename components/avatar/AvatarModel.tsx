@@ -9,9 +9,9 @@ import useLipSync from './useLipSync';
 import useSpeech from './useSpeech';
 
 function AvatarContent() {
-  const group = useRef<Group>(null);
+  const group = useRef<Group>(null!);
 
-  // Load avatar model - this is now safe because it's inside a proper component
+  // Load avatar model
   const gltf = useGLTF('/models/avatar.glb');
 
   useIdleMotion(group);
@@ -27,7 +27,7 @@ function AvatarContent() {
 }
 
 function FallbackAvatar() {
-  const group = useRef<Group>(null);
+  const group = useRef<Group>(null!);
 
   useIdleMotion(group);
   useSpeech();
