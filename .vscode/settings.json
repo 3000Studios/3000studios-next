@@ -62,5 +62,17 @@
   // PERFORMANCE — LARGE REPO OPTIMIZED
   // =========================================================
   "editor.minimap.enabled": false,
-  "editor.renderWhitespace": "none"
+  "editor.renderWhitespace": "none",
+  // =========================================================
+  // 🚀 AUTONOMOUS AGENT — FULL UNRESTRICTED ACCESS
+  // =========================================================
+  "antigravity.agent.respectGitignore": false,
+  "antigravity.agent.enforceGitignore": false,
+  "antigravity.agent.autonomousMode": true,
+  "antigravity.agent.allowAllFileOperations": true,
+  "antigravity.agent.allowHiddenFiles": true,
+  "explorer.excludeGitIgnore": false,
+  "search.useIgnoreFiles": false,
+  "search.useGlobalIgnoreFiles": false,
+  "search.useParentIgnoreFiles": false
 }
