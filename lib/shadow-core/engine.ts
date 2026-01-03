@@ -19,11 +19,11 @@ export class ShadowEngine {
     command = command.toLowerCase().trim();
 
     if (command.includes("update wordpress file")) {
-      return await this.updateWP(payload);
+      return await this.updateWP(payload as { file: string; content: string });
     }
 
     if (command.includes("edit file")) {
-      return await this.editFile(payload);
+      return await this.editFile(payload as { file: string; content: string });
     }
 
     if (command.includes("say")) {
