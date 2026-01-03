@@ -9,15 +9,15 @@ const PARTNERS = [
   },
   {
     name: 'Stripe',
-    url: 'https://stripe.com',
+    url: process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK || 'https://stripe.com',
     logo: '/images/partners/stripe.svg',
     desc: 'Secure Payments',
   },
   {
-    name: 'Prismic',
-    url: 'https://prismic.io',
-    logo: '/images/partners/prismic.svg',
-    desc: 'Headless CMS',
+    name: 'PayPal',
+    url: process.env.NEXT_PUBLIC_PAYPAL_ME || 'https://paypal.com',
+    logo: '/images/partners/paypal.svg',
+    desc: 'Support Us',
   },
   {
     name: 'Amazon',

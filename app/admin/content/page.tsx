@@ -25,6 +25,7 @@ const DESTINATION_OPTIONS = [
   { value: '/public/images', label: '📷 Images (public/images)', icon: FileImage },
   { value: '/public/videos', label: '🎬 Videos (public/videos)', icon: Video },
   { value: '/public/assets', label: '📁 Assets (public/assets)', icon: Folder },
+  { value: '/public/apps', label: '📱 Applications (public/apps)', icon: Folder },
   { value: '/app/blog', label: '📝 Blog Posts (app/blog)', icon: FileText },
   { value: '/components', label: '🧩 Components (components)', icon: Folder },
   { value: '/lib', label: '📚 Library (lib)', icon: Folder },
