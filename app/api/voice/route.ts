@@ -10,14 +10,20 @@ interface VoicePayload {
   target?: string;
   payload?: Record<string, any>;
   key?: string;
-  value?: any;
+  value?: unknown;
   transcript?: string;
 }
 
+// Voice command actions
+interface VoiceAction {
+  type: string;
+  value: string;
+}
+
 // Simple command parser for natural language inputs
-function parseTranscript(transcript: string): { actions: any[]; summary: string } {
+function parseTranscript(transcript: string): { actions: VoiceAction[]; summary: string } {
   const text = transcript.toLowerCase().trim();
-  const actions: any[] = [];
+  const actions: VoiceAction[] = [];
   let summary = 'Command processed';
 
   // Theme commands
@@ -59,29 +65,85 @@ function parseTranscript(transcript: string): { actions: any[]; summary: string 
   return { actions, summary };
 }
 
+// Helper to search Pexels (Server-side)
+async function searchPexels(query: string, type: 'video' | 'image'): Promise<string | null> {
+  const apiKey = process.env.PEXELS_API_KEY;
+  if (!apiKey) return null;
+
+  const baseUrl = type === 'video' ? 'https://api.pexels.com/videos/search' : 'https://api.pexels.com/v1/search';
+  const url = `${baseUrl}?query=${encodeURIComponent(query)}&per_page=1&orientation=landscape`;
+
+  try {
+    const res = await fetch(url, { headers: { Authorization: apiKey } });
+    const data = await res.json();
+    if (type === 'video') {
+      return data.videos?.[0]?.video_files?.[0]?.link || null;
+    } else {
+      return data.photos?.[0]?.src?.large2x || null;
+    }
+  } catch (e) {
+    console.error('Pexels search failed', e);
+    return null;
+  }
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
 
     // 1. Direct Voice Command (Phase 3 - Exact JSON)
-    // Matches { type: 'UPDATE_TEXT', ... }
     if (body.type && typeof body.type === 'string') {
       const result = await routeVoiceCommand(body as VoiceCommand);
       return NextResponse.json(result);
     }
 
-    // 2. Legacy/Natural Language Payload
+    // 2. Natural Language / Transcript Processing
     const data = body as VoicePayload;
-
-    // Handle transcript-based voice commands (from VoiceCommandCenter)
     if (data.transcript) {
+      const text = data.transcript.toLowerCase();
+
+      // AUTO-DETECT MEDIA REQUESTS (Pexels Integration)
+      // "Put a truck video..."
+      if (text.includes('video') || text.includes('photo') || text.includes('image') || text.includes('picture')) {
+        const type = text.includes('video') ? 'video' : 'image';
+        // Extract query: remove common words
+        const query = text
+          .replace('put a', '')
+          .replace('add a', '')
+          .replace('show me', '')
+          .replace('video', '')
+          .replace('photo', '')
+          .replace('image', '')
+          .replace('picture', '')
+          .replace('of', '')
+          .trim();
+
+        if (query) {
+          const mediaUrl = await searchPexels(query, type);
+          if (mediaUrl) {
+            // Queue the mutation
+            const result = await routeVoiceCommand({
+              type: 'ADD_MEDIA',
+              url: mediaUrl,
+              mediaType: type
+            });
+            return NextResponse.json({
+              ...result,
+              summary: `Found and added ${type} of "${query}" from Pexels`
+            });
+          }
+        }
+      }
+
       const result = parseTranscript(data.transcript);
       return NextResponse.json(result);
     }
 
+    // ... rest of handler
+
     // Handle media registry updates
     if (data.target === 'media' && data.key && data.value) {
-      // @ts-ignore - dynamic registry update
+      // @ts-expect-error - dynamic registry update
       media[data.key] = data.value;
       return NextResponse.json({ ok: true, media, registry: uiRegistry });
     }
