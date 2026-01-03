@@ -1,5 +1,6 @@
 'use client';
 
+import VideoBackground from '@/components/VideoBackground';
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
@@ -24,7 +25,12 @@ export default function AdminDashboard() {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
+    <div className="max-w-7xl mx-auto px-4 py-12 relative min-h-screen">
+      <VideoBackground
+        src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986234/earth_tpnzpa.mp4"
+        opacity={0.15}
+      />
+      <div className="absolute inset-0 bg-black/40 pointer-events-none" />
       <div className="flex justify-between items-center mb-8">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
