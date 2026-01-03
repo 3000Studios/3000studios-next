@@ -8,9 +8,12 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { Github, Heart, Linkedin, Mail, Twitter } from 'lucide-react';
 import Link from 'next/link';
-import { Github, Twitter, Linkedin, Mail, Heart } from 'lucide-react';
+import { useEffect, useState } from 'react';
+
+import AdUnit from '@/components/monetization/AdUnit';
+import AffiliateLinks from '@/components/monetization/AffiliateLinks';
 
 export default function GravityFooter() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -42,6 +45,12 @@ export default function GravityFooter() {
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
+      {/* Monetization Layer */}
+      <AffiliateLinks />
+      <div className="container mx-auto px-4">
+        <AdUnit slotId="footer-banner" label="Sponsored Content" />
+      </div>
+
       {/* Animated Background Effect */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
