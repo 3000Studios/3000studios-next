@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useCallback, useState } from "react";
 
 interface UseCompletionResponse {
   completion: string;
@@ -22,7 +22,7 @@ export function useAI(): UseCompletionResponse {
   const complete = useCallback(async (prompt: string): Promise<string | null> => {
     setIsLoading(true);
     setError(null);
-    
+
     try {
       const response = await fetch("/api/ai/stream", {
         method: "POST",
@@ -37,8 +37,10 @@ export function useAI(): UseCompletionResponse {
       const data = await response.json();
       const result = data.completion || data.text || "";
       setCompletion(result);
-      
-      console.log("Tokens used:", data.usage);
+
+      if (process.env.NODE_ENV === 'development') {
+        console.log("Tokens used:", data.usage);
+      }
       return result;
     } catch (err) {
       const error = err instanceof Error ? err : new Error("Unknown error");
