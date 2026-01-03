@@ -7,14 +7,14 @@
 import { AlertCircle, Check, Loader2, Lock, Mail, MapPin, Phone, Send } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 
 // JWS Password
 const JWS_PASSWORD = '88888888';
 
-export default function InfoPage() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+import VideoBackground from '@/components/VideoBackground';
 
+export default function InfoPage() {
   // Contact form state
   const [formData, setFormData] = useState({
     name: '',
@@ -36,86 +36,6 @@ export default function InfoPage() {
   const [jwsError, setJwsError] = useState('');
   const [isJwsAuthenticated, setIsJwsAuthenticated] = useState(false);
   const router = useRouter();
-
-  // Particle background effect
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animationId: number;
-    const particles: Array<{
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      size: number;
-      color: string;
-    }> = [];
-
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resize();
-    window.addEventListener('resize', resize);
-
-    // Create particles
-    for (let i = 0; i < 100; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 3 + 1,
-        color: Math.random() > 0.5 ? '#D4AF37' : '#1e3a5f',
-      });
-    }
-
-    const animate = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach((p, i) => {
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.fill();
-
-        // Connect nearby particles
-        particles.slice(i + 1).forEach((p2) => {
-          const dx = p.x - p2.x;
-          const dy = p.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 100) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(212, 175, 55, ${1 - dist / 100})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        });
-      });
-
-      animationId = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', resize);
-    };
-  }, []);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -192,7 +112,11 @@ export default function InfoPage() {
   return (
     <div className="relative min-h-screen bg-black text-white overflow-hidden">
       {/* Particle Background */}
-      <canvas ref={canvasRef} className="fixed inset-0 z-0" />
+      {/* Video Background */}
+      <VideoBackground
+        src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986234/earth_tpnzpa.mp4"
+        opacity={0.3}
+      />
 
       {/* Gold Border Overlay */}
       <div

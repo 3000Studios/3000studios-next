@@ -33,7 +33,10 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen py-8 px-4 relative" style={{ background: 'var(--marble-black)' }}>
-      <VideoBackground />
+      <VideoBackground
+        src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986152/Coding_travel_bgtycj.mp4"
+        opacity={0.3}
+      />
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
         <div className="mb-12 text-center">

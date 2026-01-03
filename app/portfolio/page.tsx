@@ -6,6 +6,7 @@
 
 'use client';
 
+import VideoBackground from '@/components/VideoBackground';
 import { motion } from 'framer-motion';
 import { Award, ChevronRight, ExternalLink, Filter, Star, TrendingUp, Users } from 'lucide-react';
 import Link from 'next/link';
@@ -37,7 +38,11 @@ export default function PortfolioPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black py-8 px-4">
+    <div className="min-h-screen relative py-8 px-4">
+      <VideoBackground
+        src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986142/3dweb_azplaj.mp4"
+        opacity={0.3}
+      />
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-16 text-center">
