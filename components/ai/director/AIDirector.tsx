@@ -1,31 +1,48 @@
-"use client";
-
-// @ts-nocheck
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import AvatarSpeech from '../dialogue/AvatarSpeech';
 import DialogueBrain from '../dialogue/DialogueBrain';
 
-export default function AIDirector({ avatar }) {
+interface AvatarMouth {
+  startTalking: () => void;
+  stopTalking: () => void;
+}
+
+interface Avatar {
+  mouth: AvatarMouth;
+}
+
+interface AIDirectorProps {
+  avatar?: Avatar | null;
+}
+
+export default function AIDirector({ avatar }: AIDirectorProps) {
   const [line, setLine] = useState('');
 
   const brain = DialogueBrain({
-    onDialogue: (l) => setLine(l),
+    onDialogue: (l: string) => setLine(l),
   });
+
+  const generateLine = useCallback(
+    (context: string) => {
+      brain.generateLine(context);
+    },
+    [brain]
+  );
 
   useEffect(() => {
     // Auto speaks whenever emotion changes
     const emotionHandler = (e: MessageEvent) => {
       if (String(e.data).startsWith('emotion:')) {
-        brain.generateLine('emotion shift');
+        generateLine('emotion shift');
       }
     };
 
     // Auto speaks whenever the crowd reacts
     const crowdHandler = (e: MessageEvent) => {
       if (String(e.data).startsWith('crowd:')) {
-        brain.generateLine('crowd reaction');
+        generateLine('crowd reaction');
       }
     };
 
@@ -34,7 +51,7 @@ export default function AIDirector({ avatar }) {
 
     // Interval dialogue so avatar never shuts up
     const interval = setInterval(() => {
-      brain.generateLine('interval fill');
+      generateLine('interval fill');
     }, 9000);
 
     return () => {
@@ -42,7 +59,7 @@ export default function AIDirector({ avatar }) {
       window.removeEventListener('message', emotionHandler);
       window.removeEventListener('message', crowdHandler);
     };
-  }, [brain]);
+  }, [generateLine]);
 
   return <AvatarSpeech text={line} avatar={avatar} />;
 }

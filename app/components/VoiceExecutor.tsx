@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function VoiceExecutor() {
   const router = useRouter();
@@ -37,7 +37,7 @@ export default function VoiceExecutor() {
         if (cmd.action === 'setCSS') {
           const el = document.querySelector(cmd.selector) as HTMLElement;
           if (!el) return;
-          Object.entries(cmd.css).forEach(([k, v]) => {
+          Object.entries(cmd.css as Record<string, string>).forEach(([k, v]) => {
             el.style.setProperty(k, v);
           });
         }
@@ -46,7 +46,7 @@ export default function VoiceExecutor() {
           await fetch('/api/git', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: 'voice deploy' })
+            body: JSON.stringify({ message: 'voice deploy' }),
           });
           alert('Deploying to production...');
         }

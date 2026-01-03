@@ -6,14 +6,14 @@ export function normalizeVendorProduct(
 ): VendorProduct {
   return {
     vendorId,
-    vendorProductId: raw.id || raw.sku,
-    name: raw.name || raw.title,
-    description: raw.description || "",
-    price: Number(raw.price),
-    currency: raw.currency || "USD",
-    image: raw.image || raw.image_url,
-    url: raw.url || raw.affiliate_link,
-    category: raw.category,
-    commissionRate: raw.commission,
+    vendorProductId: String(raw.id || raw.sku || ''),
+    name: String(raw.name || raw.title || ''),
+    description: String(raw.description || ''),
+    price: Number(raw.price) || 0,
+    currency: String(raw.currency || 'USD'),
+    image: String(raw.image || raw.image_url || ''),
+    url: String(raw.url || raw.affiliate_link || ''),
+    category: raw.category ? String(raw.category) : undefined,
+    commissionRate: raw.commission ? Number(raw.commission) : undefined,
   };
 }

@@ -1,17 +1,30 @@
-"use client";
-
-// @ts-nocheck
 'use client';
 
 import { useEffect, useRef } from 'react';
 
-export default function AvatarSpeech({ text, avatar }) {
-  const synthRef = useRef(typeof window !== 'undefined' ? window.speechSynthesis : null);
+interface AvatarMouth {
+  startTalking: () => void;
+  stopTalking: () => void;
+}
+
+interface Avatar {
+  mouth: AvatarMouth;
+}
+
+interface AvatarSpeechProps {
+  text: string;
+  avatar?: Avatar | null;
+}
+
+export default function AvatarSpeech({ text, avatar }: AvatarSpeechProps) {
+  const synthRef = useRef<SpeechSynthesis | null>(
+    typeof window !== 'undefined' ? window.speechSynthesis : null
+  );
 
   useEffect(() => {
     if (!text || !avatar || !synthRef.current) return;
 
-    const utter = new window.SpeechSynthesisUtterance(text);
+    const utter = new SpeechSynthesisUtterance(text);
 
     utter.pitch = 1.0;
     utter.rate = 1.1;

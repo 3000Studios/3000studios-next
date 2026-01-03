@@ -83,20 +83,24 @@ export const shopifyAdapter: VendorAdapter = {
   fetchProducts: async (feedUrl: string) => {
     const data = await fetchJson(feedUrl);
     const items = Array.isArray(data?.products) ? data.products : [];
-    return items.map((item: Record<string, unknown>) =>
-      normalizeVendorProduct("shopify", {
+    return items.map((item: Record<string, unknown>) => {
+      const variants = item.variants as Array<Record<string, unknown>> | undefined;
+      const images = item.images as Array<Record<string, unknown>> | undefined;
+      const handle = item.handle as string | undefined;
+
+      return normalizeVendorProduct("shopify", {
         id: item.id,
-        sku: item.handle,
+        sku: handle,
         name: item.title,
         description: item.body_html,
-        price: item.variants?.[0]?.price,
-        currency: item.variants?.[0]?.currency || "USD",
-        image: item.images?.[0]?.src,
-        url: item.handle ? `/products/${item.handle}` : item.onlineStoreUrl,
+        price: variants?.[0]?.price,
+        currency: (variants?.[0]?.currency as string) || "USD",
+        image: images?.[0]?.src,
+        url: handle ? `/products/${handle}` : item.onlineStoreUrl,
         category: item.product_type,
         commission: item.commission,
-      })
-    );
+      });
+    });
   },
 };
 
