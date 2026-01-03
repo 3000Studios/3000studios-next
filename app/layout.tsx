@@ -6,6 +6,7 @@
  */
 
 import ConsentBanner from '@/components/ConsentBanner';
+import IntroVideoGate from '@/components/IntroVideoGate';
 import { styleRegistry } from '@/lib/styleRegistry';
 import { AppProviders } from '@/providers/AppProviders';
 import { Analytics } from '@vercel/analytics/next';
@@ -142,25 +143,27 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         ) : null}
 
         <AppProviders>
-          {/* Navigation - Critical, loads immediately */}
-          <Nav />
+          <IntroVideoGate>
+            {/* Navigation - Critical, loads immediately */}
+            <Nav />
 
-          {/* Main content - Critical path, auto-sizes to viewport */}
-          <main className="relative z-10 flex-1 w-full pt-20">{children}</main>
+            {/* Main content - Critical path, auto-sizes to viewport */}
+            <main className="relative z-10 flex-1 w-full pt-20">{children}</main>
 
-          {/* Footer - Critical for SEO */}
-          <GravityFooter />
+            {/* Footer - Critical for SEO */}
+            <GravityFooter />
 
-          {/* Consent Banner - Important for compliance */}
-          <ConsentBanner />
+            {/* Consent Banner - Important for compliance */}
+            <ConsentBanner />
 
-          {/* Analytics - Load after content */}
-          <Suspense fallback={null}>
-            <Analytics />
-          </Suspense>
+            {/* Analytics - Load after content */}
+            <Suspense fallback={null}>
+              <Analytics />
+            </Suspense>
 
-          {/* Non-critical visual effects - lazy loaded via Client Component */}
-          <ClientEffects />
+            {/* Non-critical visual effects - lazy loaded via Client Component */}
+            <ClientEffects />
+          </IntroVideoGate>
         </AppProviders>
       </body>
     </html>
