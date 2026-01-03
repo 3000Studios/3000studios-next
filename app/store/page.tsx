@@ -1,5 +1,6 @@
 'use client';
 
+import VideoBackground from '@/components/VideoBackground';
 import { useCartStore } from '@/lib/cart-store';
 import { Check, ExternalLink, ShoppingCart, Sparkles, Star, Zap } from 'lucide-react';
 import Image from 'next/image';
@@ -138,7 +139,11 @@ export default function StorePage() {
   const cartItemCount = getTotalItems();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
+    <div className="min-h-screen relative">
+      <VideoBackground
+        src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986154/Coin_stack_lhwjax.mp4"
+        opacity={0.3}
+      />
       {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">
         <div className="absolute inset-0 opacity-20">

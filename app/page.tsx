@@ -60,7 +60,7 @@ export default function HomePage() {
         {/* Video Background - Lazy loaded */}
         <motion.div
           style={{ scale: heroScale, opacity: heroOpacity }}
-          className="absolute inset-0 z-0"
+          className="absolute inset-0 z-0 w-screen left-1/2 -translate-x-1/2"
         >
           <video
             autoPlay
@@ -69,11 +69,11 @@ export default function HomePage() {
             playsInline
             preload="none"
             poster="/images/hero-poster.jpg"
-            className="absolute inset-0 w-full h-full object-cover opacity-40"
+            className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto object-cover -translate-x-1/2 -translate-y-1/2 opacity-40"
           >
             <source src={STOCK_VIDEOS.heroBackground} type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-linear-to-b from-black/60 via-[#004e58]/40 to-black" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-[#004e58]/40 to-black" />
         </motion.div>
 
         {/* Animated gradient overlay */}
