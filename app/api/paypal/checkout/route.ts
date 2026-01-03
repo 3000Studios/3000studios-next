@@ -124,32 +124,32 @@ const handler = async (request: NextRequest) => {
       }
 
       // Log successful payment
-      console.log('✅ Payment captured:', {
-        orderID,
+      // Payment captured
+      orderID,
         status: captureData.status,
-        payer: captureData.payer?.email_address,
-        amount: captureData.purchase_units?.[0]?.payments?.captures?.[0]?.amount
-      });
+          payer: captureData.payer?.email_address,
+            amount: captureData.purchase_units?.[0]?.payments?.captures?.[0]?.amount
+    });
 
-      return NextResponse.json({
-        success: true,
-        orderID,
-        status: captureData.status,
-        details: captureData
-      });
-    }
-
-    return NextResponse.json(
-      { error: 'Invalid action' },
-      { status: 400 }
-    );
-  } catch (error) {
-    console.error('PayPal API error:', error);
-    return NextResponse.json(
-      { error: 'Payment processing failed', message: error instanceof Error ? error.message : 'Unknown error' },
-      { status: 500 }
-    );
+    return NextResponse.json({
+      success: true,
+      orderID,
+      status: captureData.status,
+      details: captureData
+    });
   }
+
+    return NextResponse.json(
+    { error: 'Invalid action' },
+    { status: 400 }
+  );
+} catch (error) {
+  console.error('PayPal API error:', error);
+  return NextResponse.json(
+    { error: 'Payment processing failed', message: error instanceof Error ? error.message : 'Unknown error' },
+    { status: 500 }
+  );
+}
 };
 
 export const POST = withRateLimit(
