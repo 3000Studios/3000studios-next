@@ -2,11 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
 
-  // Explicitly enable Turbopack (required for Next.js 16)
+  // Explicit Turbopack declaration (required for Next.js 16+)
   turbopack: {},
 
-  // Preserve any existing webpack customizations
-  webpack: (config, { isServer }) => {
+  // Webpack compatibility layer (non-invasive)
+  webpack: (config) => {
     return config;
   },
 };
