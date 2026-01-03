@@ -2,13 +2,21 @@
 
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Card from '../../ui/Card';
 
 export default function AdminDashboard() {
   const [status, setStatus] = useState<any>(null);
+  const router = useRouter();
 
   useEffect(() => {
+    // Security Check
+    const auth = sessionStorage.getItem('admin-auth');
+    if (auth !== 'true') {
+      router.push('/admin');
+      return;
+    }
     fetch('/api/status')
       .then((res) => res.json())
       .then((data) => setStatus(data))
