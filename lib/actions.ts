@@ -1,34 +1,37 @@
 'use server';
 
 import { signIn } from '@/auth';
-import { AuthError } from 'next-auth';
 
 export async function authenticate(prevState: string | undefined, formData: FormData) {
   try {
     await signIn('credentials', formData);
   } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
+    // Handle authentication errors
+    if (error && typeof error === 'object' && 'type' in error) {
+      const authError = error as { type: string };
+      switch (authError.type) {
         case 'CredentialsSignin':
           return 'Invalid credentials.';
         default:
           return 'Something went wrong.';
       }
     }
-    throw error;
+    // If it's a redirect error (successful auth), rethrow
+    if (error && typeof error === 'object' && 'digest' in error) {
+      throw error;
+    }
+    return 'Something went wrong.';
   }
 }
 
 export async function sendEmergencyMagicLink(email: string) {
   try {
-    // 1. Strict Security Enforcment
+    // 1. Strict Security Enforcement
     if (email !== 'mr.jwswain@gmail.com') {
       throw new Error('Unauthorized: This emergency button is restricted.');
     }
 
     // 2. Trigger Magic Link
-    // Note: The 'nodemailer' provider in NextAuth (v5) is often invoked via signIn("nodemailer", ...)
-    // which corresponds to the provider ID. Since we imported as Nodemailer, the default ID is "nodemailer".
     await signIn('nodemailer', { email, redirect: false });
 
     return {
@@ -36,7 +39,8 @@ export async function sendEmergencyMagicLink(email: string) {
       message: 'Emergency link sent to secure admin email.',
     };
   } catch (error) {
-    if (error instanceof AuthError) {
+    // Handle authentication errors
+    if (error && typeof error === 'object' && 'type' in error) {
       return { error: 'Failed to send link.' };
     }
     throw error;

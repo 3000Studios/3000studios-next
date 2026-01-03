@@ -27,7 +27,11 @@ const ADMIN_ROUTES = [
 ];
 
 export function verifyRoutes() {
-  const results = {
+  const results: {
+    passed: string[];
+    failed: { route: string; error: any }[];
+    timestamp: string;
+  } = {
     passed: [],
     failed: [],
     timestamp: new Date().toISOString()
@@ -47,4 +51,5 @@ export function verifyRoutes() {
   return results;
 }
 
-export { PUBLIC_ROUTES, ADMIN_ROUTES };
+export { ADMIN_ROUTES, PUBLIC_ROUTES };
+
