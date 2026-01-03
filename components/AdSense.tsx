@@ -20,7 +20,33 @@ export function AdSenseUnit({ slot, style }: { slot: string; style?: React.CSSPr
   if (typeof window === 'undefined') return null;
 
   const raw = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
-  if (!raw) return null;
+  const isDev = process.env.NODE_ENV === 'development';
+
+  if (!raw) {
+    if (isDev) {
+      return (
+        <div
+          style={{
+            ...style,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'rgba(255, 255, 255, 0.05)',
+            border: '1px dashed rgba(255, 255, 255, 0.2)',
+            color: 'rgba(255, 255, 255, 0.5)',
+            fontSize: '12px',
+            minHeight: '100px',
+            width: '100%',
+          }}
+        >
+          AdSense Unit (No ID configured)
+          <br />
+          Slot: {slot}
+        </div>
+      );
+    }
+    return null;
+  }
 
   const client = raw.startsWith('ca-pub-') ? raw : `ca-pub-${raw}`;
 

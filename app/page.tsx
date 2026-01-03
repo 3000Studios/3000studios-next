@@ -1,5 +1,6 @@
 'use client';
 
+import { AdSenseUnit } from '@/components/AdSense';
 import HomeBackground from '@/components/HomeBackground';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
@@ -7,6 +8,8 @@ import { useRef } from 'react';
 import Button from './ui/Button';
 import Card from './ui/Card';
 import Section from './ui/Section';
+
+import NewsFeed from '@/components/NewsFeed';
 
 // ============================================
 // COPYRIGHT-FREE MEDIA SOURCES
@@ -115,22 +118,6 @@ export default function HomePage() {
               transition={{ duration: 1 }}
               className="space-y-8"
             >
-              {/* Logo */}
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="relative w-[280px] h-[100px]"
-              >
-                <Image
-                  src="/logo.png"
-                  alt="3000 Studios"
-                  fill
-                  className="object-contain drop-shadow-[0_0_20px_rgba(212,175,55,0.5)]"
-                  priority
-                />
-              </motion.div>
-
               {/* Headline */}
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
@@ -159,28 +146,6 @@ export default function HomePage() {
               </motion.p>
 
               {/* CTA Buttons */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
-                className="flex flex-wrap gap-4"
-              >
-                <Button
-                  variant="primary"
-                  size="lg"
-                  className="group relative overflow-hidden shadow-lg shadow-yellow-500/30 hover:shadow-yellow-500/50 transition-all"
-                >
-                  <span className="relative z-10">Get Started</span>
-                  <div className="absolute inset-0 bg-linear-to-r from-yellow-400 to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </Button>
-                <Button
-                  variant="secondary"
-                  size="lg"
-                  className="backdrop-blur-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20"
-                >
-                  Watch Demo →
-                </Button>
-              </motion.div>
 
               {/* Stats row */}
               <motion.div
@@ -209,52 +174,15 @@ export default function HomePage() {
               transition={{ duration: 1, delay: 0.5 }}
               className="relative w-full h-[600px] flex flex-col gap-6 justify-center"
             >
-              {/* Weather Widget */}
-              <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-yellow-500/50 transition-colors">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-playfair text-white">Live Operations</h3>
-                  <span className="animate-pulse w-2 h-2 rounded-full bg-green-500"></span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="text-4xl">🌤️</div>
-                  <div>
-                    <div className="text-2xl font-bold text-white">72°F</div>
-                    <div className="text-sm text-gray-400">San Francisco, CA</div>
-                  </div>
-                </div>
-              </div>
-
               {/* News Widget */}
-              <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex-1 hover:border-blue-500/50 transition-colors overflow-hidden relative group">
-                <h3 className="text-xl font-playfair text-white mb-4">Latest Updates</h3>
-                <div className="space-y-4">
-                  {[1, 2, 3].map((_, i) => (
-                    <div
-                      key={i}
-                      className="flex gap-4 p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"
-                    >
-                      <div className="w-16 h-16 bg-gray-700 rounded-md shrink-0 overflow-hidden relative">
-                        <Image
-                          src={`https://images.unsplash.com/photo-${i === 0 ? '1677442136019-21780ecad995' : i === 1 ? '1639762681485-074b7f938ba0' : '1558494949-ef010cbdcc31'}?w=200&q=80`}
-                          alt="News"
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <div>
-                        <div className="text-xs text-yellow-500 mb-1">BREAKING NEWS</div>
-                        <div className="text-sm text-gray-200 line-clamp-2">
-                          New AI Integration Protocols Released for Enterprise Clients
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+              <NewsFeed />
 
-                {/* AdSense Placeholder - Explicit */}
-                <div className="mt-4 w-full h-24 bg-gray-800/50 flex items-center justify-center border border-dashed border-gray-600 text-xs text-gray-500">
-                  GOOGLE ADSENSE SLOT [news-feed]
-                </div>
+              {/* AdSense Placeholder - Explicit */}
+              <div className="mt-4 w-full">
+                <AdSenseUnit
+                  slot="news-feed-1"
+                  style={{ display: 'block', width: '100%', height: '100px' }}
+                />
               </div>
             </motion.div>
           </div>

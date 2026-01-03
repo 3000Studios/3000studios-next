@@ -1,5 +1,7 @@
 import { media } from '@/lib/mediaRegistry';
 import { uiRegistry, updateRegistry } from '@/lib/uiRegistry';
+import { VoiceCommand } from '@/voice/commands';
+import { routeVoiceCommand } from '@/voice/router';
 import { NextResponse } from 'next/server';
 
 // Voice command types
@@ -59,7 +61,17 @@ function parseTranscript(transcript: string): { actions: any[]; summary: string 
 
 export async function POST(req: Request) {
   try {
-    const data: VoicePayload = await req.json();
+    const body = await req.json();
+
+    // 1. Direct Voice Command (Phase 3 - Exact JSON)
+    // Matches { type: 'UPDATE_TEXT', ... }
+    if (body.type && typeof body.type === 'string') {
+      const result = await routeVoiceCommand(body as VoiceCommand);
+      return NextResponse.json(result);
+    }
+
+    // 2. Legacy/Natural Language Payload
+    const data = body as VoicePayload;
 
     // Handle transcript-based voice commands (from VoiceCommandCenter)
     if (data.transcript) {

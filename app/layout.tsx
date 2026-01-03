@@ -149,7 +149,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <Nav />
 
             {/* Main content - Critical path, auto-sizes to viewport */}
-            <main className="relative z-10 flex-1 w-full pt-20">{children}</main>
+            <main className="relative z-10 flex-1 w-full pt-28">{children}</main>
 
             {/* Footer - Critical for SEO */}
             <GravityFooter />

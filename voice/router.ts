@@ -6,16 +6,16 @@
 
 import { VoiceCommand } from './commands';
 import {
-  handleUpdateText,
-  handleAddSection,
   handleAddMedia,
+  handleAddSection,
   handleChangeStyle,
   handlePublishBlog,
+  handleUpdateText,
 } from './handlers/mutations';
 
 export async function routeVoiceCommand(
   cmd: VoiceCommand
-): Promise<{ status: string; message?: string; mutationId?: string }> {
+): Promise<{ success: boolean; message: string; mutationId?: string }> {
   try {
     // Route to appropriate handler based on command type
     switch (cmd.type) {
@@ -46,14 +46,14 @@ export async function routeVoiceCommand(
 
       default:
         return {
-          status: 'error',
-          message: `No handler for command type: ${cmd.type}`,
+          success: false,
+          message: `No handler for command type: ${(cmd as any).type}`,
         };
     }
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     return {
-      status: 'error',
+      success: false,
       message,
     };
   }
