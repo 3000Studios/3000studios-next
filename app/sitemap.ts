@@ -14,6 +14,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
+      url: `${BASE_URL}/store`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 0.95,
+    },
+    {
       url: `${BASE_URL}/info`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
@@ -32,13 +38,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/vendors`,
+      url: `${BASE_URL}/projects`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
-      priority: 0.7,
+      priority: 0.8,
     },
     {
-      url: `${BASE_URL}/revenue`,
+      url: `${BASE_URL}/live`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.7,
@@ -47,12 +53,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Service pages
   const servicePages: MetadataRoute.Sitemap = [
-    {
-      url: `${BASE_URL}/services`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
     {
       url: `${BASE_URL}/portfolio`,
       lastModified: currentDate,
@@ -67,5 +67,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  return [...corePages, ...servicePages];
+  // Legal pages - Required for AdSense
+  const legalPages: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE_URL}/privacy`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: `${BASE_URL}/terms`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+  ];
+
+  return [...corePages, ...servicePages, ...legalPages];
 }
