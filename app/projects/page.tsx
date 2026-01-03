@@ -6,8 +6,9 @@
 
 'use client';
 
+import VideoBackground from '@/components/VideoBackground';
+import { Code, ExternalLink, Github } from 'lucide-react';
 import { useState } from 'react';
-import { ExternalLink, Github, Code } from 'lucide-react';
 
 interface Project {
   id: number;
@@ -69,18 +70,21 @@ const categories = ['All', 'Web Development', 'Design', 'Mobile', 'Interactive']
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const filteredProjects = selectedCategory === 'All'
-    ? projects
-    : projects.filter(project => project.category === selectedCategory);
+  const filteredProjects =
+    selectedCategory === 'All'
+      ? projects
+      : projects.filter((project) => project.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black py-8 px-4">
+    <div className="min-h-screen relative py-8 px-4">
+      <VideoBackground
+        src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986149/code_ycx5gk.mp4"
+        opacity={0.3}
+      />
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-12 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold gradient-text mb-4">
-            Our Projects
-          </h1>
+          <h1 className="text-5xl md:text-6xl font-bold gradient-text mb-4">Our Projects</h1>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Showcasing our finest work across web, mobile, and interactive experiences
           </p>
@@ -123,17 +127,12 @@ export default function ProjectsPage() {
               <h3 className="text-xl font-bold text-white mb-2 group-hover:text-gold transition-colors">
                 {project.title}
               </h3>
-              <p className="text-gray-400 mb-4">
-                {project.description}
-              </p>
+              <p className="text-gray-400 mb-4">{project.description}</p>
 
               {/* Tags */}
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.tags.map((tag, idx) => (
-                  <span
-                    key={idx}
-                    className="px-2 py-1 bg-gray-900 text-gray-400 rounded text-xs"
-                  >
+                  <span key={idx} className="px-2 py-1 bg-gray-900 text-gray-400 rounded text-xs">
                     {tag}
                   </span>
                 ))}
@@ -158,9 +157,7 @@ export default function ProjectsPage() {
 
         {/* CTA Section */}
         <div className="mt-16 card bg-gradient-to-r from-gold/10 to-sapphire/10 border-gold text-center">
-          <h3 className="text-2xl font-bold text-white mb-4">
-            Have a Project in Mind?
-          </h3>
+          <h3 className="text-2xl font-bold text-white mb-4">Have a Project in Mind?</h3>
           <p className="text-gray-400 mb-6 max-w-md mx-auto">
             Let&apos;s collaborate and bring your vision to life with cutting-edge technology
           </p>

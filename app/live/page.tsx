@@ -1,6 +1,12 @@
+import VideoBackground from '@/components/VideoBackground';
+
 export default function Live() {
   return (
-    <section className="p-10 min-h-screen">
+    <section className="relative min-h-screen p-10">
+      <VideoBackground
+        src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986172/gravity_rings_qkipbj.mp4"
+        opacity={0.3}
+      />
       <h1 className="text-4xl font-bold text-white mb-6">LIVE STREAM</h1>
       <p className="text-gray-400 mb-6">Watch exclusive live content and broadcasts</p>
 
