@@ -83,7 +83,10 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden">
       {/* Background Effects */}
-      <VideoBackground opacity={0.15} />
+      <VideoBackground
+        src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986106/golfing_pvhbv5.mp4"
+        opacity={0.15}
+      />
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black opacity-90" />
 
       {/* Animated orbs */}

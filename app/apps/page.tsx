@@ -1,3 +1,4 @@
+import VideoBackground from '@/components/VideoBackground';
 import Link from 'next/link';
 import Card from '../ui/Card';
 
@@ -26,7 +27,9 @@ export default function AppsPage() {
   ];
 
   return (
-    <div className="min-h-screen py-20 px-4">
+  return (
+    <div className="min-h-screen relative py-20 px-4">
+      <VideoBackground src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986180/lime_green_zd7xgt.mp4" opacity={0.3} />
       <div className="max-w-7xl mx-auto">
         <h1 className="text-5xl font-bold text-center mb-4 bg-linear-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
           Our Applications
