@@ -23,23 +23,23 @@ export function generateSEO(config: SEOConfig): Metadata {
     title: config.title,
     description: config.description,
     keywords: config.keywords,
-    
+
     openGraph: {
       title: config.title,
       description: config.description,
       url: fullUrl,
       siteName: '3000 Studios',
       images: [{ url: ogImage }],
-      type: config.type || 'website',
+      type: (config.type || 'website') as any,
     },
-    
+
     twitter: {
       card: 'summary_large_image',
       title: config.title,
       description: config.description,
       images: [ogImage],
     },
-    
+
     robots: {
       index: true,
       follow: true,

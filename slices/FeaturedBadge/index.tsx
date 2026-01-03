@@ -1,11 +1,11 @@
-import { FC } from 'react';
-import { Content } from '@prismicio/client';
 import { SliceComponentProps } from '@prismicio/react';
+import { FC } from 'react';
+import type { FeaturedBadgeSlice } from '../../prismicio-types';
 
 /**
  * Props for `FeaturedBadge`.
  */
-export type FeaturedBadgeProps = SliceComponentProps<Content.FeaturedBadgeSlice>;
+export type FeaturedBadgeProps = SliceComponentProps<FeaturedBadgeSlice>;
 
 /**
  * Component for "FeaturedBadge" Slices.

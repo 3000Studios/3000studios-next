@@ -44,7 +44,8 @@ export function verifyRoutes() {
       // Route verification logic
       results.passed.push(route);
     } catch (error) {
-      results.failed.push({ route, error: error.message });
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      results.failed.push({ route, error: errorMessage });
     }
   }
 

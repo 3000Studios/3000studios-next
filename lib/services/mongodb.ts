@@ -188,7 +188,7 @@ export async function getProduct(productId: string): Promise<Product | null> {
   try {
     const database = await connectToDatabase();
     const product = await database.collection('products').findOne({ productId });
-    return product as Product | null;
+    return product as unknown as Product | null;
   } catch (error) {
     console.error('MongoDB get error:', error);
     return null;
@@ -209,7 +209,7 @@ export async function listProducts(limit = 10): Promise<Product[]> {
   try {
     const database = await connectToDatabase();
     const products = await database.collection('products').find({}).limit(limit).toArray();
-    return products as Product[];
+    return products as unknown as Product[];
   } catch (error) {
     console.error('MongoDB list error:', error);
     return [];
