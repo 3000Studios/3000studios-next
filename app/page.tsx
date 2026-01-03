@@ -523,6 +523,43 @@ export default function HomePage() {
       </Section>
 
       {/* ============================================
+          TRUCK VIDEO SECTION (User Requested)
+          ============================================ */}
+      <Section className="bg-black relative overflow-hidden py-20">
+        <div className="container mx-auto px-4 z-10 relative">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <h2 className="text-3xl font-bold text-[#D4AF37] mb-4">Logistics & Transportation</h2>
+            <p className="text-gray-400">Powering the future of fleet management</p>
+          </motion.div>
+
+          <div className="relative aspect-video max-w-5xl mx-auto rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+            <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+              <source
+                src="https://videos.pexels.com/video-files/3052608/3052608-uhd_2560_1440_30fps.mp4"
+                type="video/mp4"
+              />
+            </video>
+            <div className="absolute inset-0 bg-black/20" />
+            <div className="absolute bottom-4 right-4">
+              <a
+                href="https://www.pexels.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-white/50 hover:text-white"
+              >
+                Video via Pexels
+              </a>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* ============================================
           CTA SECTION
           ============================================ */}
       <Section className="relative overflow-hidden">
