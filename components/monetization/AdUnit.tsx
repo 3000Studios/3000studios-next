@@ -6,10 +6,12 @@ export default function AdUnit({
   slotId,
   format = 'auto',
   label = 'Advertisement',
+  className = '',
 }: {
   slotId: string;
   format?: string;
   label?: string;
+  className?: string;
 }) {
   useEffect(() => {
     try {
@@ -32,7 +34,7 @@ export default function AdUnit({
   }
 
   return (
-    <div className="w-full my-8 overflow-hidden">
+    <div className={`w-full my-8 overflow-hidden ${className}`}>
       <div className="text-center text-[10px] text-gray-600 uppercase tracking-widest py-1">
         {label}
       </div>

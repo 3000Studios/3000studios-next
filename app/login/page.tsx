@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 // Admin password - in production this should be environment variable
-const ADMIN_PASSWORD = '88888888';
+const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || '88888888';
 
 export default function LoginPage() {
   const router = useRouter();
