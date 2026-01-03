@@ -34,3 +34,7 @@ prisma/*.db-journal
 
 .vercel
 .env*.local
+
+!GEMINI.md
+
+
