@@ -24,7 +24,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 // Admin password - in production this should be environment variable
-const ADMIN_PASSWORD = '88888888';
+const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || '88888888';
 
 // Admin sections organized by category
 const ADMIN_SECTIONS = {
@@ -199,7 +199,10 @@ export default function AdminPage() {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden">
-        <VideoBackground opacity={0.2} />
+        <VideoBackground
+          src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986106/golfing_pvhbv5.mp4"
+          opacity={0.2}
+        />
         <div className="absolute inset-0 bg-linear-to-br from-black via-gray-900 to-black opacity-90" />
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-linear-to-r from-[#D4AF37] to-[#FFD700] rounded-full blur-3xl opacity-10 animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-linear-to-r from-[#FFD700] to-[#D4AF37] rounded-full blur-3xl opacity-10 animate-pulse" />
