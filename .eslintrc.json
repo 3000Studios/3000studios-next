@@ -1,14 +1,21 @@
 {
-  "root": true,
-  "extends": ["next/core-web-vitals", "eslint:recommended"],
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript"
+  ],
   "rules": {
-    "no-restricted-imports": [
-      "error",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
       {
-        "patterns": ["**/_disabled/**"]
+        "argsIgnorePattern": "^_"
       }
     ],
-    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-require-imports": "off"
   },
-  "ignorePatterns": ["_disabled/**", ".next/**", "node_modules/**"]
+  "ignorePatterns": [
+    "scripts/**/*.js",
+    "*.config.js",
+    "*.config.mjs"
+  ]
 }
