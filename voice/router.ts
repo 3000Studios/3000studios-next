@@ -47,7 +47,7 @@ export async function routeVoiceCommand(
       default:
         return {
           success: false,
-          message: `No handler for command type: ${(cmd as any).type}`,
+          message: `No handler for command type: ${(cmd as { type: string }).type}`,
         };
     }
   } catch (error) {
