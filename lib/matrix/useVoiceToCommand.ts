@@ -2,21 +2,28 @@
 
 import { useEffect, useRef } from 'react';
 
-// Extend Window interface for Speech Recognition
-declare global {
-  interface Window {
-    SpeechRecognition: typeof SpeechRecognition;
-    webkitSpeechRecognition: typeof SpeechRecognition;
-  }
+// SpeechRecognition is a Web API available in browsers but not typed by default in TS
+interface ISpeechRecognition extends EventTarget {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  onresult: ((event: ISpeechRecognitionEvent) => void) | null;
+  onerror: ((event: ISpeechRecognitionErrorEvent) => void) | null;
+  start: () => void;
+  stop: () => void;
 }
 
-interface SpeechRecognitionEvent extends Event {
+interface ISpeechRecognitionEvent {
   resultIndex: number;
   results: SpeechRecognitionResultList;
 }
 
-interface SpeechRecognitionErrorEvent extends Event {
+interface ISpeechRecognitionErrorEvent {
   error: string;
+}
+
+interface ISpeechRecognitionConstructor {
+  new(): ISpeechRecognition;
 }
 
 const useVoiceToCommand = (onCommand: (command: string) => void) => {
@@ -27,7 +34,12 @@ const useVoiceToCommand = (onCommand: (command: string) => void) => {
 
     if (typeof window === 'undefined') return;
 
-    const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+    // Get SpeechRecognition API (with vendor prefix support)
+    const SpeechRecognitionAPI = (
+      (window as unknown as { SpeechRecognition?: ISpeechRecognitionConstructor }).SpeechRecognition ||
+      (window as unknown as { webkitSpeechRecognition?: ISpeechRecognitionConstructor }).webkitSpeechRecognition
+    );
+
     if (!SpeechRecognitionAPI) {
       console.warn('Speech recognition not supported in this browser.');
       return;
@@ -38,7 +50,7 @@ const useVoiceToCommand = (onCommand: (command: string) => void) => {
     recognition.interimResults = false;
     recognition.lang = 'en-US';
 
-    recognition.onresult = (event: SpeechRecognitionEvent) => {
+    recognition.onresult = (event: ISpeechRecognitionEvent) => {
       for (let i = event.resultIndex; i < event.results.length; ++i) {
         if (event.results[i].isFinal) {
           const transcript = event.results[i][0].transcript.trim();
@@ -48,7 +60,7 @@ const useVoiceToCommand = (onCommand: (command: string) => void) => {
       }
     };
 
-    recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+    recognition.onerror = (event: ISpeechRecognitionErrorEvent) => {
       console.error('Speech recognition error', event.error);
     };
 
