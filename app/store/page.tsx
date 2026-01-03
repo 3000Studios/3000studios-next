@@ -123,7 +123,6 @@ export default function StorePage() {
       productId: product.id,
       name: product.name,
       price: product.price,
-      quantity: 1,
       image: product.image,
     });
     setAddedProducts((prev) => new Set([...prev, product.id]));

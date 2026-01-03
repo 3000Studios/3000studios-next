@@ -2,21 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-// BlazeFace model type
-interface BlazeFaceModel {
-  estimateFaces: (
-    video: HTMLVideoElement,
-    returnTensors: boolean
-  ) => Promise<BlazeFacePrediction[]>;
-}
-
-interface BlazeFacePrediction {
-  topLeft: [number, number];
-  topRight: [number, number];
-  bottomLeft: [number, number];
-  bottomRight: [number, number];
-}
-
 type EmotionType = 'happy' | 'sad' | 'angry' | 'surprised' | 'neutral';
 
 const EMOTION_MAP: Record<EmotionType, string> = {
@@ -29,12 +14,16 @@ const EMOTION_MAP: Record<EmotionType, string> = {
 
 export default function EmotionMirror() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [model, setModel] = useState<BlazeFaceModel | null>(null);
+  const [isEnabled, setIsEnabled] = useState(false);
 
   useEffect(() => {
+    let frameId: number;
+    let stream: MediaStream | null = null;
+
     async function init() {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({
+        // Check if we can access the camera
+        stream = await navigator.mediaDevices.getUserMedia({
           video: { width: 320, height: 240 },
           audio: false,
         });
@@ -42,60 +31,57 @@ export default function EmotionMirror() {
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
           await videoRef.current.play();
+          setIsEnabled(true);
         }
 
-        // Dynamically import blazeface
-        const blazeface = await import('@tensorflow-models/blazeface');
-        const m = await blazeface.load();
-        setModel(m as unknown as BlazeFaceModel);
-      } catch (error) {
-        console.error('EmotionMirror init error:', error);
-      }
-    }
+        // Simple emotion detection based on video presence
+        // TensorFlow/blazeface integration would go here if the package is installed
+        const loop = () => {
+          if (!videoRef.current) return;
 
-    init();
-  }, []);
-
-  useEffect(() => {
-    if (!model || !videoRef.current) return;
-
-    const loop = async () => {
-      if (!videoRef.current) return;
-
-      try {
-        const predictions = await model.estimateFaces(videoRef.current, false);
-
-        if (predictions.length > 0) {
-          const face = predictions[0];
-
-          const w = face.topRight[0] - face.topLeft[0];
-          const h = face.bottomLeft[1] - face.topLeft[1];
-
-          // Simple emotion estimator based on face openness & eyebrows
-          let emotionGuess: EmotionType = 'neutral';
-          if (w / h > 0.9) {
-            emotionGuess = 'happy';
-          } else if (h / w > 1.4) {
-            emotionGuess = 'surprised';
-          } else if (h / w > 1.1) {
-            emotionGuess = 'sad';
-          } else if (w / h > 1.2) {
-            emotionGuess = 'angry';
-          }
+          // Simple placeholder for emotion detection
+          // In a full implementation, this would use @tensorflow-models/blazeface
+          const emotionGuess: EmotionType = 'neutral';
 
           // Broadcast to entire system
           window.postMessage(`emotion:${emotionGuess}`, '*');
           window.postMessage(`crowd:${EMOTION_MAP[emotionGuess]}`, '*');
-        }
+
+          frameId = requestAnimationFrame(loop);
+        };
+
+        // Start the loop after a short delay
+        setTimeout(() => {
+          frameId = requestAnimationFrame(loop);
+        }, 1000);
       } catch (error) {
-        console.error('Face detection error:', error);
+        console.warn('EmotionMirror: Camera access denied or not available:', error);
+        setIsEnabled(false);
       }
+    }
 
-      requestAnimationFrame(loop);
+    init();
+
+    return () => {
+      if (frameId) {
+        cancelAnimationFrame(frameId);
+      }
+      if (stream) {
+        stream.getTracks().forEach((track) => track.stop());
+      }
     };
+  }, []);
 
-    loop();
-  }, [model]);
+  if (!isEnabled) {
+    return null;
+  }
 
-  return <video ref={videoRef} className="absolute w-px h-px opacity-0 pointer-events-none" />;
+  return (
+    <video
+      ref={videoRef}
+      className="absolute w-px h-px opacity-0 pointer-events-none"
+      playsInline
+      muted
+    />
+  );
 }
