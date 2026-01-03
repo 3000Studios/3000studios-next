@@ -24,35 +24,44 @@ export default function NewsFeed() {
   const [news, setNews] = useState<NewsItem[]>([]);
 
   useEffect(() => {
-    // Simulate fetching live news
-    const generateNews = () => {
-      const topics = [
-        'AI Integration Protocols Released for Enterprise Clients',
-        'Global Tech Summit Announces New 3000 Studios Partnership',
-        'Quantum Computing Breakthrough: What It Means for You',
-        'Sustainable Tech: The Future of Digital Infrastructure',
-        'Next-Gen Voice Systems Deployment Schedule Updated',
-      ];
-
-      const categories = ['BREAKING', 'TECHNOLOGY', 'PARTNERSHIP', 'INNOVATION', 'UPDATE'];
-      const now = new Date();
-
-      const items = topics.slice(0, 3).map((topic, i) => ({
-        id: i,
-        title: topic,
-        category: categories[i],
-        image: NEWS_IMAGES[i % NEWS_IMAGES.length],
-        timestamp: new Date(now.getTime() - i * 3600000).toLocaleTimeString([], {
-          hour: '2-digit',
-          minute: '2-digit',
-        }),
-      }));
-
-      setNews(items);
+    const fetchNews = async () => {
+      try {
+        const res = await fetch('/api/news');
+        if (!res.ok) throw new Error('Failed to fetch');
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          setNews(data);
+        } else {
+          throw new Error('No data');
+        }
+      } catch (error) {
+        console.warn('News API failed, using fallback data', error);
+        // Fallback to simulated news
+        const topics = [
+          'AI Integration Protocols Released for Enterprise Clients',
+          'Global Tech Summit Announces New 3000 Studios Partnership',
+          'Quantum Computing Breakthrough: What It Means for You',
+          'Sustainable Tech: The Future of Digital Infrastructure',
+          'Next-Gen Voice Systems Deployment Schedule Updated',
+        ];
+        const categories = ['BREAKING', 'TECHNOLOGY', 'PARTNERSHIP', 'INNOVATION', 'UPDATE'];
+        const now = new Date();
+        const items = topics.slice(0, 5).map((topic, i) => ({
+          id: i,
+          title: topic,
+          category: categories[i],
+          image: NEWS_IMAGES[i % NEWS_IMAGES.length],
+          timestamp: new Date(now.getTime() - i * 3600000).toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+          }),
+        }));
+        setNews(items);
+      }
     };
 
-    generateNews();
-    const interval = setInterval(generateNews, 60000); // Update "live" timestamps every minute
+    fetchNews();
+    const interval = setInterval(fetchNews, 300000); // Update every 5 minutes
     return () => clearInterval(interval);
   }, []);
 

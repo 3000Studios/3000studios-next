@@ -10,19 +10,34 @@ export const metadata = {
 export default function AppsPage() {
   const apps = [
     {
+      name: '3000 Studios Sound Amp',
+      href: 'https://ai.studio/apps/drive/16gUD8hBDhQL7BSq9V_fHOPM5xAeIJtHE?fullscreenApplet=true',
+      description: 'Enhance your audio experience with AI-powered amplification.',
+    },
+    {
+      name: '3000 FM',
+      href: 'https://ai.studio/apps/drive/1T_77lTBIyjLzMyvnJGUHZ2nUnqs4qcGM?',
+      description: 'Your personal AI radio station and music discovery platform.',
+    },
+    {
+      name: '3000 Studios Auto Video Editor',
+      href: 'https://ai.studio/apps/drive/1OJdfbOG0jyOIrKqTM3HaHyStzHQosUHw?fullscreenApplet=truefullscreenApplet=true',
+      description: 'Professional video editing powered by intelligent automation.',
+    },
+    {
+      name: '3000 Site Builder Pro',
+      href: 'https://ai.studio/apps/drive/1NXX4PEelbMSaXHwmNuMlqUY9bd5-Wq6o',
+      description: 'Create stunning websites in minutes with our advanced builder.',
+    },
+    {
+      name: '3000 Studios Youtube Downloader',
+      href: 'https://ai.studio/apps/drive/1NA6S6o46gHgNWWhxDoQFF29z3vHtzoXq?fullscreenApplet=true',
+      description: 'Download and manage YouTube content efficiently.',
+    },
+    {
       name: 'AI Automation Toolkit',
       href: '/apps/ai-automation-toolkit',
       description: 'Streamline your workflows with intelligent automation',
-    },
-    {
-      name: 'AI Content Writer Pro',
-      href: '/apps/ai-content-writer-pro',
-      description: 'Generate high-quality content effortlessly',
-    },
-    {
-      name: 'AI Video Editor',
-      href: '/apps/ai-video-editor',
-      description: 'Professional video editing powered by AI',
     },
   ];
 
