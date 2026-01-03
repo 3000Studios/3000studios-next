@@ -388,17 +388,38 @@ export default function InfoPage() {
               </Link>
             </div>
 
-            <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold mb-4">Features</h3>
-              <ul className="space-y-3 text-gray-300">
-                <li>✅ Multi-vendor product ingestion (CJ, ShareASale, Amazon, Shopify)</li>
-                <li>✅ Auto-pricing with margin guardrails</li>
-                <li>✅ AI product ranking and relevance scoring</li>
-                <li>✅ Commission tracking and analytics</li>
-                <li>✅ Vendor self-signup with multiple models</li>
-                <li>✅ Dropship fulfillment webhooks and routing</li>
-                <li>✅ AI-generated product pages with SEO schema</li>
-              </ul>
+            <div className="backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl p-8 lg:p-12 shadow-2xl">
+              <h3 className="text-2xl font-bold mb-6 text-center">Platform Features</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-gray-300">
+                <div className="flex items-start gap-3">
+                  <div className="mt-1 text-green-500">✅</div>
+                  <span>Multi-vendor product ingestion (CJ, ShareASale, Amazon, Shopify)</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="mt-1 text-green-500">✅</div>
+                  <span>Auto-pricing with margin guardrails</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="mt-1 text-green-500">✅</div>
+                  <span>AI product ranking and relevance scoring</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="mt-1 text-green-500">✅</div>
+                  <span>Commission tracking and analytics</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="mt-1 text-green-500">✅</div>
+                  <span>Vendor self-signup with multiple models</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="mt-1 text-green-500">✅</div>
+                  <span>Dropship fulfillment webhooks and routing</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="mt-1 text-green-500">✅</div>
+                  <span>AI-generated product pages with SEO schema</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>

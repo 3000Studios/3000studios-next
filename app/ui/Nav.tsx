@@ -56,12 +56,6 @@ export default function Nav() {
                 />
               </video>
             </div>
-            <span className="ml-4 font-nabla text-2xl hidden md:block">
-              <span className="nabla-char">3</span>
-              <span className="nabla-char">0</span>
-              <span className="nabla-char">0</span>
-              <span className="nabla-char">0</span>
-            </span>
           </Link>
 
           {/* Desktop Navigation - 3D Cube Style */}
