@@ -16,15 +16,40 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [isRedirecting, setIsRedirecting] = useState(false);
+
   useEffect(() => {
     // Check if already authenticated
     const auth = sessionStorage.getItem('admin-auth');
     if (auth === 'true') {
-      router.replace('/admin');
+      setIsRedirecting(true);
+      // Use window.location for hard redirect to ensure navigation
+      window.location.href = '/admin';
       return;
     }
     setIsLoading(false);
-  }, [router]);
+  }, []);
+
+  if (isRedirecting) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-black">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-10 h-10 border-2 border-[#D4AF37] border-t-transparent rounded-full animate-spin" />
+          <p className="text-gray-400 text-sm">Redirecting to Admin Panel...</p>
+          {/* Failsafe link */}
+          <button
+            onClick={() => {
+              sessionStorage.removeItem('admin-auth');
+              window.location.reload();
+            }}
+            className="text-xs text-red-500 hover:text-red-400 mt-4 underline"
+          >
+            Stuck? Click to reset session
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
