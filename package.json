@@ -16,9 +16,10 @@
     }
   },
   "scripts": {
+    "autosync": "./antigravity-autosync.sh",
+    "dev": "npm run autosync & next dev",
     "harden": "bash scripts/harden-repo.sh",
     "prebuild": "node scripts/validate-app-structure.mjs",
-    "dev": "next dev",
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint .",
