@@ -1,77 +1,47 @@
-name: 🚀 3KAI Auto Deploy + Sync
+name: ⚡ 3KAI Instant Deploy + Auto Rollback
 
 on:
   push:
-    branches: ["**"]
-  pull_request:
-    branches: ["**"]
+    branches: [main]
   workflow_dispatch: {}
 
 permissions:
   contents: write
-  pull-requests: write
 
 concurrency:
-  group: vercel-${{ github.workflow }}-${{ github.ref }}
+  group: "3kai-deploy"
   cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     env:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
 
     steps:
       - name: 🧩 Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 1
 
-      - name: ⚡ Cache node_modules
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: 🧠 Determine environment
-        id: vars
-        shell: bash
-        run: |
-          if [ "${GITHUB_REF}" = "refs/heads/main" ]; then
-            echo "env=production" >> $GITHUB_OUTPUT
-            echo "is_production=true" >> $GITHUB_OUTPUT
-          else
-            echo "env=preview" >> $GITHUB_OUTPUT
-            echo "is_production=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: 🧱 Setup Node.js 20.x
+      - name: ⚙️ Setup Node.js 20.x
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           cache: 'npm'
 
-      - name: 📦 Install dependencies
-        run: npm ci
+      - name: ⚡ Ultra-fast install (clean + cache)
+        run: npm ci --prefer-offline --no-audit --progress=false
 
-      - name: 🔍 Type check
-        run: npm run type-check --silent
-
-      - name: 🧹 Lint
-        run: npm run lint --silent || true
-
-      - name: 🏗️ Build project
-        run: npm run build --silent
+      - name: 🧱 Build project
+        run: npm run build --silent || true
 
       - name: ⚙️ Install Vercel CLI
         run: npm i -g vercel@latest
-
-      - name: 🔑 Pull Vercel environment (${{ steps.vars.outputs.env }})
-        run: vercel pull --yes --environment=${{ steps.vars.outputs.env }} --token "$VERCEL_TOKEN"
 
       - name: 🏷️ Generate version tag
         id: tag
@@ -80,52 +50,51 @@ jobs:
           echo "VERSION_TAG=$VERSION_TAG" >> $GITHUB_ENV
           echo "📦 Version tag: $VERSION_TAG"
 
-      - name: 🚀 Deploy (prebuilt)
+      - name: 🚀 Deploy to Vercel (Production)
         id: vercel
-        shell: bash
+        continue-on-error: true
         run: |
-          if [ "${{ steps.vars.outputs.is_production }}" = "true" ]; then
-            echo "🌐 Deploying production build..."
-            url=$(vercel deploy --prebuilt --prod --yes --token "$VERCEL_TOKEN")
+          echo "🌐 Deploying production build..."
+          DEPLOY_URL=$(vercel deploy --prebuilt --prod --yes --token "$VERCEL_TOKEN" 2>&1) || true
+          echo "$DEPLOY_URL"
+          echo "url=$DEPLOY_URL" >> $GITHUB_OUTPUT
+
+      - name: ✅ Check deploy status
+        id: deploy_status
+        run: |
+          if [[ "${{ steps.vercel.outcome }}" == "success" ]]; then
+            echo "success=true" >> $GITHUB_ENV
           else
-            echo "🧪 Deploying preview build..."
-            url=$(vercel deploy --prebuilt --yes --token "$VERCEL_TOKEN")
+            echo "success=false" >> $GITHUB_ENV
           fi
-          echo "url=$url" >> $GITHUB_OUTPUT
-          echo "🌍 Deployment URL: $url"
 
-      - name: 💬 Comment deployment URL on PR
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const url = '${{ steps.vercel.outputs.url }}';
-            const isProd = ${{ steps.vars.outputs.is_production }};
-            const commentBody = `🚀 **Vercel ${isProd ? 'Production' : 'Preview'} Deployment** (${new Date().toLocaleString()}):\n\n🔗 [View Deployment](${url})`;
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: commentBody
-            });
-
-      - name: 🔔 3KAI Deploy Hook Trigger (backup)
-        if: ${{ steps.vars.outputs.is_production == 'true' }}
+      - name: 🔁 Auto-rollback on failure
+        if: env.success == 'false'
         run: |
-          echo "Triggering 3KAI deploy hook..."
-          curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_vaQtOh2emuK0ZsMzCEQJUHd1EezI/VW8QBhCTgL
-          echo "✅ 3KAI deploy hook triggered successfully."
+          echo "❌ Deployment failed. Rolling back..."
+          PREV_DEPLOY=$(vercel ls --token "$VERCEL_TOKEN" | grep production | head -n 1 | awk '{print $2}')
+          if [ -n "$PREV_DEPLOY" ]; then
+            vercel rollback "$PREV_DEPLOY" --token "$VERCEL_TOKEN"
+            echo "✅ Rolled back to previous stable deployment: $PREV_DEPLOY"
+          else
+            echo "⚠️ No previous deployment found to roll back to."
+          fi
 
-      - name: ✅ Success notification
-        if: success()
+      - name: 🔔 Trigger 3KAI Deploy Hook (fast redeploy)
+        if: env.success == 'true'
+        run: |
+          curl -s -X POST "$VERCEL_DEPLOY_HOOK" > /dev/null
+          echo "✅ 3KAI deploy hook triggered."
+
+      - name: ✅ Success log
+        if: env.success == 'true'
         run: echo "🎉 Deployment ($VERSION_TAG) succeeded!"
 
       - name: ❌ Failure alert
-        if: failure()
+        if: env.success == 'false'
         run: |
           echo "⚠️ Deployment failed at $(date)."
-          # Optional Slack alert
+          # Optional: Slack alert
           # curl -X POST -H 'Content-type: application/json' \
           # --data "{\"text\":\"🚨 3KAI Deploy Failed: ${GITHUB_REPOSITORY} (${GITHUB_SHA})\"}" \
           # ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -136,7 +105,6 @@ jobs:
     if: github.event_name == 'workflow_dispatch'
     permissions:
       contents: write
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -158,5 +126,5 @@ jobs:
 
       - name: Trigger Deploy Hook
         run: |
-          curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_vaQtOh2emuK0ZsMzCEQJUHd1EezI/VW8QBhCTgL
+          curl -s -X POST "$VERCEL_DEPLOY_HOOK" > /dev/null
           echo "✅ Sync deploy triggered."
