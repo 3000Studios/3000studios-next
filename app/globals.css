@@ -32,6 +32,8 @@ body {
   text-align: center;
   overflow-x: hidden;
   width: 100%;
+  min-height: 100vh;
+  background-color: #000;
 }
 
 /* Hide default cursor - CustomCursor component handles this */
