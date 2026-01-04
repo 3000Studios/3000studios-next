@@ -43,20 +43,20 @@ export async function handleAddSection(
   sectionContent: string
 ): Promise<MutationResult> {
   try {
+    const result = await executeAddSection(sectionTitle, sectionContent);
     const mutation = await queueMutation({
       type: 'ADD_SECTION',
       payload: { sectionTitle, sectionContent },
     });
 
     return {
-      success: true,
-      message: `Section mutation queued: "${sectionTitle}"`,
+      ...result,
       mutationId: mutation.id,
     };
   } catch (error: unknown) {
     return {
       success: false,
-      message: `Failed to queue section: ${error}`,
+      message: `Failed to add section: ${error}`,
     };
   }
 }
@@ -66,20 +66,20 @@ export async function handleAddMedia(
   type: 'video' | 'image' = 'image'
 ): Promise<MutationResult> {
   try {
+    const result = await executeAddMedia(mediaUrl, type);
     const mutation = await queueMutation({
       type: 'ADD_MEDIA',
       payload: { mediaUrl, type },
     });
 
     return {
-      success: true,
-      message: `${type} media mutation queued`,
+      ...result,
       mutationId: mutation.id,
     };
   } catch (error: unknown) {
     return {
       success: false,
-      message: `Failed to queue media: ${error}`,
+      message: `Failed to add media: ${error}`,
     };
   }
 }
@@ -89,20 +89,20 @@ export async function handleChangeStyle(
   value: string
 ): Promise<MutationResult> {
   try {
+    const result = await executeChangeStyle(cssVariable, value);
     const mutation = await queueMutation({
       type: 'CHANGE_STYLE',
       payload: { cssVariable, value },
     });
 
     return {
-      success: true,
-      message: `Style mutation queued: --${cssVariable} = ${value}`,
+      ...result,
       mutationId: mutation.id,
     };
   } catch (error: unknown) {
     return {
       success: false,
-      message: `Failed to queue style change: ${error}`,
+      message: `Failed to change style: ${error}`,
     };
   }
 }
@@ -113,20 +113,20 @@ export async function handlePublishBlog(
   slug?: string
 ): Promise<MutationResult> {
   try {
+    const result = await executePublishBlog(title, body, slug);
     const mutation = await queueMutation({
       type: 'PUBLISH_BLOG',
       payload: { title, body, slug },
     });
 
     return {
-      success: true,
-      message: `Blog post mutation queued: "${title}"`,
+      ...result,
       mutationId: mutation.id,
     };
   } catch (error: unknown) {
     return {
       success: false,
-      message: `Failed to queue blog post: ${error}`,
+      message: `Failed to publish blog: ${error}`,
     };
   }
 }
