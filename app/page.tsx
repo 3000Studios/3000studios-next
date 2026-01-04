@@ -2,6 +2,7 @@
 
 import { AdSenseUnit } from '@/components/AdSense';
 import HomeBackground from '@/components/HomeBackground';
+import UnifiedAvatar from '@/components/avatar/UnifiedAvatar';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
@@ -18,8 +19,8 @@ import NewsFeed from '@/components/NewsFeed';
 
 const STOCK_IMAGES = {
   hero: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1920&q=80', // Abstract tech
-  ai: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80', // AI concept
-  design: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80', // UI Design
+  ai: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800\u0026q=80', // AI concept
+  design: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800\u0026q=80', // UI Design
   voice: 'https://images.unsplash.com/photo-1589903308904-1010c2294adc?w=800&q=80', // Sound waves
   automation: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80', // Robot
   sync: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80', // Data center
