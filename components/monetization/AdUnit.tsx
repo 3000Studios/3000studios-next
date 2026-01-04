@@ -14,13 +14,20 @@ export default function AdUnit({
   className?: string;
 }) {
   useEffect(() => {
+    // Return early if not in production or if AdSense script isn't loaded
+    if (process.env.NODE_ENV === 'development') return;
+
     try {
       // Extend window interface for AdSense
       interface WindowWithAdSense extends Window {
         adsbygoogle?: unknown[];
       }
       const win = window as WindowWithAdSense;
-      (win.adsbygoogle = win.adsbygoogle || []).push({});
+
+      // Attempt to push only if adsbygoogle exists and is an array
+      if (typeof window !== 'undefined' && win.adsbygoogle) {
+        win.adsbygoogle.push({});
+      }
     } catch (err: unknown) {
       console.error('AdSense error:', err);
     }
