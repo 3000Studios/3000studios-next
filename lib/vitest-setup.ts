@@ -1,2 +1,3 @@
-// src/lib/vitest-setup.ts
+// lib/vitest-setup.ts
 import '@testing-library/jest-dom';
+

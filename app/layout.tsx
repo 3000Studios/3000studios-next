@@ -81,7 +81,7 @@ export const metadata: Metadata = {
       'Premium digital experiences and innovative solutions. 250+ successful clients worldwide.',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
         alt: '3000 Studios - Premium Creative Agency',
@@ -94,7 +94,7 @@ export const metadata: Metadata = {
     creator: '@3000studios',
     title: '3000 Studios - Award-Winning Creative Studio',
     description: 'Premium digital experiences and innovative solutions.',
-    images: ['/og-image.jpg'],
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,

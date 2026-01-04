@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=20.18.1"
+    "node": ">=20.0.0"
   },
   "packageManager": "pnpm@10.26.0",
   "overrides": {
@@ -37,11 +37,9 @@
     "deps:update": "npm update",
     "deploy": "vercel --prod --yes",
     "postinstall": "node -e \"const { execSync } = require('child_process'); const url = process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/postgres'; execSync('npx prisma generate', { stdio: 'inherit', env: { ...process.env, DATABASE_URL: url } });\"",
-    "slicemachine": "start-slicemachine",
-    "prepare": "husky"
+    "slicemachine": "start-slicemachine"
   },
   "dependencies": {
-    "npm-run-all": "^4.1.5",
     "@ai-sdk/openai": "^2.0.89",
     "@anthropic-ai/sdk": "^0.71.2",
     "@auth/prisma-adapter": "^2.11.1",
@@ -84,6 +82,7 @@
     "next": "^16.1.1",
     "next-auth": "^4.24.13",
     "nodemailer": "^7.0.12",
+    "npm-run-all": "^4.1.5",
     "openai": "^6.15.0",
     "pg": "^8.16.3",
     "pgvector": "^0.2.1",
@@ -95,7 +94,7 @@
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.182.0",
     "uuid": "^13.0.0",
-    "zod": "^4.3.4",
+    "zod": "^4.3.5",
     "zustand": "^4.5.7"
   },
   "devDependencies": {
@@ -132,11 +131,5 @@
     "typescript": "^5.9.3",
     "vitest": "^4.0.16",
     "zx": "^8.8.5"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ]
   }
 }
