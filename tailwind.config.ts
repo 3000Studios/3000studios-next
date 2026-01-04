@@ -66,6 +66,8 @@ const config: Config = {
   },
   plugins: [
     tailwindcssAnimate,
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    require('@tailwindcss/typography'),
     function ({ addUtilities }: { addUtilities: unknown }) {
       addUtilities({
         '.hyper-glass': {

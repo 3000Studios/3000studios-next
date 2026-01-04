@@ -5,13 +5,12 @@
  */
 
 'use client';
-
 import VideoBackground from '@/components/VideoBackground';
+import AdUnit from '@/components/monetization/AdUnit';
 import { motion } from 'framer-motion';
 import { Award, ChevronRight, ExternalLink, Filter, Star, TrendingUp, Users } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
-import GoogleAdsPlaceholder from '../components/GoogleAdsPlaceholder';
 import Newsletter from '../components/Newsletter';
 import { getAllPortfolioCategories, portfolioItems } from '../lib/portfolioData';
 
@@ -104,8 +103,8 @@ export default function PortfolioPage() {
           ))}
         </div>
 
-        {/* Google Ads Placeholder */}
-        <GoogleAdsPlaceholder slot="portfolio-top-banner" format="horizontal" className="mb-12" />
+        {/* Google Ads Unit */}
+        <AdUnit slotId="portfolio-top-banner" format="horizontal" className="mb-12" />
 
         {/* Featured Projects */}
         <div className="mb-16">

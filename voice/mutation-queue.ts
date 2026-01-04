@@ -4,6 +4,7 @@
  * Gets picked up by auto-commit task running in Codespace
  */
 
+
 interface QueuedMutation {
   id: string;
   type: 'UPDATE_TEXT' | 'ADD_SECTION' | 'ADD_MEDIA' | 'CHANGE_STYLE' | 'PUBLISH_BLOG';
@@ -25,7 +26,7 @@ async function readQueue(): Promise<QueuedMutation[]> {
     const data = await import('fs').then((fs) => fs.readFileSync(_QUEUE_FILE, 'utf8'));
     const parsed = JSON.parse(data) as unknown;
     return Array.isArray(parsed) ? (parsed as QueuedMutation[]) : [];
-  } catch (error: unknown) {
+  } catch {
     // Most likely the file doesn't exist yet; start fresh
     return [];
   }
@@ -84,6 +85,7 @@ export function getPendingMutations(): QueuedMutation[] {
 
 function safeReadQueue(): QueuedMutation[] {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const fs = require('fs');
     if (!fs.existsSync(_QUEUE_FILE)) return [];
     const data = fs.readFileSync(_QUEUE_FILE, 'utf8');

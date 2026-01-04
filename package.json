@@ -37,7 +37,8 @@
     "deps:update": "npm update",
     "deploy": "vercel --prod --yes",
     "postinstall": "node -e \"const { execSync } = require('child_process'); const url = process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/postgres'; execSync('npx prisma generate', { stdio: 'inherit', env: { ...process.env, DATABASE_URL: url } });\"",
-    "slicemachine": "start-slicemachine"
+    "slicemachine": "start-slicemachine",
+    "prepare": "husky"
   },
   "dependencies": {
     "npm-run-all": "^4.1.5",
