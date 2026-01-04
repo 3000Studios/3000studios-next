@@ -28,13 +28,8 @@ export default function HomeBackground() {
     const animate = () => {
       time += 0.02;
 
-      // Clear with gradient background
-      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, '#0a0a0a');
-      gradient.addColorStop(0.5, '#1a1a2e');
-      gradient.addColorStop(1, '#0a0a0a');
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Clear for transparency to show global video background
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Draw 3D text effect
       ctx.font = `bold ${fontSize}px "Playfair Display", serif`;
