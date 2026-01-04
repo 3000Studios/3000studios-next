@@ -11,6 +11,17 @@
     }
   ],
   "paths": {
+    "/api/health": {
+      "get": {
+        "operationId": "check_health",
+        "summary": "Check if the API is reachable",
+        "description": "Public endpoint with no authentication to verify firewall state.",
+        "responses": {
+          "200": { "description": "API is online" }
+        }
+      }
+    },
+
     "/api/gpt-bridge": {
       "post": {
         "operationId": "send_instruction",
