@@ -17,6 +17,7 @@
   },
   "scripts": {
     "autosync": "./antigravity-autosync.sh",
+    "analyze": "cross-env ANALYZE=true npm run build",
     "dev": "npm-run-all -p autosync dev",
     "harden": "bash scripts/harden-repo.sh",
     "prebuild": "node scripts/validate-app-structure.mjs",
@@ -130,5 +131,11 @@
     "typescript": "^5.9.3",
     "vitest": "^4.0.16",
     "zx": "^8.8.5"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }
