@@ -8,6 +8,12 @@ import { useEffect } from 'react';
  */
 export function AdSenseUnit({ slot, style }: { slot: string; style?: React.CSSProperties }) {
   useEffect(() => {
+    const isDev = process.env.NODE_ENV === 'development';
+    const publisherId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
+
+    // Do not push in dev if we're showing the placeholder, or if no publisher ID
+    if (!publisherId || isDev) return;
+
     try {
       // @ts-expect-error AdSense global may not be available
       (window.adsbygoogle = window.adsbygoogle || []).push({});
