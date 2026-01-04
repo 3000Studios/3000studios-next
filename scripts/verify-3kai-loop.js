@@ -3,8 +3,6 @@
  * Run this to verify your API endpoints are correctly wired before testing in ChatGPT.
  */
 
-const fetch = require('node-fetch');
-
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 const TOKEN = process.env.GPT_BRIDGE_TOKEN || '3kai_live_v2_91827364505968d7f6e5a4c3b2a1';
 
