@@ -1,14 +1,14 @@
-# ⚙️ 3000 Studios — Antigravity Build & GPT Integration
+# ⚙️ 3000 Studios — Antigravity Build & 3KAI Integration
 
 ## Purpose
 
-Enable **3KAI**, your autonomous CTO, to take spoken or text instructions and directly update your production website, manage Cloudinary media, and monitor Vercel deployments.
+Enable **3KAI**, your autonomous CTO, to take spoken or text instructions and directly update your production website, manage Cloudinary media, analyze monetization, and monitor Vercel deployments.
 
 ---
 
 ## 1️⃣ Overview
 
-### Pipeline Flow
+### The 3KAI Pipeline
 
 ```
 User (Voice / Chat)
@@ -17,7 +17,7 @@ User (Voice / Chat)
       ↓
 GPT Actions (HTTPS)
       ↓
-3000studios.com/api/... (Endpoints)
+3000studios.com/api/... (6 Core Endpoints)
       ↓
    Antigravity Workspace (Execution)
       ↓
@@ -28,73 +28,63 @@ GPT Actions (HTTPS)
 
 ---
 
-## 2️⃣ Advanced 3KAI Tools
+## 2️⃣ Core 3KAI Endpoints
 
-### Media Browser (`/api/media/browse`)
+3KAI is powered by 6 mission-critical endpoints:
 
-3KAI can now "see" your Cloudinary library.
-
-- **Requirement:** Set `CLOUDINARY_API_KEY` and `CLOUDINARY_API_SECRET` in your environment.
-- **Function:** 3KAI browses Cloudinary to find videos, images, or music public IDs.
-
-### Deployment Previews (`/api/deployment/preview`)
-
-Provides real-time feedback on Vercel builds.
-
-- **Requirement:** `VERCEL_TOKEN` and `VERCEL_PROJECT_ID` must be configured.
-- **Function:** 3KAI checks this automatically to give you a clickable preview link.
+| Endpoint | Method | Operation | Purpose |
+|----------|--------|-----------|---------|
+| `/api/gpt-bridge` | POST | `send_instruction` | Primary control for code/site updates |
+| `/api/previews` | GET | `get_preview` | Fetches live Vercel preview links |
+| `/api/assets` | POST | `fetch_assets` | Discovers Cloudinary/Pexels media |
+| `/api/status` | GET | `get_status` | Returns production build/deploy status |
+| `/api/monetization` | POST | `analyze_monetization` | Returns revenue strategy analysis |
+| `/api/rollback` | POST | `rollback` | Executes emergency Git revert |
 
 ---
 
-## 3️⃣ Antigravity Bridge Setup
+## 3️⃣ Custom GPT Setup
 
-### Bridge Endpoint
-
-Maps Custom GPT instructions to internal agent actions.
-**Location:** `app/api/gpt-bridge/route.ts`
-
-### Environment Variables
-
-Configure these in your Vercel project settings:
-
-| Variable | Value | Description |
-|----------|-------|-------------|
-| `GPT_BRIDGE_TOKEN` | `540e9ae3671910efee8e89d378c7a0de35a3207d8a043449e41c5a41ec0` | Secure bearer token for auth |
-| `NEXT_PUBLIC_SITE_URL` | `https://3000studios.com` | Your production URL |
-
----
-
-## 4️⃣ 3KAI Custom GPT Configuration
-
-### Identity
+### 1. Identity & Config
 
 - **Name:** 3KAI
-- **Description:** Autonomous CTO for 3000 Studios.
-- **System Instructions:** Use `browse_media` to find assets, `send_instruction` to modify code, and `get_preview_url` to provide deployment links. No confirmations. Talk -> Execute -> Deploy.
+- **Config File:** `3KAI-gpt-config.json` (in root)
+- **Instructions:** See `3KAI-gpt-config.json` for the full system prompt.
+
+### 2. Actions Setup
+
+- **OpenAPI Schema:** Copy from `docs/openapi-schema.json`.
+- **Authentication:**
+  - Type: **API Key**
+  - Auth Type: **Bearer**
+  - Key: `540e9ae3671910efee8e89d378c7a0de35a3207d8a043449e41c5a41ec0`
 
 ---
 
-## 5️⃣ Custom GPT Actions
+## 4️⃣ Environment Dependencies
 
-### OpenAPI Schema
+Ensure these are set in your Vercel/Production environment:
 
-Import the schema from `docs/openapi-schema.json`.
-
-### Authentication
-
-- **Type:** API Key
-- **Auth Type:** Bearer
-- **Key:** `540e9ae3671910efee8e89d378c7a0de35a3207d8a043449e41c5a41ec0`
+| Category | Variable | Purpose |
+|----------|----------|---------|
+| **Auth** | `GPT_BRIDGE_TOKEN` | Secures the 3KAI bridge |
+| **Media** | `CLOUDINARY_API_KEY` | Browsing your media library |
+| **Cloud** | `VERCEL_TOKEN` | Deployment monitoring |
+| **Git** | `GITHUB_PAT` | Autonomous commits |
 
 ---
 
-## 6️⃣ Security Guidelines
+## 5️⃣ Real-Time Voice Commands
 
-- **Tokens:** Keep your `GPT_BRIDGE_TOKEN` and Cloudinary secrets private.
-- **Rollback:** *"3KAI, rollback"* triggers an immediate `git revert`.
+Try these once 3KAI is live:
+
+- *"3KAI, darken the site header and deploy a preview."*
+- *"3KAI, show me my Cloudinary assets for 'abstract'."*
+- *"3KAI, analyze our monetization and suggest an experiment."*
+- *"3KAI, the deployment is broken—rollback now!"*
 
 ---
 
 **Last Updated:** 2026-01-04
 **Maintainer:** 3000 Studios Engineering
-**Version:** 1.1.0
+**Version:** 1.2.0
