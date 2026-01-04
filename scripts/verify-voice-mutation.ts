@@ -50,6 +50,15 @@ async function testMutation() {
             console.log('Found:', updatedContent.match(new RegExp(`${testVar}:[^;]+;`))?.[0]);
         } else {
             console.error('FAILURE: app/globals.css was NOT updated.');
+
+            // Debug queue file
+            const queuePath = '/tmp/voice-mutations.json';
+            if (fs.existsSync(queuePath)) {
+                console.log('Queue File Content:', fs.readFileSync(queuePath, 'utf-8'));
+            } else {
+                console.log('Queue file not found!');
+            }
+
             // Debug regex match against file head
             console.log('Head of file (500 chars):', updatedContent.substring(0, 500));
             process.exit(1);
