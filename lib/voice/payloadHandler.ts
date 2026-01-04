@@ -21,7 +21,7 @@ export function handleVoicePayload(payload: VoicePayload) {
 
     // Update Registry (Mutable) with type safety
     if (path in styleRegistry && typeof value === 'string') {
-      (styleRegistry as Record<string, string>)[path] = value;
+      (styleRegistry as unknown as Record<string, string>)[path] = value;
     }
 
     // Direct DOM Injection for Instant Feedback (No React Render Cycle needed for basic styles)
