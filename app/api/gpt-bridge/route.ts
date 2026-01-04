@@ -7,6 +7,8 @@ import { join } from 'path';
  * Receives commands from Custom GPT and forwards to voice API
  */
 
+export const runtime = "nodejs";
+
 const LOG_FILE = join(process.cwd(), 'logs', '3kai-audit.log');
 
 function auditLog(data: any) {
@@ -25,18 +27,24 @@ export async function POST(req: Request) {
     const requestId = `3kai-${Math.random().toString(36).substring(2, 9)}`;
 
     try {
-        // Verify authentication
-        const authHeader = req.headers.get('authorization');
+        // 1. Verify Configuration
         const expectedToken = process.env.GPT_BRIDGE_TOKEN;
-
         if (!expectedToken) {
-            auditLog({ requestId, event: 'AUTH_CONFIG_ERROR' });
+            auditLog({ requestId, event: 'CONFIG_ERROR', details: 'GPT_BRIDGE_TOKEN missing' });
             return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
         }
 
-        if (authHeader !== `Bearer ${expectedToken}`) {
-            auditLog({ requestId, event: 'AUTH_FAILURE', header: authHeader });
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        // 2. Extract and Validate Bearer Token
+        const authHeader = req.headers.get('authorization');
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            auditLog({ requestId, event: 'AUTH_MISSING', header: authHeader });
+            return NextResponse.json({ error: 'Unauthorized: Missing Bearer token' }, { status: 401 });
+        }
+
+        const token = authHeader.replace('Bearer ', '').trim();
+        if (token !== expectedToken.trim()) {
+            auditLog({ requestId, event: 'AUTH_MISMATCH', header: '***' });
+            return NextResponse.json({ error: 'Forbidden: Token mismatch' }, { status: 403 });
         }
 
         const body = await req.json();
