@@ -9,6 +9,7 @@
 import VideoBackground from '@/components/VideoBackground';
 import AdUnit from '@/components/monetization/AdUnit';
 import { Code, ExternalLink, Github } from 'lucide-react';
+import Image from 'next/image';
 import { useState } from 'react';
 
 interface Project {
@@ -28,6 +29,7 @@ const projects: Project[] = [
     description: 'Full-stack e-commerce solution with AI-powered recommendations',
     category: 'Web Development',
     tags: ['Next.js', 'React', 'Stripe'],
+    image: 'https://images.unsplash.com/photo-1661956602116-aa6865609028?w=600&q=80',
   },
   {
     id: 2,
@@ -35,6 +37,7 @@ const projects: Project[] = [
     description: 'Complete brand identity and design system for tech startup',
     category: 'Design',
     tags: ['Branding', 'UI/UX', 'Design System'],
+    image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&q=80',
   },
   {
     id: 3,
@@ -42,6 +45,7 @@ const projects: Project[] = [
     description: 'Premium mobile app with real-time features',
     category: 'Mobile',
     tags: ['React Native', 'Firebase', 'Animation'],
+    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80',
   },
   {
     id: 4,
@@ -49,6 +53,7 @@ const projects: Project[] = [
     description: 'Real-time analytics dashboard with machine learning insights',
     category: 'Web Development',
     tags: ['AI/ML', 'Data Viz', 'React'],
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80',
   },
   {
     id: 5,
@@ -56,6 +61,7 @@ const projects: Project[] = [
     description: 'Interactive 3D product visualization and customization',
     category: 'Interactive',
     tags: ['Three.js', 'WebGL', '3D'],
+    image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&q=80',
   },
   {
     id: 6,
@@ -63,6 +69,7 @@ const projects: Project[] = [
     description: 'Multi-tenant SaaS platform with subscription management',
     category: 'Web Development',
     tags: ['Full-stack', 'SaaS', 'Payments'],
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80',
   },
 ];
 
@@ -115,9 +122,20 @@ export default function ProjectsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project) => (
             <div key={project.id} className="card group">
-              {/* Project Image Placeholder */}
-              <div className="w-full h-48 bg-gradient-to-br from-gold/20 to-sapphire/20 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                <Code className="text-gold opacity-30" size={64} />
+              {/* Project Image */}
+              <div className="relative w-full h-48 bg-gradient-to-br from-gold/20 to-sapphire/20 rounded-lg mb-4 overflow-hidden">
+                {project.image ? (
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="flex items-center justify-center h-full">
+                    <Code className="text-gold opacity-30" size={64} />
+                  </div>
+                )}
               </div>
 
               {/* Category Badge */}
