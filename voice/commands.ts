@@ -5,39 +5,79 @@
  * No generative AI. No freestyle. Single truth.
  */
 
+export interface CommandResult {
+  success: boolean;
+  message?: string;
+  files_changed?: string[];
+  error?: string;
+  mutationId?: string;
+}
+
 export type VoiceCommand =
   | {
-      type: 'UPDATE_TEXT';
-      text?: string;
-      file?: string;
-      search?: string;
-      replace?: string;
-    }
+    type: 'UPDATE_TEXT';
+    text?: string;
+    file?: string;
+    search?: string;
+    replace?: string;
+  }
   | {
-      type: 'ADD_SECTION';
-      title?: string;
-      content?: string;
-      page?: string;
-    }
+    type: 'ADD_SECTION';
+    title?: string;
+    content?: string;
+    page?: string;
+  }
   | {
-      type: 'ADD_MEDIA';
-      url?: string;
-      mediaType?: 'video' | 'image' | 'audio';
-      page?: string;
-    }
+    type: 'ADD_MEDIA';
+    url?: string;
+    mediaType?: 'video' | 'image' | 'audio';
+    page?: string;
+  }
   | {
-      type: 'CHANGE_STYLE';
-      property?: string;
-      value?: string;
-      target?: string;
-    }
+    type: 'CHANGE_STYLE';
+    property?: string;
+    value?: string;
+    target?: string;
+  }
   | {
-      type: 'PUBLISH_BLOG';
-      title?: string;
-      body?: string;
-      slug?: string;
-      topic?: string;
+    type: 'PUBLISH_BLOG';
+    title?: string;
+    body?: string;
+    slug?: string;
+    topic?: string;
+  };
+
+// Typed commands with Payload structure for Handlers
+export type PayloadVoiceCommand =
+  | {
+    type: 'ADD_IMAGE';
+    payload: {
+      page: string;
+      url: string;
+      alt: string;
     };
+  }
+  | {
+    type: 'UPDATE_NAV';
+    payload: {
+      action: 'add' | 'remove';
+      links: string[];
+    };
+  }
+  | {
+    type: 'UPDATE_CURSOR';
+    payload: {
+      default: string; // hex color or url
+      hover: string;
+    };
+  }
+  | {
+    type: 'ADD_ANIMATION';
+    payload: {
+      animation: string;
+    };
+  };
+
 
 /**
  * Rule: If handler is missing, generate it

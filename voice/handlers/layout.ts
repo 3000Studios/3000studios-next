@@ -5,6 +5,7 @@
 
 import { promises as fs } from 'fs';
 import path from 'path';
+import { CommandResult, PayloadVoiceCommand } from '../commands';
 
 /**
  * ADD_SECTION: Add a new section to a page
@@ -68,7 +69,7 @@ Published: ${date}`;
 }
 
 export async function handleUpdateNav(
-  command: Extract<VoiceCommand, { type: 'UPDATE_NAV' }>
+  command: Extract<PayloadVoiceCommand, { type: 'UPDATE_NAV' }>
 ): Promise<CommandResult> {
   const { action, links } = command.payload;
   const targetFile = 'src/app/components/Navigation.tsx';

@@ -5,6 +5,7 @@
 
 import { promises as fs } from 'fs';
 import path from 'path';
+import { CommandResult, PayloadVoiceCommand } from '../commands';
 
 /**
  * UPDATE_TEXT: Search and replace in a file
@@ -67,7 +68,7 @@ export async function handleAddMedia(cmd: unknown): Promise<void> {
 }
 
 export async function handleAddImage(
-  command: Extract<VoiceCommand, { type: 'ADD_IMAGE' }>
+  command: Extract<PayloadVoiceCommand, { type: 'ADD_IMAGE' }>
 ): Promise<CommandResult> {
   const { page, url, alt } = command.payload;
   const targetFile = `src/app/${page}/page.tsx`;

@@ -5,6 +5,7 @@
 
 import { promises as fs } from 'fs';
 import path from 'path';
+import { CommandResult, PayloadVoiceCommand } from '../commands';
 
 /**
  * CHANGE_STYLE: Update CSS or design tokens
@@ -40,7 +41,7 @@ export async function handleChangeStyle(cmd: unknown): Promise<void> {
 }
 
 export async function handleUpdateCursor(
-  command: Extract<VoiceCommand, { type: 'UPDATE_CURSOR' }>
+  command: Extract<PayloadVoiceCommand, { type: 'UPDATE_CURSOR' }>
 ): Promise<CommandResult> {
   const { default: defaultCursor, hover: hoverCursor } = command.payload;
   const targetFile = 'src/app/globals.css';
@@ -81,7 +82,7 @@ button:hover,
 }
 
 export async function handleAddAnimation(
-  command: Extract<VoiceCommand, { type: 'ADD_ANIMATION' }>
+  command: Extract<PayloadVoiceCommand, { type: 'ADD_ANIMATION' }>
 ): Promise<CommandResult> {
   const { animation } = command.payload;
   const targetFile = 'src/app/globals.css';
