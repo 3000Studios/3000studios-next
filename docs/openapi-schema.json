@@ -142,7 +142,7 @@
       "post": {
         "operationId": "analyze_monetization",
         "summary": "Analyze monetization opportunities",
-        "description": "Return ideas, experiments, funnels, or revenue strategies based on site state.",
+        "description": "Returns raw site metrics, detected revenue leaks, AdSense compliance audit, and suggested experiments.",
         "responses": {
           "200": {
             "description": "Monetization analysis",
@@ -152,7 +152,11 @@
                   "type": "object",
                   "properties": {
                     "success": { "type": "boolean" },
-                    "opportunities": { "type": "array", "items": { "type": "object" } }
+                    "metrics": { "type": "object" },
+                    "leaks": { "type": "array", "items": { "type": "object" } },
+                    "adsenseAudit": { "type": "object" },
+                    "experiments": { "type": "array", "items": { "type": "object" } },
+                    "recommendation": { "type": "string" }
                   }
                 }
               }
