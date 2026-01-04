@@ -129,7 +129,7 @@ export default function HomePage() {
                   The Future of
                 </span>
                 <br />
-                <span className="bg-linear-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] bg-clip-text text-transparent animate-pulse">
+                <span className="bg-linear-to-r from-[#1BFFFF] via-[#00D1FF] to-[#1BFFFF] bg-clip-text text-transparent animate-pulse drop-shadow-[0_0_15px_rgba(27,255,255,0.5)]">
                   Digital Excellence
                 </span>
               </motion.h1>
