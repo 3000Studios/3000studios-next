@@ -42,7 +42,7 @@ export async function POST(req: Request) {
 
     return Response.json({ text: result.text });
   } catch (error: unknown) {
-    const errorMessage = error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error';
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     if (errorMessage === "AI usage limit exceeded") {
       return Response.json({ error: "Usage limit exceeded" }, { status: 429 });
     }

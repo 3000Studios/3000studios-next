@@ -20,10 +20,12 @@ export async function POST(req: Request) {
 
     return NextResponse.json(json);
   } catch (error: unknown) {
-    const message = error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Media upload failed';
-    return NextResponse.json({
-      ok: false,
-      error: message
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        ok: false,
+        error: error instanceof Error ? error.message : 'Unknown error',
+      },
+      { status: 500 }
+    );
   }
 }

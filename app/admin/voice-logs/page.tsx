@@ -32,7 +32,7 @@ export default function VoiceLogsPage() {
         const data = await response.json();
         setLogs(data.logs || []);
       } catch (err: unknown) {
-        setError(err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'Failed to load logs');
+        setError(err instanceof Error ? err.message : 'Failed to load logs');
       } finally {
         setLoading(false);
       }
@@ -56,7 +56,7 @@ export default function VoiceLogsPage() {
       });
       setLogs([]);
     } catch (err: unknown) {
-      setError(err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'Failed to clear logs');
+      setError(err instanceof Error ? err.message : 'Failed to clear logs');
     }
   };
 

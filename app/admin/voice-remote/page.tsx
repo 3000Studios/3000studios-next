@@ -1,5 +1,11 @@
 'use client';
 
+import {
+  resolveSpeechRecognition,
+  type SpeechRecognitionErrorEventLike,
+  type SpeechRecognitionEventLike,
+  type SpeechRecognitionHandle,
+} from '@/lib/speechRecognition';
 import { AlertCircle, Mic, MicOff, Radio, Volume2, Zap } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -15,14 +21,13 @@ export default function VoiceRemotePage() {
   const [transcript, setTranscript] = useState('');
   const [logs, setLogs] = useState<VoiceLog[]>([]);
   const [isSupported, setIsSupported] = useState(true);
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<SpeechRecognitionHandle | null>(null);
 
   // Initialize speech recognition
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const SpeechRecognition =
-      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    const SpeechRecognition = resolveSpeechRecognition();
 
     if (!SpeechRecognition) {
       setIsSupported(false);
@@ -38,7 +43,7 @@ export default function VoiceRemotePage() {
       setStatus('listening');
     };
 
-    recognition.onresult = (event: any) => {
+    recognition.onresult = (event: SpeechRecognitionEventLike) => {
       const current = event.resultIndex;
       const result = event.results[current];
       const text = result[0].transcript;
@@ -50,7 +55,7 @@ export default function VoiceRemotePage() {
       }
     };
 
-    recognition.onerror = (event: any) => {
+    recognition.onerror = (event: SpeechRecognitionErrorEventLike) => {
       console.error('Speech recognition error:', event.error);
       setStatus('error');
       setTimeout(() => setStatus('ready'), 2000);

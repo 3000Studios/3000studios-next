@@ -9,7 +9,7 @@ export default function LoginPage() {
 
   // Auto‑authenticate on first render and redirect to admin dashboard
   useEffect(() => {
-    // Set a flag so other parts of the app recognise the admin session
+    // Set a flag so other parts of the app recognize the admin session
     sessionStorage.setItem('admin-auth', 'true');
     router.replace('/admin');
   }, [router]);

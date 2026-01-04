@@ -1,5 +1,11 @@
 'use client';
 
+import {
+  resolveSpeechRecognition,
+  type SpeechRecognitionErrorEventLike,
+  type SpeechRecognitionEventLike,
+  type SpeechRecognitionHandle,
+} from '@/lib/speechRecognition';
 import { AlertCircle, CheckCircle, Eye, Mic, StopCircle } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
@@ -27,7 +33,7 @@ export default function VoiceCodeEditor() {
   const [showPreview, setShowPreview] = useState(false);
   const [error, setError] = useState('');
   const [status, setStatus] = useState('');
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<SpeechRecognitionHandle | null>(null);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -52,7 +58,7 @@ export default function VoiceCodeEditor() {
       setError('');
       setStatus('🎤 Listening...');
 
-      const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
+      const SpeechRecognition = resolveSpeechRecognition();
       if (!SpeechRecognition) {
         setError('Speech Recognition not supported in your browser');
         return;
@@ -70,19 +76,19 @@ export default function VoiceCodeEditor() {
         setStatus('🎤 Listening... Speak your command and it will process automatically.');
       };
 
-      recognition.onresult = (event: any) => {
+      recognition.onresult = (event: SpeechRecognitionEventLike) => {
         const transcript_part = event.results[0][0].transcript;
         if (event.results[0].isFinal) {
           setTranscript(transcript_part);
         }
       };
 
-      recognition.onerror = (event: any) => {
+      recognition.onerror = (event: SpeechRecognitionErrorEventLike) => {
         console.error('[VOICE] Recognition error:', event.error);
         setError(`Error: ${event.error}`);
         setIsListening(false);
         recognitionRef.current = null;
-        
+
         // Auto-disable on repeated errors (failsafe)
         if (event.error === 'no-speech' || event.error === 'aborted') {
           setStatus('⚠️ Voice disabled - click "Start Speaking" to retry');

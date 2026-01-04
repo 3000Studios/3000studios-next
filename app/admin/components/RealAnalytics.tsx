@@ -3,9 +3,9 @@
  * Displays live data from MongoDB
  */
 
-"use client";
+'use client';
 
-import { useAnalytics } from "@/hooks/useAPI";
+import { useAnalytics, type AnalyticsResponse } from '@/hooks/useAPI';
 import {
   BarChart3,
   DollarSign,
@@ -14,15 +14,28 @@ import {
   ShoppingCart,
   TrendingUp,
   Users,
-} from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+} from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface StatCardProps {
   title: string;
   value: string | number;
   change?: string;
   icon: React.ReactNode;
-  trend?: "up" | "down";
+  trend?: 'up' | 'down';
+}
+
+interface AnalyticsStats {
+  totalRevenue?: number;
+  activeUsers?: number;
+  storeOrders?: number;
+  liveViewers?: number;
+  pageViews?: number;
+  conversionRate?: number;
+}
+
+interface AnalyticsResponse {
+  stats: AnalyticsStats;
 }
 
 function StatCard({ title, value, change, icon, trend }: StatCardProps) {
@@ -39,12 +52,9 @@ function StatCard({ title, value, change, icon, trend }: StatCardProps) {
       </div>
       {change && trend && (
         <div
-          className={`flex items-center text-sm ${trend === "up" ? "text-green-400" : "text-red-400"}`}
+          className={`flex items-center text-sm ${trend === 'up' ? 'text-green-400' : 'text-red-400'}`}
         >
-          <TrendingUp
-            size={16}
-            className={trend === "down" ? "rotate-180" : ""}
-          />
+          <TrendingUp size={16} className={trend === 'down' ? 'rotate-180' : ''} />
           <span className="ml-1">{change} from last month</span>
         </div>
       )}
@@ -53,16 +63,17 @@ function StatCard({ title, value, change, icon, trend }: StatCardProps) {
 }
 
 export default function RealAnalytics() {
-  const [timeRange, setTimeRange] = useState<"day" | "week" | "month">("day");
-  const [stats, setStats] = useState<any>(null);
+  const [timeRange, setTimeRange] = useState<'day' | 'week' | 'month'>('day');
+  const [stats, setStats] = useState<AnalyticsStats | null>(null);
   const { fetchAnalytics, loading, error } = useAnalytics();
 
   const loadAnalytics = useCallback(async () => {
     try {
       const data = await fetchAnalytics(timeRange);
-      setStats(data.stats);
+      const parsedData: AnalyticsResponse = data;
+      setStats(parsedData.stats);
     } catch (err: unknown) {
-      console.error("Analytics load error:", err);
+      console.error('Analytics load error:', err);
     }
   }, [fetchAnalytics, timeRange]);
 
@@ -94,14 +105,14 @@ export default function RealAnalytics() {
           Real-Time Analytics
         </h2>
         <div className="flex gap-2">
-          {(["day", "week", "month"] as const).map((range) => (
+          {(['day', 'week', 'month'] as const).map((range) => (
             <button
               key={range}
               onClick={() => setTimeRange(range)}
               className={`px-4 py-2 rounded-lg font-medium transition-all ${
                 timeRange === range
-                  ? "bg-gold text-black"
-                  : "glass border border-gray-700 text-gray-300 hover:border-gold"
+                  ? 'bg-gold text-black'
+                  : 'glass border border-gray-700 text-gray-300 hover:border-gold'
               }`}
             >
               {range.charAt(0).toUpperCase() + range.slice(1)}
@@ -113,10 +124,7 @@ export default function RealAnalytics() {
             className="p-2 glass border border-gray-700 hover:border-gold rounded-lg transition-all"
             title="Refresh"
           >
-            <RefreshCw
-              className={`text-gold ${loading ? "animate-spin" : ""}`}
-              size={20}
-            />
+            <RefreshCw className={`text-gold ${loading ? 'animate-spin' : ''}`} size={20} />
           </button>
         </div>
       </div>
@@ -131,28 +139,28 @@ export default function RealAnalytics() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           title="Total Revenue"
-          value={`$${stats?.totalRevenue?.toLocaleString() || "0"}`}
+          value={`$${stats?.totalRevenue?.toLocaleString() || '0'}`}
           change="+23.5%"
           icon={<DollarSign className="text-black" size={24} />}
           trend="up"
         />
         <StatCard
           title="Active Users"
-          value={stats?.activeUsers?.toLocaleString() || "0"}
+          value={stats?.activeUsers?.toLocaleString() || '0'}
           change="+12.3%"
           icon={<Users className="text-black" size={24} />}
           trend="up"
         />
         <StatCard
           title="Store Orders"
-          value={stats?.storeOrders?.toLocaleString() || "0"}
+          value={stats?.storeOrders?.toLocaleString() || '0'}
           change="+8.1%"
           icon={<ShoppingCart className="text-black" size={24} />}
           trend="up"
         />
         <StatCard
           title="Live Viewers"
-          value={stats?.liveViewers?.toLocaleString() || "0"}
+          value={stats?.liveViewers?.toLocaleString() || '0'}
           change="-5.2%"
           icon={<Eye className="text-black" size={24} />}
           trend="down"
@@ -165,11 +173,9 @@ export default function RealAnalytics() {
           <h3 className="text-lg font-bold text-white mb-4">Page Views</h3>
           <div className="text-center">
             <p className="text-4xl font-bold gradient-text">
-              {stats?.pageViews?.toLocaleString() || "0"}
+              {stats?.pageViews?.toLocaleString() || '0'}
             </p>
-            <p className="text-sm text-gray-400 mt-2">
-              Total page views this {timeRange}
-            </p>
+            <p className="text-sm text-gray-400 mt-2">Total page views this {timeRange}</p>
           </div>
         </div>
 
@@ -177,11 +183,9 @@ export default function RealAnalytics() {
           <h3 className="text-lg font-bold text-white mb-4">Conversion Rate</h3>
           <div className="text-center">
             <p className="text-4xl font-bold gradient-text">
-              {stats?.conversionRate?.toFixed(2) || "0"}%
+              {stats?.conversionRate?.toFixed(2) || '0'}%
             </p>
-            <p className="text-sm text-gray-400 mt-2">
-              Visitor to customer conversion
-            </p>
+            <p className="text-sm text-gray-400 mt-2">Visitor to customer conversion</p>
           </div>
         </div>
       </div>

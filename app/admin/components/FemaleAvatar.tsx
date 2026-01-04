@@ -21,19 +21,21 @@ export default function FemaleAvatar() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const handleVoice = (e: CustomEvent) => {
-      if (e.detail?.target === 'avatar') {
-        if (e.detail.action === 'speak') {
-          setIsSpeaking(true);
-          setExpression('talking');
-          setTimeout(() => {
-            setIsSpeaking(false);
-            setExpression('neutral');
-          }, 3000);
-        }
-        if (e.detail.action === 'emotion') {
-          setExpression(e.detail.value);
-        }
+    const handleVoice = (event: Event) => {
+      const detail = (event as CustomEvent<{ target?: string; action?: string; value?: string }>)
+        .detail;
+      if (detail?.target !== 'avatar') return;
+
+      if (detail.action === 'speak') {
+        setIsSpeaking(true);
+        setExpression('talking');
+        setTimeout(() => {
+          setIsSpeaking(false);
+          setExpression('neutral');
+        }, 3000);
+      }
+      if (detail.action === 'emotion' && detail.value) {
+        setExpression(detail.value);
       }
     };
 
