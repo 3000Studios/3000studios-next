@@ -167,43 +167,69 @@ export default function HomePage() {
               </motion.div>
             </motion.div>
 
-            {/* Right: Widgets & Live Info (Replaces AI Box) */}
+            {/* Right: Premium Visualization (Stock Image/Placeholder) */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.5 }}
-              className="relative w-full h-[600px] flex flex-col gap-6 justify-center"
+              className="relative w-full h-[600px] flex items-center justify-center p-8"
             >
-              {/* News Widget */}
-              <NewsFeed />
-
-              {/* AdSense Placeholder - Explicit */}
-              <div className="mt-4 w-full">
-                <AdSenseUnit
-                  slot="news-feed-1"
-                  style={{ display: 'block', width: '100%', height: '100px' }}
+              <div className="relative w-full h-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-cyan-500/10 group">
+                <Image
+                  src={STOCK_IMAGES.hero}
+                  alt="3000 Studios Interior"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-1000"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
+
+                {/* Float Badge */}
+                <div className="absolute bottom-8 left-8 right-8 p-6 glass border border-white/20 rounded-2xl backdrop-blur-xl">
+                  <div className="text-2xl font-bold text-white mb-2">Pioneering Autonomous Systems</div>
+                  <p className="text-sm text-gray-300">Experience the next generation of digital control with 3KAI.</p>
+                </div>
               </div>
             </motion.div>
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-6 h-10 rounded-full border-2 border-white/30 flex items-start justify-center p-2"
-          >
-            <div className="w-1 h-2 bg-white/50 rounded-full" />
-          </motion.div>
         </motion.div>
       </section>
+
+      {/* ============================================
+          NEWS & UPDATES SECTION
+          ============================================ */}
+      <Section className="bg-black py-16">
+        <div className="max-w-6xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start"
+          >
+            <div className="lg:col-span-1 space-y-6">
+              <span className="text-cyan-400 text-sm font-semibold tracking-widest uppercase">Global Updates</span>
+              <h2 className="text-4xl font-bold text-white leading-tight">
+                Stay Ahead of the <span className="gradient-text">Curve</span>
+              </h2>
+              <p className="text-gray-400">
+                Real-time intelligence from the world of technology, AI, and digital innovation.
+                Powered by our autonomous news ingestion engine.
+              </p>
+              <div className="pt-4">
+                <AdSenseUnit
+                  slot="news-sidebar"
+                  style={{ display: 'block', width: '100%', height: '250px' }}
+                />
+              </div>
+            </div>
+
+            <div className="lg:col-span-2 h-[500px]">
+              <NewsFeed />
+            </div>
+          </motion.div>
+        </div>
+      </Section>
 
       {/* ============================================
           SERVICES SECTION
