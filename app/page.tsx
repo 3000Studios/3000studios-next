@@ -32,7 +32,7 @@ const STOCK_IMAGES = {
 
 const STOCK_VIDEOS = {
   heroBackground:
-    'https://res.cloudinary.com/dj92eb97f/video/upload/v1766986138/3000_studios_back_dop_z4amap.mp4', // Deep Space 3000 Studios
+    'https://res.cloudinary.com/dj92eb97f/video/upload/v1767518758/5529964-hd_720_1280_25fps_iirxgn.mp4', // New Home Background
   techGrid: 'https://cdn.pixabay.com/video/2021/02/22/66316-517578498_large.mp4',
 };
 
