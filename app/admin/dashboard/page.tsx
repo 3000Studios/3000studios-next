@@ -1,126 +1,99 @@
 'use client';
 
-import VideoBackground from '@/components/VideoBackground';
 import { motion } from 'framer-motion';
-import dynamic from 'next/dynamic';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { Activity, DollarSign, Globe, TrendingUp, Users, Zap } from 'lucide-react';
 import Card from '../../ui/Card';
 
-export default function AdminDashboard() {
-  const [status, setStatus] = useState<any>(null);
-  const router = useRouter();
+const STATS = [
+  { label: 'Total Reach', value: '128,471', change: '+24%', icon: Globe, color: 'text-blue-400' },
+  {
+    label: 'Network Points',
+    value: '5,293',
+    change: '+18%',
+    icon: Activity,
+    color: 'text-green-400',
+  },
+  {
+    label: 'Vault Balance',
+    value: '$42,820',
+    change: '+32%',
+    icon: DollarSign,
+    color: 'text-yellow-400',
+  },
+  { label: 'Active Sessions', value: '943', change: '+12%', icon: Users, color: 'text-purple-400' },
+];
 
-  useEffect(() => {
-    // Security Check
-    const auth = sessionStorage.getItem('admin-auth');
-    if (auth !== 'true') {
-      router.push('/admin');
-      return;
-    }
-    fetch('/api/status')
-      .then((res) => res.json())
-      .then((data) => setStatus(data))
-      .catch((err) => console.error('Failed to fetch status:', err));
-  }, []);
-
+export default function DashboardPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12 relative min-h-screen">
-      <VideoBackground
-        src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986234/earth_tpnzpa.mp4"
-        opacity={0.15}
-      />
-      <div className="absolute inset-0 bg-black/40 pointer-events-none" />
-      <div className="flex justify-between items-center mb-8">
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-4xl font-bold text-red-400"
-        >
-          Command Center
-        </motion.h1>
-        <div className="w-32 h-32 relative">
-          {/* Small personal avatar preview */}
-          {/* We can't put full 3D here easily without clear layout, sticking to stats first */}
+    <div className="container-standard py-12">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="space-y-8"
+      >
+        <div className="text-center">
+          <h1 className="text-4xl font-black text-[#D4AF37] tracking-tighter uppercase mb-2">
+            Operational Analytics
+          </h1>
+          <p className="text-white/40 text-xs font-bold uppercase tracking-[0.3em]">
+            Real-time system throughput & intelligence
+          </p>
         </div>
-      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* System Status - REAL DATA */}
-        <Card className="bg-red-950/30 border-red-500/20">
-          <h3 className="text-xl font-bold text-red-300 mb-4">System Status</h3>
-          <div className="space-y-2">
-            <div className="flex justify-between">
-              <span className="text-gray-400">Server</span>
-              <span className={status ? 'text-green-400' : 'text-yellow-400'}>
-                {status ? '● Online' : '● Connecting...'}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Environment</span>
-              <span className="text-white font-mono text-sm">
-                {status?.environment.nodeEnv || 'Loading...'}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Version</span>
-              <span className="text-white font-mono text-sm">{status?.version || '...'}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-400">Commit</span>
-              <span className="text-white font-mono text-sm">{status?.git?.commit || '...'}</span>
-            </div>
-          </div>
-        </Card>
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {STATS.map((stat, idx) => {
+            const Icon = stat.icon;
+            return (
+              <Card
+                key={idx}
+                className="bg-white/5 border-white/10 hover:border-[#D4AF37]/50 transition-all"
+              >
+                <div className="flex flex-col items-center">
+                  <div
+                    className={`w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-4 ${stat.color}`}
+                  >
+                    <Icon size={24} />
+                  </div>
+                  <span className="text-white/40 text-[10px] font-bold uppercase tracking-widest mb-1">
+                    {stat.label}
+                  </span>
+                  <span className="text-3xl font-black text-white tabular-nums">{stat.value}</span>
+                  <span className="text-green-400 text-[10px] font-bold mt-2 flex items-center gap-1">
+                    <TrendingUp size={12} /> {stat.change}
+                  </span>
+                </div>
+              </Card>
+            );
+          })}
+        </div>
 
-        {/* Avatar Card - NEW */}
-        <Card className="bg-red-950/30 border-red-500/20 row-span-2 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-50">
-            {/* Dynamically import to avoid SSR issues if any */}
-          </div>
-          <div className="relative z-10 h-full flex flex-col items-center justify-center min-h-[300px]">
-            <PersonalAvatarWrapper />
-          </div>
-        </Card>
-
-        {/* Revenue Overview */}
-        <Card className="bg-red-950/30 border-red-500/20">
-          <h3 className="text-xl font-bold text-red-300 mb-4">Revenue</h3>
-          <div className="space-y-2">
-            <div className="text-3xl font-bold text-yellow-400">
-              {status?.environment.hasStripe ? '$0.00 (Ready)' : '$0.00 (Config Required)'}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <Card className="lg:col-span-2 bg-white/5 border-white/10 p-8 h-[400px] flex items-center justify-center">
+            <div className="flex flex-col items-center">
+              <div className="w-16 h-16 bg-[#D4AF37]/10 rounded-full border border-[#D4AF37]/20 flex items-center justify-center mb-4 animate-pulse">
+                <Zap className="text-[#D4AF37]" size={32} />
+              </div>
+              <h3 className="text-white font-black uppercase tracking-widest mb-2">
+                Live Throughput Graph
+              </h3>
+              <p className="text-white/30 text-xs font-medium">
+                Visualization module initializing...
+              </p>
             </div>
-            <div className="text-sm text-gray-400">This Month</div>
-          </div>
-        </Card>
+          </Card>
 
-        {/* Quick Actions */}
-        <Card className="bg-red-950/30 border-red-500/20 md:col-span-2 lg:col-span-3">
-          <h3 className="text-xl font-bold text-red-300 mb-4">Quick Actions</h3>
-          <div className="flex flex-wrap gap-3">
-            <button className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded transition-colors">
-              New Project
-            </button>
-            <button className="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-black rounded transition-colors">
-              Publish Content
-            </button>
-            <button className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded transition-colors">
-              View Analytics
-            </button>
-            <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors">
-              Connect Live Stream
-            </button>
-          </div>
-        </Card>
-      </div>
+          <Card className="bg-white/5 border-white/10 p-8 flex flex-col items-center justify-center">
+            <div className="w-32 h-32 rounded-full border-4 border-[#D4AF37]/30 border-t-[#D4AF37] animate-spin mb-6" />
+            <h3 className="text-white font-black uppercase tracking-widest text-sm mb-2">
+              Neural Link
+            </h3>
+            <p className="text-center text-white/40 text-[10px] font-bold leading-tight uppercase tracking-wider">
+              Syncing with global edge nodes for decentralized processing...
+            </p>
+          </Card>
+        </div>
+      </motion.div>
     </div>
   );
-}
-
-function PersonalAvatarWrapper() {
-  const PersonalAvatar = dynamic(() => import('@/components/avatar/PersonalAvatar'), {
-    ssr: false,
-    loading: () => <div className="text-red-500 animate-pulse">Initializing Interface...</div>,
-  });
-  return <PersonalAvatar />;
 }

@@ -79,31 +79,12 @@ export default function HomePage() {
       {/* ============================================
           HERO SECTION - Video Background + Avatar
           ============================================ */}
-      <section className="relative min-h-screen overflow-hidden">
-        {/* Video Background - Lazy loaded */}
-        <motion.div
-          style={{ scale: heroScale, opacity: heroOpacity }}
-          className="absolute inset-0 z-0 w-screen left-1/2 -translate-x-1/2"
-        >
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="none"
-            poster="/images/hero-poster.jpg"
-            className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto object-cover -translate-x-1/2 -translate-y-1/2 opacity-40"
-          >
-            <source src={STOCK_VIDEOS.heroBackground} type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-[#004e58]/40 to-black" />
-        </motion.div>
-
-        {/* Animated gradient overlay */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <div className="absolute top-[-20%] right-[-10%] w-[60%] h-[60%] bg-gradient-radial from-cyan-500/20 to-transparent blur-3xl animate-pulse" />
+      <section className="relative min-h-screen">
+        {/* Animated gradient overlay for depth */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-[-20%] right-[-10%] w-[60%] h-[60%] bg-gradient-radial from-cyan-500/10 to-transparent blur-3xl animate-pulse" />
           <div
-            className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-gradient-radial from-yellow-500/15 to-transparent blur-3xl animate-pulse"
+            className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-gradient-radial from-yellow-500/10 to-transparent blur-3xl animate-pulse"
             style={{ animationDelay: '1s' }}
           />
         </div>
