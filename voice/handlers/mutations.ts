@@ -1,32 +1,39 @@
 /**
  * VOICE COMMAND HANDLERS
- * Queues mutations that get applied on next auto-commit sync
+ * Executes mutations immediately - makes real file changes
  */
 
 import { queueMutation } from '@/voice/mutation-queue';
+import {
+  executeUpdateText
+} from './executors';
 
 interface MutationResult {
   success: boolean;
   message: string;
   mutationId?: string;
+  filesChanged?: string[];
 }
 
 export async function handleUpdateText(newText: string): Promise<MutationResult> {
   try {
+    // Execute the mutation immediately
+    const result = await executeUpdateText(newText);
+
+    // Also queue for audit log
     const mutation = await queueMutation({
       type: 'UPDATE_TEXT',
       payload: { newText },
     });
 
     return {
-      success: true,
-      message: `Headline mutation queued: "${newText}"`,
+      ...result,
       mutationId: mutation.id,
     };
   } catch (error: unknown) {
     return {
       success: false,
-      message: `Failed to queue text update: ${error}`,
+      message: `Failed to update text: ${error}`,
     };
   }
 }
