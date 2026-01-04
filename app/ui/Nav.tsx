@@ -23,7 +23,9 @@ export default function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 h-24 overflow-hidden shadow-2xl">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 shadow-2xl ${mobileMenuOpen ? 'h-screen' : 'h-24'}`}
+    >
       {/* Background Video */}
       <video
         autoPlay
