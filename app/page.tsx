@@ -182,7 +182,7 @@ export default function HomePage() {
       {/* ============================================
           NEWS & UPDATES SECTION
           ============================================ */}
-      <Section className="bg-black py-16">
+      <Section className="bg-black/20 backdrop-blur-sm py-16">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -219,7 +219,7 @@ export default function HomePage() {
       {/* ============================================
           SERVICES SECTION
           ============================================ */}
-      <Section className="bg-linear-to-b from-black via-[#0a0a0a] to-black relative overflow-hidden">
+      <Section className="bg-black/40 backdrop-blur-md relative overflow-hidden">
         {/* Background decoration */}
         <div className="absolute inset-0 opacity-20">
           <Image src="/images/geometric-shapes.png" alt="" fill className="object-cover" />
@@ -315,8 +315,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* AdSense Unit - After Services */}
-      <Section className="bg-black">
+      <Section className="bg-transparent">
         <AdSenseUnit
           slot="services-bottom"
           style={{ display: 'block', width: '100%', minHeight: '250px', margin: '20px 0' }}
@@ -326,7 +325,7 @@ export default function HomePage() {
       {/* ============================================
           VIDEO SHOWCASE SECTION
           ============================================ */}
-      <Section className="bg-black relative overflow-hidden">
+      <Section className="bg-black/20 relative overflow-hidden">
         <div className="absolute inset-0">
           <video
             autoPlay
@@ -374,7 +373,7 @@ export default function HomePage() {
       {/* ============================================
           TESTIMONIALS SECTION
           ============================================ */}
-      <Section className="bg-linear-to-b from-black via-[#0f0f0f] to-black">
+      <Section className="bg-black/40 backdrop-blur-lg">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -453,7 +452,7 @@ export default function HomePage() {
       </Section>
 
       {/* AdSense Unit - After Testimonials */}
-      <Section className="bg-black">
+      <Section className="bg-transparent">
         <AdSenseUnit
           slot="testimonials-bottom"
           style={{ display: 'block', width: '100%', minHeight: '250px', margin: '20px 0' }}
@@ -463,7 +462,7 @@ export default function HomePage() {
       {/* ============================================
           BLOG/INSIGHTS SECTION
           ============================================ */}
-      <Section className="bg-linear-to-b from-black to-[#0a0a0a]">
+      <Section className="bg-black/20">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -550,7 +549,7 @@ export default function HomePage() {
       </Section>
 
       {/* AdSense Unit - After Blog */}
-      <Section className="bg-black">
+      <Section className="bg-transparent">
         <AdSenseUnit
           slot="blog-bottom"
           style={{ display: 'block', width: '100%', minHeight: '250px', margin: '20px 0' }}
@@ -560,7 +559,7 @@ export default function HomePage() {
       {/* ============================================
           TRUCK VIDEO SECTION (User Requested)
           ============================================ */}
-      <Section className="bg-black relative overflow-hidden py-20">
+      <Section className="bg-black/20 relative overflow-hidden py-20">
         <div className="container mx-auto px-4 z-10 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
