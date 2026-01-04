@@ -41,18 +41,25 @@ export function ProductCard({ product }: ProductCardProps) {
         <h3 className="font-bold text-lg text-white mb-2 line-clamp-2">{product.name}</h3>
 
         {/* Description */}
-        <p className="text-purple-300/70 text-sm mb-4 line-clamp-2 flex-1">
-          {product.description}
-        </p>
+        <p className="text-purple-300/70 text-sm mb-4 line-clamp-2 flex-1">{product.description}</p>
 
         {/* Pricing */}
-        <div className="flex items-baseline gap-2 mb-4">
-          <span className="text-2xl font-black bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">${product.price.toFixed(2)}</span>
-          {product.compareAtPrice && (
-            <span className="text-sm text-purple-400/40 line-through">
-              ${product.compareAtPrice.toFixed(2)}
+        <div className="flex flex-col mb-4">
+          <div className="mb-1">
+            <span className="inline-block px-1.5 py-0.5 text-[9px] uppercase font-black tracking-tighter bg-red-600 text-white rounded animate-pulse">
+              Limited Time Offer
             </span>
-          )}
+          </div>
+          <div className="flex items-baseline gap-2">
+            <span className="text-2xl font-black bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+              ${product.price.toFixed(2)}
+            </span>
+            {product.compareAtPrice && (
+              <span className="text-sm text-purple-400/40 line-through">
+                ${product.compareAtPrice.toFixed(2)}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Stock Status */}

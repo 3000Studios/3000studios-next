@@ -121,6 +121,12 @@ export default function ServicesShowcase() {
 
               <p className="text-platinum opacity-80 mb-4">{service.description}</p>
 
+              <div className="mb-2">
+                <span className="inline-block px-2 py-0.5 text-[10px] uppercase font-black tracking-widest bg-red-600 text-white rounded animate-pulse">
+                  Limited Time Offer
+                </span>
+              </div>
+
               <div className="text-3xl font-bold gradient-text mb-6">{service.price}</div>
 
               <ul className="space-y-3 mb-6">
