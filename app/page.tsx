@@ -4,7 +4,7 @@ import { AdSenseUnit } from '@/components/AdSense';
 import HomeBackground from '@/components/HomeBackground';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Button from './ui/Button';
 import Card from './ui/Card';
 import Section from './ui/Section';
