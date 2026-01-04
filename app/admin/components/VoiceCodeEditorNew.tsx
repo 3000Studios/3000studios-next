@@ -68,7 +68,7 @@ export default function VoiceCodeEditor() {
       recognitionRef.current = recognition;
       recognition.continuous = false; // Changed to false to prevent repetition
       recognition.interimResults = false; // Only final results
-      recognition.language = 'en-US';
+      recognition.lang = 'en-US';
 
       recognition.onstart = () => {
         setIsListening(true);

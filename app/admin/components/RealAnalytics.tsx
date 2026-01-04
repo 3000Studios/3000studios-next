@@ -5,7 +5,7 @@
 
 'use client';
 
-import { useAnalytics, type AnalyticsResponse } from '@/hooks/useAPI';
+import { useAnalytics } from '@/hooks/useAPI';
 import {
   BarChart3,
   DollarSign,
