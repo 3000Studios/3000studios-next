@@ -108,18 +108,30 @@ export default function Nav() {
               {PUBLIC_NAV_ITEMS.map((item) => {
                 const isActive = pathname === item.href;
                 return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`block px-4 py-3 rounded-lg text-sm font-medium font-playfair transition-all ${
-                      isActive
-                        ? 'bg-[#D4AF37] text-black'
-                        : 'text-[#D4AF37] hover:text-white hover:bg-white/10'
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
+                  <div key={item.href} className="flex justify-center py-2">
+                    <Link
+                      href={item.href}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        playSound('nav');
+                      }}
+                      onMouseEnter={() => playSound('hover')}
+                      className="nav-cube-link scale-125 my-4"
+                    >
+                      <span className={isActive ? 'text-[#D4AF37] border-[#D4AF37]' : ''}>
+                        {item.label}
+                      </span>
+                      <span className={isActive ? 'text-[#D4AF37] border-[#D4AF37]' : ''}>
+                        {item.label}
+                      </span>
+                      <span className={isActive ? 'text-[#D4AF37] border-[#D4AF37]' : ''}>
+                        {item.label}
+                      </span>
+                      <span className={isActive ? 'text-[#D4AF37] border-[#D4AF37]' : ''}>
+                        {item.label}
+                      </span>
+                    </Link>
+                  </div>
                 );
               })}
             </div>
