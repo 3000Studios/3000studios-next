@@ -1,5 +1,6 @@
 'use client';
 
+import { Lock } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -22,38 +23,42 @@ export default function AdminNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-linear-to-r from-red-950/90 to-black/90 backdrop-blur-md border-b border-red-500/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center space-x-4">
-            <div className="text-red-400 font-bold text-lg">ADMIN PANEL</div>
-            <div className="hidden md:flex items-center space-x-2">
-              {ADMIN_NAV_ITEMS.map((item) => {
-                const isActive = pathname === item.href;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`px-3 py-2 rounded text-sm font-medium transition-all ${
-                      isActive
-                        ? 'bg-red-600 text-white'
-                        : 'text-red-200 hover:text-white hover:bg-red-900/50'
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
+    <nav className="fixed top-0 left-0 right-0 z-[100] bg-black/80 backdrop-blur-2xl border-b border-[#D4AF37]/20">
+      <div className="container-standard flex items-center justify-between h-20">
+        <div className="flex items-center gap-8">
+          <Link href="/admin" className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-[#D4AF37] rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+              <Lock className="text-black" size={16} />
             </div>
-          </div>
-
-          <Link
-            href="/"
-            className="px-4 py-2 rounded bg-red-600 text-white text-sm font-medium hover:bg-red-700 transition-colors"
-          >
-            Exit Admin
+            <span className="text-white font-black tracking-tighter text-lg italic">NEXUS</span>
           </Link>
+
+          <div className="hidden xl:flex items-center gap-2">
+            {ADMIN_NAV_ITEMS.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
+                    isActive
+                      ? 'bg-[#D4AF37] text-black shadow-[0_0_20px_rgba(212,175,55,0.3)]'
+                      : 'text-white/40 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </div>
         </div>
+
+        <Link
+          href="/"
+          className="px-6 py-2 rounded-xl border border-white/10 text-white/60 text-[10px] font-black uppercase tracking-widest hover:bg-white/5 hover:text-white transition-all active:scale-95"
+        >
+          Close Terminal
+        </Link>
       </div>
     </nav>
   );

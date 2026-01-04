@@ -8,6 +8,7 @@
 import ConsentBanner from '@/components/ConsentBanner';
 import IntroVideoGate from '@/components/IntroVideoGate';
 import StockMarquee from '@/components/StockMarquee';
+import VideoBackground from '@/components/VideoBackground';
 import { styleRegistry } from '@/lib/styleRegistry';
 import { AppProviders } from '@/providers/AppProviders';
 import { Analytics } from '@vercel/analytics/next';
@@ -145,6 +146,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         ) : null}
 
         <AppProviders>
+          <VideoBackground
+            src="https://res.cloudinary.com/dj92eb97f/video/upload/v1767519946/3843427-uhd_2160_4096_25fps_ggqwby.mp4"
+            opacity={0.3}
+          />
           <IntroVideoGate>
             {/* Navigation - Critical, loads immediately */}
             <Nav />
