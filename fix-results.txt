@@ -1,0 +1,11 @@
+
+Oops! Something went wrong! :(
+
+ESLint: 9.39.2
+
+Error: Invalid Options:
+- 'fixTypes' must be an array of any of "directive", "problem", "suggestion", and "layout".
+    at processOptions (C:\3000Studos-Production\3000studios-next-main\3000studios-next\node_modules\.pnpm\eslint@9.39.2_jiti@2.6.1\node_modules\eslint\lib\eslint\eslint-helpers.js:980:9)
+    at new ESLint (C:\3000Studos-Production\3000studios-next-main\3000studios-next\node_modules\.pnpm\eslint@9.39.2_jiti@2.6.1\node_modules\eslint\lib\eslint\eslint.js:720:28)
+    at Object.execute (C:\3000Studos-Production\3000studios-next-main\3000studios-next\node_modules\.pnpm\eslint@9.39.2_jiti@2.6.1\node_modules\eslint\lib\cli.js:416:13)
+    at async main (C:\3000Studos-Production\3000studios-next-main\3000studios-next\node_modules\.pnpm\eslint@9.39.2_jiti@2.6.1\node_modules\eslint\bin\eslint.js:175:19)
