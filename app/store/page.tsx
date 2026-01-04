@@ -1,6 +1,7 @@
 'use client';
 
 import VideoBackground from '@/components/VideoBackground';
+import AdUnit from '@/components/monetization/AdUnit';
 import { useCartStore } from '@/lib/cart-store';
 import { Check, ExternalLink, ShoppingCart, Sparkles, Star, Zap } from 'lucide-react';
 import Image from 'next/image';
@@ -277,6 +278,13 @@ export default function StorePage() {
         </div>
       </section>
 
+      {/* AdSense Unit - After Products */}
+      <section className="py-4">
+        <div className="max-w-6xl mx-auto px-4">
+          <AdUnit slotId="store-products-bottom" format="horizontal" />
+        </div>
+      </section>
+
       {/* Services Section */}
       <section className="py-16 px-4 bg-gradient-to-b from-transparent via-gray-900/50 to-transparent">
         <div className="max-w-6xl mx-auto">
@@ -307,6 +315,13 @@ export default function StorePage() {
               <ExternalLink size={18} />
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* AdSense Unit - After Services */}
+      <section className="py-4">
+        <div className="max-w-6xl mx-auto px-4">
+          <AdUnit slotId="store-services-bottom" format="rectangle" />
         </div>
       </section>
 
