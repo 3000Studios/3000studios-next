@@ -69,17 +69,32 @@ export default function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
   const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 1.1]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  useEffect(() => {
+    // 3KAI Greeting Protocol: Wait 15s then initiate speech
+    const timer = setTimeout(() => {
+      window.dispatchEvent(
+        new CustomEvent('voice-command', {
+          detail: {
+            target: 'avatar',
+            action: 'speak',
+            duration: 6000,
+            text: 'Welcome to the Nexus. I am 3KAI, your autonomous intelligence guide. How may I optimize your evolution today?',
+          },
+        })
+      );
+    }, 15000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <div ref={containerRef} className="relative">
+    <div ref={containerRef} className="relative w-full overflow-x-hidden">
       {/* 3D Animated "3000 STUDIOS" Background */}
       <HomeBackground />
 
       {/* ============================================
           HERO SECTION - Video Background + Avatar
           ============================================ */}
-      <section className="relative min-h-screen">
+      <section className="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-12">
         {/* Animated gradient overlay for depth */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <div className="absolute top-[-20%] right-[-10%] w-[60%] h-[60%] bg-gradient-radial from-cyan-500/10 to-transparent blur-3xl animate-pulse" />
@@ -89,28 +104,39 @@ export default function HomePage() {
           />
         </div>
 
+        {/* Home Monetization Badge */}
+        <motion.div
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="relative z-30 mb-8"
+        >
+          <div className="px-6 py-2 bg-[#D4AF37] text-black font-black uppercase tracking-[0.3em] text-[10px] rounded-full shadow-[0_0_30px_rgba(212,175,55,0.4)] animate-bounce">
+            NEXUS PRIME ACCESS: 50% OFF TODAY
+          </div>
+        </motion.div>
+
         {/* Hero Content */}
-        <div className="relative z-10 container mx-auto px-4 pt-20 min-h-screen flex items-center">
+        <div className="relative z-10 w-full container-standard">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
             {/* Left: Text Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1 }}
-              className="space-y-8"
+              className="space-y-8 flex flex-col items-center lg:items-start text-center lg:text-left"
             >
               {/* Headline */}
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="text-5xl md:text-7xl font-bold leading-tight"
+                className="text-4xl md:text-7xl font-black leading-tight tracking-tighter uppercase italic"
               >
-                <span className="bg-linear-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent italic">
                   The Future of
                 </span>
                 <br />
-                <span className="bg-linear-to-r from-[#1BFFFF] via-[#00D1FF] to-[#1BFFFF] bg-clip-text text-transparent animate-pulse drop-shadow-[0_0_15px_rgba(27,255,255,0.5)]">
+                <span className="bg-linear-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] bg-clip-text text-transparent animate-pulse drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]">
                   Digital Excellence
                 </span>
               </motion.h1>
@@ -120,57 +146,66 @@ export default function HomePage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
-                className="text-xl text-gray-300/90 max-w-lg leading-relaxed"
+                className="text-lg text-white/50 max-w-lg leading-relaxed font-bold uppercase tracking-widest"
               >
-                AI-powered automation, voice command systems, and premium digital solutions that
-                transform your business into a powerhouse.
+                AI-powered automation, voice command systems, and premium digital solutions.
               </motion.p>
-
-              {/* CTA Buttons */}
 
               {/* Stats row */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1 }}
-                className="flex gap-8 pt-8 border-t border-white/10"
+                className="flex gap-8 pt-8 border-t border-white/10 w-full justify-center lg:justify-start"
               >
                 {[
-                  { value: '250+', label: 'Projects' },
-                  { value: '99%', label: 'Satisfaction' },
-                  { value: '24/7', label: 'Support' },
+                  { value: '250+', label: 'DEPLOYMENTS' },
+                  { value: '99%', label: 'STABILITY' },
+                  { value: '24/7', label: 'CONTROL' },
                 ].map((stat, i) => (
-                  <div key={i}>
-                    <div className="text-2xl font-bold text-[#D4AF37]">{stat.value}</div>
-                    <div className="text-sm text-gray-400">{stat.label}</div>
+                  <div key={i} className="flex flex-col items-center lg:items-start">
+                    <div className="text-2xl font-black text-[#D4AF37] italic">{stat.value}</div>
+                    <div className="text-[10px] font-black text-white/30 tracking-widest uppercase">
+                      {stat.label}
+                    </div>
                   </div>
                 ))}
               </motion.div>
             </motion.div>
 
-            {/* Right: Premium Visualization (Stock Image/Placeholder) */}
+            {/* Right: Premium AI Avatar Visualization */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="relative w-full h-[600px] flex items-center justify-center p-8"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.5, delay: 0.5, ease: 'easeOut' }}
+              className="relative w-full h-[600px] flex items-center justify-center p-4 lg:p-8"
             >
-              <div className="relative w-full h-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-cyan-500/10 group">
-                <Image
-                  src={STOCK_IMAGES.hero}
-                  alt="3000 Studios Interior"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-1000"
+              <div className="relative w-full h-full group">
+                {/* Avatar Wrapper with glow back-light */}
+                <div className="absolute inset-0 bg-cyan-500/5 blur-[120px] rounded-full animate-pulse" />
+                <UnifiedAvatar
+                  variant="bust"
+                  className="w-full h-full shadow-[0_0_50px_rgba(212,175,55,0.1)] hover:shadow-[0_0_80px_rgba(212,175,55,0.2)] transition-shadow duration-700"
+                  showHUD={true}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
+
+                {/* Status HUD Overlays */}
+                <div className="absolute -top-4 -right-4 p-4 glass border border-white/10 rounded-2xl backdrop-blur-md z-20 pointer-events-none">
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-ping" />
+                    <span className="text-[10px] font-black tracking-[0.2em] text-white/60">
+                      3KAI_CORE_ONLINE
+                    </span>
+                  </div>
+                </div>
 
                 {/* Float Badge */}
-                <div className="absolute bottom-8 left-8 right-8 p-6 glass border border-white/20 rounded-2xl backdrop-blur-xl">
-                  <div className="text-2xl font-bold text-white mb-2">
-                    Pioneering Autonomous Systems
+                <div className="absolute bottom-8 left-8 right-8 p-6 glass border border-[#D4AF37]/30 rounded-2xl backdrop-blur-xl z-20">
+                  <div className="text-xl font-bold text-white mb-2 italic">
+                    Neural Link Established
                   </div>
-                  <p className="text-sm text-gray-300">
-                    Experience the next generation of digital control with 3KAI.
+                  <p className="text-[10px] text-white/50 font-black uppercase tracking-widest leading-relaxed">
+                    3KAI autonomous agent is monitoring this workspace for optimizations.
                   </p>
                 </div>
               </div>
