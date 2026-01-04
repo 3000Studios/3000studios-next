@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
       message: 'Changes committed and deployed to production',
       commitMessage,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Deploy error:', error);
     return NextResponse.json(
       { error: 'Failed to deploy changes', details: error.message },

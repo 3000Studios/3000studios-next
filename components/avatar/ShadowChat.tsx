@@ -40,7 +40,7 @@ export default function ShadowChat() {
         // Update avatar emotion
         updateEmotion(data.avatar.emotion, data.avatar.intensity);
       }
-    } catch (error) {
+    } catch (_error) {
       console.error("Chat error:", error);
       setMessages((prev) => [
         ...prev,

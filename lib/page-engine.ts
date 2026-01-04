@@ -6,7 +6,7 @@
 export interface PageSlot {
   type: 'HERO' | 'INTRO' | 'FEATURE_GRID' | 'MEDIA_STRIP' | 'CTA' | 'MONETIZATION' | 'FOOTER';
   component: string;
-  props?: Record<string, any>;
+  props?: Record<string, unknown>;
   order: number;
   enabled: boolean;
 }

@@ -1,6 +1,6 @@
 import fs from 'fs';
-import path from 'path';
 import { NextResponse } from 'next/server';
+import path from 'path';
 
 export async function POST(req: Request) {
   try {
@@ -22,10 +22,11 @@ export async function POST(req: Request) {
     );
 
     return NextResponse.json({ ok: true, slug, created: true });
-  } catch (error: any) {
-    return NextResponse.json({ 
-      ok: false, 
-      error: error.message 
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Page generation failed';
+    return NextResponse.json({
+      ok: false,
+      error: message
     }, { status: 500 });
   }
 }

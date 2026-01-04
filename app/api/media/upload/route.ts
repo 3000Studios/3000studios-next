@@ -19,10 +19,11 @@ export async function POST(req: Request) {
     const json = await res.json();
 
     return NextResponse.json(json);
-  } catch (error: any) {
-    return NextResponse.json({ 
-      ok: false, 
-      error: error.message 
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Media upload failed';
+    return NextResponse.json({
+      ok: false,
+      error: message
     }, { status: 500 });
   }
 }

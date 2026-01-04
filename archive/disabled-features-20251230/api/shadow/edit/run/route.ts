@@ -30,7 +30,7 @@ export async function POST(req: Request) {
       message: response,
       command: spoken,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Voice command error:", error);
     return NextResponse.json(
       { error: error.message || "Voice command failed" },

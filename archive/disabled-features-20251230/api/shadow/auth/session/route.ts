@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
     }
 
     return NextResponse.json({ authenticated: true, email });
-  } catch (error) {
+  } catch (_error) {
     console.error("Shadow session check error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }

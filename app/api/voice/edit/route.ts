@@ -1,6 +1,6 @@
 import fs from 'fs';
-import path from 'path';
 import { NextResponse } from 'next/server';
+import path from 'path';
 
 export async function POST(req: Request) {
   try {
@@ -13,10 +13,11 @@ export async function POST(req: Request) {
 
     fs.writeFileSync(target, jsx);
     return NextResponse.json({ ok: true, updated: route });
-  } catch (error: any) {
-    return NextResponse.json({ 
-      ok: false, 
-      error: error.message 
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Unknown error occurred';
+    return NextResponse.json({
+      ok: false,
+      error: message
     }, { status: 500 });
   }
 }

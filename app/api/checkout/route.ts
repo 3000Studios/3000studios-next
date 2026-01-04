@@ -6,7 +6,7 @@ export async function POST(req: Request) {
 
     // Mock Stripe checkout (replace with real Stripe key)
     // const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-04-10' });
-    
+
     // For now, return mock session
     const mockSession = {
       url: '/success?session=mock_' + Date.now(),
@@ -22,10 +22,11 @@ export async function POST(req: Request) {
     // });
 
     return NextResponse.json({ url: mockSession.url, id: mockSession.id });
-  } catch (error: any) {
-    return NextResponse.json({ 
-      ok: false, 
-      error: error.message 
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    return NextResponse.json({
+      ok: false,
+      error: message
     }, { status: 500 });
   }
 }

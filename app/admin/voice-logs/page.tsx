@@ -11,7 +11,7 @@ interface VoiceLogEntry {
   id: string;
   timestamp: string;
   command: string;
-  input: Record<string, any>;
+  input: Record<string, unknown>;
   output: {
     status: string;
     message: string;

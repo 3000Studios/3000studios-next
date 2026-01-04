@@ -1,7 +1,7 @@
-import fs from 'fs';
-import path from 'path';
 import { execSync } from 'child_process';
+import fs from 'fs';
 import { NextResponse } from 'next/server';
+import path from 'path';
 
 export async function POST(req: Request) {
   const { action, payload } = await req.json();
@@ -26,7 +26,8 @@ export async function POST(req: Request) {
     fs.appendFileSync(logPath, `${new Date().toISOString()} - ${action} - ${JSON.stringify(payload)}\n`);
 
     return NextResponse.json({ ok: true, action, timestamp: new Date().toISOString() });
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 });
+  } catch (e: unknown) {
+    const message = e instanceof Error ? e.message : 'Voice command failed';
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

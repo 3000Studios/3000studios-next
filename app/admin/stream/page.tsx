@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { brand } from "@/design/brand";
-import MuxPlayer from "@mux/mux-player-react";
-import { motion } from "framer-motion";
-import { MessageSquare, Mic, Radio, Video } from "lucide-react";
-import { useEffect, useState } from "react";
+import { brand } from '@/design/brand';
+import MuxPlayer from '@mux/mux-player-react';
+import { motion } from 'framer-motion';
+import { MessageSquare, Mic, Radio, Video } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export default function StreamStudioPage() {
   const [isLive, setIsLive] = useState(false);
@@ -13,7 +13,7 @@ export default function StreamStudioPage() {
 
   // Checking initial status
   useEffect(() => {
-    fetch("/api/streaming")
+    fetch('/api/streaming')
       .then((res) => res.json())
       .then((data) => {
         if (data.isLive) {
@@ -26,24 +26,21 @@ export default function StreamStudioPage() {
   const handleGoLive = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/streaming", { method: "POST" });
+      const res = await fetch('/api/streaming', { method: 'POST' });
       const data = await res.json();
       if (data.streamKey) {
         setStreamData(data);
         setIsLive(true);
       }
-    } catch (e) {
-      console.error("Failed to start stream", e);
+    } catch (err) {
+      console.error('Failed to start stream', err);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div
-      className="p-6 h-full flex flex-col gap-6"
-      style={{ overflowY: "auto" }}
-    >
+    <div className="p-6 h-full flex flex-col gap-6" style={{ overflowY: 'auto' }}>
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
@@ -51,7 +48,7 @@ export default function StreamStudioPage() {
             className="text-2xl font-bold flex items-center gap-2"
             style={{ color: brand.colors.text.primary }}
           >
-            <Radio className={isLive ? "text-red-500 animate-pulse" : ""} />
+            <Radio className={isLive ? 'text-red-500 animate-pulse' : ''} />
             Transmission Control
           </h1>
           <p style={{ color: brand.colors.text.secondary }}>
@@ -62,23 +59,21 @@ export default function StreamStudioPage() {
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/20 border border-white/5">
             <div
               className={`w-2 h-2 rounded-full ${
-                isLive ? "bg-red-500 animate-pulse" : "bg-gray-500"
+                isLive ? 'bg-red-500 animate-pulse' : 'bg-gray-500'
               }`}
             />
-            <span className="text-sm font-mono text-gray-400">
-              {isLive ? "LIVE" : "OFFLINE"}
-            </span>
+            <span className="text-sm font-mono text-gray-400">{isLive ? 'LIVE' : 'OFFLINE'}</span>
           </div>
           <button
             onClick={handleGoLive}
             disabled={isLive || loading}
             className={`px-6 py-2 rounded-lg font-bold transition-all ${
               isLive
-                ? "bg-red-500/10 text-red-500 cursor-not-allowed"
-                : "bg-red-600 hover:bg-red-700 text-white"
+                ? 'bg-red-500/10 text-red-500 cursor-not-allowed'
+                : 'bg-red-600 hover:bg-red-700 text-white'
             }`}
           >
-            {loading ? "Initializing..." : isLive ? "End Stream" : "Go Live"}
+            {loading ? 'Initializing...' : isLive ? 'End Stream' : 'Go Live'}
           </button>
         </div>
       </div>
@@ -94,7 +89,7 @@ export default function StreamStudioPage() {
               <MuxPlayer
                 streamType="live"
                 playbackId={streamData.playbackId}
-                metadata={{ video_title: "Matrix Live Stream" }}
+                metadata={{ video_title: 'Matrix Live Stream' }}
                 primaryColor="#FFFFFF"
                 secondaryColor="#000000"
               />
@@ -109,9 +104,7 @@ export default function StreamStudioPage() {
             {isLive && streamData && (
               <div className="absolute top-4 left-4 bg-black/80 backdrop-blur px-4 py-2 rounded-lg border border-white/10 z-10">
                 <div className="text-xs text-gray-400 mb-1">Stream Key</div>
-                <div className="font-mono text-white select-all">
-                  {streamData.streamKey}
-                </div>
+                <div className="font-mono text-white select-all">{streamData.streamKey}</div>
                 <div className="text-[10px] text-red-400 mt-1">
                   ⚠ Input this key into OBS to start broadcasting
                 </div>
@@ -122,14 +115,11 @@ export default function StreamStudioPage() {
           {/* Quick Stats */}
           <div className="grid grid-cols-3 gap-4">
             {[
-              { label: "Bitrate", value: isLive ? "6,000 Kbps" : "--" },
-              { label: "FPS", value: isLive ? "60" : "--" },
-              { label: "Dropped Frames", value: "0" },
+              { label: 'Bitrate', value: isLive ? '6,000 Kbps' : '--' },
+              { label: 'FPS', value: isLive ? '60' : '--' },
+              { label: 'Dropped Frames', value: '0' },
             ].map((stat, i) => (
-              <div
-                key={i}
-                className="p-4 rounded-lg bg-black/20 border border-white/5"
-              >
+              <div key={i} className="p-4 rounded-lg bg-black/20 border border-white/5">
                 <div className="text-xs text-gray-500 mb-1">{stat.label}</div>
                 <div className="text-lg font-mono text-white">{stat.value}</div>
               </div>
@@ -151,21 +141,21 @@ export default function StreamStudioPage() {
               <Mic size={16} /> Audio Mixer
             </h3>
             <div className="space-y-4">
-              {["Mic Input", "Desktop Audio", "Music Bed"].map((channel, i) => (
+              {['Mic Input', 'Desktop Audio', 'Music Bed'].map((channel, i) => (
                 <div key={i}>
                   <div className="flex justify-between text-xs text-gray-400 mb-2">
                     <span>{channel}</span>
-                    <span>{isLive ? "-6dB" : "-inf"}</span>
+                    <span>{isLive ? '-6dB' : '-inf'}</span>
                   </div>
                   <div className="h-2 bg-black/50 rounded-full overflow-hidden">
                     <motion.div
                       className="h-full bg-green-500"
-                      initial={{ width: "0%" }}
-                      animate={{ width: isLive ? "70%" : "0%" }}
+                      initial={{ width: '0%' }}
+                      animate={{ width: isLive ? '70%' : '0%' }}
                       transition={{
                         duration: 0.2,
                         repeat: Infinity,
-                        repeatType: "reverse",
+                        repeatType: 'reverse',
                         delay: i * 0.1,
                       }}
                     />

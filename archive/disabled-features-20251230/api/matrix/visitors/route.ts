@@ -31,7 +31,7 @@ export async function GET() {
       count: recentVisits.length,
       locations,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Visitors API error:", error);
     return NextResponse.json(
       { error: error.message || "Failed to fetch visitors" },

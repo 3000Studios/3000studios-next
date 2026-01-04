@@ -140,7 +140,7 @@ export class AutonomousQA {
       this.results.set('build', true);
       console.log('    ✅ Build successful');
       return true;
-    } catch (error) {
+    } catch (_error) {
       console.log('    ❌ Build failed');
       this.results.set('build', false);
       return false;

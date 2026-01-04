@@ -13,7 +13,7 @@ export async function initShadowPassword() {
       await kv.set("shadow-password", hash);
       await kv.set("shadow-email", SHADOW_EMAIL);
     }
-  } catch (error) {
+  } catch (_error) {
     console.error("Failed to initialize shadow password:", error);
   }
 }
@@ -32,7 +32,7 @@ export async function validateShadowLogin(email: string, pass: string): Promise<
     }
 
     return await bcrypt.compare(pass, storedHash);
-  } catch (error) {
+  } catch (_error) {
     console.error("Shadow login validation error:", error);
     return false;
   }
@@ -48,7 +48,7 @@ export async function validateShadowSession(sessionId: string): Promise<string |
   try {
     const email = await kv.get(`shadow-session:${sessionId}`);
     return email as string | null;
-  } catch (error) {
+  } catch (_error) {
     console.error("Shadow session validation error:", error);
     return null;
   }
@@ -57,7 +57,7 @@ export async function validateShadowSession(sessionId: string): Promise<string |
 export async function destroyShadowSession(sessionId: string) {
   try {
     await kv.del(`shadow-session:${sessionId}`);
-  } catch (error) {
+  } catch (_error) {
     console.error("Shadow session destroy error:", error);
   }
 }

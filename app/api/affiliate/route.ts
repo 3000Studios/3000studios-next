@@ -9,9 +9,9 @@
  * - GET /api/affiliate/stats?code=XXX - Get affiliate stats (admin)
  */
 
-import { NextRequest, NextResponse } from "next/server";
-import { mongodb, affiliate as affiliateConfig } from "@/lib/apiClients";
+import { affiliate as affiliateConfig, mongodb } from "@/lib/apiClients";
 import crypto from "crypto";
+import { NextRequest, NextResponse } from "next/server";
 
 // Cookie duration in days
 const COOKIE_DURATION = affiliateConfig.cookieDuration || 30;
@@ -113,8 +113,8 @@ export async function GET(request: NextRequest) {
     });
 
     return response;
-  } catch (error) {
-    console.error("Affiliate tracking error:", error);
+  } catch (err) {
+    console.error("Affiliate tracking error:", err);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },
@@ -227,8 +227,8 @@ export async function POST(request: NextRequest) {
       success: true,
       message: "Conversion tracked (DB not configured)",
     });
-  } catch (error) {
-    console.error("Affiliate conversion tracking error:", error);
+  } catch (err) {
+    console.error("Affiliate conversion tracking error:", err);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },

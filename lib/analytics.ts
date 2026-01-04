@@ -98,7 +98,7 @@ class AnalyticsService {
         },
         body: JSON.stringify(event),
       });
-    } catch (error) {
+    } catch (_error) {
       console.error('[Analytics] Failed to send event:', error);
     }
   }

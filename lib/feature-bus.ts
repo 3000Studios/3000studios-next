@@ -12,7 +12,7 @@ export interface Feature {
   permissions: string[];
   mount: string[];
   enabled: boolean;
-  config?: Record<string, any>;
+  config?: Record<string, unknown>;
 }
 
 interface FeatureBusState {
@@ -21,7 +21,7 @@ interface FeatureBusState {
   enableFeature: (name: string) => void;
   disableFeature: (name: string) => void;
   isFeatureEnabled: (name: string, route?: string) => boolean;
-  getFeatureConfig: (name: string) => Record<string, any> | undefined;
+  getFeatureConfig: (name: string) => Record<string, unknown> | undefined;
 }
 
 export const useFeatureBus = create<FeatureBusState>((set, get) => ({

@@ -12,7 +12,7 @@ export async function POST(req: Request) {
     const { command, payload } = await req.json();
     const result = await shadowEngine.execute(command, payload);
     return NextResponse.json(result);
-  } catch (e: any) {
+  } catch (e: unknown) {
     return NextResponse.json({ ok: false, error: e.message });
   }
 }

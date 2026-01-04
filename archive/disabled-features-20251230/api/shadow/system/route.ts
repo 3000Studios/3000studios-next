@@ -16,7 +16,7 @@ export async function GET() {
       queue: queueStatus,
       timestamp: Date.now(),
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     return NextResponse.json(
       { status: "Error", error: err.message },
       { status: 500 },

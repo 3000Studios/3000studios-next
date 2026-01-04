@@ -1,7 +1,7 @@
 // 3000 Studios - UI Registry (Phase 31)
 // Real-time UI updates without rebuilds.
 
-export const uiRegistry: Record<string, any> = {
+export const uiRegistry: Record<string, unknown> = {
   theme: {
     accent: "gold",
     motion: true,

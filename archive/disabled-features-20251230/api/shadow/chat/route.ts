@@ -35,7 +35,7 @@ export async function POST(req: Request) {
       text,
       avatar,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Shadow PRIME chat error:", error);
     return NextResponse.json(
       { error: error.message || "Chat failed" },

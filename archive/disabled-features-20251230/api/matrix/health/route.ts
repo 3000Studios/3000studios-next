@@ -21,7 +21,7 @@ export async function GET() {
     health.vercel_deploy = process.env.VERCEL_DEPLOY_HOOK ? "ok" : "missing";
 
     return NextResponse.json(health);
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json(
       { error: "Health check failed" },
       { status: 500 }

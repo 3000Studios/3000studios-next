@@ -335,7 +335,7 @@ export async function transcribeAudio(
       text: response.text,
       language: options.language,
     };
-  } catch (error) {
+  } catch (_error) {
     console.error("Transcription error:", error);
     throw new Error("Failed to transcribe audio");
   }
@@ -367,7 +367,7 @@ export async function generateSpeech(
     });
 
     return await response.arrayBuffer();
-  } catch (error) {
+  } catch (_error) {
     console.error("TTS error:", error);
     throw new Error("Failed to generate speech");
   }
@@ -418,7 +418,7 @@ export class VoiceActivationDetector {
 
       this.isMonitoring = true;
       this.monitor();
-    } catch (error) {
+    } catch (_error) {
       console.error("Failed to start voice activation detection:", error);
       throw error;
     }

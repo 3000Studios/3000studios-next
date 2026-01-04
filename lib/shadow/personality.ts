@@ -68,7 +68,7 @@ Respond with personality and subtle emotion cues.`;
     });
 
     return completion.choices[0]?.message?.content || "Hey, I'm thinking...";
-  } catch (error) {
+  } catch (_error) {
     console.error("Shadow PRIME personality error:", error);
     return role === "champ" 
       ? "Champ, I hit a snag. Check the API key."

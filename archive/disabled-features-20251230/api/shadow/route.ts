@@ -27,7 +27,7 @@ export async function POST(request: Request) {
       output: `Command "${cmd}" logged. Execution requires additional setup.`,
       timestamp: new Date().toISOString(),
     });
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json(
       {
         output: `Error: ${error instanceof Error ? error.message : "Unknown error"}`,

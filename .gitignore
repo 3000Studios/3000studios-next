@@ -20,6 +20,10 @@ yarn-error.log*
 .env.local
 .env.*.local
 
+# Credentials (NEVER COMMIT)
+docs/CREDENTIALS.md
+**/CREDENTIALS.md
+
 # OS / Editor junk
 .DS_Store
 Thumbs.db

@@ -43,7 +43,7 @@ export function verifyRoutes() {
     try {
       // Route verification logic
       results.passed.push(route);
-    } catch (error) {
+    } catch (_error) {
       const errorMessage = error instanceof Error ? error.message : String(error);
       results.failed.push({ route, error: errorMessage });
     }

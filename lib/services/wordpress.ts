@@ -41,7 +41,7 @@ export async function createPost(post: WordPressPost): Promise<number> {
     });
 
     return response.data.id;
-  } catch (error) {
+  } catch (_error) {
     console.error('WordPress create post error:', error);
     throw new Error('Failed to create WordPress post');
   }
@@ -50,7 +50,7 @@ export async function createPost(post: WordPressPost): Promise<number> {
 export async function updatePost(id: number, updates: Partial<WordPressPost>): Promise<void> {
   try {
     await wpApi.put(`/posts/${id}`, updates);
-  } catch (error) {
+  } catch (_error) {
     console.error('WordPress update post error:', error);
     throw new Error('Failed to update WordPress post');
   }
@@ -78,7 +78,7 @@ export async function getPosts(limit: number = 10): Promise<WordPressPost[]> {
         status: post.status as 'publish' | 'draft' | 'pending',
       };
     });
-  } catch (error) {
+  } catch (_error) {
     console.error('WordPress get posts error:', error);
     throw new Error('Failed to fetch WordPress posts');
   }
@@ -89,7 +89,7 @@ export async function deletePost(id: number): Promise<void> {
     await wpApi.delete(`/posts/${id}`, {
       params: { force: true },
     });
-  } catch (error) {
+  } catch (_error) {
     console.error('WordPress delete post error:', error);
     throw new Error('Failed to delete WordPress post');
   }
@@ -102,7 +102,7 @@ export async function getCategories(): Promise<Array<{ id: number; name: string 
       id: cat.id,
       name: cat.name,
     }));
-  } catch (error) {
+  } catch (_error) {
     console.error('WordPress get categories error:', error);
     throw new Error('Failed to fetch categories');
   }
@@ -115,7 +115,7 @@ export async function createCategory(name: string, description?: string): Promis
       description: description || '',
     });
     return response.data.id;
-  } catch (error) {
+  } catch (_error) {
     console.error('WordPress create category error:', error);
     throw new Error('Failed to create category');
   }

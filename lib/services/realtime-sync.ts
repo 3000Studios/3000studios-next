@@ -113,7 +113,7 @@ export async function instantSync(
     } else {
       throw new Error(`Deployment failed with status: ${finalStatus}`);
     }
-  } catch (error) {
+  } catch (_error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     
     onProgress?.({
@@ -157,7 +157,7 @@ async function monitorDeployment(
 
       await new Promise<void>((resolve) => setTimeout(resolve, interval));
       attempts++;
-    } catch (error) {
+    } catch (_error) {
       console.error('Error monitoring deployment:', error);
       attempts++;
     }
@@ -241,7 +241,7 @@ export async function batchSync(
     } else {
       throw new Error(`Deployment failed with status: ${finalStatus}`);
     }
-  } catch (error) {
+  } catch (_error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     
     onProgress?.({
@@ -281,7 +281,7 @@ export async function quickCommit(
       commitSha,
       message: 'Committed to main branch',
     };
-  } catch (error) {
+  } catch (_error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return {
       success: false,
@@ -341,7 +341,7 @@ export async function forceRedeploy(
     } else {
       throw new Error(`Redeployment failed with status: ${finalStatus}`);
     }
-  } catch (error) {
+  } catch (_error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     
     onProgress?.({

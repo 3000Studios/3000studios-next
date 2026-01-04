@@ -46,7 +46,7 @@ async function getAccessToken(): Promise<string> {
     };
 
     return cachedToken.token;
-  } catch (error) {
+  } catch (_error) {
     console.error('PayPal auth error:', error);
     throw new Error('Failed to authenticate with PayPal');
   }
@@ -114,7 +114,7 @@ export async function createOrder(params: CreateOrderParams) {
     );
 
     return response.data;
-  } catch (error) {
+  } catch (_error) {
     console.error('PayPal create order error:', error);
     throw new Error('Failed to create PayPal order');
   }
@@ -136,7 +136,7 @@ export async function captureOrder(orderId: string) {
     );
 
     return response.data;
-  } catch (error) {
+  } catch (_error) {
     console.error('PayPal capture order error:', error);
     throw new Error('Failed to capture PayPal order');
   }
@@ -156,7 +156,7 @@ export async function getOrderDetails(orderId: string) {
     );
 
     return response.data;
-  } catch (error) {
+  } catch (_error) {
     console.error('PayPal get order error:', error);
     throw new Error('Failed to get PayPal order details');
   }
@@ -188,7 +188,7 @@ export async function trackAffiliateSale(
       success: true,
       trackedProducts: affiliateProducts.length,
     };
-  } catch (error) {
+  } catch (_error) {
     console.error('Affiliate tracking error:', error);
     return {
       success: false,

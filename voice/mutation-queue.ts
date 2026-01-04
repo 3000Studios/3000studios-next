@@ -40,7 +40,7 @@ export async function queueMutation(
     // In production, this would write to database
     // For now, just log and return
     return queued;
-  } catch (error) {
+  } catch (_error) {
     console.error('[VOICE MUTATION ERROR]', error);
     throw error;
   }

@@ -163,7 +163,7 @@ function appendToBlogData(post: unknown) {
 
     fs.writeFileSync(TARGET_FILE, updatedContent, "utf-8");
     console.log(`Successfully added post: ${post.title}`);
-  } catch (error) {
+  } catch (_error) {
     console.error("File update failed:", error);
   }
 }

@@ -53,7 +53,7 @@ export async function triggerDeployment(
       readyState: response.data.readyState,
       createdAt: response.data.createdAt,
     };
-  } catch (error) {
+  } catch (_error) {
     console.error('Vercel deployment error:', error);
     throw new Error('Failed to trigger deployment');
   }
@@ -75,7 +75,7 @@ export async function getDeploymentStatus(deploymentId: string): Promise<string>
     );
 
     return response.data.readyState;
-  } catch (error) {
+  } catch (_error) {
     console.error('Vercel status check error:', error);
     throw new Error('Failed to check deployment status');
   }
@@ -108,7 +108,7 @@ export async function getLatestDeployment(): Promise<DeploymentResponse | null> 
     }
 
     return null;
-  } catch (error) {
+  } catch (_error) {
     console.error('Vercel get deployment error:', error);
     throw new Error('Failed to get latest deployment');
   }
@@ -129,7 +129,7 @@ export async function cancelDeployment(deploymentId: string): Promise<void> {
         },
       }
     );
-  } catch (error) {
+  } catch (_error) {
     console.error('Vercel cancel deployment error:', error);
     throw new Error('Failed to cancel deployment');
   }

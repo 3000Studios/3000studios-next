@@ -25,7 +25,7 @@ export function useShadowCommand() {
 
       const data = await res.json();
       return data;
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError(err.message);
       throw err;
     } finally {

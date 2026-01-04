@@ -75,7 +75,7 @@ export default function ShadowPage() {
       };
 
       setTasks((prev) => [newTask, ...prev]);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Command failed:", err.message);
     }
   };
