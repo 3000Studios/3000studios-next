@@ -18,7 +18,7 @@
   "scripts": {
     "autosync": "./antigravity-autosync.sh",
     "analyze": "cross-env ANALYZE=true npm run build",
-    "dev": "npm-run-all -p autosync dev",
+    "dev": "next dev",
     "harden": "bash scripts/harden-repo.sh",
     "prebuild": "node scripts/validate-app-structure.mjs",
     "build": "next build --webpack",
