@@ -1,90 +1,57 @@
-# ⚙️ 3000 Studios — Antigravity Build & 3KAI Integration
+# ⚙️ 3000 Studios — 3KAI Autonomous CTO Integration
 
 ## Purpose
 
-Enable **3KAI**, your autonomous CTO, to take spoken or text instructions and directly update your production website, manage Cloudinary media, analyze monetization, and monitor Vercel deployments.
+Enable **3KAI**, your blunt and aggressive autonomous CTO, to control the production environment of 3000Studios.com. Talk into your phone or desktop, and 3KAI executes code, fetches media, and maximizes revenue.
 
 ---
 
-## 1️⃣ Overview
+## 🚀 3KAI "Boss Mode" Architecture
 
-### The 3KAI Pipeline
-
-```
-User (Voice / Chat)
-      ↓
-   ChatGPT (3KAI)
-      ↓
-GPT Actions (HTTPS)
-      ↓
-3000studios.com/api/... (6 Core Endpoints)
-      ↓
-   Antigravity Workspace (Execution)
-      ↓
-   GitHub (Commit/Push)
-      ↓
-   Vercel (Auto-deploy)
-```
+| Feature | Endpoint | Description |
+|----------|----------|-------------|
+| **Execution** | `/api/gpt-bridge` | Direct code/style updates. 3KAI sends instructions, Antigravity executes. |
+| **Previews** | `/api/previews` | Returns live Vercel/Dev URLs so 3KAI can show you what he's done. |
+| **Assets** | `/api/assets` | Browses Cloudinary/Pexels for fire videos and images. |
+| **Status** | `/api/status` | Real-time monitoring of build success or deployment failures. |
+| **Monetization** | `/api/monetization` | Returns revenue logic: Ads, funnels, and product strategy. |
+| **Rollback** | `/api/rollback` | Emergency revert tool. "3KAI, rollback that shit." |
 
 ---
 
-## 2️⃣ Core 3KAI Endpoints
+## 🛠️ Setup Instructions
 
-3KAI is powered by 6 mission-critical endpoints:
+### 1. Environments
 
-| Endpoint | Method | Operation | Purpose |
-|----------|--------|-----------|---------|
-| `/api/gpt-bridge` | POST | `send_instruction` | Primary control for code/site updates |
-| `/api/previews` | GET | `get_preview` | Fetches live Vercel preview links |
-| `/api/assets` | POST | `fetch_assets` | Discovers Cloudinary/Pexels media |
-| `/api/status` | GET | `get_status` | Returns production build/deploy status |
-| `/api/monetization` | POST | `analyze_monetization` | Returns revenue strategy analysis |
-| `/api/rollback` | POST | `rollback` | Executes emergency Git revert |
+Add these to your production (Vercel) env:
 
----
+- `GPT_BRIDGE_TOKEN`: The bearer token that 3KAI uses to talk to your site.
+- `CLOUDINARY_API_KEY` / `SECRET`: For asset discovery.
+- `VERCEL_TOKEN`: For deployment visibility.
 
-## 3️⃣ Custom GPT Setup
+### 2. Custom GPT Configuration (3KAI)
 
-### 1. Identity & Config
+- **Model:** GPT-4-Turbo
+- **Config Package:** Use `3KAI-gpt-config.json` (in repo root) to import all actions and instructions.
+- **Personality:** Blunt, profane, and revenue-obsessed. 3KAI does not ask for permission; he ships.
 
-- **Name:** 3KAI
-- **Config File:** `3KAI-gpt-config.json` (in root)
-- **Instructions:** See `3KAI-gpt-config.json` for the full system prompt.
+### 3. Voice Control
 
-### 2. Actions Setup
+Open the ChatGPT app, select 3KAI, and speak your commands.
 
-- **OpenAPI Schema:** Copy from `docs/openapi-schema.json`.
-- **Authentication:**
-  - Type: **API Key**
-  - Auth Type: **Bearer**
-  - Key: `540e9ae3671910efee8e89d378c7a0de35a3207d8a043449e41c5a41ec0`
+- *"3KAI, shorten the hero section and find a better video."*
+- *"3KAI, what's our monetization strategy for the blog?"*
 
 ---
 
-## 4️⃣ Environment Dependencies
+## ⚠️ Safety & Governance
 
-Ensure these are set in your Vercel/Production environment:
-
-| Category | Variable | Purpose |
-|----------|----------|---------|
-| **Auth** | `GPT_BRIDGE_TOKEN` | Secures the 3KAI bridge |
-| **Media** | `CLOUDINARY_API_KEY` | Browsing your media library |
-| **Cloud** | `VERCEL_TOKEN` | Deployment monitoring |
-| **Git** | `GITHUB_PAT` | Autonomous commits |
-
----
-
-## 5️⃣ Real-Time Voice Commands
-
-Try these once 3KAI is live:
-
-- *"3KAI, darken the site header and deploy a preview."*
-- *"3KAI, show me my Cloudinary assets for 'abstract'."*
-- *"3KAI, analyze our monetization and suggest an experiment."*
-- *"3KAI, the deployment is broken—rollback now!"*
+- **Zero Guardrails:** 3KAI has full write access.
+- **Commit History:** Every 3KAI action is tagged with `gpt: <instruction>` in the Git log.
+- **Emergency Revert:** `POST /api/rollback` triggers an instant `git revert HEAD`.
 
 ---
 
 **Last Updated:** 2026-01-04
 **Maintainer:** 3000 Studios Engineering
-**Version:** 1.2.0
+**Version:** 2.0.0 (Autonomous CTO Edition)
