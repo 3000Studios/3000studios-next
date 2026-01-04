@@ -125,6 +125,93 @@ export default function InfoPage() {
       />
 
       <main className="relative z-10 pt-24 pb-16">
+        {/* ========== 3KAI SYSTEM INTEGRITY BOARD ========== */}
+        <section className="container mx-auto px-4 py-8">
+          <div className="max-w-6xl mx-auto backdrop-blur-2xl bg-black/40 border border-[#D4AF37]/50 rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.15)] relative group">
+            <div className="absolute inset-0 bg-gradient-radial from-[#D4AF37]/5 to-transparent pointer-events-none" />
+
+            <div className="p-8 md:p-12 relative z-10">
+              <div className="flex flex-col md:flex-row justify-between items-center gap-8 border-b border-[#D4AF37]/20 pb-8 mb-8">
+                <div className="text-center md:text-left">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 mb-4">
+                    <div className="w-2 h-2 bg-[#D4AF37] rounded-full animate-ping" />
+                    <span className="text-[10px] font-black text-[#D4AF37] tracking-[0.2em] uppercase">
+                      SYSTEM_LIVE
+                    </span>
+                  </div>
+                  <h1 className="text-4xl md:text-6xl font-black italic tracking-tighter uppercase mb-2">
+                    3KAI <span className="text-[#D4AF37]">Intelligence</span>
+                  </h1>
+                  <p className="text-gray-500 font-mono text-sm tracking-widest uppercase">
+                    Autonomous Deployment & Business Optimization Engine
+                  </p>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="p-6 glass border border-white/5 rounded-2xl text-center min-w-[120px]">
+                    <div className="text-3xl font-black text-cyan-400 mb-1">99.9%</div>
+                    <div className="text-[10px] text-white/30 font-bold uppercase tracking-wider">
+                      Stability
+                    </div>
+                  </div>
+                  <div className="p-6 glass border border-white/5 rounded-2xl text-center min-w-[120px]">
+                    <div className="text-3xl font-black text-[#D4AF37] mb-1">Active</div>
+                    <div className="text-[10px] text-white/30 font-bold uppercase tracking-wider">
+                      Status
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                {[
+                  { label: 'Uptime', value: '742:12:05', sub: 'ESTABLISHED' },
+                  { label: 'Latency', value: '14ms', sub: 'GLOBAL_NEXUS' },
+                  { label: 'Sec_Level', value: 'OMEGA', sub: 'ENCRYPTED' },
+                  { label: 'Revenue', value: 'STREAMING', sub: 'WEBHOOKS_ACTIVE' },
+                ].map((stat, i) => (
+                  <div
+                    key={i}
+                    className="space-y-2 p-4 rounded-xl border border-white/5 hover:border-[#D4AF37]/30 transition-colors bg-white/5"
+                  >
+                    <div className="text-[10px] font-black text-white/40 tracking-widest uppercase">
+                      {stat.label}
+                    </div>
+                    <div className="text-xl font-bold text-white tracking-tight">{stat.value}</div>
+                    <div className="text-[9px] font-mono text-[#D4AF37]/60 tracking-tighter">
+                      {stat.sub}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Live Terminal Log Mockup */}
+              <div className="mt-8 p-4 bg-black/60 rounded-xl border border-[#D4AF37]/20 font-mono text-[11px] text-gray-400 h-32 overflow-hidden flex flex-col justify-end gap-1">
+                <div className="flex gap-2">
+                  <span className="text-[#D4AF37]/50">[SYSTEM]</span> Initiating neural handshake...
+                  OK
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-[#D4AF37]/50">[AUTON]</span> Changes detected in repository
+                  branch: main
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-[#D4AF37]/50">[BUILD]</span> Compiling aesthetic upgrades
+                  for InfoPage...
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-[#D4AF37]/50">[DEPLOY]</span> Vercel integration responding
+                  @ 200ms
+                </div>
+                <div className="flex gap-2 animate-pulse">
+                  <span className="text-green-500">[STATUS]</span> 3KAI Autonomous CTO is watching
+                  your back.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ========== ABOUT SECTION ========== */}
         <section id="about" className="container mx-auto px-4 py-16">
           <div className="text-center mb-12">
