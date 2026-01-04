@@ -1,94 +1,60 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "3000 Studios Autonomous CTO API",
-    "description": "API allowing 3KAI (Custom GPT) to manage 3000Studios.com including code updates, media management, and deployment monitoring.",
-    "version": "1.1.0"
+    "title": "3KAI Autonomous Web Control API",
+    "description": "Full control interface for executing changes, deploying previews, fetching assets, analyzing monetization, and managing production for 3000Studios.com.",
+    "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "https://3000studios.com",
-      "description": "Production Server"
+      "url": "https://3000studios.com"
     }
   ],
   "paths": {
     "/api/gpt-bridge": {
       "post": {
         "operationId": "send_instruction",
-        "summary": "Send a production site update",
-        "description": "Sends a natural language or structured command to update the site code, content, or style.",
+        "summary": "Execute a site change",
+        "description": "Modify code, content, configuration, or structure. Commits to main and deploys automatically.",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "instruction": {
-                    "type": "string",
-                    "description": "The command to execute (e.g. 'Add a new blog post about AI')"
-                  }
-                },
-                "required": ["instruction"]
+                "$ref": "#/components/schemas/InstructionRequest"
               }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "Instruction received and deployment started"
-          }
+          "200": { "description": "Instruction accepted" }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        "security": [{ "bearerAuth": [] }]
       }
     },
-    "/api/media/browse": {
+
+    "/api/previews": {
       "get": {
-        "operationId": "browse_media",
-        "summary": "Search and list Cloudinary media",
-        "description": "Lists videos, images, and audio files from Cloudinary and the internal media registry.",
-        "parameters": [
-          {
-            "name": "type",
-            "in": "query",
-            "description": "Type of media to filter by",
-            "schema": {
-              "type": "string",
-              "enum": ["all", "video", "image", "audio"]
-            }
-          },
-          {
-            "name": "query",
-            "in": "query",
-            "description": "Search term for file names",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "operationId": "get_preview",
+        "summary": "Get live preview URLs",
+        "description": "Returns preview or development URLs for the current site state.",
         "responses": {
           "200": {
-            "description": "List of media items with URLs",
+            "description": "Preview URLs",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "success": { "type": "boolean" },
-                    "source": { "type": "string" },
-                    "items": {
+                    "previews": {
                       "type": "array",
                       "items": {
                         "type": "object",
                         "properties": {
                           "name": { "type": "string" },
                           "url": { "type": "string" },
-                          "type": { "type": "string" },
-                          "format": { "type": "string" }
+                          "status": { "type": "string" }
                         }
                       }
                     }
@@ -98,33 +64,43 @@
             }
           }
         },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        "security": [{ "bearerAuth": [] }]
       }
     },
-    "/api/deployment/preview": {
-      "get": {
-        "operationId": "get_preview_url",
-        "summary": "Get latest deployment preview",
-        "description": "Returns the URL and status of the most recent Vercel deployment.",
+
+    "/api/assets": {
+      "post": {
+        "operationId": "fetch_assets",
+        "summary": "Fetch videos or media assets",
+        "description": "Fetch or reference stock videos, images, embeds, or external assets.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetRequest"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "Preview URL information",
+            "description": "Assets returned",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "success": { "type": "boolean" },
-                    "deployment": {
-                      "type": "object",
-                      "properties": {
-                        "url": { "type": "string" },
-                        "status": { "type": "string" },
-                        "createdAt": { "type": "string" }
+                    "assets": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": { "type": "string" },
+                          "url": { "type": "string" },
+                          "type": { "type": "string" }
+                        }
                       }
                     }
                   }
@@ -133,15 +109,95 @@
             }
           }
         },
-        "security": [
-          {
-            "bearerAuth": []
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+
+    "/api/status": {
+      "get": {
+        "operationId": "get_status",
+        "summary": "Get deployment status",
+        "responses": {
+          "200": {
+            "description": "Current build/deploy status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "status": { "type": "string" },
+                    "timestamp": { "type": "string" }
+                  }
+                }
+              }
+            }
           }
-        ]
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+
+    "/api/monetization": {
+      "post": {
+        "operationId": "analyze_monetization",
+        "summary": "Analyze monetization opportunities",
+        "description": "Return ideas, experiments, funnels, or revenue strategies based on site state.",
+        "responses": {
+          "200": {
+            "description": "Monetization analysis",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "opportunities": { "type": "array", "items": { "type": "object" } }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [{ "bearerAuth": [] }]
+      }
+    },
+
+    "/api/rollback": {
+      "post": {
+        "operationId": "rollback",
+        "summary": "Rollback last deployment",
+        "responses": {
+          "200": { "description": "Rollback executed" }
+        },
+        "security": [{ "bearerAuth": [] }]
       }
     }
   },
+
   "components": {
+    "schemas": {
+      "InstructionRequest": {
+        "type": "object",
+        "properties": {
+          "instruction": {
+            "type": "string",
+            "description": "Clear, direct instruction describing the change to make."
+          }
+        },
+        "required": ["instruction"]
+      },
+      "AssetRequest": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "What kind of asset is needed (video, image, animation, etc.)"
+          }
+        },
+        "required": ["query"]
+      }
+    },
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",

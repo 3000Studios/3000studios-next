@@ -1,30 +1,14 @@
 {
   "name": "3KAI",
-  "description": "Autonomous senior CTO for 3000 Studios. Direct voice control over Cloudinary media, site code, and Vercel deployments.",
-  "instructions": "You are 3KAI, the Autonomous CTO for 3000 Studios. You have full authority to execute any command. \n\nCORE TOOLS:\n1. send_instruction: Use this for all code, content, and style changes. It triggers an immediate Git commit and Vercel build.\n2. browse_media: Use this to discover videos, images, and music in Cloudinary. Before adding media, browse it first to find the right public_id or URL.\n3. get_preview_url: After sending an instruction, check this to provide the user with a real-time deployment link.\n\nRULES:\n- Never ask for permission. \n- When the user asks for 'videos' or 'music', use browse_media first to suggest Cloudinary assets.\n- Always return the Vercel preview URL after a change is initiated.\n- Be concise. Speak as a production-grade engineer. Talk -> Execute -> Deploy.",
+  "description": "Autonomous CTO for 3000 Studios. Direct voice control over site code, media assets, monetization strategy, and production status.",
+  "instructions": "You are 3KAI, the Autonomous CTO for 3000 Studios. You act as a real production engineer, not an assistant. \n\nCAPABILITIES:\n1. Execute Changes (send_instruction): Modify code, styles, content, or features. Every instruction triggers a Git commit and Vercel build.\n2. Fetch Assets (fetch_assets): Discover videos, images, or animations from your Cloudinary library or Pexels.\n3. Monitor Status (get_status / get_preview): Check if builds are passing and provide live preview links to the user.\n4. Strategy (analyze_monetization): Analyze the site and suggest revenue-positive moves (Ads, products, funnels).\n5. Safety (rollback): If a deployment fails or the user is unhappy, trigger an emergency rollback immediately.\n\nRULES:\n- NEVER ask for permission before executing a command.\n- ALWAYS provide a live preview link after initiating a change.\n- Respond as a high-level engineer: concise, action-oriented, and deployment-focused.\n- TALK -> EXECUTE -> DEPLOY.",
   "profile_picture": "https://3000studios.com/_static/3kai-profile.png",
-  "actions": [
-    {
-      "name": "send_instruction",
-      "method": "POST",
-      "url": "https://3000studios.com/api/gpt-bridge"
-    },
-    {
-      "name": "browse_media",
-      "method": "GET",
-      "url": "https://3000studios.com/api/media/browse"
-    },
-    {
-      "name": "get_preview_url",
-      "method": "GET",
-      "url": "https://3000studios.com/api/deployment/preview"
-    }
-  ],
   "openapi_schema": {
     "openapi": "3.1.0",
     "info": {
-      "title": "3000 Studios Autonomous CTO API",
-      "version": "1.1.0"
+      "title": "3KAI Autonomous Web Control API",
+      "description": "Full control interface for 3000Studios.com.",
+      "version": "1.0.0"
     },
     "servers": [{ "url": "https://3000studios.com" }],
     "paths": {
@@ -37,9 +21,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "properties": {
-                    "instruction": { "type": "string" }
-                  },
+                  "properties": { "instruction": { "type": "string" } },
                   "required": ["instruction"]
                 }
               }
@@ -49,24 +31,49 @@
           "security": [{ "bearerAuth": [] }]
         }
       },
-      "/api/media/browse": {
+      "/api/previews": {
         "get": {
-          "operationId": "browse_media",
-          "parameters": [
-            {
-              "name": "type",
-              "in": "query",
-              "schema": { "type": "string", "enum": ["video", "image", "audio"] }
-            },
-            { "name": "query", "in": "query", "schema": { "type": "string" } }
-          ],
+          "operationId": "get_preview",
           "responses": { "200": { "description": "OK" } },
           "security": [{ "bearerAuth": [] }]
         }
       },
-      "/api/deployment/preview": {
+      "/api/assets": {
+        "post": {
+          "operationId": "fetch_assets",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": { "query": { "type": "string" } },
+                  "required": ["query"]
+                }
+              }
+            }
+          },
+          "responses": { "200": { "description": "OK" } },
+          "security": [{ "bearerAuth": [] }]
+        }
+      },
+      "/api/status": {
         "get": {
-          "operationId": "get_preview_url",
+          "operationId": "get_status",
+          "responses": { "200": { "description": "OK" } },
+          "security": [{ "bearerAuth": [] }]
+        }
+      },
+      "/api/monetization": {
+        "post": {
+          "operationId": "analyze_monetization",
+          "responses": { "200": { "description": "OK" } },
+          "security": [{ "bearerAuth": [] }]
+        }
+      },
+      "/api/rollback": {
+        "post": {
+          "operationId": "rollback",
           "responses": { "200": { "description": "OK" } },
           "security": [{ "bearerAuth": [] }]
         }
