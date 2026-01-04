@@ -34,6 +34,7 @@ const config: Config = {
         grain: 'grain 8s steps(10) infinite',
         float: 'float 6s ease-in-out infinite',
         marquee: 'marquee 25s linear infinite',
+        'neon-flash': 'neon-flash 1s ease-in-out infinite',
       },
       keyframes: {
         grain: {
@@ -55,6 +56,10 @@ const config: Config = {
         marquee: {
           '0%': { transform: 'translateX(0%)' },
           '100%': { transform: 'translateX(-100%)' },
+        },
+        'neon-flash': {
+          '0%, 100%': { color: '#39FF14', textShadow: '0 0 20px #39FF14, 0 0 40px #39FF14' },
+          '50%': { color: '#FFFF00', textShadow: '0 0 20px #FFFF00, 0 0 40px #FFFF00' },
         },
       },
     },

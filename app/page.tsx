@@ -130,13 +130,13 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="text-4xl md:text-7xl font-black leading-tight tracking-tighter uppercase italic"
+                className="text-5xl md:text-[5.4rem] font-black leading-tight tracking-tighter uppercase italic"
               >
                 <span className="bg-linear-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent italic">
                   The Future of
                 </span>
                 <br />
-                <span className="bg-linear-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] bg-clip-text text-transparent animate-pulse drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]">
+                <span className="animate-neon-flash drop-shadow-[0_0_25px_rgba(57,255,20,0.8)]">
                   Digital Excellence
                 </span>
               </motion.h1>
