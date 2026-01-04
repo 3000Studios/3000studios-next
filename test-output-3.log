@@ -1,0 +1,41 @@
+Starting Voice Mutation Test...
+Queueing CHANGE_STYLE mutation...
+[VOICE MUTATION QUEUED] voice-1767546615040-atvyod4lb - CHANGE_STYLE {"cssVariable":"--test-voice-integration","value":"#ff0000"}
+Processing pending mutations...
+Read queue, found 5 items. Pending: 5
+Processing mutation voice-1767546246400-r3bnrsabi (CHANGE_STYLE)...
+Applying mutation: CHANGE_STYLE
+Calling handleChangeStyle for --test-voice-integration -> #ff0000
+Mutation voice-1767546246400-r3bnrsabi applied successfully.
+Processing mutation voice-1767546298793-li0u6juqj (CHANGE_STYLE)...
+Applying mutation: CHANGE_STYLE
+Calling handleChangeStyle for --test-voice-integration -> #ff0000
+Mutation voice-1767546298793-li0u6juqj applied successfully.
+Processing mutation voice-1767546396631-s1uas8cl7 (CHANGE_STYLE)...
+Applying mutation: CHANGE_STYLE
+Calling handleChangeStyle for --test-voice-integration -> #ff0000
+Mutation voice-1767546396631-s1uas8cl7 applied successfully.
+Processing mutation voice-1767546525883-cs8n3f899 (CHANGE_STYLE)...
+Applying mutation: CHANGE_STYLE
+Calling handleChangeStyle for --test-voice-integration -> #ff0000
+Mutation voice-1767546525883-cs8n3f899 applied successfully.
+Processing mutation voice-1767546615040-atvyod4lb (CHANGE_STYLE)...
+Applying mutation: CHANGE_STYLE
+Calling handleChangeStyle for --test-voice-integration -> #ff0000
+Mutation voice-1767546615040-atvyod4lb applied successfully.
+Writing updated queue to disk...
+Queue written.
+Mutation returned: {
+  "type": "CHANGE_STYLE",
+  "payload": {
+    "cssVariable": "--test-voice-integration",
+    "value": "#ff0000"
+  },
+  "id": "voice-1767546615040-atvyod4lb",
+  "timestamp": "2026-01-04T17:10:15.040Z",
+  "status": "pending"
+}
+SUCCESS: app/globals.css was updated correctly!
+Found: --test-voice-integration: #ff0000;
+Cleaning up...
+Cleanup complete.

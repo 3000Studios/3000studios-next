@@ -1,0 +1,66 @@
+Starting Voice Mutation Test...
+Queueing CHANGE_STYLE mutation...
+[VOICE MUTATION QUEUED] voice-1767546525883-cs8n3f899 - CHANGE_STYLE {"cssVariable":"--test-voice-integration","value":"#ff0000"}
+Mutation returned: {
+  "type": "CHANGE_STYLE",
+  "payload": {
+    "cssVariable": "--test-voice-integration",
+    "value": "#ff0000"
+  },
+  "id": "voice-1767546525883-cs8n3f899",
+  "timestamp": "2026-01-04T17:08:45.883Z",
+  "status": "pending"
+}
+FAILURE: app/globals.css was NOT updated.
+Queue File Content: [
+  {
+    "type": "CHANGE_STYLE",
+    "payload": {
+      "cssVariable": "--test-voice-integration",
+      "value": "#ff0000"
+    },
+    "id": "voice-1767546246400-r3bnrsabi",
+    "timestamp": "2026-01-04T17:04:06.400Z",
+    "status": "pending"
+  },
+  {
+    "type": "CHANGE_STYLE",
+    "payload": {
+      "cssVariable": "--test-voice-integration",
+      "value": "#ff0000"
+    },
+    "id": "voice-1767546298793-li0u6juqj",
+    "timestamp": "2026-01-04T17:04:58.793Z",
+    "status": "pending"
+  },
+  {
+    "type": "CHANGE_STYLE",
+    "payload": {
+      "cssVariable": "--test-voice-integration",
+      "value": "#ff0000"
+    },
+    "id": "voice-1767546396631-s1uas8cl7",
+    "timestamp": "2026-01-04T17:06:36.631Z",
+    "status": "pending"
+  },
+  {
+    "type": "CHANGE_STYLE",
+    "payload": {
+      "cssVariable": "--test-voice-integration",
+      "value": "#ff0000"
+    },
+    "id": "voice-1767546525883-cs8n3f899",
+    "timestamp": "2026-01-04T17:08:45.883Z",
+    "status": "pending"
+  }
+]
+Head of file (500 chars): /**
+ * 3000 Studios - Global Styles
+ * Professional theme with gold/platinum/sapphire luxury color palette
+ * Includes animations, transitions, and responsive design utilities
+ */
+
+/* Google Fonts MUST be imported BEFORE Tailwind */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css?fami

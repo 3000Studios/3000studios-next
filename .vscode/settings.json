@@ -86,7 +86,7 @@
     "Vercel",
     "Cloudinary"
   ],
-  "todo-tree.tree.scanMode": "current file",
+  "todo-tree.tree.scanMode": "workspace",
   // =========================================================
   // ERROR DETECTION & AUTO-FIX EXTENSIONS
   // =========================================================
@@ -153,5 +153,14 @@
   "tailwindCSS.lint.invalidVariant": "error",
   "tailwindCSS.lint.invalidConfigPath": "error",
   "tailwindCSS.lint.invalidTailwindDirective": "error",
-  "tailwindCSS.lint.recommendedVariantOrder": "warning"
+  "tailwindCSS.lint.recommendedVariantOrder": "warning",
+  "python.testing.unittestArgs": [
+    "-v",
+    "-s",
+    "./packages",
+    "-p",
+    "*test.py"
+  ],
+  "python.testing.pytestEnabled": false,
+  "python.testing.unittestEnabled": true
 }
