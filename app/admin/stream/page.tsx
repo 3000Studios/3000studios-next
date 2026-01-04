@@ -1,6 +1,5 @@
 'use client';
 
-import { brand } from '@/design/brand';
 import MuxPlayer from '@mux/mux-player-react';
 import { motion } from 'framer-motion';
 import { MessageSquare, Mic, Radio, Video } from 'lucide-react';
@@ -40,20 +39,15 @@ export default function StreamStudioPage() {
   };
 
   return (
-    <div className="p-6 h-full flex flex-col gap-6" style={{ overflowY: 'auto' }}>
+    <div className="p-6 h-full flex flex-col gap-6 overflow-y-auto">
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1
-            className="text-2xl font-bold flex items-center gap-2"
-            style={{ color: brand.colors.text.primary }}
-          >
+          <h1 className="text-2xl font-bold flex items-center gap-2 text-white">
             <Radio className={isLive ? 'text-red-500 animate-pulse' : ''} />
             Transmission Control
           </h1>
-          <p style={{ color: brand.colors.text.secondary }}>
-            Manage live broadcasts and real-time feeds
-          </p>
+          <p className="text-slate-400">Manage live broadcasts and real-time feeds</p>
         </div>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/20 border border-white/5">
@@ -81,10 +75,7 @@ export default function StreamStudioPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-1 min-h-0">
         {/* Main Preview Area */}
         <div className="lg:col-span-2 flex flex-col gap-6">
-          <div
-            className="relative aspect-video rounded-xl overflow-hidden border bg-black"
-            style={{ borderColor: brand.colors.border.subtle }}
-          >
+          <div className="relative aspect-video rounded-xl overflow-hidden border bg-black border-white/10">
             {streamData?.playbackId ? (
               <MuxPlayer
                 streamType="live"
@@ -130,13 +121,7 @@ export default function StreamStudioPage() {
         {/* Sidebar Controls */}
         <div className="flex flex-col gap-6">
           {/* Audio Mixer */}
-          <div
-            className="p-4 rounded-xl border flex-1"
-            style={{
-              background: brand.colors.bg.elevated,
-              borderColor: brand.colors.border.subtle,
-            }}
-          >
+          <div className="p-4 rounded-xl border flex-1 bg-slate-900/50 border-white/5">
             <h3 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
               <Mic size={16} /> Audio Mixer
             </h3>
@@ -166,13 +151,7 @@ export default function StreamStudioPage() {
           </div>
 
           {/* Chat Preview */}
-          <div
-            className="p-4 rounded-xl border h-64 flex flex-col"
-            style={{
-              background: brand.colors.bg.elevated,
-              borderColor: brand.colors.border.subtle,
-            }}
-          >
+          <div className="p-4 rounded-xl border h-64 flex flex-col bg-slate-900/50 border-white/5">
             <h3 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
               <MessageSquare size={16} /> Live Chat
             </h3>
