@@ -6,8 +6,9 @@
 
 'use client';
 
-import { Component, ReactNode } from 'react';
 import { AlertCircle, RefreshCw } from 'lucide-react';
+import Link from 'next/link';
+import { Component, ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
@@ -32,7 +33,7 @@ export default class ErrorBoundary extends Component<Props, State> {
   componentDidCatch(error: Error, errorInfo: any) {
     // Log error to monitoring service
     console.error('ErrorBoundary caught an error:', error, errorInfo);
-    
+
     // TODO: Send to error tracking service like Sentry
     // Sentry.captureException(error, { extra: errorInfo });
   }
@@ -53,15 +54,14 @@ export default class ErrorBoundary extends Component<Props, State> {
             <div className="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
               <AlertCircle className="text-red-400" size={48} />
             </div>
-            
-            <h1 className="text-3xl font-bold text-white mb-4">
-              Oops! Something went wrong
-            </h1>
-            
+
+            <h1 className="text-3xl font-bold text-white mb-4">Oops! Something went wrong</h1>
+
             <p className="text-gray-400 mb-6">
-              We apologize for the inconvenience. An unexpected error occurred while loading this page.
+              We apologize for the inconvenience. An unexpected error occurred while loading this
+              page.
             </p>
-            
+
             {process.env.NODE_ENV === 'development' && this.state.error && (
               <div className="mb-6 p-4 bg-gray-900 rounded-lg text-left">
                 <p className="text-red-400 font-mono text-sm break-all">
@@ -69,7 +69,7 @@ export default class ErrorBoundary extends Component<Props, State> {
                 </p>
               </div>
             )}
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={this.handleReset}
@@ -78,15 +78,15 @@ export default class ErrorBoundary extends Component<Props, State> {
                 <RefreshCw size={20} />
                 Try Again
               </button>
-              
-              <a
+
+              <Link
                 href="/"
                 className="px-6 py-3 glass border border-gold text-gold font-semibold rounded-lg hover:bg-gold/10 transition-all duration-300 flex items-center justify-center gap-2"
               >
                 Go Home
-              </a>
+              </Link>
             </div>
-            
+
             <p className="mt-6 text-sm text-gray-600">
               If this problem persists, please contact our support team.
             </p>

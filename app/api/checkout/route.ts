@@ -1,4 +1,3 @@
-```typescript
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
@@ -10,7 +9,7 @@ export async function POST(req: Request) {
 
     // For now, return mock session
     const mockSession = {
-      url: `/ success ? session = mock_${ Date.now() }${ priceId ? `&priceId=${encodeURIComponent(priceId)}` : '' } `,
+      url: `/success?session=mock_${Date.now()}${priceId ? `&priceId=${encodeURIComponent(priceId)}` : ''}`,
       id: 'mock_session_id'
     };
 
@@ -19,19 +18,19 @@ export async function POST(req: Request) {
     //   mode: 'payment',
     //   line_items: [{ price: priceId, quantity: 1 }],
     //   success_url: `${ process.env.NEXT_PUBLIC_BASE_URL } /success`,
-//   cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cancel`
-// });
+    //   cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cancel`
+    // });
 
-return NextResponse.json({ url: mockSession.url, id: mockSession.id });
+    return NextResponse.json({ url: mockSession.url, id: mockSession.id });
   } catch (error: unknown) {
-  const message = error instanceof Error ? error.message : 'Unknown error';
-  return NextResponse.json(
-    {
-      ok: false,
-      error: message,
-    },
-    { status: 500 }
-  );
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    return NextResponse.json(
+      {
+        ok: false,
+        error: message,
+      },
+      { status: 500 }
+    );
+  }
 }
-}
-```
+

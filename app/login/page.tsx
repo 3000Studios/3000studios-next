@@ -20,7 +20,7 @@ export default function LoginPage() {
       <div className="flex flex-col items-center gap-6">
         <div className="w-16 h-16 border-2 border-[#D4AF37] border-t-transparent rounded-full animate-spin shadow-[0_0_20px_rgba(212,175,55,0.4)]" />
         <div className="text-[#D4AF37] animate-pulse tracking-[0.3em] text-xs font-black uppercase">
-          Initialising_3KAI_Handshake...
+          Initializing_3KAI_Handshake...
         </div>
         <Link
           href="/"

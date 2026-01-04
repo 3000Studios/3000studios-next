@@ -50,8 +50,7 @@ export default function AdUnit({
         {label}
       </div>
       <ins
-        className="adsbygoogle"
-        style={{ display: 'block' }}
+        className="adsbygoogle block"
         data-ad-client={process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID}
         data-ad-slot={slotId}
         data-ad-format={format}

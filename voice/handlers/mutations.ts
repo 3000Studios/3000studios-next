@@ -5,6 +5,10 @@
 
 import { queueMutation } from '@/voice/mutation-queue';
 import {
+  executeAddMedia,
+  executeAddSection,
+  executeChangeStyle,
+  executePublishBlog,
   executeUpdateText
 } from './executors';
 
