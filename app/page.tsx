@@ -98,10 +98,7 @@ export default function HomePage() {
         {/* Animated gradient overlay for depth */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <div className="absolute top-[-20%] right-[-10%] w-[60%] h-[60%] bg-gradient-radial from-cyan-500/10 to-transparent blur-3xl animate-pulse" />
-          <div
-            className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-gradient-radial from-yellow-500/10 to-transparent blur-3xl animate-pulse"
-            style={{ animationDelay: '1s' }}
-          />
+          <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-gradient-radial from-yellow-500/10 to-transparent blur-3xl animate-pulse [animation-delay:1s]" />
         </div>
 
         {/* Home Monetization Badge */}
