@@ -1,57 +1,90 @@
-# ⚙️ 3000 Studios — 3KAI Autonomous CTO Integration
+# ⚙️ 3000 Studios — Antigravity Build & 3KAI Integration
 
 ## Purpose
 
-Enable **3KAI**, your blunt and aggressive autonomous CTO, to control the production environment of 3000Studios.com. Talk into your phone or desktop, and 3KAI executes code, fetches media, and maximizes revenue.
+Enable **3KAI**, your autonomous CTO, to take spoken or text instructions and directly update your production website, manage Cloudinary media, analyze monetization, and monitor Vercel deployments.
 
 ---
 
-## 🚀 3KAI "Boss Mode" Architecture
+## 1️⃣ Overview
 
-| Feature | Endpoint | Description |
-|----------|----------|-------------|
-| **Execution** | `/api/gpt-bridge` | Direct code/style updates. 3KAI sends instructions, Antigravity executes. |
-| **Previews** | `/api/previews` | Returns live Vercel/Dev URLs so 3KAI can show you what he's done. |
-| **Assets** | `/api/assets` | Browses Cloudinary/Pexels for fire videos and images. |
-| **Status** | `/api/status` | Real-time monitoring of build success or deployment failures. |
-| **Monetization** | `/api/monetization` | Returns revenue logic: Ads, funnels, and product strategy. |
-| **Rollback** | `/api/rollback` | Emergency revert tool. "3KAI, rollback that shit." |
+### The 3KAI Pipeline
 
----
-
-## 🛠️ Setup Instructions
-
-### 1. Environments
-
-Add these to your production (Vercel) env:
-
-- `GPT_BRIDGE_TOKEN`: The bearer token that 3KAI uses to talk to your site.
-- `CLOUDINARY_API_KEY` / `SECRET`: For asset discovery.
-- `VERCEL_TOKEN`: For deployment visibility.
-
-### 2. Custom GPT Configuration (3KAI)
-
-- **Model:** GPT-4-Turbo
-- **Config Package:** Use `3KAI-gpt-config.json` (in repo root) to import all actions and instructions.
-- **Personality:** Blunt, profane, and revenue-obsessed. 3KAI does not ask for permission; he ships.
-
-### 3. Voice Control
-
-Open the ChatGPT app, select 3KAI, and speak your commands.
-
-- *"3KAI, shorten the hero section and find a better video."*
-- *"3KAI, what's our monetization strategy for the blog?"*
+```
+User (Voice / Chat)
+      ↓
+   ChatGPT (3KAI)
+      ↓
+GPT Actions (HTTPS)
+      ↓
+3000studios.com/api/... (6 Core Endpoints)
+      ↓
+   Antigravity Workspace (Execution)
+      ↓
+   GitHub (Commit/Push)
+      ↓
+   Vercel (Auto-deploy)
+```
 
 ---
 
-## ⚠️ Safety & Governance
+## 2️⃣ Core 3KAI Endpoints
 
-- **Zero Guardrails:** 3KAI has full write access.
-- **Commit History:** Every 3KAI action is tagged with `gpt: <instruction>` in the Git log.
-- **Emergency Revert:** `POST /api/rollback` triggers an instant `git revert HEAD`.
+3KAI is powered by 6 mission-critical endpoints:
+
+| Endpoint | Method | Operation | Purpose |
+|----------|--------|-----------|---------|
+| `/api/gpt-bridge` | POST | `send_instruction` | Primary control for code/site updates |
+| `/api/previews` | GET | `get_preview` | Fetches live Vercel preview links |
+| `/api/assets` | POST | `fetch_assets` | Discovers Cloudinary/Pexels media |
+| `/api/status` | GET | `get_status` | Returns production build/deploy status |
+| `/api/monetization` | POST | `analyze_monetization` | Returns revenue strategy analysis |
+| `/api/rollback` | POST | `rollback` | Executes emergency Git revert |
+
+---
+
+## 3️⃣ Custom GPT Setup
+
+### 1. Identity & Config
+
+- **Name:** 3KAI
+- **Config File:** `3KAI-gpt-config.json` (in root)
+- **Instructions:** See `3KAI-gpt-config.json` for the full system prompt.
+
+### 2. Actions Setup
+
+- **OpenAPI Schema:** Copy from `docs/openapi-schema.json`.
+- **Authentication:**
+  - Type: **API Key**
+  - Auth Type: **Bearer**
+  - Key: `3kai_live_v2_91827364505968d7f6e5a4c3b2a1` (**ROTATED - UPDATE IN VERCEL**)
+
+---
+
+## 4️⃣ Environment Dependencies
+
+Ensure these are set in your Vercel/Production environment:
+
+| Category | Variable | Purpose |
+|----------|----------|---------|
+| **Auth** | `GPT_BRIDGE_TOKEN` | Secures the 3KAI bridge |
+| **Media** | `CLOUDINARY_API_KEY` | Browsing your media library |
+| **Cloud** | `VERCEL_TOKEN` | Deployment monitoring |
+| **Git** | `GITHUB_PAT` | Autonomous commits |
+
+---
+
+## 5️⃣ Real-Time Voice Commands
+
+Try these once 3KAI is live:
+
+- *"3KAI, darken the site header and deploy a preview."*
+- *"3KAI, show me my Cloudinary assets for 'abstract'."*
+- *"3KAI, analyze our monetization and suggest an experiment."*
+- *"3KAI, the deployment is broken—rollback now!"*
 
 ---
 
 **Last Updated:** 2026-01-04
 **Maintainer:** 3000 Studios Engineering
-**Version:** 2.0.0 (Autonomous CTO Edition)
+**Version:** 1.3.0 (Security Rotation)
