@@ -185,15 +185,17 @@ export default function HomePage() {
 
                 {/* Float Badge */}
                 <div className="absolute bottom-8 left-8 right-8 p-6 glass border border-white/20 rounded-2xl backdrop-blur-xl">
-                  <div className="text-2xl font-bold text-white mb-2">Pioneering Autonomous Systems</div>
-                  <p className="text-sm text-gray-300">Experience the next generation of digital control with 3KAI.</p>
+                  <div className="text-2xl font-bold text-white mb-2">
+                    Pioneering Autonomous Systems
+                  </div>
+                  <p className="text-sm text-gray-300">
+                    Experience the next generation of digital control with 3KAI.
+                  </p>
                 </div>
               </div>
             </motion.div>
           </div>
         </div>
-
-        </motion.div>
       </section>
 
       {/* ============================================
@@ -208,7 +210,9 @@ export default function HomePage() {
             className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start"
           >
             <div className="lg:col-span-1 space-y-6">
-              <span className="text-cyan-400 text-sm font-semibold tracking-widest uppercase">Global Updates</span>
+              <span className="text-cyan-400 text-sm font-semibold tracking-widest uppercase">
+                Global Updates
+              </span>
               <h2 className="text-4xl font-bold text-white leading-tight">
                 Stay Ahead of the <span className="gradient-text">Curve</span>
               </h2>
