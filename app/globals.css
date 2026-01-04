@@ -23,6 +23,15 @@
   font-weight: 50 250;
 }
 
+/* Global Centered Alignment & Padding Reset */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: center; /* Force center by default */
+}
+
 /* Hide default cursor - CustomCursor component handles this */
 html {
   cursor: none;
@@ -339,13 +348,42 @@ button:hover,
   box-sizing: border-box;
 }
 
+:root {
+  --section-px: 1.5rem;
+  --section-py: 4rem;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --section-px: 4rem;
+    --section-py: 8rem;
+  }
+}
+
+.container-standard {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--section-px);
+  padding-right: var(--section-px);
+  width: 100%;
+}
+
+.section-standard {
+  padding-top: var(--section-py);
+  padding-bottom: var(--section-py);
+  width: 100%;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   /* Playfair Display - Luxury serif font */
   font-family: 'Playfair Display', serif;
-  overflow-x: hidden;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Global center */
 }
 
 /* Smooth Scrolling */
