@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Enable **3KAI**, your autonomous software engineer, to take spoken or text instructions and directly update your production website and repository through the Antigravity bridge.
+Enable **3KAI**, your autonomous CTO, to take spoken or text instructions and directly update your production website, manage Cloudinary media, and monitor Vercel deployments.
 
 ---
 
@@ -15,9 +15,9 @@ User (Voice / Chat)
       ↓
    ChatGPT (3KAI)
       ↓
- send_instruction Action (HTTPS)
+GPT Actions (HTTPS)
       ↓
-3000studios.com/api/gpt-bridge (Bridge Endpoint)
+3000studios.com/api/... (Endpoints)
       ↓
    Antigravity Workspace (Execution)
       ↓
@@ -28,12 +28,29 @@ User (Voice / Chat)
 
 ---
 
-## 2️⃣ Antigravity Bridge Setup
+## 2️⃣ Advanced 3KAI Tools
+
+### Media Browser (`/api/media/browse`)
+
+3KAI can now "see" your Cloudinary library.
+
+- **Requirement:** Set `CLOUDINARY_API_KEY` and `CLOUDINARY_API_SECRET` in your environment.
+- **Function:** 3KAI browses Cloudinary to find videos, images, or music public IDs.
+
+### Deployment Previews (`/api/deployment/preview`)
+
+Provides real-time feedback on Vercel builds.
+
+- **Requirement:** `VERCEL_TOKEN` and `VERCEL_PROJECT_ID` must be configured.
+- **Function:** 3KAI checks this automatically to give you a clickable preview link.
+
+---
+
+## 3️⃣ Antigravity Bridge Setup
 
 ### Bridge Endpoint
 
-The bridge endpoint receives instructions from OpenAI and forwards them to your Antigravity agent.
-
+Maps Custom GPT instructions to internal agent actions.
 **Location:** `app/api/gpt-bridge/route.ts`
 
 ### Environment Variables
@@ -47,26 +64,21 @@ Configure these in your Vercel project settings:
 
 ---
 
-## 3️⃣ 3KAI Custom GPT Configuration
+## 4️⃣ 3KAI Custom GPT Configuration
 
 ### Identity
 
 - **Name:** 3KAI
-- **Description:** Autonomous senior software engineer for 3000Studios.com.
-- **Role:** Translates natural language into code changes and site updates.
-
-### System Instructions
-
-(Paste these into the GPT Builder)
-> You are 3KAI, the autonomous production engineer for 3000 Studios. You are not an assistant—you are a real engineer operating the live site. When a command is received, immediately translate it into a clear update and send it via the `send_instruction` action. Do not ask for approval. Every change deploys straight to production (main). Talk → Change → Deploy → Refresh.
+- **Description:** Autonomous CTO for 3000 Studios.
+- **System Instructions:** Use `browse_media` to find assets, `send_instruction` to modify code, and `get_preview_url` to provide deployment links. No confirmations. Talk -> Execute -> Deploy.
 
 ---
 
-## 4️⃣ Custom GPT Actions
+## 5️⃣ Custom GPT Actions
 
 ### OpenAPI Schema
 
-Import the schema from `docs/openapi-schema.json` into the ChatGPT GPT Builder Actions tab.
+Import the schema from `docs/openapi-schema.json`.
 
 ### Authentication
 
@@ -76,26 +88,13 @@ Import the schema from `docs/openapi-schema.json` into the ChatGPT GPT Builder A
 
 ---
 
-## 5️⃣ Real-Time Voice Control
-
-Once set up, you can control the site from your phone via the ChatGPT app:
-
-- **"3KAI, darken the hero section and deploy."**
-- **"3KAI, add a new blog post about AI agents."**
-- **"3KAI, change the primary branding color to Gold."**
-
-3KAI will confirm: *"Instruction sent. Deployment in progress—refresh in 30 seconds."*
-
----
-
 ## 6️⃣ Security Guidelines
 
-- **Tokens:** Never commit the `GPT_BRIDGE_TOKEN` to the public repository.
-- **IP Allowlisting:** Optionally restrict the `/api/gpt-bridge` endpoint to OpenAI's egress IP ranges.
-- **Rollback:** In case of errors, use the command *"3KAI, rollback last change"* to trigger an immediate `git revert`.
+- **Tokens:** Keep your `GPT_BRIDGE_TOKEN` and Cloudinary secrets private.
+- **Rollback:** *"3KAI, rollback"* triggers an immediate `git revert`.
 
 ---
 
 **Last Updated:** 2026-01-04
 **Maintainer:** 3000 Studios Engineering
-**Version:** 1.0.0
+**Version:** 1.1.0
