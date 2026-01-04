@@ -50,7 +50,7 @@ export async function routeVoiceCommand(
           message: `No handler for command type: ${(cmd as { type: string }).type}`,
         };
     }
-  } catch (error) {
+  } catch (_error) {
     const message = error instanceof Error ? error.message : String(error);
     return {
       success: false,

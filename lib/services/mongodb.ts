@@ -160,7 +160,7 @@ export async function getAnalytics(
       conversionRate: data.conversionRate as number,
       timestamp: data.timestamp as Date,
     };
-  } catch (error) {
+  } catch (_error) {
     console.error('MongoDB analytics error:', error);
     return {
       totalRevenue: 0,
@@ -189,7 +189,7 @@ export async function getProduct(productId: string): Promise<Product | null> {
     const database = await connectToDatabase();
     const product = await database.collection('products').findOne({ productId });
     return product as unknown as Product | null;
-  } catch (error) {
+  } catch (_error) {
     console.error('MongoDB get error:', error);
     return null;
   }
@@ -210,7 +210,7 @@ export async function listProducts(limit = 10): Promise<Product[]> {
     const database = await connectToDatabase();
     const products = await database.collection('products').find({}).limit(limit).toArray();
     return products as unknown as Product[];
-  } catch (error) {
+  } catch (_error) {
     console.error('MongoDB list error:', error);
     return [];
   }
@@ -238,7 +238,7 @@ export async function getOrders(limit: number = 10): Promise<Order[]> {
       createdAt: doc.createdAt as Date,
       completedAt: doc.completedAt as Date | undefined,
     }));
-  } catch (error) {
+  } catch (_error) {
     console.error('Get orders error:', error);
     throw new Error('Failed to fetch orders');
   }
@@ -248,7 +248,7 @@ export async function saveOrder(order: Order): Promise<void> {
   try {
     const database = await connectToDatabase();
     await database.collection('orders').insertOne(order);
-  } catch (error) {
+  } catch (_error) {
     console.error('Save order error:', error);
     throw new Error('Failed to save order');
   }
@@ -274,7 +274,7 @@ export async function getProducts(): Promise<Product[]> {
       createdAt: doc.createdAt as Date,
       updatedAt: doc.updatedAt as Date,
     }));
-  } catch (error) {
+  } catch (_error) {
     console.error('Get products error:', error);
     throw new Error('Failed to fetch products');
   }
@@ -286,7 +286,7 @@ export async function updateProduct(productId: string, updates: Partial<Product>
     const products = database.collection('products');
 
     await products.updateOne({ productId }, { $set: { ...updates, updatedAt: new Date() } });
-  } catch (error) {
+  } catch (_error) {
     console.error('Update product error:', error);
     throw new Error('Failed to update product');
   }
@@ -339,7 +339,7 @@ export async function getDashboardStats() {
       pageViews: currentStats?.pageViews || 0,
       conversionRate: currentStats?.conversionRate || 0,
     };
-  } catch (error) {
+  } catch (_error) {
     console.error('Get dashboard stats error:', error);
     throw new Error('Failed to fetch dashboard stats');
   }

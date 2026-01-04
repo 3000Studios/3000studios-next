@@ -8,7 +8,7 @@ import { NextResponse } from 'next/server';
 interface VoicePayload {
   action?: 'update' | 'query';
   target?: string;
-  payload?: Record<string, any>;
+  payload?: Record<string, unknown>;
   key?: string;
   value?: unknown;
   transcript?: string;
@@ -156,7 +156,8 @@ export async function POST(req: Request) {
 
     // Handle voice-remote commands
     if (data.target === 'voice-remote' && data.payload?.command) {
-      const result = parseTranscript(data.payload.command);
+      const command = String(data.payload.command);
+      const result = parseTranscript(command);
       return NextResponse.json({ ok: true, ...result, registry: uiRegistry });
     }
 

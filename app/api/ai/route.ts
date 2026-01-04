@@ -1,8 +1,8 @@
-import { generateText } from "ai";
 import { routeAgent } from "@/lib/agent-router";
 import { agents } from "@/lib/agents";
-import { recallMemory, storeMemory } from "@/lib/vector-store";
 import { enforceCostLimit } from "@/lib/cost-guard";
+import { recallMemory, storeMemory } from "@/lib/vector-store";
+import { generateText } from "ai";
 
 export async function POST(req: Request) {
   const { prompt, userId } = await req.json();
@@ -21,10 +21,10 @@ export async function POST(req: Request) {
       intent === "code"
         ? agents.coder
         : intent === "research"
-        ? agents.researcher
-        : intent === "writing"
-        ? agents.writer
-        : agents.system;
+          ? agents.researcher
+          : intent === "writing"
+            ? agents.writer
+            : agents.system;
 
     const result = await generateText({
       model,
@@ -41,8 +41,9 @@ export async function POST(req: Request) {
     await storeMemory(userId, prompt);
 
     return Response.json({ text: result.text });
-  } catch (error: any) {
-    if (error.message === "AI usage limit exceeded") {
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    if (errorMessage === "AI usage limit exceeded") {
       return Response.json({ error: "Usage limit exceeded" }, { status: 429 });
     }
     console.error(error);

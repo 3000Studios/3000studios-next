@@ -36,7 +36,7 @@ export async function GET() {
       environment,
       timestamp: Date.now(),
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
       { error: error.message, status: "Error" },
       { status: 500 },

@@ -130,7 +130,7 @@ export async function executeRevenueCommand(
       success: false,
       message: 'Command execution failed',
     };
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       message: error instanceof Error ? error.message : 'Unknown error',

@@ -93,7 +93,7 @@ export const uploadToCloudinary = async (file: File): Promise<string> => {
 
     const data = await response.json();
     return data.public_id;
-  } catch (error) {
+  } catch (_error) {
     console.error('Cloudinary upload error:', error);
     throw error;
   }
@@ -108,7 +108,7 @@ export const getImageMetadata = async (publicId: string) => {
       `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/fl_getinfo/${publicId}.json`
     );
     return await response.json();
-  } catch (error) {
+  } catch (_error) {
     console.error('Error fetching metadata:', error);
     return null;
   }

@@ -54,7 +54,7 @@ export default function EmotionMirror() {
         setTimeout(() => {
           frameId = requestAnimationFrame(loop);
         }, 1000);
-      } catch (error) {
+      } catch (_error) {
         console.warn('EmotionMirror: Camera access denied or not available:', error);
         setIsEnabled(false);
       }

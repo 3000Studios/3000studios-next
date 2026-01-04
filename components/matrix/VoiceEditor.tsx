@@ -22,7 +22,7 @@ export default function VoiceEditor() {
 
       setDiff(result.diff);
       setPreview(result.preview);
-    } catch (error) {
+    } catch (_error) {
       console.error('Voice edit failed:', error);
     } finally {
       setIsLoading(false);
@@ -38,7 +38,7 @@ export default function VoiceEditor() {
       });
 
       await fetch('/api/shadow/deploy', { method: 'POST' });
-    } catch (error) {
+    } catch (_error) {
       console.error('Apply failed:', error);
     } finally {
       setIsApplying(false);

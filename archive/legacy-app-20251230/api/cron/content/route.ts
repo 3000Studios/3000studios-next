@@ -9,7 +9,7 @@ export async function GET() {
       message: 'Content Protocol Executed',
       timestamp: new Date().toISOString() 
     });
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json({ status: 'error', message: 'Protocol Failed' }, { status: 500 });
   }
 }

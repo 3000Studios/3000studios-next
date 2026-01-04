@@ -57,7 +57,7 @@ export class ContentScheduler {
       if (content.status === 'scheduled' && content.scheduledFor <= now) {
         try {
           await this.generateContent(content);
-        } catch (error) {
+        } catch (_error) {
           content.status = 'failed';
           content.error = error instanceof Error ? error.message : 'Unknown error';
         }
@@ -72,7 +72,7 @@ export class ContentScheduler {
       if (content.status === 'failed' && now - (content.scheduledFor + 3600000) > 0) {
         try {
           await this.generateContent(content);
-        } catch (error) {
+        } catch (_error) {
           console.error('[ContentScheduler] Failed to generate content:', content.id, error);
         }
       }
@@ -122,7 +122,7 @@ export class ContentScheduler {
   private async refreshSitemap(): Promise<void> {
     try {
       await fetch('/api/cron/sitemap', { method: 'POST' });
-    } catch (error) {
+    } catch (_error) {
       console.error('[ContentScheduler] Failed to refresh sitemap:', error);
     }
   }

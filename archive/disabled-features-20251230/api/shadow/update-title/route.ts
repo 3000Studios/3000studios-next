@@ -21,7 +21,7 @@ export async function POST(request: Request) {
       message: `Title update to "${title}" initiated`,
       timestamp: new Date().toISOString(),
     });
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json(
       { success: false, error: "Failed to update title" },
       { status: 500 },

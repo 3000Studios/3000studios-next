@@ -39,7 +39,7 @@ export async function POST(req: Request) {
         ? "Command executed successfully"
         : "Command failed",
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     return NextResponse.json(
       { ok: false, error: err.message },
       { status: 500 },

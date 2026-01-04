@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { brand } from "@/design/brand";
-import { getMatrixStats, StatItem } from "@/lib/services/stats";
-import { motion } from "framer-motion";
+import { brand } from '@/design/brand';
+import { getMatrixStats, StatItem } from '@/lib/services/stats';
+import { motion } from 'framer-motion';
 import {
   BarChart2,
   Calendar,
@@ -11,8 +11,8 @@ import {
   TrendingDown,
   TrendingUp,
   Users,
-} from "lucide-react";
-import { useEffect, useState } from "react";
+} from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const ICON_MAP = {
   DollarSign,
@@ -30,8 +30,8 @@ export default function StatsPage() {
       try {
         const data = await getMatrixStats();
         setStats(data);
-      } catch (error) {
-        console.error("Failed to fetch stats", error);
+      } catch (e) {
+        console.error('Failed to fetch stats', e);
       } finally {
         setLoading(false);
       }
@@ -42,10 +42,7 @@ export default function StatsPage() {
   return (
     <div className="p-8 h-full overflow-y-auto">
       <div className="mb-8">
-        <h1
-          className="text-3xl font-bold mb-2"
-          style={{ color: brand.colors.text.primary }}
-        >
+        <h1 className="text-3xl font-bold mb-2" style={{ color: brand.colors.text.primary }}>
           Data Stream
         </h1>
         <p style={{ color: brand.colors.text.secondary }}>
@@ -85,14 +82,10 @@ export default function StatsPage() {
                     </div>
                     <div
                       className={`flex items-center gap-1 text-sm font-medium ${
-                        stat.trend === "up" ? "text-green-400" : "text-red-400"
+                        stat.trend === 'up' ? 'text-green-400' : 'text-red-400'
                       }`}
                     >
-                      {stat.trend === "up" ? (
-                        <TrendingUp size={16} />
-                      ) : (
-                        <TrendingDown size={16} />
-                      )}
+                      {stat.trend === 'up' ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
                       {stat.change}
                     </div>
                   </div>
@@ -102,10 +95,7 @@ export default function StatsPage() {
                   >
                     {stat.title}
                   </h3>
-                  <p
-                    className="text-2xl font-bold"
-                    style={{ color: brand.colors.text.primary }}
-                  >
+                  <p className="text-2xl font-bold" style={{ color: brand.colors.text.primary }}>
                     {stat.value}
                   </p>
 
@@ -138,10 +128,7 @@ export default function StatsPage() {
           }}
         >
           <div className="flex justify-between items-center mb-6">
-            <h2
-              className="text-lg font-bold"
-              style={{ color: brand.colors.text.primary }}
-            >
+            <h2 className="text-lg font-bold" style={{ color: brand.colors.text.primary }}>
               Revenue Overview
             </h2>
             <select
@@ -156,22 +143,20 @@ export default function StatsPage() {
 
           {/* Visual Mock of a Chart */}
           <div className="h-64 w-full flex items-end gap-2 px-2">
-            {[30, 45, 32, 60, 55, 75, 40, 50, 80, 70, 90, 65, 85, 95].map(
-              (h, i) => (
-                <motion.div
-                  key={i}
-                  className="flex-1 rounded-t-sm hover:opacity-80 transition-opacity relative group"
-                  initial={{ height: 0 }}
-                  animate={{ height: `${h}%` }}
-                  transition={{ duration: 1, delay: 0.5 + i * 0.05 }}
-                  style={{ background: brand.colors.action.primary }}
-                >
-                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 border border-gray-700">
-                    ${h * 100}
-                  </div>
-                </motion.div>
-              )
-            )}
+            {[30, 45, 32, 60, 55, 75, 40, 50, 80, 70, 90, 65, 85, 95].map((h, i) => (
+              <motion.div
+                key={i}
+                className="flex-1 rounded-t-sm hover:opacity-80 transition-opacity relative group"
+                initial={{ height: 0 }}
+                animate={{ height: `${h}%` }}
+                transition={{ duration: 1, delay: 0.5 + i * 0.05 }}
+                style={{ background: brand.colors.action.primary }}
+              >
+                <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 border border-gray-700">
+                  ${h * 100}
+                </div>
+              </motion.div>
+            ))}
           </div>
           <div className="flex justify-between mt-4 text-xs text-gray-500 border-t border-gray-800 pt-2">
             <span>Nov 1</span>
@@ -192,38 +177,35 @@ export default function StatsPage() {
             borderColor: brand.colors.border.subtle,
           }}
         >
-          <h2
-            className="text-lg font-bold mb-6"
-            style={{ color: brand.colors.text.primary }}
-          >
+          <h2 className="text-lg font-bold mb-6" style={{ color: brand.colors.text.primary }}>
             Recent Sales
           </h2>
 
           <div className="space-y-4">
             {[
               {
-                item: "Premium Sound Pack",
-                user: "User #8821",
-                amount: "$29.99",
-                time: "2m ago",
+                item: 'Premium Sound Pack',
+                user: 'User #8821',
+                amount: '$29.99',
+                time: '2m ago',
               },
               {
-                item: "AI Voice Model",
-                user: "User #1293",
-                amount: "$49.99",
-                time: "15m ago",
+                item: 'AI Voice Model',
+                user: 'User #1293',
+                amount: '$49.99',
+                time: '15m ago',
               },
               {
-                item: "Cyberpunk UI Kit",
-                user: "User #4421",
-                amount: "$19.99",
-                time: "1h ago",
+                item: 'Cyberpunk UI Kit',
+                user: 'User #4421',
+                amount: '$19.99',
+                time: '1h ago',
               },
               {
-                item: "Ultimate Bundle",
-                user: "User #9932",
-                amount: "$199.00",
-                time: "3h ago",
+                item: 'Ultimate Bundle',
+                user: 'User #9932',
+                amount: '$199.00',
+                time: '3h ago',
               },
             ].map((sale, i) => (
               <div
@@ -235,16 +217,12 @@ export default function StatsPage() {
                     <CreditCard size={16} />
                   </div>
                   <div>
-                    <div className="text-sm font-medium text-white">
-                      {sale.item}
-                    </div>
+                    <div className="text-sm font-medium text-white">{sale.item}</div>
                     <div className="text-xs text-gray-500">{sale.user}</div>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-sm font-bold text-white">
-                    {sale.amount}
-                  </div>
+                  <div className="text-sm font-bold text-white">{sale.amount}</div>
                   <div className="text-xs text-gray-500">{sale.time}</div>
                 </div>
               </div>

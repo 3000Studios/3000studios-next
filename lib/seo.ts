@@ -191,7 +191,7 @@ export async function pingSearchEngines(urls: string[], apiKey: string): Promise
     });
 
     return true;
-  } catch (error) {
+  } catch (_error) {
     console.error('[SEO] Failed to ping search engines:', error);
     return false;
   }

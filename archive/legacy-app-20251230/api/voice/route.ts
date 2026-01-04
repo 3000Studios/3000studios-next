@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
 
     const response = parseActions(transcript);
     return NextResponse.json(response, { status: 200 });
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }

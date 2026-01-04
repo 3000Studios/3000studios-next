@@ -1,0 +1,289 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "3000 Studios Site Management API",
+    "version": "1.0.0",
+    "description": "API for managing 3000Studios.com content through voice commands from Custom GPT"
+  },
+  "servers": [
+    {
+      "url": "https://3000studios.com/api/gpt-bridge",
+      "description": "Production GPT Bridge"
+    }
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "operationId": "executeVoiceCommand",
+        "summary": "Execute a voice command to update the site",
+        "description": "Accepts voice commands in various formats and executes them on the 3000Studios.com website",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "description": "Update text content on the site",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": ["UPDATE_TEXT"],
+                        "description": "Command type for updating text"
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "The new text content to display"
+                      },
+                      "file": {
+                        "type": "string",
+                        "description": "Target file path (optional)"
+                      },
+                      "search": {
+                        "type": "string",
+                        "description": "Text to search for (optional)"
+                      },
+                      "replace": {
+                        "type": "string",
+                        "description": "Text to replace with (optional)"
+                      }
+                    },
+                    "required": ["type"]
+                  },
+                  {
+                    "type": "object",
+                    "description": "Add a new section to a page",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": ["ADD_SECTION"],
+                        "description": "Command type for adding sections"
+                      },
+                      "title": {
+                        "type": "string",
+                        "description": "Section title/heading"
+                      },
+                      "content": {
+                        "type": "string",
+                        "description": "Section content (supports markdown)"
+                      },
+                      "page": {
+                        "type": "string",
+                        "description": "Target page path (optional, defaults to homepage)"
+                      }
+                    },
+                    "required": ["type"]
+                  },
+                  {
+                    "type": "object",
+                    "description": "Add media (image, video, or audio) to the site",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": ["ADD_MEDIA"],
+                        "description": "Command type for adding media"
+                      },
+                      "url": {
+                        "type": "string",
+                        "description": "Media URL or search query (will auto-search Pexels if not a URL)"
+                      },
+                      "mediaType": {
+                        "type": "string",
+                        "enum": ["video", "image", "audio"],
+                        "description": "Type of media to add"
+                      },
+                      "page": {
+                        "type": "string",
+                        "description": "Target page (optional, defaults to homepage)"
+                      }
+                    },
+                    "required": ["type", "mediaType"]
+                  },
+                  {
+                    "type": "object",
+                    "description": "Change CSS styles or theme settings",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": ["CHANGE_STYLE"],
+                        "description": "Command type for style changes"
+                      },
+                      "property": {
+                        "type": "string",
+                        "description": "CSS property or theme setting (e.g., 'primary-color', 'theme', 'accent')"
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "New value (e.g., '#00ffff', 'dark', 'gold')"
+                      },
+                      "target": {
+                        "type": "string",
+                        "description": "Target element selector (optional)"
+                      }
+                    },
+                    "required": ["type", "property", "value"]
+                  },
+                  {
+                    "type": "object",
+                    "description": "Publish a new blog post",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": ["PUBLISH_BLOG"],
+                        "description": "Command type for publishing blog posts"
+                      },
+                      "title": {
+                        "type": "string",
+                        "description": "Blog post title"
+                      },
+                      "body": {
+                        "type": "string",
+                        "description": "Blog post content (markdown supported)"
+                      },
+                      "slug": {
+                        "type": "string",
+                        "description": "URL slug (optional, auto-generated from title if not provided)"
+                      },
+                      "topic": {
+                        "type": "string",
+                        "description": "Blog topic/category (optional)"
+                      }
+                    },
+                    "required": ["type", "title", "body"]
+                  },
+                  {
+                    "type": "object",
+                    "description": "Natural language command (will be parsed automatically)",
+                    "properties": {
+                      "transcript": {
+                        "type": "string",
+                        "description": "Natural language command (e.g., 'add a sunset video to the homepage')"
+                      }
+                    },
+                    "required": ["transcript"]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Command executed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Whether the command succeeded"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Human-readable result message"
+                    },
+                    "mutationId": {
+                      "type": "string",
+                      "description": "Unique ID for tracking this mutation"
+                    },
+                    "result": {
+                      "type": "object",
+                      "description": "Detailed result data"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "When the command was executed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing authentication token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "getStatus",
+        "summary": "Get API status and information",
+        "description": "Returns the current status of the GPT Bridge API",
+        "responses": {
+          "200": {
+            "description": "API status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Use your GPT_BRIDGE_TOKEN as the bearer token"
+      }
+    }
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ]
+}

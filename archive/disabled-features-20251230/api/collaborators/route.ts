@@ -10,7 +10,7 @@ export async function GET() {
   try {
     const collaborators = collaboratorDB.getAll();
     return NextResponse.json({ collaborators });
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json(
       {
         error:
@@ -57,7 +57,7 @@ export async function POST(request: Request) {
       { collaborator: newCollaborator },
       { status: 201 },
     );
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json(
       {
         error:
@@ -90,7 +90,7 @@ export async function DELETE(request: Request) {
     }
 
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json(
       {
         error:

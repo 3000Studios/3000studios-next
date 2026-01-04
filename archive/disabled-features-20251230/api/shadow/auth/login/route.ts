@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     });
 
     return response;
-  } catch (error) {
+  } catch (_error) {
     console.error("Shadow login error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }

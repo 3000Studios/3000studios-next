@@ -8,10 +8,11 @@ export async function POST(req: Request) {
     execSync(`git commit -m "${message || 'voice update'}"`);
     execSync('git push');
     return NextResponse.json({ ok: true, deployed: true });
-  } catch (error: any) {
-    return NextResponse.json({ 
-      ok: false, 
-      error: error.message 
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Git operation failed';
+    return NextResponse.json({
+      ok: false,
+      error: message
     }, { status: 500 });
   }
 }

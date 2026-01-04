@@ -90,7 +90,7 @@ export class SystemOrchestrator {
         payload: { cycle: this.cycleCount, success: true }
       });
 
-    } catch (error) {
+    } catch (_error) {
       console.error(`❌ Cycle ${this.cycleCount} failed:`, error);
 
       logAudit({

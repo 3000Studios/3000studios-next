@@ -20,7 +20,7 @@ export async function POST(req: Request) {
       updated: file,
       length: content.length,
     });
-  } catch (e: any) {
+  } catch (e: unknown) {
     return NextResponse.json({ ok: false, error: e.message });
   }
 }

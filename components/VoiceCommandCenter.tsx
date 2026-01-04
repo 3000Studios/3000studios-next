@@ -247,7 +247,7 @@ export function VoiceCommandCenter() {
       applyActions(payload.actions);
       setLog((prev) => [`✓ ${payload.summary}`, ...prev].slice(0, 8));
       setStatus('Applied ✓');
-    } catch (error) {
+    } catch (_error) {
       console.error('Voice command failed', error);
       setStatus('Error - try again');
     }

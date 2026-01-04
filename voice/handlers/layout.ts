@@ -28,7 +28,7 @@ export async function handleAddSection(cmd: unknown): Promise<void> {
     // Insert before closing main tag
     content = content.replace(/(<\/main>)/, `${sectionHTML}\n$1`);
     await fs.writeFile(filePath, content, 'utf-8');
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 }
@@ -62,7 +62,7 @@ This is a blog post about ${topic}.
 Published: ${date}`;
 
     await fs.writeFile(filePath, frontmatter, 'utf-8');
-  } catch (error) {
+  } catch (_error) {
     throw error;
   }
 }
@@ -94,7 +94,7 @@ export async function handleUpdateNav(
       success: true,
       files_changed: [targetFile],
     };
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       files_changed: [],

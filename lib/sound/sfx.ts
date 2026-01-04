@@ -52,7 +52,7 @@ export function playSound(type: 'hover' | 'click' | 'success' | 'nav') {
         oscillator.stop(audioContext.currentTime + 0.25);
         break;
     }
-  } catch (error) {
+  } catch (_error) {
     // Silently fail if audio context not supported
     console.debug('Audio not supported:', error);
   }

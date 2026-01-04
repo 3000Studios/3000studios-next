@@ -41,7 +41,7 @@ class AuditLogger {
         },
         body: JSON.stringify(logEntry),
       });
-    } catch (error) {
+    } catch (_error) {
       console.error('[AuditLogger] Failed to persist log:', error);
     }
 
@@ -69,7 +69,7 @@ class AuditLogger {
       const response = await fetch(`/api/audit-logs?${params.toString()}`);
       const data = await response.json();
       return data.logs || [];
-    } catch (error) {
+    } catch (_error) {
       console.error('[AuditLogger] Failed to fetch logs:', error);
       return this.logs; // Fallback to local cache
     }

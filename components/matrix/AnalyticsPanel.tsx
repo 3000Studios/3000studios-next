@@ -25,7 +25,7 @@ export default function AnalyticsPanel() {
         const res = await fetch('/api/matrix/events');
         const data = await res.json();
         setEvents(data.events || []);
-      } catch (error) {
+      } catch (_error) {
         console.error('Failed to fetch events:', error);
       }
     };

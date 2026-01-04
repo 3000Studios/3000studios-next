@@ -93,7 +93,7 @@ export async function POST(req: Request): Promise<Response> {
       success: false,
       error: "Invalid action type",
     });
-  } catch (e: any) {
+  } catch (e: unknown) {
     return NextResponse.json({
       success: false,
       error: e.message,

@@ -5,8 +5,8 @@
  * Protected: Requires admin auth
  */
 
-import { NextRequest, NextResponse } from 'next/server';
 import { getVoiceCommandLogs } from '@/voice/logger';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
   try {
@@ -21,8 +21,8 @@ export async function GET(req: NextRequest) {
       count: logs.length,
       logs,
     });
-  } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unknown error';
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Unknown error';
     return NextResponse.json({ status: 'error', message }, { status: 400 });
   }
 }
@@ -42,8 +42,8 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ status: 'error', message: 'Unknown action' }, { status: 400 });
-  } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unknown error';
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Unknown error';
     return NextResponse.json({ status: 'error', message }, { status: 400 });
   }
 }

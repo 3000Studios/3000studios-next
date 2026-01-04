@@ -46,7 +46,7 @@ export async function sendSMS(message: SMSMessage): Promise<string> {
     );
 
     return response.data.sid;
-  } catch (error) {
+  } catch (_error) {
     console.error('Twilio SMS error:', error);
     throw new Error('Failed to send SMS');
   }
@@ -69,7 +69,7 @@ export async function makeVoiceCall(call: VoiceCall): Promise<string> {
     );
 
     return response.data.sid;
-  } catch (error) {
+  } catch (_error) {
     console.error('Twilio voice call error:', error);
     throw new Error('Failed to make voice call');
   }
@@ -79,7 +79,7 @@ export async function getMessageStatus(messageSid: string): Promise<string> {
   try {
     const response = await twilioApi.get(`/Messages/${messageSid}.json`);
     return response.data.status;
-  } catch (error) {
+  } catch (_error) {
     console.error('Twilio message status error:', error);
     throw new Error('Failed to get message status');
   }

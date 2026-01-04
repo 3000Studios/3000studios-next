@@ -63,7 +63,7 @@ export async function routeCommand(command: VoiceCommand): Promise<CommandResult
     }
 
     return result;
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       files_changed: [],
@@ -89,7 +89,7 @@ async function gitCommitAndPush(files: string[], commandType: string): Promise<v
     await execAsync('git push origin main');
 
     console.log(`✅ Voice command committed and pushed: ${commandType}`);
-  } catch (error) {
+  } catch (_error) {
     console.error('Git operation failed:', error);
     throw error;
   }

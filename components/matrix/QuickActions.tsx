@@ -14,7 +14,7 @@ export default function QuickActions() {
         body: JSON.stringify({ spoken: cmd }),
       });
       alert(`✅ Action executed: ${cmd}`);
-    } catch (error) {
+    } catch (_error) {
       alert("❌ Action failed");
     }
   };

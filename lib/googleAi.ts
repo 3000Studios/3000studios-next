@@ -58,7 +58,7 @@ export async function generateProductStrategy(product: ProductInput): Promise<Ca
     const jsonString = text.replace(/```json/g, "").replace(/```/g, "").trim();
     return JSON.parse(jsonString) as CampaignOutput;
 
-  } catch (error) {
+  } catch (_error) {
     console.error("AI Generation failed:", error);
     return null;
   }

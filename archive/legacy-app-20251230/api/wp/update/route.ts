@@ -17,7 +17,7 @@ export async function POST(req: Request) {
       file,
       result,
     });
-  } catch (e: any) {
+  } catch (e: unknown) {
     return NextResponse.json({ ok: false, error: e.message });
   }
 }

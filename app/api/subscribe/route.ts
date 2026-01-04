@@ -3,10 +3,10 @@ import { NextResponse } from 'next/server';
 export async function POST(req: Request) {
   try {
     const { plan } = await req.json();
-    
+
     // Mock Stripe subscription (replace with real Stripe key)
     // const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-04-10' });
-    
+
     // Price IDs for different plans
     const priceIds: Record<string, string> = {
       monthly: 'price_monthly_placeholder',
@@ -29,10 +29,11 @@ export async function POST(req: Request) {
     };
 
     return NextResponse.json({ url: mockSession.url, id: mockSession.id });
-  } catch (error: any) {
-    return NextResponse.json({ 
-      ok: false, 
-      error: error.message 
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Subscription failed';
+    return NextResponse.json({
+      ok: false,
+      error: message
     }, { status: 500 });
   }
 }

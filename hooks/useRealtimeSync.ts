@@ -53,7 +53,7 @@ export function useRealtimeSync() {
           latestDeployment: data.deployment,
         }));
       }
-    } catch (error) {
+    } catch (_error) {
       console.error('Failed to fetch deployment status:', error);
     }
   }, []);
@@ -149,7 +149,7 @@ export function useRealtimeSync() {
 
       // Refresh status after deployment
       await fetchStatus();
-    } catch (error) {
+    } catch (_error) {
       console.error('Deployment error:', error);
       setDeploymentStatus(prev => ({
         ...prev,
@@ -246,7 +246,7 @@ export function useRealtimeSync() {
       }
 
       await fetchStatus();
-    } catch (error) {
+    } catch (_error) {
       console.error('Batch deployment error:', error);
       setDeploymentStatus(prev => ({
         ...prev,

@@ -32,7 +32,7 @@ export default function LivePage() {
           viewers: data.config?.viewers || 0,
           streamUrl: data.config?.streamUrl || '',
         });
-      } catch (error) {
+      } catch (_error) {
         console.error('Failed to fetch stream status:', error);
       }
     };

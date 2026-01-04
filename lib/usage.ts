@@ -15,7 +15,7 @@ export async function logUsage(data: {
         userId: data.userId,
       },
     });
-  } catch (error) {
+  } catch (_error) {
     console.error("Failed to log AI usage:", error);
   }
 }

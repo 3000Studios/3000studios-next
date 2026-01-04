@@ -71,7 +71,7 @@ button:hover,
       success: true,
       files_changed: [targetFile],
     };
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       files_changed: [],
@@ -108,7 +108,7 @@ export async function handleAddAnimation(
       success: true,
       files_changed: [targetFile],
     };
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       files_changed: [],

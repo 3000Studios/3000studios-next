@@ -18,7 +18,7 @@ export async function POST(req: Request) {
     fs.writeFileSync(absolute, content);
 
     return NextResponse.json({ success: true, path: absolute });
-  } catch (e: any) {
+  } catch (e: unknown) {
     return NextResponse.json({ success: false, error: e.message });
   }
 }

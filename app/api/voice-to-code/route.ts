@@ -100,10 +100,10 @@ export async function POST(request: NextRequest) {
 
     // OpenAI Generation
     const openai = await getOpenAI();
-    const systemPrompt = `You are an expert Next.js developer. 
+    const systemPrompt = `You are an expert Next.js developer.
     Convert requests into file patches.
     - TARGET ONLY files in 'src/'.
-    - RESPOND AS JSON: 
+    - RESPOND AS JSON:
     {
       "intent": "summary",
       "description": "details",
@@ -116,9 +116,8 @@ export async function POST(request: NextRequest) {
         { role: "system", content: systemPrompt },
         {
           role: "user",
-          content: `Request: ${finalTranscript}\nContext: ${
-            currentContext || "Next.js App"
-          }`,
+          content: `Request: ${finalTranscript}\nContext: ${currentContext || "Next.js App"
+            }`,
         },
       ],
       response_format: { type: "json_object" },
@@ -179,8 +178,9 @@ async function applyPatches(patches: CodePatch[]) {
       const newContent = currentContent.replace(patch.oldCode, patch.newCode);
       await fs.writeFile(activePath, newContent, "utf8");
       results.push({ file: cleanPath, status: "success" });
-    } catch (err: any) {
-      results.push({ file: patch.file, status: "error", error: err.message });
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Patch application failed';
+      results.push({ file: patch.file, status: "error", error: message });
     }
   }
 

@@ -55,7 +55,7 @@ export function generateSEO(config: SEOConfig): Metadata {
 }
 
 export function generateSchema(type: 'Organization' | 'WebSite' | 'Article' | 'Product', data: any) {
-  const baseSchemas: Record<string, any> = {
+  const baseSchemas: Record<string, unknown> = {
     Organization: {
       '@context': 'https://schema.org',
       '@type': 'Organization',

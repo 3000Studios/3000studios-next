@@ -17,7 +17,7 @@ export async function POST(req: Request) {
 
     const result = await runShadowCommand(command);
     return NextResponse.json({ ok: true, result });
-  } catch (err: any) {
+  } catch (err: unknown) {
     return NextResponse.json(
       { ok: false, error: err.message },
       { status: 500 },

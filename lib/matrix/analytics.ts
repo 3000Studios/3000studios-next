@@ -30,7 +30,7 @@ export function pushAnalytics(event: AnalyticsEvent) {
   eventListeners.forEach(listener => {
     try {
       listener(fullEvent);
-    } catch (error) {
+    } catch (_error) {
       console.error("Analytics listener error:", error);
     }
   });
