@@ -304,6 +304,14 @@ export default function HomePage() {
         </div>
       </Section>
 
+      {/* AdSense Unit - After Services */}
+      <Section className="bg-black">
+        <AdSenseUnit
+          slot="services-bottom"
+          style={{ display: 'block', width: '100%', minHeight: '250px', margin: '20px 0' }}
+        />
+      </Section>
+
       {/* ============================================
           VIDEO SHOWCASE SECTION
           ============================================ */}
@@ -433,6 +441,14 @@ export default function HomePage() {
         </div>
       </Section>
 
+      {/* AdSense Unit - After Testimonials */}
+      <Section className="bg-black">
+        <AdSenseUnit
+          slot="testimonials-bottom"
+          style={{ display: 'block', width: '100%', minHeight: '250px', margin: '20px 0' }}
+        />
+      </Section>
+
       {/* ============================================
           BLOG/INSIGHTS SECTION
           ============================================ */}
@@ -520,6 +536,14 @@ export default function HomePage() {
             </motion.div>
           ))}
         </div>
+      </Section>
+
+      {/* AdSense Unit - After Blog */}
+      <Section className="bg-black">
+        <AdSenseUnit
+          slot="blog-bottom"
+          style={{ display: 'block', width: '100%', minHeight: '250px', margin: '20px 0' }}
+        />
       </Section>
 
       {/* ============================================
