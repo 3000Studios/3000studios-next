@@ -18,6 +18,7 @@ interface Project {
   description: string;
   category: string;
   tags: string[];
+  image?: string;
   link?: string;
   github?: string;
 }

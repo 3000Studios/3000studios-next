@@ -207,6 +207,9 @@ export default function BlogPage() {
           />
         </motion.div>
 
+        {/* AdSense Unit - After Newsletter */}
+        <AdUnit slotId="blog-newsletter-bottom" format="horizontal" className="my-12" />
+
         {/* Related Topics */}
         <div className="mt-16 relative group">
           <div className="absolute -inset-[1px] bg-gradient-to-r from-transparent via-blue-500/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm pointer-events-none" />
