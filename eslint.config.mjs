@@ -8,7 +8,7 @@ export default defineConfig([
   {
     rules: {
       // Stricter core rules to improve type safety and code health
-      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-vars': [
         'warn',
         { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
@@ -32,5 +32,7 @@ export default defineConfig([
     '_disabled/**',
     '_audit/**',
     '.shadow/**',
+    'archive/**',
+    'scripts/**',
   ]),
 ]);

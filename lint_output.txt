@@ -1,0 +1,608 @@
+
+> 3000studios-next@1.0.1 lint C:\3000Studos-Production\3000studios-next-main\3000studios-next
+> eslint .
+
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\admin\components\StreamControl.tsx
+   9:41  warning  'MessageCircle' is defined but never used. Allowed unused vars must match /^_/u                                     @typescript-eslint/no-unused-vars
+  37:6   warning  React Hook useEffect has a missing dependency: 'getStreamStatus'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\admin\dashboard\page.tsx
+  78:9  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\admin\page.tsx
+  257:61  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  281:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\admin\revenue\page.tsx
+  123:57  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\admin\stats\page.tsx
+  85:9  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\admin\voice-remote\page.tsx
+  118:14  warning  'err' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\assets\route.ts
+  16:44  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  54:24  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  67:64  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\blog\generate\route.ts
+  43:12  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\checkout\route.ts
+  13:40  error  Parsing error: ':' expected
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\cron\reports\route.ts
+  43:11  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  44:11  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\deploy\route.ts
+  15:12  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\deployment\rollback\route.ts
+  19:11  warning  'targetDeployment' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\deployment\trigger\route.ts
+  7:29  warning  'getDeploymentStatus' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\gpt-bridge\route.ts
+  14:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\media\browse\route.ts
+  43:54  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  54:53  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  68:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\monetization\route.ts
+  35:18  warning  'err' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\news\route.ts
+  24:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\paypal\capture-order\route.ts
+  32:24  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  33:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\paypal\checkout\route.ts
+  61:36  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\paypal\create-order\route.ts
+   7:23  warning  'trackAffiliateSale' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  13:20  warning  'userId' is assigned a value but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  20:52  error    Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+  26:31  error    Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+  43:50  error    Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\previews\route.ts
+  40:14  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\products\generate\route.ts
+  24:74  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\products\route.ts
+  9:27  warning  'request' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\status\route.ts
+  36:12  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\stock\route.ts
+  23:45  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\streaming\start\route.ts
+  12:13  warning  'streamTitle' is assigned a value but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  12:26  warning  'streamDescription' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\stripe\checkout\route.ts
+  39:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  65:51  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\subscribe\route.ts
+  11:11  warning  'priceIds' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\vendors\signup\route.ts
+  5:24  warning  'feedUrl' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  5:33  warning  'model' is assigned a value but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\api\voice-to-code\route.ts
+  13:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\components\ConsentBanner.tsx
+  51:51  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  51:58  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\components\ErrorBoundary.tsx
+  32:46  error  Unexpected any. Specify a different type                                                                                                               @typescript-eslint/no-explicit-any
+  82:15  error  Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\components\InteractiveAvatar.tsx
+   28:33  error    Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+   63:20  error    Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+   63:57  error    Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+   78:49  error    Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+   84:48  error    Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+  146:52  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  146:65  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  152:55  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  152:66  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  191:12  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  191:44  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  191:67  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\components\LiveAnalytics.tsx
+  118:62  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\components\Navigation.tsx
+   14:60  error    Unexpected any. Specify a different type                                                 @typescript-eslint/no-explicit-any
+   60:7   warning  'ElectricLink' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  195:9   warning  'navLinks' is assigned a value but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  207:9   warning  'isActiveLink' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\components\Newsletter.tsx
+  190:22  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\components\ParticleBackground.tsx
+  28:5  warning  Compilation Skipped: Inline `class` declarations are not supported
+
+Move class declarations outside of components/hooks.
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\components\ParticleBackground.tsx:28:5
+  26 |
+  27 |     // Particle system
+> 28 |     class Particle {
+     |     ^^^^^^^^^^^^^^^^
+> 29 |       x: number;
+     | ^^^^^^^^^^^^^^^^
+> 30 |       y: number;
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^
+> 67 |       }
+     | ^^^^^^^^^^^^^^^^
+> 68 |     }
+     | ^^^^^^ Inline `class` declarations are not supported
+  69 |
+  70 |     // Create particles
+  71 |     const particles: Particle[] = [];
+
+  react-hooks/unsupported-syntax
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\components\PremiumCTA.tsx
+  35:47  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\components\ProductGrid.tsx
+  66:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\components\ShadowAvatar.tsx
+   28:33  error    Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+   31:12  warning  'input' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+   61:20  error    Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+   61:57  error    Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+   76:49  error    Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+   82:48  error    Unexpected any. Specify a different type                                 @typescript-eslint/no-explicit-any
+  144:52  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`          react/no-unescaped-entities
+  144:65  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`          react/no-unescaped-entities
+  150:55  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`          react/no-unescaped-entities
+  150:66  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`          react/no-unescaped-entities
+  189:12  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+  189:44  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+  189:67  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`          react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\components\SoundEffects.tsx
+  20:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  46:62  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\components\VoiceExecutor.tsx
+  53:16  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\components\VoiceListener.tsx
+  55:16  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\content-lab\page.tsx
+   7:44   error    Unexpected any. Specify a different type                                            @typescript-eslint/no-explicit-any
+  14:11   warning  'product' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  43:66   error    Comments inside children section of tag should be placed inside braces              react/jsx-no-comment-textnodes
+  91:66   error    Comments inside children section of tag should be placed inside braces              react/jsx-no-comment-textnodes
+  99:99   warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                     react/no-unescaped-entities
+  99:103  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                     react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\error.tsx
+  39:50  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\not-found.tsx
+  25:23  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  25:44  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  25:75  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\page.tsx
+  72:9  warning  'heroScale' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\revenue\best-ai-tools-for-creators\page.tsx
+  70:65  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\revenue\best-gaming-laptops-2025\page.tsx
+  70:65  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\revenue\best-passive-income-tools\page.tsx
+  70:65  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\revenue\ultimate-developer-setup\page.tsx
+  70:65  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\revenue\web-design-trends-2025\page.tsx
+  70:65  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\store\cancel\page.tsx
+  30:110  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  64:19   warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  84:129  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  88:128  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\app\store\success\page.tsx
+  44:62   warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  97:107  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\disabled-features-20251230\api\matrix\health\route.ts
+  24:12  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\disabled-features-20251230\api\matrix\stream\route.ts
+   3:20  error    Unexpected any. Specify a different type                               @typescript-eslint/no-explicit-any
+   5:27  warning  'req' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  17:33  error    Unexpected any. Specify a different type                               @typescript-eslint/no-explicit-any
+  31:35  error    Unexpected any. Specify a different type                               @typescript-eslint/no-explicit-any
+  35:38  error    Unexpected any. Specify a different type                               @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\disabled-features-20251230\api\shadow\llm\route.ts
+  30:12  warning  'err' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\disabled-features-20251230\api\shadow\stt\route.ts
+  31:26  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\disabled-features-20251230\api\shadow\update-title\route.ts
+  24:12  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\disabled-features-20251230\api\shadow\voice\route.ts
+  10:7  warning  'OPENAI_API_KEY' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\disabled-features-20251230\shadow\avatar\AvatarClient.tsx
+  13:8   warning  'useVoiceAvatar' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  43:20  error    Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  56:57  error    Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\disabled-features-20251230\shadow\avatar\shadowAvatar.tsx
+   23:16  error    Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+   31:20  warning  'names' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   34:26  error    Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+   35:24  error    Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+   36:29  error    Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+   37:25  error    Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+   38:23  error    Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+   39:28  error    Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  101:45  error    Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  180:35  error    Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  180:62  error    Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\disabled-features-20251230\shadow\avatar\useAvatarSounds.ts
+  25:16  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\disabled-features-20251230\shadow\components\ShadowVoiceInput.tsx
+  21:40  error    Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+  25:36  error    Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+  59:11  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  59:24  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\disabled-features-20251230\shadow\hooks\useShadowStatus.ts
+  11:46  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\legacy-app-20251230\(public)\home\page.tsx
+  149:19  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  200:16  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\legacy-app-20251230\(public)\store\3000-store\page.tsx
+  17:7  warning  Expected an assignment or function call and instead saw an expression  @typescript-eslint/no-unused-expressions
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\legacy-app-20251230\api\auth\[...nextauth]\route.ts
+   3:10  warning  'cookies' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  27:44  error    Unexpected any. Specify a different type                                   @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\legacy-app-20251230\api\command-center\deploy\route.ts
+  4:13  warning  'Diff' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\legacy-app-20251230\api\command-center\execute\route.ts
+  80:34  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\legacy-app-20251230\api\cron\content\route.ts
+  12:12  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\legacy-app-20251230\api\cron\payments\route.ts
+  12:12  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\legacy-app-20251230\api\cron\seo\route.ts
+  14:12  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\legacy-app-20251230\api\live\start\route.ts
+  13:11  warning  'title' is assigned a value but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  13:18  warning  'description' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\legacy-app-20251230\api\live\stop\route.ts
+  4:28  warning  'req' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\legacy-app-20251230\contact\page.tsx
+  22:92  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  23:52  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  67:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\legacy-app-20251230\experience\page.tsx
+  66:21  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\legacy-app-20251230\live\page.tsx
+  192:19  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\legacy-app-20251230\posts\todays-posts\page.tsx
+  8:16  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\archive\legacy-app-20251230\shadow-login\page.tsx
+   6:10  warning  'Navigation' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  13:27  error    Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\brain\voiceVocalizer.ts
+  25:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  43:34  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\AIChatBox.tsx
+  50:14  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\ConsentBanner.tsx
+  123:37  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  123:48  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\CryptoTicker.tsx
+  65:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\ExitOffer.tsx
+  21:54  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\LuxuryGallery.tsx
+  79:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\MiniGame.tsx
+  40:13  warning  'obstacleGap' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\MusicPlayer.tsx
+  59:9  warning  The 'nextSong' function makes the dependencies of useEffect Hook (at line 99) change on every render. To fix this, wrap the definition of 'nextSong' in its own useCallback() Hook  react-hooks/exhaustive-deps
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\NavGate.tsx
+  11:9  error  Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\PayPalButton.tsx
+  8:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\VoiceCommandCenter.tsx
+  209:33  error    Unexpected any. Specify a different type                                            @typescript-eslint/no-explicit-any
+  214:10  warning  'actions' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  275:18  error    Unexpected any. Specify a different type                                            @typescript-eslint/no-explicit-any
+  275:55  error    Unexpected any. Specify a different type                                            @typescript-eslint/no-explicit-any
+  281:24  error    Unexpected any. Specify a different type                                            @typescript-eslint/no-explicit-any
+  286:36  error    Unexpected any. Specify a different type                                            @typescript-eslint/no-explicit-any
+  438:76  error    Unexpected any. Specify a different type                                            @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\VoiceInput.tsx
+   8:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  12:29  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  17:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  19:22  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\VoiceListener.tsx
+   35:18  error    Unexpected any. Specify a different type                                                                                                                                                                                         @typescript-eslint/no-explicit-any
+   36:18  error    Unexpected any. Specify a different type                                                                                                                                                                                         @typescript-eslint/no-explicit-any
+   43:36  error    Unexpected any. Specify a different type                                                                                                                                                                                         @typescript-eslint/no-explicit-any
+   56:35  error    Unexpected any. Specify a different type                                                                                                                                                                                         @typescript-eslint/no-explicit-any
+   72:6   warning  React Hook useEffect has a missing dependency: 'onToggle'. Either include it or remove the dependency array. If 'onToggle' changes too often, find the parent component that defines it and wrap that definition in useCallback  react-hooks/exhaustive-deps
+  103:17  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                  react/no-unescaped-entities
+  103:30  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                  react/no-unescaped-entities
+  114:40  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                  react/no-unescaped-entities
+  114:55  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                  react/no-unescaped-entities
+  115:40  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                  react/no-unescaped-entities
+  115:64  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                  react/no-unescaped-entities
+  116:40  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                  react/no-unescaped-entities
+  116:61  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\avatar\FemaleAvatar3D.tsx
+  415:3  warning  'interactionEnabled' is assigned a value but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\avatar\LiveAvatarDock.tsx
+  82:13  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  82:38  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\avatar\PublicAvatar.tsx
+  14:26  warning  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\avatar\ShadowChat.tsx
+  13:44  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\avatar\useSpeech.ts
+  10:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  10:55  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  18:24  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\matrix\AnalyticsPanel.tsx
+  19:11  warning  'liveVisitors' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\matrix\LiveVisitors.tsx
+  12:46  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\matrix\MatrixLog.tsx
+  11:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\matrix\QuickActions.tsx
+  17:14  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\matrix\SystemHealth.tsx
+  11:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  43:52  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\matrix\VoiceEditor.tsx
+  149:19  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  149:45  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  149:49  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  149:73  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  149:77  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  150:21  warning  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\ui\Button.tsx
+  14:10  warning  'brand' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\ui\Navigation.tsx
+  76:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\voice\VoiceListener.tsx
+   4:10  warning  'useRouter' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  39:18  error    Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+  40:18  error    Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+  49:36  error    Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+  55:35  error    Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\world\MoodMap.tsx
+  25:10  warning  'currentMood' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\components\world\ParticleField.tsx
+  31:22  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\hooks\useAPI.ts
+  83:37  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\hooks\useAvatarSounds.ts
+  24:16  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\hooks\useRealtimeSync.ts
+  269:49  warning  The ref value 'eventSourceRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'eventSourceRef.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\hooks\useVoice.ts
+  15:20  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  19:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  20:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  36:36  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\lib\audit-logger.ts
+  16:13  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\lib\compliance-engine.ts
+   51:11  warning  'requirements' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  143:17  warning  'key' is assigned a value but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\lib\config-store.ts
+  130:17  warning  'updateConfig' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  130:31  warning  'resetConfig' is assigned a value but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  130:44  warning  'exportConfig' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  130:58  warning  'importConfig' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\lib\distribution\direct-store.ts
+  8:50  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\lib\distribution\google-play.ts
+   6:62  warning  'listing' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+   6:71  error    Unexpected any. Specify a different type                                   @typescript-eslint/no-explicit-any
+  21:57  warning  'copy' is defined but never used. Allowed unused args must match /^_/u     @typescript-eslint/no-unused-vars
+  21:63  error    Unexpected any. Specify a different type                                   @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\lib\distribution\gumroad.ts
+  6:53  error    Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  7:9   warning  'token' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\lib\media-registry.ts
+  40:38  error    Unexpected any. Specify a different type                               @typescript-eslint/no-explicit-any
+  43:57  warning  'key' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\lib\page-engine.ts
+  95:65  warning  'updates' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\lib\pricing-engine.ts
+  31:49  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\lib\qa-agent.ts
+  143:14  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\lib\route-verifier.ts
+  32:37  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\lib\seo-ai.ts
+  33:43  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  57:96  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\lib\services\mongodb.ts
+  8:5  warning  'cachedClient' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\lib\sound\sfx.ts
+  7:65  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\lib\stripe.ts
+  10:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\lib\voice.ts
+  163:32  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  163:55  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  170:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  182:58  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\prismicio-types.d.ts
+  60:11  error  An empty interface declaration allows any non-nullish value, including literals like `0` and `""`.
+- If that's what you want, disable this lint rule with an inline comment or configure the 'allowInterfaces' rule option.
+- If you want a type meaning "any object", you probably want `object` instead.
+- If you want a type meaning "any value", you probably want `unknown` instead  @typescript-eslint/no-empty-object-type
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\providers\VoiceBridgeProvider.tsx
+   3:71  warning  'useEffect' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  65:42  error    Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+  65:79  error    Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+  72:36  error    Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\scripts\auto-fix-all-errors.js
+   8:7   warning  'fs' is assigned a value but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+   8:12  error    A `require()` style import is forbidden                                                @typescript-eslint/no-require-imports
+   9:7   warning  'path' is assigned a value but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+   9:14  error    A `require()` style import is forbidden                                                @typescript-eslint/no-require-imports
+  10:22  error    A `require()` style import is forbidden                                                @typescript-eslint/no-require-imports
+  16:7   warning  'eventFiles' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  53:10  warning  'error' is defined but never used                                                      @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\scripts\auto-fix-lint.js
+  2:12  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  3:14  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\scripts\final-deploy.js
+    6:12  error    A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+    7:14  error    A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+    8:22  error    A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+   64:14  warning  'error' is defined but never used        @typescript-eslint/no-unused-vars
+   73:14  warning  'error' is defined but never used        @typescript-eslint/no-unused-vars
+  109:14  warning  'error' is defined but never used        @typescript-eslint/no-unused-vars
+  118:14  warning  'error' is defined but never used        @typescript-eslint/no-unused-vars
+  143:14  warning  'error' is defined but never used        @typescript-eslint/no-unused-vars
+  172:16  warning  'error' is defined but never used        @typescript-eslint/no-unused-vars
+  175:14  warning  'error' is defined but never used        @typescript-eslint/no-unused-vars
+  185:14  warning  'error' is defined but never used        @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\scripts\nightly-optimizer.js
+   6:12  error    A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+   7:14  error    A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+   8:22  error    A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  57:14  warning  'error' is defined but never used        @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\scripts\test-gpt-bridge.js
+  12:15  error    A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  15:1   error    A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  87:18  warning  'e' is defined but never used            @typescript-eslint/no-unused-vars
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\scripts\watchdog-build.js
+  6:22  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  7:12  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  8:14  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+C:\3000Studos-Production\3000studios-next-main\3000studios-next\scripts\watchdog.js
+   8:18  error    A `require()` style import is forbidden                                   @typescript-eslint/no-require-imports
+  13:30  warning  'stdout' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  13:38  warning  'stderr' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+Γ£û 299 problems (141 errors, 158 warnings)
+
+ΓÇëELIFECYCLEΓÇë Command failed with exit code 1.
