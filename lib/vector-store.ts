@@ -13,7 +13,7 @@ export async function storeMemory(userId: string, text: string) {
       INSERT INTO ai_memory (id, user_id, content, embedding)
       VALUES (${id}, ${userId}, ${text}, ${embedding}::vector)
     `;
-  } catch (_error) {
+  } catch (error: unknown) {
     console.error("Failed to store memory:", error);
   }
 }
@@ -35,7 +35,7 @@ export async function recallMemory(
     `;
 
     return results.map((r: { content: string }) => r.content).join("\n");
-  } catch (_error) {
+  } catch (error: unknown) {
     console.error("Failed to recall memory:", error);
     return "";
   }

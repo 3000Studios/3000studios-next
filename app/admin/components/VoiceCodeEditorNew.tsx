@@ -96,7 +96,7 @@ export default function VoiceCodeEditor() {
       };
 
       recognition.start();
-    } catch (err) {
+    } catch (err: unknown) {
       setError(`Listening failed: ${err}`);
       setIsListening(false);
       recognitionRef.current = null;
@@ -107,7 +107,7 @@ export default function VoiceCodeEditor() {
     if (recognitionRef.current) {
       try {
         recognitionRef.current.stop();
-      } catch (err) {
+      } catch (err: unknown) {
         console.error('Stop recognition error:', err);
       }
       recognitionRef.current = null;
@@ -146,7 +146,7 @@ export default function VoiceCodeEditor() {
       setResponse(data);
       setShowPreview(true);
       setStatus(`✅ Ready to preview: "${data.intent}"`);
-    } catch (err) {
+    } catch (err: unknown) {
       setError(`Processing failed: ${err}`);
     } finally {
       setIsProcessing(false);
@@ -183,7 +183,7 @@ export default function VoiceCodeEditor() {
         setShowPreview(false);
         setStatus('');
       }, 2000);
-    } catch (err) {
+    } catch (err: unknown) {
       setError(`Commit failed: ${err}`);
     } finally {
       setIsProcessing(false);

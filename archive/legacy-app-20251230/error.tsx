@@ -25,7 +25,7 @@ export default function Error({
           Something went wrong!
         </h1>
         <p className="text-gray-300 mb-6">
-          {error.message || "An unexpected error occurred."}
+          {(error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") || "An unexpected error occurred."}
         </p>
         <button
           onClick={reset}

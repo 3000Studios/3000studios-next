@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
           });
           finalTranscript = transcription.text;
         }
-      } catch (err) {
+      } catch (err: unknown) {
         console.error("Transcription failed", err);
       }
     }
@@ -130,7 +130,7 @@ export async function POST(request: NextRequest) {
       ...parsed,
       action: "preview",
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Voice API Error:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
@@ -179,7 +179,7 @@ async function applyPatches(patches: CodePatch[]) {
       await fs.writeFile(activePath, newContent, "utf8");
       results.push({ file: cleanPath, status: "success" });
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Patch application failed';
+      const message = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'Patch application failed';
       results.push({ file: patch.file, status: "error", error: message });
     }
   }

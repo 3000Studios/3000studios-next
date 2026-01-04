@@ -21,7 +21,7 @@ export default function AdUnit({
       }
       const win = window as WindowWithAdSense;
       (win.adsbygoogle = win.adsbygoogle || []).push({});
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('AdSense error:', err);
     }
   }, []);

@@ -33,7 +33,7 @@ export async function POST(req: NextRequest): Promise<Response> {
     });
 
     return NextResponse.json({ text: transcription.text });
-  } catch (_error) {
+  } catch (error: unknown) {
     console.error("STT Error:", error);
     return NextResponse.json(
       { error: "Transcription failed" },

@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
       alertsSent: criticalAlerts.length,
       timestamp: new Date().toISOString(),
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[Cron] Report generation error:', error);
     return NextResponse.json(
       { error: 'Report generation failed' },

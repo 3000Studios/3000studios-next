@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
         deployment: latest,
       });
     }
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Deployment status API error:', error);
     return NextResponse.json(
       { error: 'Failed to get deployment status' },

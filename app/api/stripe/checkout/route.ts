@@ -73,12 +73,12 @@ const postHandler = async (request: NextRequest) => {
       sessionId: session.id,
       url: session.url,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Stripe checkout error:', error);
     return NextResponse.json(
       {
         error: 'Failed to create checkout session',
-        message: error instanceof Error ? error.message : 'Unknown error'
+        message: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error'
       },
       { status: 500 }
     );
@@ -119,7 +119,7 @@ const getHandler = async (request: NextRequest) => {
       amountTotal: session.amount_total,
       currency: session.currency,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Stripe session retrieval error:', error);
     return NextResponse.json(
       { error: 'Failed to retrieve session' },

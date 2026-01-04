@@ -33,7 +33,7 @@ export async function POST(req: Request) {
   } catch (error: unknown) {
     console.error("Voice command error:", error);
     return NextResponse.json(
-      { error: error.message || "Voice command failed" },
+      { error: (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") || "Voice command failed" },
       { status: 500 }
     );
   }

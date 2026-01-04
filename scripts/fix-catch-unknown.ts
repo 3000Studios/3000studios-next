@@ -39,7 +39,7 @@ function fixFile(file: string) {
     // But we need to be careful NOT to double-wrap if we already have it.
     // And only if it's within a catch block or after an 'unknown' declaration.
     // This regex is a bit greedy but matches the user's request.
-    // We'll look for patterns like 'error.message' where 'error' might be unknown.
+    // We'll look for patterns like '(error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error")' where 'error' might be unknown.
 
     // Specifically looking for cases where it's likely part of the error handling
     // and NOT already wrapped in an instanceof check.

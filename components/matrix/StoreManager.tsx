@@ -25,7 +25,7 @@ export default function StoreManager() {
       } else {
         alert("Import failed");
       }
-    } catch (_error) {
+    } catch (error: unknown) {
       alert("Error: " + String(error));
     } finally {
       setUploading(false);

@@ -22,7 +22,7 @@ export function useAvatarSounds() {
           map[key] = `/sfx/avatar/${file}`;
         });
         if (isMounted) setSoundMap(map);
-      } catch (_e) {
+      } catch (e: unknown) {
         if (isMounted) setSoundMap({});
       }
     }

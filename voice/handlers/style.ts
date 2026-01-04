@@ -71,11 +71,11 @@ button:hover,
       success: true,
       files_changed: [targetFile],
     };
-  } catch (_error) {
+  } catch (error: unknown) {
     return {
       success: false,
       files_changed: [],
-      error: error instanceof Error ? error.message : 'Unknown error',
+      error: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error',
     };
   }
 }
@@ -108,11 +108,11 @@ export async function handleAddAnimation(
       success: true,
       files_changed: [targetFile],
     };
-  } catch (_error) {
+  } catch (error: unknown) {
     return {
       success: false,
       files_changed: [],
-      error: error instanceof Error ? error.message : 'Unknown error',
+      error: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error',
     };
   }
 }

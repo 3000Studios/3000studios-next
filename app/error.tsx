@@ -44,7 +44,7 @@ export default function Error({
         {process.env.NODE_ENV === "development" && (
           <div className="mb-8 p-4 bg-white/5 rounded-lg text-left">
             <p className="text-sm font-mono text-red-400 break-all">
-              {error.message}
+              {(error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error")}
             </p>
             {error.digest && (
               <p className="text-xs text-gray-500 mt-2">

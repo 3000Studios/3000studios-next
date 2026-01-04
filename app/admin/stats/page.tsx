@@ -30,7 +30,7 @@ export default function StatsPage() {
       try {
         const data = await getMatrixStats();
         setStats(data);
-      } catch (e) {
+      } catch (e: unknown) {
         console.error('Failed to fetch stats', e);
       } finally {
         setLoading(false);

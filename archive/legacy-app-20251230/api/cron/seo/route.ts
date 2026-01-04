@@ -11,7 +11,7 @@ export async function GET() {
       message: 'SEO Protocol Executed',
       timestamp: new Date().toISOString() 
     });
-  } catch (_error) {
+  } catch (error: unknown) {
     return NextResponse.json({ status: 'error', message: 'Protocol Failed' }, { status: 500 });
   }
 }

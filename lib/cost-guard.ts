@@ -28,7 +28,7 @@ export async function enforceCostLimit(
     if (usedTokens + tokensRequested > costLimit.monthlyTokenLimit) {
       throw new Error("AI usage limit exceeded");
     }
-  } catch (_error) {
+  } catch (error: unknown) {
     console.warn("Cost guard error, failing open:", error);
   }
 }

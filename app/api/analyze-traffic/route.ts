@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
         available_in: ["PRO", "ENTERPRISE"],
       },
     });
-  } catch (error) {
+  } catch (error: unknown) {
     // Don't expose error details
     console.error("Traffic analysis API error:", error);
     return NextResponse.json(

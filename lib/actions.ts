@@ -5,7 +5,7 @@ import { signIn } from '@/auth';
 export async function authenticate(prevState: string | undefined, formData: FormData) {
   try {
     await signIn('credentials', formData);
-  } catch (_error) {
+  } catch (error: unknown) {
     // Handle authentication errors
     if (error && typeof error === 'object' && 'type' in error) {
       const authError = error as { type: string };
@@ -38,7 +38,7 @@ export async function sendEmergencyMagicLink(email: string) {
       success: true,
       message: 'Emergency link sent to secure admin email.',
     };
-  } catch (_error) {
+  } catch (error: unknown) {
     // Handle authentication errors
     if (error && typeof error === 'object' && 'type' in error) {
       return { error: 'Failed to send link.' };

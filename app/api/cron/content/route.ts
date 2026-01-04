@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
       published: published.length,
       timestamp: new Date().toISOString(),
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[Cron] Content processing error:', error);
     return NextResponse.json(
       { error: 'Processing failed' },

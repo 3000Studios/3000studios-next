@@ -33,8 +33,8 @@ export function useVoiceToCode() {
       }
 
       return data;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -63,8 +63,8 @@ export function useVoiceToCode() {
       }
 
       return data;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -98,8 +98,8 @@ export function usePayPalCheckout() {
       }
 
       return data;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -125,8 +125,8 @@ export function usePayPalCheckout() {
       }
 
       return data;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -157,8 +157,8 @@ export function useAnalytics() {
       }
 
       return data;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -196,8 +196,8 @@ export function useContentGeneration() {
       }
 
       return data;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -228,8 +228,8 @@ export function useContentGeneration() {
       }
 
       return data;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -263,8 +263,8 @@ export function useStreaming() {
       }
 
       return data;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -290,8 +290,8 @@ export function useStreaming() {
       }
 
       return data;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -313,8 +313,8 @@ export function useStreaming() {
       }
 
       return data;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -348,8 +348,8 @@ export function useDeployment() {
       }
 
       return data;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -373,8 +373,8 @@ export function useDeployment() {
       }
 
       return data;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -403,8 +403,8 @@ export function useProducts() {
       }
 
       return data;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {

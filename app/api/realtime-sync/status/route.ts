@@ -26,7 +26,7 @@ export async function GET(_request: NextRequest) {
         createdAt: deployment.createdAt,
       },
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Deployment status API error:', error);
     return NextResponse.json(
       { error: 'Failed to get deployment status' },

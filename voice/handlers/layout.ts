@@ -28,7 +28,7 @@ export async function handleAddSection(cmd: unknown): Promise<void> {
     // Insert before closing main tag
     content = content.replace(/(<\/main>)/, `${sectionHTML}\n$1`);
     await fs.writeFile(filePath, content, 'utf-8');
-  } catch (_error) {
+  } catch (error: unknown) {
     throw error;
   }
 }
@@ -62,7 +62,7 @@ This is a blog post about ${topic}.
 Published: ${date}`;
 
     await fs.writeFile(filePath, frontmatter, 'utf-8');
-  } catch (_error) {
+  } catch (error: unknown) {
     throw error;
   }
 }
@@ -94,11 +94,11 @@ export async function handleUpdateNav(
       success: true,
       files_changed: [targetFile],
     };
-  } catch (_error) {
+  } catch (error: unknown) {
     return {
       success: false,
       files_changed: [],
-      error: error instanceof Error ? error.message : 'Unknown error',
+      error: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error',
     };
   }
 }

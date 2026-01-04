@@ -16,7 +16,7 @@ export async function GET() {
     const packagePath = join(process.cwd(), 'package.json');
     const packageJson = JSON.parse(readFileSync(packagePath, 'utf8'));
     version = packageJson.version;
-  } catch (err) {
+  } catch (err: unknown) {
     console.error('Failed to read package.json:', err);
   }
 

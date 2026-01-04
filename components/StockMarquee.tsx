@@ -33,7 +33,7 @@ export default function StockMarquee() {
         // Take top 20 movers
         setStocks(sorted.slice(0, 20));
         setLoading(false);
-      } catch (_e) {
+      } catch (e: unknown) {
         console.warn('Crypto API failed, retrying...', e);
       }
     };

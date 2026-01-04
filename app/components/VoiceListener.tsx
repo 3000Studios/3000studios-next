@@ -52,7 +52,7 @@ export default function VoiceListener() {
             // Legacy support, but payloadHandler handles this better now
              handleVoicePayload({ target: 'style', path: 'accent', value: cmd.color });
         }
-      } catch (e) {
+      } catch (e: unknown) {
         // Silent fail on API errors
       }
     }, 1200);

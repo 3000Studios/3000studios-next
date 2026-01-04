@@ -19,7 +19,7 @@ export async function POST(req: Request) {
       signature,
       process.env.STRIPE_WEBHOOK_SECRET
     );
-  } catch (error) {
+  } catch (error: unknown) {
     console.error(`Webhook Error: ${(error as Error).message}`);
     return NextResponse.json(
       { error: "Webhook signature verification failed" },
@@ -83,7 +83,7 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ received: true });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error processing webhook:", error);
     return NextResponse.json(
       { error: "Webhook handler failed" },

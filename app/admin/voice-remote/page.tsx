@@ -71,7 +71,7 @@ export default function VoiceRemotePage() {
     setTranscript('');
     try {
       recognitionRef.current.start();
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Failed to start recognition:', err);
     }
   }, [status]);
@@ -110,7 +110,7 @@ export default function VoiceRemotePage() {
         prev.map((log) => (log.id === logId ? { ...log, status: 'success' as const } : log))
       );
       setStatus('ready');
-    } catch (err) {
+    } catch (err: unknown) {
       // Update log to error
       setLogs((prev) =>
         prev.map((log) => (log.id === logId ? { ...log, status: 'error' as const } : log))

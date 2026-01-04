@@ -47,7 +47,7 @@ export default function AIChatBox() {
             "Command executed successfully",
         },
       ]);
-    } catch (_error) {
+    } catch (error: unknown) {
       setMessages((prev) => [
         ...prev,
         {

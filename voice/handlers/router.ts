@@ -63,11 +63,11 @@ export async function routeCommand(command: VoiceCommand): Promise<CommandResult
     }
 
     return result;
-  } catch (_error) {
+  } catch (error: unknown) {
     return {
       success: false,
       files_changed: [],
-      error: error instanceof Error ? error.message : 'Unknown error',
+      error: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error',
     };
   }
 }
@@ -89,7 +89,7 @@ async function gitCommitAndPush(files: string[], commandType: string): Promise<v
     await execAsync('git push origin main');
 
     console.log(`✅ Voice command committed and pushed: ${commandType}`);
-  } catch (_error) {
+  } catch (error: unknown) {
     console.error('Git operation failed:', error);
     throw error;
   }

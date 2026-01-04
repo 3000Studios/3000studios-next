@@ -9,7 +9,7 @@ export async function POST(req: Request) {
     execSync('git push');
     return NextResponse.json({ ok: true, deployed: true });
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : 'Git operation failed';
+    const message = error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Git operation failed';
     return NextResponse.json({
       ok: false,
       error: message

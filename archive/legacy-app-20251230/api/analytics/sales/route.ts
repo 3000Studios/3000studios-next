@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: true });
   } catch (error: unknown) {
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "An error occurred" },
+      { error: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : "An error occurred" },
       { status: 500 },
     );
   }
@@ -78,7 +78,7 @@ export async function GET() {
     });
   } catch (error: unknown) {
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "An error occurred" },
+      { error: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : "An error occurred" },
       { status: 500 },
     );
   }

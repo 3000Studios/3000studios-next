@@ -33,7 +33,7 @@ export default function ContentGenerator() {
       if (result.wordpressId) {
         alert(`Blog post saved to WordPress as draft! ID: ${result.wordpressId}`);
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Blog generation error:', err);
     }
   };
@@ -47,7 +47,7 @@ export default function ContentGenerator() {
       const result = await generateProductDescription(productName, features);
       setGeneratedContent(result.description);
       setSuccess(true);
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Product description error:', err);
     }
   };

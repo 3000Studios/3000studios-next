@@ -64,7 +64,7 @@ export class AutonomousOracle {
       for (const [name, task] of this.tasks) {
         try {
           await task();
-        } catch (_error) {
+        } catch (error: unknown) {
           console.error(`Autonomous task ${name} failed:`, error);
         }
       }

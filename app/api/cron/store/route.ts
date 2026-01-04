@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
       topProducts,
       timestamp: new Date().toISOString(),
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[Cron] Store optimization error:', error);
     return NextResponse.json(
       { error: 'Optimization failed' },

@@ -21,8 +21,8 @@ export async function GET(req: NextRequest) {
       count: logs.length,
       logs,
     });
-  } catch (err) {
-    const message = err instanceof Error ? err.message : 'Unknown error';
+  } catch (err: unknown) {
+    const message = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'Unknown error';
     return NextResponse.json({ status: 'error', message }, { status: 400 });
   }
 }
@@ -42,8 +42,8 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ status: 'error', message: 'Unknown action' }, { status: 400 });
-  } catch (err) {
-    const message = err instanceof Error ? err.message : 'Unknown error';
+  } catch (err: unknown) {
+    const message = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'Unknown error';
     return NextResponse.json({ status: 'error', message }, { status: 400 });
   }
 }

@@ -39,9 +39,15 @@ export async function POST(req: Request) {
 
         const body = await req.json();
 
+        // Compatibility Map: Convert 'instruction' from Custom GPT to 'transcript' for Voice API
+        const payload = { ...body };
+        if (payload.instruction && !payload.transcript) {
+            payload.transcript = payload.instruction;
+        }
+
         // Log the command for audit trail
         console.log('GPT Bridge command received:', {
-            type: body.type || 'transcript',
+            type: payload.type || (payload.transcript ? 'transcript' : 'unknown'),
             timestamp: new Date().toISOString(),
         });
 
@@ -54,7 +60,7 @@ export async function POST(req: Request) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(body),
+            body: JSON.stringify(payload),
         });
 
         if (!response.ok) {
@@ -83,12 +89,12 @@ export async function POST(req: Request) {
             result,
             timestamp: new Date().toISOString(),
         });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error('GPT Bridge error:', error);
         return NextResponse.json(
             {
                 error: 'Bridge failed',
-                details: error instanceof Error ? error.message : String(error)
+                details: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : String(error)
             },
             { status: 500 }
         );

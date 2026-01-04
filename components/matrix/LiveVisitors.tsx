@@ -18,7 +18,7 @@ export default function LiveVisitors() {
         const data = await res.json();
         setVisitors(data.count || 0);
         setLocations(data.locations || []);
-      } catch (_error) {
+      } catch (error: unknown) {
         console.error("Failed to fetch visitors:", error);
       }
     };

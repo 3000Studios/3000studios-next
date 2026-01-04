@@ -138,10 +138,10 @@ const handler = async (request: NextRequest) => {
       { error: 'Invalid action' },
       { status: 400 }
     );
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('PayPal API error:', error);
     return NextResponse.json(
-      { error: 'Payment processing failed', message: error instanceof Error ? error.message : 'Unknown error' },
+      { error: 'Payment processing failed', message: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error' },
       { status: 500 }
     );
   }

@@ -135,7 +135,7 @@ export const useConfigStore = create<ConfigStoreState>()(
         try {
           const imported = JSON.parse(json);
           set(imported);
-        } catch (_error) {
+        } catch (error: unknown) {
           console.error('Failed to import config:', error);
         }
       }

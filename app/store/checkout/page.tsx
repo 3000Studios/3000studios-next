@@ -71,8 +71,8 @@ export default function CheckoutPage() {
       if (data.orderID) {
         window.location.href = `https://www.paypal.com/checkoutnow?token=${data.orderID}`;
       }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Checkout failed');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'Checkout failed');
     } finally {
       setLoading(false);
     }
@@ -109,8 +109,8 @@ export default function CheckoutPage() {
       if (data.url) {
         window.location.href = data.url;
       }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Checkout failed');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'Checkout failed');
     } finally {
       setLoading(false);
     }

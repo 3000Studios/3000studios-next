@@ -40,7 +40,7 @@ export async function POST(req: Request) {
       success: true,
       post: generatedPost
     });
-  } catch (error) {
+  } catch (error: unknown) {
     return NextResponse.json({ 
       success: false, 
       error: 'Blog generation failed' 

@@ -31,8 +31,8 @@ export default function VoiceLogsPage() {
         const response = await fetch('/api/admin/voice-logs?limit=100');
         const data = await response.json();
         setLogs(data.logs || []);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load logs');
+      } catch (err: unknown) {
+        setError(err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'Failed to load logs');
       } finally {
         setLoading(false);
       }
@@ -55,8 +55,8 @@ export default function VoiceLogsPage() {
         body: JSON.stringify({ action: 'clear' }),
       });
       setLogs([]);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to clear logs');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'Failed to clear logs');
     }
   };
 

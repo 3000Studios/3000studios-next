@@ -34,7 +34,7 @@ export default function NewsFeed() {
         } else {
           throw new Error('No data');
         }
-      } catch (_error) {
+      } catch (error: unknown) {
         console.warn('News API failed, using fallback data', error);
         // Fallback to simulated news
         const topics = [

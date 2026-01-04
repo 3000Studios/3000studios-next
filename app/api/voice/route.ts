@@ -81,7 +81,7 @@ async function searchPexels(query: string, type: 'video' | 'image'): Promise<str
     } else {
       return data.photos?.[0]?.src?.large2x || null;
     }
-  } catch (e) {
+  } catch (e: unknown) {
     console.error('Pexels search failed', e);
     return null;
   }
@@ -162,7 +162,7 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ ok: true, media, registry: uiRegistry });
-  } catch (e) {
+  } catch (e: unknown) {
     console.error('Voice API error:', e);
     return NextResponse.json({ error: 'Voice command failed', details: String(e) }, { status: 500 });
   }

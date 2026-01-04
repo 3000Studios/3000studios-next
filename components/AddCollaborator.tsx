@@ -40,8 +40,8 @@ export default function AddCollaborator({ onAdd }: AddCollaboratorProps) {
       setName("");
       setEmail("");
       setRole("viewer");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : "An error occurred");
     } finally {
       setIsSubmitting(false);
     }

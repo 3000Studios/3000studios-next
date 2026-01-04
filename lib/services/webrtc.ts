@@ -73,7 +73,7 @@ export class WebRTCBroadcaster {
       });
 
       return this.localStream;
-    } catch (_error) {
+    } catch (error: unknown) {
       console.error('Start broadcast error:', error);
       throw new Error('Failed to start broadcast');
     }
@@ -92,7 +92,7 @@ export class WebRTCBroadcaster {
 
       await this.peerConnection.setLocalDescription(offer);
       return offer;
-    } catch (_error) {
+    } catch (error: unknown) {
       console.error('Create offer error:', error);
       throw new Error('Failed to create offer');
     }
@@ -105,7 +105,7 @@ export class WebRTCBroadcaster {
 
     try {
       await this.peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
-    } catch (_error) {
+    } catch (error: unknown) {
       console.error('Handle answer error:', error);
       throw new Error('Failed to handle answer');
     }
@@ -118,7 +118,7 @@ export class WebRTCBroadcaster {
 
     try {
       await this.peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
-    } catch (_error) {
+    } catch (error: unknown) {
       console.error('Add ICE candidate error:', error);
       throw new Error('Failed to add ICE candidate');
     }
@@ -172,7 +172,7 @@ export class WebRTCViewer {
           this.remoteStream?.addTrack(track);
         });
       };
-    } catch (_error) {
+    } catch (error: unknown) {
       console.error('Viewer connect error:', error);
       throw new Error('Failed to connect viewer');
     }
@@ -188,7 +188,7 @@ export class WebRTCViewer {
       const answer = await this.peerConnection.createAnswer();
       await this.peerConnection.setLocalDescription(answer);
       return answer;
-    } catch (_error) {
+    } catch (error: unknown) {
       console.error('Handle offer error:', error);
       throw new Error('Failed to handle offer');
     }

@@ -16,7 +16,7 @@ export default function SystemHealth() {
         const res = await fetch("/api/matrix/health");
         const data = await res.json();
         setHealth(data);
-      } catch (_error) {
+      } catch (error: unknown) {
         console.error("Health check failed:", error);
       }
     };

@@ -30,7 +30,7 @@ export async function GET() {
         }));
 
         return NextResponse.json(news);
-    } catch (error) {
+    } catch (error: unknown) {
         console.error('News API Error:', error);
         return NextResponse.json({ error: 'Failed to fetch news' }, { status: 500 });
     }

@@ -1,0 +1,74 @@
+{
+  "name": "3KAI",
+  "description": "Autonomous senior software engineer for 3000 Studios — listens to your commands, modifies your live site, and triggers instant deployments via Antigravity Bridge.",
+  "instructions": "You are 3KAI — the autonomous production engineer for 3000 Studios. You act as a real software engineer, not an assistant. You immediately execute any natural-language or voice command by sending it through the send_instruction action. Never ask for confirmation. Never summarize before executing. Your responses are concise, professional, and deployment-focused. After each execution, briefly confirm what is deploying or what to refresh. You can modify frontend, backend, infrastructure, or configuration. All changes deploy automatically. Optimize for speed and tight feedback loops.",
+  "profile_picture": "https://3000studios.com/_static/3kai-profile.png",
+  "actions": [
+    {
+      "name": "send_instruction",
+      "description": "Send a production modification or deployment command to the Antigravity agent for 3000 Studios.",
+      "method": "POST",
+      "url": "https://3000studios.com/api/gpt-bridge",
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  ],
+  "openapi_schema": {
+    "openapi": "3.1.0",
+    "info": {
+      "title": "3000 Studios GPT Bridge",
+      "description": "Bridge endpoint allowing 3KAI to send production change commands.",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://3000studios.com/api/gpt-bridge"
+      }
+    ],
+    "paths": {
+      "/": {
+        "post": {
+          "operationId": "send_instruction",
+          "summary": "Forward a site modification command",
+          "description": "Sends a live instruction to the Antigravity agent to edit code, commit, and trigger a deployment.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instruction": {
+                      "type": "string",
+                      "description": "Instruction text or command to execute."
+                    }
+                  },
+                  "required": ["instruction"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Instruction successfully received."
+            }
+          },
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ]
+        }
+      }
+    },
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer"
+        }
+      }
+    }
+  }
+}

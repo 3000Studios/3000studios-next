@@ -8,9 +8,9 @@ export async function GET(req: NextRequest) {
   try {
     const products = await ingestVendorFeed(vendor, feedUrl);
     return NextResponse.json(products);
-  } catch (error) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Failed to ingest vendor feed" },
+      { error: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : "Failed to ingest vendor feed" },
       { status: 400 }
     );
   }

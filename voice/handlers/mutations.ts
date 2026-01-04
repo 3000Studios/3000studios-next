@@ -23,7 +23,7 @@ export async function handleUpdateText(newText: string): Promise<MutationResult>
       message: `Headline mutation queued: "${newText}"`,
       mutationId: mutation.id,
     };
-  } catch (_error) {
+  } catch (error: unknown) {
     return {
       success: false,
       message: `Failed to queue text update: ${error}`,
@@ -46,7 +46,7 @@ export async function handleAddSection(
       message: `Section mutation queued: "${sectionTitle}"`,
       mutationId: mutation.id,
     };
-  } catch (_error) {
+  } catch (error: unknown) {
     return {
       success: false,
       message: `Failed to queue section: ${error}`,
@@ -69,7 +69,7 @@ export async function handleAddMedia(
       message: `${type} media mutation queued`,
       mutationId: mutation.id,
     };
-  } catch (_error) {
+  } catch (error: unknown) {
     return {
       success: false,
       message: `Failed to queue media: ${error}`,
@@ -92,7 +92,7 @@ export async function handleChangeStyle(
       message: `Style mutation queued: --${cssVariable} = ${value}`,
       mutationId: mutation.id,
     };
-  } catch (_error) {
+  } catch (error: unknown) {
     return {
       success: false,
       message: `Failed to queue style change: ${error}`,
@@ -116,7 +116,7 @@ export async function handlePublishBlog(
       message: `Blog post mutation queued: "${title}"`,
       mutationId: mutation.id,
     };
-  } catch (_error) {
+  } catch (error: unknown) {
     return {
       success: false,
       message: `Failed to queue blog post: ${error}`,

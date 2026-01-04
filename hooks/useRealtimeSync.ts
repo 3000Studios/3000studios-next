@@ -53,7 +53,7 @@ export function useRealtimeSync() {
           latestDeployment: data.deployment,
         }));
       }
-    } catch (_error) {
+    } catch (error: unknown) {
       console.error('Failed to fetch deployment status:', error);
     }
   }, []);
@@ -149,13 +149,13 @@ export function useRealtimeSync() {
 
       // Refresh status after deployment
       await fetchStatus();
-    } catch (_error) {
+    } catch (error: unknown) {
       console.error('Deployment error:', error);
       setDeploymentStatus(prev => ({
         ...prev,
         isDeploying: false,
         status: '❌ Deployment failed',
-        error: error instanceof Error ? error.message : 'Unknown error',
+        error: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error',
       }));
     }
   }, [fetchStatus]);
@@ -246,13 +246,13 @@ export function useRealtimeSync() {
       }
 
       await fetchStatus();
-    } catch (_error) {
+    } catch (error: unknown) {
       console.error('Batch deployment error:', error);
       setDeploymentStatus(prev => ({
         ...prev,
         isDeploying: false,
         status: '❌ Batch deployment failed',
-        error: error instanceof Error ? error.message : 'Unknown error',
+        error: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error',
       }));
     }
   }, [fetchStatus]);

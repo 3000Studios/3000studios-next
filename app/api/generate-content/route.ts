@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
         credits_remaining: 0, // Future: Track user credits
       },
     });
-  } catch (error) {
+  } catch (error: unknown) {
     // Don't expose error details
     console.error("Content generation API error:", error);
     return NextResponse.json(

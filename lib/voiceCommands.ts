@@ -292,10 +292,10 @@ export async function executeCommand(command: VoiceCommand, userRole: string): P
       requiresConfirmation: result.requiresConfirmation,
       previewUrl: result.previewUrl,
     };
-  } catch (_error) {
+  } catch (error: unknown) {
     return {
       success: false,
-      message: error instanceof Error ? error.message : 'Failed to execute command',
+      message: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Failed to execute command',
     };
   }
 }

@@ -42,7 +42,7 @@ export function useAI(): UseCompletionResponse {
         console.log("Tokens used:", data.usage);
       }
       return result;
-    } catch (err) {
+    } catch (err: unknown) {
       const error = err instanceof Error ? err : new Error("Unknown error");
       setError(error);
       console.error("AI completion error:", error);

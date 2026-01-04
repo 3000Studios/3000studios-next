@@ -13,7 +13,7 @@ export async function GET(_req: NextRequest) {
         'Cache-Control': 'public, s-maxage=86400',
       },
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[Sitemap] Generation error:', error);
     return NextResponse.json({ error: 'Generation failed' }, { status: 500 });
   }
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
       entriesGenerated: entries.length,
       timestamp: new Date().toISOString(),
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[Sitemap] Update error:', error);
     return NextResponse.json({ error: 'Update failed' }, { status: 500 });
   }

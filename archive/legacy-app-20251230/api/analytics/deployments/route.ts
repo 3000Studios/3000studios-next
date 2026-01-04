@@ -81,7 +81,7 @@ export async function GET() {
   } catch (error: unknown) {
     let message = "Unknown error";
     if (error instanceof Error) {
-      message = error.message;
+      message = (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error");
     }
     return NextResponse.json(
       {

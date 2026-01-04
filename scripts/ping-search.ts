@@ -15,7 +15,7 @@ async function pingSearchEngine() {
         `❌ Failed to ping Google. Status: ${response.status} ${response.statusText}`
       );
     }
-  } catch (_error) {
+  } catch (error: unknown) {
     console.error("❌ Error during ping:", error);
     process.exit(1);
   }
