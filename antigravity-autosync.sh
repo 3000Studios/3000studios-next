@@ -13,7 +13,12 @@ while true; do
   # Check if there are any changes (including untracked files)
   if [[ -n "$(git status --porcelain)" ]]; then
     FILE_COUNT=$(git status --porcelain | wc -l | tr -d ' ')
-    TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
+    # Use PowerShell to get timestamp on Windows, fallback to date on Unix
+    if command -v powershell >/dev/null 2>&1; then
+      TIMESTAMP=$(powershell -NoProfile -Command "Get-Date -Format 'yyyy-MM-dd HH:mm:ss'")
+    else
+      TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
+    fi
 
     # Auto-generate intelligent commit message
     MSG="auto(sync): ${FILE_COUNT} file(s) updated @ ${TIMESTAMP}"

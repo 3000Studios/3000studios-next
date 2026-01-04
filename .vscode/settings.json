@@ -85,5 +85,6 @@
     "Clerk",
     "Vercel",
     "Cloudinary"
-  ]
+  ],
+  "todo-tree.tree.scanMode": "current file"
 }
