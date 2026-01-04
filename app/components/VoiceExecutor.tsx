@@ -50,7 +50,7 @@ export default function VoiceExecutor() {
           });
           alert('Deploying to production...');
         }
-      } catch (e) {
+      } catch (e: unknown) {
         // Silent fail
       }
     }, 1000);

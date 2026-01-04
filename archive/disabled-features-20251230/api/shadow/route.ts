@@ -27,10 +27,10 @@ export async function POST(request: Request) {
       output: `Command "${cmd}" logged. Execution requires additional setup.`,
       timestamp: new Date().toISOString(),
     });
-  } catch (_error) {
+  } catch (error: unknown) {
     return NextResponse.json(
       {
-        output: `Error: ${error instanceof Error ? error.message : "Unknown error"}`,
+        output: `Error: ${error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : "Unknown error"}`,
       },
       { status: 500 },
     );

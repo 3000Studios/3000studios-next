@@ -23,10 +23,16 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ url: mockSession.url, id: mockSession.id });
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : 'Unknown error';
-    return NextResponse.json({
-      ok: false,
-      error: message
-    }, { status: 500 });
+    const message =
+      error instanceof Error
+        ? error.message
+        : "Checkout failed";
+
+    console.error("Checkout error:", error);
+
+    return NextResponse.json(
+      { ok: false, error: message },
+      { status: 500 }
+    );
   }
 }

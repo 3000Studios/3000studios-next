@@ -193,7 +193,7 @@ export const getMongoClient = async (): Promise<MongoClient> => {
       });
       await mongoClient.connect();
       console.log('✅ MongoDB connected successfully');
-    } catch (_error) {
+    } catch (error: unknown) {
       console.error('❌ MongoDB connection failed:', error);
       throw error;
     } finally {

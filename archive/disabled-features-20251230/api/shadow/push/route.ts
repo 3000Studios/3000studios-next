@@ -24,7 +24,7 @@ export async function POST(): Promise<Response> {
           success: !error,
           stdout,
           stderr,
-          error: error ? error.message : null,
+          error: error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : null,
         }),
       );
     });

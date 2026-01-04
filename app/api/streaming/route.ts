@@ -26,7 +26,7 @@ export async function POST(_request: Request) {
     });
 
     return NextResponse.json(dbStream);
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error creating stream:", error);
     return NextResponse.json(
       { error: "Failed to create stream" },

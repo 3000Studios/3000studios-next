@@ -10,12 +10,12 @@ export async function GET() {
   try {
     const collaborators = collaboratorDB.getAll();
     return NextResponse.json({ collaborators });
-  } catch (_error) {
+  } catch (error: unknown) {
     return NextResponse.json(
       {
         error:
           error instanceof Error
-            ? error.message
+            ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error")
             : "Failed to fetch collaborators",
       },
       { status: 500 },
@@ -57,11 +57,11 @@ export async function POST(request: Request) {
       { collaborator: newCollaborator },
       { status: 201 },
     );
-  } catch (_error) {
+  } catch (error: unknown) {
     return NextResponse.json(
       {
         error:
-          error instanceof Error ? error.message : "Failed to add collaborator",
+          error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : "Failed to add collaborator",
       },
       { status: 500 },
     );
@@ -90,12 +90,12 @@ export async function DELETE(request: Request) {
     }
 
     return NextResponse.json({ success: true });
-  } catch (_error) {
+  } catch (error: unknown) {
     return NextResponse.json(
       {
         error:
           error instanceof Error
-            ? error.message
+            ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error")
             : "Failed to remove collaborator",
       },
       { status: 500 },

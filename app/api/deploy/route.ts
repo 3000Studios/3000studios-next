@@ -12,7 +12,7 @@ export async function GET() {
       status: 'deploy triggered',
       timestamp: new Date().toISOString()
     });
-  } catch (error) {
+  } catch (error: unknown) {
     return NextResponse.json({ 
       status: 'error', 
       message: 'Deployment failed' 

@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
         processing_time: "< 5s",
       },
     });
-  } catch (error) {
+  } catch (error: unknown) {
     // Don't expose error details
     console.error("AI Tools API error:", error);
     return NextResponse.json(

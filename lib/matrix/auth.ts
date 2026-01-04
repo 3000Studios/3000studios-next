@@ -13,7 +13,7 @@ export async function initMasterPassword() {
       await kv.set("matrix-password", hash);
       await kv.set("matrix-email", MASTER_EMAIL);
     }
-  } catch (_error) {
+  } catch (error: unknown) {
     console.error("Failed to initialize master password:", error);
   }
 }
@@ -32,7 +32,7 @@ export async function validateLogin(email: string, pass: string): Promise<boolea
     }
 
     return await bcrypt.compare(pass, storedHash);
-  } catch (_error) {
+  } catch (error: unknown) {
     console.error("Login validation error:", error);
     return false;
   }

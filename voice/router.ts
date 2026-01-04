@@ -50,8 +50,8 @@ export async function routeVoiceCommand(
           message: `No handler for command type: ${(cmd as { type: string }).type}`,
         };
     }
-  } catch (_error) {
-    const message = error instanceof Error ? error.message : String(error);
+  } catch (error: unknown) {
+    const message = error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : String(error);
     return {
       success: false,
       message,

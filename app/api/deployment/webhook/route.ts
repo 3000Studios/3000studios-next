@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
         timestamp: timestamp || new Date().toISOString(),
       },
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Webhook processing error:', error);
     return NextResponse.json(
       { error: 'Failed to process webhook' },

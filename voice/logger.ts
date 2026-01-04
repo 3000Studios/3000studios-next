@@ -56,12 +56,12 @@ export async function logVoiceCommand(
     if (process.env.NODE_ENV !== 'production') {
       try {
         await fs.appendFile(LOG_FILE, JSON.stringify(entry) + '\n', 'utf-8');
-      } catch (_e) {
+      } catch (e: unknown) {
         // File write may fail in serverless environment
         console.warn('[VOICE LOG ERROR]', e);
       }
     }
-  } catch (_error) {
+  } catch (error: unknown) {
     console.error('[VOICE LOG WRITE ERROR]', error);
   }
 
@@ -83,7 +83,7 @@ export async function getVoiceCommandLogs(limit: number = 50): Promise<VoiceLogE
     const lines = content.split('\n').filter((line) => line.trim());
     const entries = lines.map((line) => JSON.parse(line));
     return entries.slice(-limit);
-  } catch (_error) {
+  } catch (error: unknown) {
     console.error('[VOICE LOG READ ERROR]', error);
     return [];
   }
@@ -97,7 +97,7 @@ export async function clearVoiceCommandLogs(): Promise<void> {
     if (process.env.NODE_ENV !== 'production') {
       await fs.unlink(LOG_FILE);
     }
-  } catch (_error) {
+  } catch (error: unknown) {
     console.error('[VOICE LOG CLEAR ERROR]', error);
   }
 }

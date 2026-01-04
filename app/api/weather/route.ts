@@ -29,7 +29,7 @@ export async function GET(req: Request) {
             conditions: data.currentConditions.conditions,
             icon: data.currentConditions.icon
         });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error('Weather API Error:', error);
         return NextResponse.json({ error: 'Failed to fetch weather data' }, { status: 500 });
     }

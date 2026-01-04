@@ -104,9 +104,9 @@ export async function POST(request: NextRequest) {
 
     const response = parseActions(transcript);
     return NextResponse.json(response, { status: 200 });
-  } catch (_error) {
+  } catch (error: unknown) {
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Unknown error' },
+      { error: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error' },
       { status: 500 }
     );
   }

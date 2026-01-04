@@ -32,7 +32,7 @@ export default function StreamStudioPage() {
         setStreamData(data);
         setIsLive(true);
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Failed to start stream', err);
     } finally {
       setLoading(false);

@@ -30,7 +30,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ url: mockSession.url, id: mockSession.id });
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : 'Subscription failed';
+    const message = error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Subscription failed';
     return NextResponse.json({
       ok: false,
       error: message

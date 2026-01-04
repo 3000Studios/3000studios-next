@@ -21,7 +21,7 @@ export function broadcast(data: any) {
       if (socket.readyState === 1) {
         socket.send(msg);
       }
-    } catch (_error) {
+    } catch (error: unknown) {
       console.error("Socket broadcast error:", error);
       sockets.delete(socket);
     }

@@ -88,7 +88,7 @@ export async function createCommit(changes: CommitFileChange[]): Promise<string>
     });
 
     return newCommit.sha;
-  } catch (_error) {
+  } catch (error: unknown) {
     console.error('GitHub commit error:', error);
     throw new Error('Failed to create GitHub commit');
   }
@@ -107,7 +107,7 @@ export async function getFileContent(path: string): Promise<string> {
     }
     
     throw new Error('File not found');
-  } catch (_error) {
+  } catch (error: unknown) {
     console.error('GitHub get file error:', error);
     throw new Error('Failed to get file content');
   }
@@ -127,7 +127,7 @@ export async function createBranch(branchName: string): Promise<void> {
       ref: `refs/heads/${branchName}`,
       sha: refData.object.sha,
     });
-  } catch (_error) {
+  } catch (error: unknown) {
     console.error('GitHub create branch error:', error);
     throw new Error('Failed to create branch');
   }
@@ -149,7 +149,7 @@ export async function createPullRequest(
     });
 
     return data.number;
-  } catch (_error) {
+  } catch (error: unknown) {
     console.error('GitHub create PR error:', error);
     throw new Error('Failed to create pull request');
   }

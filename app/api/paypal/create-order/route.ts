@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
       orderId: paypalOrder.id,
       approvalUrl: paypalOrder.links.find((link: any) => link.rel === 'approve')?.href,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('PayPal create order error:', error);
     return NextResponse.json({ error: 'Failed to create PayPal order' }, { status: 500 });
   }

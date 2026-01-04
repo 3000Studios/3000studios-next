@@ -21,7 +21,7 @@ export async function GET(req: Request) {
   } catch (error: unknown) {
     console.error("Events API error:", error);
     return NextResponse.json(
-      { error: error.message || "Failed to fetch events" },
+      { error: (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") || "Failed to fetch events" },
       { status: 500 }
     );
   }

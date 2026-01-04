@@ -76,7 +76,7 @@ export async function GET(request: NextRequest) {
             },
           },
         );
-      } catch (dbError) {
+      } catch (dbError: unknown) {
         console.error("Database error tracking affiliate click:", dbError);
         // Continue even if DB fails - we can still set cookie
       }
@@ -113,7 +113,7 @@ export async function GET(request: NextRequest) {
     });
 
     return response;
-  } catch (err) {
+  } catch (err: unknown) {
     console.error("Affiliate tracking error:", err);
     return NextResponse.json(
       { error: "Internal server error" },
@@ -227,7 +227,7 @@ export async function POST(request: NextRequest) {
       success: true,
       message: "Conversion tracked (DB not configured)",
     });
-  } catch (err) {
+  } catch (err: unknown) {
     console.error("Affiliate conversion tracking error:", err);
     return NextResponse.json(
       { error: "Internal server error" },

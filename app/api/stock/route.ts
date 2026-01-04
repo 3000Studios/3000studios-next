@@ -30,7 +30,7 @@ export async function GET() {
         }));
 
         return NextResponse.json(stocks);
-    } catch (error) {
+    } catch (error: unknown) {
         console.error('MarketStack API Error:', error);
         return NextResponse.json({ error: 'Failed to fetch stock data' }, { status: 500 });
     }

@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     return NextResponse.json({
       response: data.choices?.[0]?.message?.content || "",
     });
-  } catch (err) {
+  } catch (err: unknown) {
     return NextResponse.json({ error: "LLM error" }, { status: 500 });
   }
 }

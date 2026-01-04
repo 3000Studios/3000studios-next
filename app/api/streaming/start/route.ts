@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
       signalServerUrl: process.env.NEXT_PUBLIC_SIGNAL_SERVER || 'wss://signal.3000studios.com',
       message: 'Stream initialized. Use WebRTC config to start broadcasting.',
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Stream start API error:', error);
     return NextResponse.json(
       { error: 'Failed to start stream' },

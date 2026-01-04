@@ -23,7 +23,7 @@ export async function handleUpdateText(cmd: unknown): Promise<void> {
 
     content = content.replace(search, replace);
     await fs.writeFile(filePath, content, 'utf-8');
-  } catch (_error) {
+  } catch (error: unknown) {
     throw error;
   }
 }
@@ -61,7 +61,7 @@ export async function handleAddMedia(cmd: unknown): Promise<void> {
     // Insert before the last closing tag
     content = content.replace(/([\s\S]*?)<\/main>/, `$1${mediaElement}\n</main>`);
     await fs.writeFile(filePath, content, 'utf-8');
-  } catch (_error) {
+  } catch (error: unknown) {
     throw error;
   }
 }
@@ -94,11 +94,11 @@ export async function handleAddImage(
       success: true,
       files_changed: [targetFile],
     };
-  } catch (_error) {
+  } catch (error: unknown) {
     return {
       success: false,
       files_changed: [],
-      error: error instanceof Error ? error.message : 'Unknown error',
+      error: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error',
     };
   }
 }

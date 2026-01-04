@@ -18,6 +18,6 @@ export async function POST(req: Request) {
       result,
     });
   } catch (e: unknown) {
-    return NextResponse.json({ ok: false, error: e.message });
+    return NextResponse.json({ ok: false, error: (e instanceof Error ? (e instanceof Error ? e.message : "Unknown error") : "Unknown error") });
   }
 }

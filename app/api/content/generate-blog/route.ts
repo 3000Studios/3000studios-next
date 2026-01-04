@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
           status: 'draft', // Save as draft for review
           excerpt: bodyContent.substring(0, 200),
         });
-      } catch (wpError) {
+      } catch (wpError: unknown) {
         console.error('WordPress publish error:', wpError);
         // Continue even if WordPress fails
       }
@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
         ? 'Blog post generated and saved to WordPress as draft' 
         : 'Blog post generated successfully',
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Blog generation API error:', error);
     return NextResponse.json(
       { error: 'Failed to generate blog post' },

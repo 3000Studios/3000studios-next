@@ -102,7 +102,7 @@ export async function executeCommand(command: string): Promise<CommandResult> {
       action: "queued",
     };
   } catch (error: unknown) {
-    const errorMessage = error instanceof Error ? error.message : "Command execution failed";
+    const errorMessage = error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : "Command execution failed";
     return {
       success: false,
       error: errorMessage,

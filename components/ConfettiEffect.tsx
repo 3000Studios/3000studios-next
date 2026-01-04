@@ -28,7 +28,7 @@ export default function ConfettiEffect({ show }: ConfettiEffectProps) {
           origin: { y: 0.7 },
           zIndex: 99999,
         });
-      } catch (_error) {
+      } catch (error: unknown) {
         console.warn('Confetti effect not available:', error);
       }
     })();

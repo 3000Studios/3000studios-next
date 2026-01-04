@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
       streamId,
       message: 'Stream stopped successfully',
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Stream stop API error:', error);
     return NextResponse.json(
       { error: 'Failed to stop stream' },

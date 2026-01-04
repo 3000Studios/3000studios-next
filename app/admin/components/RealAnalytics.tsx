@@ -61,7 +61,7 @@ export default function RealAnalytics() {
     try {
       const data = await fetchAnalytics(timeRange);
       setStats(data.stats);
-    } catch (err) {
+    } catch (err: unknown) {
       console.error("Analytics load error:", err);
     }
   }, [fetchAnalytics, timeRange]);

@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     if (autoSave && productId) {
       try {
         await updateProduct(productId, { description });
-      } catch (dbError) {
+      } catch (dbError: unknown) {
         console.error('Database save error:', dbError);
         // Continue even if save fails
       }
@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
       productName,
       saved: autoSave && productId,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Product description API error:', error);
     return NextResponse.json(
       { error: 'Failed to generate product description' },

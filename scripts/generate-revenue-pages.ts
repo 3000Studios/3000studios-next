@@ -171,7 +171,7 @@ if (fs.existsSync(dropzoneDir)) {
           `[Dropzone] Skipped ${file}: Missing requisite fields (slug, title, content).`
         );
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error(`[Dropzone] Error processing ${file}:`, err);
     }
   });

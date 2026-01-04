@@ -43,8 +43,8 @@ export function verifyRoutes() {
     try {
       // Route verification logic
       results.passed.push(route);
-    } catch (_error) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : String(error);
       results.failed.push({ route, error: errorMessage });
     }
   }

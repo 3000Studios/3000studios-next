@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
       products,
       count: products.length,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Products API error:', error);
     
     // Return fallback products if database fails

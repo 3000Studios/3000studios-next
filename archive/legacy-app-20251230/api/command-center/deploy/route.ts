@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
   } catch (error: unknown) {
     console.error('Deploy error:', error);
     return NextResponse.json(
-      { error: 'Failed to deploy changes', details: error.message },
+      { error: 'Failed to deploy changes', details: (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") },
       { status: 500 }
     );
   }

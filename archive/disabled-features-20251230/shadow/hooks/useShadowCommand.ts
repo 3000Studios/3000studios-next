@@ -26,7 +26,7 @@ export function useShadowCommand() {
       const data = await res.json();
       return data;
     } catch (err: unknown) {
-      setError(err.message);
+      setError((err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error"));
       throw err;
     } finally {
       setLoading(false);

@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     fs.writeFileSync(target, jsx);
     return NextResponse.json({ ok: true, updated: route });
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : 'Unknown error occurred';
+    const message = error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error occurred';
     return NextResponse.json({
       ok: false,
       error: message

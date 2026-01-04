@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
       status: deployment.readyState,
       message: 'Deployment triggered successfully',
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Deployment trigger API error:', error);
     return NextResponse.json(
       { error: 'Failed to trigger deployment' },

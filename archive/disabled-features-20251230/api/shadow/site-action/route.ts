@@ -96,7 +96,7 @@ export async function POST(req: Request): Promise<Response> {
   } catch (e: unknown) {
     return NextResponse.json({
       success: false,
-      error: e.message,
+      error: (e instanceof Error ? (e instanceof Error ? e.message : "Unknown error") : "Unknown error"),
     });
   }
 }

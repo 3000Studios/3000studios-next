@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
       analytics,
       timeRange,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Analytics API error:', error);
     return NextResponse.json(
       { error: 'Failed to fetch analytics' },

@@ -64,7 +64,7 @@ Now produce the next line:
         setLastLine(line);
         onDialogue(line);
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Dialogue generation error', err);
     }
   }

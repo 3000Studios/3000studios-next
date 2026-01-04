@@ -77,7 +77,7 @@ Output: {"action": "install-package", "parameters": {"package": "three"}, "descr
       parameters: parsed.parameters || {},
       description: parsed.description || "No description available",
     };
-  } catch (_error) {
+  } catch (error: unknown) {
     console.error("AI interpretation error:", error);
     // Fallback to simple keyword matching
     return fallbackInterpretation(humanCommand);

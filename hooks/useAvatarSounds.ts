@@ -21,7 +21,7 @@ export function useAvatarSounds() {
           map[key] = `/sfx/avatar/${file}`;
         });
         setSoundMap(map);
-      } catch (_e) {
+      } catch (e: unknown) {
         console.warn("No avatar sound manifest found.");
         setSoundMap({});
       }

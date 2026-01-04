@@ -34,7 +34,7 @@ export async function GET() {
   } catch (error: unknown) {
     console.error("Visitors API error:", error);
     return NextResponse.json(
-      { error: error.message || "Failed to fetch visitors" },
+      { error: (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") || "Failed to fetch visitors" },
       { status: 500 }
     );
   }
