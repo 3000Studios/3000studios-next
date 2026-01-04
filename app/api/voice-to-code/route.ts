@@ -2,12 +2,13 @@
  * Voice-to-Code API Route
  * Converts natural language commands into actionable code changes
  * Uses OpenAI to parse intent and generate code patches
- * NOW SUPPORTS: File System Writes (fs/promises)
+ * SUPPORTS: File System Writes (fs/promises), File Creation, and Git Push
  */
 
 import fs from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
+import simpleGit from "simple-git";
 
 // Lazy-load OpenAI dynamically
 let openaiInstance: any = null;
@@ -31,14 +32,15 @@ interface VoiceInput {
   prompt?: string;
   currentContext?: string;
   action?: "preview" | "commit" | "deploy";
-  patches?: CodePatch[]; // For commit action
+  patches?: CodePatch[]; // For commit/deploy action
 }
 
 interface CodePatch {
   file: string;
   description: string;
-  oldCode: string; // Used for fuzzy matching verification
+  oldCode: string; // empty for new files
   newCode: string;
+  isNewFile?: boolean;
 }
 
 export async function POST(request: NextRequest) {
@@ -46,9 +48,32 @@ export async function POST(request: NextRequest) {
     const body = (await request.json()) as VoiceInput;
     const { transcript, audio, prompt, currentContext, action, patches } = body;
 
-    // --- CASE 1: COMMIT (Apply patches) ---
-    if (action === "commit" && patches && patches.length > 0) {
-      return await applyPatches(patches);
+    // --- CASE 1: COMMIT or DEPLOY (Apply patches + Git push) ---
+    if ((action === "commit" || action === "deploy") && patches && patches.length > 0) {
+      const patchResults = await applyPatches(patches);
+
+      if (action === "deploy") {
+        try {
+          const git = simpleGit();
+          await git.add(".");
+          const commitMsg = `voice(update): ${patches.map(p => p.description).join(", ")}`;
+          await git.commit(commitMsg);
+          await git.push("origin", "main");
+          return NextResponse.json({
+            success: true,
+            message: "Changes applied and pushed to GitHub. Deployment triggered.",
+            results: patchResults.results
+          });
+        } catch (gitErr: any) {
+          return NextResponse.json({
+            success: true,
+            warning: "Patches applied but Git push failed: " + gitErr.message,
+            results: patchResults.results
+          });
+        }
+      }
+
+      return NextResponse.json(patchResults);
     }
 
     // --- CASE 2: PREVIEW (Generate patches) ---
@@ -79,16 +104,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No input detected" }, { status: 400 });
     }
 
-    // Fallback Demo Response
-    if (!process.env.OPENAI_API_KEY) {
+    // OpenAI Generation
+    const openai = await getOpenAI();
+    if (!openai) {
       return NextResponse.json({
         success: true,
         intent: "Demo Mode (No API Key)",
-        description:
-          "This is a simulation. Add OPENAI_API_KEY to .env for real AI code generation.",
+        description: "Add OPENAI_API_KEY to .env for real AI code generation.",
         patches: [
           {
-            file: "src/app/page.tsx",
+            file: "app/page.tsx",
             description: "Mock change: Update homepage title",
             oldCode: 'const title = "Welcome";',
             newCode: 'const title = "Welcome to the Future";',
@@ -98,16 +123,15 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // OpenAI Generation
-    const openai = await getOpenAI();
     const systemPrompt = `You are an expert Next.js developer.
     Convert requests into file patches.
-    - TARGET ONLY files in 'src/'.
+    - TARGET folders: 'app/', 'components/', 'lib/', 'voice/', 'public/', 'scripts/'.
+    - If a file doesn't exist, set 'isNewFile': true and 'oldCode': "".
     - RESPOND AS JSON:
     {
-      "intent": "summary",
-      "description": "details",
-      "patches": [{ "file": "src/path/to/file.tsx", "description": "...", "oldCode": "exact string to find", "newCode": "string to replace with" }]
+      "intent": "summary of user request",
+      "description": "technical breakdown",
+      "patches": [{ "file": "path/relative/to/root.tsx", "description": "...", "oldCode": "exact string to replace", "newCode": "replacement content", "isNewFile": boolean }]
     }`;
 
     const completion = await openai.chat.completions.create({
@@ -116,8 +140,7 @@ export async function POST(request: NextRequest) {
         { role: "system", content: systemPrompt },
         {
           role: "user",
-          content: `Request: ${finalTranscript}\nContext: ${currentContext || "Next.js App"
-            }`,
+          content: `Request: ${finalTranscript}\nContext: Next.js App Router, Tailwind CSS, TypeScript.`,
         },
       ],
       response_format: { type: "json_object" },
@@ -133,7 +156,7 @@ export async function POST(request: NextRequest) {
   } catch (error: unknown) {
     console.error("Voice API Error:", error);
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: "Internal Server Error", details: String(error) },
       { status: 500 }
     );
   }
@@ -144,49 +167,60 @@ async function applyPatches(patches: CodePatch[]) {
 
   for (const patch of patches) {
     try {
-      // Safety Check: Only allow writes to src/
+      // Safety Check: Avoid path traversal
       const cleanPath = path
         .normalize(patch.file)
         .replace(/^(\.\.(\/|\\|$))+/, "");
-      if (!cleanPath.startsWith("src/") && !cleanPath.startsWith("src\\")) {
-        throw new Error("Invalid file path. Must be in src/");
+
+      const allowedDirs = ["app", "components", "lib", "voice", "public", "scripts", "styles"];
+      const targetDir = cleanPath.split(path.sep)[0];
+
+      if (!allowedDirs.includes(targetDir) && !cleanPath.endsWith('.md')) {
+        throw new Error(`Invalid file path: ${cleanPath}. Only ${allowedDirs.join(', ')} or root markdown files allowed.`);
       }
 
       const activePath = path.join(process.cwd(), cleanPath);
 
-      // Check if file exists
+      // Handle New File Creation
+      if (patch.isNewFile) {
+        await fs.mkdir(path.dirname(activePath), { recursive: true });
+        await fs.writeFile(activePath, patch.newCode, "utf8");
+        results.push({ file: cleanPath, status: "created" });
+        continue;
+      }
+
+      // Check if file exists for update
       try {
         await fs.access(activePath);
       } catch {
-        throw new Error(`File not found: ${cleanPath}`);
+        throw new Error(`File not found: ${cleanPath}. Use isNewFile for new files.`);
       }
 
       const currentContent = await fs.readFile(activePath, "utf8");
 
-      // Replace Strategy: Simple string replace (could be improved with fuzzy match or AST)
-      // We use replaceAll to handle multiple occurrences if intended, or just first.
-      // For safety, let's assume unique code blocks or simple replace.
-
-      if (!currentContent.includes(patch.oldCode)) {
-        // Try relaxed matching (trim whitespace)
-        // This is a naive implementation; a real system would use a better patcher.
+      if (patch.oldCode && !currentContent.includes(patch.oldCode)) {
         throw new Error(
           `Target code not found in ${cleanPath}. Content matching failed.`,
         );
       }
 
-      const newContent = currentContent.replace(patch.oldCode, patch.newCode);
+      const newContent = patch.oldCode
+        ? currentContent.replace(patch.oldCode, patch.newCode)
+        : patch.newCode; // If no oldCode provided but not isNewFile, just overwrite or append?
+      // Better to treat as append if not provided? No, let's stick to replace.
+
       await fs.writeFile(activePath, newContent, "utf8");
       results.push({ file: cleanPath, status: "success" });
     } catch (err: unknown) {
-      const message = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'Patch application failed';
+      const message = err instanceof Error ? err.message : "Patch application failed";
       results.push({ file: patch.file, status: "error", error: message });
     }
   }
 
-  return NextResponse.json({
+  return {
     success: true,
     action: "commit",
     results,
-  });
+  };
 }
+

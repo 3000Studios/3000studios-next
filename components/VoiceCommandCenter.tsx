@@ -1,5 +1,6 @@
 'use client';
 
+import { Code } from 'lucide-react';
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -338,6 +339,13 @@ export function VoiceCommandCenter() {
             }`}
           >
             {listening ? '⏹ Stop' : '🎤 Listen'}
+          </button>
+          <button
+            onClick={() => (window.location.href = '/voice-ai')}
+            className="w-8 h-8 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 flex items-center justify-center text-cyan-400"
+            title="Open Developer Console"
+          >
+            <Code className="w-4 h-4" />
           </button>
           <button
             onClick={() => setIsMinimized(true)}
