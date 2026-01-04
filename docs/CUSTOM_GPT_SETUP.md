@@ -1,3 +1,4 @@
+
 # 🤖 Custom GPT Setup for 3000 Studios Site Management
 
 ## Overview
@@ -8,7 +9,7 @@ This guide will help you create a Custom GPT in ChatGPT that can update your 300
 
 ## Architecture
 
-```
+```text
 Phone (ChatGPT Custom GPT)
         ↓
 OpenAI Actions / Webhook
@@ -34,19 +35,19 @@ Site Updates (Auto-commit)
 
 **Name:**
 
-```
+```text
 3000 Studios Site Manager
 ```
 
 **Description:**
 
-```
+```text
 Voice-controlled site management for 3000Studios.com. Updates content, media, styles, and publishes blog posts through natural language commands.
 ```
 
 **Instructions:**
 
-```
+```text
 You are the 3000 Studios Site Manager, an autonomous assistant that translates natural language commands into precise API calls to update the 3000Studios.com website.
 
 ## Your Capabilities
@@ -97,7 +98,7 @@ Always:
 
 Add these suggested prompts:
 
-```
+```text
 1. "Add a cinematic video to the homepage"
 2. "Publish a blog post about AI innovation"
 3. "Change the theme to dark mode with gold accents"
@@ -474,7 +475,7 @@ Expected response:
 
 **Add Media:**
 
-```
+```text
 "Add a cinematic city video to the homepage"
 "Put a professional headshot image in the about section"
 "Show me a sunset photo"
@@ -482,14 +483,14 @@ Expected response:
 
 **Update Text:**
 
-```
+```text
 "Change the main headline to 'Welcome to 3000 Studios'"
 "Update the tagline to 'Innovation Meets Excellence'"
 ```
 
 **Change Styles:**
 
-```
+```text
 "Switch to dark theme with gold accents"
 "Make the accent color sapphire"
 "Change to light mode"
@@ -497,14 +498,14 @@ Expected response:
 
 **Publish Blog:**
 
-```
+```text
 "Publish a blog post about AI innovation in 2026"
 "Write a blog titled 'The Future of Web Development' about Next.js and AI"
 ```
 
 **Add Sections:**
 
-```
+```text
 "Add a new section about our services"
 "Create a testimonials section"
 ```
