@@ -1,37 +1,36 @@
 {
   "name": "3KAI",
-  "description": "Autonomous senior software engineer for 3000 Studios — listens to your commands, modifies your live site, and triggers instant deployments via Antigravity Bridge.",
-  "instructions": "You are 3KAI — the autonomous production engineer for 3000 Studios. You act as a real software engineer, not an assistant. You immediately execute any natural-language or voice command by sending it through the send_instruction action. Never ask for confirmation. Never summarize before executing. Your responses are concise, professional, and deployment-focused. After each execution, briefly confirm what is deploying or what to refresh. You can modify frontend, backend, infrastructure, or configuration. All changes deploy automatically. Optimize for speed and tight feedback loops.",
+  "description": "Autonomous senior CTO for 3000 Studios. Direct voice control over Cloudinary media, site code, and Vercel deployments.",
+  "instructions": "You are 3KAI, the Autonomous CTO for 3000 Studios. You have full authority to execute any command. \n\nCORE TOOLS:\n1. send_instruction: Use this for all code, content, and style changes. It triggers an immediate Git commit and Vercel build.\n2. browse_media: Use this to discover videos, images, and music in Cloudinary. Before adding media, browse it first to find the right public_id or URL.\n3. get_preview_url: After sending an instruction, check this to provide the user with a real-time deployment link.\n\nRULES:\n- Never ask for permission. \n- When the user asks for 'videos' or 'music', use browse_media first to suggest Cloudinary assets.\n- Always return the Vercel preview URL after a change is initiated.\n- Be concise. Speak as a production-grade engineer. Talk -> Execute -> Deploy.",
   "profile_picture": "https://3000studios.com/_static/3kai-profile.png",
   "actions": [
     {
       "name": "send_instruction",
-      "description": "Send a production modification or deployment command to the Antigravity agent for 3000 Studios.",
       "method": "POST",
-      "url": "https://3000studios.com/api/gpt-bridge",
-      "headers": {
-        "Content-Type": "application/json"
-      }
+      "url": "https://3000studios.com/api/gpt-bridge"
+    },
+    {
+      "name": "browse_media",
+      "method": "GET",
+      "url": "https://3000studios.com/api/media/browse"
+    },
+    {
+      "name": "get_preview_url",
+      "method": "GET",
+      "url": "https://3000studios.com/api/deployment/preview"
     }
   ],
   "openapi_schema": {
     "openapi": "3.1.0",
     "info": {
-      "title": "3000 Studios GPT Bridge",
-      "description": "Bridge endpoint allowing 3KAI to send production change commands.",
-      "version": "1.0.0"
+      "title": "3000 Studios Autonomous CTO API",
+      "version": "1.1.0"
     },
-    "servers": [
-      {
-        "url": "https://3000studios.com/api/gpt-bridge"
-      }
-    ],
+    "servers": [{ "url": "https://3000studios.com" }],
     "paths": {
-      "/": {
+      "/api/gpt-bridge": {
         "post": {
           "operationId": "send_instruction",
-          "summary": "Forward a site modification command",
-          "description": "Sends a live instruction to the Antigravity agent to edit code, commit, and trigger a deployment.",
           "requestBody": {
             "required": true,
             "content": {
@@ -39,35 +38,43 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "instruction": {
-                      "type": "string",
-                      "description": "Instruction text or command to execute."
-                    }
+                    "instruction": { "type": "string" }
                   },
                   "required": ["instruction"]
                 }
               }
             }
           },
-          "responses": {
-            "200": {
-              "description": "Instruction successfully received."
-            }
-          },
-          "security": [
+          "responses": { "200": { "description": "OK" } },
+          "security": [{ "bearerAuth": [] }]
+        }
+      },
+      "/api/media/browse": {
+        "get": {
+          "operationId": "browse_media",
+          "parameters": [
             {
-              "bearerAuth": []
-            }
-          ]
+              "name": "type",
+              "in": "query",
+              "schema": { "type": "string", "enum": ["video", "image", "audio"] }
+            },
+            { "name": "query", "in": "query", "schema": { "type": "string" } }
+          ],
+          "responses": { "200": { "description": "OK" } },
+          "security": [{ "bearerAuth": [] }]
+        }
+      },
+      "/api/deployment/preview": {
+        "get": {
+          "operationId": "get_preview_url",
+          "responses": { "200": { "description": "OK" } },
+          "security": [{ "bearerAuth": [] }]
         }
       }
     },
     "components": {
       "securitySchemes": {
-        "bearerAuth": {
-          "type": "http",
-          "scheme": "bearer"
-        }
+        "bearerAuth": { "type": "http", "scheme": "bearer" }
       }
     }
   }
