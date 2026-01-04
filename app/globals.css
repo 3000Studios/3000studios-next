@@ -26,10 +26,12 @@
 /* Global Centered Alignment & Padding Reset */
 html,
 body {
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
   box-sizing: border-box;
-  text-align: center; /* Force center by default */
+  text-align: center;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* Hide default cursor - CustomCursor component handles this */
