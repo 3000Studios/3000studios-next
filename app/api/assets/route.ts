@@ -25,11 +25,24 @@ async function searchPexels(query: string) {
     }
 }
 
+export const runtime = "nodejs";
+
 export async function POST(req: Request) {
     try {
+        const expectedToken = process.env.GPT_BRIDGE_TOKEN;
         const authHeader = req.headers.get('authorization');
-        if (authHeader !== `Bearer ${process.env.GPT_BRIDGE_TOKEN}`) {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
+        if (!expectedToken) {
+            return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+        }
+
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            return NextResponse.json({ error: 'Unauthorized: Missing Bearer token' }, { status: 401 });
+        }
+
+        const token = authHeader.replace('Bearer ', '').trim();
+        if (token !== expectedToken.trim()) {
+            return NextResponse.json({ error: 'Forbidden: Token mismatch' }, { status: 403 });
         }
 
         const { query } = await req.json();
