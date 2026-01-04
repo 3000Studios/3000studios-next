@@ -1,3 +1,4 @@
+import { execSync } from 'child_process';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
@@ -7,20 +8,33 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        // Execute git rollback
-        console.warn('Executing emergency rollback via Git...');
+        console.warn('⚠️ 3KAI triggering emergency rollback...');
 
-        // In a real environment, this would run:
-        // execSync('git revert HEAD --no-edit && git push origin main');
+        try {
+            // Revert the last commit without opening an editor
+            execSync('git revert HEAD --no-edit');
+            // Push the revert to origin
+            execSync('git push origin main');
 
-        return NextResponse.json({
-            success: true,
-            message: 'Emergency rollback signal received and processed.',
-            action: 'Git Revert HEAD',
-            timestamp: new Date().toISOString()
-        });
+            console.log('✅ Rollback successful. Revert commit pushed to main.');
+
+            return NextResponse.json({
+                success: true,
+                message: 'Emergency rollback executed successfully. Last commit reverted and pushed.',
+                timestamp: new Date().toISOString()
+            });
+        } catch (gitError: unknown) {
+            const msg = gitError instanceof Error ? gitError.message : String(gitError);
+            console.error('Git rollback internal error:', msg);
+            return NextResponse.json({
+                success: false,
+                error: 'Git command failed',
+                details: msg
+            }, { status: 500 });
+        }
     } catch (error: unknown) {
-        console.error('Rollback failed:', error);
-        return NextResponse.json({ error: 'Rollback failed' }, { status: 500 });
+        const message = error instanceof Error ? error.message : "Unknown error";
+        console.error('Rollback handler error:', message);
+        return NextResponse.json({ error: 'Rollback failed', details: message }, { status: 500 });
     }
 }
