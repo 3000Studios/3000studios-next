@@ -1,4 +1,4 @@
-name: ⚡ 3KAI Instant Deploy + Auto Rollback
+name: ⚡ 3KAI Ultra-Fast Parallel Deploy
 
 on:
   push:
@@ -13,118 +13,95 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
+    name: Parallel builds
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        task: [app, assets, types]
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci --prefer-offline --no-audit --progress=false
+      - name: Run ${{ matrix.task }} build
+        run: |
+          if [ "${{ matrix.task }}" = "app" ]; then
+            npm run build
+          elif [ "${{ matrix.task }}" = "assets" ]; then
+            npm run build:assets || true
+          elif [ "${{ matrix.task }}" = "types" ]; then
+            npm run type-check || true
+          fi
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ matrix.task }}
+          path: .next
+
+  deploy:
+    name: Deploy to Vercel
+    runs-on: ubuntu-latest
+    needs: build
     env:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
       VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
-
     steps:
-      - name: 🧩 Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 1
-
-      - name: ⚙️ Setup Node.js 20.x
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
-          cache: 'npm'
-
-      - name: ⚡ Ultra-fast install (clean + cache)
-        run: npm ci --prefer-offline --no-audit --progress=false
-
-      - name: 🧱 Build project
-        run: npm run build --silent || true
-
-      - name: ⚙️ Install Vercel CLI
-        run: npm i -g vercel@latest
-
-      - name: 🏷️ Generate version tag
-        id: tag
-        run: |
-          VERSION_TAG="v$(date +'%Y.%m.%d-%H%M')"
-          echo "VERSION_TAG=$VERSION_TAG" >> $GITHUB_ENV
-          echo "📦 Version tag: $VERSION_TAG"
-
-      - name: 🚀 Deploy to Vercel (Production)
-        id: vercel
-        continue-on-error: true
+          node-version: 20
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-app
+          path: .next
+      - run: npm i -g vercel@latest
+      - name: Deploy & Rollback on failure
+        id: deploy
+        shell: bash
         run: |
           echo "🌐 Deploying production build..."
-          DEPLOY_URL=$(vercel deploy --prebuilt --prod --yes --token "$VERCEL_TOKEN" 2>&1) || true
-          echo "$DEPLOY_URL"
-          echo "url=$DEPLOY_URL" >> $GITHUB_OUTPUT
-
-      - name: ✅ Check deploy status
-        id: deploy_status
-        run: |
-          if [[ "${{ steps.vercel.outcome }}" == "success" ]]; then
-            echo "success=true" >> $GITHUB_ENV
-          else
-            echo "success=false" >> $GITHUB_ENV
+          set +e
+          DEPLOY_URL=$(vercel deploy --prebuilt --prod --yes --token "$VERCEL_TOKEN")
+          STATUS=$?
+          set -e
+          if [ $STATUS -ne 0 ]; then
+            echo "❌ Deployment failed. Rolling back..."
+            PREV_DEPLOY=$(vercel ls --token "$VERCEL_TOKEN" | grep production | head -n 1 | awk '{print $2}')
+            if [ -n "$PREV_DEPLOY" ]; then
+              vercel rollback "$PREV_DEPLOY" --token "$VERCEL_TOKEN"
+              echo "✅ Rolled back to $PREV_DEPLOY"
+            fi
+            exit 1
           fi
-
-      - name: 🔁 Auto-rollback on failure
-        if: env.success == 'false'
-        run: |
-          echo "❌ Deployment failed. Rolling back..."
-          PREV_DEPLOY=$(vercel ls --token "$VERCEL_TOKEN" | grep production | head -n 1 | awk '{print $2}')
-          if [ -n "$PREV_DEPLOY" ]; then
-            vercel rollback "$PREV_DEPLOY" --token "$VERCEL_TOKEN"
-            echo "✅ Rolled back to previous stable deployment: $PREV_DEPLOY"
-          else
-            echo "⚠️ No previous deployment found to roll back to."
-          fi
-
-      - name: 🔔 Trigger 3KAI Deploy Hook (fast redeploy)
-        if: env.success == 'true'
-        run: |
-          curl -s -X POST "$VERCEL_DEPLOY_HOOK" > /dev/null
-          echo "✅ 3KAI deploy hook triggered."
-
-      - name: ✅ Success log
-        if: env.success == 'true'
-        run: echo "🎉 Deployment ($VERSION_TAG) succeeded!"
-
-      - name: ❌ Failure alert
-        if: env.success == 'false'
-        run: |
-          echo "⚠️ Deployment failed at $(date)."
-          # Optional: Slack alert
-          # curl -X POST -H 'Content-type: application/json' \
-          # --data "{\"text\":\"🚨 3KAI Deploy Failed: ${GITHUB_REPOSITORY} (${GITHUB_SHA})\"}" \
-          # ${{ secrets.SLACK_WEBHOOK_URL }}
+          echo "✅ Deployment succeeded: $DEPLOY_URL"
+      - run: curl -s -X POST "$VERCEL_DEPLOY_HOOK" > /dev/null
 
   auto-sync:
-    name: 🔄 Auto Commit & Sync
+    name: Auto Commit & Sync
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch'
     permissions:
       contents: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Apply 3KAI Changes
-        run: |
-          echo "🧠 Applying automatic code updates..."
+      - uses: actions/checkout@v4
+      - run: |
           echo "<!-- Auto update $(date) -->" >> public/_3kai.log
-
-      - name: Commit and Push
-        run: |
           git config user.name "3KAI Autodeploy"
           git config user.email "ops@3000studios.com"
           git add -A
-          git commit -m "🤖 3KAI auto-sync update $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+          git commit -m "🤖 3KAI auto-sync update $(date +'%Y-%m-%d %H:%M:%S')" || true
           git push origin HEAD:${GITHUB_REF#refs/heads/}
-
-      - name: Trigger Deploy Hook
-        run: |
-          curl -s -X POST "$VERCEL_DEPLOY_HOOK" > /dev/null
-          echo "✅ Sync deploy triggered."
+      - run: curl -s -X POST "$VERCEL_DEPLOY_HOOK" > /dev/null
