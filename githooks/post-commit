@@ -1,0 +1,3 @@
+#!/bin/sh
+git push || true
+exit 0
