@@ -4,16 +4,16 @@ A modern Next.js 16 application with a luxury design theme, robust page structur
 
 ## 🤖 Automation
 
-This repository is **fully automated** with:
+This repository is fully automated.
 
-- ✅ Pre-commit hooks (format + lint)
-- ✅ Conventional commit enforcement
-- ✅ Auto-fixing CI/CD pipeline
-- ✅ Automated dependency updates
-- ✅ Self-healing deployments
-- ✅ Health checks and auto-rollback
+All commits are validated, fixed, and deployed automatically via CI/CD.
+Manual deployment steps are not required.
 
-See [AUTOMATION.md](./AUTOMATION.md) for details.
+See:
+
+- [AUTOMATION.md](./AUTOMATION.md)
+- [TRANSFORMATION_COMPLETE.md](./TRANSFORMATION_COMPLETE.md)
+- [VOICE_API_SPEC.md](./VOICE_API_SPEC.md)
 
 ## 🚀 Features
 
