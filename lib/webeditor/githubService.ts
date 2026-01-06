@@ -304,7 +304,7 @@ export const initializeAndRepairRepo = async (
     }
 
     // 2. Fetch and Sync Branch
-    let branch = repoData.default_branch;
+    const branch = repoData.default_branch;
     log(`Syncing with remote branch '${branch}'...`);
 
     try {
