@@ -4,30 +4,42 @@ on:
   workflow_dispatch:
     inputs:
       intent:
-        description: "Natural language command from GPT"
+        description: Natural language command from GPT
         required: true
         type: string
 
+permissions:
+  contents: write
+  actions: write
+
 jobs:
-  normalize-intent:
+  apply-intent:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Normalize intent
-        run: |
-          echo "INTENT<<EOF" >> $GITHUB_ENV
-          echo "${{ github.event.inputs.intent }}" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-
-      - name: Dispatch validation & apply workflow
-        uses: peter-evans/repository-dispatch@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          event-type: apply-command
-          client-payload: |
-            {
-              "intent": "${{ github.event.inputs.intent }}"
-            }
+          node-version: 20
+
+      - name: Install dependencies
+        run: |
+          corepack enable
+          pnpm install --frozen-lockfile
+
+      - name: Execute intent engine
+        run: |
+          echo "${{ github.event.inputs.intent }}" | node scripts/apply-intent.mjs
+
+      - name: Commit changes
+        run: |
+          git config user.name "3000 Agent"
+          git config user.email "agent@3000studios.com"
+          git add .
+          git commit -m "chore(agent): apply intent" || echo "No changes to commit"
+
+      - name: Push changes
+        run: git push origin main
