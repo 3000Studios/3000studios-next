@@ -64,3 +64,4 @@ prisma/*.db-journal
 !README.txt
 
 
+.pnpm-store/
