@@ -1,0 +1,33 @@
+name: Command Dispatch
+
+on:
+  workflow_dispatch:
+    inputs:
+      intent:
+        description: "Natural language command from GPT"
+        required: true
+        type: string
+
+jobs:
+  normalize-intent:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Normalize intent
+        run: |
+          echo "INTENT<<EOF" >> $GITHUB_ENV
+          echo "${{ github.event.inputs.intent }}" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Dispatch validation & apply workflow
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          event-type: apply-command
+          client-payload: |
+            {
+              "intent": "${{ github.event.inputs.intent }}"
+            }

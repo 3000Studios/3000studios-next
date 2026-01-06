@@ -157,6 +157,9 @@ Co-authored-by: Ona <no-reply@ona.com>"
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
+      - name: Verify deployment
+        run: node scripts/verify-deployment.mjs || true
+
       - name: Health check
         run: |
           sleep 10

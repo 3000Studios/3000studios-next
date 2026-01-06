@@ -1,0 +1,45 @@
+openapi: 3.1.0
+info:
+  title: 3000Studios GitHub Actions Control API
+  description: Canonical execution bridge from GPT to GitHub Actions
+  version: 1.0.0
+
+servers:
+  - url: https://api.github.com
+
+paths:
+  /repos/3000Studios/3000studios-next/actions/workflows/{workflow_id}/dispatches:
+    post:
+      operationId: triggerWorkflow
+      summary: Trigger a GitHub Actions workflow
+      description: Dispatches a workflow for real execution and deployment
+
+      parameters:
+        - name: workflow_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Workflow file name (e.g. command-dispatch.yml)
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ref
+              properties:
+                ref:
+                  type: string
+                  description: Branch to run the workflow on (usually "main")
+                inputs:
+                  type: object
+                  additionalProperties:
+                    type: string
+                  description: Optional workflow_dispatch inputs
+
+      responses:
+        '204':
+          description: Workflow dispatched successfully
