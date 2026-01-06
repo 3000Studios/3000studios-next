@@ -16,31 +16,23 @@
     }
   },
   "scripts": {
-    "autosync": "./antigravity-autosync.sh",
-    "analyze": "cross-env ANALYZE=true npm run build",
     "dev": "next dev",
     "prebuild": "node scripts/validate-app-structure.mjs",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint .",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "type-check": "tsc --noEmit",
-    "fix": "pnpm lint --fix || exit 0",
-    "fix:all": "pnpm fix || exit 0",
-    "repair": "pnpm run fix:all && pnpm run type-check || true",
-    "prune:types": "ts-prune --error",
+    "validate": "pnpm run format:check && pnpm run lint && pnpm run type-check",
+    "fix": "pnpm run format && pnpm run lint:fix",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "db:seed": "tsx prisma/seed.ts",
     "clean": "rimraf .next node_modules",
-    "clean:deps": "rimraf node_modules package-lock.json",
-    "fresh:install": "pnpm run clean:deps && pnpm install",
-    "deps:audit": "npm audit fix",
-    "deps:update": "npm update",
-    "deploy": "vercel --prod --yes",
-    "deploy:cloudflare": "echo \"Cloudflare deploy ready when enabled\"",
-    "postinstall": "node -e \"const { execSync } = require('child_process'); const url = process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/postgres'; execSync('npx prisma generate', { stdio: 'inherit', env: { ...process.env, DATABASE_URL: url } });\"",
-    "slicemachine": "start-slicemachine"
+    "prepare": "husky",
+    "postinstall": "node -e \"const { execSync } = require('child_process'); const url = process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/postgres'; execSync('npx prisma generate', { stdio: 'inherit', env: { ...process.env, DATABASE_URL: url } });\""
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.89",
@@ -138,5 +130,14 @@
     "typescript": "^5.9.3",
     "vitest": "^4.0.16",
     "zx": "^8.8.5"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,mjs}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
   }
 }
