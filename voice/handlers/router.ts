@@ -85,6 +85,9 @@ async function gitCommitAndPush(files: string[], commandType: string): Promise<v
     const message = `chore(voice): ${commandType.toLowerCase().replace('_', ' ')}`;
     await execAsync(`git commit -m "${message}"`);
 
+    // Pull before push to handle remote changes
+    await execAsync('git pull origin main --rebase -X theirs');
+
     // Push to trigger deploy
     await execAsync('git push origin main');
 

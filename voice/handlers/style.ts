@@ -5,14 +5,18 @@
 
 import { promises as fs } from 'fs';
 import path from 'path';
-import { CommandResult, PayloadVoiceCommand } from '../commands';
+import { CommandResult, PayloadVoiceCommand, VoiceCommand } from '../commands';
 
 /**
  * CHANGE_STYLE: Update CSS or design tokens
  * Deterministic: target (selector/variable), value (new value)
  */
-export async function handleChangeStyle(cmd: unknown): Promise<void> {
+export async function handleChangeStyle(cmd: VoiceCommand): Promise<void> {
+  if (cmd.type !== 'CHANGE_STYLE') return;
   const { target, value } = cmd.payload;
+  if (!target || value === undefined) {
+    throw new Error('Target and value are required for changing style');
+  }
 
   // Two cases: CSS variable or CSS class
   if (target.startsWith('--')) {

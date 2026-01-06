@@ -5,14 +5,18 @@
 
 import { promises as fs } from 'fs';
 import path from 'path';
-import { CommandResult, PayloadVoiceCommand } from '../commands';
+import { CommandResult, PayloadVoiceCommand, VoiceCommand } from '../commands';
 
 /**
  * UPDATE_TEXT: Search and replace in a file
  * Deterministic: file path, search string, replacement string
  */
-export async function handleUpdateText(cmd: unknown): Promise<void> {
+export async function handleUpdateText(cmd: VoiceCommand): Promise<void> {
+  if (cmd.type !== 'UPDATE_TEXT') return;
   const { file, search, replace } = cmd.payload;
+  if (!file || !search || replace === undefined) {
+    throw new Error('File, search, and replace are required for updating text');
+  }
   const filePath = path.join(process.cwd(), file);
 
   try {
@@ -33,8 +37,12 @@ export async function handleUpdateText(cmd: unknown): Promise<void> {
  * ADD_MEDIA: Add video, image, or audio to a page
  * Deterministic: page, URL, kind (video|image|audio)
  */
-export async function handleAddMedia(cmd: unknown): Promise<void> {
+export async function handleAddMedia(cmd: VoiceCommand): Promise<void> {
+  if (cmd.type !== 'ADD_MEDIA') return;
   const { page, url, kind } = cmd.payload;
+  if (!page || !url || !kind) {
+    throw new Error('Page, URL, and kind are required for adding media');
+  }
   const filePath = path.join(process.cwd(), `app/${page}/page.tsx`);
 
   try {

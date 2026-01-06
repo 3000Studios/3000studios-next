@@ -20,28 +20,28 @@ export async function routeVoiceCommand(
     // Route to appropriate handler based on command type
     switch (cmd.type) {
       case 'UPDATE_TEXT':
-        return await handleUpdateText(cmd.text || 'New Headline');
+        return await handleUpdateText(cmd.payload.text || 'New Headline');
 
       case 'ADD_SECTION':
         return await handleAddSection(
-          cmd.title || 'New Section',
-          cmd.content || 'Section content here'
+          cmd.payload.title || 'New Section',
+          cmd.payload.content || 'Section content here'
         );
 
       case 'ADD_MEDIA':
         return await handleAddMedia(
-          cmd.url || '/media/sample.mp4',
-          cmd.mediaType as 'video' | 'image'
+          cmd.payload.url || '/media/sample.mp4',
+          cmd.payload.mediaType as 'video' | 'image'
         );
 
       case 'CHANGE_STYLE':
-        return await handleChangeStyle(cmd.property || 'primary-color', cmd.value || '#00ffff');
+        return await handleChangeStyle(cmd.payload.property || 'primary-color', cmd.payload.value || '#00ffff');
 
       case 'PUBLISH_BLOG':
         return await handlePublishBlog(
-          cmd.title || 'New Blog Post',
-          cmd.body || 'Blog content here',
-          cmd.slug
+          cmd.payload.title || 'New Blog Post',
+          cmd.payload.body || 'Blog content here',
+          cmd.payload.slug
         );
 
       default:

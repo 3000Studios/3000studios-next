@@ -16,36 +16,50 @@ export interface CommandResult {
 export type VoiceCommand =
   | {
     type: 'UPDATE_TEXT';
-    text?: string;
-    file?: string;
-    search?: string;
-    replace?: string;
+    payload: {
+      text?: string;
+      file?: string;
+      search?: string;
+      replace?: string;
+    }
   }
   | {
     type: 'ADD_SECTION';
-    title?: string;
-    content?: string;
-    page?: string;
+    payload: {
+      title?: string;
+      content?: string;
+      page?: string;
+      component?: string;
+    }
   }
   | {
     type: 'ADD_MEDIA';
-    url?: string;
-    mediaType?: 'video' | 'image' | 'audio';
-    page?: string;
+    payload: {
+      url?: string;
+      mediaType?: 'video' | 'image' | 'audio';
+      page?: string;
+      kind?: 'video' | 'image' | 'audio';
+    }
   }
   | {
     type: 'CHANGE_STYLE';
-    property?: string;
-    value?: string;
-    target?: string;
+    payload: {
+      property?: string;
+      value?: string;
+      target?: string;
+      cssVariable?: string;
+    }
   }
   | {
     type: 'PUBLISH_BLOG';
-    title?: string;
-    body?: string;
-    slug?: string;
-    topic?: string;
+    payload: {
+      title?: string;
+      body?: string;
+      slug?: string;
+      topic?: string;
+    }
   };
+
 
 // Typed commands with Payload structure for Handlers
 export type PayloadVoiceCommand =

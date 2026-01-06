@@ -5,14 +5,17 @@
 
 import { promises as fs } from 'fs';
 import path from 'path';
-import { CommandResult, PayloadVoiceCommand } from '../commands';
+import { CommandResult, PayloadVoiceCommand, VoiceCommand } from '../commands';
 
 /**
  * ADD_SECTION: Add a new section to a page
  * Deterministic: page, component (section name)
  */
-export async function handleAddSection(cmd: unknown): Promise<void> {
+export async function handleAddSection(cmd: VoiceCommand): Promise<void> {
+  if (cmd.type !== 'ADD_SECTION') return;
   const { page, component } = cmd.payload;
+  if (!page || !component) throw new Error('Page and component are required for adding a section');
+
   const filePath = path.join(process.cwd(), `app/${page}/page.tsx`);
 
   try {
@@ -38,8 +41,11 @@ export async function handleAddSection(cmd: unknown): Promise<void> {
  * PUBLISH_BLOG: Create and publish a blog post
  * Deterministic: topic (generates file + frontmatter)
  */
-export async function handlePublishBlog(cmd: unknown): Promise<void> {
+export async function handlePublishBlog(cmd: VoiceCommand): Promise<void> {
+  if (cmd.type !== 'PUBLISH_BLOG') return;
   const { topic } = cmd.payload;
+  if (!topic) throw new Error('Topic is required for publishing a blog post');
+
   const date = new Date().toISOString().split('T')[0];
   const slug = topic.toLowerCase().replace(/\s+/g, '-');
   const filePath = path.join(process.cwd(), `app/blog/${slug}.md`);
@@ -99,7 +105,8 @@ export async function handleUpdateNav(
     return {
       success: false,
       files_changed: [],
-      error: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error',
+      error: error instanceof Error ? error.message : 'Unknown error',
     };
   }
 }
+

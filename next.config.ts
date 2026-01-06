@@ -1,13 +1,20 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import withBundleAnalyzer from "@next/bundle-analyzer";
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
   // Standalone output for smallest deploy bundle
   output: "standalone",
 
   // React strict mode for robust dev
   reactStrictMode: true,
 
-  // Enable SWC minification for faster builds
-  swcMinify: true,
+  // Explicit Turbopack declaration (required for Next.js 16+)
+  turbopack: {},
+
+  // Webpack compatibility layer (non-invasive)
+  webpack: (config: any) => {
+    return config;
+  },
 
   // Compiler optimizations
   compiler: {
@@ -93,4 +100,7 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+})(nextConfig);
+

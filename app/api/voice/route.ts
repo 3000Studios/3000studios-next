@@ -124,9 +124,11 @@ export async function POST(req: Request) {
             // Queue the mutation
             const result = await routeVoiceCommand({
               type: 'ADD_MEDIA',
-              url: mediaUrl,
-              mediaType: type
-            });
+              payload: {
+                url: mediaUrl,
+                mediaType: type
+              }
+            } as VoiceCommand);
             return NextResponse.json({
               ...result,
               summary: `Found and added ${type} of "${query}" from Pexels`

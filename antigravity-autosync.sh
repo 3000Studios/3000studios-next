@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 # Antigravity AutoSync - Persistent Workspace Protection
 # Ensures every file change is committed and pushed immediately.
@@ -11,8 +10,10 @@ echo "🚀 Antigravity AutoSync ACTIVE on branch: $BRANCH"
 
 while true; do
   # Check if there are any changes (including untracked files)
-  if [[ -n "$(git status --porcelain)" ]]; then
-    FILE_COUNT=$(git status --porcelain | wc -l | tr -d ' ')
+  STATUS=$(git status --porcelain)
+  if [[ -n "$STATUS" ]]; then
+    FILE_COUNT=$(echo "$STATUS" | wc -l | tr -d ' ')
+
     # Use PowerShell to get timestamp on Windows, fallback to date on Unix
     if command -v powershell >/dev/null 2>&1; then
       TIMESTAMP=$(powershell -NoProfile -Command "Get-Date -Format 'yyyy-MM-dd HH:mm:ss'")
@@ -23,16 +24,22 @@ while true; do
     # Auto-generate intelligent commit message
     MSG="auto(sync): ${FILE_COUNT} file(s) updated @ ${TIMESTAMP}"
 
-    echo "📦 Changes detected. Committing..."
+    echo "📦 Changes detected ($FILE_COUNT files). Committing..."
     git add -A
-    git commit -m "$MSG"
+    git commit -m "$MSG" || echo "⚠️ Nothing to commit"
+
+    echo "🔄 Pulling latest from Global Nexus..."
+    git pull origin "$BRANCH" --rebase -X theirs || echo "⚠️ Pull failed, attempting push anyway..."
 
     echo "📤 Pushing to Global Nexus..."
-    git push origin "$BRANCH"
-
-    echo "✅ Auto-committed + pushed → $MSG"
+    if git push origin "$BRANCH"; then
+      echo "✅ Auto-committed + pushed → $MSG"
+    else
+      echo "❌ Push failed. Retrying in next cycle."
+    fi
   fi
 
   # Wait 5 seconds before next polling cycle
   sleep 5
 done
+
