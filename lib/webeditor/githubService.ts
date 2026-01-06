@@ -49,7 +49,7 @@ export const executeGitHubCommand = async (
         switch (intent.action) {
             case 'create_file':
             case 'update_file': {
-                if (!intent.path || !intent.content) {
+                if (!intent.path || intent.content === undefined) {
                     return { success: false, message: 'Missing path or content for file operation.' };
                 }
 

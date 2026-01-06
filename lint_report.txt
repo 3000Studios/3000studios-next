@@ -1,0 +1,4 @@
+
+> 3000studios-next@1.0.1 lint C:\3000Studos-Production\3000studios-next-main\3000studios-next
+> eslint .
+
