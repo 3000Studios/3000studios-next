@@ -7,6 +7,7 @@
     "node": ">=20.0.0"
   },
   "packageManager": "pnpm@10.26.0",
+
   "overrides": {
     "camera-controls": "3.1.1"
   },
@@ -15,30 +16,47 @@
       "camera-controls": "3.1.1"
     }
   },
+
   "scripts": {
     "autosync": "./antigravity-autosync.sh",
     "analyze": "cross-env ANALYZE=true npm run build",
+
     "dev": "next dev",
-    "harden": "bash scripts/harden-repo.sh",
     "prebuild": "node scripts/validate-app-structure.mjs",
     "build": "next build --webpack",
     "start": "next start",
+
     "lint": "eslint .",
     "format": "prettier --write .",
     "type-check": "tsc --noEmit",
+
+    "fix": "pnpm lint --fix || exit 0",
+    "fix:all": "pnpm fix || exit 0",
+
+    "repair": "pnpm run fix:all && pnpm run type-check || true",
+
     "prune:types": "ts-prune --error",
+
     "test": "vitest",
     "test:ui": "vitest --ui",
+
     "db:seed": "tsx prisma/seed.ts",
+
     "clean": "rimraf .next node_modules",
     "clean:deps": "rimraf node_modules package-lock.json",
-    "fresh:install": "npm run clean:deps && npm install",
+    "fresh:install": "pnpm run clean:deps && pnpm install",
+
     "deps:audit": "npm audit fix",
     "deps:update": "npm update",
+
     "deploy": "vercel --prod --yes",
+    "deploy:cloudflare": "echo \"Cloudflare deploy ready when enabled\"",
+
     "postinstall": "node -e \"const { execSync } = require('child_process'); const url = process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/postgres'; execSync('npx prisma generate', { stdio: 'inherit', env: { ...process.env, DATABASE_URL: url } });\"",
+
     "slicemachine": "start-slicemachine"
   },
+
   "dependencies": {
     "@ai-sdk/openai": "^2.0.89",
     "@anthropic-ai/sdk": "^0.71.2",
@@ -98,6 +116,7 @@
     "zod": "^3.24.1",
     "zustand": "^4.5.7"
   },
+
   "devDependencies": {
     "@next/bundle-analyzer": "^16.1.1",
     "@slicemachine/adapter-next": "^0.3.92",
@@ -135,3 +154,4 @@
     "zx": "^8.8.5"
   }
 }
+
