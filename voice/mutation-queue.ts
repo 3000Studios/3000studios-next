@@ -186,7 +186,7 @@ async function applyMutation(mutation: QueuedMutation): Promise<void> {
 
 async function updateHomeHeroHeadline(newText: string): Promise<void> {
   const homePath = path.join(process.cwd(), 'app/page.tsx');
-  let content = await fs.readFile(homePath, 'utf8');
+  const content = await fs.readFile(homePath, 'utf8');
 
   // Replace the existing headline text while keeping styling intact
   const replaced = content.replace(
@@ -206,9 +206,10 @@ async function updateHomeHeroHeadline(newText: string): Promise<void> {
 
 function safeReadQueue(): QueuedMutation[] {
   try {
-    const fs = require('fs');
-    if (!fs.existsSync(_QUEUE_FILE)) return [];
-    const data = fs.readFileSync(_QUEUE_FILE, 'utf8');
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const nodeFs = require('fs');
+    if (!nodeFs.existsSync(_QUEUE_FILE)) return [];
+    const data = nodeFs.readFileSync(_QUEUE_FILE, 'utf8');
     const parsed = JSON.parse(data);
     return Array.isArray(parsed) ? (parsed as QueuedMutation[]) : [];
   } catch (error: unknown) {
