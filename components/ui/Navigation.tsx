@@ -28,6 +28,7 @@ export const Navigation = () => {
   const navLinks = [
     { href: '/home', label: 'HOME' },
     { href: '/store/3000-store', label: 'STORE' },
+    { href: '/vip', label: 'VIP' },
     { href: '/projects', label: 'PROJECTS' },
     { href: '/live', label: 'LIVE' },
     { href: '/posts', label: 'POSTS' },

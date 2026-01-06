@@ -1,30 +1,33 @@
-import { Octokit } from '@octokit/rest';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { executeGitHubCommand } from './githubService';
 
-// Mock Octokit
+// Mock Octokit with shared state
+const mockRepos = {
+    getContent: vi.fn(),
+    createOrUpdateFileContents: vi.fn(),
+    deleteFile: vi.fn(),
+};
+const mockActions = {
+    createWorkflowDispatch: vi.fn(),
+};
+
 vi.mock('@octokit/rest', () => {
-    const MockOctokit = vi.fn(() => ({
-        repos: {
-            getContent: vi.fn(),
-            createOrUpdateFileContents: vi.fn(),
-            deleteFile: vi.fn(),
-        },
-        actions: {
-            createWorkflowDispatch: vi.fn()
-        }
-    }));
-    return { Octokit: MockOctokit };
+    return {
+        Octokit: vi.fn().mockImplementation(function () {
+            return {
+                repos: mockRepos,
+                actions: mockActions,
+            };
+        })
+    };
 });
 
 describe('githubService', () => {
     const mockConfig = { pat: 'test-pat', owner: 'test-owner', repo: 'test-repo', openaiKey: 'key' };
-    let octokitMock: any;
+    const octokitMock = { repos: mockRepos, actions: mockActions };
 
     beforeEach(() => {
         vi.clearAllMocks();
-        // @ts-ignore
-        octokitMock = new Octokit();
     });
 
     it('create_file should call createOrUpdateFileContents with correct params', async () => {

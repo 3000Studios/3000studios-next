@@ -197,15 +197,7 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                {/* Float Badge */}
-                <div className="absolute bottom-8 left-8 right-8 p-6 glass border border-[#D4AF37]/30 rounded-2xl backdrop-blur-xl z-20">
-                  <div className="text-xl font-bold text-white mb-2 italic">
-                    Neural Link Established
-                  </div>
-                  <p className="text-[10px] text-white/50 font-black uppercase tracking-widest leading-relaxed">
-                    3KAI autonomous agent is monitoring this workspace for optimizations.
-                  </p>
-                </div>
+                {/* Float Badge - Removed as per user request */}
               </div>
             </motion.div>
           </div>
