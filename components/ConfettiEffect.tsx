@@ -29,7 +29,7 @@ export default function ConfettiEffect({ show }: ConfettiEffectProps) {
           zIndex: 99999,
         });
       } catch (error: unknown) {
-        console.warn('Confetti effect not available:', error);
+        console.warn('', _error);
       }
     })();
   }, [show]);

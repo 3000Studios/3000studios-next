@@ -31,7 +31,7 @@ export async function getSitemapEntries(): Promise<SitemapEntry[]> {
     ];
     entries.push(...blogEntries);
   } catch (error: unknown) {
-    console.error('[Sitemap] Failed to fetch blog posts:', error);
+    console.error('', _error);
   }
 
   // Products
@@ -46,7 +46,7 @@ export async function getSitemapEntries(): Promise<SitemapEntry[]> {
     ];
     entries.push(...productEntries);
   } catch (error: unknown) {
-    console.error('[Sitemap] Failed to fetch products:', error);
+    console.error('', _error);
   }
 
   return entries;

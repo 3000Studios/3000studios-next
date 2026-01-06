@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useCallback, useState } from "react";
+import { useCallback, useState } from 'react';
 
 interface UseCompletionResponse {
   completion: string;
@@ -15,7 +15,7 @@ interface UseCompletionResponse {
  * TODO: Update to use latest Vercel AI SDK when available
  */
 export function useAI(): UseCompletionResponse {
-  const [completion, setCompletion] = useState("");
+  const [completion, setCompletion] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
@@ -24,9 +24,9 @@ export function useAI(): UseCompletionResponse {
     setError(null);
 
     try {
-      const response = await fetch("/api/ai/stream", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/ai/stream', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt }),
       });
 
@@ -35,17 +35,17 @@ export function useAI(): UseCompletionResponse {
       }
 
       const data = await response.json();
-      const result = data.completion || data.text || "";
+      const result = data.completion || data.text || '';
       setCompletion(result);
 
       if (process.env.NODE_ENV === 'development') {
-        console.log("Tokens used:", data.usage);
+        console.log('Tokens used:', data.usage);
       }
       return result;
     } catch (err: unknown) {
-      const error = err instanceof Error ? err : new Error("Unknown error");
+      const error = err instanceof Error ? err : new Error('Unknown error');
       setError(error);
-      console.error("AI completion error:", error);
+      console.error('', _error);
       return null;
     } finally {
       setIsLoading(false);

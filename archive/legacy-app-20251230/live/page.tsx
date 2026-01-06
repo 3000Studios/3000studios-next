@@ -33,7 +33,7 @@ export default function LivePage() {
           streamUrl: data.config?.streamUrl || '',
         });
       } catch (error: unknown) {
-        console.error('Failed to fetch stream status:', error);
+        console.error("", _error);
       }
     };
 

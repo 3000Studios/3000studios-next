@@ -23,7 +23,9 @@ export class ContentScheduler {
   /**
    * Schedule content generation
    */
-  scheduleContent(content: Omit<ScheduledContent, 'id' | 'status' | 'approvedBy' | 'approvedAt' | 'error'>) {
+  scheduleContent(
+    content: Omit<ScheduledContent, 'id' | 'status' | 'approvedBy' | 'approvedAt' | 'error'>
+  ) {
     const scheduled: ScheduledContent = {
       ...content,
       id: `scheduled_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
@@ -38,7 +40,7 @@ export class ContentScheduler {
    * Approve content for publication
    */
   approveContent(contentId: string, approver: string): boolean {
-    const content = this.queue.find(c => c.id === contentId);
+    const content = this.queue.find((c) => c.id === contentId);
     if (!content) return false;
 
     content.status = 'generated';
@@ -59,7 +61,14 @@ export class ContentScheduler {
           await this.generateContent(content);
         } catch (error: unknown) {
           content.status = 'failed';
-          content.error = error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error';
+          content.error =
+            error instanceof Error
+              ? error instanceof Error
+                ? error instanceof Error
+                  ? error.message
+                  : 'Unknown error'
+                : 'Unknown error'
+              : 'Unknown error';
         }
       }
 
@@ -123,7 +132,7 @@ export class ContentScheduler {
     try {
       await fetch('/api/cron/sitemap', { method: 'POST' });
     } catch (error: unknown) {
-      console.error('[ContentScheduler] Failed to refresh sitemap:', error);
+      console.error('', _error);
     }
   }
 
@@ -134,9 +143,7 @@ export class ContentScheduler {
     if (this.processInterval) return;
 
     this.processInterval = setInterval(() => {
-      this.processScheduledContent().catch(err =>
-        console.error('[ContentScheduler] Processing error:', err)
-      );
+      this.processScheduledContent().catch((err) => console.error('', _err));
     }, intervalMs);
   }
 
@@ -161,7 +168,7 @@ export class ContentScheduler {
    * Get content by status
    */
   getByStatus(status: ScheduledContent['status']): ScheduledContent[] {
-    return this.queue.filter(c => c.status === status);
+    return this.queue.filter((c) => c.status === status);
   }
 }
 

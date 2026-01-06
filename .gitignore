@@ -1,15 +1,23 @@
 # Dependencies
 node_modules/
+.pnp
+.pnp.js
 
 # Next.js
 .next/
 out/
 dist/
+build/
 
 # Vercel
 .vercel/
 
+# Testing
+coverage/
+.nyc_output/
+
 # Logs
+*.log
 npm-debug.log*
 pnpm-debug.log*
 yarn-debug.log*
@@ -19,14 +27,18 @@ yarn-error.log*
 .env
 .env.local
 .env.*.local
+.env.production
 
 # Credentials (NEVER COMMIT)
 docs/CREDENTIALS.md
 **/CREDENTIALS.md
 
-# OS / Editor junk
+# OS / Editor
 .DS_Store
 Thumbs.db
+*.swp
+*.swo
+*~
 
 # Prisma
 prisma/dev.db
@@ -35,19 +47,20 @@ prisma/*.db-journal
 
 # Cache
 .cache/
+.turbo/
+.wrangler/
 
-.vercel
-node_modules
-.next
-dist
-out
-.env
-.env.local
-.env.production
-.wrangler
-.DS_Store
-.env*.local
+# TypeScript
+*.tsbuildinfo
 
-!GEMINI.md
+# Temporary files
+*.tmp
+*.temp
+.archive/
+
+# Build artifacts
+*.log
+*.txt
+!README.txt
 
 

@@ -20,6 +20,7 @@ node -e "import('yaml').then(m => { const fs = require('fs'); const content = fs
 ```
 
 **Expected Result**:
+
 - Configuration loads without errors
 - Contains `branch`, `required_pull_request_reviews`, `required_status_checks` fields
 - All boolean values are properly set
@@ -39,6 +40,7 @@ echo "Verify script: $?"
 ```
 
 **Expected Result**:
+
 - Both commands exit with code 0
 - No syntax errors reported
 
@@ -57,21 +59,25 @@ npm run configure-branch-protection
 **Expected Behaviors**:
 
 **Without Token**:
+
 ```
 ❌ Error: GITHUB_TOKEN environment variable is required
 ```
 
 **With Invalid Token**:
+
 ```
 ❌ Error: Authentication failed
 ```
 
 **With Valid Token (No Admin)**:
+
 ```
 ❌ Error: Insufficient permissions
 ```
 
 **With Valid Admin Token**:
+
 ```
 ✅ Admin access confirmed
 🚀 Applying branch protection rules...
@@ -93,11 +99,13 @@ npm run verify-branch-protection
 **Expected Behaviors**:
 
 **If Protection Not Enabled**:
+
 ```
 ❌ CRITICAL: Branch protection is NOT enabled for main branch!
 ```
 
 **If Protection Enabled but Incomplete**:
+
 ```
 ⚠️  WARNING: Some protection rules are missing!
 ❌ Minimum 1 approval: DISABLED
@@ -105,6 +113,7 @@ npm run verify-branch-protection
 ```
 
 **If Protection Fully Configured**:
+
 ```
 ✅ Pull request before merging: ENABLED
 ✅ Minimum 1 approval: ENABLED
@@ -125,6 +134,7 @@ echo "Workflow validation: $?"
 ```
 
 **Expected Result**:
+
 - Exit code 0
 - No YAML parsing errors
 
@@ -133,6 +143,7 @@ echo "Workflow validation: $?"
 **Objective**: Test the GitHub Action workflow in dry-run mode.
 
 **Steps**:
+
 1. Navigate to repository on GitHub.com
 2. Go to **Actions** tab
 3. Select **Configure Branch Protection** workflow
@@ -141,6 +152,7 @@ echo "Workflow validation: $?"
 6. Click **Run workflow** button
 
 **Expected Result**:
+
 - Workflow runs successfully
 - Shows "DRY RUN MODE" message
 - Displays configuration that would be applied
@@ -150,19 +162,22 @@ echo "Workflow validation: $?"
 
 **Objective**: Apply branch protection rules and verify they're active.
 
-**Prerequisites**: 
+**Prerequisites**:
+
 - Must have admin access to repository
 - GITHUB_TOKEN with admin permissions
 
 **Steps**:
 
 1. **Apply Configuration**:
+
    ```bash
    export GITHUB_TOKEN=ghp_your_admin_token
    npm run configure-branch-protection
    ```
 
 2. **Verify Application**:
+
    ```bash
    npm run verify-branch-protection
    ```
@@ -190,12 +205,14 @@ echo "Workflow validation: $?"
 **Steps**:
 
 1. **Modify Configuration**:
+
    ```bash
    # Edit .github/branch-protection-config.yml
    # Change required_approving_review_count from 1 to 2
    ```
 
 2. **Reapply**:
+
    ```bash
    npm run configure-branch-protection
    ```
@@ -211,6 +228,7 @@ echo "Workflow validation: $?"
 **Steps**:
 
 1. **Make Change**:
+
    ```bash
    # Edit .github/branch-protection-config.yml
    # Add a comment or modify a value
@@ -225,6 +243,7 @@ echo "Workflow validation: $?"
    - Check workflow completes successfully
 
 **Expected Result**:
+
 - Workflow runs automatically
 - Configuration applied successfully
 - Verification step passes
@@ -236,6 +255,7 @@ echo "Workflow validation: $?"
 **Test Cases**:
 
 1. **Missing Configuration File**:
+
    ```bash
    mv .github/branch-protection-config.yml /tmp/
    npm run configure-branch-protection
@@ -244,6 +264,7 @@ echo "Workflow validation: $?"
    ```
 
 2. **Invalid YAML Syntax**:
+
    ```bash
    echo "invalid: yaml: : :" >> .github/branch-protection-config.yml
    npm run configure-branch-protection
@@ -260,6 +281,7 @@ echo "Workflow validation: $?"
 ## Success Criteria
 
 All test scenarios should:
+
 - ✅ Execute without crashes
 - ✅ Provide clear, actionable error messages
 - ✅ Successfully apply configuration when credentials are valid
@@ -276,6 +298,7 @@ All test scenarios should:
 ## Automated Testing
 
 For CI/CD integration, these tests could be automated:
+
 - Syntax validation (already in CI)
 - YAML parsing
 - Script validation

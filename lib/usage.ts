@@ -1,4 +1,4 @@
-import { prisma } from "./prisma";
+import { prisma } from './prisma';
 
 export async function logUsage(data: {
   model: string;
@@ -16,6 +16,6 @@ export async function logUsage(data: {
       },
     });
   } catch (error: unknown) {
-    console.error("Failed to log AI usage:", error);
+    console.error('', _error);
   }
 }

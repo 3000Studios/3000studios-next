@@ -32,7 +32,7 @@ export default function useLipSync(ref: RefObject<Group>) {
         loop();
       })
       .catch((err) => {
-        console.log('Microphone access denied:', err);
+        console.log('', _err);
       });
   }, [ref]);
 }

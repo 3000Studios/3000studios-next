@@ -13,10 +13,7 @@ export async function POST(request: NextRequest) {
     const { topic, keywords, publishToWordPress } = body;
 
     if (!topic) {
-      return NextResponse.json(
-        { error: 'Topic required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Topic required' }, { status: 400 });
     }
 
     // Generate blog post using AI
@@ -49,15 +46,12 @@ export async function POST(request: NextRequest) {
       content: bodyContent,
       fullContent: content,
       wordpressId,
-      message: wordpressId 
-        ? 'Blog post generated and saved to WordPress as draft' 
+      message: wordpressId
+        ? 'Blog post generated and saved to WordPress as draft'
         : 'Blog post generated successfully',
     });
   } catch (error: unknown) {
-    console.error('Blog generation API error:', error);
-    return NextResponse.json(
-      { error: 'Failed to generate blog post' },
-      { status: 500 }
-    );
+    console.error('', _error);
+    return NextResponse.json({ error: 'Failed to generate blog post' }, { status: 500 });
   }
 }

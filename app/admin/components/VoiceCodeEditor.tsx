@@ -35,7 +35,7 @@ export default function VoiceCodeEditor() {
       mediaRecorder.start();
       setIsRecording(true);
     } catch (err: unknown) {
-      console.error('Microphone access error:', err);
+      console.error('', _err);
       alert('Please allow microphone access to use voice commands');
     }
   };
@@ -57,7 +57,7 @@ export default function VoiceCodeEditor() {
             setPreview(result.code || '');
             setExplanation(result.explanation || '');
           } catch (err: unknown) {
-            console.error('Transcription error:', err);
+            console.error('', _err);
           }
         };
 
@@ -74,7 +74,7 @@ export default function VoiceCodeEditor() {
       setPreview(result.code || '');
       setExplanation(result.explanation || '');
     } catch (err: unknown) {
-      console.error('Code generation error:', err);
+      console.error('', _err);
     }
   };
 
@@ -85,7 +85,7 @@ export default function VoiceCodeEditor() {
       const result = await generateCode(prompt, 'apply');
       alert(`Code committed! SHA: ${result.commitSha}`);
     } catch (err: unknown) {
-      console.error('Apply error:', err);
+      console.error('', _err);
     }
   };
 
@@ -100,7 +100,7 @@ export default function VoiceCodeEditor() {
       const result = await generateCode(prompt, 'deploy');
       alert(`Deployed! URL: ${result.deploymentUrl}`);
     } catch (err: unknown) {
-      console.error('Deploy error:', err);
+      console.error('', _err);
     }
   };
 

@@ -33,9 +33,7 @@ export const cloudinaryImage = (
   if (width || height) {
     const w = width ? `w_${width}` : '';
     const h = height ? `h_${height}` : '';
-    transforms.push(
-      [w, h, `c_${crop}`, `g_${gravity}`].filter(Boolean).join(',')
-    );
+    transforms.push([w, h, `c_${crop}`, `g_${gravity}`].filter(Boolean).join(','));
   }
 
   transforms.push(`q_${quality}`);
@@ -83,18 +81,15 @@ export const uploadToCloudinary = async (file: File): Promise<string> => {
   formData.append('upload_preset', 'unsigned_upload'); // Set in Cloudinary dashboard
 
   try {
-    const response = await fetch(
-      `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
-      {
-        method: 'POST',
-        body: formData,
-      }
-    );
+    const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+      method: 'POST',
+      body: formData,
+    });
 
     const data = await response.json();
     return data.public_id;
   } catch (error: unknown) {
-    console.error('Cloudinary upload error:', error);
+    console.error('', _error);
     throw error;
   }
 };
@@ -109,7 +104,7 @@ export const getImageMetadata = async (publicId: string) => {
     );
     return await response.json();
   } catch (error: unknown) {
-    console.error('Error fetching metadata:', error);
+    console.error('', _error);
     return null;
   }
 };

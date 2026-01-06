@@ -77,7 +77,7 @@ export default function VoiceRemotePage() {
     try {
       recognitionRef.current.start();
     } catch (err: unknown) {
-      console.error('Failed to start recognition:', err);
+      console.error('', _err);
     }
   }, [status]);
 

@@ -4,21 +4,21 @@
  *   Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
  */
 
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export default function useVoiceAvatar() {
   const [state, setState] = useState({
     talking: false,
     volume: 0,
-    mood: "idle",
+    mood: 'idle',
   });
 
   useEffect(() => {
     // Check if browser supports getUserMedia
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      console.warn("Voice Avatar: getUserMedia not supported");
+      console.warn('Voice Avatar: getUserMedia not supported');
       return;
     }
 
@@ -27,44 +27,42 @@ export default function useVoiceAvatar() {
     let microphone: MediaStreamAudioSourceNode;
     let animationFrame: number;
 
+    navigator.mediaDevices
+      .getUserMedia({ audio: true })
+      .then((stream) => {
+        audioContext = new AudioContext();
+        analyser = audioContext.createAnalyser();
+        microphone = audioContext.createMediaStreamSource(stream);
 
-      navigator.mediaDevices
-        .getUserMedia({ audio: true })
-        .then((stream) => {
-          audioContext = new AudioContext();
-          analyser = audioContext.createAnalyser();
-          microphone = audioContext.createMediaStreamSource(stream);
+        analyser.fftSize = 256;
+        microphone.connect(analyser);
 
-          analyser.fftSize = 256;
-          microphone.connect(analyser);
+        // --- PATCHED SECTION ---
+        const buffer = new ArrayBuffer(analyser.frequencyBinCount);
+        const dataArray = new Uint8Array(buffer);
 
-          // --- PATCHED SECTION ---
-          const buffer = new ArrayBuffer(analyser.frequencyBinCount);
-          const dataArray = new Uint8Array(buffer);
+        const detectSpeech = () => {
+          analyser.getByteFrequencyData(dataArray as Uint8Array);
 
-          const detectSpeech = () => {
-            analyser.getByteFrequencyData(dataArray as Uint8Array);
+          const average = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
 
-            const average =
-              dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
+          // You can setState here if needed, e.g.:
+          // setState({ talking: average > 20, volume: average, mood: average > 40 ? 'angry' : average > 25 ? 'talking' : 'idle' });
 
-            // You can setState here if needed, e.g.:
-            // setState({ talking: average > 20, volume: average, mood: average > 40 ? 'angry' : average > 25 ? 'talking' : 'idle' });
+          if (average > 20) {
+            setState((prev) => ({ ...prev, talking: true, volume: average, mood: 'talking' }));
+          } else {
+            setState((prev) => ({ ...prev, talking: false, volume: average, mood: 'idle' }));
+          }
 
-            if (average > 20) {
-              setState((prev) => ({ ...prev, talking: true, volume: average, mood: 'talking' }));
-            } else {
-              setState((prev) => ({ ...prev, talking: false, volume: average, mood: 'idle' }));
-            }
+          animationFrame = requestAnimationFrame(detectSpeech);
+        };
 
-            animationFrame = requestAnimationFrame(detectSpeech);
-          };
-
-          detectSpeech();
-        })
-        .catch((error) => {
-          console.error("Voice Avatar: Microphone access denied", error);
-        });
+        detectSpeech();
+      })
+      .catch((error) => {
+        console.error('', _error);
+      });
 
     // Cleanup
     return () => {

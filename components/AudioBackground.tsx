@@ -9,11 +9,7 @@ interface AudioBackgroundProps {
   loop?: boolean;
 }
 
-export function AudioBackground({
-  publicId,
-  autoplay = true,
-  loop = true,
-}: AudioBackgroundProps) {
+export function AudioBackground({ publicId, autoplay = true, loop = true }: AudioBackgroundProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isMuted, setIsMuted] = useState(true);
 
@@ -25,7 +21,7 @@ export function AudioBackground({
       // Start playing muted (browser autoplay policy)
       audio.muted = true;
       audio.play().catch((err) => {
-        console.log('Autoplay prevented:', err);
+        console.log('', _err);
       });
     }
   }, [autoplay, isMuted]);

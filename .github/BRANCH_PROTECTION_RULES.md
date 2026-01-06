@@ -1,19 +1,23 @@
 # Branch Protection Rules - Quick Reference
 
 ## 🎯 Purpose
+
 Protect the `main` branch from accidental changes, ensure code quality, and prevent revenue-breaking modifications.
 
 ## 📍 Configuration Location
+
 **GitHub Repository → Settings → Branches → Branch protection rules**
 
 ## 🔐 Required Protection Rules
 
 ### Branch Pattern
+
 ```
 main
 ```
 
 ### 1️⃣ Pull Request Requirements
+
 ```yaml
 Require a pull request before merging: ✅ YES
   Required approvals: 1
@@ -22,16 +26,18 @@ Require a pull request before merging: ✅ YES
 ```
 
 ### 2️⃣ Status Check Requirements
+
 ```yaml
 Require status checks to pass: ✅ YES
   Require branches to be up to date: ✅ YES
   Status checks that are required:
     - build
-    - lint  
+    - lint
     - type-check
 ```
 
 ### 3️⃣ Push Restrictions
+
 ```yaml
 Restrict who can push to matching branches: ✅ YES
   People, teams, or apps with push access:
@@ -39,6 +45,7 @@ Restrict who can push to matching branches: ✅ YES
 ```
 
 ### 4️⃣ Additional Settings (Recommended)
+
 ```yaml
 Require linear history: ✅ YES (keeps git history clean)
 Do not allow bypassing settings: ✅ YES
@@ -52,14 +59,17 @@ Allow deletions: ❌ NO
 When properly configured:
 
 ✅ **NO direct pushes to main**
+
 - All changes must go through Pull Request
 - Forces code review workflow
 
 ✅ **NO silent changes**
+
 - Every change tracked through PR
 - Full audit trail maintained
 
 ✅ **NO accidental revenue breakage**
+
 - CI checks prevent broken builds
 - Type checking catches errors
 - Code review catches logic issues
@@ -91,6 +101,7 @@ npm run verify-branch-protection
 ```
 
 Or check manually:
+
 ```bash
 # Try direct push (should fail)
 git push origin main
@@ -100,6 +111,7 @@ git push origin main
 ## 🔗 Full Documentation
 
 See [BRANCH_PROTECTION_SETUP.md](.github/BRANCH_PROTECTION_SETUP.md) for:
+
 - Detailed setup instructions
 - Troubleshooting guide
 - Emergency hotfix procedures
@@ -108,6 +120,7 @@ See [BRANCH_PROTECTION_SETUP.md](.github/BRANCH_PROTECTION_SETUP.md) for:
 ## 📊 Automated Monitoring
 
 A GitHub Action runs daily to verify protection rules are still active:
+
 - `.github/workflows/branch-protection-check.yml`
 - Creates issue if protection is disabled
 - Sends notifications

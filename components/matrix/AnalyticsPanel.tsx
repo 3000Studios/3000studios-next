@@ -26,7 +26,7 @@ export default function AnalyticsPanel() {
         const data = await res.json();
         setEvents(data.events || []);
       } catch (error: unknown) {
-        console.error('Failed to fetch events:', error);
+        console.error('', _error);
       }
     };
 

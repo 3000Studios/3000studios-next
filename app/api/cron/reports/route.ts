@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     const _analytics = getAnalytics();
 
     // Send email notification for critical alerts
-    const criticalAlerts = report.alerts.filter(a => a.level === 'critical');
+    const criticalAlerts = report.alerts.filter((a) => a.level === 'critical');
     if (criticalAlerts.length > 0) {
       await sendAlertEmail(report, criticalAlerts);
     }
@@ -31,18 +31,12 @@ export async function POST(req: NextRequest) {
       timestamp: new Date().toISOString(),
     });
   } catch (error: unknown) {
-    console.error('[Cron] Report generation error:', error);
-    return NextResponse.json(
-      { error: 'Report generation failed' },
-      { status: 500 }
-    );
+    console.error('', _error);
+    return NextResponse.json({ error: 'Report generation failed' }, { status: 500 });
   }
 }
 
-async function sendAlertEmail(
-  report: any,
-  alerts: any[]
-): Promise<boolean> {
+async function sendAlertEmail(report: any, alerts: any[]): Promise<boolean> {
   // In production, integrate with email service
   console.log('[Reports] Critical alerts:', alerts);
   return true;

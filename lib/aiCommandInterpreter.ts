@@ -4,10 +4,10 @@
  *   Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
  */
 
-import OpenAI from "openai";
+import OpenAI from 'openai';
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || "",
+  apiKey: process.env.OPENAI_API_KEY || '',
 });
 
 export interface InterpretedCommand {
@@ -16,15 +16,13 @@ export interface InterpretedCommand {
   description: string;
 }
 
-export async function interpretCommand(
-  humanCommand: string,
-): Promise<InterpretedCommand> {
+export async function interpretCommand(humanCommand: string): Promise<InterpretedCommand> {
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: 'gpt-4o-mini',
       messages: [
         {
-          role: "system",
+          role: 'system',
           content: `You are a technical command interpreter. Convert natural language into technical actions.
           
 Available actions:
@@ -61,7 +59,7 @@ Input: "install three.js package"
 Output: {"action": "install-package", "parameters": {"package": "three"}, "description": "Install three.js package"}`,
         },
         {
-          role: "user",
+          role: 'user',
           content: humanCommand,
         },
       ],
@@ -69,16 +67,16 @@ Output: {"action": "install-package", "parameters": {"package": "three"}, "descr
       max_tokens: 200,
     });
 
-    const content = response.choices[0]?.message?.content || "{}";
+    const content = response.choices[0]?.message?.content || '{}';
     const parsed = JSON.parse(content);
 
     return {
-      action: parsed.action || "unknown",
+      action: parsed.action || 'unknown',
       parameters: parsed.parameters || {},
-      description: parsed.description || "No description available",
+      description: parsed.description || 'No description available',
     };
   } catch (error: unknown) {
-    console.error("AI interpretation error:", error);
+    console.error('', _error);
     // Fallback to simple keyword matching
     return fallbackInterpretation(humanCommand);
   }
@@ -87,37 +85,37 @@ Output: {"action": "install-package", "parameters": {"package": "three"}, "descr
 function fallbackInterpretation(command: string): InterpretedCommand {
   const lower = command.toLowerCase();
 
-  if (lower.includes("deploy")) {
+  if (lower.includes('deploy')) {
     return {
-      action: "deploy",
+      action: 'deploy',
       parameters: {},
-      description: "Deploy to production",
+      description: 'Deploy to production',
     };
   }
-  if (lower.includes("push") || lower.includes("github")) {
+  if (lower.includes('push') || lower.includes('github')) {
     return {
-      action: "git-push",
+      action: 'git-push',
       parameters: {},
-      description: "Push to GitHub",
+      description: 'Push to GitHub',
     };
   }
-  if (lower.includes("build")) {
-    return { action: "build", parameters: {}, description: "Build project" };
+  if (lower.includes('build')) {
+    return { action: 'build', parameters: {}, description: 'Build project' };
   }
-  if (lower.includes("fix")) {
-    return { action: "fix-errors", parameters: {}, description: "Fix errors" };
+  if (lower.includes('fix')) {
+    return { action: 'fix-errors', parameters: {}, description: 'Fix errors' };
   }
-  if (lower.includes("hero")) {
+  if (lower.includes('hero')) {
     return {
-      action: "update-hero",
+      action: 'update-hero',
       parameters: {},
-      description: "Update hero section",
+      description: 'Update hero section',
     };
   }
 
   return {
-    action: "unknown",
+    action: 'unknown',
     parameters: {},
-    description: "Command not recognized",
+    description: 'Command not recognized',
   };
 }

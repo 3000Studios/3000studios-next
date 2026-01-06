@@ -32,11 +32,18 @@ export async function POST(request: NextRequest) {
       message: `Rollback successful: ${reason || 'Manual rollback'}`,
     });
   } catch (error: unknown) {
-    console.error('[ROLLBACK] Failed:', error);
+    console.error('', _error);
     return NextResponse.json(
       {
         error: 'Rollback failed',
-        details: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error'
+        details:
+          error instanceof Error
+            ? error instanceof Error
+              ? error instanceof Error
+                ? error.message
+                : 'Unknown error'
+              : 'Unknown error'
+            : 'Unknown error',
       },
       { status: 500 }
     );

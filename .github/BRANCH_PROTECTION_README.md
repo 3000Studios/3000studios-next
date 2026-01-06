@@ -59,16 +59,19 @@ git push origin feature/my-awesome-feature
 ## 📁 Files and Documentation
 
 ### Documentation
+
 - **[BRANCH_PROTECTION_SETUP.md](BRANCH_PROTECTION_SETUP.md)** - Complete setup guide with step-by-step instructions
 - **[BRANCH_PROTECTION_RULES.md](BRANCH_PROTECTION_RULES.md)** - Quick reference for required rules
 - **[BRANCH_PROTECTION_README.md](BRANCH_PROTECTION_README.md)** - This comprehensive workflow guide
 
 ### Scripts
+
 - **[verify-branch-protection.mjs](../scripts/verify-branch-protection.mjs)** - Check branch protection status
 - **[pre-push-hook.sh](../scripts/pre-push-hook.sh)** - Git pre-push validation hook
 - **[setup-git-hooks.sh](../scripts/setup-git-hooks.sh)** - Install git hooks
 
 ### Workflows
+
 - **[branch-protection-check.yml](workflows/branch-protection-check.yml)** - Daily automated verification
 - **[ci.yml](workflows/ci.yml)** - Continuous integration checks
 
@@ -120,6 +123,7 @@ All checks must pass before merging is allowed.
 ### Daily Verification
 
 A GitHub Action runs daily at 9 AM UTC to verify branch protection is still enabled:
+
 - Checks all required rules
 - Creates an issue if protection is disabled
 - Sends notifications
@@ -168,18 +172,23 @@ If branch protection is accidentally disabled:
 ## ❓ FAQ
 
 ### Q: Can I push directly to main?
+
 **A:** No. GitHub will block the push if protection is enabled. All changes must go through Pull Requests.
 
 ### Q: What if I need to make an urgent hotfix?
+
 **A:** Create a `hotfix/*` branch, make minimal changes, open PR, get expedited review, and merge. Even hotfixes go through PRs.
 
 ### Q: Can I bypass the pre-push hook?
+
 **A:** Yes, with `git push --no-verify`, but this is **NOT recommended**. Your PR will still need to pass CI checks.
 
 ### Q: What if CI checks fail?
+
 **A:** Fix the issues in your branch, commit, and push again. CI will re-run automatically.
 
 ### Q: How do I update my branch with latest main?
+
 ```bash
 git checkout your-branch
 git fetch origin
@@ -188,21 +197,25 @@ git push --force-with-lease
 ```
 
 ### Q: I'm getting "protected branch update failed"
+
 **A:** This is expected! You cannot push directly to main. Create a feature branch instead.
 
 ## 🔐 Security Features
 
 ### Secret Detection
+
 - Pre-push hook scans for potential secrets
 - Warns before pushing sensitive data
 - Patterns checked: API keys, passwords, tokens, credentials
 
 ### Dependency Security
+
 - Dependabot creates PRs for security updates
 - Auto-merge for trusted dependencies
 - Weekly security audits
 
 ### Code Review
+
 - Minimum 1 approval required
 - Stale approvals dismissed on new commits
 - Full audit trail maintained
@@ -225,6 +238,7 @@ Check .github/workflows/branch-protection-check.yml logs
 ### Audit Log
 
 Every change to main is tracked:
+
 - PR number and title
 - Reviewer who approved
 - CI check results

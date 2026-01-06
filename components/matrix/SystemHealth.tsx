@@ -3,9 +3,9 @@
  * Monitors all critical systems
  */
 
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export default function SystemHealth() {
   const [health, setHealth] = useState<any>(null);
@@ -13,11 +13,11 @@ export default function SystemHealth() {
   useEffect(() => {
     const check = async () => {
       try {
-        const res = await fetch("/api/matrix/health");
+        const res = await fetch('/api/matrix/health');
         const data = await res.json();
         setHealth(data);
       } catch (error: unknown) {
-        console.error("Health check failed:", error);
+        console.error('', _error);
       }
     };
 
@@ -42,15 +42,15 @@ export default function SystemHealth() {
       <ul className="space-y-3">
         {Object.entries(health).map(([key, value]: any, i) => (
           <li key={i} className="flex justify-between items-center border-b border-indigo-900 pb-2">
-            <span className="text-lg capitalize">{key.replace(/_/g, " ")}</span>
+            <span className="text-lg capitalize">{key.replace(/_/g, ' ')}</span>
             <span
               className={`font-bold px-3 py-1 rounded ${
-                value === "ok" || value === true
-                  ? "bg-green-500 text-black"
-                  : "bg-red-500 text-white"
+                value === 'ok' || value === true
+                  ? 'bg-green-500 text-black'
+                  : 'bg-red-500 text-white'
               }`}
             >
-              {value === "ok" || value === true ? "✅ OK" : "❌ DOWN"}
+              {value === 'ok' || value === true ? '✅ OK' : '❌ DOWN'}
             </span>
           </li>
         ))}

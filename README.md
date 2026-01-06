@@ -1,6 +1,19 @@
 # 3000 Studios — Professional Creative Studio Platform
 
-A modern Next.js 16 application with a luxury design theme, robust page structure, and a roadmap for advanced features like Shadow AI avatars, voice-to-code editing, live streaming, and automated deployments.
+A modern Next.js 16 application with a luxury design theme, robust page structure, and fully automated CI/CD pipeline. Features Shadow AI avatars, voice-to-code editing, live streaming, and self-healing deployments.
+
+## 🤖 Automation
+
+This repository is **fully automated** with:
+
+- ✅ Pre-commit hooks (format + lint)
+- ✅ Conventional commit enforcement
+- ✅ Auto-fixing CI/CD pipeline
+- ✅ Automated dependency updates
+- ✅ Self-healing deployments
+- ✅ Health checks and auto-rollback
+
+See [AUTOMATION.md](./AUTOMATION.md) for details.
 
 ## 🚀 Features
 
@@ -158,7 +171,6 @@ See also:
 - [DEPLOYMENT_INSTRUCTIONS.md](DEPLOYMENT_INSTRUCTIONS.md)
 - [TASK_COMPLETION_SUMMARY.md](TASK_COMPLETION_SUMMARY.md)
 
-
 ## 🎨 Customization Guide
 
 ### Colors and Theme
@@ -167,9 +179,9 @@ Edit `app/globals.css` to customize the color scheme:
 
 ```css
 :root {
-  --gold: #FFD700;       /* Primary accent */
-  --platinum: #E5E4E2;   /* Secondary accent */
-  --sapphire: #0F52BA;   /* Highlight color */
+  --gold: #ffd700; /* Primary accent */
+  --platinum: #e5e4e2; /* Secondary accent */
+  --sapphire: #0f52ba; /* Highlight color */
 }
 ```
 
@@ -183,7 +195,6 @@ const navLinks = [
   // Add or remove links as needed
 ];
 ```
-
 
 ### Admin Dashboard Stats
 

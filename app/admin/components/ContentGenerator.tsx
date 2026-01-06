@@ -25,16 +25,19 @@ export default function ContentGenerator() {
 
     setSuccess(false);
     try {
-      const keywords = blogKeywords.split(',').map(k => k.trim()).filter(Boolean);
+      const keywords = blogKeywords
+        .split(',')
+        .map((k) => k.trim())
+        .filter(Boolean);
       const result = await generateBlog(blogTopic, keywords, true);
       setGeneratedContent(result.fullContent);
       setSuccess(true);
-      
+
       if (result.wordpressId) {
         alert(`Blog post saved to WordPress as draft! ID: ${result.wordpressId}`);
       }
     } catch (err: unknown) {
-      console.error('Blog generation error:', err);
+      console.error('', _err);
     }
   };
 
@@ -43,12 +46,15 @@ export default function ContentGenerator() {
 
     setSuccess(false);
     try {
-      const features = productFeatures.split(',').map(f => f.trim()).filter(Boolean);
+      const features = productFeatures
+        .split(',')
+        .map((f) => f.trim())
+        .filter(Boolean);
       const result = await generateProductDescription(productName, features);
       setGeneratedContent(result.description);
       setSuccess(true);
     } catch (err: unknown) {
-      console.error('Product description error:', err);
+      console.error('', _err);
     }
   };
 
@@ -89,9 +95,7 @@ export default function ContentGenerator() {
       {activeTab === 'blog' && (
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
-              Blog Topic
-            </label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Blog Topic</label>
             <input
               type="text"
               value={blogTopic}
@@ -132,9 +136,7 @@ export default function ContentGenerator() {
             )}
           </button>
 
-          <p className="text-xs text-gray-500">
-            ✨ Will be saved to WordPress as draft for review
-          </p>
+          <p className="text-xs text-gray-500">✨ Will be saved to WordPress as draft for review</p>
         </div>
       )}
 
@@ -142,9 +144,7 @@ export default function ContentGenerator() {
       {activeTab === 'product' && (
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
-              Product Name
-            </label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Product Name</label>
             <input
               type="text"
               value={productName}
@@ -207,7 +207,9 @@ export default function ContentGenerator() {
         <div className="mt-4">
           <h4 className="text-sm font-semibold text-gray-300 mb-2">Generated Content:</h4>
           <div className="bg-gray-900 p-4 rounded-lg border border-gray-700 max-h-96 overflow-y-auto">
-            <pre className="text-sm text-gray-300 whitespace-pre-wrap font-sans">{generatedContent}</pre>
+            <pre className="text-sm text-gray-300 whitespace-pre-wrap font-sans">
+              {generatedContent}
+            </pre>
           </div>
         </div>
       )}

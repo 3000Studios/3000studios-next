@@ -11,10 +11,7 @@ export async function POST(request: NextRequest) {
     const { streamId } = body;
 
     if (!streamId) {
-      return NextResponse.json(
-        { error: 'Stream ID required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Stream ID required' }, { status: 400 });
     }
 
     // In a real implementation:
@@ -28,10 +25,7 @@ export async function POST(request: NextRequest) {
       message: 'Stream stopped successfully',
     });
   } catch (error: unknown) {
-    console.error('Stream stop API error:', error);
-    return NextResponse.json(
-      { error: 'Failed to stop stream' },
-      { status: 500 }
-    );
+    console.error('', _error);
+    return NextResponse.json({ error: 'Failed to stop stream' }, { status: 500 });
   }
 }

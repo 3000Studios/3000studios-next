@@ -39,23 +39,31 @@ export const affiliateProducts: AffiliateProduct[] = [
 export const AFFILIATES = {
   general: (url: string) => `${url}?ref=3000studios`,
   amazon: (asin: string) => `https://www.amazon.com/dp/${asin}?tag=3000studios-20`,
-  clickbank: (product: string) => `https://hop.clickbank.net/?affiliate=3000studios&vendor=${product}`,
+  clickbank: (product: string) =>
+    `https://hop.clickbank.net/?affiliate=3000studios&vendor=${product}`,
   gumroad: (product: string) => `https://gumroad.com/l/${product}?wanted=true&referrer=3000studios`,
 };
 
 export function getAffiliateProduct(id: string): AffiliateProduct | undefined {
-  return affiliateProducts.find(p => p.id === id);
+  return affiliateProducts.find((p) => p.id === id);
 }
 
 export function getAffiliateProductsByCategory(category: string): AffiliateProduct[] {
-  return affiliateProducts.filter(p => p.category === category);
+  return affiliateProducts.filter((p) => p.category === category);
 }
 
-export function injectAffiliateLink(content: string, keywords: string[], affiliateLink: string): string {
+export function injectAffiliateLink(
+  content: string,
+  keywords: string[],
+  affiliateLink: string
+): string {
   let result = content;
-  keywords.forEach(keyword => {
+  keywords.forEach((keyword) => {
     const regex = new RegExp(`\\b${keyword}\\b`, 'gi');
-    result = result.replace(regex, `<a href="${affiliateLink}" target="_blank" rel="noopener noreferrer sponsored">${keyword}</a>`);
+    result = result.replace(
+      regex,
+      `<a href="${affiliateLink}" target="_blank" rel="noopener noreferrer sponsored">${keyword}</a>`
+    );
   });
   return result;
 }
@@ -75,6 +83,6 @@ export function trackAffiliateClick(affiliateId: string): void {
           timestamp: Date.now(),
         },
       }),
-    }).catch(err => console.error('Failed to track affiliate click:', err));
+    }).catch((err) => console.error('', _err));
   }
 }

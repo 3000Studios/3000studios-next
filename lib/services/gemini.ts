@@ -23,7 +23,7 @@ export async function generateWithGemini(prompt: string): Promise<string> {
     const response = await result.response;
     return response.text();
   } catch (error: unknown) {
-    console.error('Gemini generation error:', error);
+    console.error('', _error);
     throw new Error('Failed to generate with Gemini');
   }
 }
@@ -35,21 +35,21 @@ export async function analyzeImage(imageBase64: string, prompt: string): Promise
 
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-pro-vision' });
-    
+
     const result = await model.generateContent([
       prompt,
       {
         inlineData: {
           data: imageBase64,
-          mimeType: 'image/jpeg'
-        }
-      }
+          mimeType: 'image/jpeg',
+        },
+      },
     ]);
-    
+
     const response = await result.response;
     return response.text();
   } catch (error: unknown) {
-    console.error('Image analysis error:', error);
+    console.error('', _error);
     throw new Error('Failed to analyze image');
   }
 }

@@ -5,10 +5,10 @@
  * SUPPORTS: File System Writes (fs/promises), File Creation, and Git Push
  */
 
-import fs from "fs/promises";
-import { NextRequest, NextResponse } from "next/server";
-import path from "path";
-import simpleGit from "simple-git";
+import fs from 'fs/promises';
+import { NextRequest, NextResponse } from 'next/server';
+import path from 'path';
+import simpleGit from 'simple-git';
 
 // Lazy-load OpenAI dynamically
 let openaiInstance: any = null;
@@ -17,7 +17,7 @@ async function getOpenAI() {
   if (!process.env.OPENAI_API_KEY) return null;
   if (!openaiInstance) {
     try {
-      const { default: OpenAI } = await import("openai");
+      const { default: OpenAI } = await import('openai');
       openaiInstance = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
     } catch {
       return null;
@@ -31,7 +31,7 @@ interface VoiceInput {
   audio?: string;
   prompt?: string;
   currentContext?: string;
-  action?: "preview" | "commit" | "deploy";
+  action?: 'preview' | 'commit' | 'deploy';
   patches?: CodePatch[]; // For commit/deploy action
 }
 
@@ -49,26 +49,26 @@ export async function POST(request: NextRequest) {
     const { transcript, audio, prompt, currentContext, action, patches } = body;
 
     // --- CASE 1: COMMIT or DEPLOY (Apply patches + Git push) ---
-    if ((action === "commit" || action === "deploy") && patches && patches.length > 0) {
+    if ((action === 'commit' || action === 'deploy') && patches && patches.length > 0) {
       const patchResults = await applyPatches(patches);
 
-      if (action === "deploy") {
+      if (action === 'deploy') {
         try {
           const git = simpleGit();
-          await git.add(".");
-          const commitMsg = `voice(update): ${patches.map(p => p.description).join(", ")}`;
+          await git.add('.');
+          const commitMsg = `voice(update): ${patches.map((p) => p.description).join(', ')}`;
           await git.commit(commitMsg);
-          await git.push("origin", "main");
+          await git.push('origin', 'main');
           return NextResponse.json({
             success: true,
-            message: "Changes applied and pushed to GitHub. Deployment triggered.",
-            results: patchResults.results
+            message: 'Changes applied and pushed to GitHub. Deployment triggered.',
+            results: patchResults.results,
           });
         } catch (gitErr: any) {
           return NextResponse.json({
             success: true,
-            warning: "Patches applied but Git push failed: " + gitErr.message,
-            results: patchResults.results
+            warning: 'Patches applied but Git push failed: ' + gitErr.message,
+            results: patchResults.results,
           });
         }
       }
@@ -78,30 +78,30 @@ export async function POST(request: NextRequest) {
 
     // --- CASE 2: PREVIEW (Generate patches) ---
     const userInput = transcript || prompt;
-    let finalTranscript = userInput || "";
+    let finalTranscript = userInput || '';
 
     // Transcribe if Audio
     if (audio && process.env.OPENAI_API_KEY) {
       try {
-        const audioBuffer = Buffer.from(audio, "base64");
-        const audioFile = new File([audioBuffer], "audio.webm", {
-          type: "audio/webm",
+        const audioBuffer = Buffer.from(audio, 'base64');
+        const audioFile = new File([audioBuffer], 'audio.webm', {
+          type: 'audio/webm',
         });
         const openai = await getOpenAI();
         if (openai) {
           const transcription = await openai.audio.transcriptions.create({
             file: audioFile,
-            model: "whisper-1",
+            model: 'whisper-1',
           });
           finalTranscript = transcription.text;
         }
       } catch (err: unknown) {
-        console.error("Transcription failed", err);
+        console.error('', _err);
       }
     }
 
     if (!finalTranscript) {
-      return NextResponse.json({ error: "No input detected" }, { status: 400 });
+      return NextResponse.json({ error: 'No input detected' }, { status: 400 });
     }
 
     // OpenAI Generation
@@ -109,17 +109,17 @@ export async function POST(request: NextRequest) {
     if (!openai) {
       return NextResponse.json({
         success: true,
-        intent: "Demo Mode (No API Key)",
-        description: "Add OPENAI_API_KEY to .env for real AI code generation.",
+        intent: 'Demo Mode (No API Key)',
+        description: 'Add OPENAI_API_KEY to .env for real AI code generation.',
         patches: [
           {
-            file: "app/page.tsx",
-            description: "Mock change: Update homepage title",
+            file: 'app/page.tsx',
+            description: 'Mock change: Update homepage title',
             oldCode: 'const title = "Welcome";',
             newCode: 'const title = "Welcome to the Future";',
           },
         ],
-        action: "preview",
+        action: 'preview',
       });
     }
 
@@ -135,28 +135,28 @@ export async function POST(request: NextRequest) {
     }`;
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: 'gpt-4o',
       messages: [
-        { role: "system", content: systemPrompt },
+        { role: 'system', content: systemPrompt },
         {
-          role: "user",
+          role: 'user',
           content: `Request: ${finalTranscript}\nContext: Next.js App Router, Tailwind CSS, TypeScript.`,
         },
       ],
-      response_format: { type: "json_object" },
+      response_format: { type: 'json_object' },
     });
 
-    const parsed = JSON.parse(completion.choices[0].message.content || "{}");
+    const parsed = JSON.parse(completion.choices[0].message.content || '{}');
 
     return NextResponse.json({
       success: true,
       ...parsed,
-      action: "preview",
+      action: 'preview',
     });
   } catch (error: unknown) {
-    console.error("Voice API Error:", error);
+    console.error('', _error);
     return NextResponse.json(
-      { error: "Internal Server Error", details: String(error) },
+      { error: 'Internal Server Error', details: String(error) },
       { status: 500 }
     );
   }
@@ -168,15 +168,15 @@ async function applyPatches(patches: CodePatch[]) {
   for (const patch of patches) {
     try {
       // Safety Check: Avoid path traversal
-      const cleanPath = path
-        .normalize(patch.file)
-        .replace(/^(\.\.(\/|\\|$))+/, "");
+      const cleanPath = path.normalize(patch.file).replace(/^(\.\.(\/|\\|$))+/, '');
 
-      const allowedDirs = ["app", "components", "lib", "voice", "public", "scripts", "styles"];
+      const allowedDirs = ['app', 'components', 'lib', 'voice', 'public', 'scripts', 'styles'];
       const targetDir = cleanPath.split(path.sep)[0];
 
       if (!allowedDirs.includes(targetDir) && !cleanPath.endsWith('.md')) {
-        throw new Error(`Invalid file path: ${cleanPath}. Only ${allowedDirs.join(', ')} or root markdown files allowed.`);
+        throw new Error(
+          `Invalid file path: ${cleanPath}. Only ${allowedDirs.join(', ')} or root markdown files allowed.`
+        );
       }
 
       const activePath = path.join(process.cwd(), cleanPath);
@@ -184,8 +184,8 @@ async function applyPatches(patches: CodePatch[]) {
       // Handle New File Creation
       if (patch.isNewFile) {
         await fs.mkdir(path.dirname(activePath), { recursive: true });
-        await fs.writeFile(activePath, patch.newCode, "utf8");
-        results.push({ file: cleanPath, status: "created" });
+        await fs.writeFile(activePath, patch.newCode, 'utf8');
+        results.push({ file: cleanPath, status: 'created' });
         continue;
       }
 
@@ -196,12 +196,10 @@ async function applyPatches(patches: CodePatch[]) {
         throw new Error(`File not found: ${cleanPath}. Use isNewFile for new files.`);
       }
 
-      const currentContent = await fs.readFile(activePath, "utf8");
+      const currentContent = await fs.readFile(activePath, 'utf8');
 
       if (patch.oldCode && !currentContent.includes(patch.oldCode)) {
-        throw new Error(
-          `Target code not found in ${cleanPath}. Content matching failed.`,
-        );
+        throw new Error(`Target code not found in ${cleanPath}. Content matching failed.`);
       }
 
       const newContent = patch.oldCode
@@ -209,18 +207,17 @@ async function applyPatches(patches: CodePatch[]) {
         : patch.newCode; // If no oldCode provided but not isNewFile, just overwrite or append?
       // Better to treat as append if not provided? No, let's stick to replace.
 
-      await fs.writeFile(activePath, newContent, "utf8");
-      results.push({ file: cleanPath, status: "success" });
+      await fs.writeFile(activePath, newContent, 'utf8');
+      results.push({ file: cleanPath, status: 'success' });
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Patch application failed";
-      results.push({ file: patch.file, status: "error", error: message });
+      const message = err instanceof Error ? err.message : 'Patch application failed';
+      results.push({ file: patch.file, status: 'error', error: message });
     }
   }
 
   return {
     success: true,
-    action: "commit",
+    action: 'commit',
     results,
   };
 }
-

@@ -130,8 +130,8 @@ const MainApp = () => {
         // Note: using 'memory' state here might be slightly stale if called immediately after setMemory
         // but allows keeping the memory file updated with recent interactions.
         await syncMemory(config, memory);
-      } catch (e) {
-        console.error('Failed to sync memory', e);
+      } catch (_e) {
+        console.error('', _e);
       }
     }
   };

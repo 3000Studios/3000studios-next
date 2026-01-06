@@ -249,7 +249,7 @@ export function VoiceCommandCenter() {
       setLog((prev) => [`✓ ${payload.summary}`, ...prev].slice(0, 8));
       setStatus('Applied ✓');
     } catch (error: unknown) {
-      console.error('Voice command failed', error);
+      console.error('', _error);
       setStatus('Error - try again');
     }
   }, []);

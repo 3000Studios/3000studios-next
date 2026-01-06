@@ -34,7 +34,7 @@ export async function POST(req: NextRequest): Promise<Response> {
 
     return NextResponse.json({ text: transcription.text });
   } catch (error: unknown) {
-    console.error("STT Error:", error);
+    console.error("", _error);
     return NextResponse.json(
       { error: "Transcription failed" },
       { status: 500 },

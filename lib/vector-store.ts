@@ -1,6 +1,6 @@
-import { prisma } from "@/lib/prisma";
-import { v4 as uuid } from "uuid";
-import { createEmbedding } from "./embeddings";
+import { prisma } from '@/lib/prisma';
+import { v4 as uuid } from 'uuid';
+import { createEmbedding } from './embeddings';
 
 export async function storeMemory(userId: string, text: string) {
   try {
@@ -14,14 +14,11 @@ export async function storeMemory(userId: string, text: string) {
       VALUES (${id}, ${userId}, ${text}, ${embedding}::vector)
     `;
   } catch (error: unknown) {
-    console.error("Failed to store memory:", error);
+    console.error('', _error);
   }
 }
 
-export async function recallMemory(
-  userId: string,
-  query: string
-): Promise<string> {
+export async function recallMemory(userId: string, query: string): Promise<string> {
   try {
     const embedding = await createEmbedding(query);
 
@@ -34,9 +31,9 @@ export async function recallMemory(
       LIMIT 5
     `;
 
-    return results.map((r: { content: string }) => r.content).join("\n");
+    return results.map((r: { content: string }) => r.content).join('\n');
   } catch (error: unknown) {
-    console.error("Failed to recall memory:", error);
-    return "";
+    console.error('', _error);
+    return '';
   }
 }

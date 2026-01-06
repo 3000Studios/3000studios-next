@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
 /**
  * Global Error Boundary
  * Catches and handles runtime errors in the application
  */
 
-import { useEffect } from "react";
-import { AlertTriangle, RefreshCw, Home } from "lucide-react";
-import Link from "next/link";
+import { useEffect } from 'react';
+import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Error({
   error,
@@ -18,7 +18,7 @@ export default function Error({
 }) {
   useEffect(() => {
     // Log error to monitoring service in production
-    console.error("Application error:", error);
+    console.error('', _error);
   }, [error]);
 
   return (
@@ -32,25 +32,22 @@ export default function Error({
         </div>
 
         {/* Error Message */}
-        <h1 className="text-4xl font-bold text-white mb-4">
-          Something went wrong!
-        </h1>
+        <h1 className="text-4xl font-bold text-white mb-4">Something went wrong!</h1>
         <p className="text-gray-400 mb-8">
-          We encountered an unexpected error. Don't worry, our team has been
-          notified.
+          We encountered an unexpected error. Don't worry, our team has been notified.
         </p>
 
         {/* Error Details (Development only) */}
-        {process.env.NODE_ENV === "development" && (
+        {process.env.NODE_ENV === 'development' && (
           <div className="mb-8 p-4 bg-white/5 rounded-lg text-left">
             <p className="text-sm font-mono text-red-400 break-all">
-              {(error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error")}
+              {error instanceof Error
+                ? error instanceof Error
+                  ? error.message
+                  : 'Unknown error'
+                : 'Unknown error'}
             </p>
-            {error.digest && (
-              <p className="text-xs text-gray-500 mt-2">
-                Error ID: {error.digest}
-              </p>
-            )}
+            {error.digest && <p className="text-xs text-gray-500 mt-2">Error ID: {error.digest}</p>}
           </div>
         )}
 

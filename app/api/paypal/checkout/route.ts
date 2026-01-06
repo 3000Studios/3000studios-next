@@ -12,9 +12,10 @@ export const runtime = 'nodejs';
 // PayPal SDK will be used server-side
 const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
 const PAYPAL_CLIENT_SECRET = process.env.PAYPAL_CLIENT_SECRET;
-const PAYPAL_API_BASE = process.env.NODE_ENV === 'production'
-  ? 'https://api-m.paypal.com'
-  : 'https://api-m.sandbox.paypal.com';
+const PAYPAL_API_BASE =
+  process.env.NODE_ENV === 'production'
+    ? 'https://api-m.paypal.com'
+    : 'https://api-m.sandbox.paypal.com';
 
 async function getPayPalAccessToken(): Promise<string> {
   if (!PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
@@ -26,7 +27,7 @@ async function getPayPalAccessToken(): Promise<string> {
   const response = await fetch(`${PAYPAL_API_BASE}/v1/oauth2/token`, {
     method: 'POST',
     headers: {
-      'Authorization': `Basic ${auth}`,
+      Authorization: `Basic ${auth}`,
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: 'grant_type=client_credentials',
@@ -47,40 +48,42 @@ const handler = async (request: NextRequest) => {
 
       const orderData = {
         intent: 'CAPTURE',
-        purchase_units: [{
-          amount: {
-            currency_code: currency,
-            value: amount.toFixed(2),
-            breakdown: {
-              item_total: {
-                currency_code: currency,
-                value: amount.toFixed(2)
-              }
-            }
-          },
-          items: items?.map((item: any) => ({
-            name: item.name,
-            quantity: item.quantity.toString(),
-            unit_amount: {
+        purchase_units: [
+          {
+            amount: {
               currency_code: currency,
-              value: item.price.toFixed(2)
-            }
-          }))
-        }],
+              value: amount.toFixed(2),
+              breakdown: {
+                item_total: {
+                  currency_code: currency,
+                  value: amount.toFixed(2),
+                },
+              },
+            },
+            items: items?.map((item: any) => ({
+              name: item.name,
+              quantity: item.quantity.toString(),
+              unit_amount: {
+                currency_code: currency,
+                value: item.price.toFixed(2),
+              },
+            })),
+          },
+        ],
         application_context: {
           brand_name: '3000 Studios',
           shipping_preference: 'NO_SHIPPING',
           user_action: 'PAY_NOW',
           return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/success`,
-          cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/checkout`
-        }
+          cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/store/checkout`,
+        },
       };
 
       const response = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`,
+          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify(orderData),
       });
@@ -102,16 +105,13 @@ const handler = async (request: NextRequest) => {
       // Capture PayPal payment
       const accessToken = await getPayPalAccessToken();
 
-      const response = await fetch(
-        `${PAYPAL_API_BASE}/v2/checkout/orders/${orderID}/capture`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`,
-          },
-        }
-      );
+      const response = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders/${orderID}/capture`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
       const captureData = await response.json();
 
@@ -130,18 +130,25 @@ const handler = async (request: NextRequest) => {
         success: true,
         orderID,
         status: captureData.status,
-        details: captureData
+        details: captureData,
       });
     }
 
-    return NextResponse.json(
-      { error: 'Invalid action' },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
   } catch (error: unknown) {
-    console.error('PayPal API error:', error);
+    console.error('', _error);
     return NextResponse.json(
-      { error: 'Payment processing failed', message: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error' },
+      {
+        error: 'Payment processing failed',
+        message:
+          error instanceof Error
+            ? error instanceof Error
+              ? error instanceof Error
+                ? error.message
+                : 'Unknown error'
+              : 'Unknown error'
+            : 'Unknown error',
+      },
       { status: 500 }
     );
   }

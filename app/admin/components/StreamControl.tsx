@@ -6,7 +6,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Video, VideoOff, Radio, Users, MessageCircle } from 'lucide-react';
+import { Video, VideoOff, Radio, Users } from 'lucide-react';
 import { useStreaming } from '@/hooks/useAPI';
 import { WebRTCBroadcaster } from '@/lib/services/webrtc';
 
@@ -28,13 +28,13 @@ export default function StreamControl() {
           const status = await getStreamStatus(streamId);
           setViewerCount(status.viewerCount || 0);
         } catch (err: unknown) {
-          console.error('Status check error:', err);
+          console.error('', _err);
         }
       }, 5000);
 
       return () => clearInterval(interval);
     }
-  }, [isStreaming, streamId]);
+  }, [isStreaming, streamId, getStreamStatus]);
 
   const handleStartStream = async () => {
     if (!streamTitle.trim()) {
@@ -53,7 +53,7 @@ export default function StreamControl() {
 
       // Start local media
       const localStream = await broadcaster.startBroadcast();
-      
+
       if (videoRef.current) {
         videoRef.current.srcObject = localStream;
       }
@@ -61,13 +61,13 @@ export default function StreamControl() {
       // Create offer and send to signaling server
       const offer = await broadcaster.createOffer();
       console.log('WebRTC Offer created:', offer);
-      
+
       // In production, send offer to signaling server
       // await fetch(streamData.signalServerUrl, { ... })
 
       setIsStreaming(true);
     } catch (err: unknown) {
-      console.error('Start stream error:', err);
+      console.error('', _err);
       alert('Failed to start stream. Please check camera/microphone permissions.');
     }
   };
@@ -77,7 +77,7 @@ export default function StreamControl() {
       try {
         await stopStream(streamId);
       } catch (err: unknown) {
-        console.error('Stop stream error:', err);
+        console.error('', _err);
       }
     }
 
@@ -100,14 +100,8 @@ export default function StreamControl() {
 
       {/* Stream Preview */}
       <div className="mb-4 bg-black rounded-lg overflow-hidden aspect-video relative">
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          playsInline
-          className="w-full h-full object-cover"
-        />
-        
+        <video ref={videoRef} autoPlay muted playsInline className="w-full h-full object-cover" />
+
         {isStreaming && (
           <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
             <div className="px-3 py-2 bg-red-600 rounded-lg flex items-center gap-2">
@@ -179,9 +173,7 @@ export default function StreamControl() {
         <p className="text-xs text-gray-400">
           💡 Viewers can watch at: <span className="text-purple-400">/live</span>
         </p>
-        <p className="text-xs text-gray-500 mt-1">
-          WebRTC streaming with TURN server support
-        </p>
+        <p className="text-xs text-gray-500 mt-1">WebRTC streaming with TURN server support</p>
       </div>
     </div>
   );

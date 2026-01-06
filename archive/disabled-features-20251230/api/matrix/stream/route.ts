@@ -22,7 +22,7 @@ export function broadcast(data: any) {
         socket.send(msg);
       }
     } catch (error: unknown) {
-      console.error("Socket broadcast error:", error);
+      console.error("", _error);
       sockets.delete(socket);
     }
   });

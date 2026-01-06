@@ -65,7 +65,7 @@ export class AutonomousOracle {
         try {
           await task();
         } catch (error: unknown) {
-          console.error(`Autonomous task ${name} failed:`, error);
+          console.error('', _error);
         }
       }
 
@@ -88,7 +88,7 @@ export class AutonomousOracle {
     return {
       isAutonomous: this.isAutonomous,
       tasks: Array.from(this.tasks.keys()),
-      uptime: process.uptime?.() || 0
+      uptime: process.uptime?.() || 0,
     };
   }
 }

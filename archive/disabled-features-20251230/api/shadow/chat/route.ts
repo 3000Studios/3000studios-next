@@ -36,7 +36,7 @@ export async function POST(req: Request) {
       avatar,
     });
   } catch (error: unknown) {
-    console.error("Shadow PRIME chat error:", error);
+    console.error("", _error);
     return NextResponse.json(
       { error: (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") || "Chat failed" },
       { status: 500 }

@@ -13,17 +13,11 @@ export async function POST(request: NextRequest) {
     const { productName, features, productId, autoSave } = body;
 
     if (!productName) {
-      return NextResponse.json(
-        { error: 'Product name required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Product name required' }, { status: 400 });
     }
 
     // Generate product description using AI
-    const description = await generateProductDescription(
-      productName,
-      features || []
-    );
+    const description = await generateProductDescription(productName, features || []);
 
     // Auto-save to database if requested
     if (autoSave && productId) {
@@ -42,10 +36,7 @@ export async function POST(request: NextRequest) {
       saved: autoSave && productId,
     });
   } catch (error: unknown) {
-    console.error('Product description API error:', error);
-    return NextResponse.json(
-      { error: 'Failed to generate product description' },
-      { status: 500 }
-    );
+    console.error('', _error);
+    return NextResponse.json({ error: 'Failed to generate product description' }, { status: 500 });
   }
 }

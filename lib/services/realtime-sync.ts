@@ -1,7 +1,7 @@
 /**
  * Real-Time Sync Service
  * Handles instant deployment and live updates for Boss Man J
- * 
+ *
  * Features:
  * - Instant commit to main branch
  * - Real-time deployment triggering
@@ -44,7 +44,7 @@ export async function instantSync(
   onProgress?: (event: DeploymentEvent) => void
 ): Promise<SyncResult> {
   const timestamp = Date.now();
-  
+
   try {
     // Step 1: Commit to main branch
     onProgress?.({
@@ -78,11 +78,11 @@ export async function instantSync(
 
     onProgress?.({
       type: 'deploy_start',
-      data: { 
-        commitSha, 
+      data: {
+        commitSha,
         deploymentId: deployment.id,
         url: deployment.url,
-        status: 'Deployment started' 
+        status: 'Deployment started',
       },
       timestamp: Date.now(),
     });
@@ -93,11 +93,11 @@ export async function instantSync(
     if (finalStatus === 'READY') {
       onProgress?.({
         type: 'deploy_complete',
-        data: { 
+        data: {
           commitSha,
           deploymentId: deployment.id,
           url: deployment.url,
-          status: 'Live on production!' 
+          status: 'Live on production!',
         },
         timestamp: Date.now(),
       });
@@ -114,8 +114,15 @@ export async function instantSync(
       throw new Error(`Deployment failed with status: ${finalStatus}`);
     }
   } catch (error: unknown) {
-    const errorMessage = error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error';
-    
+    const errorMessage =
+      error instanceof Error
+        ? error instanceof Error
+          ? error instanceof Error
+            ? error.message
+            : 'Unknown error'
+          : 'Unknown error'
+        : 'Unknown error';
+
     onProgress?.({
       type: 'deploy_error',
       data: { error: errorMessage },
@@ -158,7 +165,7 @@ async function monitorDeployment(
       await new Promise<void>((resolve) => setTimeout(resolve, interval));
       attempts++;
     } catch (error: unknown) {
-      console.error('Error monitoring deployment:', error);
+      console.error('', _error);
       attempts++;
     }
   }
@@ -184,7 +191,7 @@ export async function batchSync(
     });
 
     const commitSha = await createCommit(
-      files.map(file => ({
+      files.map((file) => ({
         path: file.path,
         content: file.content,
         message: commitMessage,
@@ -207,11 +214,11 @@ export async function batchSync(
 
     onProgress?.({
       type: 'deploy_start',
-      data: { 
+      data: {
         commitSha,
         deploymentId: deployment.id,
         url: deployment.url,
-        status: 'Deployment started' 
+        status: 'Deployment started',
       },
       timestamp: Date.now(),
     });
@@ -221,11 +228,11 @@ export async function batchSync(
     if (finalStatus === 'READY') {
       onProgress?.({
         type: 'deploy_complete',
-        data: { 
+        data: {
           commitSha,
           deploymentId: deployment.id,
           url: deployment.url,
-          status: 'All changes LIVE!' 
+          status: 'All changes LIVE!',
         },
         timestamp: Date.now(),
       });
@@ -242,8 +249,15 @@ export async function batchSync(
       throw new Error(`Deployment failed with status: ${finalStatus}`);
     }
   } catch (error: unknown) {
-    const errorMessage = error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error';
-    
+    const errorMessage =
+      error instanceof Error
+        ? error instanceof Error
+          ? error instanceof Error
+            ? error.message
+            : 'Unknown error'
+          : 'Unknown error'
+        : 'Unknown error';
+
     onProgress?.({
       type: 'deploy_error',
       data: { error: errorMessage },
@@ -282,7 +296,14 @@ export async function quickCommit(
       message: 'Committed to main branch',
     };
   } catch (error: unknown) {
-    const errorMessage = error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error';
+    const errorMessage =
+      error instanceof Error
+        ? error instanceof Error
+          ? error instanceof Error
+            ? error.message
+            : 'Unknown error'
+          : 'Unknown error'
+        : 'Unknown error';
     return {
       success: false,
       message: `Commit failed: ${errorMessage}`,
@@ -310,10 +331,10 @@ export async function forceRedeploy(
 
     onProgress?.({
       type: 'deploy_start',
-      data: { 
+      data: {
         deploymentId: deployment.id,
         url: deployment.url,
-        status: 'Redeployment started' 
+        status: 'Redeployment started',
       },
       timestamp: Date.now(),
     });
@@ -323,10 +344,10 @@ export async function forceRedeploy(
     if (finalStatus === 'READY') {
       onProgress?.({
         type: 'deploy_complete',
-        data: { 
+        data: {
           deploymentId: deployment.id,
           url: deployment.url,
-          status: 'Redeployment complete!' 
+          status: 'Redeployment complete!',
         },
         timestamp: Date.now(),
       });
@@ -342,8 +363,15 @@ export async function forceRedeploy(
       throw new Error(`Redeployment failed with status: ${finalStatus}`);
     }
   } catch (error: unknown) {
-    const errorMessage = error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error';
-    
+    const errorMessage =
+      error instanceof Error
+        ? error instanceof Error
+          ? error instanceof Error
+            ? error.message
+            : 'Unknown error'
+          : 'Unknown error'
+        : 'Unknown error';
+
     onProgress?.({
       type: 'deploy_error',
       data: { error: errorMessage },

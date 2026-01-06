@@ -14,14 +14,10 @@ export async function GET(request: NextRequest) {
     if (deploymentId) {
       // Validate deploymentId to prevent SSRF and malformed requests
       const isValidDeploymentId =
-        typeof deploymentId === 'string' &&
-        /^[a-zA-Z0-9_-]{1,64}$/.test(deploymentId);
+        typeof deploymentId === 'string' && /^[a-zA-Z0-9_-]{1,64}$/.test(deploymentId);
 
       if (!isValidDeploymentId) {
-        return NextResponse.json(
-          { error: 'Invalid deploymentId' },
-          { status: 400 }
-        );
+        return NextResponse.json({ error: 'Invalid deploymentId' }, { status: 400 });
       }
 
       // Get specific deployment status
@@ -40,10 +36,7 @@ export async function GET(request: NextRequest) {
       });
     }
   } catch (error: unknown) {
-    console.error('Deployment status API error:', error);
-    return NextResponse.json(
-      { error: 'Failed to get deployment status' },
-      { status: 500 }
-    );
+    console.error('', _error);
+    return NextResponse.json({ error: 'Failed to get deployment status' }, { status: 500 });
   }
 }

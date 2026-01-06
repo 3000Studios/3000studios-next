@@ -27,17 +27,17 @@ export function pushAnalytics(event: AnalyticsEvent) {
   }
 
   // Broadcast to all listeners
-  eventListeners.forEach(listener => {
+  eventListeners.forEach((listener) => {
     try {
       listener(fullEvent);
     } catch (error: unknown) {
-      console.error("Analytics listener error:", error);
+      console.error('', _error);
     }
   });
 
   // Log to console in development
-  if (process.env.NODE_ENV === "development") {
-    console.log("📊 Analytics:", fullEvent);
+  if (process.env.NODE_ENV === 'development') {
+    console.log('📊 Analytics:', fullEvent);
   }
 }
 
@@ -51,9 +51,7 @@ export function getRecentEvents(limit: number = 100): AnalyticsEvent[] {
 }
 
 export function getEventsByType(type: string, limit: number = 50): AnalyticsEvent[] {
-  return recentEvents
-    .filter(event => event.type === type)
-    .slice(0, limit);
+  return recentEvents.filter((event) => event.type === type).slice(0, limit);
 }
 
 export function clearEvents() {

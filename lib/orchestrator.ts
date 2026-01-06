@@ -32,7 +32,7 @@ export class SystemOrchestrator {
     logAudit({
       type: 'deploy',
       action: 'system_start',
-      payload: { timestamp: new Date().toISOString() }
+      payload: { timestamp: new Date().toISOString() },
     });
 
     // Enable autonomous mode
@@ -50,11 +50,11 @@ export class SystemOrchestrator {
   async stop() {
     this.isRunning = false;
     AutonomousMode.disable();
-    
+
     logAudit({
       type: 'deploy',
       action: 'system_stop',
-      payload: { cycles: this.cycleCount }
+      payload: { cycles: this.cycleCount },
     });
 
     console.log('🛑 Self-Sustaining System: OFFLINE');
@@ -87,16 +87,15 @@ export class SystemOrchestrator {
       logAudit({
         type: 'deploy',
         action: 'cycle_complete',
-        payload: { cycle: this.cycleCount, success: true }
+        payload: { cycle: this.cycleCount, success: true },
       });
-
     } catch (error: unknown) {
-      console.error(`❌ Cycle ${this.cycleCount} failed:`, error);
+      console.error('', _error);
 
       logAudit({
         type: 'deploy',
         action: 'cycle_failed',
-        payload: { cycle: this.cycleCount, error: (error as Error).message }
+        payload: { cycle: this.cycleCount, error: (error as Error).message },
       });
     }
 
@@ -106,9 +105,9 @@ export class SystemOrchestrator {
 
   private async healthCheck() {
     console.log('  🏥 Running health check...');
-    
+
     const qaResults = await QAAgent.runFullSuite();
-    
+
     if (!qaResults) {
       console.log('  ⚠️  Health issues detected - initiating repair');
       // Auto-repair logic would go here
@@ -119,28 +118,28 @@ export class SystemOrchestrator {
 
   private async optimize() {
     console.log('  ⚡ Optimizing performance...');
-    
+
     // Performance tuning happens automatically via PerformanceAutoTuner
     console.log('  ✅ Performance optimized');
   }
 
   private async updateContent() {
     console.log('  📝 Checking content updates...');
-    
+
     // Auto-generate blog posts, update metadata, etc.
     console.log('  ✅ Content current');
   }
 
   private async optimizeRevenue() {
     console.log('  💰 Optimizing revenue streams...');
-    
+
     // Adjust pricing, CTAs, ad placements based on analytics
     console.log('  ✅ Revenue optimized');
   }
 
   private async securityScan() {
     console.log('  🛡️  Running security scan...');
-    
+
     // Check for vulnerabilities, update dependencies
     console.log('  ✅ Security validated');
   }
@@ -150,7 +149,7 @@ export class SystemOrchestrator {
       isRunning: this.isRunning,
       cycleCount: this.cycleCount,
       autonomousMode: AutonomousMode.getStatus(),
-      uptime: process.uptime?.() || 0
+      uptime: process.uptime?.() || 0,
     };
   }
 }

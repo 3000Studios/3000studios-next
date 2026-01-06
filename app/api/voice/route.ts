@@ -70,7 +70,8 @@ async function searchPexels(query: string, type: 'video' | 'image'): Promise<str
   const apiKey = process.env.PEXELS_API_KEY;
   if (!apiKey) return null;
 
-  const baseUrl = type === 'video' ? 'https://api.pexels.com/videos/search' : 'https://api.pexels.com/v1/search';
+  const baseUrl =
+    type === 'video' ? 'https://api.pexels.com/videos/search' : 'https://api.pexels.com/v1/search';
   const url = `${baseUrl}?query=${encodeURIComponent(query)}&per_page=1&orientation=landscape`;
 
   try {
@@ -82,7 +83,7 @@ async function searchPexels(query: string, type: 'video' | 'image'): Promise<str
       return data.photos?.[0]?.src?.large2x || null;
     }
   } catch (e: unknown) {
-    console.error('Pexels search failed', e);
+    console.error('', _e);
     return null;
   }
 }
@@ -104,7 +105,12 @@ export async function POST(req: Request) {
 
       // AUTO-DETECT MEDIA REQUESTS (Pexels Integration)
       // "Put a truck video..."
-      if (text.includes('video') || text.includes('photo') || text.includes('image') || text.includes('picture')) {
+      if (
+        text.includes('video') ||
+        text.includes('photo') ||
+        text.includes('image') ||
+        text.includes('picture')
+      ) {
         const type = text.includes('video') ? 'video' : 'image';
         // Extract query: remove common words
         const query = text
@@ -126,12 +132,12 @@ export async function POST(req: Request) {
               type: 'ADD_MEDIA',
               payload: {
                 url: mediaUrl,
-                mediaType: type
-              }
+                mediaType: type,
+              },
             } as VoiceCommand);
             return NextResponse.json({
               ...result,
-              summary: `Found and added ${type} of "${query}" from Pexels`
+              summary: `Found and added ${type} of "${query}" from Pexels`,
             });
           }
         }
@@ -165,8 +171,11 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true, media, registry: uiRegistry });
   } catch (e: unknown) {
-    console.error('Voice API error:', e);
-    return NextResponse.json({ error: 'Voice command failed', details: String(e) }, { status: 500 });
+    console.error('', _e);
+    return NextResponse.json(
+      { error: 'Voice command failed', details: String(e) },
+      { status: 500 }
+    );
   }
 }
 

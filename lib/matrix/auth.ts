@@ -1,39 +1,39 @@
-import { kv } from "@vercel/kv";
-import bcrypt from "bcryptjs";
+import { kv } from '@vercel/kv';
+import bcrypt from 'bcryptjs';
 
-const MASTER_EMAIL = "mr.jwswain@gmail.com";
-const MASTER_PASSWORD = "Bossman3000!!!";
+const MASTER_EMAIL = 'mr.jwswain@gmail.com';
+const MASTER_PASSWORD = 'Bossman3000!!!';
 
 export async function initMasterPassword() {
   try {
-    const stored = await kv.get("matrix-password");
+    const stored = await kv.get('matrix-password');
 
     if (!stored) {
       const hash = await bcrypt.hash(MASTER_PASSWORD, 12);
-      await kv.set("matrix-password", hash);
-      await kv.set("matrix-email", MASTER_EMAIL);
+      await kv.set('matrix-password', hash);
+      await kv.set('matrix-email', MASTER_EMAIL);
     }
   } catch (error: unknown) {
-    console.error("Failed to initialize master password:", error);
+    console.error('', _error);
   }
 }
 
 export async function validateLogin(email: string, pass: string): Promise<boolean> {
   try {
-    const storedEmail = await kv.get("matrix-email");
-    const storedHash = await kv.get("matrix-password");
+    const storedEmail = await kv.get('matrix-email');
+    const storedHash = await kv.get('matrix-password');
 
     if (email !== storedEmail) {
       return false;
     }
 
-    if (!storedHash || typeof storedHash !== "string") {
+    if (!storedHash || typeof storedHash !== 'string') {
       return false;
     }
 
     return await bcrypt.compare(pass, storedHash);
   } catch (error: unknown) {
-    console.error("Login validation error:", error);
+    console.error('', _error);
     return false;
   }
 }

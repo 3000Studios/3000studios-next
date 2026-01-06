@@ -13,10 +13,7 @@ export async function POST(request: NextRequest) {
     const { orderId } = body;
 
     if (!orderId) {
-      return NextResponse.json(
-        { error: 'Order ID required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Order ID required' }, { status: 400 });
     }
 
     // Capture the PayPal order
@@ -24,7 +21,7 @@ export async function POST(request: NextRequest) {
 
     // Get order details from database to find affiliate products
     const orders = await getOrders(1);
-    const order = orders.find(o => o.orderId === orderId);
+    const order = orders.find((o) => o.orderId === orderId);
 
     // Track affiliate sales if applicable
     if (order) {
@@ -48,10 +45,7 @@ export async function POST(request: NextRequest) {
       payer: captureResult.payer,
     });
   } catch (error: unknown) {
-    console.error('PayPal capture order error:', error);
-    return NextResponse.json(
-      { error: 'Failed to capture PayPal order' },
-      { status: 500 }
-    );
+    console.error('', _error);
+    return NextResponse.json({ error: 'Failed to capture PayPal order' }, { status: 500 });
   }
 }

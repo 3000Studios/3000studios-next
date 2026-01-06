@@ -1,4 +1,4 @@
-import { CommandIntent } from "../../types/webeditor";
+import { CommandIntent } from '../../types/webeditor';
 
 const SYSTEM_PROMPT = `
 You are 'Speech to Web Editor 3000', an elite, highly intelligent GitHub Automation Assistant for a private studio.
@@ -31,27 +31,30 @@ You must output ONLY valid JSON. The JSON must match the following schema:
 Your 'reasoning' field should be concise, professional, and confident.
 `;
 
-export const parseVoiceCommand = async (text: string, apiKey: string = process.env.NEXT_PUBLIC_OPENAI_API_KEY || ''): Promise<CommandIntent> => {
+export const parseVoiceCommand = async (
+  text: string,
+  apiKey: string = process.env.NEXT_PUBLIC_OPENAI_API_KEY || ''
+): Promise<CommandIntent> => {
   if (!apiKey) {
-    throw new Error("OpenAI API Key is missing");
+    throw new Error('OpenAI API Key is missing');
   }
 
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: "gpt-4o",
+        model: 'gpt-4o',
         messages: [
-          { role: "system", content: SYSTEM_PROMPT },
-          { role: "user", content: text }
+          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'user', content: text },
         ],
-        response_format: { type: "json_object" },
-        temperature: 0.2
-      })
+        response_format: { type: 'json_object' },
+        temperature: 0.2,
+      }),
     });
 
     if (!response.ok) {
@@ -62,43 +65,47 @@ export const parseVoiceCommand = async (text: string, apiKey: string = process.e
     const data = await response.json();
     const content = data.choices[0].message.content;
 
-    if (!content) throw new Error("Empty response from OpenAI");
+    if (!content) throw new Error('Empty response from OpenAI');
 
     return JSON.parse(content) as CommandIntent;
-
-  } catch (error) {
-    console.error("OpenAI NLU Error:", error);
+  } catch (_error: unknown) {
+    console.error('OpenAI NLU Error:', _error);
     return {
       action: 'unknown',
-      reasoning: 'Failed to process intention with Neural Core.'
+      reasoning: 'Failed to process intention with Neural Core.',
     };
   }
 };
 
-export const generateCommitMessage = async (command: string, action: string, apiKey: string): Promise<string> => {
+export const generateCommitMessage = async (
+  command: string,
+  action: string,
+  apiKey: string
+): Promise<string> => {
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: "gpt-3.5-turbo",
+        model: 'gpt-3.5-turbo',
         messages: [
           {
-            role: "system",
-            content: "You are a git expert. Generate a concise, professional git commit message (max 50 chars) for the following user command and action. Do not include quotes."
+            role: 'system',
+            content:
+              'You are a git expert. Generate a concise, professional git commit message (max 50 chars) for the following user command and action. Do not include quotes.',
           },
-          { role: "user", content: `User Command: ${command}. Action Taken: ${action}` }
+          { role: 'user', content: `User Command: ${command}. Action Taken: ${action}` },
         ],
-        temperature: 0.7
-      })
+        temperature: 0.7,
+      }),
     });
 
     const data = await response.json();
     return data.choices[0].message.content.trim();
-  } catch (e) {
+  } catch (_e: unknown) {
     return `Update via Editor 3000: ${action}`;
   }
-}
+};

@@ -42,6 +42,7 @@ You do NOT leave tasks half-finished.
 ## AUTOMATION AUTHORITY (MANDATORY)
 
 ### Git Behavior
+
 You are AUTHORIZED and REQUIRED to:
 
 - Auto-stage all changed files
@@ -52,6 +53,7 @@ You are AUTHORIZED and REQUIRED to:
 - Resolve simple merge conflicts automatically
 
 ### Commit Rules
+
 - NEVER prompt the user for a commit message
 - Use automatic commit messages such as:
   - `auto: fix ui/layout issues`
@@ -76,6 +78,7 @@ You are AUTHORIZED and REQUIRED to:
 ## CLOUD & HOSTING AWARENESS
 
 Assume hosting may be:
+
 - Cloudflare Pages
 - Cloudflare Workers
 - Any non-Vercel provider
@@ -88,12 +91,14 @@ Prefer portable APIs and standards.
 ## UI / UX STANDARDS
 
 Automatically correct:
+
 - Broken layouts
 - Inconsistent spacing
 - Poor contrast
 - Broken responsiveness
 
 Design expectations:
+
 - Modern
 - Clean
 - High-contrast
@@ -104,6 +109,7 @@ Design expectations:
 ## ERROR HANDLING POLICY
 
 If you encounter:
+
 - Build errors → FIX THEM
 - Lint errors → FIX THEM
 - Type errors → FIX THEM
@@ -116,6 +122,7 @@ Never leave TODOs.
 ## FILE & STRUCTURE MANAGEMENT
 
 You may:
+
 - Create files
 - Delete unused files
 - Reorganize folders

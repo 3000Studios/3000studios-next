@@ -5,14 +5,30 @@
   "files.autoSave": "onFocusChange",
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
-  // Format ONLY on explicit save, not during execution
+  // Format automatically on save
   "editor.formatOnSave": true,
   "editor.formatOnPaste": false,
   "editor.formatOnType": false,
-  // Run fixes ONLY on manual save
+  // Run fixes automatically on save
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit",
     "source.organizeImports": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   // =========================================================
   // AI / ANTIGRAVITY — FULL POWER, GUARDED
@@ -32,10 +48,7 @@
   "css.validate": false,
   "scss.validate": false,
   "tailwindCSS.emmetCompletions": true,
-  "tailwindCSS.classAttributes": [
-    "class",
-    "className"
-  ],
+  "tailwindCSS.classAttributes": ["class", "className"],
   "emmet.includeLanguages": {
     "javascript": "javascriptreact",
     "typescript": "typescriptreact"
@@ -92,33 +105,19 @@
   // =========================================================
   // ESLint — Auto-fix on save
   "eslint.enable": true,
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "eslint.codeActionsOnSave.mode": "all",
   "eslint.run": "onType",
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
   // Error Lens — Inline error display
   "errorLens.enabled": true,
-  "errorLens.enabledDiagnosticLevels": [
-    "error",
-    "warning",
-    "info"
-  ],
+  "errorLens.enabledDiagnosticLevels": ["error", "warning", "info"],
   "errorLens.fontSize": "90%",
   "errorLens.fontWeight": "600",
   "errorLens.messageBackgroundMode": "line",
   "errorLens.messageTemplate": "$message",
-  "errorLens.severityText": [
-    "ERROR",
-    "WARNING",
-    "INFO",
-    "HINT"
-  ],
+  "errorLens.severityText": ["ERROR", "WARNING", "INFO", "HINT"],
   "errorLens.excludeBySource": [],
   "errorLens.followCursor": "activeLine",
   "errorLens.delay": 500,
@@ -137,14 +136,8 @@
   "tsErrorTranslator.enabled": true,
   // Tailwind CSS IntelliSense
   "tailwindCSS.experimental.classRegex": [
-    [
-      "cva\\(([^)]*)\\)",
-      "[\"'`]([^\"'`]*).*?[\"'`]"
-    ],
-    [
-      "cn\\(([^)]*)\\)",
-      "(?:'|\"|`)([^']*)(?:'|\"|`)"
-    ]
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
   "tailwindCSS.validate": true,
   "tailwindCSS.lint.cssConflict": "error",
@@ -154,13 +147,7 @@
   "tailwindCSS.lint.invalidConfigPath": "error",
   "tailwindCSS.lint.invalidTailwindDirective": "error",
   "tailwindCSS.lint.recommendedVariantOrder": "warning",
-  "python.testing.unittestArgs": [
-    "-v",
-    "-s",
-    "./packages",
-    "-p",
-    "*test.py"
-  ],
+  "python.testing.unittestArgs": ["-v", "-s", "./packages", "-p", "*test.py"],
   "python.testing.pytestEnabled": false,
   "python.testing.unittestEnabled": true
 }

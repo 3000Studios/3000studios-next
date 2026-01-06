@@ -58,7 +58,14 @@ export async function POST(request: NextRequest) {
           const errorEvent: DeploymentEvent = {
             type: 'deploy_error',
             data: {
-              error: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error',
+              error:
+                error instanceof Error
+                  ? error instanceof Error
+                    ? error instanceof Error
+                      ? error.message
+                      : 'Unknown error'
+                    : 'Unknown error'
+                  : 'Unknown error',
             },
             timestamp: Date.now(),
           };
@@ -72,19 +79,26 @@ export async function POST(request: NextRequest) {
       headers: {
         'Content-Type': 'text/event-stream',
         'Cache-Control': 'no-cache',
-        'Connection': 'keep-alive',
+        Connection: 'keep-alive',
       },
     });
   } catch (error: unknown) {
-    console.error('Real-time sync API error:', error);
+    console.error('', _error);
     return new Response(
-      JSON.stringify({ 
+      JSON.stringify({
         error: 'Failed to process sync request',
-        message: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error'
+        message:
+          error instanceof Error
+            ? error instanceof Error
+              ? error instanceof Error
+                ? error.message
+                : 'Unknown error'
+              : 'Unknown error'
+            : 'Unknown error',
       }),
-      { 
+      {
         status: 500,
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
       }
     );
   }

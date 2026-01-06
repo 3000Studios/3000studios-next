@@ -59,18 +59,18 @@ const defaultConfig: SiteConfig = {
     siteName: '3000 Studios',
     tagline: 'Award-Winning Creative Studio',
     logo: 'https://res.cloudinary.com/dj92eb97f/image/upload/v1767046287/new_logo-min_zd44u2.png',
-    favicon: '/favicon.ico'
+    favicon: '/favicon.ico',
   },
   theme: {
     default: 'marble',
-    pageOverrides: {}
+    pageOverrides: {},
   },
   media: {
     heroVideo: 'https://res.cloudinary.com/dj92eb97f/video/upload/v1767186687/1230_ptjsbp.mp4',
     backgroundVideos: [
-      'https://res.cloudinary.com/dj92eb97f/video/upload/v1767186687/1230_ptjsbp.mp4'
+      'https://res.cloudinary.com/dj92eb97f/video/upload/v1767186687/1230_ptjsbp.mp4',
     ],
-    splashVideo: 'https://res.cloudinary.com/dj92eb97f/video/upload/v1767186687/1230_ptjsbp.mp4'
+    splashVideo: 'https://res.cloudinary.com/dj92eb97f/video/upload/v1767186687/1230_ptjsbp.mp4',
   },
   monetization: {
     adsEnabled: true,
@@ -79,8 +79,8 @@ const defaultConfig: SiteConfig = {
     pricingTiers: [
       { name: 'Monthly', price: 29, interval: 'monthly' },
       { name: 'Yearly', price: 299, interval: 'yearly' },
-      { name: 'Lifetime', price: 999, interval: 'lifetime' }
-    ]
+      { name: 'Lifetime', price: 999, interval: 'lifetime' },
+    ],
   },
   features: {
     voiceControl: true,
@@ -88,18 +88,18 @@ const defaultConfig: SiteConfig = {
     liveAvatar: true,
     analytics: true,
     blog: true,
-    store: true
+    store: true,
   },
   performance: {
     enableGPUAcceleration: true,
     imageFormat: 'auto',
-    videoBitrate: 'auto'
+    videoBitrate: 'auto',
   },
   autonomousMode: {
     enabled: false,
     tasks: ['build', 'optimize', 'publish'],
-    schedule: 'hourly'
-  }
+    schedule: 'hourly',
+  },
 };
 
 interface ConfigStoreState extends SiteConfig {
@@ -117,7 +117,7 @@ export const useConfigStore = create<ConfigStoreState>()(
       updateConfig: (updates) => {
         set((state) => ({
           ...state,
-          ...updates
+          ...updates,
         }));
       },
 
@@ -136,9 +136,9 @@ export const useConfigStore = create<ConfigStoreState>()(
           const imported = JSON.parse(json);
           set(imported);
         } catch (error: unknown) {
-          console.error('Failed to import config:', error);
+          console.error('', _error);
         }
-      }
+      },
     }),
     { name: 'site-config' }
   )

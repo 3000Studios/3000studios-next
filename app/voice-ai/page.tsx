@@ -110,7 +110,7 @@ export default function VoiceAIPage() {
       } else {
         addLog(`Error: ${data.error}`);
       }
-    } catch (err) {
+    } catch (_err) {
       addLog('Failed to contact AI Engine');
     } finally {
       setIsProcessing(false);
@@ -140,7 +140,7 @@ export default function VoiceAIPage() {
       } else {
         addLog(`DEPLOY ERROR: ${data.error || data.warning}`);
       }
-    } catch (err) {
+    } catch (_err) {
       addLog('Deployment failed during network request.');
     } finally {
       setIsProcessing(false);

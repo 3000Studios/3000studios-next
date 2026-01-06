@@ -14,7 +14,7 @@ export async function GET(_req: NextRequest) {
       },
     });
   } catch (error: unknown) {
-    console.error('[Sitemap] Generation error:', error);
+    console.error('', _error);
     return NextResponse.json({ error: 'Generation failed' }, { status: 500 });
   }
 }
@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
       timestamp: new Date().toISOString(),
     });
   } catch (error: unknown) {
-    console.error('[Sitemap] Update error:', error);
+    console.error('', _error);
     return NextResponse.json({ error: 'Update failed' }, { status: 500 });
   }
 }

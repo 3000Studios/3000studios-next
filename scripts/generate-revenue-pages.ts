@@ -1,44 +1,42 @@
-import fs from "fs";
-import path from "path";
+import fs from 'fs';
+import path from 'path';
 
 const pages = [
   {
-    slug: "best-ai-tools-for-creators",
-    title: "Best AI Tools for Creators (2025)",
+    slug: 'best-ai-tools-for-creators',
+    title: 'Best AI Tools for Creators (2025)',
     description:
-      "Top AI tools to supercharge your creative workflow. Automated comparison of the best software for designers, developers, and artists.",
-    keywords: "ai tools, creator tools, best ai software, generative ai",
+      'Top AI tools to supercharge your creative workflow. Automated comparison of the best software for designers, developers, and artists.',
+    keywords: 'ai tools, creator tools, best ai software, generative ai',
     content:
-      "Discover the cutting-edge A.I. tools that are redefining creativity in 2025. From image generation to code assistance, these platforms are essential for modern creators.",
+      'Discover the cutting-edge A.I. tools that are redefining creativity in 2025. From image generation to code assistance, these platforms are essential for modern creators.',
   },
   {
-    slug: "best-passive-income-tools",
-    title: "Best Passive Income Tools Online",
+    slug: 'best-passive-income-tools',
+    title: 'Best Passive Income Tools Online',
     description:
-      "Generate revenue while you sleep with these proven digital tools. A comprehensive guide to automated income streams.",
-    keywords:
-      "passive income tools, online income, automated revenue, make money online",
+      'Generate revenue while you sleep with these proven digital tools. A comprehensive guide to automated income streams.',
+    keywords: 'passive income tools, online income, automated revenue, make money online',
     content:
-      "Building wealth requires smart tools. We explore the top platforms for affiliate marketing, digital products, and automated dropshipping that generate real passive income.",
+      'Building wealth requires smart tools. We explore the top platforms for affiliate marketing, digital products, and automated dropshipping that generate real passive income.',
   },
   {
-    slug: "web-design-trends-2025",
-    title: "Web Design Trends Dominating 2025",
+    slug: 'web-design-trends-2025',
+    title: 'Web Design Trends Dominating 2025',
     description:
-      "Stay ahead of the curve with the latest web design trends. Immersive 3D, micro-interactions, and AI-driven layouts.",
-    keywords: "web design trends, 2025 design, ux trends, ui inspiration",
+      'Stay ahead of the curve with the latest web design trends. Immersive 3D, micro-interactions, and AI-driven layouts.',
+    keywords: 'web design trends, 2025 design, ux trends, ui inspiration',
     content:
-      "The web is becoming more immersive. Explore how glassmorphism, 3D elements, and AI-driven personalization are setting the standard for premium web experiences.",
+      'The web is becoming more immersive. Explore how glassmorphism, 3D elements, and AI-driven personalization are setting the standard for premium web experiences.',
   },
   {
-    slug: "ultimate-developer-setup",
-    title: "The Ultimate Developer Setup 2025",
+    slug: 'ultimate-developer-setup',
+    title: 'The Ultimate Developer Setup 2025',
     description:
-      "Hardware and software essentials for peak coding performance. Keyboards, monitors, and productivity tools reviewed.",
-    keywords:
-      "developer setup, coding gear, mechanical keyboards, productivity tools",
+      'Hardware and software essentials for peak coding performance. Keyboards, monitors, and productivity tools reviewed.',
+    keywords: 'developer setup, coding gear, mechanical keyboards, productivity tools',
     content:
-      "Efficiency starts with the right environment. We review the best mechanical keyboards, ergonomic chairs, and high-performance monitors for professional developers.",
+      'Efficiency starts with the right environment. We review the best mechanical keyboards, ergonomic chairs, and high-performance monitors for professional developers.',
   },
 ];
 
@@ -140,7 +138,7 @@ export default function RevenuePage() {
 `;
 
 // Ensure directory exists
-const baseDir = path.join("src/app/revenue");
+const baseDir = path.join('src/app/revenue');
 if (!fs.existsSync(baseDir)) {
   fs.mkdirSync(baseDir, { recursive: true });
 }
@@ -151,15 +149,13 @@ pages.forEach((p) => {
 });
 
 // 2. Process "Dropzone" Content (src/revenue-content/*.json)
-const dropzoneDir = "src/revenue-content";
+const dropzoneDir = 'src/revenue-content';
 if (fs.existsSync(dropzoneDir)) {
-  const files = fs
-    .readdirSync(dropzoneDir)
-    .filter((file) => file.endsWith(".json"));
+  const files = fs.readdirSync(dropzoneDir).filter((file) => file.endsWith('.json'));
 
   files.forEach((file) => {
     try {
-      const rawData = fs.readFileSync(path.join(dropzoneDir, file), "utf-8");
+      const rawData = fs.readFileSync(path.join(dropzoneDir, file), 'utf-8');
       const p = JSON.parse(rawData);
 
       // Basic validation
@@ -172,7 +168,7 @@ if (fs.existsSync(dropzoneDir)) {
         );
       }
     } catch (err: unknown) {
-      console.error(`[Dropzone] Error processing ${file}:`, err);
+      console.error('', _err);
     }
   });
 }
@@ -182,6 +178,6 @@ function generatePage(p: PageData) {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
-  fs.writeFileSync(path.join(dir, "page.tsx"), template(p));
+  fs.writeFileSync(path.join(dir, 'page.tsx'), template(p));
   console.log(`Generated revenue page: ${p.slug}`);
 }

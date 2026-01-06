@@ -11,7 +11,8 @@ import Stripe from 'stripe';
 export const runtime = 'nodejs';
 
 function getStripe(): Stripe | null {
-  const key = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET || process.env.STRIPE_3000_SECRET;
+  const key =
+    process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET || process.env.STRIPE_3000_SECRET;
   if (!key) return null;
   return new Stripe(key);
 }
@@ -29,10 +30,7 @@ const postHandler = async (request: NextRequest) => {
     const { items, successUrl, cancelUrl } = await request.json();
 
     if (!items || items.length === 0) {
-      return NextResponse.json(
-        { error: 'No items provided' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'No items provided' }, { status: 400 });
     }
 
     // Create line items for Stripe
@@ -54,7 +52,9 @@ const postHandler = async (request: NextRequest) => {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: successUrl || `${process.env.NEXT_PUBLIC_SITE_URL}/store/success?session_id={CHECKOUT_SESSION_ID}`,
+      success_url:
+        successUrl ||
+        `${process.env.NEXT_PUBLIC_SITE_URL}/store/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: cancelUrl || `${process.env.NEXT_PUBLIC_SITE_URL}/store/checkout`,
       metadata: {
         source: '3000studios',
@@ -62,9 +62,11 @@ const postHandler = async (request: NextRequest) => {
       },
       customer_email: undefined, // Can be set if user is logged in
       billing_address_collection: 'auto',
-      shipping_address_collection: items.some((i: any) => i.requiresShipping) ? {
-        allowed_countries: ['US', 'CA', 'GB', 'AU'],
-      } : undefined,
+      shipping_address_collection: items.some((i: any) => i.requiresShipping)
+        ? {
+            allowed_countries: ['US', 'CA', 'GB', 'AU'],
+          }
+        : undefined,
     });
 
     // Stripe session created
@@ -74,11 +76,18 @@ const postHandler = async (request: NextRequest) => {
       url: session.url,
     });
   } catch (error: unknown) {
-    console.error('Stripe checkout error:', error);
+    console.error('', _error);
     return NextResponse.json(
       {
         error: 'Failed to create checkout session',
-        message: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error'
+        message:
+          error instanceof Error
+            ? error instanceof Error
+              ? error instanceof Error
+                ? error.message
+                : 'Unknown error'
+              : 'Unknown error'
+            : 'Unknown error',
       },
       { status: 500 }
     );
@@ -105,10 +114,7 @@ const getHandler = async (request: NextRequest) => {
     const sessionId = searchParams.get('session_id');
 
     if (!sessionId) {
-      return NextResponse.json(
-        { error: 'Session ID required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Session ID required' }, { status: 400 });
     }
 
     const session = await stripe.checkout.sessions.retrieve(sessionId);
@@ -120,11 +126,8 @@ const getHandler = async (request: NextRequest) => {
       currency: session.currency,
     });
   } catch (error: unknown) {
-    console.error('Stripe session retrieval error:', error);
-    return NextResponse.json(
-      { error: 'Failed to retrieve session' },
-      { status: 500 }
-    );
+    console.error('', _error);
+    return NextResponse.json({ error: 'Failed to retrieve session' }, { status: 500 });
   }
 };
 

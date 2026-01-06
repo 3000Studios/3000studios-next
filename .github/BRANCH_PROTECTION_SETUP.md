@@ -5,6 +5,7 @@ This guide provides step-by-step instructions for configuring branch protection 
 ## 🎯 Objective
 
 Protect the `main` branch from:
+
 - Direct pushes without review
 - Unreviewed code changes
 - Breaking changes
@@ -18,11 +19,13 @@ Branch protection can now be configured automatically using our configuration-as
 ### Quick Setup
 
 1. **Review the configuration file**:
+
    ```bash
    cat .github/branch-protection-config.yml
    ```
 
 2. **Apply configuration automatically**:
+
    ```bash
    # Requires GITHUB_TOKEN with admin access
    export GITHUB_TOKEN=your_admin_token
@@ -64,12 +67,14 @@ If you prefer manual setup or don't have admin API access:
 #### ✅ Pull Request Requirements
 
 **Require a pull request before merging**
+
 - ✅ Enable this option
 - **Require approvals**: Set to `1` minimum
 - ✅ **Dismiss stale approvals when new commits are pushed**
   - This ensures reviewers must re-approve after changes
 
 **Benefits:**
+
 - All changes go through code review
 - Prevents unreviewed code from reaching production
 - Maintains code quality standards
@@ -77,6 +82,7 @@ If you prefer manual setup or don't have admin API access:
 #### ✅ Status Check Requirements
 
 **Require status checks to pass before merging**
+
 - ✅ Enable this option
 - ✅ **Require branches to be up to date before merging**
 - **Required status checks**:
@@ -85,6 +91,7 @@ If you prefer manual setup or don't have admin API access:
   - `type-check` - TypeScript types must be valid
 
 **Benefits:**
+
 - Ensures code builds successfully
 - Validates code quality
 - Prevents broken code from being merged
@@ -92,11 +99,13 @@ If you prefer manual setup or don't have admin API access:
 #### ✅ Push Restrictions
 
 **Restrict who can push to matching branches**
+
 - ✅ Enable this option
 - **People, teams, or apps with push access**: Add ONLY repository owner
 - **Bypass list**: Leave empty (no one should bypass)
 
 **Benefits:**
+
 - Prevents direct pushes to main
 - Forces all changes through PR workflow
 - Maintains audit trail
@@ -104,13 +113,16 @@ If you prefer manual setup or don't have admin API access:
 #### ⚠️ Additional Recommended Settings
 
 **Do not allow bypassing the above settings** (if available)
+
 - Ensures protection rules apply to all contributors
 
 **Require linear history** (optional but recommended)
+
 - ✅ Enable to prevent merge commits
 - Keeps git history clean
 
 **Include administrators** (recommended)
+
 - ✅ Apply these rules even to repository admins
 - Ensures consistent workflow
 
@@ -119,6 +131,7 @@ If you prefer manual setup or don't have admin API access:
 With these rules enabled:
 
 ### Making Changes
+
 ```bash
 # 1. Create a feature branch
 git checkout -b feature/my-changes
@@ -181,13 +194,16 @@ These rules specifically protect against:
 The repository includes automated workflows that enforce these rules:
 
 ### CI Workflow (`.github/workflows/ci.yml`)
+
 Runs on every PR:
+
 - ✅ `pnpm install` - Install dependencies
 - ✅ `pnpm lint` - ESLint validation
 - ✅ `pnpm type-check` - TypeScript validation
 - ✅ `pnpm build` - Build verification
 
 ### Required for Merge
+
 All checks must pass before the PR can be merged.
 
 ## 📊 Monitoring and Compliance
@@ -195,11 +211,13 @@ All checks must pass before the PR can be merged.
 ### Verify Protection is Active
 
 Run the verification script:
+
 ```bash
 npm run verify-branch-protection
 ```
 
 Or manually check:
+
 ```bash
 # Try to push directly to main (should fail)
 git checkout main
@@ -211,6 +229,7 @@ git push origin main
 ### Audit Trail
 
 Every change to main is tracked:
+
 - PR number and title
 - Reviewer who approved
 - Time of merge
@@ -221,13 +240,17 @@ Access audit log: **Repository → Insights → Network** or **Pulse**
 ## 🆘 Troubleshooting
 
 ### "Cannot push to protected branch"
+
 **Solution:** This is expected. Create a PR instead of pushing directly.
 
 ### "Status checks haven't completed"
+
 **Solution:** Wait for CI workflow to finish. Check Actions tab for progress.
 
 ### "Branch is out of date"
+
 **Solution:** Update your branch:
+
 ```bash
 git checkout your-branch
 git fetch origin
@@ -236,6 +259,7 @@ git push --force-with-lease
 ```
 
 ### "Approval required"
+
 **Solution:** Request review from repository owner or designated reviewer.
 
 ## 📝 Summary Checklist

@@ -14,12 +14,14 @@ This repository includes automated branch protection configuration to ensure cod
 ### Configure Protection Rules
 
 **Option 1: Using npm script (Local)**
+
 ```bash
 export GITHUB_TOKEN=your_admin_token
 npm run configure-branch-protection
 ```
 
 **Option 2: Using GitHub Actions (Recommended)**
+
 1. Navigate to **Actions** tab in GitHub
 2. Select **Configure Branch Protection** workflow
 3. Click **Run workflow**
@@ -38,7 +40,7 @@ required_pull_request_reviews:
   require_code_owner_reviews: false
 
 required_status_checks:
-  strict: true  # Require up-to-date branches
+  strict: true # Require up-to-date branches
   contexts:
     - build
     - lint
@@ -61,18 +63,18 @@ required_linear_history: true
 
 Once configured, the main branch has these protections:
 
-| Protection | Status | Description |
-|------------|--------|-------------|
-| **Pull Request Required** | ✅ | All changes must go through PR workflow |
-| **Code Review** | ✅ | Minimum 1 approval required before merge |
-| **Dismiss Stale Reviews** | ✅ | New commits invalidate previous approvals |
-| **Status Checks** | ✅ | Build, lint, type-check must pass |
-| **Up-to-date Branch** | ✅ | Branch must be current with main |
-| **Enforce for Admins** | ✅ | Rules apply to everyone, including admins |
-| **Linear History** | ✅ | Clean git history, no merge commits |
-| **Block Force Push** | ✅ | Cannot rewrite history |
-| **Block Deletions** | ✅ | Cannot delete protected branch |
-| **Conversation Resolution** | ✅ | All review comments must be resolved |
+| Protection                  | Status | Description                               |
+| --------------------------- | ------ | ----------------------------------------- |
+| **Pull Request Required**   | ✅     | All changes must go through PR workflow   |
+| **Code Review**             | ✅     | Minimum 1 approval required before merge  |
+| **Dismiss Stale Reviews**   | ✅     | New commits invalidate previous approvals |
+| **Status Checks**           | ✅     | Build, lint, type-check must pass         |
+| **Up-to-date Branch**       | ✅     | Branch must be current with main          |
+| **Enforce for Admins**      | ✅     | Rules apply to everyone, including admins |
+| **Linear History**          | ✅     | Clean git history, no merge commits       |
+| **Block Force Push**        | ✅     | Cannot rewrite history                    |
+| **Block Deletions**         | ✅     | Cannot delete protected branch            |
+| **Conversation Resolution** | ✅     | All review comments must be resolved      |
 
 ## 🔍 Verification
 
@@ -84,6 +86,7 @@ npm run verify-branch-protection
 ```
 
 Expected output:
+
 ```
 ✅ Pull request before merging: ENABLED
 ✅ Minimum 1 approval: ENABLED
@@ -185,6 +188,7 @@ git push --force-with-lease origin your-branch
 ### "Insufficient permissions" when running script
 
 Ensure your GitHub token has:
+
 - `repo` scope with full control
 - Admin access to the repository
 
@@ -209,6 +213,7 @@ Generate a new token: https://github.com/settings/tokens
 ### Permission Requirements
 
 The configuration script requires:
+
 - **Scope**: `repo` (full control of private repositories)
 - **Access**: Admin access to the repository
 - **Why**: Branch protection is a repository administration feature
@@ -221,13 +226,13 @@ The configuration script requires:
 
 ## 📝 Files in This System
 
-| File | Purpose |
-|------|---------|
-| `.github/branch-protection-config.yml` | Configuration as code |
-| `scripts/configure-branch-protection.mjs` | Configuration script |
-| `scripts/verify-branch-protection.mjs` | Verification script |
-| `.github/workflows/configure-branch-protection.yml` | Auto-apply workflow |
-| `.github/workflows/branch-protection-check.yml` | Daily monitoring workflow |
+| File                                                | Purpose                   |
+| --------------------------------------------------- | ------------------------- |
+| `.github/branch-protection-config.yml`              | Configuration as code     |
+| `scripts/configure-branch-protection.mjs`           | Configuration script      |
+| `scripts/verify-branch-protection.mjs`              | Verification script       |
+| `.github/workflows/configure-branch-protection.yml` | Auto-apply workflow       |
+| `.github/workflows/branch-protection-check.yml`     | Daily monitoring workflow |
 
 ## 🎉 Benefits
 
@@ -248,16 +253,19 @@ The configuration script requires:
 ## ✨ Next Steps
 
 1. **Apply Configuration**
+
    ```bash
    npm run configure-branch-protection
    ```
 
 2. **Verify It Works**
+
    ```bash
    npm run verify-branch-protection
    ```
 
 3. **Test Protection**
+
    ```bash
    git push origin main  # Should fail
    ```

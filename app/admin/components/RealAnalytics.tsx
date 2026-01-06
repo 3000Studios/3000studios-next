@@ -73,7 +73,7 @@ export default function RealAnalytics() {
       const parsedData: AnalyticsResponse = data;
       setStats(parsedData.stats);
     } catch (err: unknown) {
-      console.error('Analytics load error:', err);
+      console.error('', _err);
     }
   }, [fetchAnalytics, timeRange]);
 

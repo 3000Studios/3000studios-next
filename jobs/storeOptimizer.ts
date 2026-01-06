@@ -145,7 +145,7 @@ export class StoreOptimizer {
     if (this.optimizationInterval) return;
 
     this.optimizationInterval = setInterval(() => {
-      this.optimize().catch(err => console.error('[StoreOptimizer] Error:', err));
+      this.optimize().catch((err) => console.error('', _err));
     }, intervalMs);
   }
 
@@ -170,14 +170,14 @@ export class StoreOptimizer {
    * Get actions by type
    */
   getActionsByType(type: OptimizationAction['type']): OptimizationAction[] {
-    return this.actions.filter(a => a.type === type);
+    return this.actions.filter((a) => a.type === type);
   }
 
   /**
    * Rollback action
    */
   rollbackAction(actionId: string): boolean {
-    const action = this.actions.find(a => a.id === actionId);
+    const action = this.actions.find((a) => a.id === actionId);
     if (!action) return false;
 
     // In production, would revert the actual change

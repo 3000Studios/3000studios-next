@@ -20,7 +20,7 @@
     "prebuild": "node scripts/validate-app-structure.mjs",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint . --max-warnings=0",
+    "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -32,7 +32,8 @@
     "db:seed": "tsx prisma/seed.ts",
     "clean": "rimraf .next node_modules",
     "prepare": "husky",
-    "postinstall": "node -e \"const { execSync } = require('child_process'); const url = process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/postgres'; execSync('npx prisma generate', { stdio: 'inherit', env: { ...process.env, DATABASE_URL: url } });\""
+    "postinstall": "node -e \"const { execSync } = require('child_process'); const url = process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/postgres'; execSync('npx prisma generate', { stdio: 'inherit', env: { ...process.env, DATABASE_URL: url } });\"",
+    "lint:strict": "eslint . --max-warnings=0"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.89",

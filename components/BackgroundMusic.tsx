@@ -64,7 +64,7 @@ export default function BackgroundMusicPlayer() {
           setHasInteracted(true);
           setShowIndicator(false);
         } catch (err: unknown) {
-          console.log('Still cannot play:', err);
+          console.log('', _err);
         }
       }
     };

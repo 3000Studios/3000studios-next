@@ -10,7 +10,14 @@ export interface AnalyticsEvent {
 }
 
 export interface ConversionEvent {
-  event: 'page_view' | 'cta_click' | 'add_to_cart' | 'checkout_start' | 'purchase' | 'signup' | 'upgrade';
+  event:
+    | 'page_view'
+    | 'cta_click'
+    | 'add_to_cart'
+    | 'checkout_start'
+    | 'purchase'
+    | 'signup'
+    | 'upgrade';
   page?: string;
   value?: number;
   currency?: string;
@@ -99,7 +106,7 @@ class AnalyticsService {
         body: JSON.stringify(event),
       });
     } catch (error: unknown) {
-      console.error('[Analytics] Failed to send event:', error);
+      console.error('', _error);
     }
   }
 

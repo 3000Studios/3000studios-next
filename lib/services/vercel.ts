@@ -26,9 +26,7 @@ export interface DeploymentResponse {
   createdAt: number;
 }
 
-export async function triggerDeployment(
-  branch: string = 'main'
-): Promise<DeploymentResponse> {
+export async function triggerDeployment(branch: string = 'main'): Promise<DeploymentResponse> {
   try {
     const response = await axios.post(
       `${VERCEL_API}/v13/deployments`,
@@ -41,7 +39,7 @@ export async function triggerDeployment(
       },
       {
         headers: {
-          'Authorization': `Bearer ${VERCEL_TOKEN}`,
+          Authorization: `Bearer ${VERCEL_TOKEN}`,
           'Content-Type': 'application/json',
         },
       }
@@ -54,29 +52,26 @@ export async function triggerDeployment(
       createdAt: response.data.createdAt,
     };
   } catch (error: unknown) {
-    console.error('Vercel deployment error:', error);
+    console.error('', _error);
     throw new Error('Failed to trigger deployment');
   }
 }
 
 export async function getDeploymentStatus(deploymentId: string): Promise<string> {
   validateDeploymentId(deploymentId);
-  
+
   try {
     validateDeploymentId(deploymentId);
 
-    const response = await axios.get(
-      `${VERCEL_API}/v13/deployments/${deploymentId}`,
-      {
-        headers: {
-          'Authorization': `Bearer ${VERCEL_TOKEN}`,
-        },
-      }
-    );
+    const response = await axios.get(`${VERCEL_API}/v13/deployments/${deploymentId}`, {
+      headers: {
+        Authorization: `Bearer ${VERCEL_TOKEN}`,
+      },
+    });
 
     return response.data.readyState;
   } catch (error: unknown) {
-    console.error('Vercel status check error:', error);
+    console.error('', _error);
     throw new Error('Failed to check deployment status');
   }
 }
@@ -91,7 +86,7 @@ export async function getLatestDeployment(): Promise<DeploymentResponse | null> 
       `${VERCEL_API}/v6/deployments?projectId=${PROJECT_NAME}&limit=1`,
       {
         headers: {
-          'Authorization': `Bearer ${VERCEL_TOKEN}`,
+          Authorization: `Bearer ${VERCEL_TOKEN}`,
         },
       }
     );
@@ -109,7 +104,7 @@ export async function getLatestDeployment(): Promise<DeploymentResponse | null> 
 
     return null;
   } catch (error: unknown) {
-    console.error('Vercel get deployment error:', error);
+    console.error('', _error);
     throw new Error('Failed to get latest deployment');
   }
 }
@@ -125,12 +120,12 @@ export async function cancelDeployment(deploymentId: string): Promise<void> {
       {},
       {
         headers: {
-          'Authorization': `Bearer ${VERCEL_TOKEN}`,
+          Authorization: `Bearer ${VERCEL_TOKEN}`,
         },
       }
     );
   } catch (error: unknown) {
-    console.error('Vercel cancel deployment error:', error);
+    console.error('', _error);
     throw new Error('Failed to cancel deployment');
   }
 }

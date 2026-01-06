@@ -1,4 +1,4 @@
-import { prisma } from "./prisma";
+import { prisma } from './prisma';
 
 export async function pruneMemory() {
   const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
@@ -16,6 +16,6 @@ export async function pruneMemory() {
     });
     console.log(`Pruned ${result.count} memories.`);
   } catch (error: unknown) {
-    console.error("Failed to prune memory:", error);
+    console.error('', _error);
   }
 }

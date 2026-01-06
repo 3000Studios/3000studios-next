@@ -44,21 +44,21 @@ Format your response as JSON with: { code, explanation, preview }`;
       model: 'gpt-4-turbo-preview',
       messages: [
         { role: 'system', content: systemPrompt },
-        { role: 'user', content: request.prompt }
+        { role: 'user', content: request.prompt },
       ],
       response_format: { type: 'json_object' },
       temperature: 0.7,
     });
 
     const result = JSON.parse(response.choices[0].message.content || '{}');
-    
+
     return {
       code: result.code || '',
       explanation: result.explanation || '',
-      preview: result.preview || ''
+      preview: result.preview || '',
     };
   } catch (error: unknown) {
-    console.error('OpenAI code generation error:', error);
+    console.error('', _error);
     throw new Error('Failed to generate code');
   }
 }
@@ -74,12 +74,13 @@ export async function generateBlogPost(topic: string, keywords: string[]): Promi
       messages: [
         {
           role: 'system',
-          content: 'You are a professional content writer for 3000 Studios, a creative digital agency. Write engaging, SEO-optimized blog posts.'
+          content:
+            'You are a professional content writer for 3000 Studios, a creative digital agency. Write engaging, SEO-optimized blog posts.',
         },
         {
           role: 'user',
-          content: `Write a comprehensive blog post about "${topic}". Include these keywords: ${keywords.join(', ')}. Use markdown formatting.`
-        }
+          content: `Write a comprehensive blog post about "${topic}". Include these keywords: ${keywords.join(', ')}. Use markdown formatting.`,
+        },
       ],
       temperature: 0.8,
       max_tokens: 2000,
@@ -87,7 +88,7 @@ export async function generateBlogPost(topic: string, keywords: string[]): Promi
 
     return response.choices[0].message.content || '';
   } catch (error: unknown) {
-    console.error('Blog post generation error:', error);
+    console.error('', _error);
     throw new Error('Failed to generate blog post');
   }
 }
@@ -106,12 +107,13 @@ export async function generateProductDescription(
       messages: [
         {
           role: 'system',
-          content: 'You are a marketing copywriter for 3000 Studios. Write compelling product descriptions that convert.'
+          content:
+            'You are a marketing copywriter for 3000 Studios. Write compelling product descriptions that convert.',
         },
         {
           role: 'user',
-          content: `Write a product description for "${productName}". Key features: ${features.join(', ')}`
-        }
+          content: `Write a product description for "${productName}". Key features: ${features.join(', ')}`,
+        },
       ],
       temperature: 0.9,
       max_tokens: 500,
@@ -119,7 +121,7 @@ export async function generateProductDescription(
 
     return response.choices[0].message.content || '';
   } catch (error: unknown) {
-    console.error('Product description generation error:', error);
+    console.error('', _error);
     throw new Error('Failed to generate product description');
   }
 }
@@ -141,7 +143,7 @@ export async function transcribeAudio(audioBase64: string): Promise<string> {
 
     return response.text;
   } catch (error: unknown) {
-    console.error('Audio transcription error:', error);
+    console.error('', _error);
     throw new Error('Failed to transcribe audio');
   }
 }

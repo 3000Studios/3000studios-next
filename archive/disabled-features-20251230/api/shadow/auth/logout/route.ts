@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
 
     return response;
   } catch (error: unknown) {
-    console.error("Shadow logout error:", error);
+    console.error("", _error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

@@ -7,9 +7,8 @@ import axios from 'axios';
 
 const PAYPAL_ENV = process.env.PAYPAL_ENV || process.env.NODE_ENV;
 
-const PAYPAL_API_BASE = PAYPAL_ENV === 'production'
-  ? 'https://api-m.paypal.com'
-  : 'https://api-m.sandbox.paypal.com';
+const PAYPAL_API_BASE =
+  PAYPAL_ENV === 'production' ? 'https://api-m.paypal.com' : 'https://api-m.sandbox.paypal.com';
 
 const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
 const PAYPAL_SECRET = process.env.PAYPAL_SECRET ?? process.env.PAYPAL_CLIENT_SECRET;
@@ -28,13 +27,13 @@ async function getAccessToken(): Promise<string> {
 
   try {
     const auth = Buffer.from(`${PAYPAL_CLIENT_ID}:${PAYPAL_SECRET}`).toString('base64');
-    
+
     const response = await axios.post<PayPalAccessToken>(
       `${PAYPAL_API_BASE}/v1/oauth2/token`,
       'grant_type=client_credentials',
       {
         headers: {
-          'Authorization': `Basic ${auth}`,
+          Authorization: `Basic ${auth}`,
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       }
@@ -42,12 +41,12 @@ async function getAccessToken(): Promise<string> {
 
     cachedToken = {
       token: response.data.access_token,
-      expiresAt: Date.now() + (response.data.expires_in * 1000) - 60000, // 1 min buffer
+      expiresAt: Date.now() + response.data.expires_in * 1000 - 60000, // 1 min buffer
     };
 
     return cachedToken.token;
   } catch (error: unknown) {
-    console.error('PayPal auth error:', error);
+    console.error('', _error);
     throw new Error('Failed to authenticate with PayPal');
   }
 }
@@ -85,7 +84,7 @@ export async function createOrder(params: CreateOrderParams) {
               },
             },
           },
-          items: params.items.map(item => ({
+          items: params.items.map((item) => ({
             name: item.name,
             description: item.description,
             quantity: item.quantity.toString(),
@@ -102,20 +101,16 @@ export async function createOrder(params: CreateOrderParams) {
       },
     };
 
-    const response = await axios.post(
-      `${PAYPAL_API_BASE}/v2/checkout/orders`,
-      orderData,
-      {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const response = await axios.post(`${PAYPAL_API_BASE}/v2/checkout/orders`, orderData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
 
     return response.data;
   } catch (error: unknown) {
-    console.error('PayPal create order error:', error);
+    console.error('', _error);
     throw new Error('Failed to create PayPal order');
   }
 }
@@ -129,7 +124,7 @@ export async function captureOrder(orderId: string) {
       {},
       {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       }
@@ -137,7 +132,7 @@ export async function captureOrder(orderId: string) {
 
     return response.data;
   } catch (error: unknown) {
-    console.error('PayPal capture order error:', error);
+    console.error('', _error);
     throw new Error('Failed to capture PayPal order');
   }
 }
@@ -146,18 +141,15 @@ export async function getOrderDetails(orderId: string) {
   try {
     const token = await getAccessToken();
 
-    const response = await axios.get(
-      `${PAYPAL_API_BASE}/v2/checkout/orders/${orderId}`,
-      {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await axios.get(`${PAYPAL_API_BASE}/v2/checkout/orders/${orderId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     return response.data;
   } catch (error: unknown) {
-    console.error('PayPal get order error:', error);
+    console.error('', _error);
     throw new Error('Failed to get PayPal order details');
   }
 }
@@ -168,10 +160,7 @@ export interface AffiliateProduct {
   commission: number;
 }
 
-export async function trackAffiliateSale(
-  orderId: string,
-  affiliateProducts: AffiliateProduct[]
-) {
+export async function trackAffiliateSale(orderId: string, affiliateProducts: AffiliateProduct[]) {
   try {
     // Store affiliate tracking data
     // This would typically go to a database
@@ -183,13 +172,13 @@ export async function trackAffiliateSale(
 
     // You can implement webhook calls to affiliate networks here
     // For example: ShareASale, CJ Affiliate, Impact, etc.
-    
+
     return {
       success: true,
       trackedProducts: affiliateProducts.length,
     };
   } catch (error: unknown) {
-    console.error('Affiliate tracking error:', error);
+    console.error('', _error);
     return {
       success: false,
       error: 'Failed to track affiliate sale',

@@ -36,7 +36,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     if (savedConfig) {
       try {
         setConfigState(JSON.parse(savedConfig));
-      } catch (e) {
+      } catch (_e) {
         localStorage.removeItem('s2w3000_config');
       }
     }

@@ -54,7 +54,7 @@ export async function GET(request: NextRequest) {
           console.warn(`[ALERT] Revenue endpoint ${endpoint} slow: ${responseTime}ms`);
         }
       } catch (error: unknown) {
-        console.error(`[CRITICAL] Revenue endpoint ${endpoint} DOWN:`, error);
+        console.error('', _error);
         results.push({
           endpoint,
           status: 'down',
@@ -74,10 +74,7 @@ export async function GET(request: NextRequest) {
       alerts: criticalDown.length > 0 ? `${criticalDown.length} critical endpoints down` : null,
     });
   } catch (error: unknown) {
-    console.error('[HEALTH CHECK] Failed:', error);
-    return NextResponse.json(
-      { error: 'Health check failed' },
-      { status: 500 }
-    );
+    console.error('', _error);
+    return NextResponse.json({ error: 'Health check failed' }, { status: 500 });
   }
 }

@@ -1,11 +1,11 @@
-import { GoogleGenAI, Type } from "@google/genai";
-import { CommandIntent } from "../../types/webeditor";
+import { GoogleGenAI, Type } from '@google/genai';
+import { CommandIntent } from '../../types/webeditor';
 
 const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY || process.env.GEMINI_API_KEY || '';
 
 const ai = new GoogleGenAI({ apiKey });
 
-const modelName = "gemini-3-flash-preview";
+const modelName = 'gemini-3-flash-preview';
 
 const systemInstruction = `
 You are an advanced GitHub Automation Assistant. Your job is to translate natural language voice commands into structured JSON instructions for the GitHub API.
@@ -28,7 +28,7 @@ If the intent is unclear, set action to 'unknown'.
 
 export const parseVoiceCommand = async (text: string): Promise<CommandIntent> => {
   if (!apiKey) {
-    throw new Error("Gemini API Key is missing");
+    throw new Error('Gemini API Key is missing');
   }
 
   try {
@@ -37,45 +37,53 @@ export const parseVoiceCommand = async (text: string): Promise<CommandIntent> =>
       contents: text,
       config: {
         systemInstruction: systemInstruction,
-        responseMimeType: "application/json",
+        responseMimeType: 'application/json',
         responseSchema: {
           type: Type.OBJECT,
           properties: {
             action: {
               type: Type.STRING,
               enum: [
-                "create_file",
-                "update_file",
-                "delete_file",
-                "list_files",
-                "get_file",
-                "trigger_workflow",
-                "unknown"
-              ]
+                'create_file',
+                'update_file',
+                'delete_file',
+                'list_files',
+                'get_file',
+                'trigger_workflow',
+                'unknown',
+              ],
             },
-            path: { type: Type.STRING, description: "File path, e.g., src/App.tsx" },
-            content: { type: Type.STRING, description: "The full content of the file to be written" },
-            commit_message: { type: Type.STRING, description: "A concise commit message" },
-            workflow_id: { type: Type.STRING, description: "Filename of the workflow, e.g., deploy.yml" },
-            branch: { type: Type.STRING, description: "Branch name, default main" },
-            reasoning: { type: Type.STRING, description: "Short explanation of why this action was chosen" }
+            path: { type: Type.STRING, description: 'File path, e.g., src/App.tsx' },
+            content: {
+              type: Type.STRING,
+              description: 'The full content of the file to be written',
+            },
+            commit_message: { type: Type.STRING, description: 'A concise commit message' },
+            workflow_id: {
+              type: Type.STRING,
+              description: 'Filename of the workflow, e.g., deploy.yml',
+            },
+            branch: { type: Type.STRING, description: 'Branch name, default main' },
+            reasoning: {
+              type: Type.STRING,
+              description: 'Short explanation of why this action was chosen',
+            },
           },
-          required: ["action", "reasoning"]
-        }
-      }
+          required: ['action', 'reasoning'],
+        },
+      },
     });
 
     const jsonText = response.text;
-    if (!jsonText) throw new Error("Empty response from Gemini");
+    if (!jsonText) throw new Error('Empty response from Gemini');
 
     const intent = JSON.parse(jsonText) as CommandIntent;
     return intent;
-
-  } catch (error) {
-    console.error("Gemini NLU Error:", error);
+  } catch (_error: unknown) {
+    console.error('Gemini NLU Error:', _error);
     return {
       action: 'unknown',
-      reasoning: 'Failed to process with AI.'
+      reasoning: 'Failed to process with AI.',
     };
   }
 };
@@ -85,11 +93,11 @@ export const generateCommitMessage = async (command: string, action: string): Pr
 
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: 'gemini-3-flash-preview',
       contents: `Generate a concise, professional git commit message (max 50 chars) for the following user command and action. Do not include quotes. Command: ${command}. Action: ${action}`,
     });
     return response.text?.trim() || `Update via Editor 3000: ${action}`;
-  } catch (e) {
+  } catch (_e: unknown) {
     return `Update via Editor 3000: ${action}`;
   }
-}
+};

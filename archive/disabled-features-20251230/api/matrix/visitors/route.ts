@@ -32,7 +32,7 @@ export async function GET() {
       locations,
     });
   } catch (error: unknown) {
-    console.error("Visitors API error:", error);
+    console.error("", _error);
     return NextResponse.json(
       { error: (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") || "Failed to fetch visitors" },
       { status: 500 }

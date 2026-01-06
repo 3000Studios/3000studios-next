@@ -65,7 +65,7 @@ Now produce the next line:
         onDialogue(line);
       }
     } catch (err: unknown) {
-      console.error('Dialogue generation error', err);
+      console.error('', _err);
     }
   }
 

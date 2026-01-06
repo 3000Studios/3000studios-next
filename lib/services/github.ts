@@ -67,9 +67,10 @@ export async function createCommit(changes: CommitFileChange[]): Promise<string>
     });
 
     // Create a new commit
-    const commitMessage = changes.length === 1 
-      ? changes[0].message 
-      : `Update ${changes.length} files via voice command`;
+    const commitMessage =
+      changes.length === 1
+        ? changes[0].message
+        : `Update ${changes.length} files via voice command`;
 
     const { data: newCommit } = await octokit.git.createCommit({
       owner,
@@ -89,7 +90,7 @@ export async function createCommit(changes: CommitFileChange[]): Promise<string>
 
     return newCommit.sha;
   } catch (error: unknown) {
-    console.error('GitHub commit error:', error);
+    console.error('', _error);
     throw new Error('Failed to create GitHub commit');
   }
 }
@@ -105,10 +106,10 @@ export async function getFileContent(path: string): Promise<string> {
     if ('content' in data) {
       return Buffer.from(data.content, 'base64').toString('utf-8');
     }
-    
+
     throw new Error('File not found');
   } catch (error: unknown) {
-    console.error('GitHub get file error:', error);
+    console.error('', _error);
     throw new Error('Failed to get file content');
   }
 }
@@ -128,7 +129,7 @@ export async function createBranch(branchName: string): Promise<void> {
       sha: refData.object.sha,
     });
   } catch (error: unknown) {
-    console.error('GitHub create branch error:', error);
+    console.error('', _error);
     throw new Error('Failed to create branch');
   }
 }
@@ -150,7 +151,7 @@ export async function createPullRequest(
 
     return data.number;
   } catch (error: unknown) {
-    console.error('GitHub create PR error:', error);
+    console.error('', _error);
     throw new Error('Failed to create pull request');
   }
 }

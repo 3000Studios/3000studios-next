@@ -42,7 +42,7 @@ class AuditLogger {
         body: JSON.stringify(logEntry),
       });
     } catch (error: unknown) {
-      console.error('[AuditLogger] Failed to persist log:', error);
+      console.error('', _error);
     }
 
     // Log to console in development
@@ -70,7 +70,7 @@ class AuditLogger {
       const data = await response.json();
       return data.logs || [];
     } catch (error: unknown) {
-      console.error('[AuditLogger] Failed to fetch logs:', error);
+      console.error('', _error);
       return this.logs; // Fallback to local cache
     }
   }

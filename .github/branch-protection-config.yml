@@ -13,7 +13,7 @@ required_pull_request_reviews:
 
 # Required status checks
 required_status_checks:
-  strict: true  # Require branches to be up to date before merging
+  strict: true # Require branches to be up to date before merging
   contexts:
     - build
     - lint
@@ -25,7 +25,7 @@ enforce_admins: true
 # Restrict who can push to matching branches
 # Set to null or remove this section entirely to allow only admins and repository owners
 # Set specific users/teams/apps to restrict to those entities
-restrictions: null  # null = only admins/owners can push
+restrictions: null # null = only admins/owners can push
 
 # Additional settings
 allow_force_pushes: false

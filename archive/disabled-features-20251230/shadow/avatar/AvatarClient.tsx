@@ -97,7 +97,7 @@ export default function AvatarClient() {
         detectSpeech();
       })
       .catch((error) => {
-        console.error("Voice Avatar: Microphone access denied", error);
+        console.error("", _error);
         setWsMsg("Microphone access denied");
         setVoiceEnabled(false);
       });

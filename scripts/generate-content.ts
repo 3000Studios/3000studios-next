@@ -1,40 +1,32 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import dotenv from "dotenv";
-import fs from "fs";
-import path from "path";
+import { GoogleGenerativeAI } from '@google/generative-ai';
+import dotenv from 'dotenv';
+import fs from 'fs';
+import path from 'path';
 
 // Load environment variables
-dotenv.config({ path: ".env.local" });
+dotenv.config({ path: '.env.local' });
 dotenv.config();
 
 const API_KEY = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY;
 
 if (!API_KEY) {
-  console.error(
-    "Error: GOOGLE_API_KEY or GEMINI_API_KEY not found in environment."
-  );
+  console.error('Error: GOOGLE_API_KEY or GEMINI_API_KEY not found in environment.');
   process.exit(1);
 }
 
 const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
 
-const TARGET_FILE = path.join(
-  process.cwd(),
-  "src",
-  "app",
-  "lib",
-  "blogData.ts"
-);
+const TARGET_FILE = path.join(process.cwd(), 'src', 'app', 'lib', 'blogData.ts');
 
 const TOPICS = [
-  "The Psychology of Color in Web Design",
-  "Server Components vs Client Components in 2025",
-  "How to Monetize Digital Products Effectively",
-  "The Rise of Micro-Interactions",
-  "Web Accessibility: Beyond Compliance",
-  "Sustainable Web Design",
-  "Zero-Trust Security for Web Apps",
+  'The Psychology of Color in Web Design',
+  'Server Components vs Client Components in 2025',
+  'How to Monetize Digital Products Effectively',
+  'The Rise of Micro-Interactions',
+  'Web Accessibility: Beyond Compliance',
+  'Sustainable Web Design',
+  'Zero-Trust Security for Web Apps',
 ];
 
 async function generatePost() {
@@ -63,62 +55,62 @@ async function generatePost() {
 
     // Clean up potential markdown code blocks
     text = text
-      .replace(/```json/g, "")
-      .replace(/```/g, "")
+      .replace(/```json/g, '')
+      .replace(/```/g, '')
       .trim();
 
     const postData = JSON.parse(text);
     const id = postData.title
       .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)+/g, "");
-    const date = new Date().toISOString().split("T")[0];
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)+/g, '');
+    const date = new Date().toISOString().split('T')[0];
 
     const newPost = {
       id,
       ...postData,
-      author: "3000 Studios AI",
+      author: '3000 Studios AI',
       date,
       featured: false,
     };
 
     appendToBlogData(newPost);
   } catch {
-    console.error("API Generation failed, switching to Mock Fallback...");
+    console.error('API Generation failed, switching to Mock Fallback...');
     generateMockPost();
   }
 }
 
 function generateMockPost() {
   const titles = [
-    "The Future of Digital Aesthetics: 2025 Prediction",
-    "Why Speed is the Ultimate Feature",
-    "mastering Dark Mode Design Patterns",
-    "The Ethics of AI in Creative Work",
-    "Minimalism: When Less is Actually More",
+    'The Future of Digital Aesthetics: 2025 Prediction',
+    'Why Speed is the Ultimate Feature',
+    'mastering Dark Mode Design Patterns',
+    'The Ethics of AI in Creative Work',
+    'Minimalism: When Less is Actually More',
   ];
   const title = titles[Math.floor(Math.random() * titles.length)];
   const id = title
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)+/g, "");
-  const date = new Date().toISOString().split("T")[0];
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)+/g, '');
+  const date = new Date().toISOString().split('T')[0];
 
   const mockPost = {
     id,
     title,
     excerpt:
-      "An in-depth look at how this trend is reshaping the industry standards for the coming year.",
+      'An in-depth look at how this trend is reshaping the industry standards for the coming year.',
     content: `In the rapidly evolving world of digital design, staying ahead of the curve is not just an advantage—it's a necessity. ${title} represents a paradigm shift in how we approach user experience.
 \n
 We are seeing a move towards more immersive, tactile interfaces that bridge the gap between physical and digital. This is not just about aesthetics; it's about functionality and emotional connection.
 \n
 Key takeaways for 2025 involve focusing on performance, accessibility, and genuine user value. At 3000 Studios, we are pioneering these techniques to deliver award-winning experiences for our clients.`,
-    category: "Design",
-    author: "3000 Studios Team",
+    category: 'Design',
+    author: '3000 Studios Team',
     date,
-    readTime: "5 min read",
-    tags: ["Design", "Future", "Trends"],
+    readTime: '5 min read',
+    tags: ['Design', 'Future', 'Trends'],
     featured: false,
   };
 
@@ -127,18 +119,18 @@ Key takeaways for 2025 involve focusing on performance, accessibility, and genui
 
 function appendToBlogData(post: unknown) {
   try {
-    const fileContent = fs.readFileSync(TARGET_FILE, "utf-8");
+    const fileContent = fs.readFileSync(TARGET_FILE, 'utf-8');
 
     // Find the end of the array
-    const arrayEndIndex = fileContent.lastIndexOf("];");
+    const arrayEndIndex = fileContent.lastIndexOf('];');
 
     if (arrayEndIndex === -1) {
-      throw new Error("Could not find end of blogPosts array in file.");
+      throw new Error('Could not find end of blogPosts array in file.');
     }
 
     // Check if we need to add a comma
     const lastChar = fileContent.slice(0, arrayEndIndex).trim().slice(-1);
-    const prefix = lastChar === "," ? "" : ",";
+    const prefix = lastChar === ',' ? '' : ',';
 
     // Insert with robust comma handling
     const newEntryString = `  ${prefix}
@@ -157,14 +149,12 @@ function appendToBlogData(post: unknown) {
 
     // Insert before the closing bracket
     const updatedContent =
-      fileContent.slice(0, arrayEndIndex) +
-      newEntryString +
-      fileContent.slice(arrayEndIndex);
+      fileContent.slice(0, arrayEndIndex) + newEntryString + fileContent.slice(arrayEndIndex);
 
-    fs.writeFileSync(TARGET_FILE, updatedContent, "utf-8");
+    fs.writeFileSync(TARGET_FILE, updatedContent, 'utf-8');
     console.log(`Successfully added post: ${post.title}`);
   } catch (error: unknown) {
-    console.error("File update failed:", error);
+    console.error('', _error);
   }
 }
 

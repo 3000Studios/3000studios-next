@@ -28,12 +28,12 @@ export function generateInternalLinks(content: string, existingPages: string[]):
 
   // Keywords that should link internally
   const keywordMap: Record<string, string> = {
-    'store': '/store',
-    'products': '/store',
-    'pricing': '/store',
-    'blog': '/blog',
-    'portfolio': '/portfolio',
-    'projects': '/projects',
+    store: '/store',
+    products: '/store',
+    pricing: '/store',
+    blog: '/blog',
+    portfolio: '/portfolio',
+    projects: '/projects',
     'live stream': '/live',
     'command center': '/admin',
     'voice control': '/admin',
@@ -192,7 +192,7 @@ export async function pingSearchEngines(urls: string[], apiKey: string): Promise
 
     return true;
   } catch (error: unknown) {
-    console.error('[SEO] Failed to ping search engines:', error);
+    console.error('', _error);
     return false;
   }
 }

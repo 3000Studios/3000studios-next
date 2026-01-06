@@ -47,7 +47,7 @@ export async function sendSMS(message: SMSMessage): Promise<string> {
 
     return response.data.sid;
   } catch (error: unknown) {
-    console.error('Twilio SMS error:', error);
+    console.error('', _error);
     throw new Error('Failed to send SMS');
   }
 }
@@ -70,7 +70,7 @@ export async function makeVoiceCall(call: VoiceCall): Promise<string> {
 
     return response.data.sid;
   } catch (error: unknown) {
-    console.error('Twilio voice call error:', error);
+    console.error('', _error);
     throw new Error('Failed to make voice call');
   }
 }
@@ -80,7 +80,7 @@ export async function getMessageStatus(messageSid: string): Promise<string> {
     const response = await twilioApi.get(`/Messages/${messageSid}.json`);
     return response.data.status;
   } catch (error: unknown) {
-    console.error('Twilio message status error:', error);
+    console.error('', _error);
     throw new Error('Failed to get message status');
   }
 }
@@ -91,7 +91,7 @@ export async function sendOrderNotification(
   total: number
 ): Promise<void> {
   const message = `Thank you for your order #${orderNumber}! Your total is $${total.toFixed(2)}. You'll receive tracking information soon. - 3000 Studios`;
-  
+
   await sendSMS({
     to: phoneNumber,
     body: message,
@@ -104,7 +104,7 @@ export async function sendStreamNotification(
   streamUrl: string
 ): Promise<void> {
   const message = `🔴 LIVE NOW: ${streamTitle}! Watch at ${streamUrl} - 3000 Studios`;
-  
+
   await sendSMS({
     to: phoneNumber,
     body: message,

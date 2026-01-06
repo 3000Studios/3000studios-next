@@ -9,11 +9,11 @@ import { getDashboardStats, getAnalytics } from '@/lib/services/mongodb';
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
-    const timeRange = searchParams.get('timeRange') as 'day' | 'week' | 'month' || 'day';
+    const timeRange = (searchParams.get('timeRange') as 'day' | 'week' | 'month') || 'day';
 
     // Get dashboard statistics
     const stats = await getDashboardStats();
-    
+
     // Get detailed analytics for the time range
     const analytics = await getAnalytics(timeRange);
 
@@ -24,10 +24,7 @@ export async function GET(request: NextRequest) {
       timeRange,
     });
   } catch (error: unknown) {
-    console.error('Analytics API error:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch analytics' },
-      { status: 500 }
-    );
+    console.error('', _error);
+    return NextResponse.json({ error: 'Failed to fetch analytics' }, { status: 500 });
   }
 }
