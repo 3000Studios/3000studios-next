@@ -11,26 +11,31 @@ on:
 permissions:
   contents: write
   actions: write
+  workflows: write
 
 jobs:
-  apply-intent:
+  execute-intent:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
       - name: Install dependencies
         run: |
-          corepack enable
-          pnpm install --frozen-lockfile
+          if [ -f pnpm-lock.yaml ]; then
+            npm install -g pnpm
+            pnpm install --frozen-lockfile
+          else
+            npm install
+          fi
 
-      - name: Execute intent engine
+      - name: Run intent engine
         run: |
           echo "${{ github.event.inputs.intent }}" | node scripts/apply-intent.mjs
 
@@ -39,7 +44,7 @@ jobs:
           git config user.name "3000 Agent"
           git config user.email "agent@3000studios.com"
           git add .
-          git commit -m "chore(agent): apply intent" || echo "No changes to commit"
+          git commit -m "chore(agent): apply intent" || echo "No changes"
 
       - name: Push changes
         run: git push origin main
