@@ -4,21 +4,20 @@ on:
   workflow_dispatch:
     inputs:
       intent:
-        description: Natural language command from GPT
+        description: Natural language command
         required: true
         type: string
 
 permissions:
   contents: write
   actions: write
-  workflows: write
 
 jobs:
-  execute-intent:
+  apply-intent:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node
@@ -26,25 +25,29 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies
-        run: |
-          if [ -f pnpm-lock.yaml ]; then
-            npm install -g pnpm
-            pnpm install --frozen-lockfile
-          else
-            npm install
-          fi
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
 
-      - name: Run intent engine
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Apply intent
         run: |
-          echo "${{ github.event.inputs.intent }}" | node scripts/apply-intent.mjs
+          node scripts/apply-intent.mjs <<'EOF'
+          ${{ inputs.intent }}
+          EOF
+
+      - name: Format + validate
+        run: pnpm run fix && pnpm run validate
 
       - name: Commit changes
         run: |
           git config user.name "3000 Agent"
           git config user.email "agent@3000studios.com"
           git add .
-          git commit -m "chore(agent): apply intent" || echo "No changes"
+          git commit -m "chore(agent): apply command intent" || echo "No changes"
 
       - name: Push changes
         run: git push origin main
