@@ -11,6 +11,7 @@ on:
 permissions:
   contents: write
   actions: write
+  pull-requests: write
 
 jobs:
   apply-intent:
@@ -25,29 +26,12 @@ jobs:
         with:
           node-version: 20
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Apply intent
+        env:
+          INTENT: ${{ github.event.inputs.intent }}
         run: |
-          node scripts/apply-intent.mjs <<'EOF'
-          ${{ inputs.intent }}
-          EOF
-
-      - name: Format + validate
-        run: pnpm run fix && pnpm run validate
-
-      - name: Commit changes
-        run: |
-          git config user.name "3000 Agent"
-          git config user.email "agent@3000studios.com"
-          git add .
-          git commit -m "chore(agent): apply command intent" || echo "No changes"
-
-      - name: Push changes
-        run: git push origin main
+          echo "INTENT=$INTENT"
+          node scripts/apply-intent.mjs
