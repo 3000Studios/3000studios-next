@@ -4,6 +4,9 @@ on:
   repository_dispatch:
     types: [apply-command]
 
+permissions:
+  contents: write
+
 jobs:
   apply:
     runs-on: ubuntu-latest
