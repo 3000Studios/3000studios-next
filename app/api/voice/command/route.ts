@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import { execSync } from 'child_process';
 import fs from 'fs';
 import { NextResponse } from 'next/server';
@@ -31,3 +33,4 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+
