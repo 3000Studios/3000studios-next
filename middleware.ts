@@ -1,11 +1,12 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
+import { getToken } from 'next-auth/jwt';
 
 const RATE_LIMIT = new Map<string, { count: number; ts: number }>();
 const WINDOW_MS = 60_000;
 const MAX_REQUESTS = 30;
 
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const url = req.nextUrl;
 
   // 1. Admin & VIP Auth Check
@@ -52,6 +53,6 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/api/ai/:path*', '/live/:path*'],
+  matcher: ['/admin/:path*', '/api/ai/:path*', '/live/:path*', '/vip/:path*'],
 };
 
