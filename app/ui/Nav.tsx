@@ -16,6 +16,7 @@ const PUBLIC_NAV_ITEMS = [
   { label: 'Apps', href: '/apps' },
   { label: 'Info', href: '/info' },
   { label: 'Admin', href: '/admin' },
+  { label: 'VIP', href: '/vip' },
 ];
 
 export default function Nav() {

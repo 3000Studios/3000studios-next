@@ -8,11 +8,15 @@ const MAX_REQUESTS = 30;
 export function middleware(req: NextRequest) {
   const url = req.nextUrl;
 
-  // 1. Admin Auth Check
-  if (url.pathname.startsWith('/admin')) {
-    const auth = req.cookies.get('auth');
-    if (!auth) {
-      return NextResponse.redirect(new URL('/login', req.url));
+  // 1. Admin & VIP Auth Check
+  if (url.pathname.startsWith('/admin') || url.pathname.startsWith('/vip')) {
+    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    
+    // Explicitly check for admin role if needed, or just presence of token
+    if (!token) {
+      const loginUrl = new URL('/login', req.url);
+      loginUrl.searchParams.set('callbackUrl', url.pathname);
+      return NextResponse.redirect(loginUrl);
     }
   }
 
