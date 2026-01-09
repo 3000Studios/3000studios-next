@@ -36,8 +36,9 @@ export async function POST(req: Request) {
 
     return result.toTextStreamResponse();
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error('', error);
     const message = error instanceof Error ? error.message : 'Unknown error';
     return new Response(JSON.stringify({ error: message }), { status: 500 });
   }
 }
+

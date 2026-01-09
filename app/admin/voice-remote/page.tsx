@@ -77,7 +77,7 @@ export default function VoiceRemotePage() {
     try {
       recognitionRef.current.start();
     } catch (err: unknown) {
-      console.error('', _err);
+      console.error('', err);
     }
   }, [status]);
 
@@ -295,3 +295,4 @@ export default function VoiceRemotePage() {
     </div>
   );
 }
+

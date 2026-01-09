@@ -7,14 +7,6 @@
     "node": ">=20 <21"
   },
   "packageManager": "pnpm@9.15.0",
-  "overrides": {
-    "camera-controls": "3.1.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "camera-controls": "3.1.1"
-    }
-  },
   "scripts": {
     "dev": "next dev",
     "prebuild": "node scripts/validate-app-structure.mjs",
@@ -30,10 +22,8 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "db:seed": "tsx prisma/seed.ts",
-    "clean": "rimraf .next node_modules",
-    "prepare": "husky",
-    "postinstall": "node -e \"const { execSync } = require('child_process'); const url = process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/postgres'; execSync('npx prisma generate', { stdio: 'inherit', env: { ...process.env, DATABASE_URL: url } });\"",
-    "lint:strict": "eslint . --max-warnings=0"
+    "clean": "rimraf .next node_modules pnpm-lock.yaml",
+    "postinstall": "node -e \"const { execSync } = require('child_process'); const url = process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/postgres'; execSync('npx prisma generate', { stdio: 'inherit', env: { ...process.env, DATABASE_URL: url } });\""
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.89",
@@ -55,13 +45,7 @@
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
     "@stripe/stripe-js": "^8.6.0",
-    "@tailwindcss/postcss": "4.1.18",
-    "@types/diff": "^8.0.0",
-    "@types/pg": "^8.16.0",
-    "@types/three": "^0.182.0",
-    "@types/uuid": "^10.0.0",
     "ai": "^5.0.117",
-    "autoprefixer": "10.4.23",
     "axios": "^1.13.2",
     "bcryptjs": "^3.0.3",
     "canvas-confetti": "^1.9.4",
@@ -103,10 +87,11 @@
     "@types/google.maps": "^3.58.1",
     "@types/howler": "^2.2.12",
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^25.0.3",
+    "@types/node": "^20.11.30",
     "@types/nodemailer": "^6.4.21",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.182.0",
     "@typescript-eslint/eslint-plugin": "^8.51.0",
     "@typescript-eslint/parser": "^8.51.0",
     "@vercel/analytics": "^1.6.1",
@@ -120,7 +105,6 @@
     "eslint-config-next": "16.0.10",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
-    "husky": "^9.1.7",
     "jsdom": "22.1.0",
     "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",
