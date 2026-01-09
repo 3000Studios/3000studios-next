@@ -76,7 +76,7 @@ const postHandler = async (request: NextRequest) => {
       url: session.url,
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error('Checkout Error:', error);
     return NextResponse.json(
       {
         error: 'Failed to create checkout session',
@@ -126,7 +126,7 @@ const getHandler = async (request: NextRequest) => {
       currency: session.currency,
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error('Checkout Retrieve Error:', error);
     return NextResponse.json({ error: 'Failed to retrieve session' }, { status: 500 });
   }
 };
