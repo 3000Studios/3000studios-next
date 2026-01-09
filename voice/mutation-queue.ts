@@ -31,7 +31,8 @@ async function readQueue(): Promise<QueuedMutation[]> {
     const data = await import('fs').then((fs) => fs.readFileSync(_QUEUE_FILE, 'utf8'));
     const parsed = JSON.parse(data) as unknown;
     return Array.isArray(parsed) ? (parsed as QueuedMutation[]) : [];
-  } catch (_error: unknown) {
+  } catch (error: unknown) {
+    if (process.env.NODE_ENV === 'development') console.warn('Queue file missing or invalid:', error);
     // Most likely the file doesn't exist yet; start fresh
     return [];
   }
