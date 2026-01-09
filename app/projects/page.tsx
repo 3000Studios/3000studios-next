@@ -147,9 +147,9 @@ export default function ProjectsPage() {
               </div>
 
               {/* Project Info */}
-              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-gold transition-colors">
+              <h2 className="text-xl font-bold text-white mb-2 group-hover:text-gold transition-colors">
                 {project.title}
-              </h3>
+              </h2>
               <p className="text-gray-400 mb-4">{project.description}</p>
 
               {/* Tags */}
@@ -163,12 +163,12 @@ export default function ProjectsPage() {
 
               {/* Links */}
               <div className="flex gap-3 pt-4 border-t border-gray-700">
-                <button className="flex items-center gap-2 text-gold hover:text-platinum transition-colors">
+                <button className="flex items-center gap-2 text-gold hover:text-platinum transition-colors min-h-[24px]">
                   <ExternalLink size={16} />
                   <span className="text-sm">View Project</span>
                 </button>
                 {project.github && (
-                  <button className="flex items-center gap-2 text-gold hover:text-platinum transition-colors">
+                  <button className="flex items-center gap-2 text-gold hover:text-platinum transition-colors min-h-[24px]">
                     <Github size={16} />
                     <span className="text-sm">Code</span>
                   </button>
@@ -180,7 +180,7 @@ export default function ProjectsPage() {
 
         {/* CTA Section */}
         <div className="mt-16 card bg-gradient-to-r from-gold/10 to-sapphire/10 border-gold text-center">
-          <h3 className="text-2xl font-bold text-white mb-4">Have a Project in Mind?</h3>
+          <h2 className="text-2xl font-bold text-white mb-4">Have a Project in Mind?</h2>
           <p className="text-gray-400 mb-6 max-w-md mx-auto">
             Let&apos;s collaborate and bring your vision to life with cutting-edge technology
           </p>
