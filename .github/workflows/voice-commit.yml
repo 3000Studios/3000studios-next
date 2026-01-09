@@ -1,0 +1,59 @@
+name: Voice Command Commit
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        required: true
+        type: string
+      payload:
+        required: true
+        type: string
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Apply voice command
+        run: |
+          node <<'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          const action = process.env.ACTION;
+          const payload = JSON.parse(process.env.PAYLOAD);
+
+          if (action === 'edit-page') {
+            const target = path.join(process.cwd(), 'app', payload.route, 'page.tsx');
+            fs.mkdirSync(path.dirname(target), { recursive: true });
+            fs.writeFileSync(target, payload.code);
+          }
+
+          if (action === 'add-component') {
+            const target = path.join(process.cwd(), 'components', payload.name + '.tsx');
+            fs.mkdirSync(path.dirname(target), { recursive: true });
+            fs.writeFileSync(target, payload.code);
+          }
+          EOF
+        env:
+          ACTION: ${{ inputs.action }}
+          PAYLOAD: ${{ inputs.payload }}
+
+      - name: Commit & push
+        run: |
+          git config user.name "3000Studios Bot"
+          git config user.email "bot@3000studios.ai"
+          git add .
+          git commit -m "voice: cloud command"
+          git push
