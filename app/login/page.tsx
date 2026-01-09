@@ -33,7 +33,8 @@ export default function LoginPage() {
         router.push(searchParams?.get('callbackUrl') || '/admin');
         router.refresh();
       }
-    } catch (err) {
+    } catch (error) {
+      console.error(error);
       setError('SYSTEM ERROR: CONNECTION FAILED');
       setLoading(false);
     }
