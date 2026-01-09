@@ -65,3 +65,5 @@ prisma/*.db-journal
 
 
 .pnpm-store/
+
+.npmrc
