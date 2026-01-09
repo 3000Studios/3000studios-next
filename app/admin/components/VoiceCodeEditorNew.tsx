@@ -114,7 +114,7 @@ export default function VoiceCodeEditor() {
       try {
         recognitionRef.current.stop();
       } catch (err: unknown) {
-        console.error('', _err);
+        console.error('', err);
       }
       recognitionRef.current = null;
     }
