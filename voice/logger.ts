@@ -84,7 +84,7 @@ export async function getVoiceCommandLogs(limit: number = 50): Promise<VoiceLogE
     const entries = lines.map((line) => JSON.parse(line));
     return entries.slice(-limit);
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error('', error);
     return [];
   }
 }
@@ -98,6 +98,6 @@ export async function clearVoiceCommandLogs(): Promise<void> {
       await fs.unlink(LOG_FILE);
     }
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error('', error);
   }
 }
