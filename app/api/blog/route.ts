@@ -1,6 +1,4 @@
-import fs from 'fs';
 import { NextResponse } from 'next/server';
-import path from 'path';
 
 interface BlogPost {
   id: number;
@@ -16,13 +14,9 @@ export async function POST(req: Request) {
   const post: BlogPost = { ...body, date: new Date().toISOString(), id: Date.now() };
   posts.push(post);
 
-  // Generate MDX file for SEO
-  const content = `# ${post.title}\n\n${post.body}\n\nPublished: ${post.date}`;
-  const blogDir = path.join(process.cwd(), 'app/blog/posts');
-  if (!fs.existsSync(blogDir)) {
-    fs.mkdirSync(blogDir, { recursive: true });
-  }
-  fs.writeFileSync(path.join(blogDir, `${post.id}.mdx`), content);
+  // In production, this should trigger a GitHub Action to commit the file
+  // via /api/command
+  console.log('Mock blog post created:', post);
 
   return NextResponse.json({ ok: true, post });
 }

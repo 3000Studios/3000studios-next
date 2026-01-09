@@ -1,6 +1,4 @@
-import { appendFileSync } from 'fs';
 import { NextResponse } from 'next/server';
-import { join } from 'path';
 
 /**
  * GPT BRIDGE ENDPOINT
@@ -9,18 +7,15 @@ import { join } from 'path';
 
 export const runtime = 'nodejs';
 
-const LOG_FILE = join(process.cwd(), 'logs', '3kai-audit.log');
-
 function auditLog(data: any) {
   try {
-    const logEntry =
-      JSON.stringify({
-        timestamp: new Date().toISOString(),
-        ...data,
-      }) + '\n';
-    appendFileSync(LOG_FILE, logEntry);
-  } catch (_err) {
-    console.error('', _err);
+    const logEntry = JSON.stringify({
+      timestamp: new Date().toISOString(),
+      ...data,
+    });
+    console.log('[AUDIT]', logEntry);
+  } catch (err) {
+    console.error('Audit log error:', err);
   }
 }
 
@@ -94,7 +89,7 @@ export async function POST(req: Request) {
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Internal server error';
     auditLog({ requestId, event: 'INTERNAL_ERROR', error: message });
-    console.error('', _error);
+    console.error('Bridge Error:', error);
     return NextResponse.json(
       { error: 'Bridge failed', requestId, details: message },
       { status: 500 }
