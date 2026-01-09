@@ -44,10 +44,10 @@ export default function AffiliateLinks() {
               className="group flex flex-col items-center gap-2"
             >
               {/* Fallback text if logo missing */}
-              <span className="text-lg font-bold text-gray-400 group-hover:text-white transition-colors">
+              <span className="text-lg font-bold text-gray-300 group-hover:text-white transition-colors">
                 {p.name}
               </span>
-              <span className="text-[10px] text-gray-600 group-hover:text-gray-400 transition-colors">
+              <span className="text-[10px] text-gray-400 group-hover:text-gray-200 transition-colors">
                 {p.desc}
               </span>
             </a>

@@ -67,7 +67,7 @@ export default function GravityFooter() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand Column */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold gradient-text">3000 STUDIOS</h3>
+            <h2 className="text-2xl font-bold gradient-text">3000 STUDIOS</h2>
             <p className="text-gray-400 text-sm">
               Professional creative studio delivering cutting-edge digital experiences
             </p>
@@ -75,7 +75,7 @@ export default function GravityFooter() {
 
           {/* Quick Links */}
           <div className="space-y-3">
-            <h4 className="text-gold font-semibold mb-4">Quick Links</h4>
+            <h3 className="text-gold font-semibold mb-4">Quick Links</h3>
             <div className="space-y-2">
               <Link href="/" className="block text-gray-400 hover:text-gold transition-colors">
                 Home
@@ -97,7 +97,7 @@ export default function GravityFooter() {
 
           {/* Resources */}
           <div className="space-y-3">
-            <h4 className="text-gold font-semibold mb-4">Resources</h4>
+            <h3 className="text-gold font-semibold mb-4">Resources</h3>
             <div className="space-y-2">
               <Link
                 href="/portfolio"
@@ -122,12 +122,13 @@ export default function GravityFooter() {
 
           {/* Social Links */}
           <div className="space-y-3">
-            <h4 className="text-gold font-semibold mb-4">Connect</h4>
+            <h3 className="text-gold font-semibold mb-4">Connect</h3>
             <div className="flex gap-4">
               <a
                 href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="GitHub"
                 className="w-10 h-10 rounded-full bg-gold/10 hover:bg-gold/20 flex items-center justify-center transition-all hover:scale-110"
               >
                 <Github size={20} className="text-gold" />
@@ -136,6 +137,7 @@ export default function GravityFooter() {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Twitter"
                 className="w-10 h-10 rounded-full bg-sapphire/10 hover:bg-sapphire/20 flex items-center justify-center transition-all hover:scale-110"
               >
                 <Twitter size={20} className="text-sapphire" />
@@ -144,12 +146,14 @@ export default function GravityFooter() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="LinkedIn"
                 className="w-10 h-10 rounded-full bg-platinum/10 hover:bg-platinum/20 flex items-center justify-center transition-all hover:scale-110"
               >
                 <Linkedin size={20} className="text-platinum" />
               </a>
               <a
                 href="mailto:contact@3000studios.com"
+                aria-label="Email Us"
                 className="w-10 h-10 rounded-full bg-gold/10 hover:bg-gold/20 flex items-center justify-center transition-all hover:scale-110"
               >
                 <Mail size={20} className="text-gold" />
