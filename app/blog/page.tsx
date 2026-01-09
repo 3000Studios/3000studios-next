@@ -75,7 +75,7 @@ export default function BlogPage() {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-2 rounded-full font-semibold transition-all hover-lift ${
+              className={`px-6 py-2 rounded-full font-semibold transition-all hover-lift min-h-[44px] flex items-center ${
                 selectedCategory === category
                   ? 'bg-gold text-black'
                   : 'glass border border-gold/30 text-gold hover:bg-gold/10'
@@ -225,7 +225,7 @@ export default function BlogPage() {
                   <button
                     key={tag}
                     onClick={() => setSearchTerm(tag)}
-                    className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-md text-gray-300 hover:border-yellow-400 hover:text-yellow-400 hover:bg-white/10 transition-all text-xs font-medium"
+                    className="px-4 py-2 bg-white/5 border border-white/10 rounded-md text-gray-300 hover:border-yellow-400 hover:text-yellow-400 hover:bg-white/10 transition-all text-xs font-medium min-h-[32px] flex items-center"
                   >
                     {tag}
                   </button>
