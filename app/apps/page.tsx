@@ -47,10 +47,10 @@ export default function AppsPage() {
         src="https://res.cloudinary.com/dj92eb97f/video/upload/v1766986180/lime_green_zd7xgt.mp4"
         opacity={0.3}
       />
-      
+
       {/* Premium Section Divider */}
       <div className="absolute top-24 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent opacity-50 shadow-[0_0_10px_#D4AF37]" />
-      
+
       <div className="max-w-7xl mx-auto mt-8">
         <h1 className="text-5xl font-bold text-center mb-4 bg-linear-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
           Our Applications

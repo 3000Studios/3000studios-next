@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -18,40 +18,45 @@ interface Testimonial {
 export default function TestimonialsCarousel() {
   const testimonials: Testimonial[] = [
     {
-      name: "Sarah Mitchell",
-      role: "CEO",
-      company: "TechVision Inc",
-      content: "3000 Studios transformed our digital presence completely. The attention to detail and creative vision exceeded all expectations. Our conversion rates increased by 300%!",
-      rating: 5
+      name: 'Sarah Mitchell',
+      role: 'CEO',
+      company: 'TechVision Inc',
+      content:
+        '3000 Studios transformed our digital presence completely. The attention to detail and creative vision exceeded all expectations. Our conversion rates increased by 300%!',
+      rating: 5,
     },
     {
-      name: "Michael Chen",
-      role: "Marketing Director",
-      company: "Innovate Labs",
-      content: "Working with 3000 Studios was an absolute game-changer. They delivered a cutting-edge solution that perfectly captured our brand identity and drove real business results.",
-      rating: 5
+      name: 'Michael Chen',
+      role: 'Marketing Director',
+      company: 'Innovate Labs',
+      content:
+        'Working with 3000 Studios was an absolute game-changer. They delivered a cutting-edge solution that perfectly captured our brand identity and drove real business results.',
+      rating: 5,
     },
     {
-      name: "Emily Rodriguez",
-      role: "Founder",
-      company: "Creative Minds Co",
-      content: "The team at 3000 Studios is phenomenal! They brought our vision to life with incredible precision and creativity. The results speak for themselves - we've never looked better.",
-      rating: 5
+      name: 'Emily Rodriguez',
+      role: 'Founder',
+      company: 'Creative Minds Co',
+      content:
+        "The team at 3000 Studios is phenomenal! They brought our vision to life with incredible precision and creativity. The results speak for themselves - we've never looked better.",
+      rating: 5,
     },
     {
-      name: "David Thompson",
-      role: "CTO",
-      company: "Digital Dynamics",
-      content: "Exceptional quality, lightning-fast delivery, and outstanding support. 3000 Studios sets the gold standard for digital creative services. Highly recommended!",
-      rating: 5
+      name: 'David Thompson',
+      role: 'CTO',
+      company: 'Digital Dynamics',
+      content:
+        'Exceptional quality, lightning-fast delivery, and outstanding support. 3000 Studios sets the gold standard for digital creative services. Highly recommended!',
+      rating: 5,
     },
     {
-      name: "Jessica Palmer",
-      role: "Brand Manager",
-      company: "Luxury Lifestyle",
-      content: "The sophistication and elegance they brought to our project was unmatched. Every detail was perfected, resulting in a truly premium digital experience.",
-      rating: 5
-    }
+      name: 'Jessica Palmer',
+      role: 'Brand Manager',
+      company: 'Luxury Lifestyle',
+      content:
+        'The sophistication and elegance they brought to our project was unmatched. Every detail was perfected, resulting in a truly premium digital experience.',
+      rating: 5,
+    },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -129,9 +134,7 @@ export default function TestimonialsCarousel() {
                 key={index}
                 onClick={() => goToTestimonial(index)}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentIndex
-                    ? 'bg-gold w-8'
-                    : 'bg-platinum opacity-40 hover:opacity-70'
+                  index === currentIndex ? 'bg-gold w-8' : 'bg-platinum opacity-40 hover:opacity-70'
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />

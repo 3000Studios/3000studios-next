@@ -1,12 +1,12 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const { name, description, price, image, url, category } = body;
 
-  const seoTitle = `${name} | Premium ${category || "Product"}`;
+  const seoTitle = `${name} | Premium ${category || 'Product'}`;
   const seoDescription = description?.slice(0, 150) || `Discover ${name} at 3000 Studios.`;
-  const slug = url || `/products/${encodeURIComponent(name.toLowerCase().replace(/\s+/g, "-"))}`;
+  const slug = url || `/products/${encodeURIComponent(name.toLowerCase().replace(/\s+/g, '-'))}`;
 
   return NextResponse.json({
     success: true,
@@ -23,18 +23,18 @@ export async function POST(req: NextRequest) {
 
 function buildSchema({ name, description, price, image, url, category }: any) {
   return {
-    "@context": "https://schema.org",
-    "@type": "Product",
+    '@context': 'https://schema.org',
+    '@type': 'Product',
     name,
     description,
     image,
     category,
     offers: {
-      "@type": "Offer",
+      '@type': 'Offer',
       price,
-      priceCurrency: "USD",
+      priceCurrency: 'USD',
       url,
-      availability: "https://schema.org/InStock",
+      availability: 'https://schema.org/InStock',
     },
   };
 }

@@ -5,10 +5,7 @@ import Script from 'next/script';
 export default function AdSlot({ slot = 'default' }: { slot?: string }) {
   return (
     <div className="my-8 border border-yellow-500/20 rounded-lg p-4 bg-black/20">
-      <Script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-      />
+      <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" />
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}

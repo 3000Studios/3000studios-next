@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     // For now, return mock session
     const mockSession = {
       url: `/success?session=mock_${Date.now()}${priceId ? `&priceId=${encodeURIComponent(priceId)}` : ''}`,
-      id: 'mock_session_id'
+      id: 'mock_session_id',
     };
 
     // Real Stripe implementation:
@@ -33,4 +33,3 @@ export async function POST(req: Request) {
     );
   }
 }
-

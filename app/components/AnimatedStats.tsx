@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
@@ -36,7 +36,7 @@ export default function AnimatedStats() {
       const interval = setInterval(() => {
         currentStep++;
         if (currentStep <= steps) {
-          setDisplayValues(prev => {
+          setDisplayValues((prev) => {
             const newValues = [...prev];
             newValues[index] = Math.min(increment * currentStep, stat.value);
             return newValues;
@@ -72,9 +72,7 @@ export default function AnimatedStats() {
                 {Math.floor(displayValues[index])}
                 {stat.suffix}
               </div>
-              <div className="text-platinum text-sm md:text-base opacity-80">
-                {stat.label}
-              </div>
+              <div className="text-platinum text-sm md:text-base opacity-80">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>

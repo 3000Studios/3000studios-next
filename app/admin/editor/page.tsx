@@ -10,9 +10,9 @@ export default function Editor() {
     const res = await fetch('/api/voice/edit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ route, jsx })
+      body: JSON.stringify({ route, jsx }),
     });
-    
+
     const data = await res.json();
     if (data.ok) {
       alert(`Page ${route} updated successfully!`);
@@ -24,13 +24,13 @@ export default function Editor() {
   return (
     <div className="p-10 min-h-screen">
       <h1 className="text-3xl font-bold mb-6 text-white">Live Page Editor</h1>
-      
+
       <div className="mb-4">
         <label className="block text-gray-400 mb-2">Page Route:</label>
         <input
           type="text"
           value={route}
-          onChange={e => setRoute(e.target.value)}
+          onChange={(e) => setRoute(e.target.value)}
           className="w-full bg-black border border-gray-700 text-white px-4 py-2 rounded"
           placeholder="e.g., about, store, portfolio"
         />
@@ -40,7 +40,7 @@ export default function Editor() {
         <label className="block text-gray-400 mb-2">JSX Code:</label>
         <textarea
           value={jsx}
-          onChange={e => setJsx(e.target.value)}
+          onChange={(e) => setJsx(e.target.value)}
           className="w-full h-96 bg-black border border-gray-700 text-green-400 px-4 py-2 rounded font-mono"
           placeholder="export default function Page() { return <div>Content</div> }"
         />

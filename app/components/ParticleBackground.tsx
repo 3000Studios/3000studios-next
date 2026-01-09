@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useEffect, useRef } from 'react';
 
@@ -70,7 +70,7 @@ export default function ParticleBackground() {
     // Create particles
     const particles: Particle[] = [];
     const particleCount = 100;
-    
+
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
     }
@@ -97,7 +97,7 @@ export default function ParticleBackground() {
         particle.draw();
 
         // Draw connections between nearby particles
-        particles.slice(i + 1).forEach(otherParticle => {
+        particles.slice(i + 1).forEach((otherParticle) => {
           const dx = particle.x - otherParticle.x;
           const dy = particle.y - otherParticle.y;
           const distance = Math.sqrt(dx * dx + dy * dy);

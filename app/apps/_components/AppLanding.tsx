@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { ReactNode } from "react";
+import Link from 'next/link';
+import { ReactNode } from 'react';
 
 interface AppLandingProps {
   title: string;
@@ -29,8 +29,8 @@ export function AppLanding(props: AppLandingProps) {
     audience,
     faq,
     heroBadge,
-    ctaLabel = "Buy now",
-    downloadNote = "Access unlocks after purchase. No free downloads.",
+    ctaLabel = 'Buy now',
+    downloadNote = 'Access unlocks after purchase. No free downloads.',
     children,
   } = props;
 
@@ -51,9 +51,7 @@ export function AppLanding(props: AppLandingProps) {
             <p className="text-lg text-gray-200/90 max-w-3xl">{subtitle}</p>
             <div className="flex items-end gap-3">
               <div className="text-4xl font-black text-amber-300">{price}</div>
-              {compareAt && (
-                <div className="text-xl text-gray-400 line-through">{compareAt}</div>
-              )}
+              {compareAt && <div className="text-xl text-gray-400 line-through">{compareAt}</div>}
             </div>
             <div className="flex flex-wrap gap-3">
               <Link
@@ -63,7 +61,7 @@ export function AppLanding(props: AppLandingProps) {
                 {ctaLabel}
               </Link>
               <Link
-                href={`mailto:contact@3000studios.com?subject=${encodeURIComponent(title + " demo")}`}
+                href={`mailto:contact@3000studios.com?subject=${encodeURIComponent(title + ' demo')}`}
                 className="px-6 py-3 rounded-lg border border-amber-300/40 text-amber-100 hover:bg-amber-300/10 transition"
               >
                 Request demo
@@ -103,7 +101,9 @@ export function AppLanding(props: AppLandingProps) {
               {highlights.map((item) => (
                 <div key={item} className="p-4 rounded-xl bg-black/40 border border-amber-200/20">
                   <p className="font-semibold text-amber-100 mb-1">{item.split(':')[0]}</p>
-                  <p className="text-sm text-gray-200/80">{item.includes(':') ? item.split(':').slice(1).join(':').trim() : item}</p>
+                  <p className="text-sm text-gray-200/80">
+                    {item.includes(':') ? item.split(':').slice(1).join(':').trim() : item}
+                  </p>
                 </div>
               ))}
             </div>

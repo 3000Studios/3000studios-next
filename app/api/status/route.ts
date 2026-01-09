@@ -1,7 +1,7 @@
 import { getLatestDeployment } from '@/lib/services/vercel';
 import { NextResponse } from 'next/server';
 
-export const runtime = "nodejs";
+export const runtime = 'nodejs';
 
 export async function GET(req: Request) {
   try {
@@ -26,12 +26,14 @@ export async function GET(req: Request) {
     return NextResponse.json({
       success: true,
       status: latest ? latest.readyState : 'unknown',
-      lastDeployment: latest ? {
-        id: latest.id,
-        url: latest.url,
-        createdAt: latest.createdAt
-      } : null,
-      timestamp: new Date().toISOString()
+      lastDeployment: latest
+        ? {
+            id: latest.id,
+            url: latest.url,
+            createdAt: latest.createdAt,
+          }
+        : null,
+      timestamp: new Date().toISOString(),
     });
   } catch (error: unknown) {
     return NextResponse.json({ error: 'Failed to fetch status' }, { status: 500 });

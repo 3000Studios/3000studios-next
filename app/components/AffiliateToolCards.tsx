@@ -5,11 +5,11 @@
  * Each card generates affiliate revenue
  */
 
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { Bot, DollarSign, Server, Video } from "lucide-react";
-import { brand } from "@/design/brand";
+import { motion } from 'framer-motion';
+import { Bot, DollarSign, Server, Video } from 'lucide-react';
+import { brand } from '@/design/brand';
 
 interface AffiliateTool {
   name: string;
@@ -23,40 +23,40 @@ interface AffiliateTool {
 
 const affiliateTools: AffiliateTool[] = [
   {
-    name: "ChatGPT Plus",
-    category: "AI",
-    description: "Most powerful AI for content creation and automation",
+    name: 'ChatGPT Plus',
+    category: 'AI',
+    description: 'Most powerful AI for content creation and automation',
     icon: <Bot size={32} />,
-    affiliateLink: "https://chat.openai.com/plus",
-    price: "$20/mo",
-    badge: "Essential",
+    affiliateLink: 'https://chat.openai.com/plus',
+    price: '$20/mo',
+    badge: 'Essential',
   },
   {
-    name: "Vercel Pro",
-    category: "Hosting",
-    description: "Lightning-fast hosting with automatic deployments",
+    name: 'Vercel Pro',
+    category: 'Hosting',
+    description: 'Lightning-fast hosting with automatic deployments',
     icon: <Server size={32} />,
-    affiliateLink: "https://vercel.com/pricing",
-    price: "$20/mo",
-    badge: "Recommended",
+    affiliateLink: 'https://vercel.com/pricing',
+    price: '$20/mo',
+    badge: 'Recommended',
   },
   {
-    name: "Stripe",
-    category: "Finance",
-    description: "Accept payments and scale revenue globally",
+    name: 'Stripe',
+    category: 'Finance',
+    description: 'Accept payments and scale revenue globally',
     icon: <DollarSign size={32} />,
-    affiliateLink: "https://stripe.com",
-    price: "Free",
-    badge: "Free Start",
+    affiliateLink: 'https://stripe.com',
+    price: 'Free',
+    badge: 'Free Start',
   },
   {
-    name: "Riverside.fm",
-    category: "Video",
-    description: "Studio-quality remote recording for creators",
+    name: 'Riverside.fm',
+    category: 'Video',
+    description: 'Studio-quality remote recording for creators',
     icon: <Video size={32} />,
-    affiliateLink: "https://riverside.fm",
-    price: "$15/mo",
-    badge: "Creator Pick",
+    affiliateLink: 'https://riverside.fm',
+    price: '$15/mo',
+    badge: 'Creator Pick',
   },
 ];
 
@@ -136,27 +136,18 @@ export default function AffiliateToolCards() {
               </div>
 
               {/* Name */}
-              <h3
-                className="text-xl font-bold mb-2"
-                style={{ color: brand.colors.text.primary }}
-              >
+              <h3 className="text-xl font-bold mb-2" style={{ color: brand.colors.text.primary }}>
                 {tool.name}
               </h3>
 
               {/* Description */}
-              <p
-                className="text-sm mb-4"
-                style={{ color: brand.colors.text.secondary }}
-              >
+              <p className="text-sm mb-4" style={{ color: brand.colors.text.secondary }}>
                 {tool.description}
               </p>
 
               {/* Price */}
               <div className="flex items-center justify-between">
-                <span
-                  className="font-bold"
-                  style={{ color: brand.colors.revenue.positive }}
-                >
+                <span className="font-bold" style={{ color: brand.colors.revenue.positive }}>
                   {tool.price}
                 </span>
                 <span

@@ -10,10 +10,10 @@ interface LoadingSkeletonProps {
   className?: string;
 }
 
-export default function LoadingSkeleton({ 
-  variant = 'card', 
+export default function LoadingSkeleton({
+  variant = 'card',
   count = 1,
-  className = '' 
+  className = '',
 }: LoadingSkeletonProps) {
   const skeletons = Array.from({ length: count });
 
@@ -33,7 +33,7 @@ export default function LoadingSkeleton({
             <div className="skeleton h-10 w-full rounded-lg"></div>
           </div>
         );
-      
+
       case 'blog':
         return (
           <div className={`card ${className}`}>
@@ -55,7 +55,7 @@ export default function LoadingSkeleton({
             </div>
           </div>
         );
-      
+
       case 'text':
         return (
           <div className={className}>
@@ -63,7 +63,7 @@ export default function LoadingSkeleton({
             <div className="skeleton h-4 w-5/6 rounded"></div>
           </div>
         );
-      
+
       case 'avatar':
         return (
           <div className={`flex items-center gap-3 ${className}`}>
@@ -74,10 +74,10 @@ export default function LoadingSkeleton({
             </div>
           </div>
         );
-      
+
       case 'button':
         return <div className={`skeleton h-10 w-32 rounded-lg ${className}`}></div>;
-      
+
       case 'card':
       default:
         return (

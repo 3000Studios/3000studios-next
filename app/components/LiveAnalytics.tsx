@@ -38,25 +38,25 @@ export default function LiveAnalytics() {
           { page: '/live', count: Math.floor(Math.random() * 8) + 1 },
         ].sort((a, b) => b.count - a.count),
         recentEvents: [
-          { 
-            type: 'page_view', 
-            timestamp: new Date(Date.now() - Math.random() * 60000), 
-            details: 'User viewed /store' 
+          {
+            type: 'page_view',
+            timestamp: new Date(Date.now() - Math.random() * 60000),
+            details: 'User viewed /store',
           },
-          { 
-            type: 'purchase', 
-            timestamp: new Date(Date.now() - Math.random() * 120000), 
-            details: 'Product purchased - $99.99' 
+          {
+            type: 'purchase',
+            timestamp: new Date(Date.now() - Math.random() * 120000),
+            details: 'Product purchased - $99.99',
           },
-          { 
-            type: 'signup', 
-            timestamp: new Date(Date.now() - Math.random() * 180000), 
-            details: 'New user registered' 
+          {
+            type: 'signup',
+            timestamp: new Date(Date.now() - Math.random() * 180000),
+            details: 'New user registered',
           },
-          { 
-            type: 'page_view', 
-            timestamp: new Date(Date.now() - Math.random() * 240000), 
-            details: 'User viewed /projects' 
+          {
+            type: 'page_view',
+            timestamp: new Date(Date.now() - Math.random() * 240000),
+            details: 'User viewed /projects',
           },
         ].sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime()),
       });
@@ -70,7 +70,7 @@ export default function LiveAnalytics() {
   const formatTime = (date: Date) => {
     const now = new Date();
     const diff = Math.floor((now.getTime() - date.getTime()) / 1000);
-    
+
     if (diff < 60) return `${diff}s ago`;
     if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
     if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
@@ -116,7 +116,9 @@ export default function LiveAnalytics() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-gray-400 text-sm mb-1">Today's Views</p>
-              <p className="text-4xl font-bold text-white">{analytics.todayViews.toLocaleString()}</p>
+              <p className="text-4xl font-bold text-white">
+                {analytics.todayViews.toLocaleString()}
+              </p>
               <p className="text-sapphire text-xs mt-1 flex items-center gap-1">
                 <Eye size={12} />
                 Peak: 1,247
@@ -145,7 +147,7 @@ export default function LiveAnalytics() {
                   <span className="text-gray-400 text-sm">{page.count} active</span>
                 </div>
                 <div className="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
-                  <div 
+                  <div
                     className="h-full bg-gradient-to-r from-gold to-sapphire rounded-full transition-all duration-500"
                     style={{ width: `${(page.count / analytics.activePages[0]?.count) * 100}%` }}
                   ></div>
@@ -164,12 +166,19 @@ export default function LiveAnalytics() {
         </h3>
         <div className="space-y-3 max-h-64 overflow-y-auto">
           {analytics.recentEvents.map((event, index) => (
-            <div key={index} className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors">
-              <div className={`w-2 h-2 rounded-full mt-2 ${
-                event.type === 'purchase' ? 'bg-gold' :
-                event.type === 'signup' ? 'bg-sapphire' :
-                'bg-gray-500'
-              }`}></div>
+            <div
+              key={index}
+              className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors"
+            >
+              <div
+                className={`w-2 h-2 rounded-full mt-2 ${
+                  event.type === 'purchase'
+                    ? 'bg-gold'
+                    : event.type === 'signup'
+                      ? 'bg-sapphire'
+                      : 'bg-gray-500'
+                }`}
+              ></div>
               <div className="flex-1">
                 <p className="text-white text-sm">{event.details}</p>
                 <p className="text-gray-500 text-xs mt-1">{formatTime(event.timestamp)}</p>

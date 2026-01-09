@@ -2,7 +2,7 @@ export default function ControlPanel() {
   return (
     <div className="p-10 min-h-screen">
       <h1 className="text-4xl font-bold mb-8 text-white">System Control Panel</h1>
-      
+
       <div className="grid gap-6 max-w-2xl">
         <div className="bg-black/50 p-6 rounded-lg border border-white/10">
           <h2 className="text-2xl font-bold mb-4 text-yellow-400">Voice Control</h2>

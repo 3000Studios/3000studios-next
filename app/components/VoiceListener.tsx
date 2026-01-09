@@ -15,14 +15,14 @@ export default function VoiceListener() {
         // Phase 63 & 32: Route to Payload Handler
         // Phase 34: Monetization Engine
         if (cmd.target === 'ui' || cmd.target === 'style' || cmd.target === 'monetization') {
-            handleVoicePayload(cmd);
-            return; 
+          handleVoicePayload(cmd);
+          return;
         }
 
         // Phase 63: Avatar Voice Control
         if (cmd.target === 'avatar') {
-            window.dispatchEvent(new CustomEvent('voice-command', { detail: cmd }));
-            return;
+          window.dispatchEvent(new CustomEvent('voice-command', { detail: cmd }));
+          return;
         }
 
         if (cmd.action === 'addText') {
@@ -49,8 +49,8 @@ export default function VoiceListener() {
         }
 
         if (cmd.action === 'changeTheme') {
-            // Legacy support, but payloadHandler handles this better now
-             handleVoicePayload({ target: 'style', path: 'accent', value: cmd.color });
+          // Legacy support, but payloadHandler handles this better now
+          handleVoicePayload({ target: 'style', path: 'accent', value: cmd.color });
         }
       } catch (e: unknown) {
         // Silent fail on API errors

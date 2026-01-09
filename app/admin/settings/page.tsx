@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Admin Settings",
+  title: 'Admin Settings',
 };
 
 export default function AdminSettingsPage() {

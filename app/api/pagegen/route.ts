@@ -23,10 +23,20 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true, slug, created: true });
   } catch (error: unknown) {
-    const message = error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Page generation failed';
-    return NextResponse.json({
-      ok: false,
-      error: message
-    }, { status: 500 });
+    const message =
+      error instanceof Error
+        ? error instanceof Error
+          ? error instanceof Error
+            ? error.message
+            : 'Unknown error'
+          : 'Unknown error'
+        : 'Page generation failed';
+    return NextResponse.json(
+      {
+        ok: false,
+        error: message,
+      },
+      { status: 500 }
+    );
   }
 }

@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     const priceIds: Record<string, string> = {
       monthly: 'price_monthly_placeholder',
       yearly: 'price_yearly_placeholder',
-      lifetime: 'price_lifetime_placeholder'
+      lifetime: 'price_lifetime_placeholder',
     };
 
     // Real Stripe implementation:
@@ -25,15 +25,25 @@ export async function POST(req: Request) {
     // Mock response
     const mockSession = {
       url: `/dashboard?subscribed=${plan}&session=mock_${Date.now()}`,
-      id: 'mock_sub_' + Date.now()
+      id: 'mock_sub_' + Date.now(),
     };
 
     return NextResponse.json({ url: mockSession.url, id: mockSession.id });
   } catch (error: unknown) {
-    const message = error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Subscription failed';
-    return NextResponse.json({
-      ok: false,
-      error: message
-    }, { status: 500 });
+    const message =
+      error instanceof Error
+        ? error instanceof Error
+          ? error instanceof Error
+            ? error.message
+            : 'Unknown error'
+          : 'Unknown error'
+        : 'Subscription failed';
+    return NextResponse.json(
+      {
+        ok: false,
+        error: message,
+      },
+      { status: 500 }
+    );
   }
 }

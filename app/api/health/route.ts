@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-export const runtime = "nodejs";
+export const runtime = 'nodejs';
 
 /**
  * PUBLIC HEALTH CHECK (NO AUTH)
@@ -11,6 +11,6 @@ export async function GET() {
   return NextResponse.json({
     status: 'Online',
     message: 'The gate is open. This route has no authentication.',
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 }

@@ -1,12 +1,8 @@
-"use client";
+'use client';
 
-import Script from "next/script";
+import Script from 'next/script';
 
-export default function GoogleAnalytics({
-  GA_MEASUREMENT_ID,
-}: {
-  GA_MEASUREMENT_ID: string;
-}) {
+export default function GoogleAnalytics({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_ID: string }) {
   if (!GA_MEASUREMENT_ID) return null;
 
   return (

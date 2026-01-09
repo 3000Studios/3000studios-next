@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useEffect } from 'react';
 
@@ -19,7 +19,7 @@ export default function SmoothScroll() {
     const smoothScrollStep = () => {
       targetScrollY = window.scrollY;
       currentScrollY += (targetScrollY - currentScrollY) * ease;
-      
+
       if (Math.abs(targetScrollY - currentScrollY) < 0.5) {
         currentScrollY = targetScrollY;
       }
@@ -33,7 +33,7 @@ export default function SmoothScroll() {
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest('a[href^="#"]');
-      
+
       if (anchor) {
         e.preventDefault();
         const href = anchor.getAttribute('href');
