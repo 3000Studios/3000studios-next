@@ -1,13 +1,8 @@
 {
-  "framework": "nextjs",
-  "buildCommand": "pnpm run build",
-  "installCommand": "pnpm install",
-  "devCommand": "npm run dev",
-  "outputDirectory": ".next",
-  "crons": [
-    {
-      "path": "/api/cron/prune-memory",
-      "schedule": "0 3 * * *"
+  "build": {
+    "env": {
+      "PNPM_HOME": "/vercel/.pnpm",
+      "NODE_OPTIONS": "--max-old-space-size=4096"
     }
-  ]
+  }
 }

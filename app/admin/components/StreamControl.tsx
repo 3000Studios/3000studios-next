@@ -28,7 +28,7 @@ export default function StreamControl() {
           const status = await getStreamStatus(streamId);
           setViewerCount(status.viewerCount || 0);
         } catch (err: unknown) {
-          console.error('', _err);
+          console.error('', err);
         }
       }, 5000);
 
@@ -67,7 +67,7 @@ export default function StreamControl() {
 
       setIsStreaming(true);
     } catch (err: unknown) {
-      console.error('', _err);
+      console.error('', err);
       alert('Failed to start stream. Please check camera/microphone permissions.');
     }
   };
@@ -77,7 +77,7 @@ export default function StreamControl() {
       try {
         await stopStream(streamId);
       } catch (err: unknown) {
-        console.error('', _err);
+        console.error('', err);
       }
     }
 
