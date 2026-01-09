@@ -37,7 +37,7 @@ export default function ContentGenerator() {
         alert(`Blog post saved to WordPress as draft! ID: ${result.wordpressId}`);
       }
     } catch (err: unknown) {
-      console.error('', _err);
+      console.error('', err);
     }
   };
 
@@ -54,7 +54,7 @@ export default function ContentGenerator() {
       setGeneratedContent(result.description);
       setSuccess(true);
     } catch (err: unknown) {
-      console.error('', _err);
+      console.error('', err);
     }
   };
 
