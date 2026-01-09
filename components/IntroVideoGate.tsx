@@ -8,8 +8,8 @@ export default function IntroVideoGate({ children }: { children: React.ReactNode
 
   useEffect(() => {
     setIsClient(true);
-    // Check if user has already dismissed the intro in this session
-    const hasSeenIntro = sessionStorage.getItem('intro-dismissed');
+    // Check if user has already dismissed the intro (persistent)
+    const hasSeenIntro = localStorage.getItem('intro-dismissed');
     if (hasSeenIntro) {
       setShowIntro(false);
     }
@@ -17,7 +17,7 @@ export default function IntroVideoGate({ children }: { children: React.ReactNode
 
   const handleDismiss = () => {
     setShowIntro(false);
-    sessionStorage.setItem('intro-dismissed', 'true');
+    localStorage.setItem('intro-dismissed', 'true');
   };
 
   if (!isClient) return null;
