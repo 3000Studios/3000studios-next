@@ -19,21 +19,25 @@ export default function LoginPage() {
     setError('');
 
     try {
-      const result = await signIn('credentials', {
-        redirect: false,
-        email,
-        password,
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
       });
 
-      if (result?.error) {
-        setError('ACCESS DENIED: INVALID CREDENTIALS');
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || 'ACCESS DENIED');
         setLoading(false);
       } else {
         router.push(searchParams?.get('callbackUrl') || '/admin');
-        router.refresh(); // Ensure auth state updates
+        router.refresh();
       }
     } catch (err) {
-      setError('SYSTEM ERROR: HANDSHAKE FAILED');
+      setError('SYSTEM ERROR: CONNECTION FAILED');
       setLoading(false);
     }
   };
