@@ -80,7 +80,14 @@ button:hover,
     return {
       success: false,
       files_changed: [],
-      error: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error',
+      error:
+        error instanceof Error
+          ? error instanceof Error
+            ? error instanceof Error
+              ? error.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'Unknown error',
     };
   }
 }
@@ -117,7 +124,14 @@ export async function handleAddAnimation(
     return {
       success: false,
       files_changed: [],
-      error: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error',
+      error:
+        error instanceof Error
+          ? error instanceof Error
+            ? error instanceof Error
+              ? error.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'Unknown error',
     };
   }
 }

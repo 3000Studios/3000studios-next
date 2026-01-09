@@ -35,7 +35,10 @@ export async function routeVoiceCommand(
         );
 
       case 'CHANGE_STYLE':
-        return await handleChangeStyle(cmd.payload.property || 'primary-color', cmd.payload.value || '#00ffff');
+        return await handleChangeStyle(
+          cmd.payload.property || 'primary-color',
+          cmd.payload.value || '#00ffff'
+        );
 
       case 'PUBLISH_BLOG':
         return await handlePublishBlog(
@@ -51,7 +54,14 @@ export async function routeVoiceCommand(
         };
     }
   } catch (error: unknown) {
-    const message = error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : String(error);
+    const message =
+      error instanceof Error
+        ? error instanceof Error
+          ? error instanceof Error
+            ? error.message
+            : 'Unknown error'
+          : 'Unknown error'
+        : String(error);
     return {
       success: false,
       message,

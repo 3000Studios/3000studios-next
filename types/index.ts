@@ -28,12 +28,12 @@ export interface WordPressPost {
   categories: number[];
   tags: number[];
   _embedded?: {
-    "wp:featuredmedia"?: Array<{
+    'wp:featuredmedia'?: Array<{
       id: number;
       source_url: string;
       alt_text: string;
     }>;
-    "wp:term"?: unknown[];
+    'wp:term'?: unknown[];
     author?: unknown[];
   };
 }
@@ -74,7 +74,7 @@ export interface CoinData {
 
 // Shadow Console Types
 export interface LogEntry {
-  type: "command" | "response" | "error" | "info";
+  type: 'command' | 'response' | 'error' | 'info';
   message: string;
   timestamp: Date;
 }
@@ -114,7 +114,7 @@ export interface ShadowConsoleProps {
 }
 
 // Collaborator Types
-export type CollaboratorRole = "admin" | "editor" | "viewer";
+export type CollaboratorRole = 'admin' | 'editor' | 'viewer';
 
 export interface Collaborator {
   id: number;

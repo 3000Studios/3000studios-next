@@ -12,12 +12,12 @@ export interface LogEntry {
   details?: any;
 }
 
-export type CommandAction = 
-  | 'create_file' 
-  | 'update_file' 
-  | 'delete_file' 
+export type CommandAction =
+  | 'create_file'
+  | 'update_file'
+  | 'delete_file'
   | 'get_file'
-  | 'list_files' 
+  | 'list_files'
   | 'trigger_workflow'
   | 'unknown';
 
@@ -38,6 +38,6 @@ export interface CommandResult {
 }
 
 export interface RepoMemory {
-    last_login: string;
-    chat_history: { role: string, content: string, timestamp: string }[];
+  last_login: string;
+  chat_history: { role: string; content: string; timestamp: string }[];
 }

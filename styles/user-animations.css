@@ -645,17 +645,23 @@
   position: absolute;
   height: 2px;
   width: 100%;
-  background: #D4AF37;
+  background: #d4af37;
   border-radius: 9px;
   opacity: 1;
   left: 0;
   transform: rotate(0deg);
-  transition: .25s ease-in-out;
+  transition: 0.25s ease-in-out;
 }
 
-.menu-icon-wrapper span:nth-child(1) { top: 0px; }
-.menu-icon-wrapper span:nth-child(2) { top: 10px; }
-.menu-icon-wrapper span:nth-child(3) { top: 20px; }
+.menu-icon-wrapper span:nth-child(1) {
+  top: 0px;
+}
+.menu-icon-wrapper span:nth-child(2) {
+  top: 10px;
+}
+.menu-icon-wrapper span:nth-child(3) {
+  top: 20px;
+}
 
 .menu-icon-wrapper.open span:nth-child(1) {
   top: 10px;
@@ -671,4 +677,3 @@
   top: 10px;
   transform: rotate(-135deg);
 }
-

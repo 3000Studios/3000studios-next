@@ -107,7 +107,14 @@ export async function handleAddImage(
     return {
       success: false,
       files_changed: [],
-      error: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error',
+      error:
+        error instanceof Error
+          ? error instanceof Error
+            ? error instanceof Error
+              ? error.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'Unknown error',
     };
   }
 }

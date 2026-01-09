@@ -9,7 +9,7 @@ import {
   executeAddSection,
   executeChangeStyle,
   executePublishBlog,
-  executeUpdateText
+  executeUpdateText,
 } from './executors';
 
 interface MutationResult {
