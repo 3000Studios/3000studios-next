@@ -60,10 +60,10 @@ prisma/*.db-journal
 
 # Build artifacts
 *.log
-*.txt
+
 !README.txt
 
 
 .pnpm-store/
 
-.npmrc
+
