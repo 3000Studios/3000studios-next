@@ -68,7 +68,7 @@ const config: Config = {
     tailwindcssAnimate,
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     require('@tailwindcss/typography'),
-    function ({ addUtilities }: { addUtilities: unknown }) {
+    function ({ addUtilities }: { addUtilities: (utilities: any) => void }) {
       addUtilities({
         '.hyper-glass': {
           'backdrop-filter': 'blur(20px)',

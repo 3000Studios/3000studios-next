@@ -19,7 +19,7 @@ export default function LiveVisitors() {
         setVisitors(data.count || 0);
         setLocations(data.locations || []);
       } catch (error: unknown) {
-        console.error('', _error);
+        console.error('Visitor Fetch Error:', error);
       }
     };
 

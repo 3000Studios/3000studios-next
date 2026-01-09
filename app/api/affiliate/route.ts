@@ -106,7 +106,7 @@ export async function GET(request: NextRequest) {
 
     return response;
   } catch (err: unknown) {
-    console.error('', _err);
+    console.error('Affiliate Tracking Error:', err);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
@@ -205,7 +205,7 @@ export async function POST(request: NextRequest) {
       message: 'Conversion tracked (DB not configured)',
     });
   } catch (err: unknown) {
-    console.error('', _err);
+    console.error('Affiliate Conversion Error:', err);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
