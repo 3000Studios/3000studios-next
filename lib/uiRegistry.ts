@@ -3,22 +3,26 @@
 
 export const uiRegistry: Record<string, unknown> = {
   theme: {
-    accent: "gold",
+    accent: 'gold',
     motion: true,
-    density: "luxury",
+    density: 'luxury',
   },
   home: {
-    heroText: "3000 Studios Premium",
-    heroSub: "Luxury AI Systems",
+    heroText: '3000 Studios Premium',
+    heroSub: 'Luxury AI Systems',
   },
 };
 
 // Update a specific key in the registry and dispatch event for listeners
 export function updateRegistry<K extends keyof typeof uiRegistry>(
   key: K,
-  value: Partial<typeof uiRegistry[K]> | unknown
+  value: Partial<(typeof uiRegistry)[K]> | unknown
 ): void {
-  if (typeof uiRegistry[key] === 'object' && uiRegistry[key] !== null && typeof value === 'object') {
+  if (
+    typeof uiRegistry[key] === 'object' &&
+    uiRegistry[key] !== null &&
+    typeof value === 'object'
+  ) {
     uiRegistry[key] = { ...uiRegistry[key], ...value };
   } else {
     uiRegistry[key] = value;

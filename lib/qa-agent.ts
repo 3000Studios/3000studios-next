@@ -30,11 +30,11 @@ export class AutonomousQA {
       this.checkAuth(),
       this.checkRevenueFlows(),
       this.checkBuild(),
-      this.checkDependencies()
+      this.checkDependencies(),
     ];
 
     const results = await Promise.all(checks);
-    const allPassed = results.every(r => r);
+    const allPassed = results.every((r) => r);
 
     if (allPassed) {
       console.log('✅ All QA checks passed - Deploy authorized');
@@ -48,7 +48,7 @@ export class AutonomousQA {
 
   private async checkRoutes(): Promise<boolean> {
     console.log('  Checking routes...');
-    
+
     const requiredRoutes = [
       '/',
       '/about',
@@ -63,7 +63,7 @@ export class AutonomousQA {
       '/revenue',
       '/vendors-platform',
       '/login',
-      '/admin'
+      '/admin',
     ];
 
     for (const route of requiredRoutes) {
@@ -82,7 +82,7 @@ export class AutonomousQA {
 
   private async checkAssets(): Promise<boolean> {
     console.log('  Checking critical assets...');
-    
+
     // Check if media registry is accessible
     const mediaRegistry = path.join(process.cwd(), 'lib', 'media-registry.ts');
     if (!fs.existsSync(mediaRegistry)) {
@@ -98,7 +98,7 @@ export class AutonomousQA {
 
   private async checkAuth(): Promise<boolean> {
     console.log('  Checking auth middleware...');
-    
+
     const middleware = path.join(process.cwd(), 'middleware.ts');
     if (!fs.existsSync(middleware)) {
       console.log('    ⚠️  Auth middleware missing');
@@ -113,11 +113,8 @@ export class AutonomousQA {
 
   private async checkRevenueFlows(): Promise<boolean> {
     console.log('  Checking revenue APIs...');
-    
-    const revenueAPIs = [
-      'app/api/checkout/route.ts',
-      'app/api/subscribe/route.ts'
-    ];
+
+    const revenueAPIs = ['app/api/checkout/route.ts', 'app/api/subscribe/route.ts'];
 
     for (const api of revenueAPIs) {
       if (!fs.existsSync(path.join(process.cwd(), api))) {
@@ -134,7 +131,7 @@ export class AutonomousQA {
 
   private async checkBuild(): Promise<boolean> {
     console.log('  Running build test...');
-    
+
     try {
       await execAsync('pnpm build', { cwd: process.cwd() });
       this.results.set('build', true);
@@ -149,7 +146,7 @@ export class AutonomousQA {
 
   private async checkDependencies(): Promise<boolean> {
     console.log('  Checking dependencies...');
-    
+
     const packageJson = path.join(process.cwd(), 'package.json');
     if (!fs.existsSync(packageJson)) {
       this.results.set('dependencies', false);

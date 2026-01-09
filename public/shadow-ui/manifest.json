@@ -3,15 +3,7 @@
   "version": "1.0.0",
   "assets": {
     "logo": "shadow-logo.svg",
-    "icons": [
-      "terminal-icon.svg",
-      "voice-icon.svg",
-      "deploy-icon.svg"
-    ],
-    "sounds": [
-      "command-received.mp3",
-      "task-complete.mp3",
-      "error.mp3"
-    ]
+    "icons": ["terminal-icon.svg", "voice-icon.svg", "deploy-icon.svg"],
+    "sounds": ["command-received.mp3", "task-complete.mp3", "error.mp3"]
   }
 }

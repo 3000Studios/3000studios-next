@@ -18,9 +18,11 @@ Place your 3D avatar model here as `avatar.glb`
    - Download CC licensed models
 
 ## If no model is provided:
+
 The system will automatically display a golden sphere placeholder that still responds to all interactions (speech, tracking, animation).
 
 ## File Requirements:
+
 - Format: GLB (GLTF Binary)
 - Filename: `avatar.glb`
 - Location: `/public/models/avatar.glb`

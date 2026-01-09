@@ -5,6 +5,7 @@
 A fully interactive, production-ready 3D avatar system with:
 
 ### ✅ Features
+
 - 🎤 **Speech Recognition** - Browser-native voice input
 - 🗣️ **Text-to-Speech** - Natural voice responses
 - 👁️ **Face Tracking** - Camera-based head following
@@ -39,10 +40,12 @@ The avatar has been integrated into your home page at [app/home/page.tsx](app/ho
 ### 🎨 3D Model (Optional)
 
 The system works with or without a 3D model:
+
 - **With model**: Place `avatar.glb` in `/public/models/`
 - **Without model**: Uses a golden sphere placeholder
 
 **Recommended sources:**
+
 1. Ready Player Me (https://readyplayer.me/) - Free customizable avatars
 2. Mixamo (https://mixamo.com/) - Free rigged characters
 3. Sketchfab (https://sketchfab.com/) - CC licensed models
@@ -50,6 +53,7 @@ The system works with or without a 3D model:
 ### 🚀 Testing
 
 1. Start the dev server (if not running):
+
    ```bash
    npm run dev
    ```
@@ -68,14 +72,18 @@ The system works with or without a 3D model:
 ### 🔧 Customization
 
 #### Change Voice Settings
+
 Edit [components/avatar/useSpeech.ts](components/avatar/useSpeech.ts#L44-L46):
+
 ```typescript
-utter.rate = 0.95;  // Speed (0.1 to 10)
+utter.rate = 0.95; // Speed (0.1 to 10)
 utter.pitch = 1.05; // Pitch (0 to 2)
 ```
 
 #### Modify Responses
+
 Edit [components/avatar/useSpeech.ts](components/avatar/useSpeech.ts#L34-L41):
+
 ```typescript
 function generateReply(input: string) {
   // Add your custom logic here
@@ -83,7 +91,9 @@ function generateReply(input: string) {
 ```
 
 #### Adjust Animation
+
 Edit [components/avatar/useIdleMotion.ts](components/avatar/useIdleMotion.ts):
+
 - Change breathing intensity
 - Modify movement speed
 - Add custom animations
@@ -91,6 +101,7 @@ Edit [components/avatar/useIdleMotion.ts](components/avatar/useIdleMotion.ts):
 ### 🔒 Security Notes
 
 This avatar is **PUBLIC-SAFE**:
+
 - ❌ No file system access
 - ❌ No admin API calls
 - ❌ No site editing capabilities
@@ -102,6 +113,7 @@ This avatar is **PUBLIC-SAFE**:
 ### 🎭 Personality & Memory
 
 The avatar remembers visitors:
+
 - First visit: "Welcome to 3000 Studios. I've been waiting for you."
 - Returning: "Good to see you again."
 
@@ -110,6 +122,7 @@ Memory stored in browser localStorage (not server).
 ### 📊 Performance
 
 Optimizations included:
+
 - GPU power preference set to high-performance
 - DPR limited to [1, 1.5] for mobile
 - Antialiasing disabled for speed
@@ -119,15 +132,18 @@ Optimizations included:
 ### 🐛 Troubleshooting
 
 **Avatar not appearing?**
+
 - Check browser console for errors
 - Ensure Three.js dependencies installed: `three`, `@react-three/fiber`, `@react-three/drei`
 
 **Voice not working?**
+
 - Grant microphone permissions
 - Use HTTPS or localhost (required for speech APIs)
 - Check browser compatibility (Chrome/Edge recommended)
 
 **Face tracking issues?**
+
 - Grant camera permissions
 - Ensure good lighting
 - Face the camera directly

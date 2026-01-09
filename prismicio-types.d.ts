@@ -6,10 +6,10 @@ type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type PickContentRelationshipFieldData<
   TRelationship extends
-  | prismic.CustomTypeModelFetchCustomTypeLevel1
-  | prismic.CustomTypeModelFetchCustomTypeLevel2
-  | prismic.CustomTypeModelFetchGroupLevel1
-  | prismic.CustomTypeModelFetchGroupLevel2,
+    | prismic.CustomTypeModelFetchCustomTypeLevel1
+    | prismic.CustomTypeModelFetchCustomTypeLevel2
+    | prismic.CustomTypeModelFetchGroupLevel1
+    | prismic.CustomTypeModelFetchGroupLevel2,
   TData extends Record<
     string,
     prismic.AnyRegularField | prismic.GroupField | prismic.NestedGroupField | prismic.SliceZone
@@ -25,25 +25,23 @@ type PickContentRelationshipFieldData<
       TSubRelationship['customtypes'],
       TLang
     >;
-  } & // Group
-  {
+  } & { // Group
     [TGroup in Extract<
       TRelationship['fields'][number],
       prismic.CustomTypeModelFetchGroupLevel1 | prismic.CustomTypeModelFetchGroupLevel2
     > as TGroup['id']]: TData[TGroup['id']] extends prismic.GroupField<infer TGroupData>
-    ? prismic.GroupField<PickContentRelationshipFieldData<TGroup, TGroupData, TLang>>
-    : never;
-  } & // Other fields
-  {
+      ? prismic.GroupField<PickContentRelationshipFieldData<TGroup, TGroupData, TLang>>
+      : never;
+  } & { // Other fields
     [TFieldKey in Extract<TRelationship['fields'][number], string>]: TFieldKey extends keyof TData
-    ? TData[TFieldKey]
-    : never;
+      ? TData[TFieldKey]
+      : never;
   };
 
 type ContentRelationshipFieldWithData<
   TCustomType extends
-  | readonly (prismic.CustomTypeModelFetchCustomTypeLevel1 | string)[]
-  | readonly (prismic.CustomTypeModelFetchCustomTypeLevel2 | string)[],
+    | readonly (prismic.CustomTypeModelFetchCustomTypeLevel1 | string)[]
+    | readonly (prismic.CustomTypeModelFetchCustomTypeLevel2 | string)[],
   TLang extends string = string,
 > = {
   [ID in Exclude<TCustomType[number], string>['id']]: prismic.ContentRelationshipField<
@@ -58,7 +56,7 @@ type ContentRelationshipFieldWithData<
 }[Exclude<TCustomType[number], string>['id']];
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-interface GDocumentData { }
+interface GDocumentData {}
 
 /**
  * g document from Prismic

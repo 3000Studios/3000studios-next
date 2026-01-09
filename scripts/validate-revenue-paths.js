@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Revenue Lock Validation Script
- * 
+ *
  * This script ensures all revenue-critical paths are intact before deployment.
  * It prevents "approval-killing" redeploys by validating:
  * 1. AdSense script is present in layout
@@ -9,7 +9,7 @@
  * 3. Stripe environment variables are configured
  * 4. Affiliate system is operational
  * 5. Analytics are enabled
- * 
+ *
  * Exit codes:
  * 0 = All checks passed
  * 1 = One or more checks failed
@@ -66,7 +66,7 @@ function info(message) {
 // Check 1: AdSense Script in Layout
 function checkAdSenseScript() {
   info('Checking AdSense script integration...');
-  
+
   const layoutPath = join(rootDir, 'src/app/layout.tsx');
   if (!existsSync(layoutPath)) {
     error('Layout file not found: src/app/layout.tsx');
@@ -74,11 +74,13 @@ function checkAdSenseScript() {
   }
 
   const layoutContent = readFileSync(layoutPath, 'utf-8');
-  
+
   // Check for AdSense script tag
-  const hasAdSenseScript = layoutContent.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js');
+  const hasAdSenseScript = layoutContent.includes(
+    'pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
+  );
   const hasPublisherIdRef = layoutContent.includes('NEXT_PUBLIC_ADSENSE_PUBLISHER_ID');
-  
+
   if (hasAdSenseScript && hasPublisherIdRef) {
     success('AdSense script is properly integrated in layout.tsx');
   } else {
@@ -91,7 +93,7 @@ function checkAdSenseScript() {
 // Check 2: ads.txt file
 function checkAdsTxt() {
   info('Checking ads.txt file...');
-  
+
   const adsTxtPath = join(rootDir, 'public/ads.txt');
   if (!existsSync(adsTxtPath)) {
     error('ads.txt file is MISSING from public/ directory');
@@ -100,11 +102,11 @@ function checkAdsTxt() {
   }
 
   const adsTxtContent = readFileSync(adsTxtPath, 'utf-8');
-  
+
   // Check for Google AdSense entry (must start with 'google.com' to be valid)
   const hasGoogleAdsense = /^google\.com,\s*pub-\d+/.test(adsTxtContent.trim());
   const hasPublisherId = /pub-\d+/.test(adsTxtContent);
-  
+
   if (hasGoogleAdsense && hasPublisherId) {
     success('ads.txt exists with valid Google AdSense publisher ID');
     const match = adsTxtContent.match(/pub-(\d+)/);
@@ -120,7 +122,7 @@ function checkAdsTxt() {
 // Check 3: Stripe Environment Variables
 function checkStripeConfig() {
   info('Checking Stripe configuration...');
-  
+
   // In CI, these should be available as secrets
   // In local dev, they're in .env files
   const envExamplePath = join(rootDir, '.env.example');
@@ -130,10 +132,10 @@ function checkStripeConfig() {
   }
 
   const envExample = readFileSync(envExamplePath, 'utf-8');
-  
+
   const hasStripeSecret = envExample.includes('STRIPE_SECRET_KEY');
   const hasStripeWebhook = envExample.includes('STRIPE_WEBHOOK_SECRET');
-  
+
   if (hasStripeSecret && hasStripeWebhook) {
     success('Stripe environment variables are documented in .env.example');
     info('  Note: Actual values should be set in CI/CD secrets');
@@ -142,7 +144,7 @@ function checkStripeConfig() {
     info('  Required: STRIPE_SECRET_KEY');
     info('  Required: STRIPE_WEBHOOK_SECRET');
   }
-  
+
   // Check if Stripe is properly initialized in code
   const stripePath = join(rootDir, 'src/lib/services/stripe.ts');
   if (existsSync(stripePath)) {
@@ -160,7 +162,7 @@ function checkStripeConfig() {
 // Check 4: Affiliate System
 function checkAffiliateSystem() {
   info('Checking affiliate system...');
-  
+
   const affiliatesPath = join(rootDir, 'src/lib/affiliates.ts');
   if (!existsSync(affiliatesPath)) {
     error('Affiliate system file MISSING: src/lib/affiliates.ts');
@@ -168,12 +170,12 @@ function checkAffiliateSystem() {
   }
 
   const affiliatesContent = readFileSync(affiliatesPath, 'utf-8');
-  
+
   // Check for key functions
   const hasAffiliateProducts = affiliatesContent.includes('affiliateProducts');
   const hasTrackingFunction = affiliatesContent.includes('trackAffiliateClick');
   const hasInjectionFunction = affiliatesContent.includes('injectAffiliateLink');
-  
+
   if (hasAffiliateProducts && hasTrackingFunction && hasInjectionFunction) {
     success('Affiliate system is intact with tracking and injection');
   } else {
@@ -187,7 +189,7 @@ function checkAffiliateSystem() {
 // Check 5: Analytics System
 function checkAnalytics() {
   info('Checking analytics system...');
-  
+
   const analyticsPath = join(rootDir, 'src/lib/analytics.ts');
   if (!existsSync(analyticsPath)) {
     error('Analytics system file MISSING: src/lib/analytics.ts');
@@ -195,12 +197,12 @@ function checkAnalytics() {
   }
 
   const analyticsContent = readFileSync(analyticsPath, 'utf-8');
-  
+
   // Check for key functionality
   const hasAnalyticsService = analyticsContent.includes('AnalyticsService');
   const hasTrackMethod = analyticsContent.includes('track(');
   const hasConversionTracking = analyticsContent.includes('trackConversion');
-  
+
   if (hasAnalyticsService && hasTrackMethod && hasConversionTracking) {
     success('Analytics system is intact with conversion tracking');
   } else {
@@ -209,7 +211,7 @@ function checkAnalytics() {
     info('  Required: track method');
     info('  Required: trackConversion method');
   }
-  
+
   // Check Vercel Analytics in layout
   const layoutPath = join(rootDir, 'src/app/layout.tsx');
   if (existsSync(layoutPath)) {
@@ -225,7 +227,7 @@ function checkAnalytics() {
 // Check 6: Consent Banner (for GDPR compliance with AdSense)
 function checkConsentMechanism() {
   info('Checking consent/cookie banner...');
-  
+
   // Look for consent-related files
   const possiblePaths = [
     'src/components/ConsentBanner.tsx',
@@ -233,7 +235,7 @@ function checkConsentMechanism() {
     'src/app/components/ConsentBanner.tsx',
     'src/app/components/CookieBanner.tsx',
   ];
-  
+
   let consentFound = false;
   for (const path of possiblePaths) {
     if (existsSync(join(rootDir, path))) {
@@ -242,7 +244,7 @@ function checkConsentMechanism() {
       break;
     }
   }
-  
+
   if (!consentFound) {
     warning('No consent banner component found');
     info('  Recommended for GDPR compliance with AdSense');
@@ -255,14 +257,14 @@ function main() {
   log('\n' + '='.repeat(60), colors.bold);
   log('🔒 REVENUE LOCK VALIDATION', colors.bold + colors.blue);
   log('='.repeat(60) + '\n', colors.bold);
-  
+
   checkAdSenseScript();
   checkAdsTxt();
   checkStripeConfig();
   checkAffiliateSystem();
   checkAnalytics();
   checkConsentMechanism();
-  
+
   // Summary
   log('\n' + '='.repeat(60), colors.bold);
   log('📊 VALIDATION SUMMARY', colors.bold + colors.blue);
@@ -271,7 +273,7 @@ function main() {
   log(`❌ Failed: ${checks.failed}`, colors.red);
   log(`⚠️  Warnings: ${checks.warnings}`, colors.yellow);
   log('='.repeat(60) + '\n', colors.bold);
-  
+
   if (checks.failed > 0) {
     log('❌ REVENUE LOCK VALIDATION FAILED', colors.red + colors.bold);
     log('   Deployment BLOCKED to prevent revenue loss', colors.red);

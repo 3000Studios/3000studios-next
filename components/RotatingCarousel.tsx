@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const items = [
-  { src: "/shadow-ui/diamond.jpg", alt: "Diamond" },
-  { src: "/shadow-ui/gold.jpg", alt: "Gold" },
-  { src: "/shadow-ui/platinum.jpg", alt: "Platinum" },
-  { src: "/shadow-ui/ai.jpg", alt: "AI" },
-  { src: "/shadow-ui/space.jpg", alt: "Space" },
-  { src: "/shadow-ui/tech.jpg", alt: "Tech" },
+  { src: '/shadow-ui/diamond.jpg', alt: 'Diamond' },
+  { src: '/shadow-ui/gold.jpg', alt: 'Gold' },
+  { src: '/shadow-ui/platinum.jpg', alt: 'Platinum' },
+  { src: '/shadow-ui/ai.jpg', alt: 'AI' },
+  { src: '/shadow-ui/space.jpg', alt: 'Space' },
+  { src: '/shadow-ui/tech.jpg', alt: 'Tech' },
 ];
 
 export default function RotatingCarousel() {
@@ -30,13 +30,17 @@ export default function RotatingCarousel() {
             initial={{ opacity: 0, scale: 0.92, rotate: -10 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             exit={{ opacity: 0, scale: 0.92, rotate: 10 }}
-            transition={{ duration: 0.7, ease: "easeInOut" }}
+            transition={{ duration: 0.7, ease: 'easeInOut' }}
           />
         </AnimatePresence>
       </div>
       <div className="flex gap-6">
-        <button className="luxury-btn" onClick={prev}>&larr; Prev</button>
-        <button className="luxury-btn" onClick={next}>Next &rarr;</button>
+        <button className="luxury-btn" onClick={prev}>
+          &larr; Prev
+        </button>
+        <button className="luxury-btn" onClick={next}>
+          Next &rarr;
+        </button>
       </div>
     </div>
   );

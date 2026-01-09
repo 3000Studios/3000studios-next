@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function StoreManager() {
   const [file, setFile] = useState<File | null>(null);
@@ -14,19 +14,19 @@ export default function StoreManager() {
       const text = await file.text();
       const products = JSON.parse(text);
 
-      const res = await fetch("/api/store/import", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/api/store/import', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ products }),
       });
 
       if (res.ok) {
-        alert("Products imported successfully!");
+        alert('Products imported successfully!');
       } else {
-        alert("Import failed");
+        alert('Import failed');
       }
     } catch (error: unknown) {
-      alert("Error: " + String(error));
+      alert('Error: ' + String(error));
     } finally {
       setUploading(false);
     }
@@ -37,9 +37,7 @@ export default function StoreManager() {
       <h2 className="mb-4 text-3xl font-bold text-yellow-500">Store Manager</h2>
 
       <div className="mb-4">
-        <label className="block mb-2 text-sm text-gray-400">
-          Import Products (JSON)
-        </label>
+        <label className="block mb-2 text-sm text-gray-400">Import Products (JSON)</label>
         <input
           type="file"
           accept=".json"
@@ -53,7 +51,7 @@ export default function StoreManager() {
         disabled={!file || uploading}
         className="w-full p-4 font-bold text-black transition rounded-lg bg-gradient-to-r from-yellow-500 to-yellow-600 hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {uploading ? "IMPORTING..." : "IMPORT PRODUCTS"}
+        {uploading ? 'IMPORTING...' : 'IMPORT PRODUCTS'}
       </button>
 
       <div className="p-4 mt-4 border border-gray-700 rounded-lg bg-black/50">

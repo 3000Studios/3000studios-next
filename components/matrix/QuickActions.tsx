@@ -3,29 +3,29 @@
  * One-click AI-powered commands
  */
 
-"use client";
+'use client';
 
 export default function QuickActions() {
   const runAction = async (cmd: string) => {
     try {
-      await fetch("/api/shadow/edit/run", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      await fetch('/api/shadow/edit/run', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ spoken: cmd }),
       });
       alert(`✅ Action executed: ${cmd}`);
     } catch (error: unknown) {
-      alert("❌ Action failed");
+      alert('❌ Action failed');
     }
   };
 
   const actions = [
-    { label: "🚀 Deploy Now", cmd: "deploy the site to vercel immediately" },
-    { label: "🎨 Dark Lux Theme", cmd: "apply dark luxury theme globally" },
-    { label: "🛒 Refresh Store", cmd: "update all product data" },
-    { label: "🔧 Fix Errors", cmd: "scan and auto fix all code errors" },
-    { label: "📊 Generate Report", cmd: "create analytics report" },
-    { label: "🔄 Full Sync", cmd: "sync all modules with deployment" },
+    { label: '🚀 Deploy Now', cmd: 'deploy the site to vercel immediately' },
+    { label: '🎨 Dark Lux Theme', cmd: 'apply dark luxury theme globally' },
+    { label: '🛒 Refresh Store', cmd: 'update all product data' },
+    { label: '🔧 Fix Errors', cmd: 'scan and auto fix all code errors' },
+    { label: '📊 Generate Report', cmd: 'create analytics report' },
+    { label: '🔄 Full Sync', cmd: 'sync all modules with deployment' },
   ];
 
   return (

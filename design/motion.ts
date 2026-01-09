@@ -96,7 +96,7 @@ export const motion = {
       animate: {
         opacity: 1,
         scale: 1,
-        transition: { type: 'spring', stiffness: 300, damping: 20 }
+        transition: { type: 'spring', stiffness: 300, damping: 20 },
       },
       exit: { opacity: 0, scale: 0.8 },
     },
@@ -119,7 +119,7 @@ export const motion = {
       hover: {
         y: -4,
         scale: 1.02,
-        transition: { duration: 0.2 }
+        transition: { duration: 0.2 },
       },
     },
 
@@ -144,12 +144,12 @@ export const motion = {
       animate: {
         opacity: 1,
         x: 0,
-        transition: { duration: 0.3, ease: 'easeOut' }
+        transition: { duration: 0.3, ease: 'easeOut' },
       },
       exit: {
         opacity: 0,
         x: 20,
-        transition: { duration: 0.2, ease: 'easeIn' }
+        transition: { duration: 0.2, ease: 'easeIn' },
       },
     },
   },

@@ -1,4 +1,4 @@
-import { VendorProduct } from "../vendors/types";
+import { VendorProduct } from '../vendors/types';
 
 export type PricingContext = {
   minMargin?: number; // e.g., 0.15

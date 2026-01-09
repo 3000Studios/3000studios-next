@@ -35,35 +35,44 @@ interface PricingState {
 
 export const usePricingEngine = create<PricingState>((set, get) => ({
   rules: new Map([
-    ['monthly', {
-      productId: 'monthly',
-      basePrice: 29,
-      currentPrice: 29,
-      rules: {
-        demandMultiplier: 1.0,
-        trafficThreshold: 1000,
-        behaviorBonus: { returning: 0.9, referred: 0.85 }
-      }
-    }],
-    ['yearly', {
-      productId: 'yearly',
-      basePrice: 299,
-      currentPrice: 299,
-      rules: {
-        demandMultiplier: 1.0,
-        trafficThreshold: 1000,
-        behaviorBonus: { returning: 0.85, referred: 0.8 }
-      }
-    }],
-    ['lifetime', {
-      productId: 'lifetime',
-      basePrice: 999,
-      currentPrice: 999,
-      rules: {
-        demandMultiplier: 1.0,
-        trafficThreshold: 500
-      }
-    }]
+    [
+      'monthly',
+      {
+        productId: 'monthly',
+        basePrice: 29,
+        currentPrice: 29,
+        rules: {
+          demandMultiplier: 1.0,
+          trafficThreshold: 1000,
+          behaviorBonus: { returning: 0.9, referred: 0.85 },
+        },
+      },
+    ],
+    [
+      'yearly',
+      {
+        productId: 'yearly',
+        basePrice: 299,
+        currentPrice: 299,
+        rules: {
+          demandMultiplier: 1.0,
+          trafficThreshold: 1000,
+          behaviorBonus: { returning: 0.85, referred: 0.8 },
+        },
+      },
+    ],
+    [
+      'lifetime',
+      {
+        productId: 'lifetime',
+        basePrice: 999,
+        currentPrice: 999,
+        rules: {
+          demandMultiplier: 1.0,
+          trafficThreshold: 500,
+        },
+      },
+    ],
   ]),
 
   calculatePrice: (productId, context = {}) => {
@@ -80,7 +89,7 @@ export const usePricingEngine = create<PricingState>((set, get) => ({
       const now = new Date();
       const { start, end, percentage } = rule.rules.timeBasedDiscount;
       if (now >= start && now <= end) {
-        price *= (1 - percentage / 100);
+        price *= 1 - percentage / 100;
       }
     }
 
@@ -108,5 +117,5 @@ export const usePricingEngine = create<PricingState>((set, get) => ({
 
   getOptimalPrice: (productId) => {
     return get().calculatePrice(productId);
-  }
+  },
 }));

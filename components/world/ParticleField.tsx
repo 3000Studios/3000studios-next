@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
 /**
  * Particle Field Component
  * Ambient floating particles for visual atmosphere
  */
 
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 export default function ParticleField() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -16,7 +16,7 @@ export default function ParticleField() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     // Set canvas size
@@ -25,7 +25,7 @@ export default function ParticleField() {
       canvas.height = window.innerHeight;
     };
     resize();
-    window.addEventListener("resize", resize);
+    window.addEventListener('resize', resize);
 
     // Particle system
     const particles: any[] = [];
@@ -44,7 +44,7 @@ export default function ParticleField() {
 
     // Animation loop
     const animate = () => {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((p) => {
@@ -70,7 +70,7 @@ export default function ParticleField() {
     animate();
 
     return () => {
-      window.removeEventListener("resize", resize);
+      window.removeEventListener('resize', resize);
     };
   }, []);
 
@@ -78,7 +78,7 @@ export default function ParticleField() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ background: "radial-gradient(circle at 50% 50%, #0a0a1a, #000000)" }}
+      style={{ background: 'radial-gradient(circle at 50% 50%, #0a0a1a, #000000)' }}
     />
   );
 }

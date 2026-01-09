@@ -40,9 +40,7 @@ export class PricingEngine {
     const fullRule: PricingRule = { ...rule, id };
 
     this.rules.set(rule.productId, fullRule);
-    this.priceHistory.set(rule.productId, [
-      { price: rule.basePrice, timestamp: Date.now() },
-    ]);
+    this.priceHistory.set(rule.productId, [{ price: rule.basePrice, timestamp: Date.now() }]);
 
     return fullRule;
   }
@@ -126,11 +124,14 @@ export class PricingEngine {
   /**
    * Get price history
    */
-  getPriceHistory(productId: string, hoursBack: number = 24): Array<{ price: number; timestamp: number }> {
+  getPriceHistory(
+    productId: string,
+    hoursBack: number = 24
+  ): Array<{ price: number; timestamp: number }> {
     const history = this.priceHistory.get(productId) || [];
     const cutoff = Date.now() - hoursBack * 60 * 60 * 1000;
 
-    return history.filter(h => h.timestamp >= cutoff);
+    return history.filter((h) => h.timestamp >= cutoff);
   }
 
   /**
@@ -202,7 +203,7 @@ export class PricingEngine {
     return Array.from(this.metrics.values())
       .sort((a, b) => b.salesPerDay - a.salesPerDay)
       .slice(0, limit)
-      .map(m => ({ productId: m.productId, salesPerDay: m.salesPerDay }));
+      .map((m) => ({ productId: m.productId, salesPerDay: m.salesPerDay }));
   }
 }
 

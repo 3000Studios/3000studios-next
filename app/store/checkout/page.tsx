@@ -22,12 +22,17 @@ export default function CheckoutPage() {
         {/* Animated background elements */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div
+            className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl animate-pulse"
+            style={{ animationDelay: '1s' }}
+          ></div>
         </div>
         <div className="relative max-w-2xl mx-auto px-4 py-12">
           <div className="text-center">
             <div className="text-6xl mb-4">🛒</div>
-            <h1 className="text-4xl font-black bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">Your Cart is Empty</h1>
+            <h1 className="text-4xl font-black bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
+              Your Cart is Empty
+            </h1>
             <p className="text-purple-300/80 mb-8 text-lg">Add some products to get started!</p>
             <Link
               href="/store"
@@ -72,7 +77,15 @@ export default function CheckoutPage() {
         window.location.href = `https://www.paypal.com/checkoutnow?token=${data.orderID}`;
       }
     } catch (err: unknown) {
-      setError(err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'Checkout failed');
+      setError(
+        err instanceof Error
+          ? err instanceof Error
+            ? err instanceof Error
+              ? err.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'Checkout failed'
+      );
     } finally {
       setLoading(false);
     }
@@ -110,7 +123,15 @@ export default function CheckoutPage() {
         window.location.href = data.url;
       }
     } catch (err: unknown) {
-      setError(err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'Checkout failed');
+      setError(
+        err instanceof Error
+          ? err instanceof Error
+            ? err instanceof Error
+              ? err.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'Checkout failed'
+      );
     } finally {
       setLoading(false);
     }
@@ -129,11 +150,16 @@ export default function CheckoutPage() {
       {/* Animated background elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div
+          className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: '1s' }}
+        ></div>
       </div>
 
       <div className="relative max-w-4xl mx-auto px-4 py-12">
-        <h1 className="text-5xl font-black bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-8">Checkout</h1>
+        <h1 className="text-5xl font-black bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-8">
+          Checkout
+        </h1>
 
         {/* Error Alert */}
         {error && (
@@ -183,7 +209,9 @@ export default function CheckoutPage() {
 
               <div className="flex items-center justify-between">
                 <span className="text-lg font-bold text-purple-300">Total</span>
-                <span className="text-4xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">${totalPrice.toFixed(2)}</span>
+                <span className="text-4xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                  ${totalPrice.toFixed(2)}
+                </span>
               </div>
             </div>
           </div>
@@ -195,10 +223,15 @@ export default function CheckoutPage() {
 
               <div className="space-y-4 mb-6">
                 {/* PayPal Option */}
-                <label className="flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all" style={{
-                  borderColor: paymentMethod === 'paypal' ? 'rgb(34, 197, 94)' : 'rgb(147, 51, 234, 0.3)',
-                  backgroundColor: paymentMethod === 'paypal' ? 'rgb(6, 78, 59, 0.3)' : 'transparent',
-                }}>
+                <label
+                  className="flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all"
+                  style={{
+                    borderColor:
+                      paymentMethod === 'paypal' ? 'rgb(34, 197, 94)' : 'rgb(147, 51, 234, 0.3)',
+                    backgroundColor:
+                      paymentMethod === 'paypal' ? 'rgb(6, 78, 59, 0.3)' : 'transparent',
+                  }}
+                >
                   <input
                     type="radio"
                     name="payment"
@@ -211,10 +244,15 @@ export default function CheckoutPage() {
                 </label>
 
                 {/* Stripe Option */}
-                <label className="flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all" style={{
-                  borderColor: paymentMethod === 'stripe' ? 'rgb(34, 197, 94)' : 'rgb(147, 51, 234, 0.3)',
-                  backgroundColor: paymentMethod === 'stripe' ? 'rgb(6, 78, 59, 0.3)' : 'transparent',
-                }}>
+                <label
+                  className="flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all"
+                  style={{
+                    borderColor:
+                      paymentMethod === 'stripe' ? 'rgb(34, 197, 94)' : 'rgb(147, 51, 234, 0.3)',
+                    backgroundColor:
+                      paymentMethod === 'stripe' ? 'rgb(6, 78, 59, 0.3)' : 'transparent',
+                  }}
+                >
                   <input
                     type="radio"
                     name="payment"
@@ -251,8 +289,12 @@ export default function CheckoutPage() {
 
               {/* Security Info */}
               <div className="mt-6 pt-6 border-t border-purple-500/20 text-center text-sm text-purple-300/80">
-                <p className="flex items-center justify-center gap-2 mb-2"><span className="text-cyan-400">🔒</span> Secure payment processing</p>
-                <p className="flex items-center justify-center gap-2"><span className="text-cyan-400">✅</span> PCI DSS Compliant</p>
+                <p className="flex items-center justify-center gap-2 mb-2">
+                  <span className="text-cyan-400">🔒</span> Secure payment processing
+                </p>
+                <p className="flex items-center justify-center gap-2">
+                  <span className="text-cyan-400">✅</span> PCI DSS Compliant
+                </p>
               </div>
             </div>
           </div>

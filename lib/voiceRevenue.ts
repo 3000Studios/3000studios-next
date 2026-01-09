@@ -126,14 +126,23 @@ export async function executeRevenueCommand(
         };
     }
 
-    return result || {
-      success: false,
-      message: 'Command execution failed',
-    };
+    return (
+      result || {
+        success: false,
+        message: 'Command execution failed',
+      }
+    );
   } catch (error: unknown) {
     return {
       success: false,
-      message: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Unknown error',
+      message:
+        error instanceof Error
+          ? error instanceof Error
+            ? error instanceof Error
+              ? error.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'Unknown error',
     };
   }
 }
@@ -222,7 +231,7 @@ async function adjustPricing(): Promise<CommandResult> {
   const pricingEngine = getPricingEngine();
   const topProducts = pricingEngine.getTopProducts(5);
 
-  const adjustments = topProducts.map(p => pricingEngine.recommendPrice(p.productId));
+  const adjustments = topProducts.map((p) => pricingEngine.recommendPrice(p.productId));
 
   return {
     success: true,

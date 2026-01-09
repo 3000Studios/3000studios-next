@@ -2,15 +2,15 @@
 
 /**
  * Branch Protection Configuration Script
- * 
+ *
  * This script automatically configures branch protection rules using the GitHub API.
  * It reads configuration from .github/branch-protection-config.yml and applies it.
- * 
+ *
  * Usage:
  *   npm run configure-branch-protection
  *   or
  *   node scripts/configure-branch-protection.mjs
- * 
+ *
  * Requires: GITHUB_TOKEN environment variable with admin:repo_hook and repo scopes
  */
 
@@ -52,7 +52,7 @@ async function configureBranchProtection() {
   // Load configuration from YAML file
   const configPath = resolve(__dirname, '../.github/branch-protection-config.yml');
   let config;
-  
+
   try {
     const configContent = readFileSync(configPath, 'utf-8');
     config = yaml.parse(configContent);
@@ -69,7 +69,7 @@ async function configureBranchProtection() {
     // Check if we have admin access
     console.log('🔐 Checking permissions...');
     const { data: repoData } = await octokit.rest.repos.get({ owner, repo });
-    
+
     if (!repoData.permissions?.admin) {
       console.error('❌ Error: Insufficient permissions');
       console.error('   You need admin access to configure branch protection');
@@ -83,48 +83,71 @@ async function configureBranchProtection() {
       owner,
       repo,
       branch: config.branch,
-      required_status_checks: config.required_status_checks ? {
-        strict: config.required_status_checks.strict,
-        contexts: config.required_status_checks.contexts || []
-      } : null,
+      required_status_checks: config.required_status_checks
+        ? {
+            strict: config.required_status_checks.strict,
+            contexts: config.required_status_checks.contexts || [],
+          }
+        : null,
       enforce_admins: config.enforce_admins || false,
-      required_pull_request_reviews: config.required_pull_request_reviews ? {
-        dismiss_stale_reviews: config.required_pull_request_reviews.dismiss_stale_reviews || false,
-        require_code_owner_reviews: config.required_pull_request_reviews.require_code_owner_reviews || false,
-        required_approving_review_count: config.required_pull_request_reviews.required_approving_review_count || 1,
-        require_last_push_approval: config.required_pull_request_reviews.require_last_push_approval || false
-      } : null,
-      restrictions: (config.restrictions && 
+      required_pull_request_reviews: config.required_pull_request_reviews
+        ? {
+            dismiss_stale_reviews:
+              config.required_pull_request_reviews.dismiss_stale_reviews || false,
+            require_code_owner_reviews:
+              config.required_pull_request_reviews.require_code_owner_reviews || false,
+            required_approving_review_count:
+              config.required_pull_request_reviews.required_approving_review_count || 1,
+            require_last_push_approval:
+              config.required_pull_request_reviews.require_last_push_approval || false,
+          }
+        : null,
+      restrictions:
+        config.restrictions &&
         (config.restrictions.users?.length > 0 ||
-         config.restrictions.teams?.length > 0 ||
-         config.restrictions.apps?.length > 0)) ? {
-        users: config.restrictions.users || [],
-        teams: config.restrictions.teams || [],
-        apps: config.restrictions.apps || []
-      } : null,
+          config.restrictions.teams?.length > 0 ||
+          config.restrictions.apps?.length > 0)
+          ? {
+              users: config.restrictions.users || [],
+              teams: config.restrictions.teams || [],
+              apps: config.restrictions.apps || [],
+            }
+          : null,
       required_linear_history: config.required_linear_history || false,
       allow_force_pushes: config.allow_force_pushes || false,
       allow_deletions: config.allow_deletions || false,
       required_conversation_resolution: config.required_conversation_resolution || false,
       lock_branch: config.lock_branch || false,
-      allow_fork_syncing: config.allow_fork_syncing !== false
+      allow_fork_syncing: config.allow_fork_syncing !== false,
     };
 
     console.log('🚀 Applying branch protection rules...\n');
     console.log('Configuration:');
-    console.log(`  • Required approvals: ${protectionParams.required_pull_request_reviews?.required_approving_review_count || 0}`);
-    console.log(`  • Dismiss stale reviews: ${protectionParams.required_pull_request_reviews?.dismiss_stale_reviews ? 'Yes' : 'No'}`);
-    console.log(`  • Require status checks: ${protectionParams.required_status_checks ? 'Yes' : 'No'}`);
+    console.log(
+      `  • Required approvals: ${protectionParams.required_pull_request_reviews?.required_approving_review_count || 0}`
+    );
+    console.log(
+      `  • Dismiss stale reviews: ${protectionParams.required_pull_request_reviews?.dismiss_stale_reviews ? 'Yes' : 'No'}`
+    );
+    console.log(
+      `  • Require status checks: ${protectionParams.required_status_checks ? 'Yes' : 'No'}`
+    );
     if (protectionParams.required_status_checks) {
       console.log(`    - Contexts: ${protectionParams.required_status_checks.contexts.join(', ')}`);
-      console.log(`    - Strict (up-to-date): ${protectionParams.required_status_checks.strict ? 'Yes' : 'No'}`);
+      console.log(
+        `    - Strict (up-to-date): ${protectionParams.required_status_checks.strict ? 'Yes' : 'No'}`
+      );
     }
     console.log(`  • Enforce for admins: ${protectionParams.enforce_admins ? 'Yes' : 'No'}`);
     console.log(`  • Restrict pushes: ${protectionParams.restrictions ? 'Yes' : 'No'}`);
     console.log(`  • Linear history: ${protectionParams.required_linear_history ? 'Yes' : 'No'}`);
     console.log(`  • Force pushes: ${protectionParams.allow_force_pushes ? 'Allowed' : 'Blocked'}`);
-    console.log(`  • Branch deletions: ${protectionParams.allow_deletions ? 'Allowed' : 'Blocked'}`);
-    console.log(`  • Conversation resolution: ${protectionParams.required_conversation_resolution ? 'Required' : 'Optional'}`);
+    console.log(
+      `  • Branch deletions: ${protectionParams.allow_deletions ? 'Allowed' : 'Blocked'}`
+    );
+    console.log(
+      `  • Conversation resolution: ${protectionParams.required_conversation_resolution ? 'Required' : 'Optional'}`
+    );
     console.log('');
 
     // Apply branch protection
@@ -143,16 +166,17 @@ async function configureBranchProtection() {
     const { data: protection } = await octokit.rest.repos.getBranchProtection({
       owner,
       repo,
-      branch: config.branch
+      branch: config.branch,
     });
 
     const checks = {
       prRequired: protection.required_pull_request_reviews !== null,
-      approvalsRequired: protection.required_pull_request_reviews?.required_approving_review_count >= 1,
+      approvalsRequired:
+        protection.required_pull_request_reviews?.required_approving_review_count >= 1,
       dismissStale: protection.required_pull_request_reviews?.dismiss_stale_reviews === true,
       statusChecksRequired: protection.required_status_checks !== null,
       upToDateRequired: protection.required_status_checks?.strict === true,
-      enforceAdmins: protection.enforce_admins?.enabled === true
+      enforceAdmins: protection.enforce_admins?.enabled === true,
     };
 
     console.log('\nVerification Results:');
@@ -163,7 +187,7 @@ async function configureBranchProtection() {
     console.log(`  ${checks.upToDateRequired ? '✅' : '❌'} Up-to-date branch required`);
     console.log(`  ${checks.enforceAdmins ? '✅' : '❌'} Enforce for admins enabled`);
 
-    const allPassed = Object.values(checks).every(check => check === true);
+    const allPassed = Object.values(checks).every((check) => check === true);
     if (allPassed) {
       console.log('\n🎉 All protection rules successfully verified!\n');
       process.exit(0);
@@ -173,7 +197,6 @@ async function configureBranchProtection() {
       console.log('Review the settings above to ensure they match your intent.\n');
       process.exit(0);
     }
-
   } catch (error) {
     if (error.status === 401) {
       console.error('❌ Error: Authentication failed');
@@ -204,13 +227,13 @@ async function configureBranchProtection() {
 async function getRepoInfo() {
   try {
     const remoteUrl = execSync('git remote get-url origin', { encoding: 'utf-8' }).trim();
-    
+
     // Parse GitHub URL
     const match = remoteUrl.match(/github\.com[:/](.+?)\/(.+?)(\.git)?$/);
     if (match) {
       return {
         owner: match[1],
-        repo: match[2]
+        repo: match[2],
       };
     }
     return null;
@@ -220,7 +243,7 @@ async function getRepoInfo() {
 }
 
 // Run configuration
-configureBranchProtection().catch(error => {
+configureBranchProtection().catch((error) => {
   console.error('Fatal error:', error);
   process.exit(1);
 });

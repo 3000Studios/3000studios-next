@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import { AlertCircle, Lock } from "lucide-react";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { AlertCircle, Lock } from 'lucide-react';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-const JWS_PASSWORD = "88888888";
+const JWS_PASSWORD = '88888888';
 
 export default function JWSProtectedPage() {
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (password === JWS_PASSWORD) {
       setIsAuthenticated(true);
-      setError("");
+      setError('');
     } else {
-      setError("Invalid password");
-      setPassword("");
+      setError('Invalid password');
+      setPassword('');
     }
   };
 
@@ -39,9 +39,7 @@ export default function JWSProtectedPage() {
               <div className="inline-flex items-center justify-center w-16 h-16 bg-gold rounded-full mb-4">
                 <Lock className="text-black" size={32} />
               </div>
-              <h1 className="text-4xl font-bold gradient-text mb-2">
-                JWS Protected Area
-              </h1>
+              <h1 className="text-4xl font-bold gradient-text mb-2">JWS Protected Area</h1>
               <p className="text-gray-400">Welcome, Boss Man J!</p>
             </div>
 
@@ -50,10 +48,18 @@ export default function JWSProtectedPage() {
               <div className="p-6 bg-gray-900 rounded-lg border border-gold/30">
                 <h2 className="text-2xl font-bold text-gold mb-4">Executive Dashboard</h2>
                 <div className="space-y-4 text-gray-300">
-                  <p className="text-lg">🎯 <strong>Current Status:</strong> All systems operational</p>
-                  <p className="text-lg">💼 <strong>Revenue:</strong> Tracking active</p>
-                  <p className="text-lg">🚀 <strong>Projects:</strong> On schedule</p>
-                  <p className="text-lg">🎨 <strong>Design System:</strong> ETHEREAL v2.0.4</p>
+                  <p className="text-lg">
+                    🎯 <strong>Current Status:</strong> All systems operational
+                  </p>
+                  <p className="text-lg">
+                    💼 <strong>Revenue:</strong> Tracking active
+                  </p>
+                  <p className="text-lg">
+                    🚀 <strong>Projects:</strong> On schedule
+                  </p>
+                  <p className="text-lg">
+                    🎨 <strong>Design System:</strong> ETHEREAL v2.0.4
+                  </p>
                 </div>
               </div>
 
@@ -66,7 +72,7 @@ export default function JWSProtectedPage() {
                   <h3 className="text-black font-bold text-lg">🎛️ Matrix Control</h3>
                   <p className="text-gray-800 text-sm">Access admin panel</p>
                 </button>
-                
+
                 <button
                   onClick={() => router.push('/store')}
                   className="p-4 bg-gradient-to-r from-sapphire to-cyan-600 rounded-lg hover:shadow-lg transition-all duration-300"
@@ -74,7 +80,7 @@ export default function JWSProtectedPage() {
                   <h3 className="text-white font-bold text-lg">🛍️ Store Management</h3>
                   <p className="text-gray-200 text-sm">View products & orders</p>
                 </button>
-                
+
                 <button
                   onClick={() => router.push('/live')}
                   className="p-4 bg-gradient-to-r from-red-600 to-pink-600 rounded-lg hover:shadow-lg transition-all duration-300"
@@ -82,7 +88,7 @@ export default function JWSProtectedPage() {
                   <h3 className="text-white font-bold text-lg">📺 Live Streaming</h3>
                   <p className="text-gray-200 text-sm">Manage broadcasts</p>
                 </button>
-                
+
                 <button
                   onClick={() => router.push('/')}
                   className="p-4 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg hover:shadow-lg transition-all duration-300"
@@ -95,7 +101,8 @@ export default function JWSProtectedPage() {
               {/* Security Note */}
               <div className="mt-6 p-4 bg-yellow-900/20 border border-yellow-600/50 rounded-lg">
                 <p className="text-yellow-200 text-sm">
-                  🔒 <strong>Security Notice:</strong> This area is password protected. Keep your credentials secure.
+                  🔒 <strong>Security Notice:</strong> This area is password protected. Keep your
+                  credentials secure.
                 </p>
               </div>
             </div>
@@ -119,9 +126,7 @@ export default function JWSProtectedPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gold rounded-full mb-4">
               <Lock className="text-black" size={32} />
             </div>
-            <h1 className="text-3xl font-bold gradient-text mb-2">
-              JWS Protected Area
-            </h1>
+            <h1 className="text-3xl font-bold gradient-text mb-2">JWS Protected Area</h1>
             <p className="text-gray-400">Enter password to access</p>
           </div>
 
@@ -134,10 +139,7 @@ export default function JWSProtectedPage() {
             )}
 
             <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-300 mb-2"
-              >
+              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
                 Password
               </label>
               <div className="relative">
@@ -167,9 +169,7 @@ export default function JWSProtectedPage() {
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-500">
-              🔒 JWS Protected • Authorized Access Only
-            </p>
+            <p className="text-sm text-gray-500">🔒 JWS Protected • Authorized Access Only</p>
           </div>
         </div>
       </div>

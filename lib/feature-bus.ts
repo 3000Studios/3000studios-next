@@ -26,9 +26,28 @@ interface FeatureBusState {
 
 export const useFeatureBus = create<FeatureBusState>((set, get) => ({
   features: new Map([
-    ['LiveAvatar', { name: 'LiveAvatar', permissions: ['admin', 'public'], mount: ['/', '/about', '/jws'], enabled: true }],
-    ['AISalesChat', { name: 'AISalesChat', permissions: ['public'], mount: ['/', '/store', '/apps', '/revenue'], enabled: true }],
-    ['VideoBackground', { name: 'VideoBackground', permissions: ['public'], mount: ['*'], enabled: true }],
+    [
+      'LiveAvatar',
+      {
+        name: 'LiveAvatar',
+        permissions: ['admin', 'public'],
+        mount: ['/', '/about', '/jws'],
+        enabled: true,
+      },
+    ],
+    [
+      'AISalesChat',
+      {
+        name: 'AISalesChat',
+        permissions: ['public'],
+        mount: ['/', '/store', '/apps', '/revenue'],
+        enabled: true,
+      },
+    ],
+    [
+      'VideoBackground',
+      { name: 'VideoBackground', permissions: ['public'], mount: ['*'], enabled: true },
+    ],
     ['VoiceControl', { name: 'VoiceControl', permissions: ['admin'], mount: ['*'], enabled: true }],
     ['Analytics', { name: 'Analytics', permissions: ['public'], mount: ['*'], enabled: true }],
   ]),
@@ -75,5 +94,5 @@ export const useFeatureBus = create<FeatureBusState>((set, get) => ({
   getFeatureConfig: (name) => {
     const features = get().features;
     return features.get(name)?.config;
-  }
+  },
 }));

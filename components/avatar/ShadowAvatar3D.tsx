@@ -3,18 +3,16 @@
  * 3D animated AI avatar for homepage
  */
 
-"use client";
+'use client';
 
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
 
-const AvatarScene = dynamic(() => import("./AvatarScene"), {
+const AvatarScene = dynamic(() => import('./AvatarScene'), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full flex items-center justify-center">
-      <div className="text-gold text-2xl animate-pulse">
-        Loading Shadow PRIME...
-      </div>
+      <div className="text-gold text-2xl animate-pulse">Loading Shadow PRIME...</div>
     </div>
   ),
 });

@@ -1,11 +1,13 @@
 # 3000 Studios Architecture Documentation
 
 ## Overview
+
 3000 Studios is a modern Next.js 16 application built with TypeScript, TailwindCSS 4, and integrated with multiple third-party services for AI, payments, analytics, and deployment.
 
 ## Tech Stack
 
 ### Core
+
 - **Framework**: Next.js 16.0.7 (App Router)
 - **Runtime**: React 19.2.0
 - **Language**: TypeScript 5
@@ -13,6 +15,7 @@
 - **Package Manager**: pnpm 10.25.0
 
 ### Key Dependencies
+
 - **AI Services**: OpenAI, Anthropic Claude, Google Gemini
 - **Payments**: PayPal, Stripe
 - **Database**: MongoDB Atlas
@@ -39,46 +42,56 @@
 ## API Routes
 
 ### Products & E-Commerce
+
 - `GET /api/products` - Fetch products from MongoDB
 - `POST /api/paypal/create-order` - Create PayPal order
 - `POST /api/paypal/capture-order` - Capture PayPal payment
 
 ### Content Generation
+
 - `POST /api/content/generate-product` - Generate product descriptions with AI
 - `POST /api/content/generate-blog` - Generate blog posts with AI
 
 ### Live Streaming
+
 - `POST /api/streaming/start` - Initialize WebRTC stream
 - `GET /api/streaming/status` - Get stream status
 - `POST /api/streaming/stop` - Stop stream
 
 ### Deployment & Analytics
+
 - `POST /api/deployment/trigger` - Trigger Vercel deployment
 - `GET /api/deployment/status` - Check deployment status
 - `GET /api/analytics` - Fetch MongoDB analytics
 
 ### AI & Automation
+
 - `POST /api/voice-to-code` - Voice-to-code generation with OpenAI
 
 ## Services Integration
 
 ### AI Services
+
 - **OpenAI**: Voice-to-code, content generation, transcription
 - **Claude**: Code review, advanced generation
 - **Gemini**: Multimodal AI for image analysis
 
 ### Payment Processing
+
 - **PayPal**: Primary payment processor with affiliate tracking
 - **Stripe**: Alternative payment method (configured)
 
 ### Database
+
 - **MongoDB Atlas**: Main database for products, orders, analytics, and user activities
 
 ### Hosting & Deployment
+
 - **Vercel**: Automated deployments with preview/production
 - **IONOS**: Backup hosting configuration
 
 ### Communication
+
 - **Twilio**: SMS and voice notifications
 - **WebRTC**: Real-time video streaming
 
@@ -91,6 +104,7 @@ cp .env.example .env.local
 ```
 
 Key variables include:
+
 - Admin credentials
 - AI API keys (OpenAI, Claude, Gemini)
 - Payment processors (PayPal, Stripe)
@@ -103,18 +117,21 @@ Key variables include:
 ## Build & Deploy
 
 ### Local Development
+
 ```bash
 pnpm install
 pnpm dev
 ```
 
 ### Production Build
+
 ```bash
 pnpm build
 pnpm start
 ```
 
 ### Linting
+
 ```bash
 npx eslint src --ext .ts,.tsx
 ```
@@ -134,6 +151,7 @@ All GitHub Actions workflows use **pnpm** for consistency:
 ## Features
 
 ### Premium UI Components
+
 - Video wallpaper backgrounds
 - Gravity-physics footer
 - Background music engine
@@ -142,6 +160,7 @@ All GitHub Actions workflows use **pnpm** for consistency:
 - Particle effects
 
 ### Business Features
+
 - Real-time analytics dashboard (Matrix)
 - AI-powered content generation
 - Live streaming with WebRTC
@@ -151,6 +170,7 @@ All GitHub Actions workflows use **pnpm** for consistency:
 - Blog with auto-generated content
 
 ### Performance & SEO
+
 - Static optimization where possible
 - Image optimization
 - Code splitting
@@ -169,12 +189,14 @@ All GitHub Actions workflows use **pnpm** for consistency:
 ## Maintenance
 
 ### Regular Tasks
+
 - Update dependencies: `pnpm update`
 - Security audit: `pnpm audit`
 - Build verification: `pnpm build`
 - TypeScript check: `pnpm tsc --noEmit`
 
 ### Monitoring
+
 - Check Vercel deployment logs
 - Monitor MongoDB usage and performance
 - Review API rate limits (OpenAI, PayPal, etc.)
@@ -191,6 +213,7 @@ All GitHub Actions workflows use **pnpm** for consistency:
 ## Support
 
 For issues or questions:
+
 - Review documentation in `/docs`
 - Check GitHub Issues
 - Contact: mr.jwswain@gmail.com (Boss Man J)

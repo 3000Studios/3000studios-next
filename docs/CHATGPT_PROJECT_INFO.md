@@ -170,9 +170,9 @@ Change text content on pages
 {
   "type": "UPDATE_TEXT",
   "text": "New headline text",
-  "file": "app/page.tsx",        // optional
-  "search": "old text",          // optional
-  "replace": "new text"          // optional
+  "file": "app/page.tsx", // optional
+  "search": "old text", // optional
+  "replace": "new text" // optional
 }
 ```
 
@@ -185,7 +185,7 @@ Add new content sections
   "type": "ADD_SECTION",
   "title": "Section Title",
   "content": "Section content (markdown supported)",
-  "page": "homepage"             // optional
+  "page": "homepage" // optional
 }
 ```
 
@@ -229,8 +229,8 @@ Create and publish blog posts
   "type": "PUBLISH_BLOG",
   "title": "Blog Post Title",
   "body": "Blog content (markdown supported)",
-  "slug": "url-slug",            // optional, auto-generated if not provided
-  "topic": "AI"                  // optional category
+  "slug": "url-slug", // optional, auto-generated if not provided
+  "topic": "AI" // optional category
 }
 ```
 
@@ -475,8 +475,8 @@ const result = await fetch('/api/voice', {
   body: JSON.stringify({
     type: 'ADD_MEDIA',
     url: 'sunset',
-    mediaType: 'video'
-  })
+    mediaType: 'video',
+  }),
 });
 ```
 

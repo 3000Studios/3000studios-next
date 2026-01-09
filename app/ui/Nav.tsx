@@ -16,7 +16,6 @@ const PUBLIC_NAV_ITEMS = [
   { label: 'Apps', href: '/apps' },
   { label: 'Info', href: '/info' },
   { label: 'Admin', href: '/admin' },
-
 ];
 
 export default function Nav() {
@@ -80,7 +79,7 @@ export default function Nav() {
                 </Link>
               );
             })}
-            
+
             {/* VIP ENTRY */}
             <Link
               href="/vip"
@@ -143,19 +142,19 @@ export default function Nav() {
                   </div>
                 );
               })}
-               {/* VIP ENTRY MOBILE */}
-               <div className="flex justify-center py-2">
-                 <Link
-                   href="/vip"
-                   onClick={() => {
-                     setMobileMenuOpen(false);
-                     playSound('nav');
-                   }}
-                   className="px-4 py-1 rounded border border-yellow-500 text-yellow-400 hover:bg-yellow-500/10 transition-colors scale-125 my-4"
-                 >
-                   VIP
-                 </Link>
-               </div>
+              {/* VIP ENTRY MOBILE */}
+              <div className="flex justify-center py-2">
+                <Link
+                  href="/vip"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    playSound('nav');
+                  }}
+                  className="px-4 py-1 rounded border border-yellow-500 text-yellow-400 hover:bg-yellow-500/10 transition-colors scale-125 my-4"
+                >
+                  VIP
+                </Link>
+              </div>
             </div>
           </motion.div>
         )}

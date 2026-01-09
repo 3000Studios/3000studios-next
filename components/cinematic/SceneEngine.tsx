@@ -1,6 +1,6 @@
-import { Canvas } from "@react-three/fiber";
-import { Suspense } from "react";
-import { Environment } from "@react-three/drei";
+import { Canvas } from '@react-three/fiber';
+import { Suspense } from 'react';
+import { Environment } from '@react-three/drei';
 
 export default function SceneEngine() {
   return (

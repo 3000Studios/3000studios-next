@@ -1,5 +1,5 @@
-import { normalizeVendorProduct } from "./normalize";
-import { VendorProduct } from "./types";
+import { normalizeVendorProduct } from './normalize';
+import { VendorProduct } from './types';
 
 export type VendorAdapter = {
   id: string;
@@ -7,18 +7,18 @@ export type VendorAdapter = {
 };
 
 async function fetchJson(feedUrl: string) {
-  const res = await fetch(feedUrl, { cache: "no-store" });
+  const res = await fetch(feedUrl, { cache: 'no-store' });
   if (!res.ok) throw new Error(`Failed to fetch feed ${feedUrl}: ${res.status}`);
   return res.json();
 }
 
 export const cjAdapter: VendorAdapter = {
-  id: "cj",
+  id: 'cj',
   fetchProducts: async (feedUrl: string) => {
     const data = await fetchJson(feedUrl);
     const items = Array.isArray(data?.items) ? data.items : data?.data || [];
     return items.map((item: Record<string, unknown>) =>
-      normalizeVendorProduct("cj", {
+      normalizeVendorProduct('cj', {
         id: item.advertiserId || item.id,
         sku: item.sku,
         name: item.name || item.title,
@@ -35,12 +35,12 @@ export const cjAdapter: VendorAdapter = {
 };
 
 export const shareasaleAdapter: VendorAdapter = {
-  id: "shareasale",
+  id: 'shareasale',
   fetchProducts: async (feedUrl: string) => {
     const data = await fetchJson(feedUrl);
     const items = Array.isArray(data?.products) ? data.products : data?.items || [];
     return items.map((item: Record<string, unknown>) =>
-      normalizeVendorProduct("shareasale", {
+      normalizeVendorProduct('shareasale', {
         id: item.merchantId || item.id,
         sku: item.sku,
         name: item.title || item.name,
@@ -57,12 +57,12 @@ export const shareasaleAdapter: VendorAdapter = {
 };
 
 export const amazonAdapter: VendorAdapter = {
-  id: "amazon",
+  id: 'amazon',
   fetchProducts: async (feedUrl: string) => {
     const data = await fetchJson(feedUrl);
     const items = Array.isArray(data?.products) ? data.products : data?.items || [];
     return items.map((item: Record<string, unknown>) =>
-      normalizeVendorProduct("amazon", {
+      normalizeVendorProduct('amazon', {
         id: item.asin || item.id,
         sku: item.sku,
         name: item.title || item.name,
@@ -79,7 +79,7 @@ export const amazonAdapter: VendorAdapter = {
 };
 
 export const shopifyAdapter: VendorAdapter = {
-  id: "shopify",
+  id: 'shopify',
   fetchProducts: async (feedUrl: string) => {
     const data = await fetchJson(feedUrl);
     const items = Array.isArray(data?.products) ? data.products : [];
@@ -88,13 +88,13 @@ export const shopifyAdapter: VendorAdapter = {
       const images = item.images as Array<Record<string, unknown>> | undefined;
       const handle = item.handle as string | undefined;
 
-      return normalizeVendorProduct("shopify", {
+      return normalizeVendorProduct('shopify', {
         id: item.id,
         sku: handle,
         name: item.title,
         description: item.body_html,
         price: variants?.[0]?.price,
-        currency: (variants?.[0]?.currency as string) || "USD",
+        currency: (variants?.[0]?.currency as string) || 'USD',
         image: images?.[0]?.src,
         url: handle ? `/products/${handle}` : item.onlineStoreUrl,
         category: item.product_type,

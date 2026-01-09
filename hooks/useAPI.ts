@@ -12,10 +12,7 @@ export function useVoiceToCode() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const generateCode = async (
-    prompt: string,
-    action: "preview" | "apply" | "deploy"
-  ) => {
+  const generateCode = async (prompt: string, action: 'preview' | 'apply' | 'deploy') => {
     setLoading(true);
     setError(null);
 
@@ -27,14 +24,21 @@ export function useVoiceToCode() {
       });
 
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Failed to generate code');
       }
 
       return data;
     } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
+      const errorMessage =
+        err instanceof Error
+          ? err instanceof Error
+            ? err instanceof Error
+              ? err.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -44,7 +48,7 @@ export function useVoiceToCode() {
 
   const transcribeAndGenerate = async (
     audioBase64: string,
-    action: "preview" | "apply" | "deploy"
+    action: 'preview' | 'apply' | 'deploy'
   ) => {
     setLoading(true);
     setError(null);
@@ -57,14 +61,21 @@ export function useVoiceToCode() {
       });
 
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Failed to process audio');
       }
 
       return data;
     } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
+      const errorMessage =
+        err instanceof Error
+          ? err instanceof Error
+            ? err instanceof Error
+              ? err.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -92,14 +103,21 @@ export function usePayPalCheckout() {
       });
 
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Failed to create order');
       }
 
       return data;
     } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
+      const errorMessage =
+        err instanceof Error
+          ? err instanceof Error
+            ? err instanceof Error
+              ? err.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -119,14 +137,21 @@ export function usePayPalCheckout() {
       });
 
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Failed to capture order');
       }
 
       return data;
     } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
+      const errorMessage =
+        err instanceof Error
+          ? err instanceof Error
+            ? err instanceof Error
+              ? err.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -142,23 +167,28 @@ export function useAnalytics() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchAnalytics = async (
-    timeRange: "day" | "week" | "month" = "day"
-  ) => {
+  const fetchAnalytics = async (timeRange: 'day' | 'week' | 'month' = 'day') => {
     setLoading(true);
     setError(null);
 
     try {
       const response = await fetch(`/api/analytics?timeRange=${timeRange}`);
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Failed to fetch analytics');
       }
 
       return data;
     } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
+      const errorMessage =
+        err instanceof Error
+          ? err instanceof Error
+            ? err instanceof Error
+              ? err.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -174,11 +204,7 @@ export function useContentGeneration() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const generateBlog = async (
-    topic: string,
-    keywords?: string[],
-    publishToWordPress?: boolean
-  ) => {
+  const generateBlog = async (topic: string, keywords?: string[], publishToWordPress?: boolean) => {
     setLoading(true);
     setError(null);
 
@@ -190,14 +216,21 @@ export function useContentGeneration() {
       });
 
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Failed to generate blog post');
       }
 
       return data;
     } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
+      const errorMessage =
+        err instanceof Error
+          ? err instanceof Error
+            ? err instanceof Error
+              ? err.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -222,14 +255,21 @@ export function useContentGeneration() {
       });
 
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Failed to generate product description');
       }
 
       return data;
     } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
+      const errorMessage =
+        err instanceof Error
+          ? err instanceof Error
+            ? err instanceof Error
+              ? err.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -257,14 +297,21 @@ export function useStreaming() {
       });
 
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Failed to start stream');
       }
 
       return data;
     } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
+      const errorMessage =
+        err instanceof Error
+          ? err instanceof Error
+            ? err instanceof Error
+              ? err.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -284,14 +331,21 @@ export function useStreaming() {
       });
 
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Failed to stop stream');
       }
 
       return data;
     } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
+      const errorMessage =
+        err instanceof Error
+          ? err instanceof Error
+            ? err instanceof Error
+              ? err.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -307,14 +361,21 @@ export function useStreaming() {
       const url = streamId ? `/api/streaming/status?streamId=${streamId}` : '/api/streaming/status';
       const response = await fetch(url);
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Failed to get stream status');
       }
 
       return data;
     } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
+      const errorMessage =
+        err instanceof Error
+          ? err instanceof Error
+            ? err instanceof Error
+              ? err.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -342,14 +403,21 @@ export function useDeployment() {
       });
 
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Failed to trigger deployment');
       }
 
       return data;
     } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
+      const errorMessage =
+        err instanceof Error
+          ? err instanceof Error
+            ? err instanceof Error
+              ? err.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -362,19 +430,26 @@ export function useDeployment() {
     setError(null);
 
     try {
-      const url = deploymentId 
-        ? `/api/deployment/status?deploymentId=${deploymentId}` 
+      const url = deploymentId
+        ? `/api/deployment/status?deploymentId=${deploymentId}`
         : '/api/deployment/status';
       const response = await fetch(url);
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Failed to get deployment status');
       }
 
       return data;
     } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
+      const errorMessage =
+        err instanceof Error
+          ? err instanceof Error
+            ? err instanceof Error
+              ? err.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {
@@ -397,14 +472,21 @@ export function useProducts() {
     try {
       const response = await fetch('/api/products');
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Failed to fetch products');
       }
 
       return data;
     } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : 'An error occurred';
+      const errorMessage =
+        err instanceof Error
+          ? err instanceof Error
+            ? err instanceof Error
+              ? err.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'An error occurred';
       setError(errorMessage);
       throw err;
     } finally {

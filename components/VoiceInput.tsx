@@ -1,48 +1,48 @@
-'use client'
+'use client';
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react';
 
 export default function VoiceInput() {
-  const [transcript, setTranscript] = useState('')
-  const [listening, setListening] = useState(false)
-  const recognitionRef = useRef<any>(null)
+  const [transcript, setTranscript] = useState('');
+  const [listening, setListening] = useState(false);
+  const recognitionRef = useRef<any>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && 'webkitSpeechRecognition' in window) {
-      const SR = (window as any).webkitSpeechRecognition
-      const recognition = new SR()
-      recognition.continuous = true
-      recognition.interimResults = true
+      const SR = (window as any).webkitSpeechRecognition;
+      const recognition = new SR();
+      recognition.continuous = true;
+      recognition.interimResults = true;
 
       recognition.onresult = (event: any) => {
         const text = Array.from(event.results)
           .map((res: any) => res[0].transcript)
-          .join(' ')
-        setTranscript(text)
-      }
+          .join(' ');
+        setTranscript(text);
+      };
 
-      recognition.onerror = () => setListening(false)
-      recognition.onend = () => setListening(false)
+      recognition.onerror = () => setListening(false);
+      recognition.onend = () => setListening(false);
 
-      recognitionRef.current = recognition
+      recognitionRef.current = recognition;
     }
 
     return () => {
-      recognitionRef.current?.stop()
-    }
-  }, [])
+      recognitionRef.current?.stop();
+    };
+  }, []);
 
   const start = () => {
-    if (!recognitionRef.current) return
-    setTranscript('')
-    setListening(true)
-    recognitionRef.current.start()
-  }
+    if (!recognitionRef.current) return;
+    setTranscript('');
+    setListening(true);
+    recognitionRef.current.start();
+  };
 
   const stop = () => {
-    recognitionRef.current?.stop()
-    setListening(false)
-  }
+    recognitionRef.current?.stop();
+    setListening(false);
+  };
 
   return (
     <div className="voice-input">
@@ -54,5 +54,5 @@ export default function VoiceInput() {
       <p className="transcript">{transcript}</p>
       <textarea className="text-area" defaultValue={transcript} />
     </div>
-  )
+  );
 }

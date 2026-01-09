@@ -2,15 +2,15 @@
 
 /**
  * Branch Protection Verification Script
- * 
+ *
  * This script verifies that the main branch has proper protection rules enabled.
  * Run this locally to check the current status of branch protection.
- * 
+ *
  * Usage:
  *   npm run verify-branch-protection
  *   or
  *   node scripts/verify-branch-protection.mjs
- * 
+ *
  * Requires: GITHUB_TOKEN environment variable with repo access
  */
 
@@ -23,7 +23,7 @@ const REQUIRED_RULES = {
   dismissStale: 'Dismiss stale approvals',
   statusChecksRequired: 'Status checks requirement',
   upToDateRequired: 'Up-to-date branch requirement',
-  restrictPush: 'Push restrictions'
+  restrictPush: 'Push restrictions',
 };
 
 async function verifyBranchProtection() {
@@ -57,17 +57,18 @@ async function verifyBranchProtection() {
     const { data: protection } = await octokit.rest.repos.getBranchProtection({
       owner,
       repo,
-      branch: 'main'
+      branch: 'main',
     });
 
     // Verify each rule
     const checks = {
       prRequired: protection.required_pull_request_reviews !== null,
-      approvalsRequired: protection.required_pull_request_reviews?.required_approving_review_count >= 1,
+      approvalsRequired:
+        protection.required_pull_request_reviews?.required_approving_review_count >= 1,
       dismissStale: protection.required_pull_request_reviews?.dismiss_stale_reviews === true,
       statusChecksRequired: protection.required_status_checks !== null,
       upToDateRequired: protection.required_status_checks?.strict === true,
-      restrictPush: protection.restrictions !== null
+      restrictPush: protection.restrictions !== null,
     };
 
     console.log('📋 Branch Protection Rules Status:\n');
@@ -99,7 +100,6 @@ async function verifyBranchProtection() {
       console.log('See .github/BRANCH_PROTECTION_SETUP.md for detailed instructions.\n');
       process.exit(1);
     }
-
   } catch (error) {
     if (error.status === 404) {
       console.log('❌ CRITICAL: Branch protection is NOT enabled for main branch!\n');
@@ -136,13 +136,13 @@ async function verifyBranchProtection() {
 async function getRepoInfo() {
   try {
     const remoteUrl = execSync('git remote get-url origin', { encoding: 'utf-8' }).trim();
-    
+
     // Parse GitHub URL
     const match = remoteUrl.match(/github\.com[:/](.+?)\/(.+?)(\.git)?$/);
     if (match) {
       return {
         owner: match[1],
-        repo: match[2]
+        repo: match[2],
       };
     }
     return null;
@@ -152,7 +152,7 @@ async function getRepoInfo() {
 }
 
 // Run verification
-verifyBranchProtection().catch(error => {
+verifyBranchProtection().catch((error) => {
   console.error('Fatal error:', error);
   process.exit(1);
 });

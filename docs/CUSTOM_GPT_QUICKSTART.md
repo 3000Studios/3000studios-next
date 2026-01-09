@@ -86,7 +86,7 @@ Copy the entire OpenAPI schema from `docs/CUSTOM_GPT_SETUP.md` (lines 200-400)
     "title": "3000 Studios API",
     "version": "1.0.0"
   },
-  "servers": [{"url": "https://3000studios.com/api/gpt-bridge"}],
+  "servers": [{ "url": "https://3000studios.com/api/gpt-bridge" }],
   "paths": {
     "/": {
       "post": {
@@ -97,8 +97,8 @@ Copy the entire OpenAPI schema from `docs/CUSTOM_GPT_SETUP.md` (lines 200-400)
               "schema": {
                 "type": "object",
                 "properties": {
-                  "type": {"type": "string"},
-                  "transcript": {"type": "string"}
+                  "type": { "type": "string" },
+                  "transcript": { "type": "string" }
                 }
               }
             }
@@ -109,10 +109,10 @@ Copy the entire OpenAPI schema from `docs/CUSTOM_GPT_SETUP.md` (lines 200-400)
   },
   "components": {
     "securitySchemes": {
-      "BearerAuth": {"type": "http", "scheme": "bearer"}
+      "BearerAuth": { "type": "http", "scheme": "bearer" }
     }
   },
-  "security": [{"BearerAuth": []}]
+  "security": [{ "BearerAuth": [] }]
 }
 ```
 

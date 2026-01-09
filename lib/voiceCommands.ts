@@ -32,15 +32,15 @@ export interface CommandHandler {
 export const VENDOR_COMMANDS = [
   {
     pattern: /add vendor (.*)/i,
-    action: "ADD_VENDOR",
+    action: 'ADD_VENDOR',
   },
   {
     pattern: /sync vendor products/i,
-    action: "SYNC_VENDORS",
+    action: 'SYNC_VENDORS',
   },
   {
     pattern: /show top selling products/i,
-    action: "SHOW_TOP_PRODUCTS",
+    action: 'SHOW_TOP_PRODUCTS',
   },
 ];
 
@@ -91,7 +91,8 @@ const commandPatterns: CommandHandler[] = [
     }),
   },
   {
-    pattern: /add\s+(?:a\s+)?(?:new\s+)?product\s+called\s+(.+?)\s+(?:for|at)\s+\$?(\d+(?:\.\d{2})?)/i,
+    pattern:
+      /add\s+(?:a\s+)?(?:new\s+)?product\s+called\s+(.+?)\s+(?:for|at)\s+\$?(\d+(?:\.\d{2})?)/i,
     category: 'store',
     action: 'add_product',
     handler: (match) => ({
@@ -244,7 +245,10 @@ export function parseVoiceCommand(transcript: string): VoiceCommand | null {
   return null;
 }
 
-export function validateCommand(command: VoiceCommand, userRole: string): { valid: boolean; reason?: string } {
+export function validateCommand(
+  command: VoiceCommand,
+  userRole: string
+): { valid: boolean; reason?: string } {
   // Admin commands require admin role
   if (command.category === 'admin' && userRole !== 'admin') {
     return { valid: false, reason: 'Admin access required' };
@@ -258,7 +262,10 @@ export function validateCommand(command: VoiceCommand, userRole: string): { vali
   return { valid: true };
 }
 
-export async function executeCommand(command: VoiceCommand, userRole: string): Promise<CommandResult> {
+export async function executeCommand(
+  command: VoiceCommand,
+  userRole: string
+): Promise<CommandResult> {
   // Validate command authorization
   const validation = validateCommand(command, userRole);
   if (!validation.valid) {
@@ -295,7 +302,14 @@ export async function executeCommand(command: VoiceCommand, userRole: string): P
   } catch (error: unknown) {
     return {
       success: false,
-      message: error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : 'Failed to execute command',
+      message:
+        error instanceof Error
+          ? error instanceof Error
+            ? error instanceof Error
+              ? error.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'Failed to execute command',
     };
   }
 }

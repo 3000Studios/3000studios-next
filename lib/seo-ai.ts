@@ -54,7 +54,10 @@ export function generateSEO(config: SEOConfig): Metadata {
   };
 }
 
-export function generateSchema(type: 'Organization' | 'WebSite' | 'Article' | 'Product', data: any) {
+export function generateSchema(
+  type: 'Organization' | 'WebSite' | 'Article' | 'Product',
+  data: any
+) {
   const baseSchemas: Record<string, unknown> = {
     Organization: {
       '@context': 'https://schema.org',
@@ -62,14 +65,14 @@ export function generateSchema(type: 'Organization' | 'WebSite' | 'Article' | 'P
       name: '3000 Studios',
       url: 'https://3000studios.com',
       logo: 'https://res.cloudinary.com/dj92eb97f/image/upload/v1767046287/new_logo-min_zd44u2.png',
-      ...data
+      ...data,
     },
     WebSite: {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: '3000 Studios',
       url: 'https://3000studios.com',
-      ...data
+      ...data,
     },
     Article: {
       '@context': 'https://schema.org',
@@ -77,19 +80,19 @@ export function generateSchema(type: 'Organization' | 'WebSite' | 'Article' | 'P
       publisher: {
         '@type': 'Organization',
         name: '3000 Studios',
-        logo: 'https://res.cloudinary.com/dj92eb97f/image/upload/v1767046287/new_logo-min_zd44u2.png'
+        logo: 'https://res.cloudinary.com/dj92eb97f/image/upload/v1767046287/new_logo-min_zd44u2.png',
       },
-      ...data
+      ...data,
     },
     Product: {
       '@context': 'https://schema.org',
       '@type': 'Product',
       brand: {
         '@type': 'Brand',
-        name: '3000 Studios'
+        name: '3000 Studios',
       },
-      ...data
-    }
+      ...data,
+    },
   };
 
   return baseSchemas[type];

@@ -29,9 +29,12 @@ export function handleVoicePayload(payload: VoicePayload) {
       document.body.setAttribute('data-accent', value);
 
       // Also force CSS variable update if needed
-      if (value === 'gold') document.documentElement.style.setProperty('--accent-base', '212 175 55');
-      if (value === 'platinum') document.documentElement.style.setProperty('--accent-base', '229 228 226');
-      if (value === 'sapphire') document.documentElement.style.setProperty('--accent-base', '15 82 186');
+      if (value === 'gold')
+        document.documentElement.style.setProperty('--accent-base', '212 175 55');
+      if (value === 'platinum')
+        document.documentElement.style.setProperty('--accent-base', '229 228 226');
+      if (value === 'sapphire')
+        document.documentElement.style.setProperty('--accent-base', '15 82 186');
     }
   }
 
@@ -63,4 +66,3 @@ export function handleVoicePayload(payload: VoicePayload) {
     });
   }
 }
-

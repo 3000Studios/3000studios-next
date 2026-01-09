@@ -33,26 +33,24 @@ export const useCart = create<CartState>()(
 
       addItem: (item) => {
         const items = get().items;
-        const existingItem = items.find(i => i.productId === item.productId);
+        const existingItem = items.find((i) => i.productId === item.productId);
 
         if (existingItem) {
           set({
-            items: items.map(i =>
-              i.productId === item.productId
-                ? { ...i, quantity: i.quantity + 1 }
-                : i
-            )
+            items: items.map((i) =>
+              i.productId === item.productId ? { ...i, quantity: i.quantity + 1 } : i
+            ),
           });
         } else {
           set({
-            items: [...items, { ...item, quantity: 1 }]
+            items: [...items, { ...item, quantity: 1 }],
           });
         }
       },
 
       removeItem: (productId) => {
         set({
-          items: get().items.filter(i => i.productId !== productId)
+          items: get().items.filter((i) => i.productId !== productId),
         });
       },
 
@@ -63,9 +61,7 @@ export const useCart = create<CartState>()(
         }
 
         set({
-          items: get().items.map(i =>
-            i.productId === productId ? { ...i, quantity } : i
-          )
+          items: get().items.map((i) => (i.productId === productId ? { ...i, quantity } : i)),
         });
       },
 
@@ -78,8 +74,8 @@ export const useCart = create<CartState>()(
       },
 
       getTotalPrice: () => {
-        return get().items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      }
+        return get().items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      },
     }),
     {
       name: '3000studios-cart',

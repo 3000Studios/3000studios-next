@@ -13,13 +13,12 @@ export const authConfig: AuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        const adminEmail = process.env.MATRIX_ADMIN_EMAIL || process.env.ADMIN_EMAIL || 'mr.jwswain@gmail.com';
-        const adminPassword = process.env.MATRIX_ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || 'Bossman3000!!!';
+        const adminEmail =
+          process.env.MATRIX_ADMIN_EMAIL || process.env.ADMIN_EMAIL || 'mr.jwswain@gmail.com';
+        const adminPassword =
+          process.env.MATRIX_ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || 'Bossman3000!!!';
 
-        if (
-          credentials?.email === adminEmail &&
-          credentials?.password === adminPassword
-        ) {
+        if (credentials?.email === adminEmail && credentials?.password === adminPassword) {
           return {
             id: 'admin',
             email: credentials.email,

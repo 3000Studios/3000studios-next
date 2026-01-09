@@ -30,11 +30,11 @@ export class ComplianceEngine {
       this.checkToS(),
       this.checkPrivacyPolicy(),
       this.checkCookieConsent(),
-      this.checkDataRetention()
+      this.checkDataRetention(),
     ]);
 
-    const allPassed = results.every(r => r);
-    
+    const allPassed = results.every((r) => r);
+
     if (allPassed) {
       console.log('✅ All compliance checks passed');
     } else {
@@ -47,12 +47,12 @@ export class ComplianceEngine {
 
   private async checkGDPR(): Promise<boolean> {
     console.log('  Checking GDPR compliance...');
-    
+
     const requirements = [
       'Cookie consent banner present',
       'Privacy policy accessible',
       'Data deletion API exists',
-      'User data export capability'
+      'User data export capability',
     ];
 
     // Check implementation
@@ -60,7 +60,7 @@ export class ComplianceEngine {
       name: 'GDPR',
       required: true,
       status: 'pass',
-      lastChecked: new Date()
+      lastChecked: new Date(),
     });
 
     console.log('    ✅ GDPR compliant');
@@ -69,12 +69,12 @@ export class ComplianceEngine {
 
   private async checkCCPA(): Promise<boolean> {
     console.log('  Checking CCPA compliance...');
-    
+
     this.checks.set('ccpa', {
       name: 'CCPA',
       required: true,
       status: 'pass',
-      lastChecked: new Date()
+      lastChecked: new Date(),
     });
 
     console.log('    ✅ CCPA compliant');
@@ -83,13 +83,13 @@ export class ComplianceEngine {
 
   private async checkToS(): Promise<boolean> {
     console.log('  Checking Terms of Service...');
-    
+
     // Verify ToS page exists and is accessible
     this.checks.set('tos', {
       name: 'Terms of Service',
       required: true,
       status: 'pass',
-      lastChecked: new Date()
+      lastChecked: new Date(),
     });
 
     console.log('    ✅ ToS present');
@@ -98,12 +98,12 @@ export class ComplianceEngine {
 
   private async checkPrivacyPolicy(): Promise<boolean> {
     console.log('  Checking Privacy Policy...');
-    
+
     this.checks.set('privacy', {
       name: 'Privacy Policy',
       required: true,
       status: 'pass',
-      lastChecked: new Date()
+      lastChecked: new Date(),
     });
 
     console.log('    ✅ Privacy policy present');
@@ -112,12 +112,12 @@ export class ComplianceEngine {
 
   private async checkCookieConsent(): Promise<boolean> {
     console.log('  Checking cookie consent...');
-    
+
     this.checks.set('cookies', {
       name: 'Cookie Consent',
       required: true,
       status: 'pass',
-      lastChecked: new Date()
+      lastChecked: new Date(),
     });
 
     console.log('    ✅ Cookie consent implemented');
@@ -126,12 +126,12 @@ export class ComplianceEngine {
 
   private async checkDataRetention(): Promise<boolean> {
     console.log('  Checking data retention policies...');
-    
+
     this.checks.set('retention', {
       name: 'Data Retention',
       required: true,
       status: 'pass',
-      lastChecked: new Date()
+      lastChecked: new Date(),
     });
 
     console.log('    ✅ Data retention policies defined');

@@ -17,6 +17,7 @@ These scripts implement a three-phase controlled merge process:
 ## 📦 Available Scripts
 
 ### PowerShell Script (Windows)
+
 **File**: `release-merge.ps1`
 
 ```powershell
@@ -34,6 +35,7 @@ These scripts implement a three-phase controlled merge process:
 ```
 
 ### Bash Script (Linux/macOS)
+
 **File**: `release-merge.sh`
 
 ```bash
@@ -57,6 +59,7 @@ These scripts implement a three-phase controlled merge process:
 ### PHASE 1: Freeze & Verify (~2 minutes)
 
 **Actions**:
+
 1. ✅ Verifies you're on `main` branch
 2. ✅ Pulls latest changes from remote
 3. ✅ Checks working tree is clean (no uncommitted changes)
@@ -69,12 +72,14 @@ These scripts implement a three-phase controlled merge process:
 ### PHASE 2: Verify PRs Individually (~10-15 minutes)
 
 **PRs Verified** (in this order):
+
 - PR #35: ESLint 9 + TS fixes
 - PR #34: platform hardening
 - PR #31: nav + pipeline
 - PR #33: Vercel analytics
 
 **For Each PR**:
+
 1. ✅ Checks out PR branch
 2. ✅ Installs dependencies (`pnpm install --frozen-lockfile`)
 3. ✅ Runs linter (`pnpm lint`)
@@ -86,6 +91,7 @@ These scripts implement a three-phase controlled merge process:
 ### PHASE 3: Controlled Merge (~5-10 minutes)
 
 **Actions**:
+
 1. ✅ Creates release branch: `release/merge-YYYY-MM-DD`
 2. ✅ Merges PRs in order using `--no-ff` (preserves history)
 3. ✅ Runs final verification gate (lint, typecheck, build)
@@ -101,17 +107,20 @@ These scripts implement a three-phase controlled merge process:
 ### Required Tools
 
 1. **Git** - Version control
+
    ```bash
    git --version  # Should be 2.x+
    ```
 
 2. **GitHub CLI** - For PR operations
+
    ```bash
    gh --version  # Should be installed
    gh auth status  # Should show "Logged in"
    ```
 
 3. **pnpm** - Package manager
+
    ```bash
    pnpm --version  # Should be 8.x+
    ```
@@ -221,6 +230,7 @@ The scripts provide color-coded output:
 **Error**: "Working tree is not clean"
 
 **Solution**:
+
 ```bash
 # See what's uncommitted
 git status
@@ -237,6 +247,7 @@ git stash
 **Error**: "PR #XX failed at [lint|typecheck|build]"
 
 **Solution**:
+
 1. Checkout that PR: `gh pr checkout XX`
 2. Fix the issues locally
 3. Run tests: `pnpm lint && pnpm typecheck && pnpm build`
@@ -249,6 +260,7 @@ git stash
 **Error**: "Merge conflict"
 
 **Solution**:
+
 ```bash
 # Abort the merge
 git merge --abort
@@ -282,12 +294,12 @@ git push origin backup/main-before-merge-YYYY-MM-DD:main --force
 
 ## 📊 Expected Timeline
 
-| Phase | Duration | Actions |
-|-------|----------|---------|
-| Phase 1 | 1-2 min | Create backups |
-| Phase 2 | 10-15 min | Test 4 PRs (2-4 min each) |
-| Phase 3 | 5-10 min | Merge, test, push |
-| **Total** | **16-27 min** | **Complete process** |
+| Phase     | Duration      | Actions                   |
+| --------- | ------------- | ------------------------- |
+| Phase 1   | 1-2 min       | Create backups            |
+| Phase 2   | 10-15 min     | Test 4 PRs (2-4 min each) |
+| Phase 3   | 5-10 min      | Merge, test, push         |
+| **Total** | **16-27 min** | **Complete process**      |
 
 Add 5-7 minutes for Vercel deployment after script completes.
 
@@ -378,6 +390,7 @@ git show v-pre-merge-YYYY-MM-DD
 ```
 
 **Expected Output**:
+
 - "DRY RUN: Would create backup branch..."
 - "DRY RUN: Would checkout PR #XX..."
 - "DRY RUN: Would merge..."
@@ -427,12 +440,14 @@ If you need to stop the script:
 **Linux/macOS**: Press `Ctrl+C`
 
 Then check current state:
+
 ```bash
 git status
 git branch
 ```
 
 Clean up if needed:
+
 ```bash
 git merge --abort  # If in middle of merge
 git checkout main

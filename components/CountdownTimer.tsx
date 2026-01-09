@@ -45,9 +45,7 @@ function TimeBlock({ value, label }: { value: number; label: string }) {
   return (
     <div className="flex flex-col items-center">
       <div className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg p-3 min-w-[60px] shadow-lg">
-        <span className="text-2xl font-black text-white">
-          {value.toString().padStart(2, '0')}
-        </span>
+        <span className="text-2xl font-black text-white">{value.toString().padStart(2, '0')}</span>
       </div>
       <span className="text-xs text-purple-300 mt-1 font-semibold">{label}</span>
     </div>

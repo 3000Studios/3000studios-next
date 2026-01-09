@@ -4,32 +4,31 @@
  *   Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
  */
 
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function useVoice() {
   const [listening, setListening] = useState(false);
-  const [transcript, setTranscript] = useState("");
+  const [transcript, setTranscript] = useState('');
 
   let recognition: any = null;
 
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     const SpeechRecognition =
-      (window as any).webkitSpeechRecognition ||
-      (window as any).SpeechRecognition;
+      (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
 
     if (SpeechRecognition) {
       recognition = new SpeechRecognition();
       recognition.continuous = true;
       recognition.interimResults = true;
-      recognition.lang = "en-US";
+      recognition.lang = 'en-US';
     }
   }
 
   function start() {
     if (!recognition) return;
-    setTranscript("");
+    setTranscript('');
     setListening(true);
 
     recognition.start();

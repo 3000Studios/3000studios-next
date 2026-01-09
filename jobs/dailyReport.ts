@@ -113,16 +113,14 @@ export class ReportGenerator {
     const recommendations: string[] = [];
 
     if (metrics.conversionRate < 0.02) {
-      recommendations.push(
-        'A/B test your homepage CTA - conversion rate is below target'
-      );
+      recommendations.push('A/B test your homepage CTA - conversion rate is below target');
     }
 
     if (metrics.topProductRevenue > metrics.revenue * 0.4) {
       recommendations.push('Promote alternative products - over-reliance on single product');
     }
 
-    if (alerts.some(a => a.level === 'critical')) {
+    if (alerts.some((a) => a.level === 'critical')) {
       recommendations.push('Review marketing channels - critical metrics need attention');
     }
 
@@ -167,10 +165,10 @@ export class ReportGenerator {
 👥 Visitors: ${report.metrics.visitors}
 🏆 Top Product: ${report.metrics.topProduct} ($${report.metrics.topProductRevenue.toFixed(2)})
 
-${report.alerts.length > 0 ? `⚠️ Alerts:\n${report.alerts.map(a => `  • [${a.level.toUpperCase()}] ${a.message}`).join('\n')}\n` : ''}
+${report.alerts.length > 0 ? `⚠️ Alerts:\n${report.alerts.map((a) => `  • [${a.level.toUpperCase()}] ${a.message}`).join('\n')}\n` : ''}
 
 💡 Recommendations:
-${report.recommendations.map(r => `  • ${r}`).join('\n')}
+${report.recommendations.map((r) => `  • ${r}`).join('\n')}
     `;
   }
 }

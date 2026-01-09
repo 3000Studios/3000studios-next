@@ -1,5 +1,5 @@
 // Placeholder for a wormhole animation effect
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Wormhole({ show, onEnd }: { show: boolean; onEnd?: () => void }) {
   return (
@@ -14,11 +14,11 @@ export default function Wormhole({ show, onEnd }: { show: boolean; onEnd?: () =>
         >
           <motion.div
             className="absolute inset-0 bg-gradient-radial from-purple-900 via-blue-700 to-black opacity-80 animate-spin-slow"
-            style={{ filter: "blur(24px)" }}
+            style={{ filter: 'blur(24px)' }}
             initial={{ scale: 0 }}
             animate={{ scale: 1.2, rotate: 360 }}
             exit={{ scale: 0 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
+            transition={{ duration: 1.2, ease: 'easeInOut' }}
             onAnimationComplete={onEnd}
           />
           <motion.div
@@ -26,7 +26,7 @@ export default function Wormhole({ show, onEnd }: { show: boolean; onEnd?: () =>
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1, rotate: 360 }}
             exit={{ scale: 0.5, opacity: 0 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
+            transition={{ duration: 1.2, ease: 'easeInOut' }}
           />
         </motion.div>
       )}

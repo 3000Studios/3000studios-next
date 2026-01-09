@@ -39,5 +39,5 @@ paths:
                     intent:
                       type: string
       responses:
-        "204":
+        '204':
           description: Workflow dispatched

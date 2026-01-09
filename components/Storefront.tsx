@@ -2,8 +2,8 @@
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
-"use client";
-import React from "react";
+'use client';
+import React from 'react';
 
 export default function Storefront() {
   // Placeholder for real store integration (Stripe/PayPal, etc.)
@@ -13,9 +13,9 @@ export default function Storefront() {
         Elite Storefront
       </h2>
       <div className="text-center text-platinum/80 text-lg mb-8">
-        The 3000 Studios store is coming soon. 10,000+ digital assets, AI tools,
-        and exclusive content will be available for purchase with full
-        Stripe/PayPal integration and affiliate automation.
+        The 3000 Studios store is coming soon. 10,000+ digital assets, AI tools, and exclusive
+        content will be available for purchase with full Stripe/PayPal integration and affiliate
+        automation.
       </div>
       <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
         <div className="luxury-btn">Sign Up for Early Access</div>

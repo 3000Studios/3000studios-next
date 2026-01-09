@@ -2,9 +2,9 @@
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
-"use client";
+'use client';
 
-import { Collaborator } from "@/types";
+import { Collaborator } from '@/types';
 
 interface CollaboratorListProps {
   collaborators: Collaborator[];
@@ -14,12 +14,12 @@ interface CollaboratorListProps {
 
 function getRoleBadgeColor(role: string): string {
   switch (role) {
-    case "admin":
-      return "from-red-600 to-orange-600";
-    case "editor":
-      return "from-blue-600 to-cyan-600";
+    case 'admin':
+      return 'from-red-600 to-orange-600';
+    case 'editor':
+      return 'from-blue-600 to-cyan-600';
     default:
-      return "from-gray-600 to-gray-500";
+      return 'from-gray-600 to-gray-500';
   }
 }
 
@@ -31,9 +31,7 @@ export default function CollaboratorList({
   if (collaborators.length === 0) {
     return (
       <div className="glass p-6 rounded-2xl text-center">
-        <p className="text-gray-400">
-          No collaborators yet. Add your first collaborator above.
-        </p>
+        <p className="text-gray-400">No collaborators yet. Add your first collaborator above.</p>
       </div>
     );
   }
@@ -73,11 +71,7 @@ export default function CollaboratorList({
                 title="Remove collaborator"
               >
                 {isRemoving === collaborator.id ? (
-                  <svg
-                    className="w-5 h-5 animate-spin"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
+                  <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
                     <circle
                       className="opacity-25"
                       cx="12"
@@ -93,12 +87,7 @@ export default function CollaboratorList({
                     />
                   </svg>
                 ) : (
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"

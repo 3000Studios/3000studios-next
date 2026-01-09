@@ -4,8 +4,8 @@
  *   Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
  */
 
-import { create } from "zustand";
-import { useNeuralCore } from "@/brain/neuralCore";
+import { create } from 'zustand';
+import { useNeuralCore } from '@/brain/neuralCore';
 
 interface VocalizerState {
   speak: (text: string) => Promise<void>;
@@ -17,19 +17,17 @@ export const useVocalizer = create<VocalizerState>((set, get) => ({
 
   speak: async (text: string) => {
     const neural = useNeuralCore.getState();
-    const mood = neural.predict("vocalizer");
+    const mood = neural.predict('vocalizer');
 
     let audioCtx = get().audioCtx;
     if (!audioCtx) {
-      audioCtx = new (
-        window.AudioContext || (window as any).webkitAudioContext
-      )();
+      audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
       set({ audioCtx });
     }
 
-    const resp = await fetch("/api/shadow/voice", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    const resp = await fetch('/api/shadow/voice', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text, mood }),
     });
 
@@ -44,13 +42,7 @@ export const useVocalizer = create<VocalizerState>((set, get) => ({
     gain.gain.value = Math.max(0.2, Math.min(1.0, intensity));
 
     source.playbackRate.value =
-      mood === "angry"
-        ? 0.85
-        : mood === "excited"
-          ? 1.25
-          : mood === "whisper"
-            ? 0.6
-            : 1.0;
+      mood === 'angry' ? 0.85 : mood === 'excited' ? 1.25 : mood === 'whisper' ? 0.6 : 1.0;
 
     source.connect(gain).connect(audioCtx.destination);
     source.start(0);

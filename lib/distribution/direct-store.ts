@@ -3,10 +3,10 @@
  * Zero-fee direct sales
  */
 
-import { stripe } from "@/lib/stripe";
+import { stripe } from '@/lib/stripe';
 
 export async function createDirectProduct(input: any) {
-  console.log("/// DIRECT STORE PIPELINE INIT");
+  console.log('/// DIRECT STORE PIPELINE INIT');
 
   // 1. Create Product in Stripe
   const product = await stripe.products.create({
@@ -28,6 +28,6 @@ export async function createDirectProduct(input: any) {
   return {
     productId: product.id,
     priceId: price.id,
-    checkoutUrl: `/checkout?p=${price.id}`
+    checkoutUrl: `/checkout?p=${price.id}`,
   };
 }

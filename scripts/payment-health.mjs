@@ -1,2 +1,2 @@
-console.log("Payment systems healthy");
+console.log('Payment systems healthy');
 process.exit(0);

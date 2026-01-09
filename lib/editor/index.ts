@@ -5,16 +5,12 @@
  */
 
 // File editor utilities
-export async function editFileContent(
-  filePath: string,
-): Promise<void> {
+export async function editFileContent(filePath: string): Promise<void> {
   // File editing logic will be implemented here
   console.log(`Editing file: ${filePath}`);
 }
 
-export async function createNewFile(
-  filePath: string,
-): Promise<void> {
+export async function createNewFile(filePath: string): Promise<void> {
   // File creation logic
   console.log(`Creating file: ${filePath}`);
 }

@@ -1,6 +1,6 @@
-import { vendorAdapters } from "./adapters";
-import { normalizeVendorProduct } from "./normalize";
-import { VENDORS } from "./registry";
+import { vendorAdapters } from './adapters';
+import { normalizeVendorProduct } from './normalize';
+import { VENDORS } from './registry';
 
 function isSafeFeedUrl(override?: string): boolean {
   if (!override) return false;
@@ -13,18 +13,14 @@ function isSafeFeedUrl(override?: string): boolean {
   }
 
   const protocol = url.protocol.toLowerCase();
-  if (protocol !== "http:" && protocol !== "https:") {
+  if (protocol !== 'http:' && protocol !== 'https:') {
     return false;
   }
 
   const hostname = url.hostname.toLowerCase();
 
   // Disallow obvious local hosts
-  if (
-    hostname === "localhost" ||
-    hostname === "127.0.0.1" ||
-    hostname === "::1"
-  ) {
+  if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '::1') {
     return false;
   }
 
@@ -42,7 +38,7 @@ function getFeedUrl(vendorId: string, override?: string) {
   const safeOverride = isSafeFeedUrl(override) ? override : undefined;
   if (safeOverride) return safeOverride;
   const vendorEntry = Object.values(VENDORS).find((v) => v.id === vendorId);
-  const envKey = vendorEntry?.feedUrlEnv || "VENDOR_FEED_URL";
+  const envKey = vendorEntry?.feedUrlEnv || 'VENDOR_FEED_URL';
   const envValue = process.env[envKey];
   if (!envValue) {
     throw new Error(`Feed URL missing for vendor ${vendorId}; set ${envKey}`);
@@ -50,10 +46,7 @@ function getFeedUrl(vendorId: string, override?: string) {
   return envValue;
 }
 
-export async function ingestVendorFeed(
-  vendorId: string,
-  feedUrl?: string
-) {
+export async function ingestVendorFeed(vendorId: string, feedUrl?: string) {
   const resolvedFeedUrl = getFeedUrl(vendorId, feedUrl);
   const adapter = vendorAdapters[vendorId];
 
@@ -62,7 +55,7 @@ export async function ingestVendorFeed(
   }
 
   // Fallback: assume generic JSON with items
-  const res = await fetch(resolvedFeedUrl, { cache: "no-store" });
+  const res = await fetch(resolvedFeedUrl, { cache: 'no-store' });
   if (!res.ok) throw new Error(`Failed to fetch feed ${resolvedFeedUrl}`);
   const data = await res.json();
   const items = Array.isArray(data?.items) ? data.items : data?.products || [];

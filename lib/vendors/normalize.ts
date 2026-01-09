@@ -1,4 +1,4 @@
-import { VendorProduct } from "./types";
+import { VendorProduct } from './types';
 
 export function normalizeVendorProduct(
   vendorId: string,

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 /*
  * Copyright (c) 2025 NAME.
@@ -6,9 +6,9 @@
  * Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
  */
 
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 interface Particle {
   x: number;
@@ -23,7 +23,7 @@ export default function BackgroundHybrid() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas?.getContext("2d");
+    const ctx = canvas?.getContext('2d');
 
     if (!canvas || !ctx) return;
 
@@ -39,8 +39,8 @@ export default function BackgroundHybrid() {
 
     // Create gradient once, recreate only on resize
     let gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-    gradient.addColorStop(0, "#050505");
-    gradient.addColorStop(1, "#0e0e0e");
+    gradient.addColorStop(0, '#050505');
+    gradient.addColorStop(1, '#0e0e0e');
 
     const particles: Particle[] = [];
     for (let i = 0; i < 150; i++) {
@@ -65,7 +65,7 @@ export default function BackgroundHybrid() {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Embers + particles
-      ctx.fillStyle = "rgba(0,195,255,0.7)";
+      ctx.fillStyle = 'rgba(0,195,255,0.7)';
       particles.forEach((p) => {
         p.x += p.vx;
         p.y += p.vy;
@@ -93,8 +93,8 @@ export default function BackgroundHybrid() {
 
       // Recreate gradient for new canvas size
       gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, "#050505");
-      gradient.addColorStop(1, "#0e0e0e");
+      gradient.addColorStop(0, '#050505');
+      gradient.addColorStop(1, '#0e0e0e');
 
       // Scale particle positions proportionally
       const scaleX = size.width / oldWidth;
@@ -104,11 +104,11 @@ export default function BackgroundHybrid() {
         p.y *= scaleY;
       });
     };
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 
     return () => {
       cancelAnimationFrame(animationId);
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 

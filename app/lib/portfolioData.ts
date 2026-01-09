@@ -33,9 +33,12 @@ export const portfolioItems: PortfolioItem[] = [
     client: 'StyleHub Fashion',
     category: 'E-Commerce',
     year: '2024',
-    description: 'Complete e-commerce platform redesign that transformed an outdated shopping experience into a modern, conversion-optimized powerhouse.',
-    challenge: 'StyleHub was losing customers to competitors due to a slow, confusing checkout process and poor mobile experience. Cart abandonment rate was 78%.',
-    solution: 'We rebuilt the entire platform using Next.js and headless commerce architecture. Implemented one-click checkout, AI-powered product recommendations, and real-time inventory management.',
+    description:
+      'Complete e-commerce platform redesign that transformed an outdated shopping experience into a modern, conversion-optimized powerhouse.',
+    challenge:
+      'StyleHub was losing customers to competitors due to a slow, confusing checkout process and poor mobile experience. Cart abandonment rate was 78%.',
+    solution:
+      'We rebuilt the entire platform using Next.js and headless commerce architecture. Implemented one-click checkout, AI-powered product recommendations, and real-time inventory management.',
     results: [
       '312% increase in online sales',
       '65% reduction in cart abandonment',
@@ -46,7 +49,8 @@ export const portfolioItems: PortfolioItem[] = [
     technologies: ['Next.js', 'Shopify', 'Stripe', 'Tailwind CSS', 'Vercel'],
     featured: true,
     testimonial: {
-      quote: "3000 Studios didn't just build us a website—they transformed our entire business. The results speak for themselves.",
+      quote:
+        "3000 Studios didn't just build us a website—they transformed our entire business. The results speak for themselves.",
       author: 'Sarah Chen',
       position: 'CEO, StyleHub Fashion',
     },
@@ -62,9 +66,12 @@ export const portfolioItems: PortfolioItem[] = [
     client: 'CapitalFlow',
     category: 'SaaS',
     year: '2024',
-    description: 'Enterprise-grade analytics dashboard for real-time financial data visualization and reporting.',
-    challenge: 'CapitalFlow needed to process and visualize millions of financial transactions in real-time while maintaining security and compliance.',
-    solution: 'Built a scalable dashboard using React and D3.js with WebSocket connections for real-time updates. Implemented role-based access control and comprehensive audit logging.',
+    description:
+      'Enterprise-grade analytics dashboard for real-time financial data visualization and reporting.',
+    challenge:
+      'CapitalFlow needed to process and visualize millions of financial transactions in real-time while maintaining security and compliance.',
+    solution:
+      'Built a scalable dashboard using React and D3.js with WebSocket connections for real-time updates. Implemented role-based access control and comprehensive audit logging.',
     results: [
       '10M+ daily transactions processed',
       '99.99% uptime achieved',
@@ -75,7 +82,8 @@ export const portfolioItems: PortfolioItem[] = [
     technologies: ['React', 'TypeScript', 'D3.js', 'Node.js', 'PostgreSQL', 'AWS'],
     featured: true,
     testimonial: {
-      quote: 'The dashboard 3000 Studios built handles our most critical data with ease. It\'s both powerful and intuitive.',
+      quote:
+        "The dashboard 3000 Studios built handles our most critical data with ease. It's both powerful and intuitive.",
       author: 'Michael Rodriguez',
       position: 'CTO, CapitalFlow',
     },
@@ -91,9 +99,12 @@ export const portfolioItems: PortfolioItem[] = [
     client: 'FitLife Health',
     category: 'Mobile App',
     year: '2024',
-    description: 'Comprehensive fitness and wellness app with AI-powered workout plans and nutrition tracking.',
-    challenge: 'FitLife wanted to stand out in a crowded fitness app market and provide truly personalized experiences at scale.',
-    solution: 'Developed native iOS and Android apps with machine learning algorithms for personalized recommendations. Integrated with wearables and created a social community feature.',
+    description:
+      'Comprehensive fitness and wellness app with AI-powered workout plans and nutrition tracking.',
+    challenge:
+      'FitLife wanted to stand out in a crowded fitness app market and provide truly personalized experiences at scale.',
+    solution:
+      'Developed native iOS and Android apps with machine learning algorithms for personalized recommendations. Integrated with wearables and created a social community feature.',
     results: [
       '500K+ downloads in first 3 months',
       '4.8-star average rating',
@@ -104,7 +115,8 @@ export const portfolioItems: PortfolioItem[] = [
     technologies: ['React Native', 'Firebase', 'TensorFlow', 'HealthKit', 'Google Fit'],
     featured: true,
     testimonial: {
-      quote: 'The team at 3000 Studios brought our vision to life and then some. Our users love the app!',
+      quote:
+        'The team at 3000 Studios brought our vision to life and then some. Our users love the app!',
       author: 'Jennifer Martinez',
       position: 'Founder, FitLife Health',
     },
@@ -120,9 +132,12 @@ export const portfolioItems: PortfolioItem[] = [
     client: 'LuxuryHomes Realty',
     category: 'Real Estate',
     year: '2024',
-    description: 'Premium real estate platform with virtual tours, AI-powered property matching, and integrated CRM.',
-    challenge: 'LuxuryHomes needed to digitize their high-end property sales process without losing the personalized, luxury touch.',
-    solution: 'Created an immersive platform with 3D virtual tours, AI property recommendations, and seamless agent-client communication tools.',
+    description:
+      'Premium real estate platform with virtual tours, AI-powered property matching, and integrated CRM.',
+    challenge:
+      'LuxuryHomes needed to digitize their high-end property sales process without losing the personalized, luxury touch.',
+    solution:
+      'Created an immersive platform with 3D virtual tours, AI property recommendations, and seamless agent-client communication tools.',
     results: [
       '156% increase in qualified leads',
       '$127M in properties sold via platform',
@@ -133,7 +148,8 @@ export const portfolioItems: PortfolioItem[] = [
     technologies: ['Next.js', 'Three.js', 'MongoDB', 'OpenAI', 'Twilio'],
     featured: true,
     testimonial: {
-      quote: 'This platform revolutionized how we sell luxury properties. Our agents and clients both love it.',
+      quote:
+        'This platform revolutionized how we sell luxury properties. Our agents and clients both love it.',
       author: 'David Thompson',
       position: 'Managing Director, LuxuryHomes Realty',
     },
@@ -149,9 +165,12 @@ export const portfolioItems: PortfolioItem[] = [
     client: 'Gourmet Restaurant Group',
     category: 'Restaurant Tech',
     year: '2023',
-    description: 'Integrated reservation and online ordering system for multi-location restaurant group.',
-    challenge: 'Managing reservations and orders across 15 locations with inconsistent systems and poor customer experience.',
-    solution: 'Built unified platform with table management, online ordering, kitchen display systems, and customer loyalty program.',
+    description:
+      'Integrated reservation and online ordering system for multi-location restaurant group.',
+    challenge:
+      'Managing reservations and orders across 15 locations with inconsistent systems and poor customer experience.',
+    solution:
+      'Built unified platform with table management, online ordering, kitchen display systems, and customer loyalty program.',
     results: [
       '87% increase in online orders',
       '34% boost in table turnover',
@@ -162,7 +181,8 @@ export const portfolioItems: PortfolioItem[] = [
     technologies: ['React', 'Node.js', 'PostgreSQL', 'Stripe', 'Socket.io'],
     featured: false,
     testimonial: {
-      quote: 'Operations are smoother, customers are happier, and revenue is up significantly. Best investment we made.',
+      quote:
+        'Operations are smoother, customers are happier, and revenue is up significantly. Best investment we made.',
       author: 'Chef Antoine Dubois',
       position: 'Owner, Gourmet Restaurant Group',
     },
@@ -178,9 +198,12 @@ export const portfolioItems: PortfolioItem[] = [
     client: 'LearnPro Education',
     category: 'EdTech',
     year: '2023',
-    description: 'Modern learning management system with video streaming, interactive quizzes, and progress tracking.',
-    challenge: 'LearnPro\'s outdated LMS couldn\'t handle video streaming or provide engaging interactive experiences.',
-    solution: 'Developed scalable video platform with adaptive streaming, gamified learning paths, and real-time collaboration tools.',
+    description:
+      'Modern learning management system with video streaming, interactive quizzes, and progress tracking.',
+    challenge:
+      "LearnPro's outdated LMS couldn't handle video streaming or provide engaging interactive experiences.",
+    solution:
+      'Developed scalable video platform with adaptive streaming, gamified learning paths, and real-time collaboration tools.',
     results: [
       '250K students enrolled',
       '94% course completion rate',
@@ -191,7 +214,8 @@ export const portfolioItems: PortfolioItem[] = [
     technologies: ['Next.js', 'AWS', 'WebRTC', 'MongoDB', 'Redis'],
     featured: false,
     testimonial: {
-      quote: 'The platform is incredible. Our students are more engaged than ever, and completion rates have skyrocketed.',
+      quote:
+        'The platform is incredible. Our students are more engaged than ever, and completion rates have skyrocketed.',
       author: 'Dr. Emily Watson',
       position: 'CEO, LearnPro Education',
     },
@@ -208,8 +232,10 @@ export const portfolioItems: PortfolioItem[] = [
     category: 'Non-Profit',
     year: '2023',
     description: 'Transparent donation platform with impact tracking and donor engagement tools.',
-    challenge: 'GiveHope needed to increase donations while providing complete transparency on fund usage.',
-    solution: 'Created donation platform with real-time impact tracking, recurring giving options, and detailed fund allocation reports.',
+    challenge:
+      'GiveHope needed to increase donations while providing complete transparency on fund usage.',
+    solution:
+      'Created donation platform with real-time impact tracking, recurring giving options, and detailed fund allocation reports.',
     results: [
       '423% increase in donations',
       '$5.8M raised in first year',
@@ -220,7 +246,8 @@ export const portfolioItems: PortfolioItem[] = [
     technologies: ['React', 'Stripe', 'Node.js', 'PostgreSQL', 'SendGrid'],
     featured: false,
     testimonial: {
-      quote: 'This platform has transformed our fundraising. Donors love seeing exactly where their money goes.',
+      quote:
+        'This platform has transformed our fundraising. Donors love seeing exactly where their money goes.',
       author: 'Rebecca Johnson',
       position: 'Executive Director, GiveHope Foundation',
     },
@@ -237,8 +264,10 @@ export const portfolioItems: PortfolioItem[] = [
     category: 'Startup',
     year: '2023',
     description: 'Rapid MVP development for innovative B2B SaaS platform in just 6 weeks.',
-    challenge: 'TechStart needed to validate their idea quickly with a functional MVP before their funding round.',
-    solution: 'Agile development process with weekly iterations, core feature prioritization, and user testing throughout.',
+    challenge:
+      'TechStart needed to validate their idea quickly with a functional MVP before their funding round.',
+    solution:
+      'Agile development process with weekly iterations, core feature prioritization, and user testing throughout.',
     results: [
       'MVP launched in 6 weeks',
       '1,200 beta users acquired',
@@ -249,7 +278,8 @@ export const portfolioItems: PortfolioItem[] = [
     technologies: ['Next.js', 'Supabase', 'Tailwind CSS', 'Vercel', 'PostHog'],
     featured: false,
     testimonial: {
-      quote: 'They moved at startup speed without cutting corners. Helped us secure funding and launch successfully.',
+      quote:
+        'They moved at startup speed without cutting corners. Helped us secure funding and launch successfully.',
       author: 'Alex Kim',
       position: 'Co-Founder, TechStart Ventures',
     },
@@ -262,17 +292,17 @@ export const portfolioItems: PortfolioItem[] = [
 ];
 
 export function getFeaturedPortfolio(): PortfolioItem[] {
-  return portfolioItems.filter(item => item.featured);
+  return portfolioItems.filter((item) => item.featured);
 }
 
 export function getPortfolioByCategory(category: string): PortfolioItem[] {
-  return portfolioItems.filter(item => item.category === category);
+  return portfolioItems.filter((item) => item.category === category);
 }
 
 export function getPortfolioById(id: string): PortfolioItem | undefined {
-  return portfolioItems.find(item => item.id === id);
+  return portfolioItems.find((item) => item.id === id);
 }
 
 export function getAllPortfolioCategories(): string[] {
-  return Array.from(new Set(portfolioItems.map(item => item.category)));
+  return Array.from(new Set(portfolioItems.map((item) => item.category)));
 }

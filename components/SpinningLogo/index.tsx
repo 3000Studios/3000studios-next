@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React from "react";
-import styles from "./styles.module.scss";
+import React from 'react';
+import styles from './styles.module.scss';
 
 // "3000 STUDIOS " has 13 chars including space
 // The animation uses classes ch1 to ch13 potentially, or more if it loops?

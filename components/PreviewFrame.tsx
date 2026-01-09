@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
+import { useState } from 'react';
 
 export default function PreviewFrame() {
-  const [content, setContent] = useState<string>('')
+  const [content, setContent] = useState<string>('');
 
   return (
     <div className="preview-frame">
@@ -15,5 +15,5 @@ export default function PreviewFrame() {
         onChange={(e) => setContent(e.target.value)}
       />
     </div>
-  )
+  );
 }

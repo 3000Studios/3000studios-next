@@ -1,4 +1,3 @@
-
 # 🤖 Custom GPT Setup for 3000 Studios Site Management
 
 ## Overview
@@ -128,10 +127,7 @@ export async function POST(req: Request) {
     const expectedToken = process.env.GPT_BRIDGE_TOKEN;
 
     if (!expectedToken || authHeader !== `Bearer ${expectedToken}`) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const body = await req.json();
@@ -160,7 +156,7 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         error: 'Bridge failed',
-        details: error instanceof Error ? error.message : String(error)
+        details: error instanceof Error ? error.message : String(error),
       },
       { status: 500 }
     );
@@ -451,7 +447,7 @@ Expected response:
 {
   "success": true,
   "result": {
-    "actions": [{"type": "setTheme", "value": "dark"}],
+    "actions": [{ "type": "setTheme", "value": "dark" }],
     "summary": "Switched to dark theme"
   },
   "timestamp": "2026-01-04T06:55:18Z"
@@ -587,7 +583,7 @@ export default {
     });
 
     return response;
-  }
+  },
 };
 ```
 

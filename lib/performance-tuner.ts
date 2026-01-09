@@ -47,7 +47,8 @@ export class PerformanceAutoTuner {
 
   private adjustImageFormats() {
     // Detect WebP/AVIF support
-    const supportsWebP = document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') === 0;
+    const supportsWebP =
+      document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') === 0;
     const supportsAVIF = false; // Detect AVIF support
 
     if (supportsAVIF) {

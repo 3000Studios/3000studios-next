@@ -79,7 +79,7 @@ export class ExperimentEngine {
     const results = this.results.get(experimentId);
     if (!results) return;
 
-    const existing = results.find(r => r.variantName === variantName);
+    const existing = results.find((r) => r.variantName === variantName);
     if (existing) {
       existing.conversions++;
     } else {
@@ -102,7 +102,7 @@ export class ExperimentEngine {
     const results = this.results.get(experimentId);
     if (!results) return;
 
-    const existing = results.find(r => r.variantName === variantName);
+    const existing = results.find((r) => r.variantName === variantName);
     if (existing) {
       existing.impressions++;
     } else {
@@ -126,8 +126,7 @@ export class ExperimentEngine {
     if (!results) return;
 
     for (const result of results) {
-      result.conversionRate =
-        result.impressions > 0 ? result.conversions / result.impressions : 0;
+      result.conversionRate = result.impressions > 0 ? result.conversions / result.impressions : 0;
 
       // Chi-square confidence calculation (simplified)
       if (result.impressions > 30) {
@@ -150,9 +149,8 @@ export class ExperimentEngine {
 
     // Find variant with highest conversion rate that meets minimum sample size
     const qualified = results.filter(
-      r =>
-        r.impressions >= experiment.minSampleSize &&
-        r.confidence >= experiment.confidenceThreshold
+      (r) =>
+        r.impressions >= experiment.minSampleSize && r.confidence >= experiment.confidenceThreshold
     );
 
     if (qualified.length === 0) return null;
@@ -189,7 +187,7 @@ export class ExperimentEngine {
    * Get active experiments
    */
   getActiveExperiments(): Experiment[] {
-    return Array.from(this.experiments.values()).filter(e => e.status === 'active');
+    return Array.from(this.experiments.values()).filter((e) => e.status === 'active');
   }
 
   /**

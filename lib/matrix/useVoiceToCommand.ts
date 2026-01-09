@@ -23,7 +23,7 @@ interface ISpeechRecognitionErrorEvent {
 }
 
 interface ISpeechRecognitionConstructor {
-  new(): ISpeechRecognition;
+  new (): ISpeechRecognition;
 }
 
 const useVoiceToCommand = (onCommand: (command: string) => void) => {
@@ -35,10 +35,11 @@ const useVoiceToCommand = (onCommand: (command: string) => void) => {
     if (typeof window === 'undefined') return;
 
     // Get SpeechRecognition API (with vendor prefix support)
-    const SpeechRecognitionAPI = (
-      (window as unknown as { SpeechRecognition?: ISpeechRecognitionConstructor }).SpeechRecognition ||
-      (window as unknown as { webkitSpeechRecognition?: ISpeechRecognitionConstructor }).webkitSpeechRecognition
-    );
+    const SpeechRecognitionAPI =
+      (window as unknown as { SpeechRecognition?: ISpeechRecognitionConstructor })
+        .SpeechRecognition ||
+      (window as unknown as { webkitSpeechRecognition?: ISpeechRecognitionConstructor })
+        .webkitSpeechRecognition;
 
     if (!SpeechRecognitionAPI) {
       console.warn('Speech recognition not supported in this browser.');

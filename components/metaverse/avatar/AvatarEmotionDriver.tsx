@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 interface AvatarEmotionDriverProps {
   api: {
@@ -13,25 +13,25 @@ interface AvatarEmotionDriverProps {
 }
 
 export default function AvatarEmotionDriver({ api }: AvatarEmotionDriverProps) {
-  const [, setEmotion] = useState<string>("neutral");
+  const [, setEmotion] = useState<string>('neutral');
 
   useEffect(() => {
     const handler = (e: MessageEvent) => {
-      if (!String(e.data).startsWith("emotion:")) return;
-      const value = e.data.replace("emotion:", "");
+      if (!String(e.data).startsWith('emotion:')) return;
+      const value = e.data.replace('emotion:', '');
       setEmotion(value);
 
       // Avatar reactions
-      if (value === "happy") api.smile();
-      if (value === "angry") api.frown();
-      if (value === "surprised") api.shock();
-      if (value === "sad") api.slump();
-      if (value === "neutral") api.resetFace();
+      if (value === 'happy') api.smile();
+      if (value === 'angry') api.frown();
+      if (value === 'surprised') api.shock();
+      if (value === 'sad') api.slump();
+      if (value === 'neutral') api.resetFace();
     };
 
-    window.addEventListener("message", handler);
-    return () => window.removeEventListener("message", handler);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    window.addEventListener('message', handler);
+    return () => window.removeEventListener('message', handler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return null;

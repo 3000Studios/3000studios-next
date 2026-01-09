@@ -4,17 +4,17 @@
  */
 
 export async function uploadToGooglePlay(bundlePath: string, listing: any) {
-  console.log("/// GOOGLE PLAY PIPELINE INIT");
+  console.log('/// GOOGLE PLAY PIPELINE INIT');
   console.log(`Target: ${bundlePath}`);
-  
+
   // Future: Use googleapis for android publisher
   // const auth = new google.auth.GoogleAuth({...});
   // const publisher = google.androidpublisher({ version: 'v3', auth });
 
   return {
-    status: "simulated_success",
-    track: "internal",
-    version: "1.0.0"
+    status: 'simulated_success',
+    track: 'internal',
+    version: '1.0.0',
   };
 }
 

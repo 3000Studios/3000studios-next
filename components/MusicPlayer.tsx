@@ -2,8 +2,8 @@
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
-"use client";
-import { useRef, useState, useEffect } from "react";
+'use client';
+import { useRef, useState, useEffect } from 'react';
 
 interface Song {
   title: string;
@@ -13,24 +13,24 @@ interface Song {
 
 const songs: Song[] = [
   {
-    title: "Symphony",
-    artist: "Clean Bandit ft. Zara Larsson",
-    src: "https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Clean-Bandit-Symphony.mp3",
+    title: 'Symphony',
+    artist: 'Clean Bandit ft. Zara Larsson',
+    src: 'https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Clean-Bandit-Symphony.mp3',
   },
   {
-    title: "Levitating",
-    artist: "Dua Lipa",
-    src: "https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Dua-Lipa-Levitating.mp3",
+    title: 'Levitating',
+    artist: 'Dua Lipa',
+    src: 'https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Dua-Lipa-Levitating.mp3',
   },
   {
-    title: "Flowers",
-    artist: "Miley Cyrus",
-    src: "https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Miley-Cyrus-Flowers.mp3",
+    title: 'Flowers',
+    artist: 'Miley Cyrus',
+    src: 'https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Miley-Cyrus-Flowers.mp3',
   },
   {
-    title: "Heat Waves",
-    artist: "Glass Animals",
-    src: "https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Glass-Animals-Heat-Waves.mp3",
+    title: 'Heat Waves',
+    artist: 'Glass Animals',
+    src: 'https://github.com/ecemgo/mini-samples-great-tricks/raw/main/song-list/Glass-Animals-Heat-Waves.mp3',
   },
 ];
 
@@ -72,7 +72,6 @@ export default function MusicPlayer() {
         audio.play().catch(() => setIsPlaying(false));
       }
     }
-     
   }, [currentIndex, isPlaying]);
 
   useEffect(() => {
@@ -86,22 +85,21 @@ export default function MusicPlayer() {
       nextSong();
     };
 
-    audio.addEventListener("timeupdate", updateTime);
-    audio.addEventListener("loadedmetadata", updateDuration);
-    audio.addEventListener("ended", handleEnded);
+    audio.addEventListener('timeupdate', updateTime);
+    audio.addEventListener('loadedmetadata', updateDuration);
+    audio.addEventListener('ended', handleEnded);
 
     return () => {
-      audio.removeEventListener("timeupdate", updateTime);
-      audio.removeEventListener("loadedmetadata", updateDuration);
-      audio.removeEventListener("ended", handleEnded);
+      audio.removeEventListener('timeupdate', updateTime);
+      audio.removeEventListener('loadedmetadata', updateDuration);
+      audio.removeEventListener('ended', handleEnded);
     };
-     
   }, [nextSong]);
 
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -151,9 +149,9 @@ export default function MusicPlayer() {
         <button
           onClick={playPause}
           className="text-5xl hover:text-purple-400 transition-colors hover:scale-110 transform"
-          title={isPlaying ? "Pause" : "Play"}
+          title={isPlaying ? 'Pause' : 'Play'}
         >
-          {isPlaying ? "⏸" : "▶️"}
+          {isPlaying ? '⏸' : '▶️'}
         </button>
         <button
           onClick={nextSong}
@@ -172,8 +170,8 @@ export default function MusicPlayer() {
             onClick={() => setCurrentIndex(index)}
             className={`p-2 rounded cursor-pointer transition-colors ${
               index === currentIndex
-                ? "bg-purple-600/30 border border-purple-500"
-                : "bg-white/5 hover:bg-white/10"
+                ? 'bg-purple-600/30 border border-purple-500'
+                : 'bg-white/5 hover:bg-white/10'
             }`}
           >
             <p className="font-semibold text-sm">{song.title}</p>

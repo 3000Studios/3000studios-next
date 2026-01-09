@@ -53,64 +53,68 @@ export default function LoginPage() {
         className="relative z-10 w-full max-w-md p-8"
       >
         <div className="border border-white/10 bg-white/5 backdrop-blur-2xl rounded-3xl p-8 shadow-2xl relative overflow-hidden group">
-            {/* Border glow */}
-            <div className="absolute inset-0 border border-[#D4AF37]/20 rounded-3xl pointer-events-none group-hover:border-[#D4AF37]/40 transition-colors" />
+          {/* Border glow */}
+          <div className="absolute inset-0 border border-[#D4AF37]/20 rounded-3xl pointer-events-none group-hover:border-[#D4AF37]/40 transition-colors" />
 
-            <div className="text-center mb-8">
-              <div className="w-16 h-16 border-2 border-[#D4AF37] border-t-transparent rounded-full animate-spin mx-auto mb-4 shadow-[0_0_20px_rgba(212,175,55,0.2)]" />
-              <h1 className="text-2xl font-black uppercase text-[#D4AF37] tracking-widest">
-                SYSTEM LOGIN
-              </h1>
-              <p className="text-[10px] text-gray-500 mt-2 tracking-[0.3em]">
-                SECURE GATEWAY v3.0 // 3000 STUDIOS
-              </p>
+          <div className="text-center mb-8">
+            <div className="w-16 h-16 border-2 border-[#D4AF37] border-t-transparent rounded-full animate-spin mx-auto mb-4 shadow-[0_0_20px_rgba(212,175,55,0.2)]" />
+            <h1 className="text-2xl font-black uppercase text-[#D4AF37] tracking-widest">
+              SYSTEM LOGIN
+            </h1>
+            <p className="text-[10px] text-gray-500 mt-2 tracking-[0.3em]">
+              SECURE GATEWAY v3.0 // 3000 STUDIOS
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase tracking-widest text-[#D4AF37]/70">
+                Identity
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl focus:outline-none focus:border-[#D4AF37] text-[#D4AF37] text-sm tracking-wider transition-all placeholder:text-gray-700"
+                placeholder="ENTER EMAIL"
+                autoComplete="email"
+              />
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="space-y-1">
-                <label className="text-[10px] uppercase tracking-widest text-[#D4AF37]/70">Identity</label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl focus:outline-none focus:border-[#D4AF37] text-[#D4AF37] text-sm tracking-wider transition-all placeholder:text-gray-700"
-                  placeholder="ENTER EMAIL"
-                  autoComplete="email"
-                />
-              </div>
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase tracking-widest text-[#D4AF37]/70">
+                Security Key
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl focus:outline-none focus:border-[#D4AF37] text-[#D4AF37] text-sm tracking-wider transition-all placeholder:text-gray-700"
+                placeholder="ENTER PASSWORD"
+                autoComplete="current-password"
+              />
+            </div>
 
-              <div className="space-y-1">
-                <label className="text-[10px] uppercase tracking-widest text-[#D4AF37]/70">Security Key</label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl focus:outline-none focus:border-[#D4AF37] text-[#D4AF37] text-sm tracking-wider transition-all placeholder:text-gray-700"
-                  placeholder="ENTER PASSWORD"
-                  autoComplete="current-password"
-                />
-              </div>
-
-              {error && (
-                <motion.div
-                  initial={{ opacity: 0, y: -5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg"
-                >
-                  <p className="text-red-500 text-[10px] text-center font-bold tracking-wider">
-                    {error}
-                  </p>
-                </motion.div>
-              )}
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full py-4 bg-[#D4AF37] text-black font-black uppercase tracking-widest rounded-xl hover:bg-[#b5952f] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-4"
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg"
               >
-                {loading ? 'AUTHENTICATING...' : 'INITIATE CONNECTION'}
-              </button>
-            </form>
+                <p className="text-red-500 text-[10px] text-center font-bold tracking-wider">
+                  {error}
+                </p>
+              </motion.div>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-4 bg-[#D4AF37] text-black font-black uppercase tracking-widest rounded-xl hover:bg-[#b5952f] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-4"
+            >
+              {loading ? 'AUTHENTICATING...' : 'INITIATE CONNECTION'}
+            </button>
+          </form>
         </div>
       </motion.div>
     </div>

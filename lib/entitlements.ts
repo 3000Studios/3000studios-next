@@ -95,7 +95,8 @@ export class EntitlementManager {
 
     entitlements.tier = newTier;
     entitlements.subscriptionActive = newTier !== 'free';
-    entitlements.subscriptionExpiresAt = newTier !== 'free' ? Date.now() + 30 * 24 * 60 * 60 * 1000 : undefined;
+    entitlements.subscriptionExpiresAt =
+      newTier !== 'free' ? Date.now() + 30 * 24 * 60 * 60 * 1000 : undefined;
     entitlements.features = new Set(tierFeatures[newTier] || tierFeatures.free);
 
     return true;

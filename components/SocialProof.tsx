@@ -3,14 +3,54 @@
 import { useEffect, useState } from 'react';
 
 const recentPurchases = [
-  { name: 'Alex M.', product: 'AI Automation Toolkit', location: 'San Francisco, CA', time: '2 minutes ago' },
-  { name: 'Sarah K.', product: 'Video Editing Course', location: 'New York, NY', time: '5 minutes ago' },
-  { name: 'Mike T.', product: 'Ultimate Creator Bundle', location: 'Austin, TX', time: '8 minutes ago' },
-  { name: 'Emma W.', product: 'Next.js Starter Template', location: 'Seattle, WA', time: '12 minutes ago' },
-  { name: 'David L.', product: '3D Animation Masterclass', location: 'Los Angeles, CA', time: '15 minutes ago' },
-  { name: 'Jessica P.', product: 'YouTube Growth Blueprint', location: 'Chicago, IL', time: '18 minutes ago' },
-  { name: 'Chris B.', product: 'Live Streaming Bundle', location: 'Miami, FL', time: '22 minutes ago' },
-  { name: 'Rachel S.', product: 'Creator Pro Yearly', location: 'Boston, MA', time: '25 minutes ago' },
+  {
+    name: 'Alex M.',
+    product: 'AI Automation Toolkit',
+    location: 'San Francisco, CA',
+    time: '2 minutes ago',
+  },
+  {
+    name: 'Sarah K.',
+    product: 'Video Editing Course',
+    location: 'New York, NY',
+    time: '5 minutes ago',
+  },
+  {
+    name: 'Mike T.',
+    product: 'Ultimate Creator Bundle',
+    location: 'Austin, TX',
+    time: '8 minutes ago',
+  },
+  {
+    name: 'Emma W.',
+    product: 'Next.js Starter Template',
+    location: 'Seattle, WA',
+    time: '12 minutes ago',
+  },
+  {
+    name: 'David L.',
+    product: '3D Animation Masterclass',
+    location: 'Los Angeles, CA',
+    time: '15 minutes ago',
+  },
+  {
+    name: 'Jessica P.',
+    product: 'YouTube Growth Blueprint',
+    location: 'Chicago, IL',
+    time: '18 minutes ago',
+  },
+  {
+    name: 'Chris B.',
+    product: 'Live Streaming Bundle',
+    location: 'Miami, FL',
+    time: '22 minutes ago',
+  },
+  {
+    name: 'Rachel S.',
+    product: 'Creator Pro Yearly',
+    location: 'Boston, MA',
+    time: '25 minutes ago',
+  },
 ];
 
 export function SocialProof() {
@@ -41,9 +81,7 @@ export function SocialProof() {
         <div className="flex items-start gap-3">
           <div className="flex-shrink-0">
             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-purple-600 flex items-center justify-center">
-              <span className="text-white font-bold text-lg">
-                {purchase.name.charAt(0)}
-              </span>
+              <span className="text-white font-bold text-lg">{purchase.name.charAt(0)}</span>
             </div>
           </div>
           <div className="flex-1 min-w-0">

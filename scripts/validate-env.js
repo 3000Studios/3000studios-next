@@ -5,10 +5,10 @@
 /**
  * Environment Variables Validation Script
  * Validates required environment variables for different deployment modes
- * 
+ *
  * Usage:
  *   node scripts/validate-env.js [mode]
- * 
+ *
  * Modes:
  *   dev        - Development mode (minimal requirements)
  *   ci         - CI/CD mode (build-only requirements)
@@ -33,7 +33,9 @@ const colors = {
 // Get mode from command line or environment
 const mode = process.argv[2] || process.env.VALIDATE_ENV_MODE || 'dev';
 
-console.log(`${colors.cyan}${colors.bright}🔍 Validating environment variables for: ${mode}${colors.reset}\n`);
+console.log(
+  `${colors.cyan}${colors.bright}🔍 Validating environment variables for: ${mode}${colors.reset}\n`
+);
 
 // Load environment variables from .env.local if it exists
 const envLocalPath = path.join(process.cwd(), '.env.local');
@@ -41,36 +43,25 @@ if (fs.existsSync(envLocalPath)) {
   console.log(`${colors.blue}📁 Loading environment from .env.local${colors.reset}`);
   require('dotenv').config({ path: envLocalPath });
 } else if (mode === 'dev') {
-  console.log(`${colors.yellow}⚠️  .env.local not found. Using system environment variables.${colors.reset}`);
+  console.log(
+    `${colors.yellow}⚠️  .env.local not found. Using system environment variables.${colors.reset}`
+  );
 }
 
 // Define required variables by mode
 const requiredVars = {
   // Always required (all modes)
-  always: [
-    'NEXT_PUBLIC_BASE_URL',
-  ],
-  
+  always: ['NEXT_PUBLIC_BASE_URL'],
+
   // Development mode
-  dev: [
-    'ADMIN_EMAIL',
-    'ADMIN_PASSWORD',
-  ],
-  
+  dev: ['ADMIN_EMAIL', 'ADMIN_PASSWORD'],
+
   // CI/CD mode (build and test)
-  ci: [
-    'NEXT_PUBLIC_BASE_URL',
-  ],
-  
+  ci: ['NEXT_PUBLIC_BASE_URL'],
+
   // Staging mode
-  staging: [
-    'ADMIN_EMAIL',
-    'ADMIN_PASSWORD',
-    'JWT_SECRET',
-    'MONGODB_URI',
-    'OPENAI_API_KEY',
-  ],
-  
+  staging: ['ADMIN_EMAIL', 'ADMIN_PASSWORD', 'JWT_SECRET', 'MONGODB_URI', 'OPENAI_API_KEY'],
+
   // Production mode (all critical variables)
   production: [
     'ADMIN_EMAIL',
@@ -96,13 +87,8 @@ const recommendedVars = {
     'NEXT_PUBLIC_GA_MEASUREMENT_ID',
     'GITHUB_PAT',
   ],
-  staging: [
-    'STRIPE_SECRET_KEY',
-    'PAYPAL_CLIENT_ID',
-  ],
-  dev: [
-    'MONGODB_URI',
-  ],
+  staging: ['STRIPE_SECRET_KEY', 'PAYPAL_CLIENT_ID'],
+  dev: ['MONGODB_URI'],
   ci: [],
 };
 
@@ -113,53 +99,18 @@ const featureVars = {
     'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY',
     'STRIPE_WEBHOOK_SECRET',
   ],
-  'Payment Processing (PayPal)': [
-    'PAYPAL_CLIENT_ID',
-    'PAYPAL_SECRET',
-    'PAYPAL_MODE',
-  ],
-  'AI Services (OpenAI)': [
-    'OPENAI_API_KEY',
-  ],
-  'AI Services (Claude)': [
-    'CLAUDE_API_KEY',
-  ],
-  'AI Services (Gemini)': [
-    'GEMINI_API_KEY',
-  ],
-  'Database (MongoDB)': [
-    'MONGODB_URI',
-    'MONGODB_DB_NAME',
-  ],
-  'Authentication (Google)': [
-    'GOOGLE_CLIENT_ID',
-    'GOOGLE_CLIENT_SECRET',
-  ],
-  'Authentication (Apple)': [
-    'APPLE_CLIENT_ID',
-    'APPLE_CLIENT_SECRET',
-  ],
-  'Communication (Twilio)': [
-    'TWILIO_ACCOUNT_SID',
-    'TWILIO_AUTH_TOKEN',
-    'TWILIO_PHONE',
-  ],
-  'Content Management (WordPress)': [
-    'WP_URL',
-    'WP_USER',
-    'WP_PASS',
-  ],
-  'Live Streaming (WebRTC)': [
-    'WEBRTC_KEY',
-    'WEBRTC_TURN_URL',
-    'NEXT_PUBLIC_SIGNAL_SERVER',
-  ],
-  'Affiliate Tracking': [
-    'AFFILIATE_SECRET',
-  ],
-  'Analytics': [
-    'NEXT_PUBLIC_GA_MEASUREMENT_ID',
-  ],
+  'Payment Processing (PayPal)': ['PAYPAL_CLIENT_ID', 'PAYPAL_SECRET', 'PAYPAL_MODE'],
+  'AI Services (OpenAI)': ['OPENAI_API_KEY'],
+  'AI Services (Claude)': ['CLAUDE_API_KEY'],
+  'AI Services (Gemini)': ['GEMINI_API_KEY'],
+  'Database (MongoDB)': ['MONGODB_URI', 'MONGODB_DB_NAME'],
+  'Authentication (Google)': ['GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET'],
+  'Authentication (Apple)': ['APPLE_CLIENT_ID', 'APPLE_CLIENT_SECRET'],
+  'Communication (Twilio)': ['TWILIO_ACCOUNT_SID', 'TWILIO_AUTH_TOKEN', 'TWILIO_PHONE'],
+  'Content Management (WordPress)': ['WP_URL', 'WP_USER', 'WP_PASS'],
+  'Live Streaming (WebRTC)': ['WEBRTC_KEY', 'WEBRTC_TURN_URL', 'NEXT_PUBLIC_SIGNAL_SERVER'],
+  'Affiliate Tracking': ['AFFILIATE_SECRET'],
+  Analytics: ['NEXT_PUBLIC_GA_MEASUREMENT_ID'],
 };
 
 // Security validations
@@ -243,11 +194,11 @@ recommended.forEach((varName) => {
 // Feature detection
 console.log(`\n${colors.bright}Feature Detection:${colors.reset}`);
 Object.entries(featureVars).forEach(([feature, vars]) => {
-  const available = vars.every(v => {
+  const available = vars.every((v) => {
     const val = process.env[v];
     return val && val !== `your-${v.toLowerCase().replace(/_/g, '-')}`;
   });
-  
+
   if (available) {
     console.log(`  ${colors.green}✓${colors.reset} ${feature} - Enabled`);
   } else {
@@ -281,11 +232,17 @@ if (missingRecommended.length > 0) {
 // Exit with appropriate code
 if (hasErrors) {
   console.log(`\n${colors.red}${colors.bright}❌ Validation FAILED${colors.reset}`);
-  console.log(`${colors.yellow}💡 Check ENVIRONMENT.md for detailed setup instructions${colors.reset}`);
+  console.log(
+    `${colors.yellow}💡 Check ENVIRONMENT.md for detailed setup instructions${colors.reset}`
+  );
   process.exit(1);
 } else if (hasWarnings && mode === 'production') {
-  console.log(`\n${colors.yellow}${colors.bright}⚠️  Validation passed with warnings${colors.reset}`);
-  console.log(`${colors.yellow}💡 Consider adding recommended variables for full functionality${colors.reset}`);
+  console.log(
+    `\n${colors.yellow}${colors.bright}⚠️  Validation passed with warnings${colors.reset}`
+  );
+  console.log(
+    `${colors.yellow}💡 Consider adding recommended variables for full functionality${colors.reset}`
+  );
   process.exit(0);
 } else {
   console.log(`\n${colors.green}${colors.bright}✅ Validation PASSED${colors.reset}`);

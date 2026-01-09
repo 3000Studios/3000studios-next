@@ -4,12 +4,12 @@
  *   Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
  */
 
-import { execSync } from "child_process";
+import { execSync } from 'child_process';
 
 export async function pushCommit(msg: string) {
-  execSync("git add .");
+  execSync('git add .');
   execSync(`git commit -m "${msg}"`);
-  execSync("git push origin main");
+  execSync('git push origin main');
 
-  return "Pushed to GitHub";
+  return 'Pushed to GitHub';
 }

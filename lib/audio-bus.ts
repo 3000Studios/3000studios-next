@@ -24,23 +24,23 @@ export const useAudioBus = create<AudioState>((set, get) => ({
   volume: 0.5,
   musicEnabled: true,
   sfxEnabled: true,
-  
+
   toggleMute: () => set((state) => ({ isMuted: !state.isMuted })),
-  
+
   setVolume: (vol) => set({ volume: Math.max(0, Math.min(1, vol)) }),
-  
+
   toggleMusic: () => set((state) => ({ musicEnabled: !state.musicEnabled })),
-  
+
   toggleSFX: () => set((state) => ({ sfxEnabled: !state.sfxEnabled })),
-  
+
   playSound: (type) => {
     const state = get();
     if (state.isMuted || !state.sfxEnabled) return;
-    
+
     if (typeof Audio !== 'undefined') {
       const audio = new Audio(`/audio/${type}.mp3`);
       audio.volume = state.volume;
       audio.play().catch(() => {});
     }
-  }
+  },
 }));

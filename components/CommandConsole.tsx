@@ -2,21 +2,21 @@
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
-"use client";
-import { useState, FormEvent } from "react";
+'use client';
+import { useState, FormEvent } from 'react';
 
 interface CommandConsoleProps {
   onExecute: (command: string) => void;
 }
 
 export default function CommandConsole({ onExecute }: CommandConsoleProps) {
-  const [command, setCommand] = useState("");
+  const [command, setCommand] = useState('');
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (command.trim()) {
       onExecute(command);
-      setCommand("");
+      setCommand('');
     }
   };
 

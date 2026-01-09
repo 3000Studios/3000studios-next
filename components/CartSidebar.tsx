@@ -49,15 +49,13 @@ export function CartSidebar() {
               <p className="text-purple-300/60 text-center py-8">Your cart is empty</p>
             ) : (
               items.map((item) => (
-                <div key={item.productId} className="flex gap-4 p-4 bg-slate-800/50 border border-purple-500/20 rounded-lg backdrop-blur-sm">
+                <div
+                  key={item.productId}
+                  className="flex gap-4 p-4 bg-slate-800/50 border border-purple-500/20 rounded-lg backdrop-blur-sm"
+                >
                   {item.image && (
                     <div className="relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        fill
-                        className="object-cover"
-                      />
+                      <Image src={item.image} alt={item.name} fill className="object-cover" />
                     </div>
                   )}
                   <div className="flex-1">
@@ -95,7 +93,9 @@ export function CartSidebar() {
             <div className="border-t border-purple-500/20 p-6 space-y-4 bg-gradient-to-r from-slate-900 to-purple-900/20">
               <div className="flex justify-between text-lg font-bold">
                 <span className="text-white">Total:</span>
-                <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">${totalPrice.toFixed(2)}</span>
+                <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                  ${totalPrice.toFixed(2)}
+                </span>
               </div>
               <Link
                 href="/store/checkout"

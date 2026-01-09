@@ -4,16 +4,16 @@
  */
 
 export const adminRoutes = [
-  "/admin",
-  "/admin/dashboard",
-  "/admin/revenue",
-  "/admin/control",
-  "/admin/settings",
-  "/admin/editor",
-  "/admin/builder",
-  "/admin/content"
+  '/admin',
+  '/admin/dashboard',
+  '/admin/revenue',
+  '/admin/control',
+  '/admin/settings',
+  '/admin/editor',
+  '/admin/builder',
+  '/admin/content',
 ];
 
 export function isAdminRoute(pathname: string): boolean {
-  return adminRoutes.some(route => pathname.startsWith(route));
+  return adminRoutes.some((route) => pathname.startsWith(route));
 }

@@ -3,12 +3,7 @@
   "version": "1.0.0",
   "lastUpdated": "2025-12-11T13:48:12.817Z",
   "totalProducts": 24,
-  "categories": [
-    "Templates",
-    "Design",
-    "Digital",
-    "Themes"
-  ],
+  "categories": ["Templates", "Design", "Digital", "Themes"],
   "products": [
     {
       "productId": "prod-001",
@@ -20,12 +15,7 @@
       "reviewCount": 127,
       "inStock": true,
       "featured": true,
-      "tags": [
-        "Next.js",
-        "Tailwind",
-        "Business",
-        "SEO"
-      ]
+      "tags": ["Next.js", "Tailwind", "Business", "SEO"]
     },
     {
       "productId": "prod-002",
@@ -37,12 +27,7 @@
       "reviewCount": 89,
       "inStock": true,
       "featured": true,
-      "tags": [
-        "E-Commerce",
-        "Stripe",
-        "PayPal",
-        "Admin"
-      ]
+      "tags": ["E-Commerce", "Stripe", "PayPal", "Admin"]
     },
     {
       "productId": "prod-003",
@@ -54,12 +39,7 @@
       "reviewCount": 203,
       "inStock": true,
       "featured": true,
-      "tags": [
-        "React",
-        "Components",
-        "TypeScript",
-        "Storybook"
-      ]
+      "tags": ["React", "Components", "TypeScript", "Storybook"]
     },
     {
       "productId": "prod-004",
@@ -71,12 +51,7 @@
       "reviewCount": 156,
       "inStock": true,
       "featured": false,
-      "tags": [
-        "SaaS",
-        "Dashboard",
-        "Analytics",
-        "Billing"
-      ]
+      "tags": ["SaaS", "Dashboard", "Analytics", "Billing"]
     },
     {
       "productId": "prod-005",
@@ -88,11 +63,7 @@
       "reviewCount": 94,
       "inStock": true,
       "featured": false,
-      "tags": [
-        "Landing Pages",
-        "Conversion",
-        "Marketing"
-      ]
+      "tags": ["Landing Pages", "Conversion", "Marketing"]
     },
     {
       "productId": "prod-006",
@@ -104,11 +75,7 @@
       "reviewCount": 178,
       "inStock": true,
       "featured": false,
-      "tags": [
-        "Animations",
-        "React",
-        "Framer Motion"
-      ]
+      "tags": ["Animations", "React", "Framer Motion"]
     },
     {
       "productId": "prod-007",
@@ -120,12 +87,7 @@
       "reviewCount": 112,
       "inStock": true,
       "featured": false,
-      "tags": [
-        "Blog",
-        "MDX",
-        "Newsletter",
-        "SEO"
-      ]
+      "tags": ["Blog", "MDX", "Newsletter", "SEO"]
     },
     {
       "productId": "prod-008",
@@ -137,11 +99,7 @@
       "reviewCount": 87,
       "inStock": true,
       "featured": false,
-      "tags": [
-        "Portfolio",
-        "Gallery",
-        "Creative"
-      ]
+      "tags": ["Portfolio", "Gallery", "Creative"]
     },
     {
       "productId": "prod-009",
@@ -153,12 +111,7 @@
       "reviewCount": 145,
       "inStock": true,
       "featured": true,
-      "tags": [
-        "Design System",
-        "Figma",
-        "Teams",
-        "Components"
-      ]
+      "tags": ["Design System", "Figma", "Teams", "Components"]
     },
     {
       "productId": "prod-010",
@@ -170,12 +123,7 @@
       "reviewCount": 134,
       "inStock": true,
       "featured": false,
-      "tags": [
-        "Mobile",
-        "UI Kit",
-        "Figma",
-        "Sketch"
-      ]
+      "tags": ["Mobile", "UI Kit", "Figma", "Sketch"]
     },
     {
       "productId": "prod-011",
@@ -187,11 +135,7 @@
       "reviewCount": 201,
       "inStock": true,
       "featured": false,
-      "tags": [
-        "SEO",
-        "Marketing",
-        "Analytics"
-      ]
+      "tags": ["SEO", "Marketing", "Analytics"]
     },
     {
       "productId": "prod-012",
@@ -203,11 +147,7 @@
       "reviewCount": 312,
       "inStock": true,
       "featured": false,
-      "tags": [
-        "Icons",
-        "SVG",
-        "Design Assets"
-      ]
+      "tags": ["Icons", "SVG", "Design Assets"]
     },
     {
       "productId": "prod-013",
@@ -219,11 +159,7 @@
       "reviewCount": 76,
       "inStock": true,
       "featured": false,
-      "tags": [
-        "Email",
-        "Marketing",
-        "Templates"
-      ]
+      "tags": ["Email", "Marketing", "Templates"]
     },
     {
       "productId": "prod-014",
@@ -235,11 +171,7 @@
       "reviewCount": 98,
       "inStock": true,
       "featured": true,
-      "tags": [
-        "Admin",
-        "Dashboard",
-        "Analytics"
-      ]
+      "tags": ["Admin", "Dashboard", "Analytics"]
     },
     {
       "productId": "prod-015",
@@ -251,11 +183,7 @@
       "reviewCount": 189,
       "inStock": true,
       "featured": false,
-      "tags": [
-        "Social Media",
-        "Graphics",
-        "Marketing"
-      ]
+      "tags": ["Social Media", "Graphics", "Marketing"]
     },
     {
       "productId": "prod-016",
@@ -267,11 +195,7 @@
       "reviewCount": 167,
       "inStock": true,
       "featured": false,
-      "tags": [
-        "WordPress",
-        "Agency",
-        "Elementor"
-      ]
+      "tags": ["WordPress", "Agency", "Elementor"]
     },
     {
       "productId": "prod-017",
@@ -283,12 +207,7 @@
       "reviewCount": 92,
       "inStock": true,
       "featured": false,
-      "tags": [
-        "Figma",
-        "Mobile",
-        "Banking",
-        "UI Kit"
-      ]
+      "tags": ["Figma", "Mobile", "Banking", "UI Kit"]
     },
     {
       "productId": "prod-018",
@@ -300,12 +219,7 @@
       "reviewCount": 67,
       "inStock": true,
       "featured": true,
-      "tags": [
-        "Startup",
-        "Bundle",
-        "Branding",
-        "Complete"
-      ]
+      "tags": ["Startup", "Bundle", "Branding", "Complete"]
     },
     {
       "productId": "prod-019",
@@ -317,11 +231,7 @@
       "reviewCount": 143,
       "inStock": true,
       "featured": false,
-      "tags": [
-        "Video",
-        "Backgrounds",
-        "4K"
-      ]
+      "tags": ["Video", "Backgrounds", "4K"]
     },
     {
       "productId": "prod-020",
@@ -333,12 +243,7 @@
       "reviewCount": 234,
       "inStock": true,
       "featured": false,
-      "tags": [
-        "Code",
-        "Snippets",
-        "React",
-        "JavaScript"
-      ]
+      "tags": ["Code", "Snippets", "React", "JavaScript"]
     },
     {
       "productId": "prod-021",
@@ -350,11 +255,7 @@
       "reviewCount": 108,
       "inStock": true,
       "featured": false,
-      "tags": [
-        "Branding",
-        "Guidelines",
-        "Identity"
-      ]
+      "tags": ["Branding", "Guidelines", "Identity"]
     },
     {
       "productId": "prod-022",
@@ -366,11 +267,7 @@
       "reviewCount": 79,
       "inStock": true,
       "featured": false,
-      "tags": [
-        "Restaurant",
-        "Ordering",
-        "Reservations"
-      ]
+      "tags": ["Restaurant", "Ordering", "Reservations"]
     },
     {
       "productId": "prod-023",
@@ -382,12 +279,7 @@
       "reviewCount": 86,
       "inStock": true,
       "featured": false,
-      "tags": [
-        "Fitness",
-        "Mobile",
-        "UI Kit",
-        "Health"
-      ]
+      "tags": ["Fitness", "Mobile", "UI Kit", "Health"]
     },
     {
       "productId": "prod-024",
@@ -399,11 +291,7 @@
       "reviewCount": 54,
       "inStock": true,
       "featured": true,
-      "tags": [
-        "Real Estate",
-        "Listings",
-        "Search"
-      ]
+      "tags": ["Real Estate", "Listings", "Search"]
     }
   ]
 }

@@ -2,20 +2,20 @@
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
-"use client";
+'use client';
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from 'react';
 
 export default function AIChatBox() {
-  const [messages, setMessages] = useState<
-    Array<{ role: "user" | "assistant"; content: string }>
-  >([]);
-  const [input, setInput] = useState("");
+  const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant'; content: string }>>(
+    []
+  );
+  const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(scrollToBottom, [messages]);
@@ -24,14 +24,14 @@ export default function AIChatBox() {
     if (!input.trim()) return;
 
     const userMessage = input.trim();
-    setInput("");
-    setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
+    setInput('');
+    setMessages((prev) => [...prev, { role: 'user', content: userMessage }]);
     setLoading(true);
 
     try {
-      const response = await fetch("/api/shadow/command", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/shadow/command', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ command: userMessage }),
       });
 
@@ -40,19 +40,16 @@ export default function AIChatBox() {
       setMessages((prev) => [
         ...prev,
         {
-          role: "assistant",
-          content:
-            data.interpretation ||
-            data.result ||
-            "Command executed successfully",
+          role: 'assistant',
+          content: data.interpretation || data.result || 'Command executed successfully',
         },
       ]);
     } catch (error: unknown) {
       setMessages((prev) => [
         ...prev,
         {
-          role: "assistant",
-          content: "Error: Unable to process command",
+          role: 'assistant',
+          content: 'Error: Unable to process command',
         },
       ]);
     } finally {
@@ -76,9 +73,7 @@ export default function AIChatBox() {
             d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
           />
         </svg>
-        <h3 className="font-heading font-semibold text-corporate-gold">
-          AI Command Assistant
-        </h3>
+        <h3 className="font-heading font-semibold text-corporate-gold">AI Command Assistant</h3>
       </div>
 
       <div className="flex-1 overflow-y-auto mb-3 space-y-2 custom-scrollbar">
@@ -91,9 +86,9 @@ export default function AIChatBox() {
           <div
             key={idx}
             className={`p-3 rounded text-sm ${
-              msg.role === "user"
-                ? "bg-corporate-steel text-white ml-8"
-                : "bg-corporate-charcoal text-corporate-silver mr-8"
+              msg.role === 'user'
+                ? 'bg-corporate-steel text-white ml-8'
+                : 'bg-corporate-charcoal text-corporate-silver mr-8'
             }`}
           >
             {msg.content}
@@ -112,7 +107,7 @@ export default function AIChatBox() {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onKeyPress={(e) => e.key === "Enter" && sendMessage()}
+          onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
           placeholder="Ask me anything or give commands..."
           className="flex-1 bg-corporate-charcoal border border-corporate-steel rounded px-3 py-2 text-sm text-white placeholder-corporate-silver focus:outline-none focus:border-corporate-gold"
           disabled={loading}

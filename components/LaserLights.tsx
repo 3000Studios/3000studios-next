@@ -1,7 +1,6 @@
-"use client";
+'use client';
 
-
-import { useRef, useEffect } from "react";
+import { useRef, useEffect } from 'react';
 
 type Laser = {
   x: number;
@@ -18,7 +17,7 @@ export default function LaserLights() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
     let animationId: number;
     const lasers: Laser[] = [];

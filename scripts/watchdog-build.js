@@ -33,7 +33,7 @@ function rollbackAndFix() {
     log('Initiating rollback...');
     execSync('git reset --hard HEAD~1');
     execSync('pnpm install');
-    
+
     if (checkBuild()) {
       log('✅ Rollback successful - system restored');
       return true;
@@ -49,7 +49,7 @@ function rollbackAndFix() {
 
 function watchdog() {
   log('🔍 Watchdog started');
-  
+
   setInterval(() => {
     if (!checkBuild()) {
       log('⚠️ Build failure detected - initiating self-heal');

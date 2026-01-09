@@ -5,6 +5,7 @@ This checklist MUST be satisfied after every merge to `main`.
 ---
 
 ## 🔁 SYSTEM HEALTH
+
 - [ ] CI green
 - [ ] Build passes
 - [ ] No runtime errors
@@ -13,6 +14,7 @@ This checklist MUST be satisfied after every merge to `main`.
 ---
 
 ## 💰 REVENUE VERIFICATION
+
 - [ ] ads.txt reachable
 - [ ] AdSense script present in HTML
 - [ ] Stripe checkout creates session
@@ -21,6 +23,7 @@ This checklist MUST be satisfied after every merge to `main`.
 ---
 
 ## 🔐 SECURITY
+
 - [ ] CSP headers intact
 - [ ] No exposed secrets
 - [ ] No console errors on homepage
@@ -28,6 +31,7 @@ This checklist MUST be satisfied after every merge to `main`.
 ---
 
 ## 🚀 DEPLOYMENT
+
 - [ ] Vercel deployment successful
 - [ ] Production environment variables loaded
 - [ ] Redeploy completed
@@ -35,6 +39,7 @@ This checklist MUST be satisfied after every merge to `main`.
 ---
 
 ## 🧹 CLEANUP
+
 - [ ] Dead code removed
 - [ ] Redundant workflows removed
 - [ ] Unused dependencies pruned
@@ -42,6 +47,7 @@ This checklist MUST be satisfied after every merge to `main`.
 ---
 
 ## 📈 PERFORMANCE
+
 - [ ] Lighthouse ≥ 90
 - [ ] Images optimized
 - [ ] No blocking scripts

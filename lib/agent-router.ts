@@ -1,5 +1,5 @@
-import { generateText } from "ai";
-import { agents } from "./agents";
+import { generateText } from 'ai';
+import { agents } from './agents';
 
 export async function routeAgent(prompt: string) {
   const { text } = await generateText({

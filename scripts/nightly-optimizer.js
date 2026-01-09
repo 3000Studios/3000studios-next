@@ -29,7 +29,7 @@ class NightlyOptimizer {
       await this.testCriticalFlows();
       await this.updateSitemap();
       await this.compressImages();
-      
+
       this.log('✅ All optimization jobs complete');
     } catch (error) {
       this.log(`❌ Optimization failed: ${error.message}`);
@@ -38,10 +38,10 @@ class NightlyOptimizer {
 
   async cleanUnusedAssets() {
     this.log('  Cleaning unused assets...');
-    
+
     // Find assets not referenced in code
     const publicDir = path.join(process.cwd(), 'public');
-    
+
     if (fs.existsSync(publicDir)) {
       // Asset cleanup logic
       this.log('    ✅ Assets cleaned');
@@ -50,7 +50,7 @@ class NightlyOptimizer {
 
   async optimizeBundles() {
     this.log('  Optimizing bundles...');
-    
+
     try {
       execSync('pnpm build', { stdio: 'pipe' });
       this.log('    ✅ Bundles optimized');
@@ -61,29 +61,29 @@ class NightlyOptimizer {
 
   async regenerateIndexes() {
     this.log('  Regenerating search indexes...');
-    
+
     // Rebuild search indexes for content
     this.log('    ✅ Indexes regenerated');
   }
 
   async testCriticalFlows() {
     this.log('  Testing critical flows...');
-    
+
     const criticalRoutes = ['/', '/store', '/admin'];
-    
+
     for (const route of criticalRoutes) {
       const routePath = path.join(process.cwd(), 'app', route === '/' ? '' : route, 'page.tsx');
       if (!fs.existsSync(routePath) && route !== '/') {
         this.log(`    ⚠️  Route missing: ${route}`);
       }
     }
-    
+
     this.log('    ✅ Critical flows validated');
   }
 
   async updateSitemap() {
     this.log('  Updating sitemap...');
-    
+
     // Generate sitemap.xml
     const routes = [
       '/',
@@ -96,27 +96,31 @@ class NightlyOptimizer {
       '/live',
       '/store',
       '/apps',
-      '/revenue'
+      '/revenue',
     ];
 
-   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${routes.map(route => `  <url>
+${routes
+  .map(
+    (route) => `  <url>
     <loc>https://3000studios.com${route}</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>`).join('\n')}
+  </url>`
+  )
+  .join('\n')}
 </urlset>`;
 
     const sitemapPath = path.join(process.cwd(), 'public', 'sitemap.xml');
     fs.writeFileSync(sitemapPath, sitemap);
-    
+
     this.log('    ✅ Sitemap updated');
   }
 
   async compressImages() {
     this.log('  Compressing images...');
-    
+
     // Image compression logic
     this.log('    ✅ Images compressed');
   }

@@ -38,17 +38,17 @@ const themes: Record<ThemeName, Theme> = {
       secondary: '#1a1a1a',
       accent: '#d4af37',
       background: '#0a0a0a',
-      text: '#f5f5f5'
+      text: '#f5f5f5',
     },
     gradients: {
       hero: 'linear-gradient(135deg, #c9a24d, #fff1b8, #b88a2e)',
       card: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05))',
-      button: 'linear-gradient(135deg, #c9a24d, #b88a2e)'
+      button: 'linear-gradient(135deg, #c9a24d, #b88a2e)',
     },
     fonts: {
       heading: 'var(--font-inter)',
-      body: 'var(--font-inter)'
-    }
+      body: 'var(--font-inter)',
+    },
   },
   obsidian: {
     name: 'obsidian',
@@ -57,17 +57,17 @@ const themes: Record<ThemeName, Theme> = {
       secondary: '#1a1a1a',
       accent: '#8b5cf6',
       background: '#000000',
-      text: '#e5e5e5'
+      text: '#e5e5e5',
     },
     gradients: {
       hero: 'linear-gradient(135deg, #8b5cf6, #6d28d9)',
       card: 'linear-gradient(135deg, rgba(139,92,246,0.1), rgba(109,40,217,0.05))',
-      button: 'linear-gradient(135deg, #8b5cf6, #6d28d9)'
+      button: 'linear-gradient(135deg, #8b5cf6, #6d28d9)',
     },
     fonts: {
       heading: 'var(--font-inter)',
-      body: 'var(--font-inter)'
-    }
+      body: 'var(--font-inter)',
+    },
   },
   platinum: {
     name: 'platinum',
@@ -76,17 +76,17 @@ const themes: Record<ThemeName, Theme> = {
       secondary: '#bfc1c2',
       accent: '#ffffff',
       background: '#0a0a0a',
-      text: '#ffffff'
+      text: '#ffffff',
     },
     gradients: {
       hero: 'linear-gradient(135deg, #e5e4e2, #ffffff, #bfc1c2)',
       card: 'linear-gradient(135deg, rgba(229,228,226,0.1), rgba(191,193,194,0.05))',
-      button: 'linear-gradient(135deg, #e5e4e2, #bfc1c2)'
+      button: 'linear-gradient(135deg, #e5e4e2, #bfc1c2)',
     },
     fonts: {
       heading: 'var(--font-inter)',
-      body: 'var(--font-inter)'
-    }
+      body: 'var(--font-inter)',
+    },
   },
   gold: {
     name: 'gold',
@@ -95,18 +95,18 @@ const themes: Record<ThemeName, Theme> = {
       secondary: '#b8860b',
       accent: '#ffed4e',
       background: '#0a0a0a',
-      text: '#f5f5f5'
+      text: '#f5f5f5',
     },
     gradients: {
       hero: 'linear-gradient(135deg, #ffd700, #ffed4e, #b8860b)',
       card: 'linear-gradient(135deg, rgba(255,215,0,0.1), rgba(184,134,11,0.05))',
-      button: 'linear-gradient(135deg, #ffd700, #b8860b)'
+      button: 'linear-gradient(135deg, #ffd700, #b8860b)',
     },
     fonts: {
       heading: 'var(--font-inter)',
-      body: 'var(--font-inter)'
-    }
-  }
+      body: 'var(--font-inter)',
+    },
+  },
 };
 
 interface ThemeState {
@@ -132,7 +132,7 @@ export const useThemeEngine = create<ThemeState>()(
 
       setPageTheme: (route, theme) => {
         set((state) => ({
-          pageThemes: { ...state.pageThemes, [route]: theme }
+          pageThemes: { ...state.pageThemes, [route]: theme },
         }));
       },
 
@@ -157,7 +157,7 @@ export const useThemeEngine = create<ThemeState>()(
         Object.entries(theme.gradients).forEach(([key, value]) => {
           root.style.setProperty(`--gradient-${key}`, value);
         });
-      }
+      },
     }),
     { name: 'theme-engine' }
   )

@@ -1,11 +1,9 @@
-"use client";
+'use client';
 
 export default function StreamController() {
   return (
     <div className="bg-black/60 backdrop-blur-xl border border-cyan-500/30 p-6 rounded-xl shadow-2xl">
-      <h2 className="text-3xl font-bold text-cyan-400 mb-4">
-        Live Stream Control
-      </h2>
+      <h2 className="text-3xl font-bold text-cyan-400 mb-4">Live Stream Control</h2>
 
       <div className="mb-4 aspect-video bg-black/70 rounded-xl border border-cyan-500/20 flex items-center justify-center">
         <p className="text-gray-500">Stream preview (offline)</p>

@@ -5,7 +5,7 @@
  */
 
 export const neuralCore = {
-  emotionalState: "neutral",
+  emotionalState: 'neutral',
   confidence: 0.75,
 
   update(state: string) {

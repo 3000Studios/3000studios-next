@@ -5,5 +5,5 @@
  */
 
 export async function deploySite() {
-  return "Deploy triggered through GitHub Actions.";
+  return 'Deploy triggered through GitHub Actions.';
 }

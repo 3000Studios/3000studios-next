@@ -134,7 +134,7 @@ You had to hover over squiggly lines to see error messages
 
 ```typescript
 const user = undefined;
-user.name = "John"; // ERROR: Cannot read property 'name' of undefined
+user.name = 'John'; // ERROR: Cannot read property 'name' of undefined
 ```
 
 The error message appears **directly in the editor** next to the line!

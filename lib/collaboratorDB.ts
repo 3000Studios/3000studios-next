@@ -4,11 +4,11 @@
  *   Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
  */
 
-import { Collaborator } from "@/types";
-import fs from "fs";
-import path from "path";
+import { Collaborator } from '@/types';
+import fs from 'fs';
+import path from 'path';
 
-const FILE = path.join(process.cwd(), "shadow", "data", "collaborators.json");
+const FILE = path.join(process.cwd(), 'shadow', 'data', 'collaborators.json');
 
 let idCounter = 0;
 
@@ -32,7 +32,7 @@ function readCollaborators(): Collaborator[] {
     return [];
   }
   try {
-    const data = fs.readFileSync(FILE, "utf8");
+    const data = fs.readFileSync(FILE, 'utf8');
     return JSON.parse(data);
   } catch {
     // Return empty array if file is corrupted or invalid JSON
@@ -55,7 +55,7 @@ const collaboratorDB = {
     return collaborators.find((c) => c.id === id);
   },
 
-  add(collaborator: Omit<Collaborator, "id" | "addedAt">): Collaborator {
+  add(collaborator: Omit<Collaborator, 'id' | 'addedAt'>): Collaborator {
     const collaborators = readCollaborators();
 
     const newCollaborator: Collaborator = {
@@ -70,10 +70,7 @@ const collaboratorDB = {
     return newCollaborator;
   },
 
-  update(
-    id: number,
-    updates: Partial<Omit<Collaborator, "id" | "addedAt">>,
-  ): Collaborator | null {
+  update(id: number, updates: Partial<Omit<Collaborator, 'id' | 'addedAt'>>): Collaborator | null {
     const collaborators = readCollaborators();
     const index = collaborators.findIndex((c) => c.id === id);
 

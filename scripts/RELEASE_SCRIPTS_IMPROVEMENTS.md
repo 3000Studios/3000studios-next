@@ -10,12 +10,14 @@
 ### 1. Extract Typecheck Logic to Function
 
 **Current**: Typecheck fallback logic duplicated in Phase 2 and Phase 3
+
 ```powershell
 # Appears at lines 127-131 and 262-264 in .ps1
 # Appears at lines 156 and 277 in .sh
 ```
 
 **Improvement**: Create reusable function
+
 ```powershell
 # PowerShell
 function Test-TypeCheck {
@@ -38,12 +40,14 @@ function Test-TypeCheck {
 ### 2. Centralize PR Configuration
 
 **Current**: PR list defined twice (verification phase and merge phase)
+
 ```powershell
 # Lines 83-88 and 201-206 in .ps1
 # Lines 109-114 and 214-218 in .sh
 ```
 
 **Improvement**: Define once at top of script
+
 ```powershell
 # PowerShell
 $PRS = @(
@@ -63,13 +67,14 @@ $PRS = @(
 **Current**: PR list and settings hardcoded in scripts
 
 **Improvement**: Load from `release-config.json`
+
 ```json
 {
   "prs": [
-    {"number": 35, "name": "ESLint 9 + TS fixes", "branch": "pr-35"},
-    {"number": 34, "name": "platform hardening", "branch": "pr-34"},
-    {"number": 31, "name": "nav + pipeline", "branch": "pr-31"},
-    {"number": 33, "name": "Vercel analytics", "branch": "pr-33"}
+    { "number": 35, "name": "ESLint 9 + TS fixes", "branch": "pr-35" },
+    { "number": 34, "name": "platform hardening", "branch": "pr-34" },
+    { "number": 31, "name": "nav + pipeline", "branch": "pr-31" },
+    { "number": 33, "name": "Vercel analytics", "branch": "pr-33" }
   ],
   "tests": {
     "lint": true,
@@ -103,7 +108,7 @@ These scripts are **operational tools**, not library code:
 ✅ **Error handling**: Proper try-catch and exit codes  
 ✅ **Documentation**: Comprehensive usage guides  
 ✅ **Testing**: Dry-run mode validates logic  
-✅ **Safety**: Backup and rollback procedures  
+✅ **Safety**: Backup and rollback procedures
 
 The duplication is **intentional** for operational clarity.
 
@@ -142,14 +147,14 @@ The duplication is **intentional** for operational clarity.
 
 ### Summary
 
-| Aspect | Rating | Notes |
-|--------|--------|-------|
-| Functionality | ✅ Excellent | All features work correctly |
-| Error Handling | ✅ Excellent | Proper error detection and reporting |
-| Documentation | ✅ Excellent | Comprehensive guides provided |
-| Code Quality | ✅ Good | Some duplication, intentional for clarity |
-| Security | ✅ Excellent | No credentials, safe operations |
-| Usability | ✅ Excellent | Clear output, dry-run mode, rollback |
+| Aspect         | Rating       | Notes                                     |
+| -------------- | ------------ | ----------------------------------------- |
+| Functionality  | ✅ Excellent | All features work correctly               |
+| Error Handling | ✅ Excellent | Proper error detection and reporting      |
+| Documentation  | ✅ Excellent | Comprehensive guides provided             |
+| Code Quality   | ✅ Good      | Some duplication, intentional for clarity |
+| Security       | ✅ Excellent | No credentials, safe operations           |
+| Usability      | ✅ Excellent | Clear output, dry-run mode, rollback      |
 
 **Overall**: Production-ready with minor improvements identified for future versions.
 
@@ -158,11 +163,13 @@ The duplication is **intentional** for operational clarity.
 ## 🔍 Testing Performed
 
 ### Validation Script
+
 - ✅ Tested in CI environment
 - ✅ All 10 checks functional
 - ✅ Proper error reporting
 
 ### Release Scripts
+
 - ✅ Dry-run mode tested (no side effects)
 - ✅ Syntax validated (PowerShell + Bash)
 - ✅ Error paths tested
@@ -170,6 +177,7 @@ The duplication is **intentional** for operational clarity.
 - ✅ Documentation accuracy verified
 
 ### Documentation
+
 - ✅ All links verified
 - ✅ Command examples tested
 - ✅ 200+ code snippets validated
@@ -182,12 +190,14 @@ The duplication is **intentional** for operational clarity.
 ### For Immediate Use
 
 **DO**:
+
 - ✅ Use scripts as-is (production-ready)
 - ✅ Always run dry-run first
 - ✅ Keep backups for 48 hours
 - ✅ Follow documentation
 
 **DON'T**:
+
 - ❌ Don't modify scripts without testing
 - ❌ Don't skip dry-run on first use
 - ❌ Don't delete backups immediately
@@ -195,12 +205,14 @@ The duplication is **intentional** for operational clarity.
 ### For Future Improvements
 
 **When PR numbers change**:
+
 1. Edit PR list in scripts (lines documented above)
 2. Update RELEASE_SCRIPTS_README.md
 3. Test with dry-run
 4. Update this document
 
 **If adding features**:
+
 1. Create new script version (v1.1, v2.0)
 2. Keep backward compatibility
 3. Update documentation
@@ -213,6 +225,7 @@ The duplication is **intentional** for operational clarity.
 ### Version 1.0.0 (2025-12-14)
 
 **Added**:
+
 - Three-phase merge automation
 - Automatic backup creation
 - Individual PR verification
@@ -224,12 +237,14 @@ The duplication is **intentional** for operational clarity.
 - Comprehensive documentation
 
 **Known Limitations**:
+
 - PR list hardcoded (easy to modify)
 - Some code duplication (intentional for clarity)
 - No interactive mode (use dry-run to preview)
 - No parallel testing (sequential is safer)
 
 **Future Considerations**:
+
 - Extract common functions (v1.1)
 - External configuration (v2.0)
 - Interactive mode (v2.0)

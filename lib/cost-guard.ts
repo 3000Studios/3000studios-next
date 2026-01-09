@@ -1,9 +1,6 @@
-import { prisma } from "./prisma";
+import { prisma } from './prisma';
 
-export async function enforceCostLimit(
-  userId: string,
-  tokensRequested: number
-) {
+export async function enforceCostLimit(userId: string, tokensRequested: number) {
   // Fail open if user ID is missing for some reason
   if (!userId) return;
 
@@ -26,9 +23,9 @@ export async function enforceCostLimit(
     const usedTokens = usage._sum.tokens || 0;
 
     if (usedTokens + tokensRequested > costLimit.monthlyTokenLimit) {
-      throw new Error("AI usage limit exceeded");
+      throw new Error('AI usage limit exceeded');
     }
   } catch (error: unknown) {
-    console.warn("Cost guard error, failing open:", error);
+    console.warn('Cost guard error, failing open:', error);
   }
 }

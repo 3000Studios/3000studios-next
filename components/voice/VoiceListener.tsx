@@ -5,9 +5,9 @@ import { useRouter } from 'next/navigation';
 
 export function routeCommand(cmd: string) {
   const router = typeof window !== 'undefined' ? window : null;
-  
+
   if (!router) return;
-  
+
   if (cmd.includes('home') || cmd.includes('go home')) {
     window.location.href = '/';
   }
@@ -34,10 +34,9 @@ export function routeCommand(cmd: string) {
 export default function VoiceListener() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    
+
     const SpeechRecognition =
-      (window as any).SpeechRecognition ||
-      (window as any).webkitSpeechRecognition;
+      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
 
     if (!SpeechRecognition) return;
 

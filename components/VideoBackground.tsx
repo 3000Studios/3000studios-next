@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 // Phase 64: Video Background Fix (All Pages)
 // Global component that plays once, pauses on blur, resumes on focus.
@@ -10,7 +10,10 @@ type VideoBackgroundProps = {
   opacity?: number;
 };
 
-export default function VideoBackground({ src = "/default-bg.mp4", opacity = 0.3 }: VideoBackgroundProps) {
+export default function VideoBackground({
+  src = '/default-bg.mp4',
+  opacity = 0.3,
+}: VideoBackgroundProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -22,9 +25,9 @@ export default function VideoBackground({ src = "/default-bg.mp4", opacity = 0.3
       }
     };
 
-    document.addEventListener("visibilitychange", handleVisibilityChange);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
     return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
 

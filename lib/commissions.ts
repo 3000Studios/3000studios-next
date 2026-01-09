@@ -3,7 +3,7 @@ export async function trackCommission(data: {
   productId: string;
   price: number;
 }) {
-  console.log("💰 COMMISSION EVENT", data);
+  console.log('💰 COMMISSION EVENT', data);
 
   // Later:
   // - Save to DB

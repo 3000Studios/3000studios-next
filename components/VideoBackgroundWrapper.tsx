@@ -2,11 +2,11 @@
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
-"use client";
+'use client';
 
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
-const VideoBackground = dynamic(() => import("./VideoBackground"), {
+const VideoBackground = dynamic(() => import('./VideoBackground'), {
   ssr: false,
 });
 

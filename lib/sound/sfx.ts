@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
 export function playSound(type: 'hover' | 'click' | 'success' | 'nav') {
   if (typeof window === 'undefined') return;
-  
+
   try {
     const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
-    
+
     oscillator.connect(gainNode);
     gainNode.connect(audioContext.destination);
-    
+
     switch (type) {
       case 'hover':
         // Soft ting/sparkle
@@ -21,7 +21,7 @@ export function playSound(type: 'hover' | 'click' | 'success' | 'nav') {
         oscillator.start(audioContext.currentTime);
         oscillator.stop(audioContext.currentTime + 0.1);
         break;
-        
+
       case 'click':
         // Cash register/coin
         oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
@@ -31,7 +31,7 @@ export function playSound(type: 'hover' | 'click' | 'success' | 'nav') {
         oscillator.start(audioContext.currentTime);
         oscillator.stop(audioContext.currentTime + 0.15);
         break;
-        
+
       case 'success':
         // Chime
         oscillator.frequency.setValueAtTime(1500, audioContext.currentTime);
@@ -41,7 +41,7 @@ export function playSound(type: 'hover' | 'click' | 'success' | 'nav') {
         oscillator.start(audioContext.currentTime);
         oscillator.stop(audioContext.currentTime + 0.2);
         break;
-        
+
       case 'nav':
         // Whoosh transition
         oscillator.frequency.setValueAtTime(300, audioContext.currentTime);

@@ -13,7 +13,10 @@ export default function CancelPage() {
       {/* Animated background elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-600/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div
+          className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: '1s' }}
+        ></div>
       </div>
 
       <div className="relative max-w-2xl mx-auto px-4 text-center">
@@ -27,17 +30,27 @@ export default function CancelPage() {
           Order Cancelled
         </h1>
         <p className="text-xl text-purple-300/80 mb-12">
-          Your payment was not processed. Your cart items are still saved, and you can try again whenever you're ready.
+          Your payment was not processed. Your cart items are still saved, and you can try again
+          whenever you're ready.
         </p>
 
         {/* Info */}
         <div className="rounded-xl bg-amber-950/30 border border-amber-500/20 p-8 mb-12 backdrop-blur-sm">
           <h2 className="font-semibold text-amber-300 mb-4">What Happened?</h2>
           <ul className="text-left space-y-3 text-amber-200/80">
-            <li className="flex items-center gap-3"><span className="text-cyan-400">✓</span> Your payment was not processed</li>
-            <li className="flex items-center gap-3"><span className="text-cyan-400">✓</span> Your cart items are still saved</li>
-            <li className="flex items-center gap-3"><span className="text-cyan-400">✓</span> No charges have been made to your account</li>
-            <li className="flex items-center gap-3"><span className="text-cyan-400">✓</span> You can try checkout again or contact support for help</li>
+            <li className="flex items-center gap-3">
+              <span className="text-cyan-400">✓</span> Your payment was not processed
+            </li>
+            <li className="flex items-center gap-3">
+              <span className="text-cyan-400">✓</span> Your cart items are still saved
+            </li>
+            <li className="flex items-center gap-3">
+              <span className="text-cyan-400">✓</span> No charges have been made to your account
+            </li>
+            <li className="flex items-center gap-3">
+              <span className="text-cyan-400">✓</span> You can try checkout again or contact support
+              for help
+            </li>
           </ul>
         </div>
 
@@ -77,15 +90,25 @@ export default function CancelPage() {
           <div className="space-y-4">
             <div className="p-4 rounded-lg bg-slate-800/30 border border-purple-500/20">
               <p className="font-semibold text-cyan-400 mb-2">Why was my payment declined?</p>
-              <p className="text-purple-300/70 text-sm">Common reasons include incorrect card details, insufficient funds, or security restrictions. Check your card details and try again, or contact your bank.</p>
+              <p className="text-purple-300/70 text-sm">
+                Common reasons include incorrect card details, insufficient funds, or security
+                restrictions. Check your card details and try again, or contact your bank.
+              </p>
             </div>
             <div className="p-4 rounded-lg bg-slate-800/30 border border-purple-500/20">
               <p className="font-semibold text-cyan-400 mb-2">Are my items still in my cart?</p>
-              <p className="text-purple-300/70 text-sm">Yes! Your cart items are saved. You can proceed to checkout whenever you're ready.</p>
+              <p className="text-purple-300/70 text-sm">
+                Yes! Your cart items are saved. You can proceed to checkout whenever you're ready.
+              </p>
             </div>
             <div className="p-4 rounded-lg bg-slate-800/30 border border-purple-500/20">
-              <p className="font-semibold text-cyan-400 mb-2">Which payment methods do you accept?</p>
-              <p className="text-purple-300/70 text-sm">We accept both PayPal and Stripe (all major credit cards). If one doesn't work, try the other.</p>
+              <p className="font-semibold text-cyan-400 mb-2">
+                Which payment methods do you accept?
+              </p>
+              <p className="text-purple-300/70 text-sm">
+                We accept both PayPal and Stripe (all major credit cards). If one doesn't work, try
+                the other.
+              </p>
             </div>
           </div>
         </div>

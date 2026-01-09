@@ -1,13 +1,13 @@
 {
-	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "../contexts"
-		},
-		{
-			"path": "../services"
-		}
-	]
+  "folders": [
+    {
+      "path": ".",
+    },
+    {
+      "path": "../contexts",
+    },
+    {
+      "path": "../services",
+    },
+  ],
 }

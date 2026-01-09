@@ -2,46 +2,54 @@
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Collaborator, CollaboratorRole } from "@/types";
+import { useState } from 'react';
+import { Collaborator, CollaboratorRole } from '@/types';
 
 interface AddCollaboratorProps {
   onAdd: (collaborator: Collaborator) => void;
 }
 
 export default function AddCollaborator({ onAdd }: AddCollaboratorProps) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState<CollaboratorRole>("viewer");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [role, setRole] = useState<CollaboratorRole>('viewer');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
+    setError('');
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/collaborators", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/collaborators', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, role }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Failed to add collaborator");
+        throw new Error(data.error || 'Failed to add collaborator');
       }
 
       onAdd(data.collaborator);
-      setName("");
-      setEmail("");
-      setRole("viewer");
+      setName('');
+      setEmail('');
+      setRole('viewer');
     } catch (err: unknown) {
-      setError(err instanceof Error ? (err instanceof Error ? (err instanceof Error ? err.message : "Unknown error") : "Unknown error") : "An error occurred");
+      setError(
+        err instanceof Error
+          ? err instanceof Error
+            ? err instanceof Error
+              ? err.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : 'An error occurred'
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -55,10 +63,7 @@ export default function AddCollaborator({ onAdd }: AddCollaboratorProps) {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label
-            htmlFor="name"
-            className="block text-sm font-medium text-gray-300 mb-1"
-          >
+          <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
             Name
           </label>
           <input
@@ -73,10 +78,7 @@ export default function AddCollaborator({ onAdd }: AddCollaboratorProps) {
         </div>
 
         <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-300 mb-1"
-          >
+          <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
             Email
           </label>
           <input
@@ -91,10 +93,7 @@ export default function AddCollaborator({ onAdd }: AddCollaboratorProps) {
         </div>
 
         <div>
-          <label
-            htmlFor="role"
-            className="block text-sm font-medium text-gray-300 mb-1"
-          >
+          <label htmlFor="role" className="block text-sm font-medium text-gray-300 mb-1">
             Role
           </label>
           <select
@@ -116,7 +115,7 @@ export default function AddCollaborator({ onAdd }: AddCollaboratorProps) {
           disabled={isSubmitting}
           className="w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg font-bold hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
         >
-          {isSubmitting ? "Adding..." : "Add Collaborator"}
+          {isSubmitting ? 'Adding...' : 'Add Collaborator'}
         </button>
       </form>
     </div>

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { createContext, useContext, ReactNode, useState, useCallback } from "react";
+import { createContext, useContext, ReactNode, useState, useCallback } from 'react';
 
 interface LiveState {
   isLive: boolean;
@@ -23,7 +23,7 @@ export function LiveStateProvider({ children }: { children: ReactNode }) {
     isLive: false,
     viewerCount: 0,
     streamUrl: null,
-    streamTitle: ""
+    streamTitle: '',
   });
 
   const goLive = useCallback((url: string, title: string) => {
@@ -31,29 +31,31 @@ export function LiveStateProvider({ children }: { children: ReactNode }) {
       isLive: true,
       viewerCount: 0,
       streamUrl: url,
-      streamTitle: title
+      streamTitle: title,
     });
   }, []);
 
   const goOffline = useCallback(() => {
-    setLive(prev => ({
+    setLive((prev) => ({
       ...prev,
       isLive: false,
-      streamUrl: null
+      streamUrl: null,
     }));
   }, []);
 
   const updateViewerCount = useCallback((count: number) => {
-    setLive(prev => ({ ...prev, viewerCount: count }));
+    setLive((prev) => ({ ...prev, viewerCount: count }));
   }, []);
 
   return (
-    <LiveStateContext.Provider value={{
-      live,
-      goLive,
-      goOffline,
-      updateViewerCount
-    }}>
+    <LiveStateContext.Provider
+      value={{
+        live,
+        goLive,
+        goOffline,
+        updateViewerCount,
+      }}
+    >
       {children}
     </LiveStateContext.Provider>
   );
@@ -61,6 +63,6 @@ export function LiveStateProvider({ children }: { children: ReactNode }) {
 
 export function useLiveState() {
   const context = useContext(LiveStateContext);
-  if (!context) throw new Error("useLiveState must be used within LiveStateProvider");
+  if (!context) throw new Error('useLiveState must be used within LiveStateProvider');
   return context;
 }

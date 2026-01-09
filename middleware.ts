@@ -6,10 +6,7 @@ const WINDOW_MS = 60_000;
 const MAX_REQUESTS = 30;
 
 export async function middleware(req: NextRequest) {
-  const ip =
-    req.headers.get('x-forwarded-for') ??
-    req.headers.get('x-real-ip') ??
-    'unknown';
+  const ip = req.headers.get('x-forwarded-for') ?? req.headers.get('x-real-ip') ?? 'unknown';
 
   const now = Date.now();
   const record = RATE_LIMIT.get(ip);
@@ -41,11 +38,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    '/admin/:path*',
-    '/vip/:path*',
-    '/api/ai/:path*',
-    '/live/:path*',
-  ],
+  matcher: ['/admin/:path*', '/vip/:path*', '/api/ai/:path*', '/live/:path*'],
 };
-

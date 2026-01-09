@@ -32,14 +32,14 @@ GPT Actions (HTTPS)
 
 3KAI is powered by 6 mission-critical endpoints:
 
-| Endpoint | Method | Operation | Purpose |
-|----------|--------|-----------|---------|
-| `/api/gpt-bridge` | POST | `send_instruction` | Primary control for code/site updates |
-| `/api/previews` | GET | `get_preview` | Fetches live Vercel preview links |
-| `/api/assets` | POST | `fetch_assets` | Discovers Cloudinary/Pexels media |
-| `/api/status` | GET | `get_status` | Returns production build/deploy status |
-| `/api/monetization` | POST | `analyze_monetization` | Returns revenue strategy analysis |
-| `/api/rollback` | POST | `rollback` | Executes emergency Git revert |
+| Endpoint            | Method | Operation              | Purpose                                |
+| ------------------- | ------ | ---------------------- | -------------------------------------- |
+| `/api/gpt-bridge`   | POST   | `send_instruction`     | Primary control for code/site updates  |
+| `/api/previews`     | GET    | `get_preview`          | Fetches live Vercel preview links      |
+| `/api/assets`       | POST   | `fetch_assets`         | Discovers Cloudinary/Pexels media      |
+| `/api/status`       | GET    | `get_status`           | Returns production build/deploy status |
+| `/api/monetization` | POST   | `analyze_monetization` | Returns revenue strategy analysis      |
+| `/api/rollback`     | POST   | `rollback`             | Executes emergency Git revert          |
 
 ---
 
@@ -65,12 +65,12 @@ GPT Actions (HTTPS)
 
 Ensure these are set in your Vercel/Production environment:
 
-| Category | Variable | Purpose |
-|----------|----------|---------|
-| **Auth** | `GPT_BRIDGE_TOKEN` | Secures the 3KAI bridge |
+| Category  | Variable             | Purpose                     |
+| --------- | -------------------- | --------------------------- |
+| **Auth**  | `GPT_BRIDGE_TOKEN`   | Secures the 3KAI bridge     |
 | **Media** | `CLOUDINARY_API_KEY` | Browsing your media library |
-| **Cloud** | `VERCEL_TOKEN` | Deployment monitoring |
-| **Git** | `GITHUB_PAT` | Autonomous commits |
+| **Cloud** | `VERCEL_TOKEN`       | Deployment monitoring       |
+| **Git**   | `GITHUB_PAT`         | Autonomous commits          |
 
 ---
 
@@ -78,10 +78,10 @@ Ensure these are set in your Vercel/Production environment:
 
 Try these once 3KAI is live:
 
-- *"3KAI, darken the site header and deploy a preview."*
-- *"3KAI, show me my Cloudinary assets for 'abstract'."*
-- *"3KAI, analyze our monetization and suggest an experiment."*
-- *"3KAI, the deployment is broken—rollback now!"*
+- _"3KAI, darken the site header and deploy a preview."_
+- _"3KAI, show me my Cloudinary assets for 'abstract'."_
+- _"3KAI, analyze our monetization and suggest an experiment."_
+- _"3KAI, the deployment is broken—rollback now!"_
 
 ---
 

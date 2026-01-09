@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
 // Copyright (c) 2025 NAME.
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
-"use client";
-import { useEffect, useRef, useState } from "react";
+'use client';
+import { useEffect, useRef, useState } from 'react';
 
 export default function MiniGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -16,7 +16,7 @@ export default function MiniGame() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     let animationId: number;
@@ -37,7 +37,7 @@ export default function MiniGame() {
     const jumpStrength = -10;
     const playerSize = 40;
     const obstacleWidth = 60;
-      const obstacleGap = 200; // Unused
+    const obstacleGap = 200; // Unused
 
     const reset = () => {
       playerY = 200;
@@ -61,7 +61,7 @@ export default function MiniGame() {
     };
 
     const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.code === "Space" || e.code === "ArrowUp") {
+      if (e.code === 'Space' || e.code === 'ArrowUp') {
         e.preventDefault();
         jump();
       }
@@ -71,27 +71,23 @@ export default function MiniGame() {
       jump();
     };
 
-    canvas.addEventListener("click", handleClick);
-    window.addEventListener("keydown", handleKeyPress);
+    canvas.addEventListener('click', handleClick);
+    window.addEventListener('keydown', handleKeyPress);
 
     const gameLoop = () => {
       // Clear canvas
-      ctx.fillStyle = "#000000";
+      ctx.fillStyle = '#000000';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       if (!gameStarted) {
         // Draw start screen
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "24px Arial";
-        ctx.textAlign = "center";
-        ctx.fillText(
-          "Click or Press Space to Start",
-          canvas.width / 2,
-          canvas.height / 2,
-        );
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '24px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Click or Press Space to Start', canvas.width / 2, canvas.height / 2);
 
         // Draw player preview
-        ctx.fillStyle = "#ff0000";
+        ctx.fillStyle = '#ff0000';
         ctx.fillRect(100, playerY, playerSize, playerSize);
 
         animationId = requestAnimationFrame(gameLoop);
@@ -99,21 +95,13 @@ export default function MiniGame() {
       }
 
       if (gameOver) {
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "32px Arial";
-        ctx.textAlign = "center";
-        ctx.fillText("Game Over!", canvas.width / 2, canvas.height / 2 - 20);
-        ctx.font = "20px Arial";
-        ctx.fillText(
-          `Score: ${gameScore}`,
-          canvas.width / 2,
-          canvas.height / 2 + 20,
-        );
-        ctx.fillText(
-          "Click to Restart",
-          canvas.width / 2,
-          canvas.height / 2 + 50,
-        );
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '32px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('Game Over!', canvas.width / 2, canvas.height / 2 - 20);
+        ctx.font = '20px Arial';
+        ctx.fillText(`Score: ${gameScore}`, canvas.width / 2, canvas.height / 2 + 20);
+        ctx.fillText('Click to Restart', canvas.width / 2, canvas.height / 2 + 50);
         animationId = requestAnimationFrame(gameLoop);
         return;
       }
@@ -135,14 +123,11 @@ export default function MiniGame() {
       }
 
       // Draw player
-      ctx.fillStyle = "#ff0000";
+      ctx.fillStyle = '#ff0000';
       ctx.fillRect(100, playerY, playerSize, playerSize);
 
       // Add new obstacles
-      if (
-        obstacles.length === 0 ||
-        obstacles[obstacles.length - 1].x < canvas.width - 300
-      ) {
+      if (obstacles.length === 0 || obstacles[obstacles.length - 1].x < canvas.width - 300) {
         const gapY = Math.random() * (canvas.height - 250) + 75;
         obstacles.push({
           x: canvas.width,
@@ -163,7 +148,7 @@ export default function MiniGame() {
         obs.x -= 3;
 
         // Draw obstacle
-        ctx.fillStyle = "#00ff00";
+        ctx.fillStyle = '#00ff00';
         ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
 
         // Check collision
@@ -187,13 +172,13 @@ export default function MiniGame() {
       });
 
       // Draw score
-      ctx.fillStyle = "#ffffff";
-      ctx.font = "24px Arial";
-      ctx.textAlign = "left";
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '24px Arial';
+      ctx.textAlign = 'left';
       ctx.fillText(`Score: ${gameScore}`, 10, 30);
 
       // Draw ground
-      ctx.fillStyle = "#333333";
+      ctx.fillStyle = '#333333';
       ctx.fillRect(0, canvas.height - 10, canvas.width, 10);
 
       animationId = requestAnimationFrame(gameLoop);
@@ -203,8 +188,8 @@ export default function MiniGame() {
 
     return () => {
       cancelAnimationFrame(animationId);
-      canvas.removeEventListener("click", handleClick);
-      window.removeEventListener("keydown", handleKeyPress);
+      canvas.removeEventListener('click', handleClick);
+      window.removeEventListener('keydown', handleKeyPress);
     };
   }, [gameStarted]);
 

@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
 // Copyright (c) 2025 NAME.
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
-"use client";
+'use client';
 
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 /**
  * PrimeLoop - Shadow PRIME main system heartbeat
@@ -17,16 +17,16 @@ export default function PrimeLoop() {
     const interval = setInterval(() => {
       // Dispatch system-check event
       window.dispatchEvent(
-        new CustomEvent("shadow-event", {
-          detail: { type: "system-check", timestamp: Date.now() },
+        new CustomEvent('shadow-event', {
+          detail: { type: 'system-check', timestamp: Date.now() },
         })
       );
 
       // Random optimization trigger (15% chance)
       if (Math.random() > 0.85) {
         window.dispatchEvent(
-          new CustomEvent("shadow-event", {
-            detail: { type: "optimize", timestamp: Date.now() },
+          new CustomEvent('shadow-event', {
+            detail: { type: 'optimize', timestamp: Date.now() },
           })
         );
       }

@@ -9,7 +9,7 @@ const { exec } = require('child_process');
 
 function checkBuild() {
   console.log(`[${new Date().toISOString()}] Running build check...`);
-  
+
   exec('pnpm build', (error, stdout, stderr) => {
     if (error) {
       console.error(`[${new Date().toISOString()}] Build failed. Initiating self-heal...`);

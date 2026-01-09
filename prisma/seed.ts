@@ -1,17 +1,17 @@
-import { PrismaClient } from "@prisma/client";
-import { products as productsData } from "../src/lib/products-data";
+import { PrismaClient } from '@prisma/client';
+import { products as productsData } from '../src/lib/products-data';
 // @ts-expect-error - bcrypt types might be missing
-import bcrypt from "bcryptjs";
+import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log("Start seeding...");
+  console.log('Start seeding...');
 
   // Create Admin User for Matrix Access
-  const adminEmail = "mr.jwswain@gmail.com";
+  const adminEmail = 'mr.jwswain@gmail.com';
   // Create or Update Admin User for Matrix Access
-  const hashedPassword = await bcrypt.hash("Gabby3000", 10);
+  const hashedPassword = await bcrypt.hash('Gabby3000', 10);
 
   await prisma.user.upsert({
     where: { email: adminEmail },
@@ -20,11 +20,11 @@ async function main() {
     },
     create: {
       email: adminEmail,
-      name: "Matrix Admin",
+      name: 'Matrix Admin',
       password: hashedPassword,
     },
   });
-  console.log("Ensured Admin User: mr.jwswain@gmail.com");
+  console.log('Ensured Admin User: mr.jwswain@gmail.com');
 
   for (const p of productsData) {
     // Check if product with the same SKU already exists
@@ -43,20 +43,20 @@ async function main() {
         price: p.price,
         compareAtPrice: p.compareAtPrice,
         category: p.category,
-        images: p.images.join(","),
+        images: p.images.join(','),
         inStock: p.inStock,
         inventory: p.inventory,
         sku: p.sku,
         supplier: p.supplier,
-        features: p.features.join(","),
+        features: p.features.join(','),
         specifications: JSON.stringify(p.specifications),
         shippingWeight: p.shippingWeight,
-        tags: p.tags.join(","),
+        tags: p.tags.join(','),
       },
     });
     console.log(`Created product with id: ${product.id}`);
   }
-  console.log("Seeding finished.");
+  console.log('Seeding finished.');
 }
 
 main()

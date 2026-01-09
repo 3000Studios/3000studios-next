@@ -64,13 +64,13 @@ Authorization: Bearer YOUR_GPT_BRIDGE_TOKEN
 
 ### Supported Commands
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `UPDATE_TEXT` | Change text content | "Change headline to 'Welcome'" |
-| `ADD_SECTION` | Add new sections | "Add a services section" |
-| `ADD_MEDIA` | Add images/videos | "Add a sunset video" |
-| `CHANGE_STYLE` | Modify CSS/theme | "Switch to dark mode" |
-| `PUBLISH_BLOG` | Create blog posts | "Publish a post about AI" |
+| Command        | Description         | Example                        |
+| -------------- | ------------------- | ------------------------------ |
+| `UPDATE_TEXT`  | Change text content | "Change headline to 'Welcome'" |
+| `ADD_SECTION`  | Add new sections    | "Add a services section"       |
+| `ADD_MEDIA`    | Add images/videos   | "Add a sunset video"           |
+| `CHANGE_STYLE` | Modify CSS/theme    | "Switch to dark mode"          |
+| `PUBLISH_BLOG` | Create blog posts   | "Publish a post about AI"      |
 
 ---
 
@@ -150,12 +150,12 @@ The Custom GPT will:
 
 ### Common Issues
 
-| Issue | Solution |
-|-------|----------|
-| "Unauthorized" error | Check token matches in Vercel and Custom GPT |
-| "Bridge failed" error | Check Vercel logs: `vercel logs` |
-| GPT not calling API | Verify Actions schema is valid JSON |
-| Commands not executing | Test `/api/voice` endpoint directly |
+| Issue                  | Solution                                     |
+| ---------------------- | -------------------------------------------- |
+| "Unauthorized" error   | Check token matches in Vercel and Custom GPT |
+| "Bridge failed" error  | Check Vercel logs: `vercel logs`             |
+| GPT not calling API    | Verify Actions schema is valid JSON          |
+| Commands not executing | Test `/api/voice` endpoint directly          |
 
 ### Debug Steps
 

@@ -4,13 +4,13 @@
  *   Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
  */
 
-import axios from "axios";
+import axios from 'axios';
 
-const WP_URL = "https://3000studios.com/wp-json/jwt-auth/v1/token";
-const WP_UPDATE = "https://3000studios.com/wp-json/wp/v2/files/update";
+const WP_URL = 'https://3000studios.com/wp-json/jwt-auth/v1/token';
+const WP_UPDATE = 'https://3000studios.com/wp-json/wp/v2/files/update';
 
-const USERNAME = process.env.WP_USERNAME || "mr.jwswain@gmail.com";
-const PASSWORD = process.env.WP_PASSWORD || "";
+const USERNAME = process.env.WP_USERNAME || 'mr.jwswain@gmail.com';
+const PASSWORD = process.env.WP_PASSWORD || '';
 
 let cachedToken: string | null = null;
 
@@ -36,7 +36,7 @@ export async function runWordPressUpdate(file: string, content: string) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    },
+    }
   );
 
   return res.data;

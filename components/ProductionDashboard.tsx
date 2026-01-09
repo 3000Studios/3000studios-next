@@ -1,9 +1,9 @@
 // Copyright (c) 2025 NAME.
 // All rights reserved.
 
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 interface DashboardStats {
   // Visitors
@@ -45,24 +45,14 @@ interface StatCardProps {
   icon?: string;
 }
 
-const StatCard = ({
-  title,
-  value,
-  unit,
-  trend,
-  icon,
-}: StatCardProps) => (
+const StatCard = ({ title, value, unit, trend, icon }: StatCardProps) => (
   <div className="bg-corporate-navy border border-corporate-steel rounded-lg p-4 hover:border-corporate-gold transition">
     <div className="flex items-start justify-between mb-2">
-      <h4 className="text-corporate-silver text-xs font-medium uppercase tracking-wide">
-        {title}
-      </h4>
+      <h4 className="text-corporate-silver text-xs font-medium uppercase tracking-wide">{title}</h4>
       {icon && <span className="text-lg">{icon}</span>}
     </div>
     <div className="flex items-baseline gap-1">
-      <span className="text-3xl font-heading font-bold text-white">
-        {value}
-      </span>
+      <span className="text-3xl font-heading font-bold text-white">{value}</span>
       {unit && <span className="text-corporate-silver text-sm">{unit}</span>}
     </div>
     {trend && <p className="text-xs text-corporate-gold mt-1">{trend}</p>}
@@ -79,13 +69,12 @@ export default function ProductionDashboard() {
       setLoading(true);
       setError(null);
 
-      const [visitorsRes, salesRes, systemRes, deploymentsRes] =
-        await Promise.all([
-          fetch("/api/analytics/visitors"),
-          fetch("/api/analytics/sales"),
-          fetch("/api/analytics/system"),
-          fetch("/api/analytics/deployments"),
-        ]);
+      const [visitorsRes, salesRes, systemRes, deploymentsRes] = await Promise.all([
+        fetch('/api/analytics/visitors'),
+        fetch('/api/analytics/sales'),
+        fetch('/api/analytics/system'),
+        fetch('/api/analytics/deployments'),
+      ]);
 
       const [visitors, sales, system, deployments] = await Promise.all([
         visitorsRes.json(),
@@ -108,8 +97,8 @@ export default function ProductionDashboard() {
         revenueTotal: sales.revenueTotal || 0,
         topProducts: sales.topProducts || [],
 
-        systemStatus: system.status || "Unknown",
-        uptime: system.uptime || "0h 0m",
+        systemStatus: system.status || 'Unknown',
+        uptime: system.uptime || '0h 0m',
         memoryUsed: system.memory?.heapUsed || 0,
         memoryTotal: system.memory?.heapTotal || 0,
 
@@ -120,10 +109,10 @@ export default function ProductionDashboard() {
 
       setLoading(false);
     } catch (err: unknown) {
-      if (typeof err === "object" && err && "message" in err) {
+      if (typeof err === 'object' && err && 'message' in err) {
         setError((err as { message: string }).message);
       } else {
-        setError("Unknown error");
+        setError('Unknown error');
       }
       setLoading(false);
     }
@@ -175,7 +164,7 @@ export default function ProductionDashboard() {
           className="px-3 py-1.5 bg-corporate-navy border border-corporate-steel rounded text-sm hover:border-corporate-gold transition"
           disabled={loading}
         >
-          {loading ? "Refreshing..." : "Refresh"}
+          {loading ? 'Refreshing...' : 'Refresh'}
         </button>
       </div>
 
@@ -189,24 +178,14 @@ export default function ProductionDashboard() {
           unit={`/ ${stats.memoryTotal} MB`}
           icon="💾"
         />
-        <StatCard
-          title="Deployments"
-          value={stats.totalDeployments}
-          icon="🚀"
-        />
+        <StatCard title="Deployments" value={stats.totalDeployments} icon="🚀" />
       </div>
 
       {/* Visitor Analytics */}
       <div>
-        <h3 className="text-lg font-heading font-bold text-white mb-3">
-          Visitor Analytics
-        </h3>
+        <h3 className="text-lg font-heading font-bold text-white mb-3">Visitor Analytics</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <StatCard
-            title="Total Visitors"
-            value={stats.totalVisitors}
-            icon="👥"
-          />
+          <StatCard title="Total Visitors" value={stats.totalVisitors} icon="👥" />
           <StatCard title="Last 24 Hours" value={stats.visitors24h} icon="📊" />
           <StatCard title="Last 7 Days" value={stats.visitors7d} icon="📈" />
           <StatCard title="Unique (24h)" value={stats.unique24h} icon="✨" />
@@ -216,21 +195,12 @@ export default function ProductionDashboard() {
       {/* Top Pages */}
       {stats.topPages.length > 0 && (
         <div className="bg-corporate-navy border border-corporate-steel rounded-lg p-4">
-          <h4 className="text-sm font-bold text-corporate-gold mb-3">
-            Top Pages
-          </h4>
+          <h4 className="text-sm font-bold text-corporate-gold mb-3">Top Pages</h4>
           <div className="space-y-2">
             {stats.topPages.map((page, idx) => (
-              <div
-                key={idx}
-                className="flex items-center justify-between text-sm"
-              >
-                <span className="text-white font-mono truncate">
-                  {page.path}
-                </span>
-                <span className="text-corporate-silver ml-2">
-                  {page.views} views
-                </span>
+              <div key={idx} className="flex items-center justify-between text-sm">
+                <span className="text-white font-mono truncate">{page.path}</span>
+                <span className="text-corporate-silver ml-2">{page.views} views</span>
               </div>
             ))}
           </div>
@@ -239,25 +209,11 @@ export default function ProductionDashboard() {
 
       {/* Sales & Revenue */}
       <div>
-        <h3 className="text-lg font-heading font-bold text-white mb-3">
-          Sales & Revenue
-        </h3>
+        <h3 className="text-lg font-heading font-bold text-white mb-3">Sales & Revenue</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <StatCard
-            title="Total Revenue"
-            value={`$${stats.revenueTotal.toFixed(2)}`}
-            icon="💰"
-          />
-          <StatCard
-            title="Revenue (7d)"
-            value={`$${stats.revenue7d.toFixed(2)}`}
-            icon="📊"
-          />
-          <StatCard
-            title="Revenue (24h)"
-            value={`$${stats.revenue24h.toFixed(2)}`}
-            icon="💵"
-          />
+          <StatCard title="Total Revenue" value={`$${stats.revenueTotal.toFixed(2)}`} icon="💰" />
+          <StatCard title="Revenue (7d)" value={`$${stats.revenue7d.toFixed(2)}`} icon="📊" />
+          <StatCard title="Revenue (24h)" value={`$${stats.revenue24h.toFixed(2)}`} icon="💵" />
           <StatCard title="Sales (24h)" value={stats.sales24h} icon="🛒" />
         </div>
       </div>
@@ -265,20 +221,13 @@ export default function ProductionDashboard() {
       {/* Top Products */}
       {stats.topProducts.length > 0 && (
         <div className="bg-corporate-navy border border-corporate-steel rounded-lg p-4">
-          <h4 className="text-sm font-bold text-corporate-gold mb-3">
-            Top Products
-          </h4>
+          <h4 className="text-sm font-bold text-corporate-gold mb-3">Top Products</h4>
           <div className="space-y-2">
             {stats.topProducts.map((product, idx) => (
-              <div
-                key={idx}
-                className="flex items-center justify-between text-sm"
-              >
+              <div key={idx} className="flex items-center justify-between text-sm">
                 <span className="text-white">{product.product}</span>
                 <div className="flex items-center gap-3">
-                  <span className="text-corporate-silver">
-                    {product.count} sold
-                  </span>
+                  <span className="text-corporate-silver">{product.count} sold</span>
                   <span className="text-corporate-gold font-bold">
                     ${product.revenue.toFixed(2)}
                   </span>
@@ -292,15 +241,11 @@ export default function ProductionDashboard() {
       {/* Latest Deployment */}
       {stats.latestDeployment && (
         <div className="bg-corporate-navy border border-corporate-steel rounded-lg p-4">
-          <h4 className="text-sm font-bold text-corporate-gold mb-3">
-            Latest Deployment
-          </h4>
+          <h4 className="text-sm font-bold text-corporate-gold mb-3">Latest Deployment</h4>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-corporate-silver">Status:</span>
-              <span className="text-white font-bold">
-                {stats.latestDeployment.state}
-              </span>
+              <span className="text-white font-bold">{stats.latestDeployment.state}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-corporate-silver">URL:</span>

@@ -16,15 +16,10 @@ const PUBLIC_ROUTES = [
   '/apps',
   '/revenue',
   '/vendors-platform',
-  '/login'
+  '/login',
 ];
 
-const ADMIN_ROUTES = [
-  '/admin',
-  '/admin/editor',
-  '/admin/revenue',
-  '/admin/settings'
-];
+const ADMIN_ROUTES = ['/admin', '/admin/editor', '/admin/revenue', '/admin/settings'];
 
 export function verifyRoutes() {
   const results: {
@@ -34,7 +29,7 @@ export function verifyRoutes() {
   } = {
     passed: [],
     failed: [],
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   };
 
   const allRoutes = [...PUBLIC_ROUTES, ...ADMIN_ROUTES];
@@ -44,7 +39,14 @@ export function verifyRoutes() {
       // Route verification logic
       results.passed.push(route);
     } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") : String(error);
+      const errorMessage =
+        error instanceof Error
+          ? error instanceof Error
+            ? error instanceof Error
+              ? error.message
+              : 'Unknown error'
+            : 'Unknown error'
+          : String(error);
       results.failed.push({ route, error: errorMessage });
     }
   }
@@ -53,4 +55,3 @@ export function verifyRoutes() {
 }
 
 export { ADMIN_ROUTES, PUBLIC_ROUTES };
-

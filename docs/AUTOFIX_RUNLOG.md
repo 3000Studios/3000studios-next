@@ -1,20 +1,23 @@
 # Autonomous Execution Runlog
 
 ### Environment
+
 - **Repo Root:** /workspaces/3000studios-next
 - **Git Remote:** origin https://github.com/3000Studios/3000studios-next
 - **Current Branch:** main
 - **Status:** Clean (mostly)
 
 ### Package Discovery
+
 - **Roots Found:**
   - ./package.json (Canonical)
-  - ./_archive/3000studios-next-main/package.json (Archived)
+  - ./\_archive/3000studios-next-main/package.json (Archived)
   - ./shadow/mobile/package.json
   - ./shadow/core/package.json
 - **Canonical Root:** ./package.json
 
 ### PRs & Branches
+
 - **Open PRs:** 9 Open PRs found.
   - #70: Fix TypeScript errors, configure admin credentials... (Most recent)
   - #68: Resolve 171 merge conflicts...
@@ -28,6 +31,7 @@
 - **Branches:** ~30 branches, mostly `copilot/*`
 
 ### Execution Log
+
 - **[Phase 1] Merge:** Successfully merged `origin/copilot/fix-ui-and-deploy` (PR #70).
   - Added `src/app/jws/page.tsx` (Admin).
   - Updated `MarbleBG.tsx`.
@@ -43,6 +47,7 @@
   - Created `DEPLOYMENT_BLOCKED.md`.
 
 ### Final Status
+
 - **Repo:** Clean & Synced.
 - **Build:** Passing.
 - **Deploy:** Pending Credentials.

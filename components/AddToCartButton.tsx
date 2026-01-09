@@ -40,8 +40,8 @@ export function AddToCartButton({ product, disabled = false }: AddToCartButtonPr
         isAdded
           ? 'bg-gradient-to-r from-cyan-500 to-green-500 text-white shadow-lg shadow-green-500/50'
           : disabled
-          ? 'bg-gray-600 text-gray-300 cursor-not-allowed opacity-60'
-          : 'bg-gradient-to-r from-cyan-500 to-purple-500 text-white hover:shadow-lg hover:shadow-cyan-500/50'
+            ? 'bg-gray-600 text-gray-300 cursor-not-allowed opacity-60'
+            : 'bg-gradient-to-r from-cyan-500 to-purple-500 text-white hover:shadow-lg hover:shadow-cyan-500/50'
       }`}
     >
       <ShoppingCart size={20} />

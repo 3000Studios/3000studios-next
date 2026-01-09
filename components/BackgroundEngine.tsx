@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function BackgroundEngine() {
   const pathname = usePathname();
-  const [videoSrc, setVideoSrc] = useState("/assets/video/marble-flow.mp4");
+  const [videoSrc, setVideoSrc] = useState('/assets/video/marble-flow.mp4');
   const [opacity, setOpacity] = useState(0);
 
   useEffect(() => {
@@ -14,15 +14,15 @@ export default function BackgroundEngine() {
 
     const timeout = setTimeout(() => {
       // Determine video based on route
-      if (pathname === "/") {
-        setVideoSrc("/assets/video/marble-flow.mp4");
-      } else if (pathname.startsWith("/store")) {
+      if (pathname === '/') {
+        setVideoSrc('/assets/video/marble-flow.mp4');
+      } else if (pathname.startsWith('/store')) {
         // Ideally a different video for store, using same for now or a variant if available
-        setVideoSrc("/assets/video/marble-flow.mp4");
-      } else if (pathname.startsWith("/live")) {
-        setVideoSrc("/assets/video/marble-flow.mp4");
+        setVideoSrc('/assets/video/marble-flow.mp4');
+      } else if (pathname.startsWith('/live')) {
+        setVideoSrc('/assets/video/marble-flow.mp4');
       } else {
-        setVideoSrc("/assets/video/marble-flow.mp4");
+        setVideoSrc('/assets/video/marble-flow.mp4');
       }
 
       // Fade in
@@ -42,8 +42,8 @@ export default function BackgroundEngine() {
         className="absolute inset-0 z-0 opacity-30"
         style={{
           backgroundImage: `url('/assets/textures/marble-dark.jpg')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       />
 

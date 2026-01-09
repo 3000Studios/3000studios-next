@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
 // Copyright (c) 2025 NAME.
 // All rights reserved.
 // Unauthorized copying, modification, distribution, or use of this is prohibited without express written permission.
 
-"use client";
-import { useEffect, useState } from "react";
+'use client';
+import { useEffect, useState } from 'react';
 
 interface VoiceListenerProps {
   isListening: boolean;
@@ -13,32 +13,24 @@ interface VoiceListenerProps {
   onCommand: (transcript: string) => void;
 }
 
-export default function VoiceListener({
-  isListening,
-  onToggle,
-  onCommand,
-}: VoiceListenerProps) {
-  const [transcript, setTranscript] = useState("");
+export default function VoiceListener({ isListening, onToggle, onCommand }: VoiceListenerProps) {
+  const [transcript, setTranscript] = useState('');
   const [isSupported, setIsSupported] = useState(true);
 
   useEffect(() => {
     // Check if browser supports Web Speech API
-    if (
-      !("webkitSpeechRecognition" in window) &&
-      !("SpeechRecognition" in window)
-    ) {
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
       setIsSupported(false);
       return;
     }
 
     const SpeechRecognition =
-      (window as any).SpeechRecognition ||
-      (window as any).webkitSpeechRecognition;
+      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
 
     recognition.continuous = false;
     recognition.interimResults = true;
-    recognition.lang = "en-US";
+    recognition.lang = 'en-US';
 
     recognition.onresult = (event: any) => {
       const current = event.resultIndex;
@@ -48,14 +40,14 @@ export default function VoiceListener({
       // If final result, execute command
       if (event.results[current].isFinal) {
         onCommand(transcriptText);
-        setTranscript("");
+        setTranscript('');
         onToggle(); // Stop listening after command
       }
     };
 
     recognition.onerror = (event: any) => {
-      console.error("Speech recognition error:", event.error);
-      if (event.error === "not-allowed") {
+      console.error('Speech recognition error:', event.error);
+      if (event.error === 'not-allowed') {
         setIsSupported(false);
       }
     };
@@ -87,11 +79,11 @@ export default function VoiceListener({
         onClick={onToggle}
         className={`w-32 h-32 rounded-full flex items-center justify-center text-6xl transition-all ${
           isListening
-            ? "bg-red-500 hover:bg-red-600 animate-pulse shadow-lg shadow-red-500/50"
-            : "bg-yellow-600 hover:bg-yellow-700 shadow-lg shadow-yellow-500/50"
+            ? 'bg-red-500 hover:bg-red-600 animate-pulse shadow-lg shadow-red-500/50'
+            : 'bg-yellow-600 hover:bg-yellow-700 shadow-lg shadow-yellow-500/50'
         }`}
       >
-        {isListening ? "🔴" : "🎤"}
+        {isListening ? '🔴' : '🎤'}
       </button>
 
       <div className="min-h-[60px]">
