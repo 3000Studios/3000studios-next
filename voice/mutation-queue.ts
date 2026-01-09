@@ -72,7 +72,7 @@ export async function queueMutation(
     // For now, just log and return
     return queued;
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error('', error);
     throw error;
   }
 }
@@ -112,7 +112,7 @@ export async function processPendingMutations(): Promise<QueuedMutation[]> {
       updated = true;
       console.log(`Mutation ${mutation.id} applied successfully.`);
     } catch (error: unknown) {
-      console.error('', _error);
+      console.error('', error);
       mutation.status = 'failed';
       mutation.result = {
         success: false,
@@ -225,7 +225,7 @@ function safeReadQueue(): QueuedMutation[] {
     const parsed = JSON.parse(data);
     return Array.isArray(parsed) ? (parsed as QueuedMutation[]) : [];
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error('', error);
     return [];
   }
 }
