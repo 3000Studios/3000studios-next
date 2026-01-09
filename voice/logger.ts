@@ -58,11 +58,11 @@ export async function logVoiceCommand(
         await fs.appendFile(LOG_FILE, JSON.stringify(entry) + '\n', 'utf-8');
       } catch (e: unknown) {
         // File write may fail in serverless environment
-        console.warn('', _e);
+        console.warn('', e);
       }
     }
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error('', error);
   }
 
   return entry;
