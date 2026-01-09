@@ -44,7 +44,7 @@ export async function POST(req: Request) {
       owner,
       repo,
       path: filename,
-      message: `command: ${intent} [skip ci]`, // Skip CI for the command file itself, wait for executor
+      message: `command: ${intent}`, // Trigger CI for the command executor
       content: Buffer.from(content).toString('base64'),
       branch: 'main',
     });

@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
       },
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error('', error);
     return new Response(
       JSON.stringify({
         error: 'Failed to process sync request',
