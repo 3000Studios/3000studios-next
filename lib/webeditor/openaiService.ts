@@ -68,8 +68,8 @@ export const parseVoiceCommand = async (
     if (!content) throw new Error('Empty response from OpenAI');
 
     return JSON.parse(content) as CommandIntent;
-  } catch (_error: unknown) {
-    console.error("", error);
+  } catch (error: unknown) {
+    console.error('OpenAI processing failed', error);
     return {
       action: 'unknown',
       reasoning: 'Failed to process intention with Neural Core.',
@@ -109,4 +109,3 @@ export const generateCommitMessage = async (
     return `Update via Editor 3000: ${action}`;
   }
 };
-

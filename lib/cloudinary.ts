@@ -28,7 +28,7 @@ export const cloudinaryImage = (
     gravity = 'auto',
   } = options;
 
-  const transforms = [];
+  const transforms: string[] = [];
 
   if (width || height) {
     const w = width ? `w_${width}` : '';
@@ -57,7 +57,7 @@ export const cloudinaryVideo = (
 ): string => {
   const { width, height, quality = 'auto' } = options;
 
-  const transforms = [];
+  const transforms: string[] = [];
 
   if (width || height) {
     const w = width ? `w_${width}` : '';
@@ -89,7 +89,7 @@ export const uploadToCloudinary = async (file: File): Promise<string> => {
     const data = await response.json();
     return data.public_id;
   } catch (error: unknown) {
-    console.error("", error);
+    console.error('Upload failed', error);
     throw error;
   }
 };
@@ -104,8 +104,7 @@ export const getImageMetadata = async (publicId: string) => {
     );
     return await response.json();
   } catch (error: unknown) {
-    console.error("", error);
+    console.error('Failed to get metadata', error);
     return null;
   }
 };
-

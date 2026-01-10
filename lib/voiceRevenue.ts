@@ -135,14 +135,7 @@ export async function executeRevenueCommand(
   } catch (error: unknown) {
     return {
       success: false,
-      message:
-        error instanceof Error
-          ? error instanceof Error
-            ? error instanceof Error
-              ? error.message
-              : 'Unknown error'
-            : 'Unknown error'
-          : 'Unknown error',
+      message: error instanceof Error ? error.message : 'Unknown error',
     };
   }
 }
@@ -196,7 +189,7 @@ async function generateContentBatch(count: number): Promise<CommandResult> {
     };
   }
 
-  const scheduled = [];
+  const scheduled: any[] = [];
   for (let i = 0; i < count; i++) {
     const topic = `Auto-Generated Topic ${i + 1}`;
     const scheduled_item = scheduler.scheduleContent({
@@ -249,4 +242,3 @@ async function rotateAffiliates(): Promise<CommandResult> {
     data: {},
   };
 }
-

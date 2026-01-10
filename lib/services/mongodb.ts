@@ -161,7 +161,7 @@ export async function getAnalytics(
       timestamp: data.timestamp as Date,
     };
   } catch (error: unknown) {
-    console.error("", error);
+    console.error('', error);
     return {
       totalRevenue: 0,
       activeUsers: 0,
@@ -181,7 +181,16 @@ export async function getProduct(productId: string): Promise<Product | null> {
   const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
 
   if (!mongoUri) {
-    console.warn("", error);
+    console.warn('MongoDB URI not configured');
+    return null;
+  }
+
+  try {
+    const database = await connectToDatabase();
+    const product = await database.collection('products').findOne({ productId });
+    return product as unknown as Product | null;
+  } catch (error) {
+    console.error('Failed to fetch product', error);
     return null;
   }
 }
@@ -193,7 +202,16 @@ export async function listProducts(limit = 10): Promise<Product[]> {
   const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
 
   if (!mongoUri) {
-    console.warn("", error);
+    console.warn('MongoDB URI not configured');
+    return [];
+  }
+
+  try {
+    const database = await connectToDatabase();
+    const products = await database.collection('products').find({}).limit(limit).toArray();
+    return products as unknown as Product[];
+  } catch (error) {
+    console.error('Failed to list products', error);
     return [];
   }
 }
@@ -221,7 +239,7 @@ export async function getOrders(limit: number = 10): Promise<Order[]> {
       completedAt: doc.completedAt as Date | undefined,
     }));
   } catch (error: unknown) {
-    console.error("", error);
+    console.error('Failed to fetch orders', error);
     throw new Error('Failed to fetch orders');
   }
 }
@@ -231,7 +249,7 @@ export async function saveOrder(order: Order): Promise<void> {
     const database = await connectToDatabase();
     await database.collection('orders').insertOne(order);
   } catch (error: unknown) {
-    console.error("", error);
+    console.error('Failed to save order', error);
     throw new Error('Failed to save order');
   }
 }
@@ -257,7 +275,7 @@ export async function getProducts(): Promise<Product[]> {
       updatedAt: doc.updatedAt as Date,
     }));
   } catch (error: unknown) {
-    console.error("", error);
+    console.error('Failed to fetch products', error);
     throw new Error('Failed to fetch products');
   }
 }
@@ -269,7 +287,7 @@ export async function updateProduct(productId: string, updates: Partial<Product>
 
     await products.updateOne({ productId }, { $set: { ...updates, updatedAt: new Date() } });
   } catch (error: unknown) {
-    console.error("", error);
+    console.error('Failed to update product', error);
     throw new Error('Failed to update product');
   }
 }
@@ -322,8 +340,7 @@ export async function getDashboardStats() {
       conversionRate: currentStats?.conversionRate || 0,
     };
   } catch (error: unknown) {
-    console.error("", error);
+    console.error('Failed to fetch dashboard stats', error);
     throw new Error('Failed to fetch dashboard stats');
   }
 }
-

@@ -79,8 +79,8 @@ export const parseVoiceCommand = async (text: string): Promise<CommandIntent> =>
 
     const intent = JSON.parse(jsonText) as CommandIntent;
     return intent;
-  } catch (_error: unknown) {
-    console.error("", error);
+  } catch (error: unknown) {
+    console.error('Gemini processing failed', error);
     return {
       action: 'unknown',
       reasoning: 'Failed to process with AI.',
@@ -101,4 +101,3 @@ export const generateCommitMessage = async (command: string, action: string): Pr
     return `Update via Editor 3000: ${action}`;
   }
 };
-
