@@ -23,29 +23,29 @@
 #>
 
 param(
-    [switch]$PatchOnly = $false,
-    [switch]$AutoRemoveParentLockfile = $false,
-    [switch]$PushDirectly = $false
+  [switch]$PatchOnly = $false,
+  [switch]$AutoRemoveParentLockfile = $false,
+  [switch]$PushDirectly = $false
 )
 
 set-strictmode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 function Write-Log {
-    param([string]$Message, [string]$Level = "INFO")
-    $timestamp = (Get-Date).ToString("s")
-    Write-Host "[$timestamp] [$Level] $Message"
+  param([string]$Message, [string]$Level = "INFO")
+  $timestamp = (Get-Date).ToString("s")
+  Write-Host "[$timestamp] [$Level] $Message"
 }
 
 function Ensure-Command {
-    param([string]$cmd)
-    try {
-        & $cmd --version > $null 2>&1
-        return $true
-    }
-    catch {
-        return $false
-    }
+  param([string]$cmd)
+  try {
+    & $cmd --version > $null 2>&1
+    return $true
+  }
+  catch {
+    return $false
+  }
 }
 
 # Embedded patch content (mbox-style).
@@ -518,7 +518,7 @@ index 0000000..0000000
 +
 +-- 
 +2.42.0
-+'@
+'@
 
 try {
   # Basic environment checks
@@ -566,7 +566,8 @@ try {
   if (-not (& git show-ref --verify --quiet refs/heads/main)) {
     Write-Log "Local main branch not found. Creating from origin/main" "INFO"
     & git checkout -b main origin/main
-  } else {
+  }
+  else {
     & git checkout main
     & git pull origin main --rebase
   }
@@ -594,14 +595,16 @@ try {
         Write-Log "Removing stray lockfile $f (AutoRemoveParentLockfile enabled)" "INFO"
         Remove-Item -Path $f -Force -ErrorAction SilentlyContinue
       }
-    } else {
+    }
+    else {
       $remove = Read-Host "Remove these stray lockfiles? (y/N)"
       if ($remove -match '^(y|Y)') {
         foreach ($f in $strayLockfiles) {
           Write-Log "Removing $f" "INFO"
           Remove-Item -Path $f -Force -ErrorAction SilentlyContinue
         }
-      } else {
+      }
+      else {
         Write-Log "Skipping removal of stray lockfiles. You may still see Next.js warning. Continue? (y/N)" "WARN"
         $cont = Read-Host "Continue despite stray lockfiles?"
         if ($cont -notmatch '^(y|Y)') {
@@ -609,7 +612,8 @@ try {
         }
       }
     }
-  } else {
+  }
+  else {
     Write-Log "No stray pnpm-lock.yaml files found in parent directories" "INFO"
   }
 
@@ -627,7 +631,8 @@ try {
   try {
     & git am $patchPath
     Write-Log "Patch applied cleanly via git am" "INFO"
-  } catch {
+  }
+  catch {
     Write-Log "git am failed. Attempting git am --abort and fallback apply" "WARN"
     try { & git am --abort } catch {}
     # fallback to git apply
@@ -636,7 +641,8 @@ try {
       Write-Log "git apply succeeded (with possible .rej files). Now adding and committing changes." "INFO"
       & git add -A
       & git commit -m "chore: apply stabilization patch (fallback apply)"
-    } catch {
+    }
+    catch {
       Write-Log "git apply also failed. You must resolve conflicts manually." "ERROR"
       throw "Patch application failed. Resolve conflicts manually with 'git am' or 'git apply'."
     }
@@ -654,7 +660,8 @@ try {
     if ($pkg.scripts -and $pkg.scripts.prebuild) {
       Write-Log "Running pnpm run prebuild" "INFO"
       & pnpm run prebuild
-    } else {
+    }
+    else {
       Write-Log "No prebuild script found, skipping" "INFO"
     }
   }
@@ -663,7 +670,8 @@ try {
   if ($pkg.scripts -and $pkg.scripts.'type-check') {
     Write-Log "Running pnpm run type-check" "INFO"
     & pnpm run type-check
-  } else {
+  }
+  else {
     Write-Log "No type-check script defined, skipping ts type-check step" "WARN"
   }
 
@@ -672,7 +680,8 @@ try {
   try {
     & pnpm run build 2>&1 | Tee-Object -Variable buildOutput -FilePath ".apply-fixes-build.log"
     Write-Log "Build finished. Log written to .\apply-fixes-build.log" "INFO"
-  } catch {
+  }
+  catch {
     Write-Log "Build failed. Tail of recent logs:" "ERROR"
     Get-Content .\apply-fixes-build.log -Tail 200 | ForEach-Object { Write-Host $_ }
     throw "Build failed. Check .\apply-fixes-build.log for details."
@@ -684,7 +693,8 @@ try {
     Write-Log "Staged/Unstaged changes detected after build; committing them to $workBranch" "INFO"
     & git add -A
     & git commit -m "fix: stabilization, add admin voice-logs API, env validation, next config, CI workflow"
-  } else {
+  }
+  else {
     Write-Log "No additional uncommitted changes after build" "INFO"
   }
 
@@ -695,20 +705,23 @@ try {
     & git merge --no-ff $workBranch -m "chore: merge stabilization fixes from $workBranch"
     Write-Log "Pushing main to origin" "INFO"
     & git push origin main
-  } else {
+  }
+  else {
     Write-Log "By default we will push the working branch and leave main untouched." "INFO"
     $pushBranch = Read-Host "Push branch $workBranch to origin and open a PR? (y = push only, m = merge to main & push, n = don't push)"
     if ($pushBranch -match '^(y|Y)') {
       & git push -u origin $workBranch
       Write-Log "Branch pushed: origin/$workBranch" "INFO"
       Write-Log "Open a PR from $workBranch -> main in GitHub to review and merge." "DONE"
-    } elseif ($pushBranch -match '^(m|M)') {
+    }
+    elseif ($pushBranch -match '^(m|M)') {
       Write-Log "Merging $workBranch into main locally and pushing origin/main" "WARN"
       & git checkout main
       & git merge --no-ff $workBranch -m "chore: merge stabilization fixes from $workBranch"
       & git push origin main
       Write-Log "Pushed merged main to origin/main" "DONE"
-    } else {
+    }
+    else {
       Write-Log "Skipping push. Local branch $workBranch contains the changes." "INFO"
     }
   }
@@ -722,7 +735,8 @@ try {
       if (Test-Path ".env.example") {
         Copy-Item -Path ".env.example" -Destination ".env" -Force
         Write-Log "Copied .env.example -> .env (you may want to edit secrets before starting server)" "INFO"
-      } else {
+      }
+      else {
         Write-Log "No .env.example available; server may require secrets to run. Continuing anyway." "WARN"
       }
     }
@@ -754,7 +768,8 @@ try {
           $ok = $true
           break
         }
-      } catch {
+      }
+      catch {
         # continue
       }
       $attempt++
@@ -769,7 +784,8 @@ try {
         $out | Out-File -FilePath ".apply-fixes-server-out.log" -Encoding utf8
         $err | Out-File -FilePath ".apply-fixes-server-err.log" -Encoding utf8
         Write-Log "Server stdout/stderr saved to .apply-fixes-server-*.log" "INFO"
-      } catch {
+      }
+      catch {
         Write-Log "Unable to capture server logs." "WARN"
       }
       # Stop process
@@ -788,7 +804,8 @@ try {
       try {
         $r = Invoke-WebRequest -UseBasicParsing -Uri $t.Url -TimeoutSec 5 -ErrorAction Stop
         Write-Log "$($t.Name): HTTP $($r.StatusCode)" "INFO"
-      } catch {
+      }
+      catch {
         Write-Log "$($t.Name) failed: $($_.Exception.Message)" "ERROR"
       }
     }
@@ -796,17 +813,20 @@ try {
     Write-Log "Stopping production server" "INFO"
     try {
       $proc.Kill()
-    } catch {
+    }
+    catch {
       Write-Log "Failed to stop server process: $($_.Exception.Message)" "WARN"
     }
-  } else {
+  }
+  else {
     Write-Log "Skipping smoke tests as requested" "INFO"
   }
 
   Write-Log "apply-fixes script completed successfully" "DONE"
   exit 0
 
-} catch {
+}
+catch {
   Write-Log "Fatal error: $($_.Exception.Message)" "FATAL"
   Write-Host "StackTrace:" -ForegroundColor Red
   $_.Exception.StackTrace
