@@ -2,9 +2,9 @@ name: CI / Build / Deploy
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   build:
@@ -22,16 +22,16 @@ jobs:
           cache: 'pnpm'
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: 9
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Validate env variables
+      - name: Validate env variables (minimal)
         run: |
-          node -e "const { validateEnv } = require('./lib/env'); const missing = validateEnv(['DATABASE_URL','NEXTAUTH_SECRET']); if (missing && missing.length) { console.error('Missing envs:', missing); process.exit(1); }"
+          node -e "if (!process.env.DATABASE_URL || !process.env.NEXTAUTH_SECRET) { console.error('Missing critical envs'); process.exit(1); }"
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
@@ -76,7 +76,3 @@ jobs:
 
       - name: Deployment completed notice
         run: echo "Deployment job finished (check logs for deploy provider status)."
-
-# Note:
-# - Set required secrets (DATABASE_URL, NEXTAUTH_SECRET, VERCEL_TOKEN) in the repository settings.
-# - Replace the Vercel deploy step with any provider-specific CLI you use in production.
