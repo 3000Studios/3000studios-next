@@ -58,7 +58,7 @@ export async function GET(req: Request) {
 
     // 3. Fallback to lib/mediaRegistry.ts
     // This is useful if the user hasn't set up API keys yet
-    const fallbackItems = [];
+    const fallbackItems: any[] = [];
 
     if (registry.introVideo)
       fallbackItems.push({ name: 'Intro Video', url: registry.introVideo, type: 'video' });
@@ -87,8 +87,7 @@ export async function GET(req: Request) {
         : null,
     });
   } catch (error: unknown) {
-    console.error("", error);
+    console.error('', error);
     return NextResponse.json({ error: 'Failed to browse media' }, { status: 500 });
   }
 }
-

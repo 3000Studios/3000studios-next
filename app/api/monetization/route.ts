@@ -45,7 +45,7 @@ export async function POST(req: Request) {
     }
 
     // 2. Deterministic Leak Detection
-    const leaks = [];
+    const leaks: any[] = [];
     if (stats.conversionRate < 0.02) {
       leaks.push({
         type: 'CONVERSION_LIMP',
@@ -80,7 +80,7 @@ export async function POST(req: Request) {
     };
 
     // 4. Experiment Proposer
-    const experiments = [];
+    const experiments: any[] = [];
     if (leaks.some((l) => l.type === 'CONVERSION_LIMP')) {
       experiments.push({
         experimentId: 'urgency-cta-v1',
@@ -118,4 +118,3 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
-

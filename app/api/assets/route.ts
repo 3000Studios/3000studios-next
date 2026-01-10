@@ -75,8 +75,8 @@ export async function POST(req: Request) {
           }));
           allAssets = [...allAssets, ...cloudAssets];
         }
-      } catch (_err) {
-        console.error('', err);
+      } catch (err) {
+        console.error('Cloudinary search error:', err);
       }
     }
 

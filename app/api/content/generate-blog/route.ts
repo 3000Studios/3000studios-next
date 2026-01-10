@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     const bodyContent = lines.slice(1).join('\n');
 
     // Publish to WordPress if requested
-    let wordpressId = null;
+    let wordpressId: number | null = null;
     if (publishToWordPress) {
       try {
         wordpressId = await createPost({
@@ -51,8 +51,7 @@ export async function POST(request: NextRequest) {
         : 'Blog post generated successfully',
     });
   } catch (error: unknown) {
-    console.error("", error);
+    console.error('', error);
     return NextResponse.json({ error: 'Failed to generate blog post' }, { status: 500 });
   }
 }
-
