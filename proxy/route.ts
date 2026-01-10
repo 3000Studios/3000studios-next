@@ -8,12 +8,13 @@ export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (pathname.startsWith('/admin') || pathname.startsWith('/vip')) {
-    if (pathname === '/admin/login') {
+    if (pathname === '/admin/login' || pathname === '/login') {
       return NextResponse.next();
     }
 
-    const admin = request.cookies.get('admin')?.value;
-    if (!admin) {
+    const adminSession = request.cookies.get('app_session')?.value;
+    const legacyAdmin = request.cookies.get('admin')?.value;
+    if (!adminSession && !legacyAdmin) {
       return NextResponse.redirect(new URL('/login', request.url));
     }
   }
