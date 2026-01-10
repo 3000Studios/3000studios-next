@@ -21,7 +21,14 @@ import '../styles/user-animations.css';
 import ClientEffects from './components/ClientEffects';
 import GravityFooter from './components/GravityFooter';
 import './globals.css';
+import { Playfair_Display } from 'next/font/google';
 import Nav from './ui/Nav';
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-playfair',
+});
 
 // ============================================
 // METADATA & SEO
@@ -132,7 +139,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
       </head>
       <body
-        className="flex min-h-screen w-full flex-col bg-black antialiased"
+        className={`${playfair.variable} font-serif flex min-h-screen w-full flex-col bg-black antialiased`}
         data-accent={styleRegistry.accent}
       >
         {/* Google AdSense Auto Ads - Load after initial hydration for best revenue */}
@@ -174,4 +181,3 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     </html>
   );
 }
-
