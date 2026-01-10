@@ -107,54 +107,41 @@ export default function Nav() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden absolute top-24 left-0 right-0 bg-black/95 backdrop-blur-xl border-b border-[#D4AF37]/30"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="lg:hidden fixed inset-0 z-50 bg-black flex flex-col items-center justify-center p-8"
           >
-            <div className="px-4 py-4 space-y-2">
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="absolute top-8 right-8 text-white text-4xl"
+            >
+              ×
+            </button>
+            <div className="flex flex-col space-y-8 items-center">
               {PUBLIC_NAV_ITEMS.map((item) => {
                 const isActive = pathname === item.href;
                 return (
-                  <div key={item.href} className="flex justify-center py-2">
-                    <Link
-                      href={item.href}
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                        playSound('nav');
-                      }}
-                      onMouseEnter={() => playSound('hover')}
-                      className="nav-cube-link scale-125 my-4"
-                    >
-                      <span className={isActive ? 'text-[#D4AF37] border-[#D4AF37]' : ''}>
-                        {item.label}
-                      </span>
-                      <span className={isActive ? 'text-[#D4AF37] border-[#D4AF37]' : ''}>
-                        {item.label}
-                      </span>
-                      <span className={isActive ? 'text-[#D4AF37] border-[#D4AF37]' : ''}>
-                        {item.label}
-                      </span>
-                      <span className={isActive ? 'text-[#D4AF37] border-[#D4AF37]' : ''}>
-                        {item.label}
-                      </span>
-                    </Link>
-                  </div>
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      playSound('nav');
+                    }}
+                    className={`text-3xl font-serif tracking-widest ${isActive ? 'text-[#D4AF37]' : 'text-white'}`}
+                  >
+                    {item.label}
+                  </Link>
                 );
               })}
-              {/* VIP ENTRY MOBILE */}
-              <div className="flex justify-center py-2">
-                <Link
-                  href="/vip"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    playSound('nav');
-                  }}
-                  className="px-4 py-1 rounded border border-yellow-500 text-yellow-400 hover:bg-yellow-500/10 transition-colors scale-125 my-4"
-                >
-                  VIP
-                </Link>
-              </div>
+              <Link
+                href="/vip"
+                onClick={() => setMobileMenuOpen(false)}
+                className="px-12 py-3 rounded-full border-2 border-yellow-500 text-yellow-400 text-2xl font-bold"
+              >
+                VIP ACCESS
+              </Link>
             </div>
           </motion.div>
         )}
@@ -162,4 +149,3 @@ export default function Nav() {
     </nav>
   );
 }
-
