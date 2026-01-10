@@ -6,8 +6,6 @@
  * Displays ad slot ready for Google AdSense integration
  */
 
-'use client';
-
 import { useEffect, useState } from 'react';
 
 interface GoogleAdsProps {
@@ -64,4 +62,3 @@ export default function GoogleAdsPlaceholder({
     </div>
   );
 }
-
