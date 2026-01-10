@@ -1,8 +1,48 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useStreaming } from '@/hooks/useAPI';
+
+type StreamStatus = {
+  isLive?: boolean;
+  viewerCount?: number;
+  title?: string;
+};
 
 export default function LiveControlPage() {
+  const { getStreamStatus, startStream, stopStream, loading, error } = useStreaming();
+  const [status, setStatus] = useState<StreamStatus | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    const load = async () => {
+      try {
+        const data = await getStreamStatus();
+        if (active) {
+          setStatus(data);
+        }
+      } catch {
+        // handled by hook error
+      }
+    };
+    load();
+    const interval = setInterval(load, 5 * 60 * 1000);
+    return () => {
+      active = false;
+      clearInterval(interval);
+    };
+  }, [getStreamStatus]);
+
+  const toggleStream = async () => {
+    if (status?.isLive) {
+      await stopStream('current');
+    } else {
+      await startStream('Admin Live Stream', 'Triggered from admin dashboard');
+    }
+    const updated = await getStreamStatus();
+    setStatus(updated);
+  };
+
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
@@ -12,9 +52,17 @@ export default function LiveControlPage() {
         </div>
         <div className="flex items-center gap-2 px-4 py-2 bg-red-500/10 border border-red-500/20 rounded-full">
           <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-          <span className="text-[10px] font-bold text-red-500 uppercase">System Ready</span>
+          <span className="text-[10px] font-bold text-red-500 uppercase">
+            {status?.isLive ? 'Live' : 'Ready'}
+          </span>
         </div>
       </div>
+
+      {error && (
+        <div className="bg-red-500/10 border border-red-500/30 text-red-200 text-sm p-4 rounded-2xl">
+          {error}
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="aspect-video bg-zinc-900 border border-white/5 rounded-3xl flex items-center justify-center relative overflow-hidden">
@@ -34,14 +82,16 @@ export default function LiveControlPage() {
               <path d="M23 7l-7 5 7 5V7z" />
               <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
             </svg>
-            <p className="text-gray-500 italic">Preview Stream Offline</p>
+            <p className="text-gray-500 italic">
+              {status?.isLive ? status?.title || 'Live Stream' : 'Preview Stream Offline'}
+            </p>
           </div>
           <div className="absolute top-4 left-4 flex gap-2">
             <span className="px-2 py-1 bg-black/50 backdrop-blur rounded text-[8px] font-bold uppercase tracking-widest border border-white/10">
               1080p60
             </span>
             <span className="px-2 py-1 bg-black/50 backdrop-blur rounded text-[8px] font-bold uppercase tracking-widest border border-white/10">
-              0kbps
+              {status?.isLive ? `${status?.viewerCount || 0} viewers` : '0 viewers'}
             </span>
           </div>
         </div>
@@ -59,8 +109,12 @@ export default function LiveControlPage() {
                 <span className="text-[10px] font-bold uppercase">Ultra Low</span>
               </div>
             </div>
-            <button className="w-full mt-8 bg-white text-black py-3 rounded-2xl font-black italic uppercase hover:bg-zinc-200 transition-colors">
-              START BROADCAST
+            <button
+              onClick={toggleStream}
+              disabled={loading}
+              className="w-full mt-8 bg-white text-black py-3 rounded-2xl font-black italic uppercase hover:bg-zinc-200 transition-colors disabled:opacity-60"
+            >
+              {status?.isLive ? 'STOP BROADCAST' : 'START BROADCAST'}
             </button>
           </div>
 
