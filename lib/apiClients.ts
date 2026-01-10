@@ -192,8 +192,6 @@ export const getMongoClient = async (): Promise<MongoClient> => {
         maxIdleTimeMS: 30000,
       });
       await mongoClient.connect();
-      console.log("", error);
-      throw error;
     } finally {
       isConnecting = false;
     }
@@ -403,4 +401,3 @@ const apiClients = {
 };
 
 export default apiClients;
-
