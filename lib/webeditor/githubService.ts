@@ -3,7 +3,7 @@ import { CommandIntent, CommandResult, GitHubConfig, RepoMemory } from '../../ty
 
 const MEMORY_PATH = '.speech-to-web-memory/history.json';
 
-const handleApiError = (error: any, context: string): CommandResult => {
+const handleApiError = (error: unknown, context: string): CommandResult => {
   console.error(`GitHub API Error during ${context}:`, error);
 
   // Specific actionable feedback
@@ -54,7 +54,7 @@ const handleApiError = (error: any, context: string): CommandResult => {
 
   return {
     success: false,
-    message: error.message || `An unexpected error occurred during ${context}.`,
+    message: (error as Error).message || `An unexpected error occurred during ${context}.`,
   };
 };
 
@@ -125,7 +125,7 @@ export const executeGitHubCommand = async (
         } catch (e: any) {
           if (e.status === 404)
             return { success: false, message: `File ${intent.path} not found.` };
-          return handleApiError(_e, 'locating file to delete');
+          return handleApiError(e, 'locating file to delete');
         }
 
         const message =
@@ -267,8 +267,8 @@ export default function RevenuePage() {
       default:
         return { success: false, message: `Unknown action: ${intent.action}` };
     }
-  } catch (error: any) {
-    return handleApiError(_error, 'executing command');
+  } catch (error: unknown) {
+    return handleApiError(error, 'executing command');
   }
 };
 
