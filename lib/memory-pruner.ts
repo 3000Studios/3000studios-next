@@ -14,7 +14,8 @@ export async function pruneMemory() {
         },
       },
     });
-    console.log("", error);
+    console.log(`Pruned ${result.count} memories`);
+  } catch (error) {
+    console.error('Failed to prune memory:', error);
   }
 }
-

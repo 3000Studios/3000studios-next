@@ -22,8 +22,8 @@ async function searchPexels(query: string) {
       type: 'image',
       source: 'pexels',
     }));
-  } catch (_e) {
-    console.error("", e);
+  } catch (e) {
+    console.error('Pexels search error:', e);
     return [];
   }
 }
@@ -76,7 +76,7 @@ export async function POST(req: Request) {
           allAssets = [...allAssets, ...cloudAssets];
         }
       } catch (_err) {
-        console.error("", err);
+        console.error('', err);
       }
     }
 
@@ -107,5 +107,3 @@ export async function POST(req: Request) {
     );
   }
 }
-
-

@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
         });
 
         const responseTime = Date.now() - start;
-        const status = response.ok ? 'healthy' : 'degraded';
+        const status = response.ok ? 'healthy' : 'down'; // Mark as down if not OK for simplicity/revenue critical
 
         results.push({
           endpoint,
@@ -44,15 +44,17 @@ export async function GET(request: NextRequest) {
           lastChecked: new Date(),
         });
 
-        // Alert if revenue endpoint is down
         if (!response.ok) {
-          console.error("", error);
+          console.error(`Revenue endpoint ${endpoint} returned ${response.status}`);
+        }
+      } catch (err) {
         results.push({
           endpoint,
           status: 'down',
           responseTime: Date.now() - start,
           lastChecked: new Date(),
         });
+        console.error(`Failed to reach ${endpoint}:`, err);
       }
     }
 
@@ -66,8 +68,7 @@ export async function GET(request: NextRequest) {
       alerts: criticalDown.length > 0 ? `${criticalDown.length} critical endpoints down` : null,
     });
   } catch (error: unknown) {
-    console.error("", error);
+    console.error('', error);
     return NextResponse.json({ error: 'Health check failed' }, { status: 500 });
   }
 }
-
