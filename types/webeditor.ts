@@ -19,6 +19,7 @@ export type CommandAction =
   | 'get_file'
   | 'list_files'
   | 'trigger_workflow'
+  | 'generate_revenue_page'
   | 'unknown';
 
 export interface CommandIntent {
@@ -41,4 +42,3 @@ export interface RepoMemory {
   last_login: string;
   chat_history: { role: string; content: string; timestamp: string }[];
 }
-
