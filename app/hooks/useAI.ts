@@ -34,18 +34,31 @@ export function useAI(): UseCompletionResponse {
         throw new Error(`API error: ${response.status}`);
       }
 
-      const data = await response.json();
+      // Be resilient to streaming or plain/text responses:
+      const contentType = response.headers.get('content-type') || '';
+      let data: any = {};
+
+      if (contentType.includes('application/json')) {
+        data = await response.json();
+      } else {
+        // If the endpoint returns plain text or streaming, read text
+        data = { completion: await response.text() };
+      }
+
       const result = data.completion || data.text || '';
       setCompletion(result);
 
       if (process.env.NODE_ENV === 'development') {
-        console.log('Tokens used:', data.usage);
+        // Some endpoints return usage info; log if present
+        if (data.usage) {
+          console.log('Tokens used:', data.usage);
+        }
       }
       return result;
     } catch (err: unknown) {
       const error = err instanceof Error ? err : new Error('Unknown error');
       setError(error);
-      console.error("", error);
+      console.error(error);
       return null;
     } finally {
       setIsLoading(false);
@@ -59,4 +72,3 @@ export function useAI(): UseCompletionResponse {
     error,
   };
 }
-
