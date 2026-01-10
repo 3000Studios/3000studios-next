@@ -312,6 +312,12 @@
   box-sizing: border-box;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 :root {
   --section-px: 1.5rem;
   --section-py: 4rem;
