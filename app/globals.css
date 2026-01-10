@@ -355,6 +355,7 @@ body {
 /* Smooth Scrolling */
 html {
   scroll-behavior: smooth;
+  font-size: var(--base-font-size);
 }
 
 /* Professional Button Styles */
