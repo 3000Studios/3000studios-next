@@ -349,6 +349,7 @@ body {
   min-height: 100vh;
   margin: 0;
   width: 100%;
+  overflow-x: hidden;
 }
 
 /* Smooth Scrolling */
