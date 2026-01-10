@@ -22,6 +22,7 @@ import ClientEffects from './components/ClientEffects';
 import GravityFooter from './components/GravityFooter';
 import './globals.css';
 import { Playfair_Display } from 'next/font/google';
+import GreetingAvatar from '@/components/GreetingAvatar';
 import Nav from './ui/Nav';
 
 const playfair = Playfair_Display({
@@ -167,6 +168,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <StockMarquee />
             {/* Footer - Critical for SEO */}
             <GravityFooter />
+            {/* Greeting AI Avatar - Phase 65 */}
+            <GreetingAvatar />
             {/* Consent Banner - Important for compliance */}
             <ConsentBanner />
             {/* Analytics - Load after content */}
