@@ -58,7 +58,7 @@ Format your response as JSON with: { code, explanation, preview }`;
       preview: result.preview || '',
     };
   } catch (error: unknown) {
-    console.error("", error);
+    console.error('OpenAI Code generation failed', error);
     throw new Error('Failed to generate code');
   }
 }
@@ -88,7 +88,7 @@ export async function generateBlogPost(topic: string, keywords: string[]): Promi
 
     return response.choices[0].message.content || '';
   } catch (error: unknown) {
-    console.error("", error);
+    console.error('OpenAI Blog generation failed', error);
     throw new Error('Failed to generate blog post');
   }
 }
@@ -121,7 +121,7 @@ export async function generateProductDescription(
 
     return response.choices[0].message.content || '';
   } catch (error: unknown) {
-    console.error("", error);
+    console.error('OpenAI Product description generation failed', error);
     throw new Error('Failed to generate product description');
   }
 }
@@ -143,8 +143,7 @@ export async function transcribeAudio(audioBase64: string): Promise<string> {
 
     return response.text;
   } catch (error: unknown) {
-    console.error("", error);
+    console.error('OpenAI Audio transcription failed', error);
     throw new Error('Failed to transcribe audio');
   }
 }
-
