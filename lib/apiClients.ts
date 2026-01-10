@@ -162,42 +162,43 @@ export const gemini = {
 let mongoClient: MongoClient | null = null;
 let isConnecting = false;
 
-export const getMongoClient = async (): Promise<MongoClient> => {
-  if (!MongoClient) {
-    throw new Error(
-      "MongoDB client is not available. Install 'mongodb' package to use this feature."
-    );
-  }
+export const getMongoClient = async (uri?: string): Promise<MongoClient> => {
+  const mongoUri = uri || process.env.MONGO_URI || process.env.MONGODB_URI;
 
-  const uri = process.env.MONGODB_URI;
-
-  if (!uri) {
+  if (!mongoUri) {
     throw new Error('MONGODB_URI is not configured. Set it in your environment variables.');
   }
 
-  if (!mongoClient) {
-    if (isConnecting) {
-      // Wait for existing connection attempt
-      while (isConnecting) {
-        await new Promise((resolve) => setTimeout(resolve, 100));
-      }
-      if (mongoClient) return mongoClient;
-    }
+  if (mongoClient) return mongoClient;
 
-    isConnecting = true;
-    try {
-      mongoClient = new MongoClient(uri, {
-        maxPoolSize: 10,
-        minPoolSize: 2,
-        maxIdleTimeMS: 30000,
-      });
-      await mongoClient.connect();
-    } finally {
-      isConnecting = false;
+  if (isConnecting) {
+    // Wait for existing connect to complete (simple backoff with timeout)
+    let tries = 0;
+    while (!mongoClient && tries < 50) {
+      // eslint-disable-next-line no-await-in-loop
+      await new Promise((r) => setTimeout(r, 100));
+      tries++;
     }
+    if (mongoClient) return mongoClient;
   }
 
-  return mongoClient;
+  isConnecting = true;
+  try {
+    mongoClient = new MongoClient(mongoUri, {
+      maxPoolSize: 10,
+      minPoolSize: 2,
+      maxIdleTimeMS: 30000,
+      connectTimeoutMS: 10000,
+    });
+    await mongoClient.connect();
+    return mongoClient;
+  } catch (err: unknown) {
+    console.error('Failed to connect to MongoDB', err);
+    mongoClient = null;
+    throw err;
+  } finally {
+    isConnecting = false;
+  }
 };
 
 export const getMongoDb = async () => {
