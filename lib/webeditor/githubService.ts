@@ -4,7 +4,7 @@ import { CommandIntent, CommandResult, GitHubConfig, RepoMemory } from '../../ty
 const MEMORY_PATH = '.speech-to-web-memory/history.json';
 
 const handleApiError = (error: any, context: string): CommandResult => {
-  console.error('', error);
+  console.error(`GitHub API Error during ${context}:`, error);
 
   // Specific actionable feedback
   if (!navigator.onLine) {
@@ -189,6 +189,78 @@ export const executeGitHubCommand = async (
           return { success: true, message: `Triggered workflow: ${workflow_id} on ${ref}` };
         } catch (_e: unknown) {
           return handleApiError(_e, 'triggering workflow');
+        }
+      }
+
+      case 'generate_revenue_page': {
+        const topic = intent.content || intent.reasoning || originalCommand || 'AI Tools';
+        try {
+          const res = await fetch('/api/content/generate-blog', {
+            method: 'POST',
+            body: JSON.stringify({ topic, keywords: ['revenue', 'affiliate', 'best tools'] }),
+          });
+          const data = await res.json();
+
+          if (!data.success) {
+            return {
+              success: false,
+              message: `Content generation failed: ${data.error || 'Unknown error'}`,
+            };
+          }
+
+          const slug = topic.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+          const path = `app/revenue/${slug}/page.tsx`;
+          const pageContent = `import { Metadata } from 'next';
+import { AFFILIATES } from '@/lib/affiliates';
+
+export const metadata: Metadata = {
+  title: \`${data.title} | 3000 Studios\`,
+  description: \`${data.title}\`,
+};
+
+export default function RevenuePage() {
+  return (
+    <div className="container mx-auto px-4 py-24 min-h-screen">
+      <div className="max-w-4xl mx-auto space-y-12">
+        <header className="space-y-6 text-center">
+          <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-500 animate-fade-in-up">
+            ${data.title}
+          </h1>
+        </header>
+
+        <div className="prose prose-invert prose-lg max-w-none glass-panel p-8 rounded-2xl border border-white/10 shadow-2xl">
+          ${data.content
+            .split('\n')
+            .filter((line: string) => line.trim())
+            .map((line: string) => `<p className="mb-4">${line.replace(/"/g, '&quot;')}</p>`)
+            .join('\n          ')}
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          <a
+            href={AFFILIATES.general('https://3000studios.com/tools')}
+            rel="nofollow sponsored"
+            target="_blank"
+            className="group relative overflow-hidden rounded-xl p-6 glass-premium border border-white/10 hover:border-gold/50 transition-all"
+          >
+            <h3 className="text-xl font-bold text-white mb-2">Editor Select</h3>
+            <p className="text-sm text-gray-400">Get the best price on professional tools.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+`;
+
+          // Reuse create_file logic
+          intent.action = 'create_file';
+          intent.path = path;
+          intent.content = pageContent;
+          intent.commit_message = `Generate revenue page for ${topic}`;
+          return executeGitHubCommand(config, intent, originalCommand);
+        } catch (err: unknown) {
+          return { success: false, message: 'Failed to generate revenue page content.' };
         }
       }
 
