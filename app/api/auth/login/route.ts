@@ -20,10 +20,8 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { email, password } = body || {};
-    if (!email || !password)
-      return NextResponse.json({ error: 'Missing credentials' }, { status: 400 });
+    if (!email || !password) return NextResponse.json({ error: 'Missing credentials' }, { status: 400 });
 
-    // If you have Prisma configured, you should query DB instead — omitted for brevity
     const users = getUsersFromJson();
     const user = users.find((u: any) => u.email === email);
     if (!user) return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
@@ -31,20 +29,11 @@ export async function POST(request: NextRequest) {
     const match = await bcrypt.compare(password, user.password);
     if (!match) return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
 
-    // Create JWT
     const secret = process.env.NEXTAUTH_SECRET || process.env.JWT_SECRET || 'dev-secret';
-    const token = jwt.sign({ id: user.id, email: user.email, role: user.role || 'admin' }, secret, {
-      expiresIn: '7d',
-    });
+    const token = jwt.sign({ id: user.id, email: user.email, role: user.role || 'admin' }, secret, { expiresIn: '7d' });
 
-    // Set cookie
     const res = NextResponse.json({ success: true });
-    res.cookies.set('app_session', token, {
-      httpOnly: true,
-      sameSite: 'lax',
-      path: '/',
-      secure: process.env.NODE_ENV === 'production',
-    });
+    res.cookies.set('app_session', token, { httpOnly: true, sameSite: 'lax', path: '/', secure: process.env.NODE_ENV === 'production' });
     return res;
   } catch (err) {
     console.error('Login error', err);
