@@ -1,12 +1,32 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import AdminAvatar from '@/components/AdminAvatar';
 import './admin.css';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
+  const navItems = useMemo(
+    () => [
+      { href: '/admin', label: 'Overview' },
+      { href: '/admin/revenue', label: 'Revenue' },
+      { href: '/admin/live', label: 'Live Control' },
+      { href: '/admin/stream', label: 'Live Setup' },
+      { href: '/admin/store', label: 'Store' },
+      { href: '/admin/store-manager', label: 'Store Manager' },
+      { href: '/admin/content', label: 'Content Automation' },
+      { href: '/admin/automation', label: 'Automation' },
+      { href: '/admin/ideas', label: 'Ideas' },
+      { href: '/admin/blog', label: 'Blog' },
+      { href: '/admin/referrals', label: 'Referrals' },
+      { href: '/admin/voice-logs', label: 'Voice Logs' },
+      { href: '/admin/voice-remote', label: 'Voice Remote' },
+      { href: '/admin/logs', label: 'System Logs' },
+      { href: '/admin/settings', label: 'Settings' },
+    ],
+    []
+  );
 
   return (
     <div className="admin-root min-h-screen bg-black text-white">
@@ -16,6 +36,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             aria-label="menu"
             className="hamburger p-2 lg:hidden"
             onClick={() => setOpen(!open)}
+            aria-expanded={open}
+            aria-controls="admin-sidebar"
           >
             <span className="hamburger-line block w-6 h-[2px] bg-white"></span>
             <span className="hamburger-line block w-6 h-[2px] bg-white mt-1"></span>
@@ -41,6 +63,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       <div className="admin-container flex">
         <aside
+          id="admin-sidebar"
           className={`admin-sidebar fixed inset-y-0 left-0 z-50 w-64 bg-zinc-950 p-6 transform transition-transform duration-300 lg:relative lg:translate-x-0 ${open ? 'translate-x-0' : '-translate-x-full'}`}
         >
           <div className="flex justify-between items-center mb-8 lg:hidden">
@@ -50,48 +73,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </button>
           </div>
           <nav className="space-y-1">
-            <Link
-              href="/admin"
-              className="block p-2 hover:bg-white/5 rounded transition-colors text-sm"
-            >
-              Overview
-            </Link>
-            <Link
-              href="/admin/revenue"
-              className="block p-2 hover:bg-white/5 rounded transition-colors text-sm"
-            >
-              Revenue
-            </Link>
-            <Link
-              href="/admin/live"
-              className="block p-2 hover:bg-white/5 rounded transition-colors text-sm"
-            >
-              Live Control
-            </Link>
-            <Link
-              href="/admin/store"
-              className="block p-2 hover:bg-white/5 rounded transition-colors text-sm"
-            >
-              Store Manager
-            </Link>
-            <Link
-              href="/admin/content"
-              className="block p-2 hover:bg-white/5 rounded transition-colors text-sm"
-            >
-              Content Automation
-            </Link>
-            <Link
-              href="/admin/voice-logs"
-              className="block p-2 hover:bg-white/5 rounded transition-colors text-sm"
-            >
-              Voice Logs
-            </Link>
-            <Link
-              href="/admin/settings"
-              className="block p-2 hover:bg-white/5 rounded transition-colors text-sm"
-            >
-              Settings
-            </Link>
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="block p-2 hover:bg-white/5 rounded transition-colors text-sm"
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
         </aside>
 
@@ -110,6 +101,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </div>
             <div>
               <AdminAvatar />
+            </div>
+          </div>
+
+          <div className="admin-subnav">
+            <div className="admin-subnav-title">Admin Navigation</div>
+            <div className="admin-subnav-links">
+              {navItems.map((item) => (
+                <Link key={item.href} href={item.href} className="admin-subnav-link">
+                  {item.label}
+                </Link>
+              ))}
             </div>
           </div>
 
