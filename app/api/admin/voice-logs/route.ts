@@ -1,65 +1,85 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { promises as fs } from 'fs';
+import path from 'path';
+
 /**
- * VOICE COMMAND LOGS ENDPOINT
- * GET /api/admin/voice-logs
- * Returns: Array of recent voice command executions
- * Protected: Requires admin auth
+ * Minimal admin voice-logs API.
+ *
+ * - GET: returns last N logs (default 100)
+ * - POST: { action: 'clear' } to remove logs
+ *         { action: 'append', entry: {...} } to append a log (dev)
+ *
+ * Persisted to .data/voice-logs.json in project root for simplicity.
+ * Replace with DB-backed storage (Prisma/Mongo) for production.
  */
 
-import { getVoiceCommandLogs } from '@/voice/logger';
-import { NextRequest, NextResponse } from 'next/server';
+const DATA_DIR = path.join(process.cwd(), '.data');
+const LOG_FILE = path.join(DATA_DIR, 'voice-logs.json');
 
-export async function GET(req: NextRequest) {
+async function ensureStore() {
   try {
-    // TODO: Add auth check - verify admin session
-    // For now, logs are public (will restrict later)
-
-    const limit = req.nextUrl.searchParams.get('limit');
-    const logs = await getVoiceCommandLogs(limit ? parseInt(limit) : 50);
-
-    return NextResponse.json({
-      status: 'ok',
-      count: logs.length,
-      logs,
-    });
-  } catch (err: unknown) {
-    const message =
-      err instanceof Error
-        ? err instanceof Error
-          ? err instanceof Error
-            ? err.message
-            : 'Unknown error'
-          : 'Unknown error'
-        : 'Unknown error';
-    return NextResponse.json({ status: 'error', message }, { status: 400 });
+    await fs.mkdir(DATA_DIR, { recursive: true });
+    try {
+      await fs.access(LOG_FILE);
+    } catch {
+      await fs.writeFile(LOG_FILE, JSON.stringify([], null, 2), 'utf-8');
+    }
+  } catch (err) {
+    // ignore; read/write will fail later if needed
+    console.warn('ensureStore warning', err);
   }
 }
 
-export async function POST(req: NextRequest) {
+async function readLogs(): Promise<any[]> {
+  await ensureStore();
   try {
-    const { action } = await req.json();
+    const raw = await fs.readFile(LOG_FILE, 'utf-8');
+    return JSON.parse(raw || '[]');
+  } catch (err) {
+    console.error('readLogs error', err);
+    return [];
+  }
+}
 
-    if (action === 'clear') {
-      // Clear logs
-      const { clearVoiceCommandLogs } = await import('@/voice/logger');
-      await clearVoiceCommandLogs();
-      return NextResponse.json({
-        status: 'ok',
-        message: 'Voice command logs cleared',
-      });
+async function writeLogs(logs: any[]) {
+  await ensureStore();
+  await fs.writeFile(LOG_FILE, JSON.stringify(logs, null, 2), 'utf-8');
+}
+
+export async function GET(request: NextRequest) {
+  try {
+    const url = new URL(request.url);
+    const limit = Number(url.searchParams.get('limit') || '100');
+    const logs = await readLogs();
+    return NextResponse.json({ logs: logs.slice(0, limit) });
+  } catch (err) {
+    console.error('GET /api/admin/voice-logs failed', err);
+    return NextResponse.json({ error: 'Failed to read logs' }, { status: 500 });
+  }
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json().catch(() => null);
+    if (!body || !body.action) {
+      return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
     }
 
-    return NextResponse.json({ status: 'error', message: 'Unknown action' }, { status: 400 });
-  } catch (err: unknown) {
-    const message =
-      err instanceof Error
-        ? err instanceof Error
-          ? err instanceof Error
-            ? err.message
-            : 'Unknown error'
-          : 'Unknown error'
-        : 'Unknown error';
-    return NextResponse.json({ status: 'error', message }, { status: 400 });
+    if (body.action === 'clear') {
+      await writeLogs([]);
+      return NextResponse.json({ success: true });
+    }
+
+    if (body.action === 'append' && body.entry) {
+      const logs = await readLogs();
+      logs.unshift(body.entry);
+      await writeLogs(logs);
+      return NextResponse.json({ success: true });
+    }
+
+    return NextResponse.json({ error: 'Unknown action' }, { status: 400 });
+  } catch (err) {
+    console.error('POST /api/admin/voice-logs failed', err);
+    return NextResponse.json({ error: 'Failed to write logs' }, { status: 500 });
   }
 }
-
-

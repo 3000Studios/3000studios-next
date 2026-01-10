@@ -1,7 +1,12 @@
 import withBundleAnalyzer from '@next/bundle-analyzer';
 import type { NextConfig } from 'next';
 
+import path from 'path';
+
 const nextConfig: NextConfig = {
+  // This helps Next.js correctly infer the workspace root when multiple lockfiles exist
+  outputFileTracingRoot: path.resolve(__dirname),
+
   // Standalone output for smallest deploy bundle
   output: 'standalone',
 
@@ -101,4 +106,3 @@ const nextConfig: NextConfig = {
 export default withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 })(nextConfig);
-
