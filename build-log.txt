@@ -1,0 +1,61 @@
+ΓÇëWARNΓÇë Unsupported engine: wanted: {"node":"20"} (current: {"node":"v24.12.0","pnpm":"9.15.0"})
+
+> 3000studios-next@1.0.1 prebuild C:\ANTIGRAVITY\3000studios-next
+> node scripts/validate-app-structure.mjs
+
+Γ£à App structure validated. Safe to build.
+
+> 3000studios-next@1.0.1 build C:\ANTIGRAVITY\3000studios-next
+> next build --webpack
+
+Γû▓ Next.js 16.1.1 (webpack)
+- Experiments (use with caution):
+  ┬╖ optimizePackageImports
+
+ΓÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+Failed to compile.
+
+./app/login/page.tsx
+Error:   x You're importing a component that needs `useRouter`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+  |
+  |  Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+  |
+
+   ,-[C:\ANTIGRAVITY\3000studios-next\app\login\page.tsx:1:1]
+ 1 | import { useRouter, useSearchParams } from 'next/navigation';
+   :          ^^^^^^^^^
+ 2 | import { useState } from 'react';
+ 3 | import { motion } from 'framer-motion';
+   `----
+  x You're importing a component that needs `useSearchParams`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+  |
+  |  Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+  |
+
+   ,-[C:\ANTIGRAVITY\3000studios-next\app\login\page.tsx:1:1]
+ 1 | import { useRouter, useSearchParams } from 'next/navigation';
+   :                     ^^^^^^^^^^^^^^^
+ 2 | import { useState } from 'react';
+ 3 | import { motion } from 'framer-motion';
+   `----
+  x You're importing a component that needs `useState`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+  |
+  |  Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+  |
+
+   ,-[C:\ANTIGRAVITY\3000studios-next\app\login\page.tsx:2:1]
+ 1 | import { useRouter, useSearchParams } from 'next/navigation';
+ 2 | import { useState } from 'react';
+   :          ^^^^^^^^
+ 3 | import { motion } from 'framer-motion';
+ 4 | 
+ 5 | export default function LoginPage() {
+   `----
+
+Import trace for requested module:
+./app/login/page.tsx
+
+
+> Build failed because of webpack errors
+ΓÇëELIFECYCLEΓÇë Command failed with exit code 1.

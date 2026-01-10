@@ -240,3 +240,4 @@ export default function ShadowAvatar({
 
 // Preload the GLTF model
 useGLTF.preload("/models/shadow_entity.glb");
+

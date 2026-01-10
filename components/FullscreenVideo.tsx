@@ -37,3 +37,4 @@ export default function FullscreenVideo({ src, button }: { src: string; button?:
     </div>
   );
 }
+

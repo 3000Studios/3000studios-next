@@ -20,3 +20,4 @@ export function StoryBeats(emotion: string) {
     recommendedScene: recommendedScene[emotion] ?? 'lobby',
   };
 }
+

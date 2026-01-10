@@ -31,7 +31,7 @@ export function pushAnalytics(event: AnalyticsEvent) {
     try {
       listener(fullEvent);
     } catch (error: unknown) {
-      console.error('', _error);
+      console.error("", error);
     }
   });
 
@@ -57,3 +57,4 @@ export function getEventsByType(type: string, limit: number = 50): AnalyticsEven
 export function clearEvents() {
   recentEvents = [];
 }
+

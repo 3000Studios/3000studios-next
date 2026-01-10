@@ -31,7 +31,8 @@ export async function POST(request: NextRequest) {
       message: 'Stream initialized. Use WebRTC config to start broadcasting.',
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json({ error: 'Failed to start stream' }, { status: 500 });
   }
 }
+

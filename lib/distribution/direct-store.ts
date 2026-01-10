@@ -31,3 +31,4 @@ export async function createDirectProduct(input: any) {
     checkoutUrl: `/checkout?p=${price.id}`,
   };
 }
+

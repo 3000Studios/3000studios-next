@@ -27,7 +27,7 @@ export async function POST(_request: Request) {
 
     return NextResponse.json(dbStream);
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json({ error: 'Failed to create stream' }, { status: 500 });
   }
 }
@@ -45,3 +45,4 @@ export async function GET() {
     return NextResponse.json({ error: 'Failed to fetch stream' }, { status: 500 });
   }
 }
+

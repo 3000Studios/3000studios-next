@@ -15,7 +15,7 @@ export default function GlobalError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error('', _error);
+    console.error("", error);
   }, [error]);
 
   return (
@@ -67,3 +67,4 @@ export default function GlobalError({
     </html>
   );
 }
+

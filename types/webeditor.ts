@@ -41,3 +41,4 @@ export interface RepoMemory {
   last_login: string;
   chat_history: { role: string; content: string; timestamp: string }[];
 }
+

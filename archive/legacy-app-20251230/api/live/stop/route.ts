@@ -15,3 +15,4 @@ export async function POST(req: NextRequest) {
     message: 'Stream stopped successfully',
   });
 }
+

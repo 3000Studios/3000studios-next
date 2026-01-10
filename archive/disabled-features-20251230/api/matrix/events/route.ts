@@ -19,10 +19,11 @@ export async function GET(req: Request) {
       count: events.length,
     });
   } catch (error: unknown) {
-    console.error("", _error);
+    console.error("", error);
     return NextResponse.json(
       { error: (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") || "Failed to fetch events" },
       { status: 500 }
     );
   }
 }
+

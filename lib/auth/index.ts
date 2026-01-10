@@ -13,3 +13,4 @@ export function validateShadowToken(token: string): boolean {
 export function generateShadowSession(): string {
   return `shadow-${Date.now()}-${Math.random().toString(36).substring(7)}`;
 }
+

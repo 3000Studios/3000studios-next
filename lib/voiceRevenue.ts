@@ -249,3 +249,4 @@ async function rotateAffiliates(): Promise<CommandResult> {
     data: {},
   };
 }
+

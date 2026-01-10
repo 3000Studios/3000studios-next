@@ -124,3 +124,4 @@ export interface Collaborator {
   avatar?: string;
   addedAt: string;
 }
+

@@ -14,3 +14,4 @@ export async function createNewFile(filePath: string): Promise<void> {
   // File creation logic
   console.log(`Creating file: ${filePath}`);
 }
+

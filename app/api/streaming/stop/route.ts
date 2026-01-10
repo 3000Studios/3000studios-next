@@ -25,7 +25,8 @@ export async function POST(request: NextRequest) {
       message: 'Stream stopped successfully',
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json({ error: 'Failed to stop stream' }, { status: 500 });
   }
 }
+

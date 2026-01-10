@@ -182,3 +182,4 @@ export function getReportGenerator(): ReportGenerator {
   }
   return generator;
 }
+

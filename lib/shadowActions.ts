@@ -4,3 +4,4 @@ const shadow = {
   analyze: async () => ({ success: true }),
 };
 export default shadow;
+

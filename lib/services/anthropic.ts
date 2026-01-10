@@ -30,7 +30,7 @@ export async function generateWithClaude(prompt: string, system?: string): Promi
     const content = response.content[0];
     return content.type === 'text' ? content.text : '';
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     throw new Error('Failed to generate with Claude');
   }
 }
@@ -42,3 +42,4 @@ export async function generateCodeReview(code: string): Promise<string> {
 
   return generateWithClaude(prompt, system);
 }
+

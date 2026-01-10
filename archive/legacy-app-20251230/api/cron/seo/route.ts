@@ -15,3 +15,4 @@ export async function GET() {
     return NextResponse.json({ status: 'error', message: 'Protocol Failed' }, { status: 500 });
   }
 }
+

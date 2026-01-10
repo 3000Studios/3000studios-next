@@ -106,7 +106,7 @@ class AnalyticsService {
         body: JSON.stringify(event),
       });
     } catch (error: unknown) {
-      console.error('', _error);
+      console.error("", error);
     }
   }
 
@@ -133,3 +133,4 @@ export function getAnalytics(): AnalyticsService {
 export function useAnalytics() {
   return getAnalytics();
 }
+

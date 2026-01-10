@@ -24,3 +24,4 @@ export function MoodLighting({ emotion, scene }: { emotion: string; scene: strin
 
   return null;
 }
+

@@ -26,3 +26,4 @@ export const handlers: Record<VoiceCommand['type'], CommandHandler> = {
   CHANGE_STYLE: handleChangeStyle,
   PUBLISH_BLOG: handlePublishBlog,
 };
+

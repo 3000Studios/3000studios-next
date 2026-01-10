@@ -28,3 +28,4 @@ export async function GET() {
       : '❌ NEXT_PUBLIC_SITE_URL is missing',
   });
 }
+

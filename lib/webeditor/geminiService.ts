@@ -80,7 +80,7 @@ export const parseVoiceCommand = async (text: string): Promise<CommandIntent> =>
     const intent = JSON.parse(jsonText) as CommandIntent;
     return intent;
   } catch (_error: unknown) {
-    console.error('Gemini NLU Error:', _error);
+    console.error("", error);
     return {
       action: 'unknown',
       reasoning: 'Failed to process with AI.',
@@ -101,3 +101,4 @@ export const generateCommitMessage = async (command: string, action: string): Pr
     return `Update via Editor 3000: ${action}`;
   }
 };
+

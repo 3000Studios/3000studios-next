@@ -27,3 +27,4 @@ export function formatPrice(cents: number) {
     currency: 'USD',
   }).format(cents / 100);
 }
+

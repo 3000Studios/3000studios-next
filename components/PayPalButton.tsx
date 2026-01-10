@@ -50,7 +50,7 @@ export default function PayPalButton({ amount, onSuccess }: PayPalButtonProps) {
             });
           }}
           onError={(err) => {
-            console.error('', _err);
+            console.error("", err);
             setError('PayPal encountered exists. Please try again.');
           }}
         />
@@ -58,3 +58,4 @@ export default function PayPalButton({ amount, onSuccess }: PayPalButtonProps) {
     </div>
   );
 }
+

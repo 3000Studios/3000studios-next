@@ -496,3 +496,4 @@ export function useProducts() {
 
   return { fetchProducts, loading, error };
 }
+

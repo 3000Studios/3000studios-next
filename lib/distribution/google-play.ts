@@ -23,3 +23,4 @@ export async function updateStoreListing(appId: string, copy: any) {
   // Updates title, short description, full description
   return true;
 }
+

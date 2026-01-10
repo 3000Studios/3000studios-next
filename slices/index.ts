@@ -5,3 +5,4 @@ import dynamic from 'next/dynamic';
 export const components = {
   featured_badge: dynamic(() => import('./FeaturedBadge')),
 };
+

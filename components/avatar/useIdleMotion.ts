@@ -10,3 +10,4 @@ export default function useIdleMotion(ref: RefObject<Group>) {
     ref.current.position.y = -1.3 + Math.sin(clock.elapsedTime * 1.5) * 0.03;
   });
 }
+

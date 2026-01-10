@@ -56,3 +56,4 @@ export function resolveSpeechRecognition(): SpeechRecognitionConstructor | null 
   const w = window as any;
   return (w.SpeechRecognition || w.webkitSpeechRecognition) as SpeechRecognitionConstructor | null;
 }
+

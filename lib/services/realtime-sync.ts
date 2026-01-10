@@ -165,7 +165,7 @@ async function monitorDeployment(
       await new Promise<void>((resolve) => setTimeout(resolve, interval));
       attempts++;
     } catch (error: unknown) {
-      console.error('', _error);
+      console.error("", error);
       attempts++;
     }
   }
@@ -385,3 +385,4 @@ export async function forceRedeploy(
     };
   }
 }
+

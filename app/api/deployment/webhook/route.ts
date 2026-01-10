@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
       },
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json({ error: 'Failed to process webhook' }, { status: 500 });
   }
 }
@@ -51,3 +51,4 @@ export async function GET(_request: NextRequest) {
     },
   });
 }
+

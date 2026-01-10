@@ -22,7 +22,7 @@ export function broadcast(data: any) {
         socket.send(msg);
       }
     } catch (error: unknown) {
-      console.error("", _error);
+      console.error("", error);
       sockets.delete(socket);
     }
   });
@@ -35,3 +35,4 @@ export function addSocket(socket: any) {
 export function removeSocket(socket: any) {
   sockets.delete(socket);
 }
+

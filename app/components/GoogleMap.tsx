@@ -131,3 +131,4 @@ export default function GoogleMap({
 
   return <div ref={mapRef} className="w-full h-full" style={{ minHeight: '400px' }} />;
 }
+

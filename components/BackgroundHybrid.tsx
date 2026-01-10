@@ -114,3 +114,4 @@ export default function BackgroundHybrid() {
 
   return <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-50" />;
 }
+

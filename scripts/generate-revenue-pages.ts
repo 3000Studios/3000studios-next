@@ -168,7 +168,7 @@ if (fs.existsSync(dropzoneDir)) {
         );
       }
     } catch (err: unknown) {
-      console.error('', _err);
+      console.error("", err);
     }
   });
 }
@@ -181,3 +181,4 @@ function generatePage(p: PageData) {
   fs.writeFileSync(path.join(dir, 'page.tsx'), template(p));
   console.log(`Generated revenue page: ${p.slug}`);
 }
+

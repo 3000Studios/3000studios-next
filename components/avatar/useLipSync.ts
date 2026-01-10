@@ -32,7 +32,8 @@ export default function useLipSync(ref: RefObject<Group>) {
         loop();
       })
       .catch((err) => {
-        console.log('', _err);
+        console.log("", err);
       });
   }, [ref]);
 }
+

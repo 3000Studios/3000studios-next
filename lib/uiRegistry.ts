@@ -39,3 +39,4 @@ export function updateRegistry<K extends keyof typeof uiRegistry>(
 }
 
 export type UIRegistry = typeof uiRegistry;
+

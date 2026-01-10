@@ -20,3 +20,4 @@ Return only the label.
 
   return text.trim();
 }
+

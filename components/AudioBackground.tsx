@@ -21,7 +21,7 @@ export function AudioBackground({ publicId, autoplay = true, loop = true }: Audi
       // Start playing muted (browser autoplay policy)
       audio.muted = true;
       audio.play().catch((err) => {
-        console.log('', _err);
+        console.log("", err);
       });
     }
   }, [autoplay, isMuted]);
@@ -59,3 +59,4 @@ export function AudioBackground({ publicId, autoplay = true, loop = true }: Audi
     </>
   );
 }
+

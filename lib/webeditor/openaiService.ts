@@ -69,7 +69,7 @@ export const parseVoiceCommand = async (
 
     return JSON.parse(content) as CommandIntent;
   } catch (_error: unknown) {
-    console.error('OpenAI NLU Error:', _error);
+    console.error("", error);
     return {
       action: 'unknown',
       reasoning: 'Failed to process intention with Neural Core.',
@@ -109,3 +109,4 @@ export const generateCommitMessage = async (
     return `Update via Editor 3000: ${action}`;
   }
 };
+

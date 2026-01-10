@@ -9,3 +9,4 @@ export const styleRegistry = {
 };
 
 export type StyleRegistry = typeof styleRegistry;
+

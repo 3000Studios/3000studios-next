@@ -8,3 +8,4 @@ export async function GET(request: NextRequest) {
 
   return await redirectToPreviewURL({ client, request });
 }
+

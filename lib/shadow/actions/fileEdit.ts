@@ -17,3 +17,4 @@ export async function editFile(filePath: string, find: string | RegExp, replace:
 
   return true;
 }
+

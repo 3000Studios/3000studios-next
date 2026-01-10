@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
       message: `Rollback successful: ${reason || 'Manual rollback'}`,
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json(
       {
         error: 'Rollback failed',
@@ -49,3 +49,4 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+

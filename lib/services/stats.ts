@@ -75,3 +75,4 @@ export async function getMatrixStats(): Promise<StatItem[]> {
     })
   ) as StatItem[];
 }
+

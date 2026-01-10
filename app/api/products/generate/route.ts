@@ -38,3 +38,4 @@ function buildSchema({ name, description, price, image, url, category }: any) {
     },
   };
 }
+

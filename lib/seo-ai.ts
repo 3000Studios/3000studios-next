@@ -103,3 +103,4 @@ export async function submitToSearchEngines(url: string) {
   // Bing indexing API integration
   console.log(`Submitting ${url} to search engines`);
 }
+

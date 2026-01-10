@@ -45,7 +45,7 @@ export function useAI(): UseCompletionResponse {
     } catch (err: unknown) {
       const error = err instanceof Error ? err : new Error('Unknown error');
       setError(error);
-      console.error('', _error);
+      console.error("", error);
       return null;
     } finally {
       setIsLoading(false);
@@ -59,3 +59,4 @@ export function useAI(): UseCompletionResponse {
     error,
   };
 }
+

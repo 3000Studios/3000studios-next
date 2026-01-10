@@ -27,7 +27,8 @@ export async function GET(_request: NextRequest) {
       },
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json({ error: 'Failed to get deployment status' }, { status: 500 });
   }
 }
+

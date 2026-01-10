@@ -87,7 +87,8 @@ export async function GET(req: Request) {
         : null,
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json({ error: 'Failed to browse media' }, { status: 500 });
   }
 }
+

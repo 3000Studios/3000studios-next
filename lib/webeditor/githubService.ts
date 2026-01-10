@@ -4,7 +4,7 @@ import { CommandIntent, CommandResult, GitHubConfig, RepoMemory } from '../../ty
 const MEMORY_PATH = '.speech-to-web-memory/history.json';
 
 const handleApiError = (error: any, context: string): CommandResult => {
-  console.error('', _error);
+  console.error("", error);
 
   // Specific actionable feedback
   if (!navigator.onLine) {
@@ -266,7 +266,7 @@ export const getDeploymentStatus = async (config: GitHubConfig) => {
     }
     return { state: 'pending', description: 'Deployment created, waiting for status...' };
   } catch (_error: unknown) {
-    console.warn('Failed to fetch deployment status', _error);
+    console.warn("", error);
     return null;
   }
 };
@@ -392,3 +392,4 @@ export const initializeAndRepairRepo = async (config: GitHubConfig, log: (msg: s
 
   log('All systems nominal. Ready for input.');
 };
+

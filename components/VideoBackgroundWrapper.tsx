@@ -13,3 +13,4 @@ const VideoBackground = dynamic(() => import('./VideoBackground'), {
 export default function VideoBackgroundWrapper() {
   return <VideoBackground />;
 }
+

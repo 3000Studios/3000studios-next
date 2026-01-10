@@ -14,7 +14,7 @@ export async function storeMemory(userId: string, text: string) {
       VALUES (${id}, ${userId}, ${text}, ${embedding}::vector)
     `;
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
   }
 }
 
@@ -33,7 +33,8 @@ export async function recallMemory(userId: string, query: string): Promise<strin
 
     return results.map((r: { content: string }) => r.content).join('\n');
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return '';
   }
 }
+

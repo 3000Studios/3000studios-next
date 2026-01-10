@@ -42,7 +42,7 @@ class AuditLogger {
         body: JSON.stringify(logEntry),
       });
     } catch (error: unknown) {
-      console.error('', _error);
+      console.error("", error);
     }
 
     // Log to console in development
@@ -70,7 +70,7 @@ class AuditLogger {
       const data = await response.json();
       return data.logs || [];
     } catch (error: unknown) {
-      console.error('', _error);
+      console.error("", error);
       return this.logs; // Fallback to local cache
     }
   }
@@ -89,3 +89,4 @@ export function getAuditLogger(): AuditLogger {
   }
   return auditLoggerInstance;
 }
+

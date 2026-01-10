@@ -7,3 +7,4 @@ export const paypalConfig = {
       : 'https://api-m.sandbox.paypal.com',
   environment: process.env.PAYPAL_ENV === 'production' ? 'paypal' : 'sandbox',
 };
+

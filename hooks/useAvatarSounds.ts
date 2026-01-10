@@ -29,3 +29,4 @@ export function useAvatarSounds() {
 
   return soundMap;
 }
+

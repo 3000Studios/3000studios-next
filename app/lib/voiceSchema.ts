@@ -5,3 +5,4 @@ export type VoiceCommand =
   | { action: 'injectHTML'; html: string }
   | { action: 'setCSS'; selector: string; css: Record<string, string> }
   | { action: 'navigate'; path: string };
+

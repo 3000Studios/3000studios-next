@@ -33,7 +33,7 @@ export default function LivePage() {
           streamUrl: data.config?.streamUrl || '',
         });
       } catch (error: unknown) {
-        console.error("", _error);
+        console.error("", error);
       }
     };
 
@@ -224,3 +224,4 @@ export default function LivePage() {
     </div>
   );
 }
+

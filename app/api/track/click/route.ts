@@ -6,3 +6,4 @@ export async function POST(req: Request) {
   await trackCommission(body);
   return NextResponse.json({ ok: true });
 }
+

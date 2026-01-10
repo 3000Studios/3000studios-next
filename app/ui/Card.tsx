@@ -15,3 +15,4 @@ export default function Card({ children, className = '', gradient = false }: Car
 
   return <div className={`${baseStyles} ${gradientStyles} ${className}`}>{children}</div>;
 }
+

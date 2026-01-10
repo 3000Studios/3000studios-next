@@ -157,3 +157,4 @@ export default function ProductGrid({ products, onAddToCart }: ProductGridProps)
     </div>
   );
 }
+

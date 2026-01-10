@@ -28,3 +28,4 @@ export interface PayPalCaptureResponse {
   status?: string;
   error?: string;
 }
+

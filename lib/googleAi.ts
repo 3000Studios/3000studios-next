@@ -63,7 +63,7 @@ export async function generateProductStrategy(
       .trim();
     return JSON.parse(jsonString) as CampaignOutput;
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return null;
   }
 }
@@ -81,3 +81,4 @@ function mockStrategy(product: ProductInput): CampaignOutput {
     pricingStrategy: 'Premium skimming strategy: Start high, enable limited early access.',
   };
 }
+

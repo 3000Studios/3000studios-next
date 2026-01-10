@@ -38,3 +38,4 @@ export const siteState = {
 export function updateSiteState(updates: Partial<typeof siteState>) {
   Object.assign(siteState, updates);
 }
+

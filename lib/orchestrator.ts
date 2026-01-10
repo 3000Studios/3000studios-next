@@ -90,7 +90,7 @@ export class SystemOrchestrator {
         payload: { cycle: this.cycleCount, success: true },
       });
     } catch (error: unknown) {
-      console.error('', _error);
+      console.error("", error);
 
       logAudit({
         type: 'deploy',
@@ -161,3 +161,4 @@ export const Orchestrator = SystemOrchestrator.getInstance();
 if (process.env.NODE_ENV === 'production' && process.env.AUTO_START === 'true') {
   Orchestrator.start();
 }
+

@@ -52,7 +52,7 @@ export async function triggerDeployment(branch: string = 'main'): Promise<Deploy
       createdAt: response.data.createdAt,
     };
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     throw new Error('Failed to trigger deployment');
   }
 }
@@ -71,7 +71,7 @@ export async function getDeploymentStatus(deploymentId: string): Promise<string>
 
     return response.data.readyState;
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     throw new Error('Failed to check deployment status');
   }
 }
@@ -104,7 +104,7 @@ export async function getLatestDeployment(): Promise<DeploymentResponse | null> 
 
     return null;
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     throw new Error('Failed to get latest deployment');
   }
 }
@@ -125,7 +125,8 @@ export async function cancelDeployment(deploymentId: string): Promise<void> {
       }
     );
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     throw new Error('Failed to cancel deployment');
   }
 }
+

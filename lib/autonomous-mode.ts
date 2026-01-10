@@ -65,7 +65,7 @@ export class AutonomousOracle {
         try {
           await task();
         } catch (error: unknown) {
-          console.error('', _error);
+          console.error("", error);
         }
       }
 
@@ -95,3 +95,4 @@ export class AutonomousOracle {
 
 // Singleton export
 export const AutonomousMode = AutonomousOracle.getInstance();
+

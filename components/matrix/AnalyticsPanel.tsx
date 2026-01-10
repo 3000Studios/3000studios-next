@@ -26,7 +26,7 @@ export default function AnalyticsPanel() {
         const data = await res.json();
         setEvents(data.events || []);
       } catch (error: unknown) {
-        console.error('', _error);
+        console.error("", error);
       }
     };
 
@@ -72,3 +72,4 @@ export default function AnalyticsPanel() {
     </div>
   );
 }
+

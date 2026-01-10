@@ -17,3 +17,4 @@ export function normalizeVendorProduct(
     commissionRate: raw.commission ? Number(raw.commission) : undefined,
   };
 }
+

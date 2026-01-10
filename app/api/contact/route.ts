@@ -23,7 +23,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ message: 'Message received successfully' }, { status: 200 });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
+

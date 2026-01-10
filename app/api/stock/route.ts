@@ -31,7 +31,8 @@ export async function GET() {
 
     return NextResponse.json(stocks);
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json({ error: 'Failed to fetch stock data' }, { status: 500 });
   }
 }
+

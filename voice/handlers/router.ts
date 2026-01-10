@@ -98,9 +98,7 @@ async function gitCommitAndPush(files: string[], commandType: string): Promise<v
     // Push to trigger deploy
     await execAsync('git push origin main');
 
-    console.log(`✅ Voice command committed and pushed: ${commandType}`);
-  } catch (error: unknown) {
-    console.error('', _error);
+    console.log("", error);
     throw error;
   }
 }
@@ -144,3 +142,4 @@ export function validateCommand(command: VoiceCommand): boolean {
       return true;
   }
 }
+

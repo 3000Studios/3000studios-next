@@ -29,3 +29,4 @@ export async function enforceCostLimit(userId: string, tokensRequested: number) 
     console.warn('Cost guard error, failing open:', error);
   }
 }
+

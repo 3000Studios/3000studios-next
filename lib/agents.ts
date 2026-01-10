@@ -7,3 +7,4 @@ export const agents = {
   writer: openai('gpt-4o-mini'),
   system: openai('gpt-4o'),
 };
+

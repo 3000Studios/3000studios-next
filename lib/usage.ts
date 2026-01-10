@@ -16,6 +16,7 @@ export async function logUsage(data: {
       },
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
   }
 }
+

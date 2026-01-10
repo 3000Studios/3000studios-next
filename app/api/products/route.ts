@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
       count: products.length,
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
 
     // Return fallback products if database fails
     return NextResponse.json({
@@ -48,3 +48,4 @@ export async function GET(request: NextRequest) {
     });
   }
 }
+

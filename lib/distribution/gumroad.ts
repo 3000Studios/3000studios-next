@@ -18,3 +18,4 @@ export async function createGumroadProduct(product: any) {
     url: `https://gumroad.com/l/${product.slug || 'simulated-product'}`,
   };
 }
+

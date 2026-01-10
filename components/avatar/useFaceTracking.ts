@@ -40,3 +40,4 @@ export default function useFaceTracking(ref: RefObject<Group>) {
     });
   }, [ref]);
 }
+

@@ -81,3 +81,4 @@ export default function LiveWallpaper() {
     <canvas ref={canvasRef} className="fixed inset-0 w-full h-full -z-10 pointer-events-none" />
   );
 }
+

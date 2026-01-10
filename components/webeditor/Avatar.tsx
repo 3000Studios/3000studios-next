@@ -67,3 +67,4 @@ export const Avatar: React.FC<AvatarProps> = ({ mood }) => {
     </div>
   );
 };
+

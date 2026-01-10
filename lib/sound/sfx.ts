@@ -57,3 +57,4 @@ export function playSound(type: 'hover' | 'click' | 'success' | 'nav') {
     console.debug('Audio not supported:', error);
   }
 }
+

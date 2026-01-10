@@ -36,3 +36,4 @@ export default function AvatarEmotionDriver({ api }: AvatarEmotionDriverProps) {
 
   return null;
 }
+

@@ -45,3 +45,4 @@ export default function RotatingCarousel() {
     </div>
   );
 }
+

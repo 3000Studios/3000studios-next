@@ -31,10 +31,11 @@ export async function POST(req: Request) {
       command: spoken,
     });
   } catch (error: unknown) {
-    console.error("", _error);
+    console.error("", error);
     return NextResponse.json(
       { error: (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") || "Voice command failed" },
       { status: 500 }
     );
   }
 }
+

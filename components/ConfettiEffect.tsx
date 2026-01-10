@@ -29,10 +29,11 @@ export default function ConfettiEffect({ show }: ConfettiEffectProps) {
           zIndex: 99999,
         });
       } catch (error: unknown) {
-        console.warn('', _error);
+        console.warn("", error);
       }
     })();
   }, [show]);
 
   return null;
 }
+

@@ -135,3 +135,4 @@ export const GET = withRateLimit(
   withSecurity(getHandler, { csrf: false, cors: true }),
   RATE_LIMITS.api
 );
+

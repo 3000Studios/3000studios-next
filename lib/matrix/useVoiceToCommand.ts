@@ -76,3 +76,4 @@ const useVoiceToCommand = (onCommand: (command: string) => void) => {
 };
 
 export default useVoiceToCommand;
+

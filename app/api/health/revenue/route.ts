@@ -46,15 +46,7 @@ export async function GET(request: NextRequest) {
 
         // Alert if revenue endpoint is down
         if (!response.ok) {
-          console.error(`[ALERT] Revenue endpoint ${endpoint} returned ${response.status}`);
-        }
-
-        // Alert if response is too slow
-        if (responseTime > 5000) {
-          console.warn(`[ALERT] Revenue endpoint ${endpoint} slow: ${responseTime}ms`);
-        }
-      } catch (error: unknown) {
-        console.error('', _error);
+          console.error("", error);
         results.push({
           endpoint,
           status: 'down',
@@ -74,7 +66,8 @@ export async function GET(request: NextRequest) {
       alerts: criticalDown.length > 0 ? `${criticalDown.length} critical endpoints down` : null,
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json({ error: 'Health check failed' }, { status: 500 });
   }
 }
+

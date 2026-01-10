@@ -55,7 +55,7 @@ export default function EmotionMirror() {
           frameId = requestAnimationFrame(loop);
         }, 1000);
       } catch (error: unknown) {
-        console.warn('', _error);
+        console.warn("", error);
         setIsEnabled(false);
       }
     }
@@ -85,3 +85,4 @@ export default function EmotionMirror() {
     />
   );
 }
+

@@ -5,3 +5,4 @@ export const Marquee = () => (
     </p>
   </div>
 );
+

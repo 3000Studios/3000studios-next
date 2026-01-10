@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
       commitMessage,
     });
   } catch (error: unknown) {
-    console.error("", _error);
+    console.error("", error);
     return NextResponse.json(
       { error: 'Failed to deploy changes', details: (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") },
       { status: 500 }
@@ -89,3 +89,4 @@ async function applyFileChange(change: FileChange) {
       break;
   }
 }
+

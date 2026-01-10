@@ -16,3 +16,4 @@ export default function AdSlot({ slot = 'default' }: { slot?: string }) {
     </div>
   );
 }
+

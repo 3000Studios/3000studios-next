@@ -5,3 +5,4 @@ export function useHoverSound(src: string) {
   const audio = new Audio(src);
   return () => audio.play().catch(() => {});
 }
+

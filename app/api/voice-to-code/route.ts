@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
           finalTranscript = transcription.text;
         }
       } catch (err: unknown) {
-        console.error('', _err);
+        console.error("", err);
       }
     }
 
@@ -154,7 +154,7 @@ export async function POST(request: NextRequest) {
       action: 'preview',
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json(
       { error: 'Internal Server Error', details: String(error) },
       { status: 500 }
@@ -221,3 +221,4 @@ async function applyPatches(patches: CodePatch[]) {
     results,
   };
 }
+

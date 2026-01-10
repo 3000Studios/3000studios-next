@@ -28,3 +28,4 @@ export function trackAffiliateClick(link: string) {
   console.log(`Affiliate click tracked: ${link}`);
   // Send to analytics
 }
+

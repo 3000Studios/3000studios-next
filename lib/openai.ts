@@ -5,3 +5,4 @@ export const openai = createOpenAI({
   organization: undefined,
   project: undefined,
 });
+

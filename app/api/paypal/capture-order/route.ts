@@ -45,7 +45,8 @@ export async function POST(request: NextRequest) {
       payer: captureResult.payer,
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json({ error: 'Failed to capture PayPal order' }, { status: 500 });
   }
 }
+

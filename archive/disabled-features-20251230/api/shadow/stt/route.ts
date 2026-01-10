@@ -34,10 +34,11 @@ export async function POST(req: NextRequest): Promise<Response> {
 
     return NextResponse.json({ text: transcription.text });
   } catch (error: unknown) {
-    console.error("", _error);
+    console.error("", error);
     return NextResponse.json(
       { error: "Transcription failed" },
       { status: 500 },
     );
   }
 }
+

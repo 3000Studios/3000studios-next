@@ -137,6 +137,7 @@ export function preloadAvatarModel(path: string) {
   try {
     useGLTF.preload(path);
   } catch (error: unknown) {
-    console.log('', _error);
+    console.log("", error);
   }
 }
+

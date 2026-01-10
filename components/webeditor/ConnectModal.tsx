@@ -123,3 +123,4 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({ onConnect }) => {
     </div>
   );
 };
+

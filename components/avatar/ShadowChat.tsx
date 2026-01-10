@@ -38,7 +38,7 @@ export default function ShadowChat() {
         updateEmotion(data.avatar.emotion, data.avatar.intensity);
       }
     } catch (error: unknown) {
-      console.error('', _error);
+      console.error("", error);
       setMessages((prev) => [
         ...prev,
         { role: 'shadow', text: 'Yo, my circuits just glitched. Try again?' },
@@ -100,3 +100,4 @@ export default function ShadowChat() {
     </div>
   );
 }
+

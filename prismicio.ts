@@ -39,3 +39,4 @@ export const createClient = (config: ClientConfig = {}) => {
 
   return client;
 };
+

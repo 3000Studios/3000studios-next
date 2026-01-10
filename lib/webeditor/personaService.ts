@@ -106,3 +106,4 @@ export const speakWithAttitude = (text: string) => {
 
   window.speechSynthesis.speak(utterance);
 };
+

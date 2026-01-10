@@ -51,7 +51,8 @@ export async function POST(request: NextRequest) {
         : 'Blog post generated successfully',
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json({ error: 'Failed to generate blog post' }, { status: 500 });
   }
 }
+

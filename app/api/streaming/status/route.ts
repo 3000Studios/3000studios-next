@@ -22,7 +22,8 @@ export async function GET(request: NextRequest) {
       title: 'No active stream',
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json({ error: 'Failed to get stream status' }, { status: 500 });
   }
 }
+

@@ -24,9 +24,10 @@ export async function POST(req: NextRequest) {
       timestamp: new Date().toISOString(),
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json({ error: 'Optimization failed' }, { status: 500 });
   }
 }
 
 export const preferredRegion = 'auto';
+

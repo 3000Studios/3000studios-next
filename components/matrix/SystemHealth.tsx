@@ -17,7 +17,7 @@ export default function SystemHealth() {
         const data = await res.json();
         setHealth(data);
       } catch (error: unknown) {
-        console.error('', _error);
+        console.error("", error);
       }
     };
 
@@ -58,3 +58,4 @@ export default function SystemHealth() {
     </div>
   );
 }
+

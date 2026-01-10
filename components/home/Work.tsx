@@ -7,3 +7,4 @@ export const Work = () => (
     </div>
   </section>
 );
+

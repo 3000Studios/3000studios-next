@@ -18,7 +18,7 @@ export default function Error({
 }) {
   useEffect(() => {
     // Log error to monitoring service in production
-    console.error('', _error);
+    console.error("", error);
   }, [error]);
 
   return (
@@ -73,3 +73,4 @@ export default function Error({
     </div>
   );
 }
+

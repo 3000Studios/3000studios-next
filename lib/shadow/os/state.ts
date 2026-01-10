@@ -73,3 +73,4 @@ export const useShadowOS = create<ShadowOSState>((set) => ({
 
   setVoiceActive: (active) => set({ voiceActive: active }),
 }));
+

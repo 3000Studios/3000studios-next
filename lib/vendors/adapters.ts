@@ -110,3 +110,4 @@ export const vendorAdapters: Record<string, VendorAdapter> = {
   amazon: amazonAdapter,
   shopify: shopifyAdapter,
 };
+

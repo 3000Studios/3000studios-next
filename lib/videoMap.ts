@@ -14,3 +14,4 @@ export const videoMap: Record<string, string> = {
 export function getVideoForRoute(route: string): string | undefined {
   return videoMap[route];
 }
+

@@ -48,3 +48,4 @@ declare module '@tensorflow-models/blazeface' {
 }
 
 export {};
+

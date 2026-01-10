@@ -306,3 +306,4 @@ export function getPortfolioById(id: string): PortfolioItem | undefined {
 export function getAllPortfolioCategories(): string[] {
   return Array.from(new Set(portfolioItems.map((item) => item.category)));
 }
+

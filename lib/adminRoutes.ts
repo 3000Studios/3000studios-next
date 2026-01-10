@@ -17,3 +17,4 @@ export const adminRoutes = [
 export function isAdminRoute(pathname: string): boolean {
   return adminRoutes.some((route) => pathname.startsWith(route));
 }
+

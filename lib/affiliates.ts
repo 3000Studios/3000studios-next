@@ -83,6 +83,7 @@ export function trackAffiliateClick(affiliateId: string): void {
           timestamp: Date.now(),
         },
       }),
-    }).catch((err) => console.error('', _err));
+    }).catch((err) => console.error("", err));
   }
 }
+

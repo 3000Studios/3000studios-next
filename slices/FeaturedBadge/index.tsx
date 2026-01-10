@@ -25,3 +25,4 @@ const FeaturedBadge: FC<FeaturedBadgeProps> = ({ slice }) => {
 };
 
 export default FeaturedBadge;
+

@@ -55,3 +55,4 @@ export default function IntroVideoGate({ children }: { children: React.ReactNode
 
   return <>{children}</>;
 }
+

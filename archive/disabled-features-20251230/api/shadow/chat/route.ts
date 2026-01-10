@@ -36,10 +36,11 @@ export async function POST(req: Request) {
       avatar,
     });
   } catch (error: unknown) {
-    console.error("", _error);
+    console.error("", error);
     return NextResponse.json(
       { error: (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") || "Chat failed" },
       { status: 500 }
     );
   }
 }
+

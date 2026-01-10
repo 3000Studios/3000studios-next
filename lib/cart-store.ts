@@ -85,3 +85,4 @@ export const useCart = create<CartState>()(
 
 // Alias for backward compatibility
 export const useCartStore = useCart;
+

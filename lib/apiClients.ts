@@ -192,9 +192,7 @@ export const getMongoClient = async (): Promise<MongoClient> => {
         maxIdleTimeMS: 30000,
       });
       await mongoClient.connect();
-      console.log('✅ MongoDB connected successfully');
-    } catch (error: unknown) {
-      console.error('', _error);
+      console.log("", error);
       throw error;
     } finally {
       isConnecting = false;
@@ -405,3 +403,4 @@ const apiClients = {
 };
 
 export default apiClients;
+

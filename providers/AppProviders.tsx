@@ -28,3 +28,4 @@ export function AppProviders({ children }: AppProvidersProps) {
     </ThemeProvider>
   );
 }
+

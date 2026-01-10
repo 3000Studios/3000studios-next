@@ -12,3 +12,4 @@ export default function ShadowLayout({ children }: { children: ReactNode }) {
     </div>
   );
 }
+

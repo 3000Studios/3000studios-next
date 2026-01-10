@@ -74,3 +74,4 @@ export const amortizationEngine = {
     return PRODUCT_CATALOG[0]; // Default Toolkit
   },
 };
+

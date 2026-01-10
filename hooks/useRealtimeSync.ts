@@ -54,7 +54,7 @@ export function useRealtimeSync() {
         }));
       }
     } catch (error: unknown) {
-      console.error('', _error);
+      console.error("", error);
     }
   }, []);
 
@@ -148,7 +148,7 @@ export function useRealtimeSync() {
         // Refresh status after deployment
         await fetchStatus();
       } catch (error: unknown) {
-        console.error('', _error);
+        console.error("", error);
         setDeploymentStatus((prev) => ({
           ...prev,
           isDeploying: false,
@@ -253,7 +253,7 @@ export function useRealtimeSync() {
 
         await fetchStatus();
       } catch (error: unknown) {
-        console.error('', _error);
+        console.error("", error);
         setDeploymentStatus((prev) => ({
           ...prev,
           isDeploying: false,
@@ -295,3 +295,4 @@ export function useRealtimeSync() {
     refreshStatus: fetchStatus,
   };
 }
+

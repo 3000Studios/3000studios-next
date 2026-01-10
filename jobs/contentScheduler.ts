@@ -132,7 +132,7 @@ export class ContentScheduler {
     try {
       await fetch('/api/cron/sitemap', { method: 'POST' });
     } catch (error: unknown) {
-      console.error('', _error);
+      console.error("", error);
     }
   }
 
@@ -143,7 +143,7 @@ export class ContentScheduler {
     if (this.processInterval) return;
 
     this.processInterval = setInterval(() => {
-      this.processScheduledContent().catch((err) => console.error('', _err));
+      this.processScheduledContent().catch((err) => console.error("", err));
     }, intervalMs);
   }
 
@@ -181,3 +181,4 @@ export function getContentScheduler(): ContentScheduler {
   }
   return scheduler;
 }
+

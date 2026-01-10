@@ -104,3 +104,4 @@ export function useVoiceBridge() {
   if (!context) throw new Error('useVoiceBridge must be used within VoiceBridgeProvider');
   return context;
 }
+

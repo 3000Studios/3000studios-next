@@ -13,3 +13,4 @@ export default function BackgroundMusic({ src }: { src: string }) {
 
   return <audio ref={audioRef} src={src} loop />;
 }
+

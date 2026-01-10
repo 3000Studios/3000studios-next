@@ -49,3 +49,4 @@ export const AmbientAudio = () => {
 
   return <audio ref={audioRef} preload="auto" style={{ display: 'none' }} />;
 };
+

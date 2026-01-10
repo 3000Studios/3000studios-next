@@ -324,3 +324,4 @@ export function getAllTags(): string[] {
   const tags = blogPosts.flatMap((post) => post.tags);
   return Array.from(new Set(tags));
 }
+

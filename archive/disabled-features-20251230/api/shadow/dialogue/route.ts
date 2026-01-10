@@ -26,3 +26,4 @@ export async function POST(req: Request) {
   const json = await result.json();
   return NextResponse.json({ text: json.choices[0].message.content });
 }
+

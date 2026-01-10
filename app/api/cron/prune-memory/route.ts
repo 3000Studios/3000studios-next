@@ -4,3 +4,4 @@ export async function GET() {
   await pruneMemory();
   return Response.json({ status: 'memory pruned' });
 }
+

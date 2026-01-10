@@ -327,3 +327,4 @@ export function useConsent() {
     advertising: consent?.advertising ?? false,
   };
 }
+

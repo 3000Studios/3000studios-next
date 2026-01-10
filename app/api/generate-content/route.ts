@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
     });
   } catch (error: unknown) {
     // Don't expose error details
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json(
       { status: 'error', message: 'Request processing failed' },
       { status: 500 }
@@ -105,3 +105,4 @@ export async function GET(request: NextRequest) {
     },
   });
 }
+

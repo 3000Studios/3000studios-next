@@ -36,3 +36,4 @@ export function applyCommission(price: number, commissionRate?: number) {
   const rate = commissionRate ?? 0.1;
   return Number((price * (1 + rate)).toFixed(2));
 }
+

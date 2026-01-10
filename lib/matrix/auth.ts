@@ -14,7 +14,7 @@ export async function initMasterPassword() {
       await kv.set('matrix-email', MASTER_EMAIL);
     }
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
   }
 }
 
@@ -33,7 +33,7 @@ export async function validateLogin(email: string, pass: string): Promise<boolea
 
     return await bcrypt.compare(pass, storedHash);
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return false;
   }
 }
@@ -56,3 +56,4 @@ export async function validateSession(sessionId: string): Promise<string | null>
 export async function destroySession(sessionId: string): Promise<void> {
   await kv.del(`session:${sessionId}`);
 }
+

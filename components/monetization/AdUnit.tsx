@@ -29,7 +29,7 @@ export default function AdUnit({
         win.adsbygoogle.push({});
       }
     } catch (err: unknown) {
-      console.error('', _err);
+      console.error("", err);
     }
   }, []);
 
@@ -59,3 +59,4 @@ export default function AdUnit({
     </div>
   );
 }
+

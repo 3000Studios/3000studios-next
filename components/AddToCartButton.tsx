@@ -49,3 +49,4 @@ export function AddToCartButton({ product, disabled = false }: AddToCartButtonPr
     </button>
   );
 }
+

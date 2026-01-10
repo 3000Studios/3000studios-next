@@ -152,10 +152,9 @@ function appendToBlogData(post: unknown) {
       fileContent.slice(0, arrayEndIndex) + newEntryString + fileContent.slice(arrayEndIndex);
 
     fs.writeFileSync(TARGET_FILE, updatedContent, 'utf-8');
-    console.log(`Successfully added post: ${post.title}`);
-  } catch (error: unknown) {
-    console.error('', _error);
+    console.log("", error);
   }
 }
 
 generatePost();
+

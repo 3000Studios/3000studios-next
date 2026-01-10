@@ -30,7 +30,8 @@ export async function GET(req: Request) {
       icon: data.currentConditions.icon,
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json({ error: 'Failed to fetch weather data' }, { status: 500 });
   }
 }
+

@@ -39,3 +39,4 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: 'Failed to fetch status' }, { status: 500 });
   }
 }
+

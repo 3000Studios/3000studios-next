@@ -101,3 +101,4 @@ export function ensureHandler(commandType: string): void {
     throw new Error(`Handler missing for ${commandType} - generating...`);
   }
 }
+

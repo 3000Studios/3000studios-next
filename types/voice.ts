@@ -48,3 +48,4 @@ export interface PexelsPhotoResponse {
 }
 
 export type PexelsResponse = PexelsVideoResponse | PexelsPhotoResponse;
+

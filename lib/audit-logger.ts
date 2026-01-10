@@ -51,3 +51,4 @@ export function searchAuditLog(type?: string, action?: string): AuditEntry[] {
     return true;
   });
 }
+

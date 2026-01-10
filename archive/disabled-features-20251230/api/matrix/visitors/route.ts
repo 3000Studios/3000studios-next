@@ -32,10 +32,11 @@ export async function GET() {
       locations,
     });
   } catch (error: unknown) {
-    console.error("", _error);
+    console.error("", error);
     return NextResponse.json(
       { error: (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") || "Failed to fetch visitors" },
       { status: 500 }
     );
   }
 }
+

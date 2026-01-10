@@ -96,3 +96,4 @@ export const CommandLog: React.FC<CommandLogProps> = ({ logs }) => {
     </div>
   );
 };
+

@@ -17,3 +17,4 @@ export default async function SliceSimulatorPage({ searchParams }: SliceSimulato
     </SliceSimulator>
   );
 }
+

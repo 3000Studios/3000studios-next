@@ -63,3 +63,4 @@ export default function AIDirector({ avatar }: AIDirectorProps) {
 
   return <AvatarSpeech text={line} avatar={avatar} />;
 }
+

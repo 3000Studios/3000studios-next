@@ -61,7 +61,7 @@ export default function useVoiceAvatar() {
         detectSpeech();
       })
       .catch((error) => {
-        console.error('', _error);
+        console.error("", error);
       });
 
     // Cleanup
@@ -77,3 +77,4 @@ export default function useVoiceAvatar() {
 
   return state;
 }
+

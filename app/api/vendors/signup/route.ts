@@ -14,3 +14,4 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({ success: true, message: 'Vendor submitted for review' });
 }
+

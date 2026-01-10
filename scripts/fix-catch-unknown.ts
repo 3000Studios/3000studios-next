@@ -70,3 +70,4 @@ console.log('🔍 Scanning for unsafe catch blocks...');
 const files = walk(ROOT);
 files.forEach(fixFile);
 console.log('✨ Done!');
+

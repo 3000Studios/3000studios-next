@@ -22,7 +22,8 @@ export async function POST(request: NextRequest) {
       message: 'Deployment triggered successfully',
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json({ error: 'Failed to trigger deployment' }, { status: 500 });
   }
 }
+

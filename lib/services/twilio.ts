@@ -47,7 +47,7 @@ export async function sendSMS(message: SMSMessage): Promise<string> {
 
     return response.data.sid;
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     throw new Error('Failed to send SMS');
   }
 }
@@ -70,7 +70,7 @@ export async function makeVoiceCall(call: VoiceCall): Promise<string> {
 
     return response.data.sid;
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     throw new Error('Failed to make voice call');
   }
 }
@@ -80,7 +80,7 @@ export async function getMessageStatus(messageSid: string): Promise<string> {
     const response = await twilioApi.get(`/Messages/${messageSid}.json`);
     return response.data.status;
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     throw new Error('Failed to get message status');
   }
 }
@@ -110,3 +110,4 @@ export async function sendStreamNotification(
     body: message,
   });
 }
+

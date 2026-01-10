@@ -39,3 +39,4 @@ export default function AvatarSpeech({ text, avatar }: AvatarSpeechProps) {
 
   return null;
 }
+

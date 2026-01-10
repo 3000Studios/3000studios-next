@@ -18,3 +18,4 @@ export default function PastPostsPage() {
     </div>
   );
 }
+

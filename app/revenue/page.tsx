@@ -20,3 +20,4 @@ export default function RevenuePage() {
     </div>
   );
 }
+

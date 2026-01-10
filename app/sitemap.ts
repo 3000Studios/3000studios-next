@@ -91,3 +91,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...corePages, ...servicePages, ...legalPages];
 }
+

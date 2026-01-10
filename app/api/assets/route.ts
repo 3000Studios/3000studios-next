@@ -23,7 +23,7 @@ async function searchPexels(query: string) {
       source: 'pexels',
     }));
   } catch (_e) {
-    console.error('', _e);
+    console.error("", e);
     return [];
   }
 }
@@ -76,7 +76,7 @@ export async function POST(req: Request) {
           allAssets = [...allAssets, ...cloudAssets];
         }
       } catch (_err) {
-        console.error('', _err);
+        console.error("", err);
       }
     }
 
@@ -107,3 +107,5 @@ export async function POST(req: Request) {
     );
   }
 }
+
+

@@ -34,12 +34,11 @@ async function createAdminUser() {
     console.log('✅ Admin user created successfully!');
     console.log('📧 Email:', adminUser.email);
     console.log('🔐 ID:', adminUser.id);
-    console.log('\n🔒 SECURE: Password is hashed and only you know the plaintext.');
-  } catch (error: unknown) {
-    console.error('', _error);
+    console.log("", error);
   } finally {
     await prisma.$disconnect();
   }
 }
 
 createAdminUser();
+

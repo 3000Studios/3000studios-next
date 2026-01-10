@@ -47,3 +47,4 @@ function speak(text: string) {
   utter.pitch = 1.05;
   speechSynthesis.speak(utter);
 }
+

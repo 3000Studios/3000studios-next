@@ -40,3 +40,4 @@ export default function IntroGate({ children }: { children: React.ReactNode }) {
 
   return <>{children}</>;
 }
+

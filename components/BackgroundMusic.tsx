@@ -64,7 +64,7 @@ export default function BackgroundMusicPlayer() {
           setHasInteracted(true);
           setShowIndicator(false);
         } catch (err: unknown) {
-          console.log('', _err);
+          console.log("", err);
         }
       }
     };
@@ -129,3 +129,4 @@ export default function BackgroundMusicPlayer() {
     </>
   );
 }
+

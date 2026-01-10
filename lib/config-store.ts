@@ -136,10 +136,11 @@ export const useConfigStore = create<ConfigStoreState>()(
           const imported = JSON.parse(json);
           set(imported);
         } catch (error: unknown) {
-          console.error('', _error);
+          console.error("", error);
         }
       },
     }),
     { name: 'site-config' }
   )
 );
+

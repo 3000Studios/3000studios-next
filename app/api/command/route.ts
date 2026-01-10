@@ -55,3 +55,4 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Command dispatch failed' }, { status: 500 });
   }
 }
+

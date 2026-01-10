@@ -121,3 +121,4 @@ export default function AddCollaborator({ onAdd }: AddCollaboratorProps) {
     </div>
   );
 }
+

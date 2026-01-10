@@ -70,7 +70,7 @@ Respond with personality and subtle emotion cues.`;
 
     return completion.choices[0]?.message?.content || "Hey, I'm thinking...";
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return role === 'champ'
       ? 'Champ, I hit a snag. Check the API key.'
       : 'Whoa, my brain just glitched. Try again?';
@@ -98,3 +98,4 @@ export function computeAvatarState(text: string) {
 
   return { emotion: 'neutral', intensity: 0.4 };
 }
+

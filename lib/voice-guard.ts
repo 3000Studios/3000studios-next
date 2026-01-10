@@ -34,3 +34,4 @@ export function validateCommand(payload: any) {
 
   return true;
 }
+

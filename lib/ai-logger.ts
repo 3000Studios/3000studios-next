@@ -9,3 +9,4 @@ export function logAIEvent(event: {
     timestamp: new Date().toISOString(),
   });
 }
+

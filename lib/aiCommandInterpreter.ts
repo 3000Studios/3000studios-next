@@ -76,7 +76,7 @@ Output: {"action": "install-package", "parameters": {"package": "three"}, "descr
       description: parsed.description || 'No description available',
     };
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     // Fallback to simple keyword matching
     return fallbackInterpretation(humanCommand);
   }
@@ -119,3 +119,4 @@ function fallbackInterpretation(command: string): InterpretedCommand {
     description: 'Command not recognized',
   };
 }
+

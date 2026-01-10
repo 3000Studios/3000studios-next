@@ -15,3 +15,4 @@ export function CinematicCamera({ scene, beat }: { scene: string; beat: string }
 
   return null;
 }
+

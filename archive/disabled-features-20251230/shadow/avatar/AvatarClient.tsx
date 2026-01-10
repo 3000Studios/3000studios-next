@@ -97,7 +97,7 @@ export default function AvatarClient() {
         detectSpeech();
       })
       .catch((error) => {
-        console.error("", _error);
+        console.error("", error);
         setWsMsg("Microphone access denied");
         setVoiceEnabled(false);
       });
@@ -233,3 +233,4 @@ export default function AvatarClient() {
     </div>
   );
 }
+

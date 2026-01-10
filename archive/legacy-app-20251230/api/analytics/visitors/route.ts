@@ -75,3 +75,4 @@ export async function GET() {
     return NextResponse.json({ error: (error instanceof Error ? (error instanceof Error ? error.message : "Unknown error") : "Unknown error") }, { status: 500 });
   }
 }
+

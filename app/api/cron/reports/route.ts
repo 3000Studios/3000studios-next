@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
       timestamp: new Date().toISOString(),
     });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json({ error: 'Report generation failed' }, { status: 500 });
   }
 }
@@ -43,3 +43,4 @@ async function sendAlertEmail(report: any, alerts: any[]): Promise<boolean> {
 }
 
 export const preferredRegion = 'auto';
+

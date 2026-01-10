@@ -23,7 +23,7 @@ export default function VoiceEditor() {
       setDiff(result.diff);
       setPreview(result.preview);
     } catch (error: unknown) {
-      console.error('', _error);
+      console.error("", error);
     } finally {
       setIsLoading(false);
     }
@@ -39,7 +39,7 @@ export default function VoiceEditor() {
 
       await fetch('/api/shadow/deploy', { method: 'POST' });
     } catch (error: unknown) {
-      console.error('', _error);
+      console.error("", error);
     } finally {
       setIsApplying(false);
     }
@@ -153,3 +153,4 @@ export default function VoiceEditor() {
     </div>
   );
 }
+

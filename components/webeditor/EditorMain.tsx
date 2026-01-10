@@ -131,7 +131,7 @@ const MainApp = () => {
         // but allows keeping the memory file updated with recent interactions.
         await syncMemory(config, memory);
       } catch (_e) {
-        console.error('', _e);
+        console.error("", e);
       }
     }
   };
@@ -449,3 +449,4 @@ export default function App() {
     </UserProvider>
   );
 }
+

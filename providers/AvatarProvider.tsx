@@ -77,3 +77,4 @@ export function useAvatar() {
   if (!context) throw new Error('useAvatar must be used within AvatarProvider');
   return context;
 }
+

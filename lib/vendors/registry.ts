@@ -32,3 +32,4 @@ export const VENDORS = {
 } as const;
 
 export type VendorKey = keyof typeof VENDORS;
+

@@ -13,3 +13,4 @@ export async function pushCommit(msg: string) {
 
   return 'Pushed to GitHub';
 }
+

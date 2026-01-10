@@ -23,7 +23,7 @@ export async function generateWithGemini(prompt: string): Promise<string> {
     const response = await result.response;
     return response.text();
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     throw new Error('Failed to generate with Gemini');
   }
 }
@@ -49,7 +49,8 @@ export async function analyzeImage(imageBase64: string, prompt: string): Promise
     const response = await result.response;
     return response.text();
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     throw new Error('Failed to analyze image');
   }
 }
+

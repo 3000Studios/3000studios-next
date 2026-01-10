@@ -177,3 +177,4 @@ export function LuxuryGallery({ images, title = 'Our Collection' }: LuxuryGaller
     </section>
   );
 }
+

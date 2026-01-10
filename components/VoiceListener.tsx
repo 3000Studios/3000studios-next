@@ -110,3 +110,4 @@ export default function VoiceListener({ isListening, onToggle, onCommand }: Voic
     </div>
   );
 }
+

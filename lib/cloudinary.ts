@@ -89,7 +89,7 @@ export const uploadToCloudinary = async (file: File): Promise<string> => {
     const data = await response.json();
     return data.public_id;
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     throw error;
   }
 };
@@ -104,7 +104,8 @@ export const getImageMetadata = async (publicId: string) => {
     );
     return await response.json();
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return null;
   }
 };
+

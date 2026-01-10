@@ -145,7 +145,7 @@ export class StoreOptimizer {
     if (this.optimizationInterval) return;
 
     this.optimizationInterval = setInterval(() => {
-      this.optimize().catch((err) => console.error('', _err));
+      this.optimize().catch((err) => console.error("", err));
     }, intervalMs);
   }
 
@@ -195,3 +195,4 @@ export function getStoreOptimizer(): StoreOptimizer {
   }
   return optimizer;
 }
+

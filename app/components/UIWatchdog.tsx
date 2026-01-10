@@ -21,3 +21,4 @@ export default function UIWatchdog() {
 
   return null;
 }
+

@@ -32,3 +32,4 @@ export default function EmotionLights({ lightRef }: EmotionLightsProps) {
 
   return null;
 }
+

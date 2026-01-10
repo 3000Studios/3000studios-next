@@ -17,3 +17,4 @@ export function clearAdminSession() {
   if (typeof document === 'undefined') return;
   document.cookie = 'admin_auth=; path=/; max-age=0';
 }
+

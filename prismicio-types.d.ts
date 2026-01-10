@@ -235,3 +235,4 @@ declare module '@prismicio/client' {
     };
   }
 }
+

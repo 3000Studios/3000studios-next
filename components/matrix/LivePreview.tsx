@@ -23,3 +23,4 @@ export default function LivePreview({ preview, diff }: LivePreviewProps) {
     </div>
   );
 }
+

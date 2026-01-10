@@ -19,3 +19,4 @@ export const ENV = {
   OPENAI_API_KEY: getEnv('OPENAI_API_KEY'),
   GOOGLE_MAPS_API_KEY: getEnv('GOOGLE_MAPS_API_KEY'),
 };
+

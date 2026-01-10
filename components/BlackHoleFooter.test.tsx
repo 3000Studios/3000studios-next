@@ -10,3 +10,4 @@ describe('BlackHoleFooter', () => {
     expect(footerText).toBeInTheDocument();
   });
 });
+

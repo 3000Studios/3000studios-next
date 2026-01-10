@@ -401,3 +401,4 @@ export function searchProducts(query: string): Product[] {
       p.tags?.some((tag) => tag.toLowerCase().includes(lowerQuery))
   );
 }
+

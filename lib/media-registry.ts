@@ -42,3 +42,4 @@ export function addMedia(category: string, url: string, key?: string) {
   // Add new media to registry
   console.log(`Adding ${url} to ${category}`);
 }
+

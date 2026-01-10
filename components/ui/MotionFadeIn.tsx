@@ -12,3 +12,4 @@ export default function MotionFadeIn({ children }: { children: React.ReactNode }
     </motion.div>
   );
 }
+

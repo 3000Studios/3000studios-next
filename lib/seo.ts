@@ -192,7 +192,8 @@ export async function pingSearchEngines(urls: string[], apiKey: string): Promise
 
     return true;
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return false;
   }
 }
+

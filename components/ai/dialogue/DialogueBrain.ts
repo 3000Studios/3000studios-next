@@ -65,9 +65,10 @@ Now produce the next line:
         onDialogue(line);
       }
     } catch (err: unknown) {
-      console.error('', _err);
+      console.error("", err);
     }
   }
 
   return { generateLine };
 }
+

@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
 
     return response;
   } catch (error: unknown) {
-    console.error("", _error);
+    console.error("", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

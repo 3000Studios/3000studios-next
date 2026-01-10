@@ -668,3 +668,4 @@ export function searchProducts(query: string): Product[] {
 export function getProducts(): Product[] {
   return products;
 }
+

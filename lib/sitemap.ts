@@ -31,7 +31,7 @@ export async function getSitemapEntries(): Promise<SitemapEntry[]> {
     ];
     entries.push(...blogEntries);
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
   }
 
   // Products
@@ -46,8 +46,9 @@ export async function getSitemapEntries(): Promise<SitemapEntry[]> {
     ];
     entries.push(...productEntries);
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
   }
 
   return entries;
 }
+

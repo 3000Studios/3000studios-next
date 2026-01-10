@@ -11,3 +11,4 @@ export default function AdSlot({ slot = 'auto' }: { slot?: string }) {
     </div>
   );
 }
+

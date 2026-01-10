@@ -181,3 +181,4 @@ export function getEntitlementManager(): EntitlementManager {
   }
   return manager;
 }
+

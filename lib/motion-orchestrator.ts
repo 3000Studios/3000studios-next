@@ -61,3 +61,4 @@ export function shouldUseGPU() {
 
   return !isMobile && !hasLimitedHardware;
 }
+

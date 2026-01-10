@@ -41,3 +41,4 @@ export default function ShadowConsole({ messages }: ShadowConsoleProps) {
     </div>
   );
 }
+

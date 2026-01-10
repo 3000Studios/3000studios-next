@@ -101,3 +101,4 @@ export async function clearVoiceCommandLogs(): Promise<void> {
     console.error('', error);
   }
 }
+

@@ -13,3 +13,4 @@ export function SceneTransitions({ beat }: { beat: string }) {
 
   return null;
 }
+

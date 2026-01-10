@@ -83,3 +83,4 @@ export default function CommandHistory({ tasks }: CommandHistoryProps) {
     </div>
   );
 }
+

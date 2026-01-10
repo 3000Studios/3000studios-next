@@ -10,3 +10,4 @@ export type VendorProduct = {
   category?: string;
   commissionRate?: number;
 };
+

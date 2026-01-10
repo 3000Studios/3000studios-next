@@ -61,3 +61,4 @@ export async function ingestVendorFeed(vendorId: string, feedUrl?: string) {
   const items = Array.isArray(data?.items) ? data.items : data?.products || [];
   return items.map((item: Record<string, unknown>) => normalizeVendorProduct(vendorId, item));
 }
+

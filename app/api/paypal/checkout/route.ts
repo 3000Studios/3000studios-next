@@ -136,7 +136,7 @@ const handler = async (request: NextRequest) => {
 
     return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
   } catch (error: unknown) {
-    console.error('', _error);
+    console.error("", error);
     return NextResponse.json(
       {
         error: 'Payment processing failed',
@@ -158,3 +158,4 @@ export const POST = withRateLimit(
   withSecurity(handler, { csrf: false, cors: true }),
   RATE_LIMITS.payment
 );
+
