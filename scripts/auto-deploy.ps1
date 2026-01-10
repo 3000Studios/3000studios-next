@@ -78,11 +78,8 @@ try {
     }
 
     # Create work branch
-    if (& git show-ref --verify --quiet "refs/heads/$Branch") {
-        Log "Deleting existing local branch $Branch"
-        & git branch -D $Branch
-    }
-    & git checkout -b $Branch
+    Log "Stepping into branch $Branch..."
+    & git checkout -B $Branch
 
     # Apply patch
     if (-not (Test-Path $PatchFile)) {
