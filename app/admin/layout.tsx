@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import Nav from '../ui/Nav';
 import AdminNav from '../ui/AdminNav';
 
