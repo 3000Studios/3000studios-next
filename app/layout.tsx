@@ -162,7 +162,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             {/* Navigation - Critical, loads immediately */}
             <Nav />
             {/* Main content - Critical path, auto-sizes to viewport */}
-            <main className="relative z-10 flex-1 w-full max-w-[1920px] mx-auto pt-28 flex flex-col items-center">
+            <main className="relative z-10 flex-1 w-full pt-28 flex flex-col items-stretch">
               {children}
             </main>
             <StockMarquee />
