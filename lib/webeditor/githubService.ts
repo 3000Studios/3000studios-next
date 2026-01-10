@@ -309,7 +309,6 @@ export const getHeadStatus = async (config: GitHubConfig) => {
       date: branchData.commit.commit.author?.date,
       status: 'clean', // Since we are editing directly, it's always clean relative to itself
     };
-  } catch (_e: unknown) {
     return null;
   }
 };
@@ -343,8 +342,8 @@ export const getDeploymentStatus = async (config: GitHubConfig) => {
       };
     }
     return { state: 'pending', description: 'Deployment created, waiting for status...' };
-  } catch (error: unknown) {
-    console.warn('Deployment status check failed', error);
+  } catch (err: unknown) {
+    console.warn('Deployment status check failed', err);
     return null;
   }
 };
