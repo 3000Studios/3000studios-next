@@ -1,7 +1,5 @@
-import Navigation from '@/app/components/Navigation';
 import MediaGrid from '@/components/MediaGrid';
 import SectionMedia from '@/components/SectionMedia';
-import { Footer } from '@/components/ui/Footer';
 import Image from 'next/image';
 
 export default function HomePage() {
@@ -63,8 +61,7 @@ export default function HomePage() {
   ];
 
   return (
-    <main className="relative min-h-screen bg-black text-white">
-      <Navigation />
+    <div className="relative min-h-screen bg-black text-white">
 
       {/* Hero Section with Background Video */}
       <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
@@ -207,8 +204,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <Footer />
-    </main>
+    </div>
   );
 }
 
