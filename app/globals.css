@@ -5,51 +5,11 @@
  */
 
 /* Google Fonts MUST be imported BEFORE Tailwind */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700');
-
-/* Tailwind after fonts */
-@import 'tailwindcss';
-
-@font-face {
-  font-family: 'ww';
-  src:
-    url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/108082/Dusseldot-variable-web.woff2')
-      format('woff2 supports variations'),
-    url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/108082/Dusseldot-variable-web.woff2')
-      format('woff2-variations');
-  font-display: swap;
-  font-weight: 50 250;
-}
-
-/* Global Centered Alignment & Padding Reset */
-html,
-body {
-  margin: 0 !important;
-  padding: 0 !important;
-  box-sizing: border-box;
-  text-align: center;
-  overflow-x: hidden;
-  width: 100%;
-  min-height: 100vh;
-  background-color: #000;
-}
-
-/* Hide default cursor - CustomCursor component handles this */
-html {
-  cursor: none;
-}
-
-a:hover,
-button:hover,
-[role='button']:hover {
-  cursor:
-    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="%234169E1" stroke="%236495ED" stroke-width="2"/></svg>'),
-    pointer;
-}
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap');
 
 :root {
+  --font-sans: 'Playfair Display', serif;
+  --base-font-size: 16px;
   /* Marble + Gold Luxury System (Runtime Variables - Phase 61) */
   --accent-base: 212 175 55; /* Gold in RGB */
   --bg-base: 0 78 88; /* Teal #004e58 in RGB */
