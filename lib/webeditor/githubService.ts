@@ -6,38 +6,44 @@ const MEMORY_PATH = '.speech-to-web-memory/history.json';
 const handleApiError = (error: unknown, context: string): CommandResult => {
   console.error(`GitHub API Error during ${context}:`, error);
 
+  const status = (error as any)?.status;
+  const message = (error as Error)?.message || `An unexpected error occurred during ${context}.`;
+
   // Specific actionable feedback
   if (!navigator.onLine) {
     return { success: false, message: 'Network Error: You appear to be offline.' };
   }
 
-  if (error.status === 401) {
+  if (status === 401) {
     return {
       success: false,
       message: 'Authentication failed. Please verify your Personal Access Token.',
     };
   }
-  if (error.status === 404) {
+  if (status === 404) {
     return {
       success: false,
       message: `Resource not found during '${context}'. The file or repository may not exist.`,
     };
   }
-  if (error.status === 409) {
+  if (status === 409) {
     return {
       success: false,
       message: `Merge Conflict in '${context}'. The remote file has changed since you last fetched.`,
     };
   }
-  if (error.status === 422) {
+  if (status === 422) {
     return {
       success: false,
       message: `Validation failed for '${context}'. GitHub rejected the payload.`,
     };
   }
-  if (error.status === 403) {
-    if (error.response?.headers?.['x-ratelimit-remaining'] === '0') {
-      const resetTime = new Date(parseInt(error.response.headers['x-ratelimit-reset']) * 1000);
+  if (status === 403) {
+    const rateLimit = (error as any)?.response?.headers?.['x-ratelimit-remaining'];
+    if (rateLimit === '0') {
+      const resetTime = new Date(
+        parseInt((error as any).response.headers['x-ratelimit-reset']) * 1000
+      );
       return {
         success: false,
         message: `Rate limit exceeded. Resets at ${resetTime.toLocaleTimeString()}.`,
@@ -48,13 +54,13 @@ const handleApiError = (error: unknown, context: string): CommandResult => {
       message: 'Permission denied. Ensure your token has "repo" and "workflow" scopes.',
     };
   }
-  if (error.status >= 500) {
+  if (status >= 500) {
     return { success: false, message: 'GitHub System Error. Their servers might be down.' };
   }
 
   return {
     success: false,
-    message: (error as Error).message || `An unexpected error occurred during ${context}.`,
+    message,
   };
 };
 
