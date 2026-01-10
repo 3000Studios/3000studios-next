@@ -15,33 +15,40 @@ export interface AffiliateProduct {
 
 export const affiliateProducts: AffiliateProduct[] = [
   {
-    id: 'aff_1',
-    name: 'Premium Web Hosting',
-    affiliateLink: 'https://partner.example.com/hosting?ref=3000studios',
-    commission: 25,
+    id: 'hosting_1',
+    name: 'Hostinger Premium',
+    affiliateLink: 'https://hostinger.com?REFERRALCODE=JWSWAIN',
+    commission: 20,
     commissionType: 'percentage',
     platform: 'custom',
     category: 'Hosting',
   },
   {
-    id: 'aff_2',
-    name: 'Design Tool Pro',
-    affiliateLink: 'https://partner.example.com/design-pro?ref=3000studios',
-    commission: 50,
-    commissionType: 'fixed',
+    id: 'ai_tool_1',
+    name: 'Jasper AI',
+    affiliateLink: 'https://jasper.ai?ref=jwswain',
+    commission: 30,
+    commissionType: 'percentage',
     platform: 'custom',
-    category: 'Tools',
+    category: 'AI Tools',
   },
-  // Add more affiliate products here
+  {
+    id: 'design_tool_1',
+    name: 'Canva Pro',
+    affiliateLink: 'https://canva.com/pro?ref=3000studios',
+    commission: 15,
+    commissionType: 'percentage',
+    platform: 'custom',
+    category: 'Design',
+  },
 ];
 
 // Affiliate link generators for revenue pages
 export const AFFILIATES = {
-  general: (url: string) => `${url}?ref=3000studios`,
-  amazon: (asin: string) => `https://www.amazon.com/dp/${asin}?tag=3000studios-20`,
-  clickbank: (product: string) =>
-    `https://hop.clickbank.net/?affiliate=3000studios&vendor=${product}`,
-  gumroad: (product: string) => `https://gumroad.com/l/${product}?wanted=true&referrer=3000studios`,
+  general: (url: string) => `${url}?ref=jwswain`,
+  amazon: (asin: string) => `https://www.amazon.com/dp/${asin}?tag=jwswain-20`,
+  clickbank: (product: string) => `https://hop.clickbank.net/?affiliate=jwswain&vendor=${product}`,
+  gumroad: (product: string) => `https://gumroad.com/l/${product}?wanted=true&referrer=jwswain`,
 };
 
 export function getAffiliateProduct(id: string): AffiliateProduct | undefined {
@@ -83,7 +90,6 @@ export function trackAffiliateClick(affiliateId: string): void {
           timestamp: Date.now(),
         },
       }),
-    }).catch((err) => console.error("", err));
+    }).catch((err) => console.error('', err));
   }
 }
-
