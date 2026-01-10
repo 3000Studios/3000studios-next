@@ -83,7 +83,7 @@ async function searchPexels(query: string, type: 'video' | 'image'): Promise<str
       return data.photos?.[0]?.src?.large2x || null;
     }
   } catch (e: unknown) {
-    console.error("", e);
+    console.error('', e);
     return null;
   }
 }
@@ -151,7 +151,7 @@ export async function POST(req: Request) {
 
     // Handle media registry updates
     if (data.target === 'media' && data.key && data.value) {
-      // @ts-expect-error - dynamic registry update
+      // Dynamic registry update
       media[data.key] = data.value;
       return NextResponse.json({ ok: true, media, registry: uiRegistry });
     }
@@ -171,7 +171,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true, media, registry: uiRegistry });
   } catch (e: unknown) {
-    console.error("", e);
+    console.error('', e);
     return NextResponse.json(
       { error: 'Voice command failed', details: String(e) },
       { status: 500 }
@@ -192,4 +192,3 @@ export async function GET() {
     registry: uiRegistry,
   });
 }
-

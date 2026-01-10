@@ -19,7 +19,7 @@ function AvatarModel({
   const modelRef = useRef<THREE.Group>(null);
 
   // Try to load the model, fallback to primitive sphere if not available
-  let scene = null;
+  let scene: THREE.Group | null = null;
   try {
     const gltf = useGLTF(modelPath);
     scene = gltf.scene;
@@ -137,7 +137,6 @@ export function preloadAvatarModel(path: string) {
   try {
     useGLTF.preload(path);
   } catch (error: unknown) {
-    console.log("", error);
+    console.log('', error);
   }
 }
-

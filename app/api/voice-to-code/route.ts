@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
           finalTranscript = transcription.text;
         }
       } catch (err: unknown) {
-        console.error("", err);
+        console.error('', err);
       }
     }
 
@@ -154,7 +154,7 @@ export async function POST(request: NextRequest) {
       action: 'preview',
     });
   } catch (error: unknown) {
-    console.error("", error);
+    console.error('', error);
     return NextResponse.json(
       { error: 'Internal Server Error', details: String(error) },
       { status: 500 }
@@ -163,7 +163,7 @@ export async function POST(request: NextRequest) {
 }
 
 async function applyPatches(patches: CodePatch[]) {
-  const results = [];
+  const results: any[] = [];
 
   for (const patch of patches) {
     try {
@@ -221,4 +221,3 @@ async function applyPatches(patches: CodePatch[]) {
     results,
   };
 }
-
