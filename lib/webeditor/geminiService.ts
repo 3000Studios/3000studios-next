@@ -50,6 +50,7 @@ export const parseVoiceCommand = async (text: string): Promise<CommandIntent> =>
                 'list_files',
                 'get_file',
                 'trigger_workflow',
+                'generate_revenue_page',
                 'unknown',
               ],
             },
