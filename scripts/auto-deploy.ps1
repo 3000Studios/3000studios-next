@@ -89,17 +89,20 @@ Log "Fetching origin..."
 & git fetch origin --prune
 
 # Ensure local main exists and is up-to-date
-if (-not (& git show-ref --verify --quiet refs/heads/main)) {
+& git show-ref --verify --quiet refs/heads/main
+if ($LASTEXITCODE -ne 0) {
     Log "Local main not found; creating from origin/main"
     & git checkout -b main origin/main
 }
 else {
     & git checkout main
-    try { & git pull origin main --rebase } catch { Log "Warning: git pull failed - you may need to resolve local changes." }
+    & git pull origin main --rebase
+    if ($LASTEXITCODE -ne 0) { Log "Warning: git pull failed - you may need to resolve local changes." }
 }
 
 # Ensure working tree clean
-if ((& git status --porcelain).Trim()) {
+$status = & git status --porcelain
+if ($status -and $status.ToString().Trim()) {
     Log "Stashing local changes..."
     & git stash
 }
