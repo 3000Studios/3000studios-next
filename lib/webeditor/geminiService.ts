@@ -17,8 +17,8 @@ The supported actions are:
 3. delete_file: Delete a file. Requires 'path' and 'commit_message'.
 4. list_files: List files in a directory. Optional 'path'.
 5. get_file: Read content of a file. Requires 'path'.
-620. trigger_workflow: Run a GitHub Action workflow (deployment, test, etc.). Requires 'workflow_id' (e.g., 'deploy.yml') and 'branch'.
-21. generate_revenue_page: Create a new SEO-optimized revenue page for a specific topic. Requires 'topic' (put this in a new field if possible, or just mention in reasoning). NOTE: This action should map to creating a file at 'app/revenue/[topic-slug]/page.tsx'.
+6. trigger_workflow: Run a GitHub Action workflow (deployment, test, etc.). Requires 'workflow_id' (e.g., 'deploy.yml') and 'branch'.
+7. generate_revenue_page: Create a new SEO-optimized revenue page for a specific topic. Requires 'topic' (put this in a new field if possible, or just mention in reasoning). NOTE: This action should map to creating a file at 'app/revenue/[topic-slug]/page.tsx'.
 
 If the user says "Make a revenue page for [topic]" or "Create an affiliate page about [topic]", use 'generate_revenue_page'.
 
