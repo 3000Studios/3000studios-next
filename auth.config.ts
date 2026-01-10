@@ -16,7 +16,7 @@ export const authConfig: AuthOptions = {
         const adminEmail =
           process.env.MATRIX_ADMIN_EMAIL || process.env.ADMIN_EMAIL || 'mr.jwswain@gmail.com';
         const adminPassword =
-          process.env.MATRIX_ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || 'Bossman3000!!!';
+          process.env.MATRIX_ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || '5555';
 
         if (credentials?.email === adminEmail && credentials?.password === adminPassword) {
           return {
@@ -46,4 +46,3 @@ export const authConfig: AuthOptions = {
     },
   },
 };
-
