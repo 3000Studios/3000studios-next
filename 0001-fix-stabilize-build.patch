@@ -347,8 +347,8 @@ index 0000000..0000000
 +diff --git a/next.config.js b/next.config.js
 +new file mode 100644
 +index 0000000..0000000
---- /dev/null
-+++ b/next.config.js
++--- /dev/null
+++++ b/next.config.js
 @@ -0,0 +1,9 @@
 +const path = require('path');
 +
@@ -361,8 +361,8 @@ index 0000000..0000000
 +diff --git a/.env.example b/.env.example
 +new file mode 100644
 +index 0000000..0000000
---- /dev/null
-+++ b/.env.example
++--- /dev/null
+++++ b/.env.example
 @@ -0,0 +1,12 @@
 +# Example environment variables for local development
 +DATABASE_URL=postgresql://postgres:postgres@localhost:5432/postgres
@@ -374,11 +374,11 @@ index 0000000..0000000
 +# Add provider keys below:
 +# STRIPE_SECRET_KEY=
 +# OPENAI_API_KEY=
-diff --git b/.github/workflows/deploy.yml
-new file mode 100644
-index 0000000..0000000
---- /dev/null
-+++ b/.github/workflows/deploy.yml
++diff --git fix: stabilize build b/.github/workflows/deploy.yml
++new file mode 100644
++index 0000000..0000000
++--- /dev/null
+++++ b/.github/workflows/deploy.yml
 @@ -0,0 +1,118 @@
 +name: CI / Build / Deploy
 +
@@ -465,4 +465,3 @@ index 0000000..0000000
 +
 +-- 
 +2.42.0
-+
