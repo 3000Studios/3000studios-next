@@ -93,7 +93,7 @@ export const executeGitHubCommand = async (
           }
         } catch (e: any) {
           // If 404, it's a new file. If other error (e.g., 401), we handle it.
-          if (e.status !== 404) return handleApiError(_e, 'checking file existence');
+          if (e.status !== 404) return handleApiError(e, 'checking file existence');
         }
 
         const message =
@@ -145,8 +145,8 @@ export const executeGitHubCommand = async (
             message: message,
             sha: sha,
           });
-        } catch (_e: unknown) {
-          return handleApiError(_e, 'deleting file');
+        } catch (error: unknown) {
+          return handleApiError(error, 'deleting file');
         }
 
         return { success: true, message: `Deleted ${intent.path}` };
@@ -160,8 +160,8 @@ export const executeGitHubCommand = async (
             ? data.map((f) => f.name).join(', ')
             : 'Single file found';
           return { success: true, message: `Contents of /${path}: ${files}`, data };
-        } catch (_e: unknown) {
-          return handleApiError(_e, 'listing files');
+        } catch (error: unknown) {
+          return handleApiError(error, 'listing files');
         }
       }
 
@@ -176,8 +176,8 @@ export const executeGitHubCommand = async (
 
           const content = atob((data as any).content);
           return { success: true, message: `Read ${intent.path}`, data: content };
-        } catch (_e: unknown) {
-          return handleApiError(_e, 'reading file');
+        } catch (error: unknown) {
+          return handleApiError(error, 'reading file');
         }
       }
 
@@ -193,8 +193,8 @@ export const executeGitHubCommand = async (
             ref,
           });
           return { success: true, message: `Triggered workflow: ${workflow_id} on ${ref}` };
-        } catch (_e: unknown) {
-          return handleApiError(_e, 'triggering workflow');
+        } catch (error: unknown) {
+          return handleApiError(error, 'triggering workflow');
         }
       }
 
