@@ -1,47 +1,53 @@
-import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
+import { NextRequest, NextResponse } from 'next/server';
+import bcrypt from 'bcryptjs';
+import fs from 'fs';
+import path from 'path';
+import jwt from 'jsonwebtoken';
 
-export async function POST(req: Request) {
+const DATA_DIR = path.join(process.cwd(), '.data');
+const USERS_FILE = path.join(DATA_DIR, 'users.json');
+
+function getUsersFromJson() {
+  if (!fs.existsSync(USERS_FILE)) return [];
   try {
-    const { email, password } = await req.json();
-
-    // Validate request
-    if (!password) {
-      return NextResponse.json({ error: 'Password required' }, { status: 400 });
-    }
-
-    // Check credentials
-    // We prioritize ADMIN_PASSWORD, but fallback to ADMIN_SECRET for compatibility
-    const validPassword = process.env.ADMIN_PASSWORD || process.env.ADMIN_SECRET;
-    const validEmail = process.env.ADMIN_EMAIL;
-
-    if (!validPassword) {
-      console.error('Server missing ADMIN_PASSWORD or ADMIN_SECRET env var');
-      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
-    }
-
-    const passwordMatch = password === validPassword;
-    // If ADMIN_EMAIL is set, we require email match too. If not, we ignore email.
-    const emailMatch = validEmail ? email === validEmail : true;
-
-    if (!passwordMatch || !emailMatch) {
-      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
-    }
-
-    // Set secure cookie
-    const cookieStore = await cookies();
-    cookieStore.set('admin', 'true', {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 60 * 60 * 24 * 7, // 7 days
-      path: '/',
-    });
-
-    return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error('Login error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return JSON.parse(fs.readFileSync(USERS_FILE, 'utf8') || '[]');
+  } catch {
+    return [];
   }
 }
 
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { email, password } = body || {};
+    if (!email || !password)
+      return NextResponse.json({ error: 'Missing credentials' }, { status: 400 });
+
+    // If you have Prisma configured, you should query DB instead — omitted for brevity
+    const users = getUsersFromJson();
+    const user = users.find((u: any) => u.email === email);
+    if (!user) return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+
+    // Create JWT
+    const secret = process.env.NEXTAUTH_SECRET || process.env.JWT_SECRET || 'dev-secret';
+    const token = jwt.sign({ id: user.id, email: user.email, role: user.role || 'admin' }, secret, {
+      expiresIn: '7d',
+    });
+
+    // Set cookie
+    const res = NextResponse.json({ success: true });
+    res.cookies.set('app_session', token, {
+      httpOnly: true,
+      sameSite: 'lax',
+      path: '/',
+      secure: process.env.NODE_ENV === 'production',
+    });
+    return res;
+  } catch (err) {
+    console.error('Login error', err);
+    return NextResponse.json({ error: 'Server error' }, { status: 500 });
+  }
+}
