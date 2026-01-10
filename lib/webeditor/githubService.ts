@@ -309,6 +309,7 @@ export const getHeadStatus = async (config: GitHubConfig) => {
       date: branchData.commit.commit.author?.date,
       status: 'clean', // Since we are editing directly, it's always clean relative to itself
     };
+  } catch (error: unknown) {
     return null;
   }
 };
