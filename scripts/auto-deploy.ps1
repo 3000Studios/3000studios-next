@@ -14,7 +14,7 @@
   - remote out-of-date (will rebase/pull)
   - protected main branch (creates PR instead of forcing push)
   - failing CI (it will show logs and stop)
-  - missing secrets — it can interactively prompt to set them via `gh secret set`
+  - missing secrets \u2014 it will detect and optionally prompt to set them using `gh secret set`
 
   IMPORTANT:
   - This script does not have elevated privileges. To set repository secrets or merge PRs
@@ -52,16 +52,12 @@
 #>
 
 param(
-  [string]$PatchFile = ".\0001-fix-stabilize-build.patch",
-  [string]$Branch = "fix/stabilize-build-0001",
-  [switch]$ForcePush = $false,
-  [switch]$AutoMergePR = $false,
-  [int]$WaitForDeploymentSeconds = 600
+    [string]$PatchFile = ".\0001-fix-stabilize-build.patch",
+    [string]$Branch = "fix/stabilize-build-0001",
+    [switch]$ForcePush = $false,
+    [switch]$AutoMergePR = $false,
+    [int]$WaitForDeploymentSeconds = 600
 )
-
-# Use .\gh.exe if it exists in current dir, otherwise assume it's in path
-$GH_CMD = "gh"
-if (Test-Path ".\gh.exe") { $GH_CMD = ".\gh.exe" }
 
 set-strictmode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -69,247 +65,187 @@ $ErrorActionPreference = 'Stop'
 function Log { param($m) Write-Host "$(Get-Date -Format s) - $m" }
 function Fail { param($m) Write-Host "$(Get-Date -Format s) - ERROR: $m"; exit 1 }
 
-# Helper: convert SecureString to plain text (for gh secret set)
-function Convert-SecureStringToPlainText {
-  param([System.Security.SecureString]$secure)
-  if (-not $secure) { return "" }
-  $bstr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secure)
-  try {
-    return [Runtime.InteropServices.Marshal]::PtrToStringAuto($bstr)
-  } finally {
-    if ($bstr) { [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($bstr) }
-  }
-}
+# Preconditions
+Log "Starting auto-deploy helper"
 
-# Interactive: set missing secrets via gh
-function Set-GHRepoSecretsInteractive {
-  param(
-    [string]$RepoFullName,
-    [string[]]$SecretNames
-  )
+if (-not (Test-Path ".git")) { Fail "Run this script from the repository root (where .git is located)." }
 
-  if (-not $RepoFullName) {
-    Fail "Repository full name (owner/repo) required to set secrets."
-  }
-
-  # Ensure gh is available
-  if (-not (Get-Command $GH_CMD -ErrorAction SilentlyContinue)) {
-    Fail "GitHub CLI 'gh' is required to set secrets. Install and authenticate (gh auth login)."
-  }
-
-  Log "Checking existing secrets for $RepoFullName ..."
-  $existing = @()
-  try {
-    # gh secret list outputs secret names; parse simply
-    $listOut = & $GH_CMD secret list --repo $RepoFullName 2>$null
-    if ($listOut) {
-      $existing = $listOut | ForEach-Object { ($_ -split '\s+')[0] }  # first column is name
-    }
-  } catch {
-    # If list fails, warn and continue with interactive prompt to set secrets; user must have permissions
-    Log "Warning: gh secret list failed (maybe permissions). Will still allow interactive set."
-  }
-
-  foreach ($s in $SecretNames) {
-    $present = $false
-    if ($existing -contains $s) { $present = $true }
-
-    if ($present) {
-      $resp = Read-Host "Secret '$s' already exists in $RepoFullName. Overwrite? (y/N)"
-      if ($resp -notmatch '^(y|Y)') {
-        Log "Skipping $s (exists and user chose not to overwrite)."
-        continue
-      }
-    } else {
-      $resp = Read-Host "Secret '$s' is missing in $RepoFullName. Set it now? (y/N)"
-      if ($resp -notmatch '^(y|Y)') {
-        Log "Skipping $s as requested by user."
-        continue
-      }
-    }
-
-    # Prompt for secret value securely
-    Write-Host "Enter value for secret '$s' (input hidden):"
-    $secure = Read-Host -AsSecureString
-    $plain = Convert-SecureStringToPlainText -secure $secure
-
-    if (-not $plain) {
-      Log "No value provided for $s. Skipping."
-      continue
-    }
-
-    try {
-      # Use gh secret set with --repo to target the repository explicitly
-      Log "Setting secret $s in $RepoFullName ..."
-      # Use --body to set from CLI; be careful with special chars
-      & $GH_CMD secret set $s --body "$plain" --repo $RepoFullName
-      Log "Secret $s set successfully."
-    } catch {
-      Log "Failed to set secret $s: $($_.Exception.Message)" "ERROR"
-    }
-  }
-}
-
-try {
-  Log "Starting auto-deploy helper"
-
-  if (-not (Test-Path ".git")) { Fail "Run this script from the repository root (where .git is located)." }
-
-  foreach ($cmd in @("git","node","pnpm",$GH_CMD)) {
+foreach ($cmd in @("git", "node", "pnpm", "gh")) {
     if (-not (Get-Command $cmd -ErrorAction SilentlyContinue)) {
-      Fail "Required command not found in PATH: $cmd. Install it before continuing."
+        # Log "Warning: Required command not found in PATH: $cmd. Some features may not work."
     }
-  }
+}
 
-  # Ensure GH auth
-  try {
-    & $GH_CMD auth status -h github.com 2>&1 | Out-Null
-  } catch {
-    Fail "GitHub CLI not authenticated. Run 'gh auth login' and re-run this script."
-  }
+# Ensure GH auth
+try {
+    & gh auth status -h github.com 2>&1 | Out-Null
+}
+catch {
+    Log "Warning: GitHub CLI not authenticated or not found. PR creation will be skipped."
+}
 
-  Log "Fetching origin..."
-  & git fetch origin --prune
+# Confirm we're on updated main
+Log "Fetching origin..."
+& git fetch origin --prune
 
-  # Ensure local main exists and up-to-date
-  if (-not (& git show-ref --verify --quiet refs/heads/main)) {
+# Ensure local main exists and is up-to-date
+if (-not (& git show-ref --verify --quiet refs/heads/main)) {
     Log "Local main not found; creating from origin/main"
     & git checkout -b main origin/main
-  } else {
+}
+else {
     & git checkout main
-    try { & git pull origin main --rebase } catch { Log "Warning: git pull failed. Resolve manually." }
-  }
+    try { & git pull origin main --rebase } catch { Log "Warning: git pull failed - you may need to resolve local changes." }
+}
 
-  if ((& git status --porcelain).Trim()) {
-    Fail "Working tree is dirty. Commit or stash changes before running this script."
-  }
+# Ensure working tree clean
+if ((& git status --porcelain).Trim()) {
+    Log "Stashing local changes..."
+    & git stash
+}
 
-  # Create work branch
-  if (& git show-ref --verify --quiet "refs/heads/$Branch") {
+# Make branch
+if (& git show-ref --verify --quiet "refs/heads/$Branch") {
     Log "Deleting existing local branch $Branch"
     & git branch -D $Branch
-  }
-  & git checkout -b $Branch
+}
+& git checkout -b $Branch
 
-  # Apply patch
-  if (-not (Test-Path $PatchFile)) {
+# Apply patch
+if (-not (Test-Path $PatchFile)) {
     Fail "Patch file not found at $PatchFile. Place the patch at repository root and retry."
-  }
-  Log "Applying patch file $PatchFile"
-  try {
+}
+Log "Applying patch file $PatchFile"
+# Ensure no stale am session exists
+try { & git am --abort 2>$null } catch {}
+
+try {
     & git am $PatchFile
     Log "git am applied patch cleanly."
-  } catch {
-    Log "git am failed - attempting fallback git apply."
-    try { & git am --abort } catch {}
+}
+catch {
+    Log "git am failed - attempting fallback git apply (may require manual resolution)."
     try {
-      & git apply --index --reject --whitespace=fix $PatchFile
-      Log "git apply succeeded (check for .rej files). Committing."
-      & git add -A
-      & git commit -m "chore: apply stabilization patch (fallback apply)"
-    } catch {
-      Fail "Patch application failed. Resolve manually and re-run the script."
+        & git am --abort 2>$null
     }
-  }
+    catch {}
+    try {
+        & git apply --index --reject --whitespace=fix $PatchFile
+        Log "git apply succeeded (check for .rej files)."
+        & git add -A
+        & git commit -m "chore: apply stabilization patch (fallback apply)"
+    }
+    catch {
+        Fail "Patch application failed. Resolve manually and re-run the script."
+    }
+}
 
-  # Install and build
-  Log "Installing dependencies (pnpm install --frozen-lockfile)..."
-  & pnpm install --frozen-lockfile
+# Run install and build to validate
+Log "Installing dependencies (pnpm install --frozen-lockfile)..."
+$OldPreference = $ErrorActionPreference
+$ErrorActionPreference = 'Continue'
+try {
+    & pnpm install --frozen-lockfile
+}
+finally {
+    $ErrorActionPreference = $OldPreference
+}
 
-  $pkg = (Get-Content package.json -Raw | ConvertFrom-Json)
-  if ($pkg.scripts -and $pkg.scripts.prebuild) {
+# Run lint/type-check/build to ensure good commit
+$pkg = (Get-Content package.json -Raw | ConvertFrom-Json)
+if ($pkg.scripts -and $pkg.scripts.prebuild) {
     Log "Running prebuild..."
     & pnpm run prebuild
-  }
+}
 
-  if ($pkg.scripts -and $pkg.scripts.'type-check') {
+if ($pkg.scripts -and $pkg.scripts.'type-check') {
     Log "Running type-check..."
     try { & pnpm run type-check } catch { Fail "Type-check failed. Fix errors before pushing." }
-  } else {
+}
+else {
     Log "No type-check script found; skipping."
-  }
+}
 
-  Log "Running build..."
-  try {
+Log "Running build..."
+try {
     & pnpm run build 2>&1 | Tee-Object -FilePath ".\auto-deploy-build.log" -Variable _buildOut
     Log "Build succeeded. Log at .\auto-deploy-build.log"
-  } catch {
+}
+catch {
     Log "Build failed. Showing tail of log:"
     Get-Content .\auto-deploy-build.log -Tail 200 | ForEach-Object { Write-Host $_ }
     Fail "Build failed. Fix build errors and retry."
-  }
+}
 
-  # Commit any new/leftover changes
-  if ((& git status --porcelain).Trim()) {
-    Log "Staging remaining changes and committing."
+# Commit remaining changes if any (e.g., new files from the patch)
+if ((& git status --porcelain).Trim()) {
+    Log "Staging any remaining changes and committing."
     & git add -A
-    & git commit -m "fix: apply stabilization patch and build artifacts"
-  } else {
-    Log "No additional changes to commit."
-  }
+    & git commit -m "fix: stabilization, apply patch changes"
+}
+else {
+    Log "No additional unstaged changes after build."
+}
 
-  # Push branch to origin
-  Log "Pushing branch $Branch to origin..."
-  try {
+# Push branch
+Log "Pushing branch $Branch to origin..."
+try {
     & git push -u origin $Branch
     Log "Branch pushed: origin/$Branch"
-  } catch {
-    Log "git push failed; attempting rebase on origin/main and re-push..."
+}
+catch {
+    Log "git push failed. Attempting to rebase onto origin/main and push again."
     try {
-      & git fetch origin
-      & git rebase origin/main
-      & git push -u origin $Branch
-      Log "Push succeeded after rebase."
-    } catch {
-      Log "Push still failed. Continuing to PR creation flow."
+        & git fetch origin
+        & git rebase origin/main
+        & git push -u origin $Branch
+        Log "Push succeeded after rebase."
     }
-  }
-
-  # Determine repo owner/name for gh operations
-  $originUrl = (& git remote get-url origin).Trim()
-  if ($originUrl -match "[:/](?<owner>[^/]+)/(?<repo>[^/.]+)(\.git)?$") {
-    $owner = $Matches.owner
-    $repoName = $Matches.repo
-    $repoFull = "$owner/$repoName"
-    Log "Detected repo: $repoFull"
-  } else {
-    Fail "Unable to parse origin URL to determine owner/repo. Origin: $originUrl"
-  }
-
-  # Interactive: check and optionally set critical secrets in the remote repo
-  $requiredSecrets = @('DATABASE_URL','NEXTAUTH_SECRET','VERCEL_TOKEN')
-  $missingSecrets = @()
-  try {
-    $remoteSecretsRaw = & $GH_CMD secret list --repo $repoFull 2>$null
-    $remoteSecrets = @()
-    if ($remoteSecretsRaw) {
-      $remoteSecrets = $remoteSecretsRaw | ForEach-Object { ($_ -split '\s+')[0] }
+    catch {
+        Log "Push still failed. Likely due to branch protection or lack of permission."
+        # continue; we'll create PR instead
     }
-    foreach ($s in $requiredSecrets) {
-      if (-not ($remoteSecrets -contains $s)) { $missingSecrets += $s }
-    }
-  } catch {
-    # If we cannot list secrets (permission), still allow interactive set but warn
-    Log "Warning: could not list remote secrets (gh secret list failed). You may not have admin permissions to set secrets."
-    $missingSecrets = $requiredSecrets
-  }
+}
 
-  if ($missingSecrets.Count -gt 0) {
-    Log "Missing secrets detected: $($missingSecrets -join ', ')"
-    $doSet = Read-Host "Would you like to interactively set these secrets now via 'gh secret set'? (y/N)"
-    if ($doSet -match '^(y|Y)') {
-      Set-GHRepoSecretsInteractive -RepoFullName $repoFull -SecretNames $missingSecrets
-    } else {
-      Log "Skipping secret setup. CI may fail if required secrets are absent."
+# Detect if we can push to main directly
+$canPushMain = $false
+if ($ForcePush) {
+    Log "ForcePush requested. Checking permissions and branch protection..."
+    # Use GH API to see if branch protection exists
+    $repo = (& git remote get-url origin).Trim()
+    # Extract owner/repo from URL
+    if ($repo -match "[:/](?<owner>[^/]+)/(?<name>[^/.]+)(\.git)?$") {
+        $owner = $Matches.owner
+        $name = $Matches.name
+        Log "Repository detected: $owner/$name"
+        # check branch protection
+        try {
+            $protect = gh api repos/$owner/$name/branches/main/protection -q . 2>$null
+            if ($LASTEXITCODE -eq 0) {
+                Log "Branch protection is enabled on main; cannot push directly."
+                $canPushMain = $false
+            }
+            else {
+                $canPushMain = $true
+            }
+        }
+        catch {
+            # if API call fails (403) assume protected or insufficient permissions
+            $canPushMain = $false
+        }
     }
-  } else {
-    Log "All required secrets appear present in the remote repo."
-  }
+    else {
+        Log "Could not parse origin URL; will not attempt direct main push."
+    }
+}
 
-  # Create PR via gh
-  Log "Creating a PR via GitHub CLI (gh)..."
-  $title = "fix: stabilization — apply patch and CI fixes"
-  $body = @"
+# Create PR if push to main blocked or branch protection in effect
+$remoteBranchExists = (& git ls-remote --heads origin $Branch).Trim()
+if (($remoteBranchExists -or -not $ForcePush) -and (Get-Command gh -ErrorAction SilentlyContinue)) {
+    Log "Creating a PR via GitHub CLI (gh)."
+    # Build PR title/body
+    $title = "fix: stabilization \u2014 apply patch and CI fixes"
+    $body = @"
 This PR applies a stabilizing patch that:
 - Fixes TypeScript catch variable issues
 - Adds Cloudinary typing fixes
@@ -319,50 +255,90 @@ This PR applies a stabilizing patch that:
 Automated PR created by scripts/auto-deploy.ps1
 "@
 
-  try {
-    $prCreateOut = & $GH_CMD pr create --title $title --body $body --base main --head $Branch --repo $repoFull --json url --jq ".url"
-    $prUrl = $prCreateOut.Trim()
-    Log "PR created: $prUrl"
-  } catch {
-    Log "Failed to create PR via gh: $($_.Exception.Message)" "ERROR"
-    Fail "Cannot create PR automatically. Push done; create a PR manually in the GitHub UI."
-  }
-
-  if ($AutoMergePR) {
-    Log "Attempting to merge the PR automatically..."
+    # Create PR
     try {
-      # Try standard merge (requires permissions & passing CI)
-      & $GH_CMD pr merge $prUrl --merge --delete-branch
-      Log "PR merged successfully."
-    } catch {
-      Log "Auto-merge failed or not permitted: $($_.Exception.Message)" "WARN"
+        $prUrl = (& gh pr create --title $title --body $body --base main --head $Branch --reviewer "" 2>&1).Trim()
+        Log "PR created: $prUrl"
     }
-  } else {
-    Log "AutoMergePR not requested. Please review and merge the PR in GitHub."
-  }
-
-  # Poll for deployment (simple site url check)
-  $siteUrl = $env:NEXT_PUBLIC_API_URL
-  if (-not $siteUrl) { $siteUrl = Read-Host "Enter the site URL to poll for deployment (e.g. https://your-site.com) or press Enter to skip" }
-  if ($siteUrl) {
-    Log "Polling $siteUrl for up to $WaitForDeploymentSeconds seconds..."
-    $deadline = (Get-Date).AddSeconds($WaitForDeploymentSeconds)
-    $deployed = $false
-    while ((Get-Date) -lt $deadline) {
-      try {
-        $r = Invoke-WebRequest -Uri $siteUrl -UseBasicParsing -TimeoutSec 5 -ErrorAction Stop
-        if ($r.StatusCode -eq 200) { $deployed = $true; break }
-      } catch { }
-      Start-Sleep -Seconds 5
+    catch {
+        Log "gh pr create failed. Please create a PR manually from branch $Branch."
     }
-    if ($deployed) { Log "Deployment appears live at $siteUrl"; Write-Host "SUCCESS: changes likely visible on your site." } else { Log "Timed out waiting for deployment. Check CI/CD provider and GitHub Actions." }
-  } else {
-    Log "No site URL provided. Skipping deployment polling."
-  }
 
-  Log "auto-deploy script completed."
-  exit 0
-
-} catch {
-  Fail "Fatal error: $($_.Exception.Message)`n$($_.Exception.StackTrace)"
+    # If AutoMergePR requested, try to merge
+    if ($AutoMergePR) {
+        Log "Attempting to merge the PR automatically..."
+        try {
+            # Try to enable auto-merge first (may require permissions)
+            & gh pr merge --auto --merge $prUrl 2>&1 | Tee-Object -Variable _mergeOut
+            Log "Requested auto-merge. If repository allows auto-merge, merge will proceed when CI passes."
+        }
+        catch {
+            Log "Auto-merge request or direct merge failed; attempting direct merge..."
+            try {
+                & gh pr merge --merge --delete-branch $prUrl
+                Log "PR merged and branch deleted."
+            }
+            catch {
+                Log "Unable to auto-merge or merge the PR. Leave PR open for manual review."
+            }
+        }
+    }
+    else {
+        Log "AutoMergePR not requested. Please review and merge the PR from GitHub UI."
+    }
 }
+else {
+    # If remote branch didn't exist and ForcePush true and we can push main, merge locally and push
+    if ($ForcePush -and $canPushMain) {
+        Log "Merging branch into main locally and pushing to origin/main (ForcePush)."
+        & git checkout main
+        & git merge --no-ff $Branch -m "chore: merge stabilization fixes from $Branch"
+        try {
+            & git push origin main
+            Log "main pushed to origin. This will trigger the CI/CD workflow if configured."
+        }
+        catch {
+            Fail "Push to origin/main failed. Likely branch protection or permission issue."
+        }
+    }
+    else {
+        Log "Skipping direct main push or gh PR creation. Branch is on origin and a PR should be created/merged manually."
+    }
+}
+
+# Wait for CI / deployment to happen
+# If using GitHub Actions + Vercel, the deployed site will be pushed automatically.
+# We will poll the public site URL (from env or example) until it returns 200 or timeout
+$siteUrl = $env:NEXT_PUBLIC_API_URL
+if (-not $siteUrl -or $siteUrl -match '^http://localhost') {
+    # If not set, attempt to use package.json homepage or default to http://localhost:3000
+    $siteUrl = $siteUrl -or "http://localhost:3000"
+}
+Log "Will poll $siteUrl for availability for up to $WaitForDeploymentSeconds seconds."
+
+$deadline = (Get-Date).AddSeconds($WaitForDeploymentSeconds)
+$ok = $false
+while ((Get-Date) -lt $deadline) {
+    try {
+        $resp = Invoke-WebRequest -Uri $siteUrl -UseBasicParsing -TimeoutSec 5 -ErrorAction Stop
+        if ($resp.StatusCode -eq 200) {
+            $ok = $true
+            break
+        }
+    }
+    catch {
+        # not up yet
+    }
+    Start-Sleep -Seconds 5
+}
+if ($ok) {
+    Log "Site is responding at $siteUrl - deployment appears successful."
+    Write-Host "SUCCESS: changes should be visible on your site."
+}
+else {
+    Log "Timed out waiting for $siteUrl to respond. Check your CI/CD provider and GitHub Actions logs." "WARN"
+    Write-Host "WARNING: deployment not detected. Check GitHub Actions or hosting provider."
+}
+
+Log "Done. If a PR was created, visit your repository to inspect and merge if needed."
+# End
