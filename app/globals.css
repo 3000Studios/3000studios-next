@@ -965,13 +965,3 @@ main {
   width: 100%;
   overflow-x: hidden;
 }
-
-main > section,
-main > div {
-  width: 100%;
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--section-px);
-  padding-right: var(--section-px);
-}
